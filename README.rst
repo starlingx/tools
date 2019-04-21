@@ -1,5 +1,6 @@
-stx-tools
-=========
+=====
+tools
+=====
 
 StarlingX Build Tools
 ---------------------
@@ -279,7 +280,7 @@ Initialize the source tree.
 .. code-block:: bash
 
     cd $MY_REPO_ROOT_DIR
-    repo init -u https://git.openstack.org/openstack/stx-manifest.git -m default.xml
+    repo init -u https://opendev.org/starlingx/manifest.git -m default.xml
     repo sync
 
 To generate cgcs-centos-repo
@@ -330,7 +331,7 @@ built by this build system. The symptom of this issue is that even if
 the build is successful, the ISO will be unable to boot.
 
 For more specific instructions on how to solve this issue, please the
-README on ``installer`` folder in ``stx-beas`` repository.
+README on ``installer`` folder in ``metal`` repository.
 
 WARNING HACK WARNING
 --------------------
