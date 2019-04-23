@@ -22,7 +22,7 @@ lldpd-0.9.0.tar.gz#lldpd-0.9.0#https://media.luffy.cx/files/lldpd/lldpd-0.9.0.ta
 python-cephclient-v0.1.0.5.tar.gz#python-cephclient-0.1.0.5#https://github.com/dmsimard/python-cephclient/archive/v0.1.0.5.tar.gz#http##
 python-setuptools-v38.5.1.tar.gz#setuptools-38.5.1#https://github.com/pypa/setuptools/archive/v38.5.1.tar.gz#http##
 python-smartpm-1.4.1.tar.gz#smart-1.4.1#http://launchpad.net/smart/trunk/1.4.1/+download/smart-1.4.1.tar.bz2#http##
-!qat1.7.upstream.l.1.0.3-42.tar.gz#quickassist#https://01.org/sites/default/files/downloads/intelr-quickassist-technology/qat1.7.upstream.l.1.0.3-42.tar.gz#http_script##post-dl-script/qat1.7.sh
+!qat1.7.l.4.5.0-00034.tar.gz#quickassist#https://01.org/sites/default/files/downloads/qat1.7.l.4.5.0-00034.tar.gz#http_script##post-dl-script/qat1.7.sh
 requests-toolbelt-0.5.1.tar.gz#requests-toolbelt-0.5.1#https://github.com/requests/toolbelt/archive/0.5.1.tar.gz#http##
 rpm-4.14.0.tar.bz2#rpm-4.14.0#https://ftp.osuosl.org/pub/rpm/releases/rpm-4.14.x/rpm-4.14.0.tar.bz2#http##
 swtpm-0.1.0-253eac5.tar.gz#swtpm-0.1.0#https://github.com/stefanberger/swtpm/tarball/1303be7d03294fb02204cb8242f366cbf0da076d#http##
