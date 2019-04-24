@@ -1186,6 +1186,7 @@ python2-gluster-5.2-1.el7.x86_64.rpm
 python2-gnocchiclient-3.3.1-1.el7.noarch.rpm
 python2-google-auth-1.3.0-1.el7.noarch.rpm
 python2-greenlet-0.4.9-1.el7.x86_64.rpm
+python2-gunicorn-19.7.1-1.el7.noarch.rpm
 python2-hacking-0.13.0-1.el7.noarch.rpm
 python2-idna-2.5-1.el7.noarch.rpm
 python2-imagesize-0.7.1-5.el7.noarch.rpm
