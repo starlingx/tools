@@ -314,7 +314,7 @@ for line in $(cat $tarball_file); do
             #   rm -f "$tarball_name"
 
             rm -rf "$directory_name"
-        elif [ "$tarball_name" = "qat1.7.upstream.l.1.0.3-42.tar.gz" ]; then
+        elif [ "$tarball_name" = "qat1.7.l.4.5.0-00034.tar.gz" ]; then
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
