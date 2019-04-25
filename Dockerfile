@@ -61,25 +61,17 @@ RUN groupadd -g 751 cgts && \
         git \
         libtool \
         libxml2 \
-        libxml2-devel \
-        libxslt-devel \
-        libffi-devel \
         lighttpd \
         lighttpd-fastcgi \
         lighttpd-mod_geoip \
-        libvirt-devel \
         net-tools \
         mkisofs \
         mock \
         mongodb \
         mongodb-server \
-        mariadb-devel \
-        openldap-devel \
-        openssl-devel \
         pax \
         perl-CPAN \
         python-deltarpm \
-        python-devel \
         python-pep8 \
         python-pip \
         python-psutil \
@@ -89,13 +81,11 @@ RUN groupadd -g 751 cgts && \
         python-testrepository \
         python-tox \
         postgresql \
-        postgresql-devel \
         qemu-kvm \
         quilt \
         rpm-build \
         rpm-sign \
         rpm-python \
-        sqlite-devel \
         squashfs-tools \
         sudo \
         systemd \
