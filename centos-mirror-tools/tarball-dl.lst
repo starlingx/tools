@@ -53,3 +53,5 @@ Sirupsen-logrus-55eb11d21d2a31a3cc93838241d04800f52e823d.tar.gz#Sirupsen-logrus#
 gophercloud-gophercloud-aa00757ee3ab58e53520b6cb910ca0543116400a.tar.gz#gophercloud-gophercloud#github.com/gophercloud/gophercloud/archive/aa00757ee3ab58e53520b6cb910ca0543116400a.tar.gz#http##
 docker-libtrust-fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#docker-libtrust#https://github.com/docker/libtrust/archive/fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#http##
 docker-distribution-48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89.tar.gz#docker-distribution#github.com/docker/distribution/archive/48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89.tar.gz#http##
+openvswitch-2.11.0.tar.gz#openvswitch-2.11.0#https://github.com/openvswitch/ovs/archive/v2.11.0.tar.gz#http##
+dpdk-18.11.tar.xz#dpdk-18.11#http://fast.dpdk.org/rel/dpdk-18.11.tar.xz#http##
