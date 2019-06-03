@@ -59,17 +59,18 @@ for t in "Binary" "Source" ; do
     fi
 done
 
-unsuccessful_file=0
+mirror_content=$(mktemp -t centos-repo-XXXXXX)
+find ${mirror_dir} -type f > ${mirror_content}
+
 for lst_file in ${rpm_lst_files} ; do
     grep -v "^#" ${lst_file_dir}/${lst_file} | while IFS="#" read rpmname extrafields; do
         if [ -z "${rpmname}" ]; then
             continue
         fi
-        mirror_file=$(find ${mirror_dir} -name ${rpmname})
+        mirror_file=$(grep "/${rpmname}$" ${mirror_content})
         if [ -z "${mirror_file}" ]; then
             echo "Error -- could not find requested ${rpmname} in ${mirror_dir}"
             echo ${rpmname} >> ${missing_rpms_file}
-            unsuccessful_file=1
             continue
         fi
 
@@ -87,11 +88,11 @@ for lst_file in ${rpm_lst_files} ; do
         ln -sf "${mirror_dir}/$ff" "${dest_dir}/${sub_dir}"
         if [ $? -ne 0 ]; then
             echo "Failed ${mirror_file}: ln -sf \"${mirror_dir}/$ff\" \"${dest_dir}/${sub_dir}\""
-            unsuccessful_file=1
         fi
     done
 done
 
+rm -f ${mirror_content}
 
 if [ ! -f "$mock_cfg_file" ]; then
     echo "Cannot find mock.cfg.proto file!"
@@ -130,6 +131,10 @@ cat ${lst_file_dir}/${other_lst_file} | grep -v "#" | while IFS=":" read targett
 done
 
 echo "Done creating repo directory"
-if [ ${unsuccessful_file} -ne 0 ]; then
+declare -i missing_rpms_file_count=$(wc -l ${missing_rpms_file} 2>/dev/null | awk '{print $1}')
+if [ ${missing_rpms_file_count} -gt 0 ]; then
     echo "WARNING: Some targets could not be found.  Your repo may be incomplete."
+    echo "Missing targets:"
+    cat ${missing_rpms_file}
+    exit 1
 fi
