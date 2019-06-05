@@ -60,7 +60,7 @@ for t in "Binary" "Source" ; do
 done
 
 mirror_content=$(mktemp -t centos-repo-XXXXXX)
-find ${mirror_dir} -type f > ${mirror_content}
+find -L ${mirror_dir} -type f > ${mirror_content}
 
 for lst_file in ${rpm_lst_files} ; do
     grep -v "^#" ${lst_file_dir}/${lst_file} | while IFS="#" read rpmname extrafields; do
