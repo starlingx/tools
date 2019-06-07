@@ -82,6 +82,7 @@ RUN groupadd -g 751 cgts && \
         python-pip \
         python-testrepository \
         python-tox \
+        python-yaml \
         postgresql \
         qemu-kvm \
         quilt \
