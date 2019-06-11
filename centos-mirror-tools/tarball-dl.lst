@@ -32,8 +32,8 @@ ibsh-0.3e.tar.gz#cgcs-users-1.0#https://sourceforge.net/projects/ibsh/files/ibsh
 !integrity-kmod-e6aef069.tar.gz#integrity#http://git.infradead.org/users/jjs/linux-tpmdd.git/snapshot/e6aef069b6e97790cb127d5eeb86ae9ff0b7b0e3.tar.gz#http_script##post-dl-script/integrity-kmod.sh
 isa-l-7e1a337433a340bc0974ed0f04301bdaca374af6.tar.gz#isa-l#https://api.github.com/repos/ceph/isa-l/tarball/7e1a337433a340bc0974ed0f04301bdaca374af6#https##
 isa-l_crypto-603529a4e06ac8a1662c13d6b31f122e21830352.tar.gz#isa-l_crypto#https://api.github.com/repos/01org/isa-l_crypto/tarball/603529a4e06ac8a1662c13d6b31f122e21830352#https##
-ixgbe-5.5.3.tar.gz#ixgbe-5.5.3#https://sourceforge.net/projects/e1000/files/ixgbe%20stable/5.5.3/ixgbe-5.5.3.tar.gz/download#http##
-ixgbevf-4.5.1.tar.gz#ixgbevf-4.5.1#https://sourceforge.net/projects/e1000/files/ixgbevf%20stable/4.5.1/ixgbevf-4.5.1.tar.gz/download#http##
+ixgbe-5.5.5.tar.gz#ixgbe-5.5.5#https://sourceforge.net/projects/e1000/files/ixgbe%20stable/5.5.5/ixgbe-5.5.5.tar.gz/download#http##
+ixgbevf-4.5.3.tar.gz#ixgbevf-4.5.3#https://sourceforge.net/projects/e1000/files/ixgbevf%20stable/4.5.3/ixgbevf-4.5.3.tar.gz/download#http##
 jerasure-96c76b89d661c163f65a014b8042c9354ccf7f31.tar.gz#jerasure#https://api.github.com/repos/ceph/jerasure/tarball/96c76b89d661c163f65a014b8042c9354ccf7f31#https##
 keycodemapdb-16e5b07.tar.gz#keycodemapdb#https://github.com/CendioOssman/keycodemapdb/tarball/16e5b0787687d8904dad2c026107409eb9bfcb95#http##
 kubernetes-contrib-v1.13.5.tar.gz#kubernetes-contrib-1.13.5#https://github.com/kubernetes/contrib/tarball/b72fa5059d8ce9de234b65c392dc03bca8a73be4#http##
