@@ -64,6 +64,7 @@ python-setuptools-v38.5.1.tar.gz#setuptools-38.5.1#https://github.com/pypa/setup
 python-smartpm-1.4.1.tar.gz#smart-1.4.1#http://launchpad.net/smart/trunk/1.4.1/+download/smart-1.4.1.tar.bz2#http##
 !qat1.7.l.4.5.0-00034.tar.gz#quickassist#https://01.org/sites/default/files/downloads/qat1.7.l.4.5.0-00034.tar.gz#http_script##post-dl-script/qat1.7.sh
 rapidjson-f54b0e47a08782a6131cc3d60f94d038fa6e0a51.tar.gz#rapidjson#https://api.github.com/repos/ceph/rapidjson/tarball/f54b0e47a08782a6131cc3d60f94d038fa6e0a51#https##
+Redfishtool-1.0.8.tar.gz#Redfishtool-1.0.8#https://github.com/DMTF/Redfishtool/archive/1.0.8.tar.gz#http##
 requests-toolbelt-0.5.1.tar.gz#requests-toolbelt-0.5.1#https://github.com/requests/toolbelt/archive/0.5.1.tar.gz#http##
 rocksdb-f4a857da0b720691effc524469f6db895ad00d8e.tar.gz#rocksdb#https://api.github.com/repos/ceph/rocksdb/tarball/f4a857da0b720691effc524469f6db895ad00d8e#https##
 rpm-4.14.0.tar.bz2#rpm-4.14.0#https://ftp.osuosl.org/pub/rpm/releases/rpm-4.14.x/rpm-4.14.0.tar.bz2#http##
