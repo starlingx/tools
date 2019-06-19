@@ -43,7 +43,7 @@ RUN groupadd -g 751 cgts && \
     echo "mock:x:751:root" >> /etc/group && \
     echo "mockbuild:x:9001:" >> /etc/group && \
     yum install -y epel-release && \
-        yum install -y anaconda \
+    yum install -y anaconda \
         anaconda-help \
         anaconda-runtime \
         autoconf-archive \
@@ -121,6 +121,13 @@ RUN pip install python-subunit junitxml --upgrade && \
 # Install repo tool
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo && \
     chmod a+x /usr/local/bin/repo
+
+# installing go and setting paths
+ENV GOPATH="/usr/local/go"
+ENV PATH="${GOPATH}/bin:${PATH}"
+RUN yum install -y golang && \
+    mkdir -p ${GOPATH}/bin && \
+    curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
 # mock time
 # forcing chroots since a couple of packages naughtily insist on network access and
@@ -233,10 +240,8 @@ COPY centos-mirror-tools/rpm-gpg-keys/* /etc/pki/rpm-gpg/
 # Import GPG keys
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 
-# installing go and setting paths
-ENV GOPATH="/usr/local/go"
-ENV PATH="${GOPATH}/bin:${PATH}"
-RUN yum install -y golang; mkdir -p ${GOPATH}/bin; curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+# Try to continue a yum command even if a StarlingX repo is unavailable.
+RUN yum-config-manager --setopt=StarlingX\*.skip_if_unavailable=1 --save
 
 # Don't know if it's possible to run services without starting this
 CMD /usr/sbin/init
