@@ -243,5 +243,9 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 # Try to continue a yum command even if a StarlingX repo is unavailable.
 RUN yum-config-manager --setopt=StarlingX\*.skip_if_unavailable=1 --save
 
+# When we run 'init' below, it will run systemd, and systemd requires RTMIN+3
+# to exit cleanly. By default, docker stop uses SIGTERM, which systemd ignores.
+STOPSIGNAL RTMIN+3
+
 # Don't know if it's possible to run services without starting this
 CMD /usr/sbin/init
