@@ -22,7 +22,7 @@ Links
 * Code Review: `Gerrit`_
 * Bugs: `Storyboard`_
 
-.. _stx-tools: https://git.starlingx.io/cgit/stx-tools/
+.. _stx-tools: https://opendev.org/starlingx/tools/
 .. _Gerrit: https://review.opendev.org/#/q/project:starlingx/tools
 .. _Storyboard: https://storyboard.openstack.org/#!/project/1027
 
