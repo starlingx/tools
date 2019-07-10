@@ -3,8 +3,6 @@ boost_1_67_0.tar.bz2#boost_1_67_0#https://dl.bintray.com/boostorg/release/1.67.0
 ceph-erasure-code-corpus-2d7d78b9cc52e8a9529d8cc2d2954c7d375d5dd7.tar.gz#ceph-erasure-code-corpus#https://api.github.com/repos/ceph/ceph-erasure-code-corpus/tarball/2d7d78b9cc52e8a9529d8cc2d2954c7d375d5dd7#https##
 ceph-object-corpus-e32bf8ca3dc6151ebe7f205ba187815bc18e1cef.tar.gz#ceph-object-corpus#https://api.github.com/repos/ceph/ceph-object-corpus/tarball/e32bf8ca3dc6151ebe7f205ba187815bc18e1cef#https##
 civetweb-ff2881e2cd5869a71ca91083bad5d12cccd22136.tar.gz#civetweb#https://api.github.com/repos/ceph/civetweb/tarball/ff2881e2cd5869a71ca91083bad5d12cccd22136#https##
-cloud-provider-openstack-1.13.1-linux-amd64.tar.gz#cloud-provider-openstack#github.com/kubernetes/cloud-provider-openstack/releases/download/1.13.1/cloud-provider-openstack-1.13.1-linux-amd64.tar.gz#http##
-cloud-provider-openstack-1.13.1.tar.gz#cloud-provider-openstack-src#github.com/kubernetes/cloud-provider-openstack/releases/download/1.13.1/cloud-provider-openstack-1.13.1.tar.gz#http##
 dep-v0.5.0.tar.gz#dep-v0.5.0#https://github.com/golang/dep/archive/v0.5.0.tar.gz#http##
 docker-distribution-48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89.tar.gz#docker-distribution#github.com/docker/distribution/archive/48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89.tar.gz#http##
 docker-libtrust-fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#docker-libtrust#https://github.com/docker/libtrust/archive/fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#http##
