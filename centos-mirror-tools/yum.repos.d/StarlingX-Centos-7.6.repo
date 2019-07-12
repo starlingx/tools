@@ -128,6 +128,13 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 enabled=1
 
+[StarlingX-C7.6.1810-storage-ceph-nautilus]
+name=StarlingX-CentOS-7.6.1810 - storage-ceph-nautilus
+baseurl=http://mirror.centos.org/centos/7.6.1810/storage/x86_64/ceph-nautilus/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
 [StarlingX-C7.6.1810-storage-gluster-5]
 name=StarlingX-CentOS-7.6.1810 - storage-gluster-5
 baseurl=http://mirror.centos.org/centos/7.6.1810/storage/x86_64/gluster-5/
