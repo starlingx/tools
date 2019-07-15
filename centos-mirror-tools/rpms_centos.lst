@@ -525,8 +525,8 @@ kbd-1.15.5-15.el7.x86_64.rpm
 kbd-legacy-1.15.5-15.el7.noarch.rpm
 kbd-misc-1.15.5-15.el7.noarch.rpm
 kde-filesystem-4-47.el7.x86_64.rpm
-kernel-3.10.0-957.12.2.el7.src.rpm
-kernel-headers-3.10.0-957.12.2.el7.x86_64.rpm
+kernel-3.10.0-957.21.3.el7.src.rpm
+kernel-headers-3.10.0-957.21.3.el7.x86_64.rpm
 keyutils-1.5.8-3.el7.x86_64.rpm
 keyutils-libs-1.5.8-3.el7.x86_64.rpm
 keyutils-libs-devel-1.5.8-3.el7.x86_64.rpm
