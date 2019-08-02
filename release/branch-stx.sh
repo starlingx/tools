@@ -38,6 +38,11 @@
 # TAG is the release tag that represents the actual release. If TAG is unset
 # no tag is created.
 #
+# REMOTES is the list of remotes to select from a manifest file if -m is used.
+# The default is "starlingx".  For release 1.0 (aka 2018.10) the default was
+# "starlingx stx-staging" however the staging repos are no longer branched in
+# the same manner, they are treated as third-party repos for release purposes.
+#
 # Notes:
 # * This script is used for creating milestone, release and feature branches.
 # * The default action is to create a milestone branch with prefix 'm/'.
@@ -107,7 +112,7 @@ BRANCH=${BRANCH:-m/$SERIES}
 TAG=${TAG:-""}
 
 # The list of remotes to extract from MANIFEST
-REMOTES="starlingx stx-staging"
+REMOTES=${REMOTES:-"starlingx"}
 
 if [[ -n $TAG_ONLY ]]; then
     # Force source and target branches to be the same
@@ -171,7 +176,7 @@ function branch_repo {
     fi
 
     # Push the new goodness back up
-    if [[ "$repo" =~ "git.starlingx.io" ]]; then
+    if [[ "$repo" =~ "git.starlingx.io" || "$repo" =~ "opendev.org" ]]; then
         # Do the Gerrit way
 
         # set up gerrit remote
