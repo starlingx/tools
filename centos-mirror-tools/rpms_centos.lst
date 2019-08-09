@@ -1175,7 +1175,6 @@ python2-django-babel-0.4.0-2.el7.noarch.rpm
 python2-django-compressor-2.1-5.el7.noarch.rpm
 python2-django-debreach-1.5.2-1.el7.noarch.rpm
 python2-django-formtools-2.1-1.el7.noarch.rpm
-python2-docker-3.3.0-1.el7.noarch.rpm
 python2-dulwich-0.18.4-1.el7.x86_64.rpm
 python2-extras-1.0.0-2.el7.noarch.rpm
 python2-fasteners-0.14.1-6.el7.noarch.rpm
@@ -1405,6 +1404,7 @@ python-django-compressor-2.0-1.el7.noarch.rpm
 python-django-nose-1.4.3-1.el7.noarch.rpm
 python-django-pyscss-2.0.2-1.el7.noarch.rpm
 python-dns-1.12.0-4.20150617git465785f.el7.noarch.rpm
+python-docker-3.3.0-1.el7.src.rpm
 python-docker-pycreds-0.3.0-7.el7.noarch.rpm
 python-docutils-0.11-0.3.20130715svn7687.el7.noarch.rpm
 python-dogpile-cache-0.6.2-1.el7.noarch.rpm
