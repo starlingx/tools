@@ -23,6 +23,7 @@ googletest-fdb850479284e2aae047b87df6beae84236d0135.tar.gz#googletest#https://ap
 gophercloud-gophercloud-aa00757ee3ab58e53520b6cb910ca0543116400a.tar.gz#gophercloud-gophercloud#github.com/gophercloud/gophercloud/archive/aa00757ee3ab58e53520b6cb910ca0543116400a.tar.gz#http##
 gorilla-context-08b5f424b9271eedf6f9f0ce86cb9396ed337a42.tar.gz#gorilla-context#https://github.com/gorilla/context/archive/08b5f424b9271eedf6f9f0ce86cb9396ed337a42.tar.gz#http##
 gorilla-mux-456bcfa82d672db7cae587c9b541463f65bc2718.tar.gz#gorilla-mux#https://github.com/gorilla/mux/archive/456bcfa82d672db7cae587c9b541463f65bc2718.tar.gz#http##
+helm-charts-92b6289ae93816717a8453cfe62bad51cbdb8ad0.tar.gz#helm-charts#https://github.com/helm/charts/archive/92b6289ae93816717a8453cfe62bad51cbdb8ad0.tar.gz#http##
 helm-v2.13.1-linux-amd64.tar.gz#linux-amd64#https://storage.googleapis.com/kubernetes-helm/helm-v2.13.1-linux-amd64.tar.gz#http##
 i40e-2.7.29.tar.gz#i40e-2.7.29#https://sourceforge.net/projects/e1000/files/i40e%20stable/2.7.29/i40e-2.7.29.tar.gz/download#http##
 i40evf-3.6.15.tar.gz#i40evf-3.6.15#https://sourceforge.net/projects/e1000/files/i40evf%20stable/3.6.15/i40evf-3.6.15.tar.gz/download#http##
