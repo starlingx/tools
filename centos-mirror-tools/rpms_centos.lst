@@ -171,7 +171,7 @@ cryptsetup-libs-2.0.3-3.el7.x86_64.rpm
 ctags-5.8-13.el7.x86_64.rpm
 cups-client-1.6.3-35.el7.x86_64.rpm
 cups-libs-1.6.3-35.el7.x86_64.rpm
-curl-7.29.0-51.el7.x86_64.rpm
+curl-7.29.0-51.el7_6.3.x86_64.rpm
 cyrus-sasl-2.1.26-23.el7.x86_64.rpm
 cyrus-sasl-devel-2.1.26-23.el7.x86_64.rpm
 cyrus-sasl-gssapi-2.1.26-23.el7.x86_64.rpm
@@ -583,8 +583,8 @@ libcmocka-devel-1.1.3-1.el7.x86_64.rpm
 libcollection-0.7.0-32.el7.x86_64.rpm
 libconfig-1.4.9-5.el7.x86_64.rpm
 libcroco-0.6.12-4.el7.x86_64.rpm
-libcurl-7.29.0-51.el7.x86_64.rpm
-libcurl-devel-7.29.0-51.el7.x86_64.rpm
+libcurl-7.29.0-51.el7_6.3.x86_64.rpm
+libcurl-devel-7.29.0-51.el7_6.3.x86_64.rpm
 libdaemon-0.14-7.el7.x86_64.rpm
 libdb-5.3.21-24.el7.x86_64.rpm
 libdb-devel-5.3.21-24.el7.x86_64.rpm
