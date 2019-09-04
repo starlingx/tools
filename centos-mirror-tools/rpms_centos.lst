@@ -906,9 +906,7 @@ nss-sysinit-3.36.0-7.el7_5.x86_64.rpm
 nss-tools-3.36.0-7.el7_5.x86_64.rpm
 nss-util-3.36.0-1.el7_5.x86_64.rpm
 nss-util-devel-3.36.0-1.el7_5.x86_64.rpm
-ntp-4.2.6p5-28.el7.centos.x86_64.rpm
-ntpdate-4.2.6p5-28.el7.centos.x86_64.rpm
-ntp-perl-4.2.6p5-28.el7.centos.noarch.rpm
+ntp-4.2.6p5-28.el7.centos.src.rpm
 numactl-devel-2.0.9-7.el7.x86_64.rpm
 numactl-libs-2.0.9-7.el7.x86_64.rpm
 objectweb-asm-3.3.1-9.el7.noarch.rpm
