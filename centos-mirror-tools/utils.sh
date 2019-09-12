@@ -20,7 +20,7 @@ get_yum_command() {
     if [ "$arch" == "src" ]; then
         yumdownloader_extra_opts="--source"
     else
-        yumdownloader_extra_opts="--archlist=noarch,x86_64"
+        yumdownloader_extra_opts="--exclude='*.i686' --archlist=noarch,x86_64"
     fi
 
     echo "yumdownloader -q -C ${YUMCONFOPT} ${RELEASEVER} $yumdownloader_extra_opts $rpm_name"

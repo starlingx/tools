@@ -16,15 +16,16 @@
 # input files:
 # The file tarball-dl.lst contains the list of packages and artifacts for
 # building this sub-mirror.
-script_path="$(dirname $(readlink -f $0))"
-tarball_file="$script_path/tarball-dl.lst"
+tarball_file=""
 
+set -x
 DL_TARBALL_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
 source $DL_TARBALL_DIR/url_utils.sh
+source $DL_TARBALL_DIR/utils.sh
 
 usage () {
-    echo "$0 [-D <distro>] [-s|-S|-u|-U] [-h] <other_download_list.ini> <save_path> [<force_update>]"
+    echo "$0 [-D <distro>] [-s|-S|-u|-U] [-h] <path_to_tarball_dl.lst>"
 }
 
 # Permitted values of dl_source
@@ -96,6 +97,8 @@ while getopts "D:hsSuU" o; do
     esac
 done
 shift $((OPTIND-1))
+tarball_file="${1}"
+shift
 
 
 if [ ! -e $tarball_file ]; then
@@ -108,10 +111,12 @@ fi
 # - Puppet hosted under "downloads/puppet" output directory.
 # to be populated under $MY_REPO/addons/wr-cgcs/layers/cgcs/downloads/puppet
 
-logs_dir="$script_path/logs"
-output_main="$script_path/output"
+export DL_MIRROR_LOG_DIR="${DL_MIRROR_LOG_DIR:-./logs}"
+export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx-r1/CentOS/pike}"
+
+logs_dir="${DL_MIRROR_LOG_DIR}"
 output_log="$logs_dir/log_download_tarball_missing.txt"
-output_path=$output_main/stx-r1/CentOS/pike
+output_path="${DL_MIRROR_OUTPUT_DIR}"
 output_tarball=$output_path/downloads
 output_puppet=$output_tarball/puppet
 
@@ -122,10 +127,12 @@ if [ ! -d "$logs_dir" ]; then
 fi
 
 is_tarball() {
-    tarball_name="$1"
+    local tarball_name="$1"
+    local mime_type
+    local types=("gzip" "x-bzip2" "x-rpm" "x-xz" "x-gzip" "x-tar")
+    local FOUND=1
+
     mime_type=$(file --mime-type -b $tarball_name | cut -d "/" -f 2)
-    types=("gzip" "x-bzip2" "x-rpm" "x-xz" "x-gzip" "x-tar")
-    FOUND=1
     for t in "${types[@]}"; do
         if [ "$mime_type" == "$t" ]; then
             FOUND=0

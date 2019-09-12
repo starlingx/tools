@@ -1,0 +1,287 @@
+apr-1.4.8-3.el7_4.1.x86_64.rpm
+apr-util-1.5.2-6.el7.x86_64.rpm
+atk-devel-2.28.1-1.el7.x86_64.rpm
+at-spi2-atk-devel-2.26.2-1.el7.x86_64.rpm
+autoconf-2.69-11.el7.noarch.rpm
+automake-1.13.4-3.el7.noarch.rpm
+# basesystem-10.0-7.el7.centos.noarch.rpm provided by mock
+bash-4.2.46-31.el7.x86_64.rpm
+# binutils-2.27-34.base.el7.x86_64.rpm provided by mock
+binutils-devel-2.27-34.base.el7.x86_64.rpm
+bison-3.0.4-2.el7.x86_64.rpm
+bluez-libs-5.44-4.el7_4.x86_64.rpm
+bluez-libs-devel-5.44-4.el7_4.x86_64.rpm
+# bzip2-1.0.6-13.el7.x86_64.rpm provided by mock
+bzip2-devel-1.0.6-13.el7.x86_64.rpm
+# bzip2-libs-1.0.6-13.el7.x86_64.rpm provided by mock
+# ca-certificates-2018.2.22-70.0.el7_5.noarch.rpm provided by mock
+# centos-release-7-6.1810.2.el7.centos.x86_64.rpm provided by mock
+# chkconfig-1.7.4-1.el7.x86_64.rpm provided by mock
+# coreutils-8.22-23.el7.x86_64.rpm provided by mock
+# cpio-2.11-27.el7.x86_64.rpm provided by mock
+# cpp-4.8.5-36.el7.x86_64.rpm provided by mock
+# cracklib-2.9.0-11.el7.x86_64.rpm provided by mock
+# cracklib-dicts-2.9.0-11.el7.x86_64.rpm provided by mock
+# cryptsetup-libs-2.0.3-3.el7.x86_64.rpm provided by mock
+# curl-7.29.0-51.el7_6.3.x86_64.rpm provided by mock
+# cyrus-sasl-lib-2.1.26-23.el7.x86_64.rpm provided by mock
+# dbus-1.10.24-12.el7.x86_64.rpm provided by mock
+dbus-devel-1.10.24-12.el7.x86_64.rpm
+# dbus-libs-1.10.24-12.el7.x86_64.rpm provided by mock
+dejavu-fonts-common-2.33-6.el7.noarch.rpm
+dejavu-sans-fonts-2.33-6.el7.noarch.rpm
+# device-mapper-1.02.146-4.el7.x86_64.rpm provided by mock
+device-mapper-devel-1.02.146-4.el7.x86_64.rpm
+device-mapper-event-1.02.146-4.el7.x86_64.rpm
+device-mapper-event-libs-1.02.146-4.el7.x86_64.rpm
+# device-mapper-libs-1.02.146-4.el7.x86_64.rpm provided by mock
+device-mapper-multipath-0.4.9-119.el7.x86_64.rpm
+device-mapper-multipath-libs-0.4.9-119.el7.x86_64.rpm
+device-mapper-persistent-data-0.7.3-3.el7.x86_64.rpm
+# diffutils-3.3-4.el7.x86_64.rpm provided by mock
+# dracut-033-554.el7.x86_64.rpm provided by mock
+# expat-2.1.0-10.el7_3.x86_64.rpm provided by mock
+expat-devel-2.1.0-10.el7_3.x86_64.rpm
+file-devel-5.11-35.el7.x86_64.rpm
+# filesystem-3.2-25.el7.x86_64.rpm provided by mock
+# findutils-4.5.11-6.el7.x86_64.rpm provided by mock
+fipscheck-1.4.1-6.el7.x86_64.rpm
+fipscheck-lib-1.4.1-6.el7.x86_64.rpm
+fontconfig-2.13.0-4.3.el7.x86_64.rpm
+fontconfig-devel-2.13.0-4.3.el7.x86_64.rpm
+fontpackages-filesystem-1.44-8.el7.noarch.rpm
+freetype-2.8-12.el7.x86_64.rpm
+freetype-devel-2.8-12.el7.x86_64.rpm
+# gawk-4.0.2-4.el7_3.1.x86_64.rpm provided by mock
+# gcc-4.8.5-36.el7.x86_64.rpm provided by mock
+# gcc-c++-4.8.5-36.el7.x86_64.rpm provided by mock
+# gdbm-1.10-8.el7.x86_64.rpm provided by mock
+gdbm-devel-1.10-8.el7.x86_64.rpm
+gettext-0.19.8.1-2.el7.x86_64.rpm
+gettext-common-devel-0.19.8.1-2.el7.noarch.rpm
+gettext-devel-0.19.8.1-2.el7.x86_64.rpm
+gettext-libs-0.19.8.1-2.el7.x86_64.rpm
+git-1.8.3.1-20.el7.x86_64.rpm
+# glibc-2.17-260.el7.x86_64.rpm provided by mock
+# glibc-common-2.17-260.el7.x86_64.rpm provided by mock
+# glibc-devel-2.17-260.el7.x86_64.rpm provided by mock
+# glibc-headers-2.17-260.el7.x86_64.rpm provided by mock
+glibc-static-2.17-260.el7.x86_64.rpm
+gl-manpages-1.1-7.20130122.el7.noarch.rpm
+# gmp-6.0.0-15.el7.x86_64.rpm provided by mock
+gmp-devel-6.0.0-15.el7.x86_64.rpm
+gnutls-3.3.29-8.el7.x86_64.rpm
+golang-1.11.2-3.el7.x86_64.rpm
+golang-bin-1.11.2-3.el7.x86_64.rpm
+golang-github-cpuguy83-go-md2man-1.0.4-4.el7.x86_64.rpm
+golang-src-1.11.2-3.el7.noarch.rpm
+# grep-2.20-3.el7.x86_64.rpm provided by mock
+# groff-base-1.22.2-8.el7.x86_64.rpm provided by mock
+# gzip-1.5-10.el7.x86_64.rpm provided by mock
+# hardlink-1.0-19.el7.x86_64.rpm provided by mock
+hwdata-0.252-9.1.el7.x86_64.rpm
+# info-5.1-5.el7.x86_64.rpm provided by mock
+# json-c-0.11-4.el7_0.x86_64.rpm provided by mock
+json-c-devel-0.11-4.el7_0.x86_64.rpm
+kernel-headers-3.10.0-1062.1.2.el7.x86_64.rpm
+# keyutils-libs-1.5.8-3.el7.x86_64.rpm provided by mock
+keyutils-libs-devel-1.5.8-3.el7.x86_64.rpm
+# kmod-20-23.el7.x86_64.rpm provided by mock
+# kmod-libs-20-23.el7.x86_64.rpm provided by mock
+# kpartx-0.4.9-119.el7.x86_64.rpm provided by mock
+krb5-devel-1.15.1-34.el7.x86_64.rpm
+# krb5-libs-1.15.1-34.el7.x86_64.rpm provided by mock
+less-458-9.el7.x86_64.rpm
+# libacl-2.2.51-14.el7.x86_64.rpm provided by mock
+libacl-devel-2.2.51-14.el7.x86_64.rpm
+libarchive-devel-3.1.2-10.el7_2.x86_64.rpm
+# libattr-2.4.46-13.el7.x86_64.rpm provided by mock
+libattr-devel-2.4.46-13.el7.x86_64.rpm
+# libcap-2.22-9.el7.x86_64.rpm provided by mock
+libcap-devel-2.22-9.el7.x86_64.rpm
+# libcap-ng-0.7.5-4.el7.x86_64.rpm provided by mock
+libcap-ng-devel-0.7.5-4.el7.x86_64.rpm
+libcroco-0.6.12-4.el7.x86_64.rpm
+# libcurl-7.29.0-51.el7_6.3.x86_64.rpm provided by mock
+# libcurl-devel-7.29.0-51.el7_6.3.x86_64.rpm provided by mock
+# libdb-5.3.21-24.el7.x86_64.rpm provided by mock
+libdb-devel-5.3.21-24.el7.x86_64.rpm
+# libdb-utils-5.3.21-24.el7.x86_64.rpm provided by mock
+libedit-3.0-12.20121213cvs.el7.x86_64.rpm
+# libffi-3.0.13-18.el7.x86_64.rpm provided by mock
+libffi-devel-3.0.13-18.el7.x86_64.rpm
+# libgcc-4.8.5-36.el7.x86_64.rpm provided by mock
+# libgcrypt-1.5.3-14.el7.x86_64.rpm provided by mock
+libglvnd-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm
+libglvnd-core-devel-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm
+libglvnd-devel-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm
+libglvnd-egl-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm
+libglvnd-gles-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm
+libglvnd-glx-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm
+libglvnd-opengl-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm
+# libgomp-4.8.5-36.el7.x86_64.rpm provided by mock
+# libgpg-error-1.12-3.el7.x86_64.rpm provided by mock
+libgpg-error-devel-1.12-3.el7.x86_64.rpm
+# libidn-1.28-4.el7.x86_64.rpm provided by mock
+libkadm5-1.15.1-34.el7.x86_64.rpm
+libmodman-2.0.1-8.el7.x86_64.rpm
+# libmount-2.23.2-59.el7.x86_64.rpm provided by mock
+# libmpc-1.0.1-3.el7.x86_64.rpm provided by mock
+libpciaccess-0.14-1.el7.x86_64.rpm
+libpng-1.5.13-7.el7_2.x86_64.rpm
+libpng-devel-1.5.13-7.el7_2.x86_64.rpm
+libproxy-0.4.11-11.el7.x86_64.rpm
+# libpwquality-1.2.3-5.el7.x86_64.rpm provided by mock
+# libselinux-2.5-14.1.el7.x86_64.rpm provided by mock
+libselinux-devel-2.5-14.1.el7.x86_64.rpm
+# libsepol-2.5-10.el7.x86_64.rpm provided by mock
+libsepol-devel-2.5-10.el7.x86_64.rpm
+# libsmartcols-2.23.2-59.el7.x86_64.rpm provided by mock
+# libssh2-1.4.3-12.el7.x86_64.rpm provided by mock
+# libstdc++-4.8.5-36.el7.x86_64.rpm provided by mock
+# libstdc++-devel-4.8.5-36.el7.x86_64.rpm provided by mock
+# libtasn1-4.10-1.el7.x86_64.rpm provided by mock
+libtool-2.4.2-22.el7_3.x86_64.rpm
+libunistring-0.9.3-9.el7.x86_64.rpm
+# libuser-0.60-9.el7.x86_64.rpm provided by mock
+# libutempter-1.1.6-4.el7.x86_64.rpm provided by mock
+# libuuid-2.23.2-59.el7.x86_64.rpm provided by mock
+libuuid-devel-2.23.2-59.el7.x86_64.rpm
+# libverto-0.2.5-4.el7.x86_64.rpm provided by mock
+libverto-devel-0.2.5-4.el7.x86_64.rpm
+libwayland-client-1.15.0-1.el7.x86_64.rpm
+libwayland-server-1.15.0-1.el7.x86_64.rpm
+libX11-1.6.7-2.el7.x86_64.rpm
+libX11-common-1.6.7-2.el7.noarch.rpm
+libX11-devel-1.6.7-2.el7.x86_64.rpm
+libXau-1.0.8-2.1.el7.x86_64.rpm
+libXau-devel-1.0.8-2.1.el7.x86_64.rpm
+libxcb-1.13-1.el7.x86_64.rpm
+libxcb-devel-1.13-1.el7.x86_64.rpm
+libXdamage-1.1.4-4.1.el7.x86_64.rpm
+libXdamage-devel-1.1.4-4.1.el7.x86_64.rpm
+libXext-1.3.3-3.el7.x86_64.rpm
+libXext-devel-1.3.3-3.el7.x86_64.rpm
+libXfixes-5.0.3-1.el7.x86_64.rpm
+libXfixes-devel-5.0.3-1.el7.x86_64.rpm
+libXft-2.3.2-2.el7.x86_64.rpm
+libXft-devel-2.3.2-2.el7.x86_64.rpm
+# libxml2-2.9.1-6.el7_2.3.x86_64.rpm provided by mock
+libXrender-0.9.10-1.el7.x86_64.rpm
+libXrender-devel-0.9.10-1.el7.x86_64.rpm
+libxshmfence-1.2-1.el7.x86_64.rpm
+libXxf86vm-1.1.4-1.el7.x86_64.rpm
+libXxf86vm-devel-1.1.4-1.el7.x86_64.rpm
+# lua-5.1.4-15.el7.x86_64.rpm provided by mock
+lua-devel-5.1.4-15.el7.x86_64.rpm
+# lz4-1.7.5-2.el7.x86_64.rpm provided by mock
+m4-1.4.16-10.el7.x86_64.rpm
+mercurial-2.6.2-8.el7_4.x86_64.rpm
+mesa-libGLU-9.0.0-4.el7.x86_64.rpm
+mesa-libGLU-devel-9.0.0-4.el7.x86_64.rpm
+# mpfr-3.1.1-4.el7.x86_64.rpm provided by mock
+# ncurses-5.9-14.20130511.el7_4.x86_64.rpm provided by mock
+# ncurses-base-5.9-14.20130511.el7_4.noarch.rpm provided by mock
+ncurses-devel-5.9-14.20130511.el7_4.x86_64.rpm
+# ncurses-libs-5.9-14.20130511.el7_4.x86_64.rpm provided by mock
+neon-0.30.0-3.el7.x86_64.rpm
+nettle-2.7.1-8.el7.x86_64.rpm
+# nspr-4.19.0-1.el7_5.x86_64.rpm provided by mock
+nspr-devel-4.19.0-1.el7_5.x86_64.rpm
+# nss-3.36.0-7.el7_5.x86_64.rpm provided by mock
+nss-devel-3.36.0-7.el7_5.x86_64.rpm
+# nss-pem-1.0.3-5.el7.x86_64.rpm provided by mock
+# nss-sysinit-3.36.0-7.el7_5.x86_64.rpm provided by mock
+# nss-tools-3.36.0-7.el7_5.x86_64.rpm provided by mock
+# nss-util-3.36.0-1.el7_5.x86_64.rpm provided by mock
+nss-util-devel-3.36.0-1.el7_5.x86_64.rpm
+openssh-7.4p1-16.el7.x86_64.rpm
+openssh-clients-7.4p1-16.el7.x86_64.rpm
+openssl-devel-1.0.2k-16.el7.x86_64.rpm
+# openssl-libs-1.0.2k-16.el7.x86_64.rpm provided by mock
+# p11-kit-0.23.5-3.el7.x86_64.rpm provided by mock
+p11-kit-devel-0.23.5-3.el7.x86_64.rpm
+# p11-kit-trust-0.23.5-3.el7.x86_64.rpm provided by mock
+pakchois-0.4-10.el7.x86_64.rpm
+# pam-1.1.8-22.el7.x86_64.rpm provided by mock
+# pcre-8.32-17.el7.x86_64.rpm provided by mock
+pcre-devel-8.32-17.el7.x86_64.rpm
+# perl-5.16.3-294.el7_6.x86_64.rpm provided by mock
+# perl-Carp-1.26-244.el7.noarch.rpm provided by mock
+# perl-constant-1.27-2.el7.noarch.rpm provided by mock
+perl-Data-Dumper-2.145-3.el7.x86_64.rpm
+# perl-Encode-2.51-7.el7.x86_64.rpm provided by mock
+perl-Encode-Locale-1.03-5.el7.noarch.rpm
+perl-Error-0.17020-2.el7.noarch.rpm
+# perl-Exporter-5.68-3.el7.noarch.rpm provided by mock
+# perl-File-Path-2.09-2.el7.noarch.rpm provided by mock
+# perl-File-Temp-0.23.01-3.el7.noarch.rpm provided by mock
+# perl-Filter-1.49-3.el7.x86_64.rpm provided by mock
+# perl-Getopt-Long-2.40-3.el7.noarch.rpm provided by mock
+perl-Git-1.8.3.1-20.el7.noarch.rpm
+# perl-HTTP-Tiny-0.033-3.el7.noarch.rpm provided by mock
+perl-libintl-1.20-12.el7.x86_64.rpm
+# perl-libs-5.16.3-294.el7_6.x86_64.rpm provided by mock
+# perl-macros-5.16.3-294.el7_6.x86_64.rpm provided by mock
+# perl-parent-0.225-244.el7.noarch.rpm provided by mock
+# perl-PathTools-3.40-5.el7.x86_64.rpm provided by mock
+# perl-Pod-Escapes-1.04-294.el7_6.noarch.rpm provided by mock
+# perl-podlators-2.5.1-3.el7.noarch.rpm provided by mock
+# perl-Pod-Perldoc-3.20-4.el7.noarch.rpm provided by mock
+# perl-Pod-Simple-3.28-4.el7.noarch.rpm provided by mock
+# perl-Pod-Usage-1.63-3.el7.noarch.rpm provided by mock
+# perl-Scalar-List-Utils-1.27-248.el7.x86_64.rpm provided by mock
+# perl-Socket-2.010-4.el7.x86_64.rpm provided by mock
+# perl-Storable-2.45-3.el7.x86_64.rpm provided by mock
+perl-TermReadKey-2.30-20.el7.x86_64.rpm
+perl-Test-Harness-3.28-3.el7.noarch.rpm
+# perl-Text-ParseWords-3.29-4.el7.noarch.rpm provided by mock
+perl-Text-Unidecode-0.04-20.el7.noarch.rpm
+# perl-threads-1.87-4.el7.x86_64.rpm provided by mock
+# perl-threads-shared-1.43-6.el7.x86_64.rpm provided by mock
+# perl-Time-HiRes-1.9725-3.el7.x86_64.rpm provided by mock
+# perl-Time-Local-1.2300-2.el7.noarch.rpm provided by mock
+# pkgconfig-0.27.1-4.el7.x86_64.rpm provided by mock
+# popt-1.13-16.el7.x86_64.rpm provided by mock
+popt-devel-1.13-16.el7.x86_64.rpm
+# procps-ng-3.3.10-23.el7.x86_64.rpm provided by mock
+pyparsing-2.1.10-3.el7.noarch.rpm
+python2-pyparsing-2.1.10-3.el7.noarch.rpm
+python-2.7.5-76.el7.x86_64.rpm
+python-devel-2.7.5-76.el7.x86_64.rpm
+python-libs-2.7.5-76.el7.x86_64.rpm
+# qrencode-libs-3.4.1-3.el7.x86_64.rpm provided by mock
+# readline-6.2-10.el7.x86_64.rpm provided by mock
+readline-devel-6.2-10.el7.x86_64.rpm
+rpm-4.11.3-35.el7.x86_64.rpm
+rpm-build-4.11.3-35.el7.x86_64.rpm
+rpm-build-libs-4.11.3-35.el7.x86_64.rpm
+rpm-libs-4.11.3-35.el7.x86_64.rpm
+rpm-python-4.11.3-35.el7.x86_64.rpm
+rsync-3.1.2-4.el7.x86_64.rpm
+# sed-4.2.2-5.el7.x86_64.rpm provided by mock
+# setup-2.8.71-10.el7.noarch.rpm provided by mock
+# shadow-utils-4.1.5.1-25.el7.x86_64.rpm provided by mock
+# shared-mime-info-1.8-4.el7.x86_64.rpm provided by mock
+# sqlite-3.7.17-8.el7.x86_64.rpm provided by mock
+sqlite-devel-3.7.17-8.el7.x86_64.rpm
+subversion-1.7.14-14.el7.x86_64.rpm
+subversion-libs-1.7.14-14.el7.x86_64.rpm
+# tar-1.26-35.el7.x86_64.rpm provided by mock
+tcl-8.5.13-8.el7.x86_64.rpm
+tcl-devel-8.5.13-8.el7.x86_64.rpm
+texinfo-5.1-5.el7.x86_64.rpm
+tix-8.4.3-12.el7.x86_64.rpm
+tix-devel-8.4.3-12.el7.x86_64.rpm
+tk-8.5.13-6.el7.x86_64.rpm
+tk-devel-8.5.13-6.el7.x86_64.rpm
+trousers-0.3.14-2.el7.x86_64.rpm
+# tzdata-2018g-1.el7.noarch.rpm provided by mock
+# ustr-1.0.4-16.el7.x86_64.rpm provided by mock
+ustr-devel-1.0.4-16.el7.x86_64.rpm
+xorg-x11-proto-devel-2018.4-1.el7.noarch.rpm
+# xz-5.2.2-1.el7.x86_64.rpm provided by mock
+xz-devel-5.2.2-1.el7.x86_64.rpm
+# xz-libs-5.2.2-1.el7.x86_64.rpm provided by mock
+# zlib-1.2.7-18.el7.x86_64.rpm provided by mock
+zlib-devel-1.2.7-18.el7.x86_64.rpm

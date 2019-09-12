@@ -153,13 +153,15 @@ fi
 timestamp=$(date +%F_%H%M)
 echo $timestamp
 
-DESTDIR="output"
-MDIR_SRC=$DESTDIR/stx-r1/CentOS/pike/Source
-mkdir -p $MDIR_SRC
-MDIR_BIN=$DESTDIR/stx-r1/CentOS/pike/Binary
-mkdir -p $MDIR_BIN
+export DL_MIRROR_LOG_DIR="${DL_MIRROR_LOG_DIR:-./logs}"
+export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx-r1/CentOS/pike}"
 
-LOGSDIR="logs"
+MDIR_SRC="${DL_MIRROR_OUTPUT_DIR}/Source"
+mkdir -p "$MDIR_SRC"
+MDIR_BIN="${DL_MIRROR_OUTPUT_DIR}/Binary"
+mkdir -p "$MDIR_BIN"
+
+LOGSDIR="${DL_MIRROR_LOG_DIR}"
 from=$(get_from $rpms_list)
 LOG="$LOGSDIR/${match_level}_failmoved_url_${from}.log"
 MISSING_SRPMS="$LOGSDIR/${match_level}_srpms_missing_${from}.log"

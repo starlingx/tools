@@ -108,6 +108,7 @@ COPY toCOPY/finishSetup.sh /usr/local/bin
 COPY toCOPY/populate_downloads.sh /usr/local/bin
 COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
 COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
+COPY toCOPY/lst_utils.sh /usr/local/bin
 COPY toCOPY/.inputrc /home/$MYUNAME/
 COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
 
@@ -158,7 +159,7 @@ RUN echo "# Load stx-builder configuration" >> /etc/profile.d/TC.sh && \
     echo "if [[ -r \${HOME}/buildrc ]]; then" >> /etc/profile.d/TC.sh && \
     echo "    source \${HOME}/buildrc" >> /etc/profile.d/TC.sh && \
     echo "    export PROJECT SRC_BUILD_ENVIRONMENT MYPROJECTNAME MYUNAME" >> /etc/profile.d/TC.sh && \
-    echo "    export MY_BUILD_CFG MY_BUILD_CFG_RT MY_BUILD_CFG_STD MY_BUILD_DIR MY_BUILD_ENVIRONMENT MY_BUILD_ENVIRONMENT_FILE MY_BUILD_ENVIRONMENT_FILE_RT MY_BUILD_ENVIRONMENT_FILE_STD MY_DEBUG_BUILD_CFG_RT MY_DEBUG_BUILD_CFG_STD MY_LOCAL_DISK MY_MOCK_ROOT MY_REPO MY_REPO_ROOT_DIR MY_SRC_RPM_BUILD_DIR MY_TC_RELEASE MY_WORKSPACE" >> /etc/profile.d/TC.sh && \
+    echo "    export MY_BUILD_CFG MY_BUILD_CFG_RT MY_BUILD_CFG_STD MY_BUILD_DIR MY_BUILD_ENVIRONMENT MY_BUILD_ENVIRONMENT_FILE MY_BUILD_ENVIRONMENT_FILE_RT MY_BUILD_ENVIRONMENT_FILE_STD MY_DEBUG_BUILD_CFG_RT MY_DEBUG_BUILD_CFG_STD MY_LOCAL_DISK MY_MOCK_ROOT MY_REPO MY_REPO_ROOT_DIR MY_SRC_RPM_BUILD_DIR MY_TC_RELEASE MY_WORKSPACE LAYER" >> /etc/profile.d/TC.sh && \
     echo "fi" >> /etc/profile.d/TC.sh && \
     echo "export FORMAL_BUILD=0" >> /etc/profile.d/TC.sh && \
     echo "export PATH=\$MY_REPO/build-tools:\$PATH" >> /etc/profile.d/TC.sh

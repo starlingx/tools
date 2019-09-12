@@ -151,6 +151,12 @@ for ff in $all; do
                     let i+=1
                     echo "$file_name is downloaded successfully"
 
+                    mkdir -p $save_path/$sub_path
+                    if [ $? -ne 0 ]; then
+                        echo "Error: mkdir -p '$save_path/$sub_path'"
+                        error_count=$((error_count + 1))
+                    fi
+
                     \mv -f ./$file_name $save_path/$_name
                     if [ $? -ne 0 ]; then
                         echo "Error: mv -f './$file_name' '$save_path/$_name'"
