@@ -45,6 +45,7 @@ lldpd-0.9.0.tar.gz#lldpd-0.9.0#https://media.luffy.cx/files/lldpd/lldpd-0.9.0.ta
 lua-1fce39c6397056db645718b8f5821571d97869a4.tar.gz#lua#https://api.github.com/repos/ceph/lua/tarball/1fce39c6397056db645718b8f5821571d97869a4#https##
 !mariadb-10.1.28.tar.gz#mariadb-10.1.28#https://github.com/MariaDB/server/archive/mariadb-10.1.28.tar.gz#http_script##post-dl-script/mariadb.sh
 !MLNX_OFED_SRC-4.5-1.0.1.0.tgz#MLNX_OFED_SRC-4.5-1.0.1.0#http://content.mellanox.com/ofed/MLNX_OFED-4.5-1.0.1.0/MLNX_OFED_SRC-4.5-1.0.1.0.tgz#http_script##post-dl-script/MLNX_OFEDqat1.7.sh
+opae-intel-fpga-driver-1.3.0-2.tar.gz#opae-intel-fpga-driver-1.3.0-2#https://github.com/OPAE/opae-sdk/releases/download/1.3.0-2/opae-intel-fpga-driver-1.3.0-2.tar.gz#http##
 openstack-helm-6c71637222f47d85681038994f02feac92f75bd2.tar.gz#openstack-helm#https://github.com/openstack/openstack-helm/archive/6c71637222f47d85681038994f02feac92f75bd2.tar.gz#http##
 openstack-helm-infra-aae64213c95fbcea7a0a7671dcb9d8a366f16fa5.tar.gz#openstack-helm-infra#https://github.com/openstack/openstack-helm-infra/archive/aae64213c95fbcea7a0a7671dcb9d8a366f16fa5.tar.gz#http##
 openvswitch-2.11.0.tar.gz#openvswitch-2.11.0#https://github.com/openvswitch/ovs/archive/v2.11.0.tar.gz#http##
