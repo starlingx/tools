@@ -13,7 +13,7 @@ drbd-8.4.11-1.tar.gz#drbd-8.4.11-1#http://www.linbit.com/downloads/drbd/8.4/drbd
 drbd-8.4.3.tar.gz#drbd-8.4.3#http://www.linbit.com/downloads/drbd/8.4/archive/drbd-8.4.3.tar.gz#http##
 dtc-1.4.4.tar.gz#dtc-1.4.4#https://www.kernel.org/pub/software/utils/dtc/dtc-1.4.4.tar.gz#http##
 e1000e-3.4.2.1.tar.gz#e1000e-3.4.2.1#https://sourceforge.net/projects/e1000/files/e1000e%20stable/3.4.2.1/e1000e-3.4.2.1.tar.gz#http##
-etcd-v3.2.24.tar.gz#etcd-v3.2.24#https://github.com/etcd-io/etcd/archive/v3.2.24.tar.gz#http##
+etcd-v3.3.15.tar.gz#etcd-v3.3.15#https://github.com/etcd-io/etcd/archive/v3.3.15.tar.gz#http##
 gf-complete-7e61b44404f0ed410c83cfd3947a52e88ae044e1.tar.gz#gf-complete#https://api.github.com/repos/ceph/gf-complete/tarball/7e61b44404f0ed410c83cfd3947a52e88ae044e1#https##
 gnocchi-4.2.5.tar.gz#gnocchi-4.2.5#https://pypi.io/packages/source/g/gnocchi/gnocchi-4.2.5.tar.gz#http##
 gnocchiclient-7.0.1.tar.gz#gnocchiclient-7.0.1#https://pypi.io/packages/source/g/gnocchiclient/gnocchiclient-7.0.1.tar.gz#http##
@@ -36,8 +36,8 @@ ixgbe-5.5.5.tar.gz#ixgbe-5.5.5#https://sourceforge.net/projects/e1000/files/ixgb
 ixgbevf-4.5.3.tar.gz#ixgbevf-4.5.3#https://sourceforge.net/projects/e1000/files/ixgbevf%20stable/4.5.3/ixgbevf-4.5.3.tar.gz/download#http##
 jerasure-96c76b89d661c163f65a014b8042c9354ccf7f31.tar.gz#jerasure#https://api.github.com/repos/ceph/jerasure/tarball/96c76b89d661c163f65a014b8042c9354ccf7f31#https##
 keycodemapdb-16e5b07.tar.gz#keycodemapdb#https://github.com/CendioOssman/keycodemapdb/tarball/16e5b0787687d8904dad2c026107409eb9bfcb95#http##
-kubernetes-contrib-v1.15.3.tar.gz#kubernetes-contrib-1.15.3#https://github.com/kubernetes-retired/contrib/tarball/89f6948e24578fed2a90a87871b2263729f90ac3#http##
-kubernetes-v1.15.3.tar.gz#kubernetes-1.15.3#https://github.com/kubernetes/kubernetes/archive/v1.15.3.tar.gz#http##
+kubernetes-contrib-v1.16.0.tar.gz#kubernetes-contrib-1.16.0#https://github.com/kubernetes-retired/contrib/tarball/89f6948e24578fed2a90a87871b2263729f90ac3#http##
+kubernetes-v1.16.0.tar.gz#kubernetes-1.16.0#https://github.com/kubernetes/kubernetes/archive/v1.16.0.tar.gz#http##
 kvm-unit-tests.git-4ea7633.tar.bz2#kvm-unit-tests#https://git.kernel.org/pub/scm/virt/kvm/kvm-unit-tests.git/snapshot/kvm-unit-tests-20171020.tar.gz#http##
 ldapscripts-2.0.8.tgz#ldapscripts-2.0.8#https://sourceforge.net/projects/ldapscripts/files/ldapscripts/ldapscripts-2.0.8/ldapscripts-2.0.8.tgz/download#http##
 libtpms-0.6.0-4f0d59d.tar.gz#libtpms-0.6.0#https://github.com/stefanberger/libtpms/tarball/c421ca0f4d00c0caceeda8d62c1efb2b7e47db04#http##
