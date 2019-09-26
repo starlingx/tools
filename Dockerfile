@@ -56,9 +56,11 @@ RUN groupadd -g 751 cgts && \
         createrepo \
         deltarpm \
         expat-devel \
+        isomd5sum \
         gcc \
         gettext \
         git \
+        libguestfs-tools \
         libtool \
         libxml2 \
         lighttpd \
@@ -93,6 +95,7 @@ RUN groupadd -g 751 cgts && \
         sudo \
         systemd \
         syslinux \
+        syslinux-utils \
         udisks2 \
         vim-enhanced \
         wget \
