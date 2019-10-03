@@ -29,9 +29,9 @@ DEST_RPM="${DEST_RPM_ROOT_NEW}/Packages"
 DEST_SRPM="${DEST_SRPM_ROOT_NEW}/SPackages"
 DEST_RPM_REPODATA="${DEST_RPM_ROOT_NEW}/repodata"
 DEST_SRPM_REPODATA="${DEST_SRPM_ROOT_NEW}/repodata"
-TIS_REPO_DIR="${MY_REPO}/cgcs-tis-repo"
-TIS_CACHE_DIR="${TIS_REPO_DIR}/dependancy-cache"
-TIS_CACHE_ORIGIN="${TIS_REPO_DIR}/origin"
+LOCAL_REPO_DIR="${MY_REPO}/local-repo"
+LOCAL_CACHE_DIR="${LOCAL_REPO_DIR}/dependancy-cache"
+LOCAL_CACHE_ORIGIN="${LOCAL_REPO_DIR}/origin"
 ORIGIN="/import/mirrors/CentOS/${SRC_BUILD_ENVIRONMENT}/CentOS"
 
 CREATEREPO=$(which createrepo_c)
@@ -40,17 +40,17 @@ if [ $? -ne 0 ]; then
 fi
 
 # Create directories
-for d in "$DEST_RPM" "$DEST_SRPM" "$TIS_CACHE_DIR"; do
+for d in "$DEST_RPM" "$DEST_SRPM" "$LOCAL_CACHE_DIR"; do
     if [ ! -d "$d" ]; then
         mkdir -p "$d"
     fi
 done
 
-if [ ! -e "$TIS_CACHE_ORIGIN" ]; then
-    echo "$ORIGIN" > $TIS_CACHE_ORIGIN
+if [ ! -e "$LOCAL_CACHE_ORIGIN" ]; then
+    echo "$ORIGIN" > $LOCAL_CACHE_ORIGIN
     ORIGIN_DIR="$ORIGIN"
 else
-    ORIGIN_DIR=$(grep -v '^#'  $TIS_CACHE_ORIGIN | head -n 1)
+    ORIGIN_DIR=$(grep -v '^#'  $LOCAL_CACHE_ORIGIN | head -n 1)
 fi
 
 if [ ! -d "$ORIGIN_DIR" ]; then
@@ -99,28 +99,28 @@ fi
 mv "$DEST_SRPM_ROOT_NEW" "$DEST_SRPM_ROOT"
 rm -rf "$DEST_SRPM_ROOT_OLD"
 
-# Update symlinks in cgcs-tis-repo
+# Update symlinks in local-repo
 
 for d in $(find "$ORIGIN_DIR" -type d | tail -n +2); do
     RELATIVE_DIR=$(echo $d | sed "s#^$ORIGIN_DIR/##")
-    if [ -d "${TIS_REPO_DIR}/${RELATIVE_DIR}" ]; then
-        rm -rf "${TIS_REPO_DIR}/${RELATIVE_DIR}/*"
+    if [ -d "${LOCAL_REPO_DIR}/${RELATIVE_DIR}" ]; then
+        rm -rf "${LOCAL_REPO_DIR}/${RELATIVE_DIR}/*"
     fi
     echo "mkdir -p $RELATIVE_DIR"
-    mkdir -p "${TIS_REPO_DIR}/${RELATIVE_DIR}"
+    mkdir -p "${LOCAL_REPO_DIR}/${RELATIVE_DIR}"
 done
 
 for d in $(find "$ORIGIN_DIR" -type d | tail -n +2); do
     for f in $(find $d -maxdepth 1 -type f); do
         RELATIVE_FILE=$(echo $f | sed "s#^$ORIGIN_DIR/##")
-        if [ -e "${TIS_REPO_DIR}/${RELATIVE_FILE}" ]; then
-            rm -f "${TIS_REPO_DIR}/${RELATIVE_FILE}"
+        if [ -e "${LOCAL_REPO_DIR}/${RELATIVE_FILE}" ]; then
+            rm -f "${LOCAL_REPO_DIR}/${RELATIVE_FILE}"
         fi
-        ln -s "$f" "${TIS_REPO_DIR}/${RELATIVE_FILE}"
+        ln -s "$f" "${LOCAL_REPO_DIR}/${RELATIVE_FILE}"
     done
 done
 
-for d in $(find -L "$TIS_REPO_DIR" -type d -name repodata); do
+for d in $(find -L "$LOCAL_REPO_DIR" -type d -name repodata); do
     pushd  "${d}/.."
     rm -rf repodata
     if [ -f "comps.xml" ]; then
@@ -132,7 +132,7 @@ for d in $(find -L "$TIS_REPO_DIR" -type d -name repodata); do
 done
 
 # Recreate repodata
-cd "$TIS_REPO_DIR"
+cd "$LOCAL_REPO_DIR"
 
 for d in $(find -L . -type d -name repodata); do
     pushd "${d}/.."
@@ -150,5 +150,5 @@ for d in $(find -L . -type d -name repodata); do
     popd
 done
 
-# Update the dependancy_cache under cgcs-tis-repo
-create_dependancy_cache.py --cache_dir "${TIS_CACHE_DIR}"
+# Update the dependancy_cache under local-repo
+create_dependancy_cache.py --cache_dir "${LOCAL_CACHE_DIR}"

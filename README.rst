@@ -314,16 +314,16 @@ To build all packages:
     $ cd $MY_REPO
     $ build-pkgs or build-pkgs --clean <pkglist>; build-pkgs <pkglist>
 
-To generate cgcs-tis-repo:
+To generate local-repo:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The cgcs-tis-repo has the dependency information that sequences the
+The local-repo has the dependency information that sequences the
 build order; To generate or update the information the following command
 needs to be executed after building modified or new packages.
 
 .. code-block:: bash
 
-    $ generate-cgcs-tis-repo
+    $ generate-local-repo.sh
 
 To make an iso:
 ~~~~~~~~~~~~~~~

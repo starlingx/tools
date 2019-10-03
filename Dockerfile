@@ -126,7 +126,7 @@ RUN groupadd -g 751 cgts && \
 # copied inside the image.
 COPY toCOPY/finishSetup.sh /usr/local/bin
 COPY toCOPY/populate_downloads.sh /usr/local/bin
-COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
+COPY toCOPY/generate-local-repo.sh /usr/local/bin
 COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
 COPY toCOPY/lst_utils.sh /usr/local/bin
 COPY toCOPY/.inputrc /home/$MYUNAME/
