@@ -160,7 +160,7 @@ timestamp=$(date +%F_%H%M)
 echo $timestamp
 
 export DL_MIRROR_LOG_DIR="${DL_MIRROR_LOG_DIR:-./logs}"
-export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx-r1/CentOS/pike}"
+export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx/CentOS/}"
 
 MDIR_SRC="${DL_MIRROR_OUTPUT_DIR}/Source"
 mkdir -p "$MDIR_SRC"

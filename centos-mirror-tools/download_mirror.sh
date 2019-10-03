@@ -8,7 +8,17 @@ DOWNLOAD_MIRROR_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 source $DOWNLOAD_MIRROR_DIR/../toCOPY/lst_utils.sh
 
 export DL_MIRROR_LOG_DIR="${DL_MIRROR_LOG_DIR:-./logs}"
-export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx-r1/CentOS/pike}"
+export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx/CentOS}"
+
+# A temporary compatability step to save download time
+# during the shift to the new DL_MIRROR_OUTPUT_DIR location.
+#
+# Relocate downloaded rpms from the old location to the new.
+pike_dir="./output/stx-r1/CentOS/pike"
+if [ -d $old_dir && ! -d $DL_MIRROR_OUTPUT_DIR ]; then
+    mkdir -p $(dirname $DL_MIRROR_OUTPUT_DIR)
+    mv $pike_dir $DL_MIRROR_OUTPUT_DIR
+fi
 
 usage() {
     echo "$0 [options]"

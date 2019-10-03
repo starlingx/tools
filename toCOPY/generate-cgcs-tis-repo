@@ -6,7 +6,7 @@
 #
 
 set -e
-export SRC_BUILD_ENVIRONMENT="stx-r1"
+export SRC_BUILD_ENVIRONMENT="stx"
 export ARCH="x86_64"
 export PATH="${MY_REPO}/build-tools:${PATH}"
 
@@ -32,7 +32,7 @@ DEST_SRPM_REPODATA="${DEST_SRPM_ROOT_NEW}/repodata"
 TIS_REPO_DIR="${MY_REPO}/cgcs-tis-repo"
 TIS_CACHE_DIR="${TIS_REPO_DIR}/dependancy-cache"
 TIS_CACHE_ORIGIN="${TIS_REPO_DIR}/origin"
-ORIGIN="/import/mirrors/CentOS/${SRC_BUILD_ENVIRONMENT}/CentOS/pike"
+ORIGIN="/import/mirrors/CentOS/${SRC_BUILD_ENVIRONMENT}/CentOS"
 
 CREATEREPO=$(which createrepo_c)
 if [ $? -ne 0 ]; then

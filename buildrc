@@ -50,7 +50,7 @@ LOCALDISK=${HOST_PREFIX}/${GUEST_LOCALDISK}
 
 
 # Release Variable
-export MY_RELEASE=${MY_RELEASE:-3.0}
+export MY_RELEASE=${MY_RELEASE:-4.0}
 
 # Default branch to build
 export BRANCH=${BRANCH:-intel_r0}
