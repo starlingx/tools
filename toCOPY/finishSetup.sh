@@ -33,7 +33,7 @@ sudo chown root:mock /localdisk/loadbuild/mock-cache
 # 78  mkdir -p $MY_WORKSPACE/rt/rpmbuild/RPMS
 
 # make the place we will clone into
-. /etc/profile.d/TC.sh
+. /etc/profile.d/stx-builder-conf.sh
 echo "MY_REPO=$MY_REPO"
 mkdir -p $MY_REPO
 mkdir -p $MY_WORKSPACE

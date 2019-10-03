@@ -155,14 +155,14 @@ RUN cd /opt/mock_overlay && \
     make install
 
 #  ENV setup
-RUN echo "# Load stx-builder configuration" >> /etc/profile.d/TC.sh && \
-    echo "if [[ -r \${HOME}/buildrc ]]; then" >> /etc/profile.d/TC.sh && \
-    echo "    source \${HOME}/buildrc" >> /etc/profile.d/TC.sh && \
-    echo "    export PROJECT SRC_BUILD_ENVIRONMENT MYPROJECTNAME MYUNAME" >> /etc/profile.d/TC.sh && \
-    echo "    export MY_BUILD_CFG MY_BUILD_CFG_RT MY_BUILD_CFG_STD MY_BUILD_DIR MY_BUILD_ENVIRONMENT MY_BUILD_ENVIRONMENT_FILE MY_BUILD_ENVIRONMENT_FILE_RT MY_BUILD_ENVIRONMENT_FILE_STD MY_DEBUG_BUILD_CFG_RT MY_DEBUG_BUILD_CFG_STD MY_LOCAL_DISK MY_MOCK_ROOT MY_REPO MY_REPO_ROOT_DIR MY_SRC_RPM_BUILD_DIR MY_TC_RELEASE MY_WORKSPACE LAYER" >> /etc/profile.d/TC.sh && \
-    echo "fi" >> /etc/profile.d/TC.sh && \
-    echo "export FORMAL_BUILD=0" >> /etc/profile.d/TC.sh && \
-    echo "export PATH=\$MY_REPO/build-tools:\$PATH" >> /etc/profile.d/TC.sh
+RUN echo "# Load stx-builder configuration" >> /etc/profile.d/stx-builder-conf.sh && \
+    echo "if [[ -r \${HOME}/buildrc ]]; then" >> /etc/profile.d/stx-builder-conf.sh && \
+    echo "    source \${HOME}/buildrc" >> /etc/profile.d/stx-builder-conf.sh && \
+    echo "    export PROJECT SRC_BUILD_ENVIRONMENT MYPROJECTNAME MYUNAME" >> /etc/profile.d/stx-builder-conf.sh && \
+    echo "    export MY_BUILD_CFG MY_BUILD_CFG_RT MY_BUILD_CFG_STD MY_BUILD_DIR MY_BUILD_ENVIRONMENT MY_BUILD_ENVIRONMENT_FILE MY_BUILD_ENVIRONMENT_FILE_RT MY_BUILD_ENVIRONMENT_FILE_STD MY_DEBUG_BUILD_CFG_RT MY_DEBUG_BUILD_CFG_STD MY_LOCAL_DISK MY_MOCK_ROOT MY_REPO MY_REPO_ROOT_DIR MY_SRC_RPM_BUILD_DIR MY_RELEASE MY_WORKSPACE LAYER" >> /etc/profile.d/stx-builder-conf.sh && \
+    echo "fi" >> /etc/profile.d/stx-builder-conf.sh && \
+    echo "export FORMAL_BUILD=0" >> /etc/profile.d/stx-builder-conf.sh && \
+    echo "export PATH=\$MY_REPO/build-tools:\$PATH" >> /etc/profile.d/stx-builder-conf.sh
 
 # centos locales are broken. this needs to be run after the last yum install/update
 RUN localedef -i en_US -f UTF-8 en_US.UTF-8
