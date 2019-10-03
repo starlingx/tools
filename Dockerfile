@@ -147,8 +147,8 @@ RUN useradd -s /sbin/nologin -u 9001 -g 9001 mockbuild && \
 # Inherited  tools for mock stuff
 # we at least need the mock_cache_unlock tool
 # they install into /usr/bin
-COPY toCOPY/cgcs_overlay /opt/cgcs_overlay
-RUN cd /opt/cgcs_overlay && \
+COPY toCOPY/mock_overlay /opt/mock_overlay
+RUN cd /opt/mock_overlay && \
     make && \
     make install
 
