@@ -34,6 +34,11 @@ TIS_CACHE_DIR="${TIS_REPO_DIR}/dependancy-cache"
 TIS_CACHE_ORIGIN="${TIS_REPO_DIR}/origin"
 ORIGIN="/import/mirrors/CentOS/${SRC_BUILD_ENVIRONMENT}/CentOS/pike"
 
+CREATEREPO=$(which createrepo_c)
+if [ $? -ne 0 ]; then
+   CREATEREPO="createrepo"
+fi
+
 # Create directories
 for d in "$DEST_RPM" "$DEST_SRPM" "$TIS_CACHE_DIR"; do
 	if [ ! -d "$d" ]; then
@@ -63,7 +68,7 @@ for f in $(find "$RT_PKG_DIR" "$STD_PKG_DIR" -name '*.rpm' \
 done
 
 # Make a repo out of it
-( cd "$DEST_RPM_ROOT_NEW"; createrepo $PWD; exit $? )
+( cd "$DEST_RPM_ROOT_NEW"; $CREATEREPO $PWD; exit $? )
 
 # copy standard and rt build of src.rpm packages
 for f in $(find "$STD_PKG_DIR" "$RT_PKG_DIR" -name '*.src.rpm'); do
@@ -74,7 +79,7 @@ for f in $(find "$STD_PKG_DIR" "$RT_PKG_DIR" -name '*.src.rpm'); do
 done
 
 # Make a repo out of it
-( cd  "$DEST_SRPM_ROOT_NEW"; createrepo $PWD; exit $? )
+( cd  "$DEST_SRPM_ROOT_NEW"; $CREATEREPO $PWD; exit $? )
 
 date > "${DEST_SRPM_ROOT_NEW}/last_updated"
 date > "${DEST_RPM_ROOT_NEW}/last_updated"
@@ -138,9 +143,9 @@ for d in $(find -L . -type d -name repodata); do
 		rm -rf repodata
 	fi
 	if [ -f "comps.xml" ]; then
-		createrepo -g comps.xml "$PWD"
+		$CREATEREPO -g comps.xml "$PWD"
 	else
-		createrepo "$PWD"
+		$CREATEREPO "$PWD"
 	fi
 	popd
 done
