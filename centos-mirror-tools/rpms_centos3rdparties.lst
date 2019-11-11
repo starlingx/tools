@@ -82,7 +82,7 @@ openscap-1.2.17-2.el7.x86_64.rpm
 openscap-scanner-1.2.17-2.el7.x86_64.rpm
 openstack-tempest-17.2.0-4.el7.noarch.rpm
 osinfo-db-20180531-1.el7.noarch.rpm
-OVMF-20150414-2.gitc9e5618.el7.noarch.rpm
+OVMF-20180508-6.gitee3198e672e2.el7.noarch.rpm
 policycoreutils-2.5-29.el7.x86_64.rpm
 policycoreutils-devel-2.5-29.el7.x86_64.rpm
 policycoreutils-newrole-2.5-29.el7.x86_64.rpm
