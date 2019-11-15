@@ -27,8 +27,8 @@ gorilla-mux-456bcfa82d672db7cae587c9b541463f65bc2718.tar.gz#gorilla-mux#https://
 helm-charts-92b6289ae93816717a8453cfe62bad51cbdb8ad0.tar.gz#helm-charts#https://github.com/helm/charts/archive/92b6289ae93816717a8453cfe62bad51cbdb8ad0.tar.gz#http##
 helm-charts-elastic-2bd7616ceddbdf2eee88965e2028ee37d304c79c.tar.gz#helm-charts-elastic#https://github.com/elastic/helm-charts/archive/2bd7616ceddbdf2eee88965e2028ee37d304c79c.tar.gz#http##
 helm-v2.13.1-linux-amd64.tar.gz#linux-amd64#https://storage.googleapis.com/kubernetes-helm/helm-v2.13.1-linux-amd64.tar.gz#http##
-i40e-2.7.29.tar.gz#i40e-2.7.29#https://sourceforge.net/projects/e1000/files/i40e%20stable/2.7.29/i40e-2.7.29.tar.gz/download#http##
-i40evf-3.6.15.tar.gz#i40evf-3.6.15#https://sourceforge.net/projects/e1000/files/i40evf%20stable/3.6.15/i40evf-3.6.15.tar.gz/download#http##
+i40e-2.10.19.30.tar.gz#i40e-2.10.19.30#https://sourceforge.net/projects/e1000/files/i40e%20stable/2.10.19.30/i40e-2.10.19.30.tar.gz/download#http##
+iavf-3.7.61.20.tar.gz#iavf-3.7.61.20#https://sourceforge.net/projects/e1000/files/iavf%20stable/3.7.61.20/iavf-3.7.61.20.tar.gz/download#http##
 ibsh-0.3e.tar.gz#cgcs-users-1.0#https://sourceforge.net/projects/ibsh/files/ibsh/ibsh-0.3e/ibsh-0.3e.tar.gz/download#http##
 !integrity-kmod-e6aef069.tar.gz#integrity#http://git.infradead.org/users/jjs/linux-tpmdd.git/snapshot/e6aef069b6e97790cb127d5eeb86ae9ff0b7b0e3.tar.gz#http_script##post-dl-script/integrity-kmod.sh
 isa-l-7e1a337433a340bc0974ed0f04301bdaca374af6.tar.gz#isa-l#https://api.github.com/repos/ceph/isa-l/tarball/7e1a337433a340bc0974ed0f04301bdaca374af6#https##
