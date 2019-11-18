@@ -13,18 +13,18 @@
 # Copyright (C) 2019 Intel Corporation
 #
 
-FROM centos:7.4.1708
+FROM centos:8
 
 # Proxy configuration
 #ENV http_proxy  "http://your.actual_http_proxy.com:your_port"
 #ENV https_proxy "https://your.actual_https_proxy.com:your_port"
 #ENV ftp_proxy   "http://your.actual_ftp_proxy.com:your_port"
 
-#RUN echo "proxy=$http_proxy" >> /etc/yum.conf && \
+#RUN echo "proxy=$http_proxy" >> /etc/dnf/dnf.conf && \
 #    echo -e "export http_proxy=$http_proxy\nexport https_proxy=$https_proxy\n\
 #export ftp_proxy=$ftp_proxy" >> /root/.bashrc
 
-RUN echo "http_caching=packages" >> /etc/yum.conf
+RUN echo "http_caching=packages" >> /etc/dnf/dnf.conf
 
 # username you will docker exec into the container as.
 # It should NOT be your host username so you can easily tell
@@ -35,16 +35,18 @@ ARG MYUID=1000
 ENV container=docker
 
 # Download required dependencies by mirror/build processes.
-# Notice there are 3 invocations to yum package manage.
+# Notice there are 3 invocations to dnf package manage.
 # 1) Enable EPEL repository.
 # 2) Download required packages.
-# 3) Clean yum cache.
+# 3) Clean dnf cache.
 RUN groupadd -g 751 cgts && \
     echo "mock:x:751:root" >> /etc/group && \
     echo "mockbuild:x:9001:" >> /etc/group && \
-    yum install -y epel-release && \
-    yum install -y anaconda \
-        anaconda-help \
+    dnf install -y epel-release && \
+    dnf install -y dnf-utils && \
+    dnf config-manager --enable PowerTools && \
+    dnf install -y anaconda \
+        #anaconda-help \
         anaconda-runtime \
         autoconf-archive \
         autogen \
@@ -54,7 +56,7 @@ RUN groupadd -g 751 cgts && \
         bind-utils \
         cpanminus \
         createrepo \
-        deltarpm \
+        #deltarpm \
         expat-devel \
         isomd5sum \
         gcc \
@@ -64,42 +66,41 @@ RUN groupadd -g 751 cgts && \
         libtool \
         libxml2 \
         lighttpd \
-        lighttpd-fastcgi \
-        lighttpd-mod_geoip \
+        #lighttpd-fastcgi \
+        #lighttpd-mod_geoip \
         net-tools \
         mkisofs \
         mock \
-        mongodb \
-        mongodb-server \
-        pax \
+        #mongodb \
+        #mongodb-server \
+        #pax \
         perl-CPAN \
-        python-deltarpm \
-        python-pep8 \
-        python-pip \
-        python-psutil \
-        python2-psutil \
-        python36-psutil \
-        python-sphinx \
-        python-subunit \
-        python-pip \
-        python-testrepository \
-        python-tox \
-        python-yaml \
+        #python-deltarpm \
+        #python-pep8 \
+        python3-pip \
+        #python-psutil \
+        python3-psutil \
+        #python36-psutil \
+        #python-sphinx \
+        #python-subunit \
+        python3-rpm \
+        #python-testrepository \
+        #python-tox \
+        python3-yaml \
         postgresql \
         qemu-kvm \
         quilt \
         rpm-build \
         rpm-sign \
-        rpm-python \
         squashfs-tools \
         sudo \
         systemd \
         syslinux \
-        syslinux-utils \
+        #syslinux-utils \
         udisks2 \
         vim-enhanced \
-        wget \
-        yumdownloader
+        wget
+        #yumdownloader
 
 # This image requires a set of scripts and helpers
 # for working correctly, in this section they are
@@ -118,8 +119,8 @@ RUN cpanm --notest Fatal && \
     cpanm --notest XML::Simple
 
 # pip installs
-RUN pip install python-subunit junitxml --upgrade && \
-    pip install tox --upgrade
+RUN pip3 install python-subunit junitxml --upgrade && \
+    pip3 install tox --upgrade
 
 # Install repo tool
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo && \
@@ -128,7 +129,7 @@ RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin
 # installing go and setting paths
 ENV GOPATH="/usr/local/go"
 ENV PATH="${GOPATH}/bin:${PATH}"
-RUN yum install -y golang && \
+RUN dnf install -y golang && \
     mkdir -p ${GOPATH}/bin && \
     curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
@@ -162,8 +163,8 @@ RUN echo "# Load stx-builder configuration" >> /etc/profile.d/TC.sh && \
     echo "export FORMAL_BUILD=0" >> /etc/profile.d/TC.sh && \
     echo "export PATH=\$MY_REPO/build-tools:\$PATH" >> /etc/profile.d/TC.sh
 
-# centos locales are broken. this needs to be run after the last yum install/update
-RUN localedef -i en_US -f UTF-8 en_US.UTF-8
+# centos locales are broken. this needs to be run after the last dnf install/update
+#RUN localedef -i en_US -f UTF-8 en_US.UTF-8
 
 # setup
 RUN mkdir -p /www/run && \
@@ -244,7 +245,7 @@ COPY centos-mirror-tools/rpm-gpg-keys/* /etc/pki/rpm-gpg/
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 
 # Try to continue a yum command even if a StarlingX repo is unavailable.
-RUN yum-config-manager --setopt=StarlingX\*.skip_if_unavailable=1 --save
+RUN dnf config-manager --setopt=StarlingX\*.skip_if_unavailable=1 --save
 
 # When we run 'init' below, it will run systemd, and systemd requires RTMIN+3
 # to exit cleanly. By default, docker stop uses SIGTERM, which systemd ignores.
