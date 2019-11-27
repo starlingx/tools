@@ -12,6 +12,7 @@ Create documentation as pydoc -w cve_policy_filter
 import json
 import sys
 import os
+from lp import find_lp_assigned
 
 def print_html_report(cves_report, title):
     """
@@ -25,6 +26,7 @@ def print_html_report(cves_report, title):
     template = template_env.get_template(template_file)
     heads = ["cve_id", "status", "cvss2Score", "av", "ac", "au", "ai"]
     output_text = template.render(cves_to_fix=cves_report["cves_to_fix"],\
+        cves_to_fix_lp=cves_report["cves_to_fix_lp"],\
         cves_to_track=cves_report["cves_to_track"],\
         cves_w_errors=cves_report["cves_w_errors"],\
         cves_to_omit=cves_report["cves_to_omit"],\
@@ -40,7 +42,7 @@ def print_report(cves_report, title):
     Print the txt STDOUT report
     """
     print("\n%s report:" % (title))
-    print("\nValid CVEs to take action immediately: %d\n" \
+    print("\nCVEs to fix w/o a launchpad assigned: %d\n" \
         % (len(cves_report["cves_to_fix"])))
     for cve in cves_report["cves_to_fix"]:
         print("\n")
@@ -56,6 +58,15 @@ def print_report(cves_report, title):
         print(cve["summary"])
         if cve["sourcelink"]:
             print(cve["sourcelink"])
+
+    print("\nCVEs to fix w/ a launchpad assigned: %d \n" \
+        % (len(cves_report["cves_to_fix_lp"])))
+    for cve in cves_report["cves_to_fix_lp"]:
+        cve_line = []
+        for key, value in cve.items():
+            if key != "summary":
+                cve_line.append(key + ":" + str(value))
+        print(cve_line)
 
     print("\nCVEs to track for incoming fix: %d \n" \
         % (len(cves_report["cves_to_track"])))
@@ -128,6 +139,7 @@ def main():
     cves = []
     cves_valid = []
     cves_to_fix = []
+    cves_to_fix_lp = []
     cves_to_track = []
     cves_w_errors = []
     cves_to_omit = []
@@ -197,13 +209,17 @@ def main():
                 and ("N" in cve["au"] or "S" in cve["au"])
                 and ("P" in cve["ai"] or "C" in cve["ai"])):
             if cve["status"] == "fixed":
-                cves_to_fix.append(cve)
+                if find_lp_assigned(cve["id"]):
+                    cves_to_fix_lp.append(cve)
+                else:
+                    cves_to_fix.append(cve)
             else:
                 cves_to_track.append(cve)
         else:
             cves_to_omit.append(cve)
 
     cves_report["cves_to_fix"] = cves_to_fix
+    cves_report["cves_to_fix_lp"] = cves_to_fix_lp
     cves_report["cves_to_track"] = cves_to_track
     cves_report["cves_w_errors"] = cves_w_errors
     cves_report["cves_to_omit"] = cves_to_omit
