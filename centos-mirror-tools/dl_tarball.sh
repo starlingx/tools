@@ -263,7 +263,7 @@ for line in $(cat $tarball_file); do
     if [[ "$line" =~ ^'!' ]]; then
         echo $tarball_name
         pushd $output_tarball > /dev/null
-        if [ "$tarball_name" = "integrity-kmod-e6aef069.tar.gz" ]; then
+        if [ "$tarball_name" = "integrity-kmod-37e0c813.tar.gz" ]; then
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
@@ -296,7 +296,7 @@ for line in $(cat $tarball_file); do
             tar czvf $tarball_name $directory_name
             rm -rf $directory_name
             popd > /dev/null   # pushd $directory_name
-        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-4.5-1.0.1.0.tgz' ]]; then
+        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-4.7-1.0.0.1.tgz' ]]; then
             srpm_path="${directory_name}/SRPMS/"
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
@@ -322,7 +322,7 @@ for line in $(cat $tarball_file); do
                 continue
             fi
 
-        elif [ "$tarball_name" = "tpm-kmod-e6aef069.tar.gz" ]; then
+        elif [ "$tarball_name" = "tpm-kmod-37e0c813.tar.gz" ]; then
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))

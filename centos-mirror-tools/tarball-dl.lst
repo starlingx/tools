@@ -9,10 +9,10 @@ docker-libtrust-fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#docker-libtrust#
 dpdk-18.11.tar.xz#dpdk-18.11#http://fast.dpdk.org/rel/dpdk-18.11.tar.xz#http##
 dpdk-6ece49ad5a26f5e2f5c4af6c06c30376c0ddc387.tar.gz#dpdk#https://api.github.com/repos/spdk/dpdk/tarball/6ece49ad5a26f5e2f5c4af6c06c30376c0ddc387#https##
 dpkg_1.18.24.tar.xz#dpkg-1.18.24#http://http.debian.net/debian/pool/main/d/dpkg/dpkg_1.18.24.tar.xz#http##
-drbd-8.4.11-1.tar.gz#drbd-8.4.11-1#http://www.linbit.com/downloads/drbd/8.4/drbd-8.4.11-1.tar.gz#http##
+drbd-9.0.21-1.tar.gz#drbd-9.0.21-1#http://www.linbit.com/downloads/drbd/9.0/drbd-9.0.21-1.tar.gz#http##
 drbd-8.4.3.tar.gz#drbd-8.4.3#http://www.linbit.com/downloads/drbd/8.4/archive/drbd-8.4.3.tar.gz#http##
 dtc-1.4.4.tar.gz#dtc-1.4.4#https://www.kernel.org/pub/software/utils/dtc/dtc-1.4.4.tar.gz#http##
-e1000e-3.4.2.1.tar.gz#e1000e-3.4.2.1#https://sourceforge.net/projects/e1000/files/e1000e%20stable/3.4.2.1/e1000e-3.4.2.1.tar.gz#http##
+e1000e-3.6.0.tar.gz#e1000e-3.6.0#https://sourceforge.net/projects/e1000/files/e1000e%20stable/3.6.0/e1000e-3.6.0.tar.gz#http##
 etcd-v3.3.15.tar.gz#etcd-v3.3.15#https://github.com/etcd-io/etcd/archive/v3.3.15.tar.gz#http##
 gf-complete-7e61b44404f0ed410c83cfd3947a52e88ae044e1.tar.gz#gf-complete#https://api.github.com/repos/ceph/gf-complete/tarball/7e61b44404f0ed410c83cfd3947a52e88ae044e1#https##
 gnocchi-4.2.5.tar.gz#gnocchi-4.2.5#https://pypi.io/packages/source/g/gnocchi/gnocchi-4.2.5.tar.gz#http##
@@ -30,11 +30,11 @@ helm-v2.13.1-linux-amd64.tar.gz#linux-amd64#https://storage.googleapis.com/kuber
 i40e-2.10.19.30.tar.gz#i40e-2.10.19.30#https://sourceforge.net/projects/e1000/files/i40e%20stable/2.10.19.30/i40e-2.10.19.30.tar.gz/download#http##
 iavf-3.7.61.20.tar.gz#iavf-3.7.61.20#https://sourceforge.net/projects/e1000/files/iavf%20stable/3.7.61.20/iavf-3.7.61.20.tar.gz/download#http##
 ibsh-0.3e.tar.gz#cgcs-users-1.0#https://sourceforge.net/projects/ibsh/files/ibsh/ibsh-0.3e/ibsh-0.3e.tar.gz/download#http##
-!integrity-kmod-e6aef069.tar.gz#integrity#http://git.infradead.org/users/jjs/linux-tpmdd.git/snapshot/e6aef069b6e97790cb127d5eeb86ae9ff0b7b0e3.tar.gz#http_script##post-dl-script/integrity-kmod.sh
+!integrity-kmod-37e0c813.tar.gz#integrity#http://git.infradead.org/users/jjs/linux-tpmdd.git/snapshot/37e0c813a2c4c85b3bf1beb9a277f1fda8f94273.tar.gz#http_script##post-dl-script/integrity-kmod.sh
 isa-l-7e1a337433a340bc0974ed0f04301bdaca374af6.tar.gz#isa-l#https://api.github.com/repos/ceph/isa-l/tarball/7e1a337433a340bc0974ed0f04301bdaca374af6#https##
 isa-l_crypto-603529a4e06ac8a1662c13d6b31f122e21830352.tar.gz#isa-l_crypto#https://api.github.com/repos/01org/isa-l_crypto/tarball/603529a4e06ac8a1662c13d6b31f122e21830352#https##
-ixgbe-5.5.5.tar.gz#ixgbe-5.5.5#https://sourceforge.net/projects/e1000/files/ixgbe%20stable/5.5.5/ixgbe-5.5.5.tar.gz/download#http##
-ixgbevf-4.5.3.tar.gz#ixgbevf-4.5.3#https://sourceforge.net/projects/e1000/files/ixgbevf%20stable/4.5.3/ixgbevf-4.5.3.tar.gz/download#http##
+ixgbe-5.6.3.tar.gz#ixgbe-5.6.3#https://sourceforge.net/projects/e1000/files/ixgbe%20stable/5.6.3/ixgbe-5.6.3.tar.gz/download#http##
+ixgbevf-4.6.1.tar.gz#ixgbevf-4.6.1#https://sourceforge.net/projects/e1000/files/ixgbevf%20stable/4.6.1/ixgbevf-4.6.1.tar.gz/download#http##
 jerasure-96c76b89d661c163f65a014b8042c9354ccf7f31.tar.gz#jerasure#https://api.github.com/repos/ceph/jerasure/tarball/96c76b89d661c163f65a014b8042c9354ccf7f31#https##
 keycodemapdb-16e5b07.tar.gz#keycodemapdb#https://github.com/CendioOssman/keycodemapdb/tarball/16e5b0787687d8904dad2c026107409eb9bfcb95#http##
 kubernetes-contrib-v1.16.2.tar.gz#kubernetes-contrib-1.16.2#https://github.com/kubernetes-retired/contrib/tarball/89f6948e24578fed2a90a87871b2263729f90ac3#http##
@@ -45,7 +45,7 @@ libtpms-0.6.0-4f0d59d.tar.gz#libtpms-0.6.0#https://github.com/stefanberger/libtp
 lldpd-0.9.0.tar.gz#lldpd-0.9.0#https://media.luffy.cx/files/lldpd/lldpd-0.9.0.tar.gz#http##
 lua-1fce39c6397056db645718b8f5821571d97869a4.tar.gz#lua#https://api.github.com/repos/ceph/lua/tarball/1fce39c6397056db645718b8f5821571d97869a4#https##
 !mariadb-10.1.28.tar.gz#mariadb-10.1.28#https://github.com/MariaDB/server/archive/mariadb-10.1.28.tar.gz#http_script##post-dl-script/mariadb.sh
-!MLNX_OFED_SRC-4.5-1.0.1.0.tgz#MLNX_OFED_SRC-4.5-1.0.1.0#http://content.mellanox.com/ofed/MLNX_OFED-4.5-1.0.1.0/MLNX_OFED_SRC-4.5-1.0.1.0.tgz#http_script##post-dl-script/MLNX_OFEDqat1.7.sh
+!MLNX_OFED_SRC-4.7-1.0.0.1.tgz#MLNX_OFED_SRC-4.7-1.0.1.0#http://content.mellanox.com/ofed/MLNX_OFED-4.7-1.0.0.1/MLNX_OFED_SRC-4.7-1.0.0.1.tgz#http_script##post-dl-script/MLNX_OFEDqat1.7.sh
 opae-intel-fpga-driver-1.3.0-2.tar.gz#opae-intel-fpga-driver-1.3.0-2#https://github.com/OPAE/opae-sdk/releases/download/1.3.0-2/opae-intel-fpga-driver-1.3.0-2.tar.gz#http##
 openstack-helm-82c72367c85ca94270f702661c7b984899c1ae38.tar.gz#openstack-helm#https://github.com/openstack/openstack-helm/archive/82c72367c85ca94270f702661c7b984899c1ae38.tar.gz#http##
 openstack-helm-infra-c9d6676bf9a5aceb311dc31dadd07cba6a3d6392.tar.gz#openstack-helm-infra#https://github.com/openstack/openstack-helm-infra/archive/c9d6676bf9a5aceb311dc31dadd07cba6a3d6392.tar.gz#http##
@@ -62,7 +62,7 @@ puppet-network-7deacd5fdc22c0543455878a8d1872f2f5417c1d.tar.gz#packstack/puppet/
 puppet-nslcd-b8c19b1ada89865f2e50758e054583798ad8011a.tar.gz#packstack/puppet/modules/nslcd#https://github.com/jlyheden/puppet-nslcd/tarball/b8c19b1ada89865f2e50758e054583798ad8011a#http##
 puppi-c1c47f4edfd761d1bbde32a75da0c3fa7cc93a81.tar.gz#puppi-master#https://github.com/example42/puppi/tarball/c1c47f4edfd761d1bbde32a75da0c3fa7cc93a81#http##
 python-cephclient-v0.1.0.5.tar.gz#python-cephclient-0.1.0.5#https://github.com/dmsimard/python-cephclient/archive/v0.1.0.5.tar.gz#http##
-python-setuptools-v38.5.1.tar.gz#setuptools-38.5.1#https://github.com/pypa/setuptools/archive/v38.5.1.tar.gz#http##
+python-setuptools-v39.2.0.tar.gz#setuptools-39.2.0#https://github.com/pypa/setuptools/archive/v39.2.0.tar.gz#http##
 python-smartpm-1.4.1.tar.gz#smart-1.4.1#http://launchpad.net/smart/trunk/1.4.1/+download/smart-1.4.1.tar.bz2#http##
 !qat1.7.l.4.5.0-00034.tar.gz#quickassist#https://01.org/sites/default/files/downloads/qat1.7.l.4.5.0-00034.tar.gz#http_script##post-dl-script/qat1.7.sh
 rapidjson-f54b0e47a08782a6131cc3d60f94d038fa6e0a51.tar.gz#rapidjson#https://api.github.com/repos/ceph/rapidjson/tarball/f54b0e47a08782a6131cc3d60f94d038fa6e0a51#https##
@@ -74,7 +74,7 @@ Sirupsen-logrus-55eb11d21d2a31a3cc93838241d04800f52e823d.tar.gz#Sirupsen-logrus#
 spdk-f474ce6930f0a44360e1cc4ecd606d2348481c4c.tar.gz#spdk#https://api.github.com/repos/ceph/spdk/tarball/f474ce6930f0a44360e1cc4ecd606d2348481c4c#https##
 spectre-meltdown-checker-0.37+-5cc77741.tar.gz#spectre-meltdown-checker#https://github.com/speed47/spectre-meltdown-checker/tarball/5cc77741af1d2f52140aa9f89339f56b6c4b6783#http##
 swtpm-0.1.0-253eac5.tar.gz#swtpm-0.1.0#https://github.com/stefanberger/swtpm/tarball/1303be7d03294fb02204cb8242f366cbf0da076d#http##
-!tpm-kmod-e6aef069.tar.gz#tpm#http://git.infradead.org/users/jjs/linux-tpmdd.git/snapshot/e6aef069b6e97790cb127d5eeb86ae9ff0b7b0e3.tar.gz#http_script#post-dl-script/tpm-kmod.sh
+!tpm-kmod-37e0c813.tar.gz#tpm#http://git.infradead.org/users/jjs/linux-tpmdd.git/snapshot/37e0c813a2c4c85b3bf1beb9a277f1fda8f94273.tar.gz#http_script#post-dl-script/tpm-kmod.sh
 !tss2-930.tar.gz#tss2-930#https://git.code.sf.net/p/ibmtpm20tss/tss#git#v930#
 xxHash-1f40c6511fa8dd9d2e337ca8c9bc18b3e87663c9.tar.gz#xxHash#https://api.github.com/repos/ceph/xxHash/tarball/1f40c6511fa8dd9d2e337ca8c9bc18b3e87663c9#https##
 zstd-f4340f46b2387bc8de7d5320c0b83bb1499933ad.tar.gz#zstd#https://api.github.com/repos/facebook/zstd/tarball/f4340f46b2387bc8de7d5320c0b83bb1499933ad#https##
