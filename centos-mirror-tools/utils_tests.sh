@@ -10,8 +10,8 @@
 set -o errexit
 set -o nounset
 
-YUMCONFOPT=""
-RELEASEVER="--releasever=7"
+DNFCONFOPT=""
+RELEASEVER="--releasever=8"
 
 source utils.sh
 
@@ -51,42 +51,42 @@ res=$(get_url "python2-httpbin-0.5.0-6.el7.noarch.rpm" "K1")
 expect="https://kojipkgs.fedoraproject.org/packages/python2-httpbin/0.5.0/6.el7/noarch/python2-httpbin-0.5.0-6.el7.noarch.rpm"
 check_result "$res" "$expect"
 
-# get_yum_command
+# get_dnf_command
 
-res=$(get_yum_command "anaconda-21.48.22.147-1.el7.centos.src.rpm" "L1")
-expect="yumdownloader -q -C  --releasever=7 --source anaconda-21.48.22.147-1.el7.centos"
+res=$(get_dnf_command "anaconda-29.19.0.43-1.el8_0.src.rpm" "L1")
+expect="dnf download -q --releasever=8 --source anaconda-29.19.0.43-1.el8_0"
 check_result "$res" "$expect"
 
-res=$(get_yum_command "acpid-2.0.19-9.el7.x86_64.rpm" "L1")
-expect="yumdownloader -q -C  --releasever=7 --archlist=noarch,x86_64 acpid-2.0.19-9.el7"
+res=$(get_dnf_command "acpid-2.0.19-9.el7.x86_64.rpm" "L1")
+expect="dnf download -q --releasever=8 --archlist=noarch,x86_64 acl-2.2.53-1.el8"
 check_result "$res" "$expect"
 
 # get_rpm_level_name
 
-res=$(get_rpm_level_name "acl-2.2.51-12.el7.x86_64.rpm" "L1")
-expect="acl-2.2.51-12.el7"
+res=$(get_rpm_level_name "acl-2.2.53-1.el8.x86_64.rpm" "L1")
+expect="acl-2.2.53-1.el8"
 check_result "$res" "$expect"
 
-res=$(get_rpm_level_name "acl-2.2.51-12.el7.x86_64.rpm" "L3")
+res=$(get_rpm_level_name "acl-2.2.53-1.el8.x86_64.rpm" "L3")
 expect="acl"
 check_result "$res" "$expect"
 
-res=$(get_rpm_level_name "anaconda-21.48.22.147-1.el7.centos.src.rpm" "L2")
+res=$(get_rpm_level_name "anaconda-29.19.0.43-1.el8_0.src.rpm" "L2")
 expect="anaconda-21.48.22.147"
 check_result "$res" "$expect"
 
-res=$(get_arch_from_rpm "acl-2.2.51-12.el7.x86_64.rpm")
+res=$(get_arch_from_rpm "acl-2.2.53-1.el8.x86_64.rpm")
 expect="x86_64"
 check_result "$res" "$expect"
 
-res=$(get_arch_from_rpm "acl-2.2.51-12.el7.noarch.rpm")
+res=$(get_arch_from_rpm "acl-2.2.53-1.el8.noarch.rpm")
 expect="noarch"
 check_result "$res" "$expect"
 
-res=$(get_arch_from_rpm "acl-2.2.51-12.el7.src.rpm")
+res=$(get_arch_from_rpm "acl-2.2.53-1.el8.src.rpm")
 expect="src"
 check_result "$res" "$expect"
 
-res=$(get_arch_from_rpm "acl-2.2.51-12.el7.src.rpm#https://someurl.com/acl-2.2.51-12.el7.src.rpm")
+res=$(get_arch_from_rpm "acl-2.2.51-12.el7.src.rpm#https://someurl.com/acl-2.2.53-1.el8.src.rpm")
 expect="src"
 check_result "$res" "$expect"
