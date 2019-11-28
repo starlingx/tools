@@ -1,15 +1,15 @@
 [main]
-releasever=7
-cachedir=/tmp/cache/yum/$basearch/$releasever
+releasever=8
+cachedir=/tmp/cache/dnf/$basearch/$releasever
 keepcache=0
 debuglevel=2
-logfile=/tmp/log/yum.log
+logfile=/tmp/log/dnf.log
 exactarch=1
 obsoletes=1
 gpgcheck=1
 plugins=1
 installonly_limit=5
-bugtracker_url=http://bugs.centos.org/set_project.php?project_id=23&ref=http://bugs.centos.org/bug_report_page.php?category=yum
+bugtracker_url=http://bugs.centos.org/set_project.php?project_id=23&ref=http://bugs.centos.org/bug_report_page.php?category=dnf
 distroverpkg=centos-release
 override_install_langs=en_US.utf8
 tsflags=nodocs
@@ -17,9 +17,9 @@ http_caching=packages
 reposdir=yum.repos.d
 
 
-#  This is the default, if you make this bigger yum won't see if the metadata
+#  This is the default, if you make this bigger dnf won't see if the metadata
 # is newer on the remote and so you'll "gain" the bandwidth of not having to
-# download the new metadata and "pay" for it by yum not having correct
+# download the new metadata and "pay" for it by dnf not having correct
 # information.
 #  It is esp. important, to have correct metadata, for distributions like
 # Fedora which don't keep old packages around. If you don't like this checking
