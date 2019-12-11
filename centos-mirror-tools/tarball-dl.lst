@@ -27,8 +27,8 @@ gorilla-mux-456bcfa82d672db7cae587c9b541463f65bc2718.tar.gz#gorilla-mux#https://
 helm-charts-92b6289ae93816717a8453cfe62bad51cbdb8ad0.tar.gz#helm-charts#https://github.com/helm/charts/archive/92b6289ae93816717a8453cfe62bad51cbdb8ad0.tar.gz#http##
 helm-charts-elastic-2bd7616ceddbdf2eee88965e2028ee37d304c79c.tar.gz#helm-charts-elastic#https://github.com/elastic/helm-charts/archive/2bd7616ceddbdf2eee88965e2028ee37d304c79c.tar.gz#http##
 helm-v2.13.1-linux-amd64.tar.gz#linux-amd64#https://storage.googleapis.com/kubernetes-helm/helm-v2.13.1-linux-amd64.tar.gz#http##
-i40e-2.7.29.tar.gz#i40e-2.7.29#https://sourceforge.net/projects/e1000/files/i40e%20stable/2.7.29/i40e-2.7.29.tar.gz/download#http##
-i40evf-3.6.15.tar.gz#i40evf-3.6.15#https://sourceforge.net/projects/e1000/files/i40evf%20stable/3.6.15/i40evf-3.6.15.tar.gz/download#http##
+i40e-2.10.19.30.tar.gz#i40e-2.10.19.30#https://sourceforge.net/projects/e1000/files/i40e%20stable/2.10.19.30/i40e-2.10.19.30.tar.gz/download#http##
+iavf-3.7.61.20.tar.gz#iavf-3.7.61.20#https://sourceforge.net/projects/e1000/files/iavf%20stable/3.7.61.20/iavf-3.7.61.20.tar.gz/download#http##
 ibsh-0.3e.tar.gz#cgcs-users-1.0#https://sourceforge.net/projects/ibsh/files/ibsh/ibsh-0.3e/ibsh-0.3e.tar.gz/download#http##
 !integrity-kmod-e6aef069.tar.gz#integrity#http://git.infradead.org/users/jjs/linux-tpmdd.git/snapshot/e6aef069b6e97790cb127d5eeb86ae9ff0b7b0e3.tar.gz#http_script##post-dl-script/integrity-kmod.sh
 isa-l-7e1a337433a340bc0974ed0f04301bdaca374af6.tar.gz#isa-l#https://api.github.com/repos/ceph/isa-l/tarball/7e1a337433a340bc0974ed0f04301bdaca374af6#https##
@@ -47,8 +47,8 @@ lua-1fce39c6397056db645718b8f5821571d97869a4.tar.gz#lua#https://api.github.com/r
 !mariadb-10.1.28.tar.gz#mariadb-10.1.28#https://github.com/MariaDB/server/archive/mariadb-10.1.28.tar.gz#http_script##post-dl-script/mariadb.sh
 !MLNX_OFED_SRC-4.5-1.0.1.0.tgz#MLNX_OFED_SRC-4.5-1.0.1.0#http://content.mellanox.com/ofed/MLNX_OFED-4.5-1.0.1.0/MLNX_OFED_SRC-4.5-1.0.1.0.tgz#http_script##post-dl-script/MLNX_OFEDqat1.7.sh
 opae-intel-fpga-driver-1.3.0-2.tar.gz#opae-intel-fpga-driver-1.3.0-2#https://github.com/OPAE/opae-sdk/releases/download/1.3.0-2/opae-intel-fpga-driver-1.3.0-2.tar.gz#http##
-openstack-helm-6c71637222f47d85681038994f02feac92f75bd2.tar.gz#openstack-helm#https://github.com/openstack/openstack-helm/archive/6c71637222f47d85681038994f02feac92f75bd2.tar.gz#http##
-openstack-helm-infra-aae64213c95fbcea7a0a7671dcb9d8a366f16fa5.tar.gz#openstack-helm-infra#https://github.com/openstack/openstack-helm-infra/archive/aae64213c95fbcea7a0a7671dcb9d8a366f16fa5.tar.gz#http##
+openstack-helm-82c72367c85ca94270f702661c7b984899c1ae38.tar.gz#openstack-helm#https://github.com/openstack/openstack-helm/archive/82c72367c85ca94270f702661c7b984899c1ae38.tar.gz#http##
+openstack-helm-infra-c9d6676bf9a5aceb311dc31dadd07cba6a3d6392.tar.gz#openstack-helm-infra#https://github.com/openstack/openstack-helm-infra/archive/c9d6676bf9a5aceb311dc31dadd07cba6a3d6392.tar.gz#http##
 openvswitch-2.11.0.tar.gz#openvswitch-2.11.0#https://github.com/openvswitch/ovs/archive/v2.11.0.tar.gz#http##
 puppet-boolean-22b726dd78b0a60a224cc7054aebbf28e9306f62.tar.gz#puppet-boolean#https://github.com/voxpupuli/puppet-boolean/tarball/22b726dd78b0a60a224cc7054aebbf28e9306f62#http##
 puppet-dnsmasq-cff07e90890662972c97684a2baee964f68ff3ed.tar.gz#packstack/puppet/modules/dnsmasq/#https://github.com/procore/puppet-dnsmasq/tarball/cff07e90890662972c97684a2baee964f68ff3ed#http##
