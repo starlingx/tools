@@ -1063,9 +1063,9 @@ plexus-interpolation-1.15-8.el7.noarch.rpm
 plexus-sec-dispatcher-1.4-13.el7.noarch.rpm
 plexus-utils-3.0.9-9.el7.noarch.rpm
 pm-utils-1.4.1-27.el7.x86_64.rpm
-polkit-0.112-18.el7.x86_64.rpm
-polkit-devel-0.112-18.el7.x86_64.rpm
-polkit-docs-0.112-18.el7.noarch.rpm
+polkit-0.112-22.el7.x86_64.rpm
+polkit-devel-0.112-22.el7.x86_64.rpm
+polkit-docs-0.112-22.el7.noarch.rpm
 polkit-pkla-compat-0.1-4.el7.x86_64.rpm
 poppler-0.26.5-20.el7.x86_64.rpm
 poppler-data-0.4.6-3.el7.noarch.rpm
