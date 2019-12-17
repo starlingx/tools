@@ -8,22 +8,22 @@ UTILS_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
 source $UTILS_DIR/url_utils.sh
 
-get_yum_command() {
+get_dnf_command() {
     local _file=$1
     local _level=$2
     local rpm_name=""
     local arr=( $(split_filename $_file) )
     local arch=${arr[3]}
-    local yumdownloader_extra_opts=""
+    local dnf_download_extra_opts=""
     rpm_name="$(get_rpm_level_name $_file $_level)"
 
     if [ "$arch" == "src" ]; then
-        yumdownloader_extra_opts="--source"
+        dnf_download_extra_opts="--source"
     else
-        yumdownloader_extra_opts="--archlist=noarch,x86_64"
+        dnf_download_extra_opts="--archlist=noarch,x86_64"
     fi
 
-    echo "yumdownloader -q -C ${YUMCONFOPT} ${RELEASEVER} $yumdownloader_extra_opts $rpm_name"
+    echo "dnf download -q ${DNFCONFOPT} ${RELEASEVER} $dnf_download_extra_opts $rpm_name"
 }
 
 get_wget_command() {
@@ -66,9 +66,9 @@ get_url() {
             _ret="$(url_to_stx_mirror_url $_ret $distro)"
         fi
     else
-        _url_cmd="$(get_yum_command $_name $_level)"
+        _url_cmd="$(get_dnf_command $_name $_level)"
 
-        # When we add --url to the yum download command,
+        # When we add --url to the dnf download command,
         # --archlist is no longer enforced.  Multiple
         # url's might be returned.  So use grep to
         # filter urls for the desitered arch.
@@ -166,14 +166,14 @@ get_download_cmd() {
     local ff="$1"
     local _level="$2"
 
-    # Decide if the list will be downloaded using yumdownloader or wget
+    # Decide if the list will be downloaded using dnf download or wget
     if [[ $ff != *"#"* ]]; then
         rpm_name=$ff
         if [ $_level == "K1" ]; then
             download_cmd="$(get_wget_command $rpm_name)"
         else
-            # yumdownloader with the appropriate flag for src, noarch or x86_64
-            download_cmd="${SUDOCMD} $(get_yum_command $rpm_name $_level)"
+            # dnf download with the appropriate flag for src, noarch or x86_64
+            download_cmd="${SUDOCMD} $(get_dnf_command $rpm_name $_level)"
         fi
     else
         # Build wget command

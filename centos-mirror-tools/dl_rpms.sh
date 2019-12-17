@@ -8,23 +8,23 @@
 set -o errexit
 set -o nounset
 
-# By default, we use "sudo" and we don't use a local yum.conf. These can
+# By default, we use "sudo" and we don't use a local dnf.conf. These can
 # be overridden via flags.
 
 SUDOCMD="sudo -E"
-RELEASEVER="--releasever=7"
-YUMCONFOPT=""
+RELEASEVER="--releasever=8"
+DNFCONFOPT=""
 
 DL_RPMS_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
 source $DL_RPMS_DIR/utils.sh
 
 usage() {
-    echo "$0 [-n] [-c <yum.conf>] <rpms_list> <match_level> "
+    echo "$0 [-n] [-c <dnf.conf>] <rpms_list> <match_level> "
     echo ""
     echo "Options:"
     echo "  -n: Do not use sudo when performing operations"
-    echo "  -c: Use an alternate yum.conf rather than the system file"
+    echo "  -c: Use an alternate dnf.conf rather than the system file"
     echo "  -x: Clean log files only, do not run."
     echo "  rpm_list: a list of RPM files to be downloaded."
     echo "  match_level: value could be L1, L2 or L3:"
@@ -34,7 +34,7 @@ usage() {
     echo "        using vim-7.4.160 to search vim-7.4.160-2.el7.src.rpm"
     echo "    L3: use name:"
     echo "        using vim to search vim-7.4.160-2.el7.src.rpm"
-    echo "    K1: Use Koji rather than yum repos as a source."
+    echo "    K1: Use Koji rather than dnf repos as a source."
     echo "        Koji has a longer retention period than epel mirrors."
     echo ""
     echo "Returns: 0 = All files downloaded successfully"
@@ -85,8 +85,8 @@ while getopts "c:nxD:sSuUh" o; do
             CLEAN_LOGS_ONLY=1
             ;;
         c)
-            # Use an alternate yum.conf
-            YUMCONFOPT="-c $OPTARG"
+            # Use an alternate dnf.conf
+            DNFCONFOPT="-c $OPTARG"
             grep -q "releasever=" $OPTARG && RELEASEVER="--$(grep releasever= ${OPTARG})"
             ;;
         D)
@@ -253,8 +253,8 @@ download () {
 # Prime the cache
 loop_count=0
 max_loop_count=5
-echo "${SUDOCMD} yum ${YUMCONFOPT} ${RELEASEVER} makecache"
-while ! ${SUDOCMD} yum ${YUMCONFOPT} ${RELEASEVER} makecache ; do
+echo "${SUDOCMD} dnf ${DNFCONFOPT} ${RELEASEVER} makecache"
+while ! ${SUDOCMD} dnf ${DNFCONFOPT} ${RELEASEVER} makecache ; do
     # To protect against intermittent 404 errors, we'll retry
     # a few times.  The suspected issue is pulling repodata
     # from multiple source that are temporarily inconsistent.
@@ -265,8 +265,8 @@ while ! ${SUDOCMD} yum ${YUMCONFOPT} ${RELEASEVER} makecache ; do
     echo "makecache retry: $loop_count"
 
     # Wipe the inconsistent data from the last try
-    echo "yum ${YUMCONFOPT} ${RELEASEVER} clean all"
-    yum ${YUMCONFOPT} ${RELEASEVER} clean all
+    echo "dnf ${DNFCONFOPT} ${RELEASEVER} clean all"
+    dnf ${DNFCONFOPT} ${RELEASEVER} clean all
 done
 
 

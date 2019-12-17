@@ -5,35 +5,35 @@
 #
 
 #
-# Replicate a yum.conf and yum.repo.d under a temporary directory and
+# Replicate a dnf.conf and yum.repo.d under a temporary directory and
 # then modify the files to point to equivalent repos in the StarlingX mirror.
 # This script was originated by Scott Little
 #
 
-MAKE_STX_MIRROR_YUM_CONF_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
+MAKE_STX_MIRROR_DNF_CONF_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
-source "$MAKE_STX_MIRROR_YUM_CONF_DIR/url_utils.sh"
+source "$MAKE_STX_MIRROR_DNF_CONF_DIR/url_utils.sh"
 
 DISTRO="centos"
 
 TEMP_DIR=""
-SRC_REPO_DIR="$MAKE_STX_MIRROR_YUM_CONF_DIR/yum.repos.d"
-SRC_YUM_CONF="$MAKE_STX_MIRROR_YUM_CONF_DIR/yum.conf.sample"
+SRC_REPO_DIR="$MAKE_STX_MIRROR_DNF_CONF_DIR/yum.repos.d"
+SRC_DNF_CONF="$MAKE_STX_MIRROR_DNF_CONF_DIR/dnf.conf.sample"
 
 RETAIN_REPODIR=0
 
 usage () {
     echo ""
-    echo "$0 -d <dest_dir> [-D <distro>] [-y <src_yum_conf>] [-r <src_repos_dir>] [-R]"
+    echo "$0 -d <dest_dir> [-D <distro>] [-y <src_dnf_conf>] [-r <src_repos_dir>] [-R]"
     echo ""
-    echo "Replicate a yum.conf and yum.repo.d under a new directory and"
+    echo "Replicate a dnf.conf and yum.repo.d under a new directory and"
     echo "then modify the files to point to equivalent repos in the StarlingX"
     echo "mirror."
     echo ""
-    echo "-d <dest_dir> = Place modified yum.conf and yum.repo.d into this directory"
+    echo "-d <dest_dir> = Place modified dnf.conf and yum.repo.d into this directory"
     echo "-D <distro>   = Target distro on StarlingX mirror. Default is 'centos'"
-    echo "-y <yum_conf> = Path to yum.conf file that we will modify.  Default is"
-    echo "                'yum.conf.sample' in same directory as this script"
+    echo "-y <dnf_conf> = Path to dnf.conf file that we will modify.  Default is"
+    echo "                'dnf.conf.sample' in same directory as this script"
     echo "-r <repos_dir> = Path to yum.repos.d that we will modify.  Default is"
     echo "                 'yum.repos.d' in same directory as this script"
 }
@@ -57,7 +57,7 @@ while getopts "D:d:Rr:y:" o; do
             RETAIN_REPODIR=1
             ;;
         y)
-            SRC_YUM_CONF="${OPTARG}"
+            SRC_DNF_CONF="${OPTARG}"
             ;;
         *)
             usage
@@ -69,8 +69,8 @@ done
 #
 # option validation
 #
-if [ ! -f $SRC_YUM_CONF ]; then
-    echo "Error: yum.conf not found at '$SRC_YUM_CONF'"
+if [ ! -f $SRC_DNF_CONF ]; then
+    echo "Error: dnf.conf not found at '$SRC_DNF_CONF'"
     exit 1
 fi
 
@@ -93,32 +93,32 @@ fi
 #
 # Get the value of the $releasever variable.
 #
-# If the source yum.conf has a releasever= setting, we will honor
-# that, even though yum will not.
+# If the source dnf.conf has a releasever= setting, we will honor
+# that, even though dnf will not.
 #
-# Otherwise use yum to query the host environment (Docker).
+# Otherwise use dnf to query the host environment (Docker).
 # This assumes the host environmnet has the same releasever
 # as that which will be used inside StarlingX.
 #
-# NOTE: In other scripts we will read releasever= out of yum.conf
-# and push it back into yum via --releasever=<#>.
+# NOTE: In other scripts we will read releasever= out of dnf.conf
+# and push it back into dnf via --releasever=<#>.
 #
 get_releasever () {
-    if [ -f $SRC_YUM_CONF ] && grep -q '^releasever=' $SRC_YUM_CONF; then
-        grep '^releasever=' $SRC_YUM_CONF | cut -d '=' -f 2
+    if [ -f $SRC_DNF_CONF ] && grep -q '^releasever=' $SRC_DNF_CONF; then
+        grep '^releasever=' $SRC_DNF_CONF | cut -d '=' -f 2
     else
-        yum version nogroups | grep Installed | cut -d ' ' -f 2 | cut -d '/' -f 1
+        dnf version nogroups | grep Installed | cut -d ' ' -f 2 | cut -d '/' -f 1
     fi
 }
 
 #
 # Get the value of the $basearch variable.
 #
-# Just use yum to query the host environment (Docker) as we don't support
+# Just use dnf to query the host environment (Docker) as we don't support
 # cross compiling.
 #
 get_arch () {
-    yum version nogroups | grep Installed | cut -d ' ' -f 2 | cut -d '/' -f 2
+    dnf version nogroups | grep Installed | cut -d ' ' -f 2 | cut -d '/' -f 2
 }
 
 
@@ -126,60 +126,60 @@ get_arch () {
 # Global variables we will use later.
 #
 CENGN_REPOS_DIR="$TEMP_DIR/yum.repos.d"
-CENGN_YUM_CONF="$TEMP_DIR/yum.conf"
-CENGN_YUM_LOG="$TEMP_DIR/yum.log"
-CENGN_YUM_CACHDIR="$TEMP_DIR/cache/yum/\$basearch/\$releasever"
+CENGN_DNF_CONF="$TEMP_DIR/dnf.conf"
+CENGN_DNF_LOG="$TEMP_DIR/dnf.log"
+CENGN_DNF_CACHDIR="$TEMP_DIR/cache/dnf/\$basearch/\$releasever"
 
 RELEASEVER=$(get_releasever)
 ARCH=$(get_arch)
 
 #
-# Copy as yet unmodified yum.conf and yum.repos.d from source to dest.
+# Copy as yet unmodified dnf.conf and yum.repos.d from source to dest.
 #
 echo "\cp -r '$SRC_REPO_DIR' '$CENGN_REPOS_DIR'"
 \cp -r "$SRC_REPO_DIR" "$CENGN_REPOS_DIR"
-echo "\cp '$SRC_YUM_CONF' '$CENGN_YUM_CONF'"
-\cp "$SRC_YUM_CONF" "$CENGN_YUM_CONF"
+echo "\cp '$SRC_DNF_CONF' '$CENGN_DNF_CONF'"
+\cp "$SRC_DNF_CONF" "$CENGN_DNF_CONF"
 
 #
-# Add or modify reposdir= value in our new yum.conf
+# Add or modify reposdir= value in our new dnf.conf
 #
-if grep -q '^reposdir=' $CENGN_YUM_CONF; then
+if grep -q '^reposdir=' $CENGN_DNF_CONF; then
     # reposdir= already exists, modify it
     if [ $RETAIN_REPODIR -eq 1 ]; then
         # Append CENGN_REPOS_DIR
-        sed "s#^reposdir=\(.*\)\$#reposdir=\1 $CENGN_REPOS_DIR#" -i $CENGN_YUM_CONF
+        sed "s#^reposdir=\(.*\)\$#reposdir=\1 $CENGN_REPOS_DIR#" -i $CENGN_DNF_CONF
     else
         # replace with CENGN_REPOS_DIR
-        sed "s#^reposdir=.*\$#reposdir=$CENGN_REPOS_DIR#" -i $CENGN_YUM_CONF
+        sed "s#^reposdir=.*\$#reposdir=$CENGN_REPOS_DIR#" -i $CENGN_DNF_CONF
     fi
 else
     # reposdir= doeas not yet exist, add it
     if [ $RETAIN_REPODIR -eq 1 ]; then
         # Add both SRC_REPO_DIR and CENGN_REPOS_DIR
-        echo "reposdir=$SRC_REPO_DIR $CENGN_REPOS_DIR" >> $CENGN_YUM_CONF
+        echo "reposdir=$SRC_REPO_DIR $CENGN_REPOS_DIR" >> $CENGN_DNF_CONF
     else
         # Add CENGN_REPOS_DIR only
-        echo "reposdir=$CENGN_REPOS_DIR" >> $CENGN_YUM_CONF
+        echo "reposdir=$CENGN_REPOS_DIR" >> $CENGN_DNF_CONF
     fi
 fi
 
 #
-# modify or add logfile= value in our new yum.conf
+# modify or add logfile= value in our new dnf.conf
 #
-if grep -q '^logfile=' $CENGN_YUM_CONF; then
-    sed "s#^logfile=.*\$#logfile=$CENGN_YUM_LOG#" -i $CENGN_YUM_CONF
+if grep -q '^logfile=' $CENGN_DNF_CONF; then
+    sed "s#^logfile=.*\$#logfile=$CENGN_DNF_LOG#" -i $CENGN_DNF_CONF
 else
-    echo "logfile=$CENGN_YUM_LOG" >> $CENGN_YUM_CONF
+    echo "logfile=$CENGN_DNF_LOG" >> $CENGN_DNF_CONF
 fi
 
 #
-# modify or add cachedir= value in our new yum.conf
+# modify or add cachedir= value in our new dnf.conf
 #
-if grep -q '^cachedir=' $CENGN_YUM_CONF; then
-    sed "s#^cachedir=.*\$#cachedir=$CENGN_YUM_CACHDIR#" -i $CENGN_YUM_CONF
+if grep -q '^cachedir=' $CENGN_DNF_CONF; then
+    sed "s#^cachedir=.*\$#cachedir=$CENGN_DNF_CACHDIR#" -i $CENGN_DNF_CONF
 else
-    echo "cachedir=$CENGN_YUM_CACHDIR" >> $CENGN_YUM_CONF
+    echo "cachedir=$CENGN_DNF_CACHDIR" >> $CENGN_DNF_CONF
 fi
 
 

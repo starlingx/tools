@@ -11,7 +11,7 @@
 # We can find this problems in an early stage without the need to
 # download all the packages.
 #
-# The yum cache contains this information, more specific the primary_db
+# The dnf cache contains this information, more specific the primary_db
 # files, so iterating over the content of .lst, parse the name of the
 # package and get the information on what is available to download
 # should be enough to know the status of the mirror.
@@ -43,10 +43,10 @@ extra_opts=""
 
 
 usage() {
-    echo "$0 [-c <yum.conf>]"
+    echo "$0 [-c <dnf.conf>]"
     echo ""
     echo "Options:"
-    echo "  -c: Use an alternate yum.conf rather than the system file (option passed"
+    echo "  -c: Use an alternate dnf.conf rather than the system file (option passed"
     echo "      on to subscripts when appropriate)"
     echo ""
 }
@@ -127,9 +127,9 @@ while getopts "c:" opt; do
     esac
 done
 
-info "Getting yum cache"
-if ! yum $extra_opts ${RELEASEVER} makecache; then
-    error "There was a problem getting yum cache"
+info "Getting dnf cache"
+if ! dnf $extra_opts ${RELEASEVER} makecache; then
+    error "There was a problem getting dnf cache"
     exit 1
 fi
 

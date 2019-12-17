@@ -23,11 +23,11 @@
 #
 
 LOGFILE="/export/log/repo_update.log"
-YUM_CONF_DIR="/export/config"
-# YUM_CONF_DIR="/tmp/config"
-YUM_CONF="$YUM_CONF_DIR/yum.conf"
-YUM_REPOS_DIR="$YUM_CONF_DIR/yum.repos.d"
-GPG_KEYS_DIR="$YUM_CONF_DIR/rpm-gpg-keys"
+DNF_CONF_DIR="/export/config"
+# DNF_CONF_DIR="/tmp/config"
+DNF_CONF="$DNF_CONF_DIR/dnf.conf"
+DNF_REPOS_DIR="$DNF_CONF_DIR/dnf.repos.d"
+GPG_KEYS_DIR="$DNF_CONF_DIR/rpm-gpg-keys"
 DOWNLOAD_PATH_ROOT=/export/mirror/centos
 STX_TOOLS_BRANCH="master"
 STX_TOOLS_BRANCH_ROOT_DIR="$HOME/stx-tools"
@@ -90,8 +90,8 @@ done
 
 STX_TOOLS_DL_ROOT_DIR="$STX_TOOLS_BRANCH_ROOT_DIR/$STX_TOOLS_BRANCH"
 STX_TOOLS_DL_DIR="$STX_TOOLS_DL_ROOT_DIR/stx-tools"
-UPSTREAM_YUM_REPOS_DIR="$STX_TOOLS_DL_DIR/$STX_TOOLS_OS_SUBDIR/yum.repos.d"
-UPSTREAM_YUM_CONF="$STX_TOOLS_DL_DIR/$STX_TOOLS_OS_SUBDIR/yum.conf.sample"
+UPSTREAM_DNF_REPOS_DIR="$STX_TOOLS_DL_DIR/$STX_TOOLS_OS_SUBDIR/yum.repos.d"
+UPSTREAM_DNF_CONF="$STX_TOOLS_DL_DIR/$STX_TOOLS_OS_SUBDIR/dnf.conf.sample"
 UPSTREAM_GPG_KEYS_DIR="$STX_TOOLS_DL_DIR/$STX_TOOLS_OS_SUBDIR/rpm-gpg-keys"
 
 
@@ -125,18 +125,18 @@ update_gpg_keys () {
 }
 
 get_repo_url () {
-    local YUM_CONF="$1"
+    local DNF_CONF="$1"
     local REPO_ID="$2"
     local URL=""
 
-    URL=$(cd $(dirname $YUM_CONF);
-            yum repoinfo --config="$(basename $YUM_CONF)" --disablerepo="*" --enablerepo="$REPO_ID" | \
+    URL=$(cd $(dirname $DNF_CONF);
+            dnf repoinfo --config="$(basename $DNF_CONF)" --disablerepo="*" --enablerepo="$REPO_ID" | \
                 grep Repo-baseurl | \
                 cut -d ' ' -f 3;
             exit ${PIPESTATUS[0]}
         )
     if [ $? != 0 ]; then
-        >&2 echo "ERROR: yum repoinfo --config='$YUM_CONF' --disablerepo='*' --enablerepo='$REPO_ID'"
+        >&2 echo "ERROR: dnf repoinfo --config='$DNF_CONF' --disablerepo='*' --enablerepo='$REPO_ID'"
         return 1
     fi
 
@@ -145,18 +145,18 @@ get_repo_url () {
 }
 
 get_repo_name () {
-    local YUM_CONF="$1"
+    local DNF_CONF="$1"
     local REPO_ID="$2"
     local NAME=""
 
-    NAME=$(cd $(dirname $YUM_CONF);
-            yum repoinfo --config="$(basename $YUM_CONF)" --disablerepo="*" --enablerepo="$REPO_ID" | \
+    NAME=$(cd $(dirname $DNF_CONF);
+            dnf repoinfo --config="$(basename $DNF_CONF)" --disablerepo="*" --enablerepo="$REPO_ID" | \
                 grep Repo-name | \
                 cut -d ' ' -f 3;
             exit ${PIPESTATUS[0]}
         )
     if [ $? != 0 ]; then
-        >&2 echo "ERROR: yum repoinfo --config='$YUM_CONF' --disablerepo='*' --enablerepo='$REPO_ID'"
+        >&2 echo "ERROR: dnf repoinfo --config='$DNF_CONF' --disablerepo='*' --enablerepo='$REPO_ID'"
         return 1
     fi
 
@@ -166,14 +166,14 @@ get_repo_name () {
 
 archive_repo_id () {
     local REPO_ID="$1"
-    local YUM_CONF="$2"
+    local DNF_CONF="$2"
     local REPO="$3"
     local REPO_NAME=""
     local TEMP=""
     local EXTRA=""
 
-    if [ ! -f "$YUM_CONF" ]; then
-        >&2 echo "ERROR: invalid file YUM_CONF='$YUM_CONF'"
+    if [ ! -f "$DNF_CONF" ]; then
+        >&2 echo "ERROR: invalid file DNF_CONF='$DNF_CONF'"
         return 1
     fi
 
@@ -182,7 +182,7 @@ archive_repo_id () {
         return 1
     fi
 
-    REPO_NAME=$(get_repo_name "$YUM_CONF" "$REPO_ID")
+    REPO_NAME=$(get_repo_name "$DNF_CONF" "$REPO_ID")
     if [ $? != 0 ]; then
         return 1
     fi
@@ -245,7 +245,7 @@ copy_repo_id () {
     return 0
 }
 
-update_yum_repos_d () {
+update_dnf_repos_d () {
     local UPSTREAM_REPO=""
     local REPO=""
     local UPSTREAM_REPO_ID=""
@@ -258,8 +258,8 @@ update_yum_repos_d () {
     local DOWNLOAD_PATH=""
     local TEMPDIR=""
 
-    for UPSTREAM_REPO in $(find $UPSTREAM_YUM_REPOS_DIR -name '*.repo' | sort ); do
-        REPO=$YUM_REPOS_DIR/$(basename $UPSTREAM_REPO)
+    for UPSTREAM_REPO in $(find $UPSTREAM_DNF_REPOS_DIR -name '*.repo' | sort ); do
+        REPO=$DNF_REPOS_DIR/$(basename $UPSTREAM_REPO)
         if [ ! -f $REPO ]; then
             # New repo file
             echo "Copy new repo file '$UPSTREAM_REPO' to '$REPO'"
@@ -268,12 +268,12 @@ update_yum_repos_d () {
         fi
 
         for UPSTREAM_REPO_ID in $(grep '^[[]' $UPSTREAM_REPO | sed 's#[][]##g'); do
-            UPSTREAM_REPO_URL=$(get_repo_url "$UPSTREAM_YUM_CONF" "$UPSTREAM_REPO_ID")
+            UPSTREAM_REPO_URL=$(get_repo_url "$UPSTREAM_DNF_CONF" "$UPSTREAM_REPO_ID")
             if [ $? != 0 ]; then
                 return 1
             fi
 
-            UPSTREAM_REPO_NAME=$(get_repo_name "$UPSTREAM_YUM_CONF" "$UPSTREAM_REPO_ID")
+            UPSTREAM_REPO_NAME=$(get_repo_name "$UPSTREAM_DNF_CONF" "$UPSTREAM_REPO_ID")
             if [ $? != 0 ]; then
                 return 1
             fi
@@ -298,24 +298,24 @@ update_yum_repos_d () {
                 return 1
             fi
 
-            # REPO_URL=$(cd $(dirname $YUM_CONF);
-            #            yum repoinfo --config="$(basename $YUM_CONF)" --disablerepo="*" --enablerepo="$REPO_ID" | \
+            # REPO_URL=$(cd $(dirname $DNF_CONF);
+            #            dnf repoinfo --config="$(basename $DNF_CONF)" --disablerepo="*" --enablerepo="$REPO_ID" | \
             #                grep Repo-baseurl | \
             #                cut -d ' ' -f 3;
             #            exit ${PIPESTATUS[0]})
-            REPO_URL=$(get_repo_url "$YUM_CONF" "$REPO_ID")
+            REPO_URL=$(get_repo_url "$DNF_CONF" "$REPO_ID")
             if [ $? != 0 ]; then
-            #     >&2 echo "ERROR: yum repoinfo --config='$YUM_CONF' --disablerepo='*' --enablerepo='$REPO_ID'"
+            #     >&2 echo "ERROR: dnf repoinfo --config='$DNF_CONF' --disablerepo='*' --enablerepo='$REPO_ID'"
                 return 1
             fi
 
-            REPO_NAME=$(get_repo_name "$YUM_CONF" "$REPO_ID")
+            REPO_NAME=$(get_repo_name "$DNF_CONF" "$REPO_ID")
             if [ $? != 0 ]; then
-            #     >&2 echo "ERROR: yum repoinfo --config='$YUM_CONF' --disablerepo='*' --enablerepo='$REPO_ID'"
+            #     >&2 echo "ERROR: dnf repoinfo --config='$DNF_CONF' --disablerepo='*' --enablerepo='$REPO_ID'"
                 return 1
             fi
 
-            REPO_URL=$(yum repoinfo --config="$YUM_CONF"  --disablerepo="*" --enablerepo="$REPO_ID" | grep Repo-baseurl | cut -d ' ' -f 3)
+            REPO_URL=$(dnf repoinfo --config="$DNF_CONF"  --disablerepo="*" --enablerepo="$REPO_ID" | grep Repo-baseurl | cut -d ' ' -f 3)
             DOWNLOAD_PATH="$DOWNLOAD_PATH_ROOT/$(repo_url_to_sub_path "$REPO_URL")"
 
             # Check critical content is the same
@@ -333,7 +333,7 @@ update_yum_repos_d () {
                 >&2 echo "Warning: Existing download path has changed: file:$UPSTREAM_REPO,  id:$UPSTREAM_REPO_ID,  path:$UPSTREAM_DOWNLOAD_PATH -> $DOWNLOAD_PATH"
             fi
 
-            archive_repo_id "$REPO_ID" "$YUM_CONF" "$REPO"
+            archive_repo_id "$REPO_ID" "$DNF_CONF" "$REPO"
             copy_repo_id "$UPSTREAM_REPO_ID" "$UPSTREAM_REPO" "$REPO"
             if [ $? != 0 ]; then
                 >&2 echo "Error: copy_repo_id '$UPSTREAM_REPO_ID' '$UPSTREAM_REPO' '$REPO'"
@@ -355,21 +355,21 @@ fi
 (
 ERR_COUNT=0
 
-mkdir -p "$YUM_CONF_DIR"
+mkdir -p "$DNF_CONF_DIR"
 if [ $? -ne 0 ]; then
-    >&2 echo "Error: mkdir -p '$YUM_CONF_DIR'"
+    >&2 echo "Error: mkdir -p '$DNF_CONF_DIR'"
     exit 1
 fi
 
-mkdir -p "$YUM_REPOS_DIR"
+mkdir -p "$DNF_REPOS_DIR"
 if [ $? -ne 0 ]; then
-    >&2 echo "Error: mkdir -p '$YUM_CONF_DIR'"
+    >&2 echo "Error: mkdir -p '$DNF_CONF_DIR'"
     exit 1
 fi
 
 mkdir -p "$GPG_KEYS_DIR"
 if [ $? -ne 0 ]; then
-    >&2 echo "Error: mkdir -p '$YUM_CONF_DIR'"
+    >&2 echo "Error: mkdir -p '$DNF_CONF_DIR'"
     exit 1
 fi
 
@@ -379,11 +379,11 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-if [ ! -f "$YUM_CONF" ]; then
-    echo "Copy yum.conf: '$UPSTREAM_YUM_CONF' -> '$YUM_CONF'"
-    cat $UPSTREAM_YUM_CONF | sed "s#=/tmp/#=$YUM_CONF_DIR/#" | \
-                            sed "s#reposdir=yum.repos.d#reposdir=$YUM_CONF_DIR/yum.repos.d#" | \
-                            sed 's#/etc/pki/rpm-gpg/#$GPG_KEYS_DIR/#' >> $YUM_CONF
+if [ ! -f "$DNF_CONF" ]; then
+    echo "Copy dnf.conf: '$UPSTREAM_DNF_CONF' -> '$DNF_CONF'"
+    cat $UPSTREAM_DNF_CONF | sed "s#=/tmp/#=$DNF_CONF_DIR/#" | \
+                            sed "s#reposdir=yum.repos.d#reposdir=$DNF_CONF_DIR/yum.repos.d#" | \
+                            sed 's#/etc/pki/rpm-gpg/#$GPG_KEYS_DIR/#' >> $DNF_CONF
 fi
 
 update_gpg_keys
@@ -392,9 +392,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-update_yum_repos_d
+update_dnf_repos_d
 if [ $? -ne 0 ]; then
-    >&2 echo "Error: Failed in update_yum_repos_d. Can't continue."
+    >&2 echo "Error: Failed in update_dnf_repos_d. Can't continue."
     exit 1
 fi
 

@@ -4,12 +4,12 @@
 #
 
 usage() {
-    echo "$0 [-n] [-c <yum.conf>] [-g] [-s|-S|-u|-U]"
+    echo "$0 [-n] [-c <dnf.conf>] [-g] [-s|-S|-u|-U]"
     echo ""
     echo "Options:"
     echo "  -n: Do not use sudo when performing operations (option passed on to"
     echo "      subscripts when appropriate)"
-    echo "  -c: Use an alternate yum.conf rather than the system file (option passed"
+    echo "  -c: Use an alternate dnf.conf rather than the system file (option passed"
     echo "      on to subscripts when appropriate)"
     echo "  -g: do not change group IDs of downloaded artifacts"
     echo "  -s: Download from StarlingX mirror only"
@@ -111,7 +111,7 @@ while getopts "c:nghsSuU" o; do
             rpm_downloader_extra_args="${rpm_downloader_extra_args} -n"
             ;;
         c)
-            # Pass -c ("use alternate yum.conf") to rpm downloader
+            # Pass -c ("use alternate dnf.conf") to rpm downloader
             use_system_yum_conf=0
             alternate_yum_conf="${OPTARG}"
             ;;
@@ -208,14 +208,14 @@ fi
 if ! dl_from_stx; then
     # Not using stx mirror
     if [ $use_system_yum_conf -eq 0 ]; then
-        # Use provided yum.conf unaltered.
+        # Use provided dnf.conf unaltered.
         rpm_downloader_extra_args="${rpm_downloader_extra_args} -c ${alternate_yum_conf}"
     fi
 else
-    # We want to use stx mirror, so we need to create a new, modified yum.conf and yum.repos.d.
+    # We want to use stx mirror, so we need to create a new, modified dnf.conf and yum.repos.d.
     # The modifications will add or substitute repos pointing to the StralingX mirror.
     TEMP_DIR=$(mktemp -d /tmp/stx_mirror_XXXXXX)
-    TEMP_CONF="$TEMP_DIR/yum.conf"
+    TEMP_CONF="$TEMP_DIR/dnf.conf"
     need_file ${make_stx_mirror_yum_conf}
     need_dir ${TEMP_DIR}
 
@@ -230,15 +230,15 @@ else
             ${make_stx_mirror_yum_conf} -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro
         fi
     else
-        # Modify system yum.conf and yum.repos.d.  Remember that we expect to run this
-        # inside a container, and the system yum.conf has like been modified else where
+        # Modify system dnf.conf and yum.repos.d.  Remember that we expect to run this
+        # inside a container, and the system dnf.conf has like been modified else where
         # in these scripts.
         if dl_from_upstream; then
             # add
-            ${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y /etc/yum.conf -r /etc/yum.repos.d -D $distro
+            ${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y /etc/dnf/dnf.conf -r /etc/yum.repos.d -D $distro
         else
             # substitute
-            ${make_stx_mirror_yum_conf} -d $TEMP_DIR -y /etc/yum.conf -r /etc/yum.repos.d -D $distro
+            ${make_stx_mirror_yum_conf} -d $TEMP_DIR -y /etc/dnf/dnf.conf -r /etc/yum.repos.d -D $distro
         fi
     fi
 
@@ -257,7 +257,7 @@ if [ $retcode -ne 0 ];then
     success=0
 fi
 
-# download RPMs/SRPMs from 3rd_party repos by "yumdownloader"
+# download RPMs/SRPMs from 3rd_party repos by "dnf download"
 list=${rpms_from_centos_3rd_parties}
 level=L1
 logfile=$(generate_log_name $list $level)
@@ -280,7 +280,7 @@ fi
 
 
 echo "step #2: start 1st round of downloading RPMs and SRPMs with L1 match criteria..."
-#download RPMs/SRPMs from CentOS repos by "yumdownloader"
+#download RPMs/SRPMs from CentOS repos by "dnf download"
 list=${rpms_from_centos_repo}
 level=L1
 logfile=$(generate_log_name $list $level)
