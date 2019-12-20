@@ -9,13 +9,12 @@ file:EFI/BOOT/grubx64.efi
 #file:EFI/BOOT/mmia32.efi
 folder:EFI/BOOT/fonts
 file:EFI/BOOT/fonts/unicode.pf2
-folder:LiveOS
-file:LiveOS/squashfs.img
 folder:images
 folder:images/pxeboot
 file:images/pxeboot/initrd.img
 file:images/pxeboot/vmlinuz
 file:images/efiboot.img
+file:images/install.img
 #file:images/boot.iso
 folder:isolinux
 file:isolinux/memtest
@@ -27,3 +26,6 @@ file:isolinux/isolinux.bin
 file:isolinux/splash.png
 file:isolinux/isolinux.cfg
 file:isolinux/vesamenu.c32
+file:isolinux/ldlinux.c32
+file:isolinux/libcom32.c32
+file:isolinux/libutil.c32
