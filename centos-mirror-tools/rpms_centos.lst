@@ -1174,6 +1174,7 @@ python2-django-babel-0.4.0-2.el7.noarch.rpm
 python2-django-compressor-2.1-5.el7.noarch.rpm
 python2-django-debreach-1.5.2-1.el7.noarch.rpm
 python2-django-formtools-2.1-1.el7.noarch.rpm
+python-dns-1.15.0-5.el7.noarch.rpm
 python2-dulwich-0.18.4-1.el7.x86_64.rpm
 python2-extras-1.0.0-2.el7.noarch.rpm
 python2-fasteners-0.14.1-6.el7.noarch.rpm
@@ -1220,6 +1221,7 @@ python2-microversion-parse-0.1.4-2.el7.noarch.rpm
 python2-mimeparse-1.6.0-5.el7.noarch.rpm
 python2-mock-2.0.0-1.el7.noarch.rpm
 python2-monascaclient-1.7.1-1.el7.noarch.rpm
+python2-monotonic-1.5-1.el7.noarch.rpm
 python2-mox3-0.23.0-1.el7.noarch.rpm
 python2-munch-2.2.0-2.el7.noarch.rpm
 python2-murano-pkg-check-0.3.0-2.el7.noarch.rpm
@@ -1413,7 +1415,7 @@ python-dracclient-1.3.0-1.el7.noarch.rpm
 python-editor-0.4-4.el7.noarch.rpm
 python-enum34-1.0.4-1.el7.noarch.rpm
 python-ethtool-0.8-7.el7.x86_64.rpm
-python-eventlet-0.18.4-2.el7.src.rpm
+python2-eventlet-0.24.1-3.el7.noarch.rpm
 python-extras-0.0.3-2.el7.noarch.rpm
 python-firewall-0.5.3-5.el7.noarch.rpm
 python-fixtures-3.0.0-2.el7.noarch.rpm
@@ -1510,7 +1512,7 @@ python-pyudev-0.15-9.el7.noarch.rpm
 python-redis-2.10.3-1.el7.noarch.rpm
 python-repoze-lru-0.4-3.el7.noarch.rpm
 python-repoze-who-2.1-1.el7.noarch.rpm
-python-requests-2.21.0-2.el7.src.rpm
+python2-requests-2.21.0-2.el7.noarch.rpm
 python-requests-kerberos-0.8.0-3.el7.noarch.rpm
 python-retrying-1.2.3-4.el7.noarch.rpm
 python-routes-2.4.1-1.el7.noarch.rpm
