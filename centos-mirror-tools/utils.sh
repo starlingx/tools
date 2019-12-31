@@ -12,18 +12,9 @@ get_dnf_command() {
     local _file=$1
     local _level=$2
     local rpm_name=""
-    local arr=( $(split_filename $_file) )
-    local arch=${arr[3]}
-    local dnf_download_extra_opts=""
     rpm_name="$(get_rpm_level_name $_file $_level)"
 
-    if [ "$arch" == "src" ]; then
-        dnf_download_extra_opts="--source"
-    else
-        dnf_download_extra_opts="--archlist=noarch,x86_64"
-    fi
-
-    echo "dnf download -q ${DNFCONFOPT} ${RELEASEVER} $dnf_download_extra_opts $rpm_name"
+    echo "dnf download -q ${DNFCONFOPT} ${RELEASEVER} $rpm_name"
 }
 
 get_wget_command() {
@@ -41,10 +32,10 @@ get_rpm_level_name() {
     local _rpm_name=$1
     local _level=$2
     if [ $_level == "L1" ]; then
-        SFILE=`echo $_rpm_name | rev | cut -d'.' -f3- | rev`
+        SFILE=`echo $_rpm_name | rev | cut -d'.' -f2- | rev`
     elif [ $_level == "$dl_from_stx_mirror" ];then
         # stx mirror uses L1 matches
-        SFILE=`echo $_rpm_name | rev | cut -d'.' -f3- | rev`
+        SFILE=`echo $_rpm_name | rev | cut -d'.' -f2- | rev`
     elif [ $_level == "L2" ];then
         SFILE=`echo $_rpm_name | rev | cut -d'-' -f2- | rev`
     else
