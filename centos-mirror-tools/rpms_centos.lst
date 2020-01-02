@@ -1671,7 +1671,7 @@ stix-math-fonts-1.1.0-5.el7.noarch.rpm
 strace-4.12-9.el7.x86_64.rpm
 subversion-1.7.14-14.el7.x86_64.rpm
 subversion-libs-1.7.14-14.el7.x86_64.rpm
-sudo-1.8.23-3.el7.src.rpm
+sudo-1.8.23-4.el7_7.1.src.rpm
 supermin5-5.1.19-1.el7.x86_64.rpm
 swig-2.0.10-5.el7.x86_64.rpm
 sysfsutils-2.1.0-16.el7.x86_64.rpm
