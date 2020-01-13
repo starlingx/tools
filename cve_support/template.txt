@@ -93,7 +93,7 @@
 	<h2>ERROR: CVEs that have no cvss2Score or cvss2Vector:{{cves_w_errors | length}}</h2>
 		<table>
 		{% if cves_w_errors|length >= 1 %}
-			{% for cve in cves_to_track %}
+			{% for cve in cves_w_errors %}
 			<tr>
 				<td>{{cve["id"]}}</td>
 				<td>{{cve["status"]}}</td>
