@@ -3,8 +3,6 @@ boost_1_67_0.tar.bz2#boost_1_67_0#https://dl.bintray.com/boostorg/release/1.67.0
 ceph-erasure-code-corpus-2d7d78b9cc52e8a9529d8cc2d2954c7d375d5dd7.tar.gz#ceph-erasure-code-corpus#https://api.github.com/repos/ceph/ceph-erasure-code-corpus/tarball/2d7d78b9cc52e8a9529d8cc2d2954c7d375d5dd7#https##
 ceph-object-corpus-e32bf8ca3dc6151ebe7f205ba187815bc18e1cef.tar.gz#ceph-object-corpus#https://api.github.com/repos/ceph/ceph-object-corpus/tarball/e32bf8ca3dc6151ebe7f205ba187815bc18e1cef#https##
 civetweb-ff2881e2cd5869a71ca91083bad5d12cccd22136.tar.gz#civetweb#https://api.github.com/repos/ceph/civetweb/tarball/ff2881e2cd5869a71ca91083bad5d12cccd22136#https##
-containerd-v1.3.0.tar.gz#containerd#https://github.com/containerd/containerd/archive/v1.3.0.tar.gz#https##
-crictl-v1.16.0-linux-amd64.tar.gz#crictl#https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.16.0/crictl-v1.16.0-linux-amd64.tar.gz#https##
 dep-v0.5.0.tar.gz#dep-v0.5.0#https://github.com/golang/dep/archive/v0.5.0.tar.gz#http##
 docker-distribution-48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89.tar.gz#docker-distribution#github.com/docker/distribution/archive/48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89.tar.gz#http##
 docker-libtrust-fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#docker-libtrust#https://github.com/docker/libtrust/archive/fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#http##
@@ -73,7 +71,6 @@ requests-toolbelt-0.9.1.tar.gz#requests-toolbelt-0.9.1#https://github.com/reques
 rocksdb-f4a857da0b720691effc524469f6db895ad00d8e.tar.gz#rocksdb#https://api.github.com/repos/ceph/rocksdb/tarball/f4a857da0b720691effc524469f6db895ad00d8e#https##
 rook-1.1.1.tar.gz#rook-1.1.1#https://github.com/rook/rook/archive/v1.1.1.tar.gz##
 rpm-4.14.0.tar.bz2#rpm-4.14.0#https://ftp.osuosl.org/pub/rpm/releases/rpm-4.14.x/rpm-4.14.0.tar.bz2#http##
-runc-1.0.0-rc8.tar.gz#runc#https://github.com/opencontainers/runc/archive/v1.0.0-rc8.tar.gz#https##
 Sirupsen-logrus-55eb11d21d2a31a3cc93838241d04800f52e823d.tar.gz#Sirupsen-logrus#github.com/Sirupsen/logrus/archive/55eb11d21d2a31a3cc93838241d04800f52e823d.tar.gz#http##
 spdk-f474ce6930f0a44360e1cc4ecd606d2348481c4c.tar.gz#spdk#https://api.github.com/repos/ceph/spdk/tarball/f474ce6930f0a44360e1cc4ecd606d2348481c4c#https##
 spectre-meltdown-checker-0.37+-5cc77741.tar.gz#spectre-meltdown-checker#https://github.com/speed47/spectre-meltdown-checker/tarball/5cc77741af1d2f52140aa9f89339f56b6c4b6783#http##
