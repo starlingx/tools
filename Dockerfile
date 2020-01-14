@@ -109,6 +109,7 @@ COPY toCOPY/populate_downloads.sh /usr/local/bin
 COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
 COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
 COPY toCOPY/.inputrc /home/$MYUNAME/
+COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
 
 # cpan modules, installing with cpanminus to avoid stupid questions since cpan is whack
 RUN cpanm --notest Fatal && \
@@ -118,8 +119,8 @@ RUN cpanm --notest Fatal && \
     cpanm --notest XML::Simple
 
 # pip installs
-RUN pip install python-subunit junitxml --upgrade && \
-    pip install tox --upgrade
+RUN pip install -c /home/$MYUNAME/builder-constraints.txt python-subunit junitxml --upgrade && \
+    pip install -c /home/$MYUNAME/builder-constraints.txt tox --upgrade
 
 # Install repo tool
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo && \
