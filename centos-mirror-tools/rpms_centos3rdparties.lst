@@ -8,7 +8,6 @@ audit-libs-devel-2.8.4-4.el7.x86_64.rpm
 audit-libs-python-2.8.4-4.el7.x86_64.rpm
 collectd-5.8.1-4.el7.x86_64.rpm
 collectd-python-5.8.1-4.el7.x86_64.rpm
-containerd.io-1.2.5-3.1.el7.x86_64.rpm
 containernetworking-plugins-0.8.1-1.el7.centos.x86_64.rpm
 copy-jdk-configs-3.3-10.el7_5.noarch.rpm
 cppcheck-1.88-3.el7.x86_64.rpm
@@ -42,6 +41,15 @@ iprutils-2.4.16.1-1.el7.x86_64.rpm
 java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64.rpm
 java-1.8.0-openjdk-devel-1.8.0.191.b12-1.el7_6.x86_64.rpm
 java-1.8.0-openjdk-headless-1.8.0.191.b12-1.el7_6.x86_64.rpm
+kata-containers-image-1.10.0-4.1.x86_64.rpm
+kata-ksm-throttler-1.10.0-4.1.x86_64.rpm
+kata-linux-container-4.19.86.60-4.1.x86_64.rpm
+kata-linux-container-debug-4.19.86.60-4.1.x86_64.rpm
+kata-proxy-1.10.0-4.1.x86_64.rpm
+kata-proxy-bin-1.10.0-4.1.x86_64.rpm
+kata-runtime-1.10.0-4.1.x86_64.rpm
+kata-shim-1.10.0-4.1.x86_64.rpm
+kata-shim-bin-1.10.0-4.1.x86_64.rpm
 kernel-rt-3.10.0-1062.1.2.rt56.1025.el7.src.rpm
 kexec-tools-2.0.15-21.el7.x86_64.rpm
 libblkid-2.23.2-59.el7.x86_64.rpm
@@ -112,6 +120,9 @@ python-requests-mock-1.3.0-1.el7.noarch.rpm
 python-setuptools-22.0.5-1.el7.src.rpm
 python-tempest-17.2.0-4.el7.noarch.rpm
 python-virtualenv-15.1.0-2.el7.noarch.rpm
+qemu-vanilla-4.1.0+git.9e06029aea-4.1.x86_64.rpm
+qemu-vanilla-bin-4.1.0+git.9e06029aea-4.1.x86_64.rpm
+qemu-vanilla-data-4.1.0+git.9e06029aea-4.1.x86_64.rpm
 rest-0.8.1-2.el7.x86_64.rpm
 samba-client-libs-4.8.3-4.el7.x86_64.rpm
 samba-common-4.8.3-4.el7.noarch.rpm
