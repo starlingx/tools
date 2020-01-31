@@ -79,6 +79,9 @@ chrpath-0.16-7.el8.x86_64.rpm
 cloud-init-18.5-1.el8.4.src.rpm
 cmake-filesystem-3.11.4-3.el8.x86_64.rpm
 colord-libs-1.4.2-1.el8.x86_64.rpm
+compat-lua-5.1.5-15.el8.x86_64.rpm
+compat-lua-devel-5.1.5-15.el8.x86_64.rpm
+compat-lua-libs-5.1.5-15.el8.x86_64.rpm
 copy-jdk-configs-3.7-1.el8.noarch.rpm
 coreutils-8.30-6.el8.x86_64.rpm
 coreutils-common-8.30-6.el8.x86_64.rpm
