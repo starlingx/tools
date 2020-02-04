@@ -1,33 +1,26 @@
-stx-tools Documentation
-=======================
+=============================
+StarlingX Tools Documentation
+=============================
 
-StarlingX Build Tools
+The starlingx/tools project provides StarlingX build tools.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-Release Notes
+-------------
+Release notes
 -------------
 
 .. toctree::
    :maxdepth: 1
 
-   Release Notes <https://docs.starlingx.io/releasenotes/stx-tools>
+   Release notes <https://docs.starlingx.io/releasenotes/stx-tools>
 
+-----
 Links
-=====
+-----
 
-* Source: `stx-tools`_
-* Code Review: `Gerrit`_
-* Bugs: `Storyboard`_
+* Source: `starlingx/tools`_
+* Code review: `Gerrit`_
+* Project tracking: `Storyboard`_
 
-.. _stx-tools: https://opendev.org/starlingx/tools/
+.. _starlingx/tools: https://opendev.org/starlingx/tools/
 .. _Gerrit: https://review.opendev.org/#/q/project:starlingx/tools
 .. _Storyboard: https://storyboard.openstack.org/#!/project/1027
-
-Indices and tables
-==================
-
-* :ref:`search`
-* :ref:`genindex`

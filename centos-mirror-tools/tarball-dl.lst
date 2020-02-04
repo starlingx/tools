@@ -3,6 +3,8 @@ boost_1_67_0.tar.bz2#boost_1_67_0#https://dl.bintray.com/boostorg/release/1.67.0
 ceph-erasure-code-corpus-2d7d78b9cc52e8a9529d8cc2d2954c7d375d5dd7.tar.gz#ceph-erasure-code-corpus#https://api.github.com/repos/ceph/ceph-erasure-code-corpus/tarball/2d7d78b9cc52e8a9529d8cc2d2954c7d375d5dd7#https##
 ceph-object-corpus-e32bf8ca3dc6151ebe7f205ba187815bc18e1cef.tar.gz#ceph-object-corpus#https://api.github.com/repos/ceph/ceph-object-corpus/tarball/e32bf8ca3dc6151ebe7f205ba187815bc18e1cef#https##
 civetweb-ff2881e2cd5869a71ca91083bad5d12cccd22136.tar.gz#civetweb#https://api.github.com/repos/ceph/civetweb/tarball/ff2881e2cd5869a71ca91083bad5d12cccd22136#https##
+containerd-v1.3.0.tar.gz#containerd#https://github.com/containerd/containerd/archive/v1.3.0.tar.gz#https##
+crictl-v1.16.0-linux-amd64.tar.gz#crictl#https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.16.0/crictl-v1.16.0-linux-amd64.tar.gz#https##
 dep-v0.5.0.tar.gz#dep-v0.5.0#https://github.com/golang/dep/archive/v0.5.0.tar.gz#http##
 docker-distribution-48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89.tar.gz#docker-distribution#github.com/docker/distribution/archive/48294d928ced5dd9b378f7fd7c6f5da3ff3f2c89.tar.gz#http##
 docker-libtrust-fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#docker-libtrust#https://github.com/docker/libtrust/archive/fa567046d9b14f6aa788882a950d69651d230b21.tar.gz#http##
@@ -29,7 +31,6 @@ helm-charts-elastic-2bd7616ceddbdf2eee88965e2028ee37d304c79c.tar.gz#helm-charts-
 helm-v2.13.1-linux-amd64.tar.gz#linux-amd64#https://storage.googleapis.com/kubernetes-helm/helm-v2.13.1-linux-amd64.tar.gz#http##
 i40e-2.10.19.30.tar.gz#i40e-2.10.19.30#https://sourceforge.net/projects/e1000/files/i40e%20stable/2.10.19.30/i40e-2.10.19.30.tar.gz/download#http##
 iavf-3.7.61.20.tar.gz#iavf-3.7.61.20#https://sourceforge.net/projects/e1000/files/iavf%20stable/3.7.61.20/iavf-3.7.61.20.tar.gz/download#http##
-ibsh-0.3e.tar.gz#cgcs-users-1.0#https://sourceforge.net/projects/ibsh/files/ibsh/ibsh-0.3e/ibsh-0.3e.tar.gz/download#http##
 !integrity-kmod-37e0c813.tar.gz#integrity#http://git.infradead.org/users/jjs/linux-tpmdd.git/snapshot/37e0c813a2c4c85b3bf1beb9a277f1fda8f94273.tar.gz#http_script##post-dl-script/integrity-kmod.sh
 isa-l-7e1a337433a340bc0974ed0f04301bdaca374af6.tar.gz#isa-l#https://api.github.com/repos/ceph/isa-l/tarball/7e1a337433a340bc0974ed0f04301bdaca374af6#https##
 isa-l_crypto-603529a4e06ac8a1662c13d6b31f122e21830352.tar.gz#isa-l_crypto#https://api.github.com/repos/01org/isa-l_crypto/tarball/603529a4e06ac8a1662c13d6b31f122e21830352#https##
@@ -69,7 +70,9 @@ rapidjson-f54b0e47a08782a6131cc3d60f94d038fa6e0a51.tar.gz#rapidjson#https://api.
 Redfishtool-1.1.0.tar.gz#Redfishtool-1.1.0#https://github.com/DMTF/Redfishtool/archive/1.1.0.tar.gz#http##
 requests-toolbelt-0.9.1.tar.gz#requests-toolbelt-0.9.1#https://github.com/requests/toolbelt/archive/0.9.1.tar.gz#http##
 rocksdb-f4a857da0b720691effc524469f6db895ad00d8e.tar.gz#rocksdb#https://api.github.com/repos/ceph/rocksdb/tarball/f4a857da0b720691effc524469f6db895ad00d8e#https##
+rook-1.1.1.tar.gz#rook-1.1.1#https://github.com/rook/rook/archive/v1.1.1.tar.gz##
 rpm-4.14.0.tar.bz2#rpm-4.14.0#https://ftp.osuosl.org/pub/rpm/releases/rpm-4.14.x/rpm-4.14.0.tar.bz2#http##
+runc-1.0.0-rc8.tar.gz#runc#https://github.com/opencontainers/runc/archive/v1.0.0-rc8.tar.gz#https##
 Sirupsen-logrus-55eb11d21d2a31a3cc93838241d04800f52e823d.tar.gz#Sirupsen-logrus#github.com/Sirupsen/logrus/archive/55eb11d21d2a31a3cc93838241d04800f52e823d.tar.gz#http##
 spdk-f474ce6930f0a44360e1cc4ecd606d2348481c4c.tar.gz#spdk#https://api.github.com/repos/ceph/spdk/tarball/f474ce6930f0a44360e1cc4ecd606d2348481c4c#https##
 spectre-meltdown-checker-0.37+-5cc77741.tar.gz#spectre-meltdown-checker#https://github.com/speed47/spectre-meltdown-checker/tarball/5cc77741af1d2f52140aa9f89339f56b6c4b6783#http##

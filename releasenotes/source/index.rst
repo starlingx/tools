@@ -1,14 +1,8 @@
-=======================
-stx-tools Release Notes
-=======================
+=============================
+StarlingX Tools Release Notes
+=============================
 
 .. toctree::
    :maxdepth: 2
 
    unreleased
-
-Search
-------
-
-:ref:`search`
-
