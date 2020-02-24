@@ -110,6 +110,8 @@ other_downloads_template="other_downloads.lst"
 # Overall success
 success=1
 
+SUDO=sudo
+
 # Permitted values of dl_source
 dl_from_stx_mirror="stx_mirror"
 dl_from_upstream="upstream"
@@ -179,6 +181,7 @@ while getopts "c:Cd:ghI:sl:L:nSuU" o; do
         n)
             # Pass -n ("no-sudo") to rpm downloader
             rpm_downloader_extra_args="${rpm_downloader_extra_args} -n"
+            SUDO=""
             ;;
         s)
             # Download from StarlingX mirror only. Do not use upstream sources.
@@ -336,12 +339,12 @@ if [ ${use_system_yum_conf} -ne 0 ]; then
     REPO_SOURCE_DIR=/localdisk/yum.repos.d
     REPO_DIR=/etc/yum.repos.d
     if [ -d $REPO_SOURCE_DIR ] && [ -d $REPO_DIR ]; then
-        \cp -f $REPO_SOURCE_DIR/*.repo $REPO_DIR/
+        ${SUDO} \cp -f $REPO_SOURCE_DIR/*.repo $REPO_DIR/
     fi
 
     if [ $layer != "all" ]; then
         if [ -d ${config_dir}/${distro}/${layer}/yum.repos.d ]; then
-            \cp -f ${config_dir}/${distro}/${layer}/yum.repos.d/*.repo $REPO_DIR
+            ${SUDO} \cp -f ${config_dir}/${distro}/${layer}/yum.repos.d/*.repo $REPO_DIR
         fi
     fi
 fi
@@ -482,11 +485,11 @@ fi
 
 if [ ${use_system_yum_conf} -eq 1 ]; then
     # deleting the StarlingX_3rd to avoid pull centos packages from the 3rd Repo.
-    \rm -f $REPO_DIR/StarlingX_3rd*.repo
-    \rm -f $REPO_DIR/StarlingX_cengn*.repo
+    ${SUDO} \rm -f $REPO_DIR/StarlingX_3rd*.repo
+    ${SUDO} \rm -f $REPO_DIR/StarlingX_cengn*.repo
     if [ "$TEMP_DIR" != "" ]; then
-        \rm -f $TEMP_DIR/yum.repos.d/StarlingX_3rd*.repo
-        \rm -f $TEMP_DIR/yum.repos.d/StarlingX_cengn*.repo
+        ${SUDO} \rm -f $TEMP_DIR/yum.repos.d/StarlingX_3rd*.repo
+        ${SUDO} \rm -f $TEMP_DIR/yum.repos.d/StarlingX_cengn*.repo
     fi
 fi
 
@@ -580,7 +583,7 @@ fi
 
 if [ $change_group_ids -eq 1 ]; then
     # change "./output" and sub-folders to 751 (cgcs) group
-    chown  751:751 -R ./output
+    ${SUDO} chown  751:751 -R ./output
 fi
 
 echo "step #4: start downloading other files ..."
@@ -620,8 +623,8 @@ fi
 # Clean up the mktemp directory, if required.
 #
 if [ "$TEMP_DIR" != "" ]; then
-    echo "rm -rf $TEMP_DIR"
-    \rm -rf "$TEMP_DIR"
+    echo "${SUDO} rm -rf $TEMP_DIR"
+    ${SUDO} \rm -rf "$TEMP_DIR"
 fi
 
 echo "IMPORTANT: The following 3 files are just bootstrap versions. Based"
