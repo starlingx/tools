@@ -845,7 +845,7 @@ python2-olefile-0.46-2.el7.noarch.rpm
 python2-osc-lib-1.11.1-1.el7.noarch.rpm
 python2-os-client-config-1.28.0-1.el7.noarch.rpm
 python2-oslo-cache-1.30.3-1.el7.noarch.rpm
-python2-oslo-concurrency-3.27.0-1.el7.noarch.rpm
+python2-oslo-concurrency-3.29.1-1.el7.noarch.rpm
 python2-oslo-config-6.8.1-1.el7.noarch.rpm
 python2-oslo-context-2.22.1-1.el7.noarch.rpm
 python2-oslo-db-4.40.0-1.el7.noarch.rpm
@@ -1047,7 +1047,7 @@ python-neutron-11.0.6-1.el7.noarch.rpm
 python-neutron-tests-11.0.6-1.el7.noarch.rpm
 python-openstack-nose-plugin-0.11-4.el7.noarch.rpm
 python-oslo-cache-lang-1.30.3-1.el7.noarch.rpm
-python-oslo-concurrency-lang-3.27.0-1.el7.noarch.rpm
+python-oslo-concurrency-lang-3.29.1-1.el7.noarch.rpm
 python-oslo-db-lang-4.40.0-1.el7.noarch.rpm
 python-oslo-db-tests-4.25.1-1.el7.noarch.rpm
 python-oslo-i18n-lang-3.17.1-1.el7.noarch.rpm
