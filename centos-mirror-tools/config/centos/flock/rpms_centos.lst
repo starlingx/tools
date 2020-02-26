@@ -970,6 +970,11 @@ python2-yaql-1.1.0-3.el7.noarch.rpm
 python2-yaql-1.1.3-2.el7.noarch.rpm
 python2-zake-0.2.2-2.el7.noarch.rpm
 python2-zaqarclient-1.7.0-1.el7.noarch.rpm
+python3-libs-3.6.8-10.el7.x86_64.rpm
+python3-pip-9.0.3-5.el7.noarch.rpm
+python3-setuptools-39.2.0-10.el7.noarch.rpm
+python3-wheel-0.31.1-4.el7.noarch.rpm
+python3-rpm-macros-3-32.el7.noarch.rpm
 python-aniso8601-0.82-3.el7.noarch.rpm
 python-anyjson-0.3.3-3.el7.noarch.rpm
 python-backports-1.0-8.el7.x86_64.rpm
