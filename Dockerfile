@@ -79,9 +79,9 @@ RUN groupadd -g 751 cgts && \
         python-psutil \
         python2-psutil \
         python36-psutil \
+        python3-devel \
         python-sphinx \
         python-subunit \
-        python-pip \
         python-testrepository \
         python-tox \
         python-yaml \
