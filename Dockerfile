@@ -52,10 +52,12 @@ RUN groupadd -g 751 cgts && \
         bc \
         bind \
         bind-utils \
+        bison \
         cpanminus \
         createrepo \
         deltarpm \
         expat-devel \
+        flex \
         isomd5sum \
         gcc \
         gettext \
