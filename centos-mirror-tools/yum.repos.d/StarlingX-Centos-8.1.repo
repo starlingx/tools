@@ -1,0 +1,18 @@
+########
+# Centos 8.1.1911
+#
+
+[StarlingX-C8.1.1911-BaseOS]
+name=StarlingX-CentOS-8.1.1911 - BaseOS
+baseurl=http://mirror.centos.org/centos-8/8.1.1911/BaseOS/x86_64/os/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C8.1.1911-BaseOS-Source]
+name=StarlingX-CentOS-8.1.1911 - BaseOS Source
+baseurl=http://vault.centos.org/8.1.1911/BaseOS/Source/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
