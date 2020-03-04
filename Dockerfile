@@ -56,6 +56,7 @@ RUN groupadd -g 751 cgts && \
         cpanminus \
         createrepo \
         deltarpm \
+        docker-client \
         expat-devel \
         flex \
         isomd5sum \

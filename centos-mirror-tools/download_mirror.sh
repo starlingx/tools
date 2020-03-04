@@ -43,6 +43,11 @@ usage() {
     echo "                   layer's build type.  Normally the url(s) is read from"
     echo "                   <config_dir>/<distro>/<layer>/required_layer_pkgs.cfg."
     echo "                   This option can be used more than once."
+    echo "  -W <lower_layer>,<stream>,<url>:"
+    echo "                   Override the url for the wheels.inc list of a lower"
+    echo "                   layer's build type.  Normally the url(s) is read from"
+    echo "                   <config_dir>/<distro>/<layer>/required_layer_wheel_inc.cfg."
+    echo "                   This option can be used more than once."
     echo
 }
 
@@ -105,6 +110,7 @@ rpms_from_centos_3rd_parties_template="rpms_centos3rdparties.lst"
 rpms_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_pkg_lists
 rpms_from_layer_repos_dir=${DL_MIRROR_OUTPUT_DIR}/layer_repos
 image_inc_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_image_inc
+wheels_inc_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_wheels_inc
 build_info_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_build_info
 tarball_downloads_template="tarball-dl.lst"
 other_downloads_template="other_downloads.lst"
@@ -151,7 +157,7 @@ multiple_dl_flag_check () {
 
 
 # Parse out optional arguments
-while getopts "c:Cd:ghI:sl:L:nSuU" o; do
+while getopts "c:Cd:ghI:sl:L:nSuUW:" o; do
     case "${o}" in
         c)
             # Pass -c ("use alternate yum.conf") to rpm downloader
@@ -172,6 +178,9 @@ while getopts "c:Cd:ghI:sl:L:nSuU" o; do
             ;;
         I)
             set_layer_image_inc_urls "${OPTARG}"
+            ;;
+        W)
+            set_layer_wheels_inc_urls "${OPTARG}"
             ;;
         l)
             # layer
@@ -310,6 +319,22 @@ for key in "${!layer_image_inc_urls[@]}"; do
     fi
 done
 
+\rm -rf ${wheels_inc_from_layer_build_dir}
+mkdir -p ${wheels_inc_from_layer_build_dir}
+
+for key in "${!layer_wheels_inc_urls[@]}"; do
+    lower_layer="${key%,*}"
+    stream="${key#*,}"
+    url="${layer_wheels_inc_urls[${key}]}"
+    name_from_url=$(url_to_file_name $url)
+    list="${wheels_inc_from_layer_build_dir}/${name_from_url}"
+    curl --silent --fail ${url} > ${list} ||
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Failed to download from url: ${url}"
+        exit 1
+    fi
+done
+
 \rm -rf ${build_info_from_layer_build_dir}
 mkdir -p ${build_info_from_layer_build_dir}
 
@@ -326,7 +351,7 @@ for key in "${!layer_image_inc_urls[@]}"; do
     url=$( echo ${layer_image_inc_urls[${key}]} | sed 's#image.inc$#BUILD_INFO#' )
     name_from_url=$(url_to_file_name $url)
     dest="${build_info_from_layer_build_dir}/${name_from_url}"
-    curl --silent --fail ${url} > ${dest}
+    curl --silent --fail ${url} > ${dest} ||
     if [ $? -ne 0 ]; then
         echo "ERROR: Failed to download from url: ${url}"
         exit 1
