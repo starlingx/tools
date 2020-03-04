@@ -303,7 +303,7 @@ for line in $(cat $tarball_file); do
             tar czvf $tarball_name $directory_name
             rm -rf $directory_name
             popd > /dev/null   # pushd $directory_name
-        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-4.5-1.0.1.0.tgz' ]]; then
+        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-4.7-3.2.9.0.tgz' ]]; then
             srpm_path="${directory_name}/SRPMS/"
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
@@ -313,9 +313,9 @@ for line in $(cat $tarball_file); do
             fi
 
             tar -xf "$tarball_name"
-            cp "${srpm_path}/mlnx-ofa_kernel-4.5-OFED.4.5.1.0.1.1.gb4fdfac.src.rpm" .
-            cp "${srpm_path}/rdma-core-45mlnx1-1.45101.src.rpm" .
-            cp "${srpm_path}/libibverbs-41mlnx1-OFED.4.5.0.1.0.45101.src.rpm" .
+            cp "${srpm_path}/mlnx-ofa_kernel-4.7-OFED.4.7.3.2.9.1.g457f064.src.rpm" .
+            cp "${srpm_path}/rdma-core-47mlnx1-1.47329.src.rpm" .
+            cp "${srpm_path}/libibverbs-41mlnx1-OFED.4.7.0.0.2.47329.src.rpm" .
             # Don't delete the original MLNX_OFED_LINUX tarball.
             # We don't use it, but it will prevent re-downloading this file.
             #   rm -f "$tarball_name"
