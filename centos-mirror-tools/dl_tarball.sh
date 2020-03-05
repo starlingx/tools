@@ -270,19 +270,22 @@ for line in $(cat $tarball_file); do
     if [[ "$line" =~ ^'!' ]]; then
         echo $tarball_name
         pushd $output_tarball > /dev/null
-        if [ "$tarball_name" = "integrity-kmod-e6aef069.tar.gz" ]; then
+        if [ "$tarball_name" = "linux-4.18.0-147.3.1.el8_1.tar.gz" ]; then
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
                 popd > /dev/null   # pushd $output_tarball
                 continue
             fi
-
+            version="147.3.1"
             tar xf "$tarball_name"
-            rm "$tarball_name"
-            mv linux-tpmdd-e6aef06/security/integrity/ $directory_name
-            tar czvf $tarball_name $directory_name
-            rm -rf linux-tpmdd-e6aef06
+            rm -rf integrity integrity-kmod-${version}.tar.gz
+            mv ${directory_name}/security/integrity/ integrity
+            tar czvf integrity-kmod-${version}.tar.gz integrity
+            rm -rf tpm tpm-kmod-${version}.tar.gz
+            mv ${directory_name}/drivers/char/tpm tpm
+            tar czvf tpm-kmod-${version}.tar.gz tpm
+            rm -rf $directory_name tpm integrity
         elif [ "$tarball_name" = "mariadb-10.1.28.tar.gz" ]; then
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
@@ -328,21 +331,6 @@ for line in $(cat $tarball_file); do
                 popd > /dev/null  # pushd $output_tarball
                 continue
             fi
-
-        elif [ "$tarball_name" = "tpm-kmod-e6aef069.tar.gz" ]; then
-            download_package "$tarball_name" "$tarball_url"
-            if [ $? -ne 0 ]; then
-                error_count=$((error_count + 1))
-                popd > /dev/null  # pushd $output_tarball
-                continue
-            fi
-
-            tar xf "$tarball_name"
-            rm "$tarball_name"
-            mv linux-tpmdd-e6aef06/drivers/char/tpm $directory_name
-            tar czvf $tarball_name $directory_name
-            rm -rf linux-tpmdd-e6aef06
-            rm -rf $directory_name
         elif [ "$tarball_name" = "tss2-930.tar.gz" ]; then
             dest_dir=ibmtpm20tss-tss
             for dl_src in $dl_source; do
