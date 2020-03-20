@@ -3,5 +3,3 @@ python2-pip-9.0.3-6.fc29.noarch.rpm#https://kojipkgs.fedoraproject.org/packages/
 python2-pytest-httpbin-0.2.3-6.el7.noarch.rpm#http://cbs.centos.org/kojifiles/packages/python-pytest-httpbin/0.2.3/6.el7/noarch/python2-pytest-httpbin-0.2.3-6.el7.noarch.rpm
 python2-pytest-mock-1.6.0-2.el7.noarch.rpm#http://cbs.centos.org/kojifiles/packages/python-pytest-mock/1.6.0/2.el7/noarch/python2-pytest-mock-1.6.0-2.el7.noarch.rpm
 python2-wheel-0.31.1-3.fc30.noarch.rpm#https://kojipkgs.fedoraproject.org/packages/python-wheel/0.31.1/3.fc30/noarch/python2-wheel-0.31.1-3.fc30.noarch.rpm
-python3-pip-9.0.3-6.fc29.noarch.rpm#https://kojipkgs.fedoraproject.org/packages/python-pip/9.0.3/6.fc29/noarch/python3-pip-9.0.3-6.fc29.noarch.rpm
-python3-wheel-0.31.1-3.fc30.noarch.rpm#https://kojipkgs.fedoraproject.org/packages/python-wheel/0.31.1/3.fc30/noarch/python3-wheel-0.31.1-3.fc30.noarch.rpm
