@@ -1,0 +1,18 @@
+#####
+# StarlingX distro layer at CENGN
+
+[Starlingx-cengn_distro_std_layer]
+name=Starlingx-cengn_distro_std_layer
+baseurl=http://mirror.starlingx.cengn.ca/mirror/starlingx/master/centos/distro/latest_build/outputs/RPMS/std/
+enabled=1
+
+[Starlingx-cengn_distro_rt_layer]
+name=Starlingx-cengn_distro_rt_layer
+baseurl=http://mirror.starlingx.cengn.ca/mirror/starlingx/master/centos/distro/latest_build/outputs/RPMS/rt/
+enabled=1
+
+[Starlingx-cengn_distro_installer_layer]
+name=Starlingx-cengn_distro_installer_layer
+baseurl=http://mirror.starlingx.cengn.ca/mirror/starlingx/master/centos/distro/latest_build/outputs/RPMS/installer/
+enabled=1
+

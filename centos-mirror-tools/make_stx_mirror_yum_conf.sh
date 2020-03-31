@@ -24,7 +24,7 @@ RETAIN_REPODIR=0
 
 usage () {
     echo ""
-    echo "$0 -d <dest_dir> [-D <distro>] [-y <src_dnf_conf>] [-r <src_repos_dir>] [-R]"
+    echo "$0 -d <dest_dir> [-D <distro>] [-y <src_dnf_conf>] [-r <src_repos_dir>] [-R] [-l <layer>] [-u <lower-layer>,<repo_url>]"
     echo ""
     echo "Replicate a dnf.conf and yum.repo.d under a new directory and"
     echo "then modify the files to point to equivalent repos in the StarlingX"
@@ -36,13 +36,32 @@ usage () {
     echo "                'dnf.conf.sample' in same directory as this script"
     echo "-r <repos_dir> = Path to yum.repos.d that we will modify.  Default is"
     echo "                 'yum.repos.d' in same directory as this script"
+    echo "-l <layer> = Download only packages required to build a given layer"
+    echo "-u <lower-layer>,<build-type>,<repo_url> = Add/change the repo baseurl for a lower layer"
+}
+
+declare -A layer_urls
+
+set_layer_urls () {
+    local option="${1}"
+    local layer_and_build_type="${option%,*}"
+    local layer="${layer_and_build_type%,*}"
+    local build_type="${layer_and_build_type#*,}"
+    local layer_url="${option##*,}"
+
+    # Enforce trailing '/'
+    if [ "${layer_url:${#layer_url}-1:1}" != "/" ]; then
+        layer_url+="/"
+    fi
+
+    layer_urls["${layer_and_build_type}"]="${layer_url}"
 }
 
 
 #
 # option processing
 #
-while getopts "D:d:Rr:y:" o; do
+while getopts "D:d:l:Rr:u:y:" o; do
     case "${o}" in
         D)
             DISTRO="${OPTARG}"
@@ -50,11 +69,17 @@ while getopts "D:d:Rr:y:" o; do
         d)
             TEMP_DIR="${OPTARG}"
             ;;
+        l)
+            LAYER="${OPTARG}"
+            ;;
         r)
             SRC_REPO_DIR="${OPTARG}"
             ;;
         R)
             RETAIN_REPODIR=1
+            ;;
+        u)
+            set_layer_urls "${OPTARG}"
             ;;
         y)
             SRC_DNF_CONF="${OPTARG}"
@@ -136,10 +161,17 @@ ARCH=$(get_arch)
 #
 # Copy as yet unmodified dnf.conf and yum.repos.d from source to dest.
 #
-echo "\cp -r '$SRC_REPO_DIR' '$CENGN_REPOS_DIR'"
-\cp -r "$SRC_REPO_DIR" "$CENGN_REPOS_DIR"
+mkdir -p "$CENGN_REPOS_DIR"
+echo "\cp -r '$SRC_REPO_DIR/*' '$CENGN_REPOS_DIR/'"
+\cp -r "$SRC_REPO_DIR"/* "$CENGN_REPOS_DIR/"
 echo "\cp '$SRC_DNF_CONF' '$CENGN_DNF_CONF'"
 \cp "$SRC_DNF_CONF" "$CENGN_DNF_CONF"
+
+if [ "$LAYER" != "all" ]; then
+    if [ -d ${MAKE_STX_MIRROR_DNF_CONF_DIR}/config/${DISTRO}/${LAYER}/yum.repos.d ]; then
+        \cp -f ${MAKE_STX_MIRROR_DNF_CONF_DIR}/config/${DISTRO}/${LAYER}/yum.repos.d/*.repo $CENGN_REPOS_DIR
+    fi
+fi
 
 #
 # Add or modify reposdir= value in our new dnf.conf
@@ -227,6 +259,23 @@ for REPO in $(find "$CENGN_REPOS_DIR" -type f -name '*repo'); do
     #
     sed "s#^name=\(.*\)#name=CENGN_\1#" -i "$REPO"
     sed "s#^\[\([^]]*\)\]#[CENGN_\1]#" -i "$REPO"
+done
+
+for key in "${!layer_urls[@]}"; do
+    lower_layer="${key%,*}"
+    build_type="${key#*,}"
+    REPO="$CENGN_REPOS_DIR/StarlingX_cengn_${lower_layer}_layer.repo"
+    if [ -f "$REPO" ]; then
+        sed "s#^baseurl=.*/${lower_layer}/.*/${build_type}/\$#baseurl=${layer_urls[${key}]}#" -i "$REPO"
+    else
+        REPO="$CENGN_REPOS_DIR/StarlingX_local_${lower_layer}_${build_type}_layer.repo"
+        (
+        echo "[Starlingx-local_${lower_layer}_${build_type}_layer]"
+        echo "name=Starlingx-cengn_${lower_layer}_${build_type}_layer"
+        echo "baseurl=${layer_urls[${key}]}"
+        echo "enabled=1"
+        ) > "$REPO"
+    fi
 done
 
 echo $TEMP_DIR

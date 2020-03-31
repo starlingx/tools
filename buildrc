@@ -1,4 +1,4 @@
-# Common configuration for TC tbuilder
+# Common configuration for StarlingX builder
 
 [[ -z "$_BUILDRC" ]] || return 0
 declare -r -g _BUILDRC=1
@@ -49,8 +49,8 @@ GUEST_LOCALDISK=${GUEST_LOCALDISK%/}
 LOCALDISK=${HOST_PREFIX}/${GUEST_LOCALDISK}
 
 
-# TC vars
-export MY_TC_RELEASE=${MY_TC_RELEASE:-tis-r5-pike}
+# Release Variable
+export MY_RELEASE=${MY_RELEASE:-3.0}
 
 # Default branch to build
 export BRANCH=${BRANCH:-intel_r0}
@@ -62,7 +62,7 @@ export PROJECT=${PROJECT:-test}
 export MYUNAME=${MYUNAME:-builder}
 export MYPROJECTNAME=${PROJECT:-frog1}
 
-export SRC_BUILD_ENVIRONMENT=${SRC_BUILD_ENVIRONMENT:-$MY_TC_RELEASE}
+export SRC_BUILD_ENVIRONMENT=${SRC_BUILD_ENVIRONMENT:-$MY_RELEASE}
 
 # All of the below are dependent on variables defined earlier, right now
 # we are not going to support directly setting them in localrc
@@ -82,3 +82,5 @@ export MY_BUILD_CFG_RT=${MY_WORKSPACE}/rt/${MY_BUILD_ENVIRONMENT_FILE_RT}
 export MY_MOCK_ROOT=$MY_WORKSPACE/mock/root
 export MY_DEBUG_BUILD_CFG_STD=${MY_WORKSPACE}/std/configs/${MY_BUILD_ENVIRONMENT}-std/${MY_BUILD_ENVIRONMENT}-std.b0.cfg
 export MY_DEBUG_BUILD_CFG_RT=${MY_WORKSPACE}/std/configs/${MY_BUILD_ENVIRONMENT}-std/${MY_BUILD_ENVIRONMENT}-rt.b0.cfg
+export LAYER=$LAYER
+export STX_CONFIG_DIR="$STX_CONFIG_DIR"

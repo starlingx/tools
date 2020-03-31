@@ -1,6 +1,6 @@
-=============================
-StarlingX Tools Documentation
-=============================
+=======================
+StarlingX Tools Project
+=======================
 
 The starlingx/tools project provides StarlingX build tools.
 
@@ -11,7 +11,7 @@ Release notes
 .. toctree::
    :maxdepth: 1
 
-   Release notes <https://docs.starlingx.io/releasenotes/stx-tools>
+   Release notes <https://docs.starlingx.io/releasenotes/tools>
 
 -----
 Links

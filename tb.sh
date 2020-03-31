@@ -87,8 +87,9 @@ case $CMD in
         echo "SOURCE_REMOTE_NAME=${SOURCE_REMOTE_NAME}"
         echo "SOURCE_REMOTE_URI=${SOURCE_REMOTE_URI}"
         echo "HOST_MIRROR_DIR=${HOST_MIRROR_DIR}"
-        echo "MY_TC_RELEASE=${MY_TC_RELEASE}"
+        echo "MY_RELEASE=${MY_RELEASE}"
         echo "MY_REPO_ROOT_DIR=${MY_REPO_ROOT_DIR}"
+        echo "LAYER=${LAYER}"
         ;;
     create)
         create_container
