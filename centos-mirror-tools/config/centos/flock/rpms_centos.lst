@@ -1158,7 +1158,6 @@ rootfiles-8.1-11.el7.noarch.rpm
 rpcbind-0.2.0-47.el7.x86_64.rpm
 rsync-3.1.2-4.el7.x86_64.rpm
 rtctl-1.13-2.el7.noarch.rpm
-rt-setup-1.59-5.el7.noarch.rpm
 ruby-2.0.0.648-36.el7.x86_64.rpm
 ruby-augeas-0.5.0-1.el7.x86_64.rpm
 rubygem-bigdecimal-1.2.0-36.el7.x86_64.rpm

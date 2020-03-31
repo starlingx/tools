@@ -7,7 +7,7 @@ automake-1.13.4-3.el7.noarch.rpm
 # basesystem-10.0-7.el7.centos.noarch.rpm provided by mock
 bash-4.2.46-31.el7.x86_64.rpm
 # binutils-2.27-34.base.el7.x86_64.rpm provided by mock
-binutils-devel-2.27-34.base.el7.x86_64.rpm
+binutils-devel-2.27-41.base.el7.x86_64.rpm
 bison-3.0.4-2.el7.x86_64.rpm
 bluez-libs-5.44-4.el7_4.x86_64.rpm
 bluez-libs-devel-5.44-4.el7_4.x86_64.rpm
