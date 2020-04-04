@@ -82,6 +82,7 @@ need_dir(){
 
 # Downloader scripts
 rpm_downloader="${DOWNLOAD_MIRROR_DIR}/dl_rpms.sh"
+lower_layer_rpm_downloader="${DOWNLOAD_MIRROR_DIR}/dl_lower_layer_rpms.sh"
 rpm_from_url_downloader="${DOWNLOAD_MIRROR_DIR}/dl_rpms_from_url.sh"
 tarball_downloader="${DOWNLOAD_MIRROR_DIR}/dl_tarball.sh"
 other_downloader="${DOWNLOAD_MIRROR_DIR}/dl_other_from_centos_repo.sh"
@@ -102,6 +103,7 @@ rpms_from_3rd_parties_template="rpms_3rdparties.lst"
 rpms_from_centos_repo_template="rpms_centos.lst"
 rpms_from_centos_3rd_parties_template="rpms_centos3rdparties.lst"
 rpms_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_pkg_lists
+rpms_from_layer_repos_dir=${DL_MIRROR_OUTPUT_DIR}/layer_repos
 image_inc_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_image_inc
 build_info_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_build_info
 tarball_downloads_template="tarball-dl.lst"
@@ -190,7 +192,7 @@ while getopts "c:Cd:ghI:sl:L:nSuU" o; do
             dl_flag="-s"
             ;;
         S)
-            # Download from StarlingX mirror only. Do not use upstream sources.
+            # Download from StarlingX mirror first, only use upstream source as a fallback.
             multiple_dl_flag_check
             dl_source="$dl_from_stx_then_upstream"
             dl_flag="-S"
@@ -202,7 +204,7 @@ while getopts "c:Cd:ghI:sl:L:nSuU" o; do
             dl_flag="-u"
             ;;
         U)
-            # Download from upstream only. Do not use StarlingX mirror.
+            # Download from upstream first, only use StarlingX mirror as a fallback.
             multiple_dl_flag_check
             dl_source="$dl_from_upstream_then_stx"
             dl_flag="-U"
@@ -324,7 +326,7 @@ for key in "${!layer_image_inc_urls[@]}"; do
     url=$( echo ${layer_image_inc_urls[${key}]} | sed 's#image.inc$#BUILD_INFO#' )
     name_from_url=$(url_to_file_name $url)
     dest="${build_info_from_layer_build_dir}/${name_from_url}"
-    curl --silent --fail ${url} > ${dest} ||
+    curl --silent --fail ${url} > ${dest}
     if [ $? -ne 0 ]; then
         echo "ERROR: Failed to download from url: ${url}"
         exit 1
@@ -432,7 +434,12 @@ for key in "${!layer_pkg_urls[@]}"; do
         #download RPMs/SRPMs from CentOS repos by "yumdownloader"
         level=L1
         logfile=$(generate_log_name $list $level)
-        $rpm_downloader ${rpm_downloader_extra_args} $list $level |& tee $logfile
+        llrd_extra_args=""
+        if [ $use_system_yum_conf -eq 0 ]; then
+            llrd_extra_args="-c '${alternate_yum_conf}'"
+        fi
+        echo "$lower_layer_rpm_downloader -l ${lower_layer} -b ${build_type} -r $(dirname $url) ${llrd_extra_args} ${list} ${level}"
+        $lower_layer_rpm_downloader -l ${lower_layer} -b ${build_type} -r $(dirname $url) ${llrd_extra_args} ${list} ${level} |& tee $logfile
         local_retcode=${PIPESTATUS[0]}
     fi
 
@@ -583,7 +590,9 @@ fi
 
 if [ $change_group_ids -eq 1 ]; then
     # change "./output" and sub-folders to 751 (cgcs) group
-    ${SUDO} chown  751:751 -R ./output
+    NEW_UID=$(id -u)
+    NEW_GID=751
+    ${SUDO} chown  ${NEW_UID}:${NEW_GID} -R ./output
 fi
 
 echo "step #4: start downloading other files ..."
