@@ -142,7 +142,7 @@ missing_rpms_file=missing.txt
 \rm -f ${missing_rpms_file}
 
 # Strip trailing / from mirror_dir if it was specified...
-mirror_dir=$(echo ${mirror_dir} | sed "s%/$%%")
+mirror_dir=$(readlink -f ${mirror_dir} | sed "s%/$%%")
 
 if [[ ( ! -d ${mirror_dir}/Binary ) || ( ! -d ${mirror_dir}/Source ) ]]; then
     echo "The mirror ${mirror_dir} doesn't has the Binary and Source"
