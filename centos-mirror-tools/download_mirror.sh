@@ -393,9 +393,11 @@ else
         # point to the repos that need to be modified as well.
         if dl_from_upstream; then
             # add
+            echo "${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}"
             ${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}
         else
             # substitute
+            echo "${make_stx_mirror_yum_conf} -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}"
             ${make_stx_mirror_yum_conf} -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}
         fi
     else
@@ -404,9 +406,11 @@ else
         # in these scripts.
         if dl_from_upstream; then
             # add
+            echo "${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y /etc/yum.conf -r /etc/yum.repos.d -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}"
             ${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y /etc/yum.conf -r /etc/yum.repos.d -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}
         else
             # substitute
+            echo "${make_stx_mirror_yum_conf} -d $TEMP_DIR -y /etc/yum.conf -r /etc/yum.repos.d -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}"
             ${make_stx_mirror_yum_conf} -d $TEMP_DIR -y /etc/yum.conf -r /etc/yum.repos.d -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}
         fi
     fi
@@ -434,10 +438,7 @@ for key in "${!layer_pkg_urls[@]}"; do
         #download RPMs/SRPMs from CentOS repos by "yumdownloader"
         level=L1
         logfile=$(generate_log_name $list $level)
-        llrd_extra_args=""
-        if [ $use_system_yum_conf -eq 0 ]; then
-            llrd_extra_args="-c '${alternate_yum_conf}'"
-        fi
+        llrd_extra_args="-c ${TEMP_DIR}/yum.conf"
         echo "$lower_layer_rpm_downloader -l ${lower_layer} -b ${build_type} -r $(dirname $url) ${llrd_extra_args} ${list} ${level}"
         $lower_layer_rpm_downloader -l ${lower_layer} -b ${build_type} -r $(dirname $url) ${llrd_extra_args} ${list} ${level} |& tee $logfile
         local_retcode=${PIPESTATUS[0]}
