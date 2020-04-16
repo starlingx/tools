@@ -274,8 +274,10 @@ dl_repo () {
     local TMP
     local YUM_CONF_DIR_TMP
     local MUNGED_LIST
-    YUM_CONF_TMP="$(mktemp "/tmp/${YUM_CONF}.XXXXXX")"
-    TMP=$(echo "${YUM_CONF_TMP}" | sed "s#^.*${YUM_CONF}.##")
+    local YUM_CONF_NAME
+    YUM_CONF_NAME=$(basename "${YUM_CONF}")
+    YUM_CONF_TMP="$(mktemp "/tmp/${YUM_CONF_NAME}.XXXXXX")"
+    TMP=$(basename "${YUM_CONF_TMP}" | sed "s#^${YUM_CONF_NAME}.##")
     YUM_CONF_DIR=$(dirname "${YUM_CONF_TMP}")
     YUM_REPOS_DIR_TMP="${YUM_CONF_DIR}/yum.repos.d.${TMP}"
     MUNGED_LIST="${YUM_CONF_DIR}/yum.lst.${TMP}"
