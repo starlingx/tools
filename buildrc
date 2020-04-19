@@ -34,7 +34,7 @@ fi
 export USER=${USER:-$(id -un)}
 
 # Local mirror location
-HOST_MIRROR_DIR=${HOST_MIRROR_DIR:-/home/starlingx/mirror}
+HOST_MIRROR_DIR=${HOST_MIRROR_DIR:-${HOME}/starlingx/mirror}
 
 
 # The root of an individual build workspace

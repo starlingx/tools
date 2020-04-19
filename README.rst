@@ -202,7 +202,7 @@ before starting the container.
 Set the mirror directory to the shared mirror pointed to by
 ``HOST_MIRROR_DIR``. The mirror is LARGE, if you are on a shared machine
 use the shared mirror. For example you could set the default value for
-``HOST_MIRROR_DIR`` to ``/home/starlingx/mirror`` and share it.
+``HOST_MIRROR_DIR`` to ``$HOME/starlingx/mirror`` and share it.
 
 Running the Container
 ~~~~~~~~~~~~~~~~~~~~~
