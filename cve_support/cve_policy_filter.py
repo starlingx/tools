@@ -28,6 +28,7 @@ def print_html_report(cves_report, title):
     output_text = template.render(cves_to_fix=cves_report["cves_to_fix"],\
         cves_to_fix_lp=cves_report["cves_to_fix_lp"],\
         cves_to_track=cves_report["cves_to_track"],\
+        cves_wont_fix=cves_report["cves_wont_fix"],\
         cves_w_errors=cves_report["cves_w_errors"],\
         cves_to_omit=cves_report["cves_to_omit"],\
         heads=heads,\
@@ -76,6 +77,16 @@ def print_report(cves_report, title):
             if key != "summary":
                 cve_line.append(key + ":" + str(value))
         print(cve_line)
+
+    print("\nCVEs with no plans to fix (Won't Fix or Invalid): %d \n" \
+        % (len(cves_report["cves_wont_fix"])))
+    for cve in cves_report["cves_wont_fix"]:
+        cve_line = []
+        for key, value in cve.items():
+            if key != "summary":
+                cve_line.append(key + ":" + str(value))
+        print(cve_line)
+
 
     print("\nERROR: CVEs that have no cvss2Score or cvss2Vector: %d \n" \
         % (len(cves_report["cves_w_errors"])))
@@ -142,6 +153,7 @@ def main():
     cves_to_fix_lp = []
     cves_to_track = []
     cves_w_errors = []
+    cves_wont_fix = []
     cves_to_omit = []
     cves_report = {}
 
@@ -209,8 +221,13 @@ def main():
                 and ("N" in cve["au"] or "S" in cve["au"])
                 and ("P" in cve["ai"] or "C" in cve["ai"])):
             if cve["status"] == "fixed":
-                if find_lp_assigned(cve["id"]):
-                    cves_to_fix_lp.append(cve)
+                bug = find_lp_assigned(cve["id"])
+                if (bug):
+                    print(bug["status"])
+                    if (bug["status"] == "Invalid" or bug["status"] == "Won't Fix"):
+                        cves_wont_fix.append(cve)
+                    else:
+                        cves_to_fix_lp.append(cve)
                 else:
                     cves_to_fix.append(cve)
             else:
@@ -222,6 +239,7 @@ def main():
     cves_report["cves_to_fix_lp"] = cves_to_fix_lp
     cves_report["cves_to_track"] = cves_to_track
     cves_report["cves_w_errors"] = cves_w_errors
+    cves_report["cves_wont_fix"] = cves_wont_fix
     cves_report["cves_to_omit"] = cves_to_omit
 
     print_report(cves_report, title)

@@ -12,7 +12,6 @@ import os
 from os import path
 from launchpadlib.launchpad import Launchpad
 
-
 # Filter the open bugs
 STATUSES = [
     'New',
@@ -22,6 +21,8 @@ STATUSES = [
     'In Progress',
     'Fix Committed',
     'Fix Released',
+    "Invalid",
+    "Won't Fix",
 ]
 
 CACHEDIR = path.join('/tmp', os.environ['USER'], '.launchpadlib/cache')
@@ -37,12 +38,13 @@ def search_upstrem_lps():
         ('lplib.cookbook.json_fetcher', 'production',
          CACHEDIR, version='devel')
     project = launchpad.projects['starlingx']
-    tasks = project.searchTasks(status=STATUSES)
+    tasks = project.searchTasks(status=STATUSES, has_cve=True)
     for task in tasks:
         bug = task.bug
         if ("cve" in bug.title.lower()):
             bug_dic = {}
             bug_dic['id'] = bug.id
+            bug_dic['status'] = task.status
             bug_dic['title'] = bug.title
             bug_dic['link'] = bug.self_link
             DATA.append(bug_dic)
@@ -75,6 +77,7 @@ def main():
     Sanity test
     """
     cve_ids = ["CVE-2019-0160",\
+        "CVE-2018-7536",\
         "CVE-2019-11810",\
         "CVE-2019-11811",\
         "CVE-2018-15686",\
