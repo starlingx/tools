@@ -403,7 +403,23 @@ for line in $(cat $tarball_file); do
             popd > /dev/null # pushd kernel-rt
             # Cleanup
             rm -rf kernel-rt
+        elif [[ "$tarball_name" =~ ^rt-setup-*.*.rpm ]]; then
+            git clone -b c8 --single-branch $tarball_url
+            pushd rt-setup
+            rev=$util
+            git checkout -b spec $rev
 
+            # get the CentOS tools for building SRPMs
+            git clone https://git.centos.org/centos-git-common
+
+            # Create the SRPM using CentOS tools
+            # bracketed to contain the PATH change
+            (PATH=$PATH:./centos-git-common into_srpm.sh -d .el8)
+            mv SRPMS/*.rpm ..
+
+            popd > /dev/null # pushd rt-setup
+            # Cleanup
+            rm -rf rt-setup
         fi
         popd > /dev/null # pushd $output_tarball
         continue
