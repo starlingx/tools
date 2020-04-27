@@ -13,16 +13,17 @@
 # Copyright (C) 2019 Intel Corporation
 #
 
-FROM centos:8
+FROM centos:8.1.1911
 
 # Proxy configuration
 #ENV http_proxy  "http://your.actual_http_proxy.com:your_port"
 #ENV https_proxy "https://your.actual_https_proxy.com:your_port"
 #ENV ftp_proxy   "http://your.actual_ftp_proxy.com:your_port"
+#ENV no_proxy    "localhost,127.0.0.1"
 
 #RUN echo "proxy=$http_proxy" >> /etc/dnf/dnf.conf && \
 #    echo -e "export http_proxy=$http_proxy\nexport https_proxy=$https_proxy\n\
-#export ftp_proxy=$ftp_proxy" >> /root/.bashrc
+#export ftp_proxy=$ftp_proxy\nexport no_proxy=$no_proxy" >> /root/.bashrc
 
 RUN echo "http_caching=packages" >> /etc/dnf/dnf.conf
 
@@ -60,21 +61,21 @@ RUN groupadd -g 751 cgts && \
         #deltarpm \
         expat-devel \
         flex \
-        isomd5sum \
         gcc \
         gettext \
         git \
+        isomd5sum \
         libguestfs-tools \
         libtool \
         libxml2 \
         lighttpd \
-        #lighttpd-fastcgi \
+        lighttpd-fastcgi \
         #lighttpd-mod_geoip \
-        net-tools \
         mkisofs \
         mock \
         #mongodb \
         #mongodb-server \
+        net-tools \
         #pax \
         perl-CPAN \
         #python-deltarpm \
@@ -103,7 +104,6 @@ RUN groupadd -g 751 cgts && \
         udisks2 \
         vim-enhanced \
         wget
-        #yumdownloader
 
 # This image requires a set of scripts and helpers
 # for working correctly, in this section they are
@@ -114,6 +114,7 @@ COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
 COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
 COPY toCOPY/lst_utils.sh /usr/local/bin
 COPY toCOPY/.inputrc /home/$MYUNAME/
+COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
 
 # cpan modules, installing with cpanminus to avoid stupid questions since cpan is whack
 RUN cpanm --notest Fatal && \
@@ -123,8 +124,8 @@ RUN cpanm --notest Fatal && \
     cpanm --notest XML::Simple
 
 # pip installs
-RUN pip3 install python-subunit junitxml --upgrade && \
-    pip3 install tox --upgrade
+RUN pip3 install -c /home/$MYUNAME/builder-constraints.txt python-subunit junitxml --upgrade && \
+    pip3 install -c /home/$MYUNAME/builder-constraints.txt tox --upgrade
 
 # Install repo tool
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo && \
