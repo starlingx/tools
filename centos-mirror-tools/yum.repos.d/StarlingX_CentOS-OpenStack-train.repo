@@ -26,8 +26,8 @@ enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud
 exclude=sip,PyQt4
 
-[centos-openstack-Stein-source]
-name=CentOS-7 - OpenStack Stein - Source
+[centos-openstack-train-source]
+name=CentOS-7 - OpenStack train - Source
 baseurl=http://vault.centos.org/centos/7.7.1908/cloud/Source/openstack-train/
 gpgcheck=1
 enabled=1
