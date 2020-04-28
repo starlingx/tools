@@ -155,8 +155,9 @@ CENGN_DNF_CONF="$TEMP_DIR/dnf.conf"
 CENGN_DNF_LOG="$TEMP_DIR/dnf.log"
 CENGN_DNF_CACHDIR="$TEMP_DIR/cache/dnf/\$basearch/\$releasever"
 
-RELEASEVER=$(get_releasever)
-ARCH=$(get_arch)
+RELEASEVER="8"
+ARCH="x86_64"
+CONTENTDIR="centos"
 
 #
 # Copy as yet unmodified dnf.conf and yum.repos.d from source to dest.
@@ -232,6 +233,7 @@ for REPO in $(find "$CENGN_REPOS_DIR" -type f -name '*repo'); do
     #
     sed "s#/[$]releasever/#/$RELEASEVER/#g" -i "$REPO"
     sed "s#/[$]basearch/#/$ARCH/#g" -i "$REPO"
+    sed "s#/[$]contentdir/#/$CONTENTDIR/#g" -i "$REPO"
 
     #
     # Turn off gpgcheck for now.

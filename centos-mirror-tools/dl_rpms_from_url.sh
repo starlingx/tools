@@ -8,7 +8,7 @@
 set -o errexit
 set -o nounset
 
-# By default, we use "sudo" and we don't use a local yum.conf. These can
+# By default, we use "sudo" and we don't use a local dnf.conf. These can
 # be overridden via flags.
 
 DL_RPMS_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
@@ -40,7 +40,7 @@ distro="centos"
 while getopts "u:h" o; do
     case "${o}" in
         u)
-            # Use an alternate yum.conf
+            # Use an alternate dnf.conf
             BASE_URL="$OPTARG"
             ;;
         h)

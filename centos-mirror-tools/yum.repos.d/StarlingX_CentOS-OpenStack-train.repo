@@ -39,3 +39,19 @@ name=OpenStack train Trunk Tested
 baseurl=https://trunk.rdoproject.org/centos7-train/current-passed-ci/
 gpgcheck=0
 enabled=0
+
+[centos8-openstack-train]
+name=CentOS-8 - OpenStack train
+baseurl=http://mirror.centos.org/centos/8/cloud/$basearch/openstack-train/
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud
+exclude=sip,PyQt4
+
+[centos8-openstack-train-source]
+name=CentOS-8 - OpenStack train - Source
+baseurl=http://vault.centos.org/centos/8.0.1905/cloud/Source/openstack-train/
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud
+exclude=sip,PyQt4
