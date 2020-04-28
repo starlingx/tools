@@ -1,0 +1,10 @@
+---
+schema: armada/ChartGroup/v1
+metadata:
+  schema: metadata/Document/v1
+  name: $NAME$
+data:
+  description: $DESCRIPTION%This is a chartgroup$
+  sequenced: $SEQUENCED%false$
+  @CHART_GROUP|2@
+
