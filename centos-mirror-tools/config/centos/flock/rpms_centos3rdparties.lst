@@ -20,15 +20,15 @@ gsettings-desktop-schemas-3.28.0-2.el7.x86_64.rpm
 gssproxy-0.7.0-21.el7.x86_64.rpm
 # ima-evm-utils-1.1-2.el7.x86_64.rpm provided by mock
 iprutils-2.4.16.1-1.el7.x86_64.rpm
-kata-containers-image-1.10.0-4.1.x86_64.rpm
-kata-ksm-throttler-1.10.0-4.1.x86_64.rpm
-kata-linux-container-4.19.86.60-4.1.x86_64.rpm
-kata-linux-container-debug-4.19.86.60-4.1.x86_64.rpm
-kata-proxy-1.10.0-4.1.x86_64.rpm
-kata-proxy-bin-1.10.0-4.1.x86_64.rpm
-kata-runtime-1.10.0-4.1.x86_64.rpm
-kata-shim-1.10.0-4.1.x86_64.rpm
-kata-shim-bin-1.10.0-4.1.x86_64.rpm
+kata-containers-image-1.11.0-3.1.x86_64.rpm
+kata-ksm-throttler-1.11.0-3.1.x86_64.rpm
+kata-linux-container-5.4.32.73-3.1.x86_64.rpm
+kata-linux-container-debug-5.4.32.73-3.1.x86_64.rpm
+kata-proxy-1.11.0-3.1.x86_64.rpm
+kata-proxy-bin-1.11.0-3.1.x86_64.rpm
+kata-runtime-1.11.0-3.1.x86_64.rpm
+kata-shim-1.11.0-3.1.x86_64.rpm
+kata-shim-bin-1.11.0-3.1.x86_64.rpm
 kexec-tools-2.0.15-21.el7.x86_64.rpm
 # libblkid-2.23.2-59.el7.x86_64.rpm provided by mock
 # libcom_err-1.42.9-13.el7.x86_64.rpm provided by mock
@@ -77,9 +77,9 @@ python-ironic-lib-2.10.1-1.el7.noarch.rpm
 python-libguestfs-1.38.2-12.el7_6.1.x86_64.rpm
 python-tempest-17.2.0-4.el7.noarch.rpm
 python-virtualenv-15.1.0-2.el7.noarch.rpm
-qemu-vanilla-4.1.0+git.9e06029aea-4.1.x86_64.rpm
-qemu-vanilla-bin-4.1.0+git.9e06029aea-4.1.x86_64.rpm
-qemu-vanilla-data-4.1.0+git.9e06029aea-4.1.x86_64.rpm
+qemu-vanilla-4.1.1+git.99c5874a9b-3.1.x86_64.rpm
+qemu-vanilla-bin-4.1.1+git.99c5874a9b-3.1.x86_64.rpm
+qemu-vanilla-data-4.1.1+git.99c5874a9b-3.1.x86_64.rpm
 samba-client-libs-4.8.3-4.el7.x86_64.rpm
 samba-common-4.8.3-4.el7.noarch.rpm
 samba-common-libs-4.8.3-4.el7.x86_64.rpm
