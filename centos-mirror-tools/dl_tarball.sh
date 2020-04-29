@@ -386,6 +386,24 @@ for line in $(cat $tarball_file); do
             tar czvf $tarball_name $directory_name
             rm -rf $directory_name
             popd > /dev/null  # pushd $dest_dir
+        elif [[ "$tarball_name" =~ ^kernel-rt-.*.rpm ]]; then
+            git clone -b c8 --single-branch $tarball_url
+            pushd kernel-rt
+            rev=$util
+            git checkout -b spec $rev
+
+            # get the CentOS tools for building SRPMs
+            git clone https://git.centos.org/centos-git-common
+
+            # Create the SRPM using CentOS tools
+            # bracketed to contain the PATH change
+            (PATH=$PATH:./centos-git-common into_srpm.sh -d .el8)
+            mv SRPMS/*.rpm ..
+
+            popd > /dev/null # pushd kernel-rt
+            # Cleanup
+            rm -rf kernel-rt
+
         fi
         popd > /dev/null # pushd $output_tarball
         continue
