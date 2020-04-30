@@ -75,6 +75,7 @@ cdi-api-1.0-11.SP4.el7.noarch.rpm
 cdparanoia-libs-10.2-17.el7.x86_64.rpm
 celt051-0.5.1.3-8.el7.x86_64.rpm
 centos-logos-70.0.6-3.el7.centos.noarch.rpm
+ceph-common-13.2.10-0.el7.x86_64.rpm
 # centos-release-7-6.1810.2.el7.centos.x86_64.rpm provided by mock
 cf-sorts-mill-goudy-fonts-3.1-7.el7.noarch.rpm
 cglib-2.2-18.el7.noarch.rpm
@@ -289,6 +290,11 @@ httpcomponents-client-4.2.5-5.el7_0.noarch.rpm
 httpcomponents-core-4.2.4-6.el7.noarch.rpm
 httpd-2.4.6-88.el7.centos.x86_64.rpm
 httpd-tools-2.4.6-88.el7.centos.x86_64.rpm
+httpd24-libcurl-7.61.1-2.el7.x86_64.rpm
+httpd24-libnghttp2-1.7.1-8.el7.x86_64.rpm
+httpd24-httpd-2.4.34-15.el7.x86_64.rpm
+httpd24-httpd-tools-2.4.34-15.el7.x86_64.rpm
+httpd24-runtime-1.1-19.el7.x86_64.rpm
 hwdata-0.252-9.1.el7.x86_64.rpm
 hwloc-libs-1.11.8-4.el7.x86_64.rpm
 impallari-lobster-fonts-1.4-8.el7.noarch.rpm
@@ -379,6 +385,7 @@ libcacard-2.5.2-2.1.el7.x86_64.rpm
 # libcap-2.22-9.el7.x86_64.rpm provided by mock
 # libcap-ng-0.7.5-4.el7.x86_64.rpm provided by mock
 libcap-ng-devel-0.7.5-4.el7.x86_64.rpm
+libcephfs2-13.2.10-0.el7.x86_64.rpm
 libcgroup-0.41-20.el7.x86_64.rpm
 libcgroup-tools-0.41-20.el7.x86_64.rpm
 libcollection-0.7.0-32.el7.x86_64.rpm
@@ -462,11 +469,17 @@ libpsm2-compat-10.3.58-1.el7.x86_64.rpm
 # libpwquality-1.2.3-5.el7.x86_64.rpm provided by mock
 libqhull-2015.2-1.el7.x86_64.rpm
 libquadmath-4.8.5-36.el7.x86_64.rpm
+librados2-13.2.2-0.el7.x86_64.rpm
+librados2-13.2.10-0.el7.x86_64.rpm
+libradosstriper1-13.2.10-0.el7.x86_64.rpm
 libraw1394-2.1.0-2.el7.x86_64.rpm
+librbd1-13.2.2-0.el7.x86_64.rpm
+librbd1-13.2.10-0.el7.x86_64.rpm
 librdmacm-17.2-3.el7.x86_64.rpm
 libref_array-0.1.5-32.el7.x86_64.rpm
 librepo-1.8.1-7.el7.x86_64.rpm
 libreport-filesystem-2.1.11-42.el7.centos.x86_64.rpm
+librgw2-13.2.10-0.el7.x86_64.rpm
 libseccomp-2.3.1-3.el7.x86_64.rpm
 # libselinux-2.5-14.1.el7.x86_64.rpm provided by mock
 libselinux-devel-2.5-14.1.el7.x86_64.rpm
@@ -744,6 +757,11 @@ pyparsing-2.1.10-3.el7.noarch.rpm
 pyparted-3.9-15.el7.x86_64.rpm
 PyQt4-4.12-1.el7.x86_64.rpm
 pysendfile-2.0.0-5.el7.x86_64.rpm
+python-ceph-argparse-13.2.10-0.el7.x86_64.rpm
+python-cephfs-13.2.10-0.el7.x86_64.rpm
+python-rados-13.2.10-0.el7.x86_64.rpm
+python-rbd-13.2.10-0.el7.x86_64.rpm
+python-rgw-13.2.10-0.el7.x86_64.rpm
 python2-alembic-0.9.7-1.el7.noarch.rpm
 python2-amqp-2.1.4-3.el7.noarch.rpm
 python2-appdirs-1.4.0-4.el7.noarch.rpm
@@ -970,6 +988,16 @@ python2-yaql-1.1.0-3.el7.noarch.rpm
 python2-yaql-1.1.3-2.el7.noarch.rpm
 python2-zake-0.2.2-2.el7.noarch.rpm
 python2-zaqarclient-1.7.0-1.el7.noarch.rpm
+python3-ceph-argparse-13.2.10-0.el7.x86_64.rpm
+python3-cephfs-13.2.10-0.el7.x86_64.rpm
+python3-libs-3.6.8-10.el7.x86_64.rpm
+python3-pip-9.0.3-5.el7.noarch.rpm
+python3-rados-13.2.10-0.el7.x86_64.rpm
+python3-rbd-13.2.10-0.el7.x86_64.rpm
+python3-rgw-13.2.10-0.el7.x86_64.rpm
+python3-rpm-macros-3-32.el7.noarch.rpm
+python3-setuptools-39.2.0-10.el7.noarch.rpm
+python3-wheel-0.31.1-4.el7.noarch.rpm
 python36-docutils-0.14-1.el7.noarch.rpm
 python36-iso8601-0.1.11-8.el7.noarch.rpm
 python36-mock-2.0.0-2.el7.noarch.rpm
@@ -1164,6 +1192,11 @@ rdma-7.3_4.7_rc2-6.el7_3.noarch.rpm
 # readline-6.2-10.el7.x86_64.rpm provided by mock
 regexp-1.5-13.el7.noarch.rpm
 rh-python36-mod_wsgi-4.5.17-2.el7.x86_64.rpm
+rh-python36-python-3.6.9-2.el7.x86_64.rpm
+rh-python36-python-libs-3.6.9-2.el7.x86_64.rpm
+rh-python36-python-pip-9.0.1-2.el7.noarch.rpm
+rh-python36-python-setuptools-36.5.0-1.el7.noarch.rpm
+rh-python36-runtime-2.0-1.el7.x86_64.rpm
 roboto-fontface-common-0.5.0.0-1.el7.noarch.rpm
 roboto-fontface-fonts-0.5.0.0-1.el7.noarch.rpm
 rootfiles-8.1-11.el7.noarch.rpm
