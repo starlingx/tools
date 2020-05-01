@@ -1,7 +1,8 @@
 acl-2.2.51-14.el7.x86_64.rpm
+annobin-9.12-1.el7.x86_64.rpm
 basesystem-10.0-7.el7.centos.noarch.rpm
 # bash-4.2.46-31.el7.x86_64.rpm
-binutils-2.27-34.base.el7.x86_64.rpm
+binutils-2.27-41.base.el7.x86_64.rpm
 bzip2-1.0.6-13.el7.x86_64.rpm
 bzip2-libs-1.0.6-13.el7.x86_64.rpm
 ca-certificates-2018.2.22-70.0.el7_5.noarch.rpm
