@@ -1,0 +1,18 @@
+########
+#### EPEL 8 
+
+[Starlingx-epel-8-Everything]
+name=Starlingx-Epel-8
+baseurl=https://dl.fedoraproject.org/pub/epel/8/Everything/x86_64/
+gpgcheck=1
+gpgkey=file:///export/config/rpm-gpg-keys/RPM-GPG-KEY-EPEL-8
+enabled=1
+
+[Starlingx-epel-8-Everything-source]
+name=Starlingx-Epel-8-Everything-source
+baseurl=https://dl.fedoraproject.org/pub/epel/8/Everything/SRPMS/
+gpgcheck=0
+#gpgkey=file:///export/config/rpm-gpg-keys/RPM-GPG-KEY-EPEL-8
+enabled=1
+
+
