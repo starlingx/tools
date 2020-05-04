@@ -463,7 +463,15 @@ for key in "${!layer_pkg_urls[@]}"; do
         #download RPMs/SRPMs from CentOS repos by "yumdownloader"
         level=L1
         logfile=$(generate_log_name $list $level)
-        llrd_extra_args="-c ${TEMP_DIR}/yum.conf"
+        if ! dl_from_stx; then
+            # Not using stx mirror
+            if [ $use_system_yum_conf -eq 0 ]; then
+                # Use provided yum.conf unaltered.
+                llrd_extra_args="-c ${alternate_yum_conf}"
+            fi
+        else
+            llrd_extra_args="-c ${TEMP_DIR}/yum.conf"
+        fi
         echo "$lower_layer_rpm_downloader -l ${lower_layer} -b ${build_type} -r $(dirname $url) ${llrd_extra_args} ${list} ${level}"
         $lower_layer_rpm_downloader -l ${lower_layer} -b ${build_type} -r $(dirname $url) ${llrd_extra_args} ${list} ${level} |& tee $logfile
         local_retcode=${PIPESTATUS[0]}
