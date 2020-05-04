@@ -386,7 +386,7 @@ for line in $(cat $tarball_file); do
             # Create the SRPM using CentOS tools
             # bracketed to contain the PATH change
             (PATH=$PATH:./centos-git-common into_srpm.sh -d .el8)
-            mv SRPMS/*.rpm ..
+            mv SRPMS/*.rpm ../${tarball_name}
 
             popd > /dev/null # pushd kernel-rt
             # Cleanup
