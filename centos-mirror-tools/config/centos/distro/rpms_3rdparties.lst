@@ -1,3 +1,4 @@
+kernel-headers-4.18.0-147.3.1.el8_1.x86_64.rpm#http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/kernel-headers-4.18.0-147.3.1.el8_1.x86_64.rpm
 python2-openstackdocstheme-1.23.2-1.el7.noarch.rpm#https://cbs.centos.org/kojifiles/packages/python-openstackdocstheme/1.23.2/1.el7/noarch/python2-openstackdocstheme-1.23.2-1.el7.noarch.rpm
 python2-pip-9.0.3-6.fc29.noarch.rpm#https://kojipkgs.fedoraproject.org/packages/python-pip/9.0.3/6.fc29/noarch/python2-pip-9.0.3-6.fc29.noarch.rpm
 python2-pytest-httpbin-0.2.3-6.el7.noarch.rpm#http://cbs.centos.org/kojifiles/packages/python-pytest-httpbin/0.2.3/6.el7/noarch/python2-pytest-httpbin-0.2.3-6.el7.noarch.rpm
