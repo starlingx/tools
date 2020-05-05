@@ -628,6 +628,7 @@ perl-ExtUtils-ParseXS-3.18-3.el7.noarch.rpm
 # perl-File-Path-2.09-2.el7.noarch.rpm provided by mock
 # perl-File-Temp-0.23.01-3.el7.noarch.rpm provided by mock
 # perl-Filter-1.49-3.el7.x86_64.rpm provided by mock
+perl-generators-1.08-7.el7.noarch.rpm
 # perl-Getopt-Long-2.40-3.el7.noarch.rpm provided by mock
 perl-Git-1.8.3.1-20.el7.noarch.rpm
 perl-HTML-Parser-3.71-4.el7.x86_64.rpm
