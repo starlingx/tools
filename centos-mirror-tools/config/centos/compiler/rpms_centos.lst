@@ -248,6 +248,8 @@ pyparsing-2.1.10-3.el7.noarch.rpm
 python2-pyparsing-2.1.10-3.el7.noarch.rpm
 python3-3.6.8-10.el7.x86_64.rpm
 python3-devel-3.6.8-10.el7.x86_64.rpm
+python3-rpm-generators-6-2.el7.noarch.rpm
+python3-rpm-macros-3-32.el7.noarch.rpm
 python-2.7.5-76.el7.x86_64.rpm
 python-devel-2.7.5-76.el7.x86_64.rpm
 python-libs-2.7.5-76.el7.x86_64.rpm
