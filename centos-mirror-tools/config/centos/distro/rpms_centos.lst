@@ -850,6 +850,12 @@ python2-XStatic-smart-table-1.4.13.2-1.el7.noarch.rpm
 python2-XStatic-termjs-0.0.7.0-1.el7.noarch.rpm
 python2-XStatic-tv4-1.2.7.0-0.1.pre_review.el7.noarch.rpm
 python2-yappi-1.0-1.el7.x86_64.rpm
+python3-3.6.8-10.el7.x86_64.rpm
+python3-devel-3.6.8-10.el7.x86_64.rpm
+python3-libs-3.6.8-10.el7.x86_64.rpm
+python3-pip-9.0.3-5.el7.noarch.rpm
+python3-rpm-generators-6-2.el7.noarch.rpm
+python3-rpm-macros-3-32.el7.noarch.rpm
 python-anyjson-0.3.3-3.el7.noarch.rpm
 python-backports-1.0-8.el7.x86_64.rpm
 python-backports-ssl_match_hostname-3.5.0.1-1.el7.noarch.rpm
