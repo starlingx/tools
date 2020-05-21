@@ -48,6 +48,11 @@ usage () {
     echo "                      layer's build type.  Normally the url(s) is read from"
     echo "                      <config_dir>/<distro>/<layer>/required_layer_pkgs.cfg."
     echo "                      This option can be used more than once."
+    echo "  --layer-wheels-inc-url=<lower_layer>,<stream>,<url>:"
+    echo "                      Override the url for the image include file of a lower"
+    echo "                      layer's build type.  Normally the url(s) is read from"
+    echo "                      <config_dir>/<distro>/<layer>/required_layer_wheel_inc.cfg"
+    echo "                      This option can be used more than once."
     echo "  --layer-dir=<dir>:  Look in provided dir for packages to link to."
     echo "                      This option can be used more than once."
     echo
@@ -72,7 +77,7 @@ if [ -z "$MY_REPO" ]; then
 fi
 
 
-TEMP=$(getopt -o h --long help,config-dir:,distro:,layer:,layer-dir:,layer-inc-url:,layer-pkg-url:,mirror-dir: -n 'generate-cgcs-centos-repo' -- "$@")
+TEMP=$(getopt -o h --long help,config-dir:,distro:,layer:,layer-dir:,layer-inc-url:,layer-pkg-url:,layer-wheels-inc-url:,mirror-dir: -n 'generate-cgcs-centos-repo' -- "$@")
 if [ $? -ne 0 ]; then
     echo "getopt error"
     usage
@@ -86,6 +91,7 @@ while true ; do
         --mirror-dir)     mirror_dir=$2 ; shift 2 ;;
         --layer-dir)      layer_dirs+=" ${2/,/ }" ; shift 2 ;;
         --layer-inc-url)  set_layer_image_inc_urls "${2}" ; shift 2 ;;
+        --layer-wheels-inc-url)  set_layer_wheels_inc_urls "${2}" ; shift 2 ;;
         --layer-pkg-url)  set_layer_pkg_urls "${2}" ; shift 2 ;;
         --config-dir)     set_and_validate_config_dir "${2}"; shift 2 ;;
         --distro)         set_and_validate_distro "${2}"; shift 2 ;;
@@ -114,6 +120,8 @@ echo "layer_pkg_urls=${layer_pkg_urls[@]}"
 echo
 echo "layer_image_inc_urls=${layer_image_inc_urls[@]}"
 echo
+echo "layer_wheels_inc_urls=${layer_wheels_inc_urls[@]}"
+echo
 
 dest_dir=$MY_REPO/cgcs-centos-repo
 timestamp="$(date +%F_%H%M)"
@@ -126,6 +134,7 @@ TMP_LST_DIR=$(mktemp -d /tmp/tmp_lst_dir_XXXXXX)
 mkdir -p $TMP_LST_DIR
 lst_file_dir="$TMP_LST_DIR"
 inc_file_dir="${dest_dir}/layer_image_inc"
+wheels_file_dir="${dest_dir}/layer_wheels_inc"
 build_info_file_dir="${dest_dir}/layer_build_info"
 
 rpm_lst_files="rpms_3rdparties.lst rpms_centos3rdparties.lst rpms_centos.lst"
@@ -142,7 +151,7 @@ missing_rpms_file=missing.txt
 \rm -f ${missing_rpms_file}
 
 # Strip trailing / from mirror_dir if it was specified...
-mirror_dir=$(echo ${mirror_dir} | sed "s%/$%%")
+mirror_dir=$(readlink -f ${mirror_dir} | sed "s%/$%%")
 
 if [[ ( ! -d ${mirror_dir}/Binary ) || ( ! -d ${mirror_dir}/Source ) ]]; then
     echo "The mirror ${mirror_dir} doesn't has the Binary and Source"
@@ -201,6 +210,37 @@ for key in "${!layer_image_inc_urls[@]}"; do
 
     if [ ! -f ${inc_file_dir}/${list} ]; then
         curl --silent --fail ${url} > ${inc_file_dir}/${list}
+        if [ $? -ne 0 ]; then
+            echo "ERROR: Failed to download from url '${url}'"
+            exit 1
+        fi
+    fi
+done
+
+#
+# Dowload wheels inc files from layer_wheels_inc_urls
+#
+\rm -rf ${wheels_file_dir}
+mkdir -p ${wheels_file_dir}
+for key in "${!layer_wheels_inc_urls[@]}"; do
+    lower_layer="${key%,*}"
+    stream="${key#*,}"
+    url="${layer_wheels_inc_urls[${key}]}"
+    name_from_url=$(url_to_file_name "${url}")
+
+    ideal_name="${lower_layer}_${distro}_${stream}_${wheels_inc_from_layer_build_template}"
+
+    list="${ideal_name}"
+
+    for f in $(find -L ${layer_dirs} ${mirror_dir} -type f -name "${name_from_url}"); do
+        cp $f ${wheels_file_dir}/${list}
+        if [ $? -ne 0 ]; then
+            echo "WARNING: Failed to copy from cached file '$f' to satisfy url '${url}'"
+        fi
+    done
+
+    if [ ! -f ${wheels_file_dir}/${list} ]; then
+        curl --silent --fail ${url} > ${wheels_file_dir}/${list}
         if [ $? -ne 0 ]; then
             echo "ERROR: Failed to download from url '${url}'"
             exit 1

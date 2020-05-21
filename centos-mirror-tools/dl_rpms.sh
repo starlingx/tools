@@ -20,7 +20,7 @@ DL_RPMS_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 source $DL_RPMS_DIR/utils.sh
 
 usage() {
-    echo "$0 [-n] [-c <dnf.conf>] <rpms_list> <match_level> "
+    echo "$0 [-n] [-c <dnf.conf>] [-s|-S|-u|-U] [-x] <rpms_list> <match_level> "
     echo ""
     echo "Options:"
     echo "  -n: Do not use sudo when performing operations"
@@ -36,6 +36,12 @@ usage() {
     echo "        using vim to search vim-7.4.160-2.el7.src.rpm"
     echo "    K1: Use Koji rather than dnf repos as a source."
     echo "        Koji has a longer retention period than epel mirrors."
+    echo ""
+    echo "  Download Source Options:  Only select one of these."
+    echo "    -s: Download from StarlingX mirror only"
+    echo "    -S: Download from StarlingX mirror, upstream as backup (default)"
+    echo "    -u: Download from original upstream sources only"
+    echo "    -U: Download from original upstream sources, StarlingX mirror as backup"
     echo ""
     echo "Returns: 0 = All files downloaded successfully"
     echo "         1 = Some files could not be downloaded"
@@ -100,7 +106,7 @@ while getopts "c:nxD:sSuUh" o; do
             dl_flag="-s"
             ;;
         S)
-            # Download from StarlingX mirror only. Do not use upstream sources.
+            # Download from StarlingX mirror first, only use upstream source as a fallback.
             multiple_dl_flag_check
             dl_source="$dl_from_stx_then_upstream"
             dl_flag="-S"
@@ -112,7 +118,7 @@ while getopts "c:nxD:sSuUh" o; do
             dl_flag="-u"
             ;;
         U)
-            # Download from upstream only. Do not use StarlingX mirror.
+            # Download from upstream first, only use StarlingX mirror as a fallback.
             multiple_dl_flag_check
             dl_source="$dl_from_upstream_then_stx"
             dl_flag="-U"

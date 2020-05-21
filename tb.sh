@@ -45,10 +45,13 @@ function exec_container {
 function run_container {
     # create localdisk
     mkdir -p ${LOCALDISK}/designer/${MYUNAME}/${PROJECT}
+    #create centOS mirror
+    mkdir -p ${HOST_MIRROR_DIR}/CentOS
 
     docker run -it --rm \
         --name ${TC_CONTAINER_NAME} \
         --detach \
+        -v /var/run/docker.sock:/var/run/docker.sock \
         -v ${LOCALDISK}:/${GUEST_LOCALDISK} \
         -v ${HOST_MIRROR_DIR}:/import/mirrors:ro \
         -v /sys/fs/cgroup:/sys/fs/cgroup:ro \

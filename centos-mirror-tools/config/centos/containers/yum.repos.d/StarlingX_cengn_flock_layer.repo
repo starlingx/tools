@@ -1,0 +1,8 @@
+#####
+# StarlingX flock layer at CENGN
+
+[Starlingx-cengn_flock_std_layer]
+name=Starlingx-cengn_flock_std_layer
+baseurl=http://mirror.starlingx.cengn.ca/mirror/starlingx/master/centos/flock/latest_build/outputs/RPMS/std/
+enabled=1
+

@@ -270,20 +270,7 @@ for line in $(cat $tarball_file); do
     if [[ "$line" =~ ^'!' ]]; then
         echo $tarball_name
         pushd $output_tarball > /dev/null
-        if [ "$tarball_name" = "integrity-kmod-37e0c813.tar.gz" ]; then
-            download_package "$tarball_name" "$tarball_url"
-            if [ $? -ne 0 ]; then
-                error_count=$((error_count + 1))
-                popd > /dev/null   # pushd $output_tarball
-                continue
-            fi
-
-            tar xf "$tarball_name"
-            rm "$tarball_name"
-            mv linux-tpmdd-e6aef06/security/integrity/ $directory_name
-            tar czvf $tarball_name $directory_name
-            rm -rf linux-tpmdd-e6aef06
-        elif [ "$tarball_name" = "mariadb-10.1.28.tar.gz" ]; then
+        if [ "$tarball_name" = "mariadb-10.1.28.tar.gz" ]; then
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
@@ -303,7 +290,7 @@ for line in $(cat $tarball_file); do
             tar czvf $tarball_name $directory_name
             rm -rf $directory_name
             popd > /dev/null   # pushd $directory_name
-        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-4.7-1.0.0.1.tgz' ]]; then
+        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-4.7-3.2.9.0.tgz' ]]; then
             srpm_path="${directory_name}/SRPMS/"
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
@@ -313,9 +300,9 @@ for line in $(cat $tarball_file); do
             fi
 
             tar -xf "$tarball_name"
-            cp "${srpm_path}/mlnx-ofa_kernel-4.5-OFED.4.5.1.0.1.1.gb4fdfac.src.rpm" .
-            cp "${srpm_path}/rdma-core-45mlnx1-1.45101.src.rpm" .
-            cp "${srpm_path}/libibverbs-41mlnx1-OFED.4.5.0.1.0.45101.src.rpm" .
+            cp "${srpm_path}/mlnx-ofa_kernel-4.7-OFED.4.7.3.2.9.1.g457f064.src.rpm" .
+            cp "${srpm_path}/rdma-core-47mlnx1-1.47329.src.rpm" .
+            cp "${srpm_path}/libibverbs-41mlnx1-OFED.4.7.0.0.2.47329.src.rpm" .
             # Don't delete the original MLNX_OFED_LINUX tarball.
             # We don't use it, but it will prevent re-downloading this file.
             #   rm -f "$tarball_name"
@@ -328,21 +315,6 @@ for line in $(cat $tarball_file); do
                 popd > /dev/null  # pushd $output_tarball
                 continue
             fi
-
-        elif [ "$tarball_name" = "tpm-kmod-37e0c813.tar.gz" ]; then
-            download_package "$tarball_name" "$tarball_url"
-            if [ $? -ne 0 ]; then
-                error_count=$((error_count + 1))
-                popd > /dev/null  # pushd $output_tarball
-                continue
-            fi
-
-            tar xf "$tarball_name"
-            rm "$tarball_name"
-            mv linux-tpmdd-e6aef06/drivers/char/tpm $directory_name
-            tar czvf $tarball_name $directory_name
-            rm -rf linux-tpmdd-e6aef06
-            rm -rf $directory_name
         elif [ "$tarball_name" = "tss2-930.tar.gz" ]; then
             dest_dir=ibmtpm20tss-tss
             for dl_src in $dl_source; do
@@ -386,6 +358,40 @@ for line in $(cat $tarball_file); do
             tar czvf $tarball_name $directory_name
             rm -rf $directory_name
             popd > /dev/null  # pushd $dest_dir
+        elif [[ "$tarball_name" =~ ^kernel-rt-.*.rpm ]]; then
+            git clone -b c8 --single-branch $tarball_url
+            pushd kernel-rt
+            rev=$util
+            git checkout -b spec $rev
+
+            # get the CentOS tools for building SRPMs
+            git clone https://git.centos.org/centos-git-common
+
+            # Create the SRPM using CentOS tools
+            # bracketed to contain the PATH change
+            (PATH=$PATH:./centos-git-common into_srpm.sh -d .el8)
+            mv SRPMS/*.rpm ../${tarball_name}
+
+            popd > /dev/null # pushd kernel-rt
+            # Cleanup
+            rm -rf kernel-rt
+        elif [[ "$tarball_name" =~ ^rt-setup-*.*.rpm ]]; then
+            git clone -b c8 --single-branch $tarball_url
+            pushd rt-setup
+            rev=$util
+            git checkout -b spec $rev
+
+            # get the CentOS tools for building SRPMs
+            git clone https://git.centos.org/centos-git-common
+
+            # Create the SRPM using CentOS tools
+            # bracketed to contain the PATH change
+            (PATH=$PATH:./centos-git-common into_srpm.sh -d .el8)
+            mv SRPMS/*.rpm ..
+
+            popd > /dev/null # pushd rt-setup
+            # Cleanup
+            rm -rf rt-setup
         fi
         popd > /dev/null # pushd $output_tarball
         continue

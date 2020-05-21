@@ -43,6 +43,11 @@ usage() {
     echo "                   layer's build type.  Normally the url(s) is read from"
     echo "                   <config_dir>/<distro>/<layer>/required_layer_pkgs.cfg."
     echo "                   This option can be used more than once."
+    echo "  -W <lower_layer>,<stream>,<url>:"
+    echo "                   Override the url for the wheels.inc list of a lower"
+    echo "                   layer's build type.  Normally the url(s) is read from"
+    echo "                   <config_dir>/<distro>/<layer>/required_layer_wheel_inc.cfg."
+    echo "                   This option can be used more than once."
     echo
 }
 
@@ -82,6 +87,7 @@ need_dir(){
 
 # Downloader scripts
 rpm_downloader="${DOWNLOAD_MIRROR_DIR}/dl_rpms.sh"
+lower_layer_rpm_downloader="${DOWNLOAD_MIRROR_DIR}/dl_lower_layer_rpms.sh"
 rpm_from_url_downloader="${DOWNLOAD_MIRROR_DIR}/dl_rpms_from_url.sh"
 tarball_downloader="${DOWNLOAD_MIRROR_DIR}/dl_tarball.sh"
 other_downloader="${DOWNLOAD_MIRROR_DIR}/dl_other_from_centos_repo.sh"
@@ -102,7 +108,9 @@ rpms_from_3rd_parties_template="rpms_3rdparties.lst"
 rpms_from_centos_repo_template="rpms_centos.lst"
 rpms_from_centos_3rd_parties_template="rpms_centos3rdparties.lst"
 rpms_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_pkg_lists
+rpms_from_layer_repos_dir=${DL_MIRROR_OUTPUT_DIR}/layer_repos
 image_inc_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_image_inc
+wheels_inc_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_wheels_inc
 build_info_from_layer_build_dir=${DL_MIRROR_OUTPUT_DIR}/layer_build_info
 tarball_downloads_template="tarball-dl.lst"
 other_downloads_template="other_downloads.lst"
@@ -149,7 +157,7 @@ multiple_dl_flag_check () {
 
 
 # Parse out optional arguments
-while getopts "c:Cd:ghI:sl:L:nSuU" o; do
+while getopts "c:Cd:ghI:sl:L:nSuUW:" o; do
     case "${o}" in
         c)
             # Pass -c ("use alternate dnf.conf") to rpm downloader
@@ -171,6 +179,9 @@ while getopts "c:Cd:ghI:sl:L:nSuU" o; do
         I)
             set_layer_image_inc_urls "${OPTARG}"
             ;;
+        W)
+            set_layer_wheels_inc_urls "${OPTARG}"
+            ;;
         l)
             # layer
             set_and_validate_layer "${OPTARG}"
@@ -190,7 +201,7 @@ while getopts "c:Cd:ghI:sl:L:nSuU" o; do
             dl_flag="-s"
             ;;
         S)
-            # Download from StarlingX mirror only. Do not use upstream sources.
+            # Download from StarlingX mirror first, only use upstream source as a fallback.
             multiple_dl_flag_check
             dl_source="$dl_from_stx_then_upstream"
             dl_flag="-S"
@@ -202,7 +213,7 @@ while getopts "c:Cd:ghI:sl:L:nSuU" o; do
             dl_flag="-u"
             ;;
         U)
-            # Download from upstream only. Do not use StarlingX mirror.
+            # Download from upstream first, only use StarlingX mirror as a fallback.
             multiple_dl_flag_check
             dl_source="$dl_from_upstream_then_stx"
             dl_flag="-U"
@@ -308,6 +319,22 @@ for key in "${!layer_image_inc_urls[@]}"; do
     fi
 done
 
+\rm -rf ${wheels_inc_from_layer_build_dir}
+mkdir -p ${wheels_inc_from_layer_build_dir}
+
+for key in "${!layer_wheels_inc_urls[@]}"; do
+    lower_layer="${key%,*}"
+    stream="${key#*,}"
+    url="${layer_wheels_inc_urls[${key}]}"
+    name_from_url=$(url_to_file_name $url)
+    list="${wheels_inc_from_layer_build_dir}/${name_from_url}"
+    curl --silent --fail ${url} > ${list} ||
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Failed to download from url: ${url}"
+        exit 1
+    fi
+done
+
 \rm -rf ${build_info_from_layer_build_dir}
 mkdir -p ${build_info_from_layer_build_dir}
 
@@ -391,9 +418,11 @@ else
         # point to the repos that need to be modified as well.
         if dl_from_upstream; then
             # add
+            echo "${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}"
             ${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}
         else
             # substitute
+            echo "${make_stx_mirror_yum_conf} -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}"
             ${make_stx_mirror_yum_conf} -d $TEMP_DIR -y $alternate_yum_conf -r $alternate_repo_dir -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}
         fi
     else
@@ -402,9 +431,11 @@ else
         # in these scripts.
         if dl_from_upstream; then
             # add
+            echo "${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y /etc//dnf/dnf.conf -r /etc/yum.repos.d -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}"
             ${make_stx_mirror_yum_conf} -R -d $TEMP_DIR -y /etc/dnf/dnf.conf -r /etc/yum.repos.d -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}
         else
             # substitute
+            echo "${make_stx_mirror_yum_conf} -d $TEMP_DIR -y /etc/dnf/dnf.conf -r /etc/yum.repos.d -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}"
             ${make_stx_mirror_yum_conf} -d $TEMP_DIR -y /etc/dnf/dnf.conf -r /etc/yum.repos.d -D $distro -l $layer ${make_stx_mirror_yum_conf_extra_args}
         fi
     fi
@@ -432,7 +463,17 @@ for key in "${!layer_pkg_urls[@]}"; do
         #download RPMs/SRPMs from CentOS repos by "yumdownloader"
         level=L1
         logfile=$(generate_log_name $list $level)
-        $rpm_downloader ${rpm_downloader_extra_args} $list $level |& tee $logfile
+        if ! dl_from_stx; then
+            # Not using stx mirror
+            if [ $use_system_yum_conf -eq 0 ]; then
+                # Use provided yum.conf unaltered.
+                llrd_extra_args="-c ${alternate_yum_conf}"
+            fi
+        else
+            llrd_extra_args="-c ${TEMP_DIR}/yum.conf"
+        fi
+        echo "$lower_layer_rpm_downloader -l ${lower_layer} -b ${build_type} -r $(dirname $url) ${llrd_extra_args} ${list} ${level}"
+        $lower_layer_rpm_downloader -l ${lower_layer} -b ${build_type} -r $(dirname $url) ${llrd_extra_args} ${list} ${level} |& tee $logfile
         local_retcode=${PIPESTATUS[0]}
     fi
 
@@ -583,7 +624,9 @@ fi
 
 if [ $change_group_ids -eq 1 ]; then
     # change "./output" and sub-folders to 751 (cgcs) group
-    ${SUDO} chown  751:751 -R ./output
+    NEW_UID=$(id -u)
+    NEW_GID=751
+    ${SUDO} chown  ${NEW_UID}:${NEW_GID} -R ./output
 fi
 
 echo "step #4: start downloading other files ..."

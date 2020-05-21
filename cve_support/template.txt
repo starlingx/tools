@@ -67,6 +67,29 @@
 			{% endfor %}
 		{% endif %}
 	</table>
+	<h2> CVEs that are Invalid or Won't Fix: {{cves_wont_fix | length}}</h2>
+	<table>
+		{% if cves_wont_fix|length >= 1 %}
+			<tr>
+			{% for head in heads %}
+				<th>{{head}}</th>
+			{% endfor %}
+			</tr>
+
+			{% for cve in cves_wont_fix %}
+			<tr>
+				<td>{{cve["id"]}}</td>
+				<td>{{cve["status"]}}</td>
+				<td>{{cve["cvss2Score"]}}</td>
+				<td>{{cve["av"]}}</td>
+				<td>{{cve["ac"]}}</td>
+				<td>{{cve["au"]}}</td>
+				<td>{{cve["ai"]}}</td>
+			</tr>
+			{% endfor %}
+		{% endif %}
+	</table>
+
 	<h2> CVEs to omit: {{cves_to_omit | length}}</h2>
 	<table>
 		{% if cves_to_omit|length >= 1 %}

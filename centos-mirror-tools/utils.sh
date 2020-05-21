@@ -57,7 +57,7 @@ get_url() {
             _ret="$(url_to_stx_mirror_url $_ret $distro)"
         fi
     else
-        _url_cmd="$(get_dnf_command $_name $_level)"
+        _url_cmd="$(get_dnf_command $_name $_level) --url"
 
         # When we add --url to the dnf download command,
         # --archlist is no longer enforced.  Multiple
@@ -65,7 +65,7 @@ get_url() {
         # filter urls for the desitered arch.
         local arr=( $(split_filename $_name) )
         local arch=${arr[3]}
-        _ret="$($_url_cmd --url | grep "[.]$arch[.]rpm$")"
+        _ret="$($_url_cmd | grep "[.]$arch[.]rpm$" | head -n 1)"
     fi
     echo "$_ret"
 }

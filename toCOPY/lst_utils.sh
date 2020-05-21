@@ -7,6 +7,7 @@
 rpms_from_layer_build_template="rpm.lst"
 image_inc_from_layer_build_template="image.inc"
 dev_image_inc_from_layer_build_template="image-dev.inc"
+wheels_inc_from_layer_build_template="wheels.inc"
 
 config_dir=${MY_REPO}/../stx-tools/centos-mirror-tools/config
 distro="centos"
@@ -17,6 +18,9 @@ declare -A layer_pkg_urls
 
 # Store urls for image include files of the various layers in an associative array
 declare -A layer_image_inc_urls
+
+# Store urls for wheel include files of the various layers in an associative array
+declare -A layer_wheels_inc_urls
 
 url_to_file_name () {
     echo "${1}" | sed 's#[:/ ]#-#g'
@@ -74,11 +78,26 @@ set_layer_image_inc_urls () {
     fi
 
     local layer_and_inc_type="${option%,*}"
-    local layer="${layer_and_build_type%,*}"
+    local layer="${layer_and_inc_type%,*}"
     local inc_type="${layer_and_inc_type#*,}"
     local layer_image_inc_url="${option##*,}"
 
     layer_image_inc_urls["${layer_and_inc_type}"]="${layer_image_inc_url}"
+}
+
+set_layer_wheels_inc_urls () {
+    local option="${1}"
+
+    if [ "${option}" == "" ]; then
+        return
+    fi
+
+    local layer_and_stream="${option%,*}"
+    local layer="${layer_and_stream%,*}"
+    local stream="${layer_and_stream#*,}"
+    local layer_wheels_inc_url="${option##*,}"
+
+    layer_wheels_inc_urls["${layer_and_stream}"]="${layer_wheels_inc_url}"
 }
 
 set_layer_pkg_urls () {
@@ -117,6 +136,30 @@ read_layer_image_inc_urls () {
             continue
         fi
         set_layer_image_inc_urls "${line}"
+    done < "${cfg}"
+}
+
+read_layer_wheels_inc_urls () {
+    local layer="${1}"
+    local cfg="${config_dir}/${distro}/${layer}/required_layer_wheel_inc.cfg"
+    local line=""
+    local key
+
+    if [ ! -f "${cfg}" ]; then
+        return 0;
+    fi
+
+    # Clear all pre-existing entries
+    for key in "${!layer_wheels_inc_urls[@]}"; do
+        unset layer_wheels_inc_urls[${key}]
+    done
+
+    while read line; do
+        line=$(echo "${line}" | sed 's/^[ \t]*//;s/[ \t]*$//' | grep '^[^#]')
+        if [ "${line}" == "" ]; then
+            continue
+        fi
+        set_layer_wheels_inc_urls "${line}"
     done < "${cfg}"
 }
 
@@ -172,6 +215,7 @@ set_and_validate_distro () {
     if [ -d ${config_dir}/${distro}/${layer} ]; then
         read_layer_pkg_urls ${layer}
         read_layer_image_inc_urls ${layer}
+        read_layer_wheels_inc_urls ${layer}
     else
         echo "Warning: layer ${layer} not defined for distro '${distro}', please provide a valid layer via '-l <layer>'"
     fi
@@ -191,6 +235,7 @@ set_and_validate_layer () {
 
     read_layer_pkg_urls ${layer}
     read_layer_image_inc_urls ${layer}
+    read_layer_wheels_inc_urls ${layer}
 }
 
 # Pick up value of the config_dir from environment if set
@@ -205,3 +250,4 @@ fi
 
 read_layer_pkg_urls ${layer}
 read_layer_image_inc_urls ${layer}
+read_layer_wheels_inc_urls ${layer}
