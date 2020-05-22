@@ -1,90 +1,63 @@
-adwaita-cursor-theme-3.28.0-1.el7.noarch.rpm
-adwaita-icon-theme-3.28.0-1.el7.noarch.rpm
-alsa-lib-1.1.6-2.el7.x86_64.rpm
-alsa-lib-devel-1.1.6-2.el7.x86_64.rpm
-# audit-libs-2.8.4-4.el7.x86_64.rpm provided by mock
-audit-libs-devel-2.8.4-4.el7.x86_64.rpm
-audit-libs-python-2.8.4-4.el7.x86_64.rpm
-copy-jdk-configs-3.3-10.el7_5.noarch.rpm
-CUnit-2.1.3-8.el7.x86_64.rpm
-CUnit-devel-2.1.3-8.el7.x86_64.rpm
-devtoolset-7-binutils-2.28-11.el7.x86_64.rpm
-devtoolset-7-gcc-7.3.1-5.10.el7.x86_64.rpm
-devtoolset-7-gcc-c++-7.3.1-5.10.el7.x86_64.rpm
-devtoolset-7-libstdc++-devel-7.3.1-5.10.el7.x86_64.rpm
-devtoolset-7-runtime-7.1-4.el7.x86_64.rpm
-# elfutils-0.176-2.el7.x86_64.rpm provided by mock
-# elfutils-default-yama-scope-0.176-2.el7.noarch.rpm provided by mock
-# elfutils-devel-0.176-2.el7.x86_64.rpm provided by mock
-# elfutils-libelf-0.176-2.el7.x86_64.rpm provided by mock
-# elfutils-libelf-devel-0.176-2.el7.x86_64.rpm provided by mock
-# elfutils-libs-0.176-2.el7.x86_64.rpm provided by mock
-# glib2-2.56.1-2.el7.x86_64.rpm provided by mock
-glib2-devel-2.56.1-2.el7.x86_64.rpm
-glib2-doc-2.56.1-2.el7.noarch.rpm
-gsettings-desktop-schemas-3.28.0-2.el7.x86_64.rpm
-gssproxy-0.7.0-21.el7.x86_64.rpm
-gtk3-3.22.30-3.el7.x86_64.rpm
-gtk3-devel-3.22.30-3.el7.x86_64.rpm
-gtk3-devel-docs-3.22.30-3.el7.x86_64.rpm
-gtk-update-icon-cache-3.22.30-3.el7.x86_64.rpm
-java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64.rpm
-java-1.8.0-openjdk-devel-1.8.0.191.b12-1.el7_6.x86_64.rpm
-java-1.8.0-openjdk-headless-1.8.0.191.b12-1.el7_6.x86_64.rpm
-# libblkid-2.23.2-59.el7.x86_64.rpm provided by mock
-# libcom_err-1.42.9-13.el7.x86_64.rpm provided by mock
-libcom_err-devel-1.42.9-13.el7.x86_64.rpm
-libdrm-2.4.91-3.el7.x86_64.rpm
-libdrm-devel-2.4.91-3.el7.x86_64.rpm
-liboath-2.4.1-9.el7.x86_64.rpm
-liboath-devel-2.4.1-9.el7.x86_64.rpm
-# libsemanage-2.5-14.el7.x86_64.rpm provided by mock
-libsemanage-python-2.5-14.el7.x86_64.rpm
-libss-1.42.9-13.el7.x86_64.rpm
-libtalloc-2.1.13-1.el7.x86_64.rpm
-libtevent-0.9.36-1.el7.x86_64.rpm
-lvm2-2.02.177-4.el7.x86_64.rpm
-lvm2-libs-2.02.177-4.el7.x86_64.rpm
-mesa-libEGL-18.0.5-3.el7.x86_64.rpm
-mesa-libEGL-devel-18.0.5-3.el7.x86_64.rpm
-mesa-libgbm-18.0.5-3.el7.x86_64.rpm
-mesa-libGL-18.0.5-3.el7.x86_64.rpm
-mesa-libglapi-18.0.5-3.el7.x86_64.rpm
-mesa-libGL-devel-18.0.5-3.el7.x86_64.rpm
-NetworkManager-glib-1.12.0-8.el7_6.x86_64.rpm
-NetworkManager-glib-devel-1.12.0-8.el7_6.x86_64.rpm
-# nss-softokn-3.36.0-5.el7_5.x86_64.rpm provided by mock
-nss-softokn-devel-3.36.0-5.el7_5.x86_64.rpm
-# nss-softokn-freebl-3.36.0-5.el7_5.x86_64.rpm provided by mock
-nss-softokn-freebl-devel-3.36.0-5.el7_5.x86_64.rpm
-# openldap-2.4.44-20.el7.x86_64.rpm provided by mock
-policycoreutils-2.5-29.el7.x86_64.rpm
-policycoreutils-devel-2.5-29.el7.x86_64.rpm
-policycoreutils-python-2.5-29.el7.x86_64.rpm
-pulseaudio-libs-10.0-5.el7.x86_64.rpm
-pulseaudio-libs-devel-10.0-5.el7.x86_64.rpm
-pulseaudio-libs-glib2-10.0-5.el7.x86_64.rpm
-pykickstart-1.99.66.19-2.el7.noarch.rpm
-python2-msgpack-0.6.1-2.el7.x86_64.rpm
-python2-pysocks-1.6.8-6.el7.noarch.rpm
-python2-scapy-2.4.0-3.el7.noarch.rpm
-python2-urllib3-1.21.1-1.el7.noarch.rpm
-python2-requests-mock-1.5.2-3.el7.noarch.rpm
-rest-0.8.1-2.el7.x86_64.rpm
-selinux-policy-3.13.1-229.el7_6.6.noarch.rpm
-selinux-policy-devel-3.13.1-229.el7_6.6.noarch.rpm
-spice-protocol-0.12.14-1.el7.noarch.rpm
-spice-server-0.14.0-6.el7.x86_64.rpm
-spice-server-devel-0.14.0-6.el7.x86_64.rpm
-# systemd-219-67.el7.x86_64.rpm provided by mock
-# systemd-devel-219-67.el7.x86_64.rpm provided by mock
-# systemd-libs-219-67.el7.x86_64.rpm provided by mock
-# systemd-sysv-219-67.el7.x86_64.rpm provided by mock
-systemtap-3.3-3.el7.x86_64.rpm
-systemtap-client-3.3-3.el7.x86_64.rpm
-systemtap-devel-3.3-3.el7.x86_64.rpm
-systemtap-runtime-3.3-3.el7.x86_64.rpm
-systemtap-sdt-devel-3.3-3.el7.x86_64.rpm
-# util-linux-2.23.2-59.el7.x86_64.rpm provided by mock
-valgrind-3.13.0-13.el7.x86_64.rpm
-valgrind-devel-3.13.0-13.el7.x86_64.rpm
+adwaita-cursor-theme-3.28.0-2.el8.noarch.rpm
+adwaita-icon-theme-3.28.0-2.el8.noarch.rpm
+alsa-lib-1.1.6-3.el8.x86_64.rpm
+alsa-lib-devel-1.1.6-3.el8.x86_64.rpm
+audit-libs-devel-3.0-0.13.20190507gitf58ec40.el8.x86_64.rpm
+copy-jdk-configs-3.7-1.el8.noarch.rpm
+CUnit-2.1.3-17.el8.x86_64.rpm
+CUnit-devel-2.1.3-17.el8.x86_64.rpm
+glib2-devel-2.56.4-1.el8.x86_64.rpm
+glib2-doc-2.56.4-1.el8.noarch.rpm
+gsettings-desktop-schemas-3.32.0-3.el8.x86_64.rpm
+gssproxy-0.8.0-5.el8.x86_64.rpm
+gtk3-3.22.30-3.el8.x86_64.rpm
+gtk3-devel-3.22.30-3.el8.x86_64.rpm
+gtk-doc-1.28-1.el8.x86_64.rpm
+gtk-update-icon-cache-3.22.30-3.el8.x86_64.rpm
+java-1.8.0-openjdk-1.8.0.232.b09-0.el8_0.x86_64.rpm
+java-1.8.0-openjdk-devel-1.8.0.232.b09-0.el8_0.x86_64.rpm
+java-1.8.0-openjdk-headless-1.8.0.232.b09-0.el8_0.x86_64.rpm
+libcom_err-devel-1.44.3-2.el8.x86_64.rpm
+libdrm-2.4.96-2.el8.x86_64.rpm
+libdrm-devel-2.4.96-2.el8.x86_64.rpm
+liboath-2.6.2-3.el8.x86_64.rpm
+liboath-devel-2.6.2-3.el8.x86_64.rpm
+libss-1.44.3-2.el8.x86_64.rpm
+libtalloc-2.1.16-3.el8.x86_64.rpm
+libtevent-0.9.39-2.el8.x86_64.rpm
+lvm2-2.03.02-6.el8.x86_64.rpm
+lvm2-libs-2.03.02-6.el8.x86_64.rpm
+mesa-libEGL-18.3.1-5.el8_0.x86_64.rpm
+mesa-libEGL-devel-18.3.1-5.el8_0.x86_64.rpm
+mesa-libgbm-18.3.1-5.el8_0.x86_64.rpm
+mesa-libGL-18.3.1-5.el8_0.x86_64.rpm
+mesa-libglapi-18.3.1-5.el8_0.x86_64.rpm
+mesa-libGL-devel-18.3.1-5.el8_0.x86_64.rpm
+nss-softokn-devel-3.44.0-7.el8_0.x86_64.rpm
+nss-softokn-freebl-devel-3.44.0-7.el8_0.x86_64.rpm
+policycoreutils-2.8-16.1.el8.x86_64.rpm
+policycoreutils-devel-2.8-16.1.el8.x86_64.rpm
+policycoreutils-python-utils-2.8-16.1.el8.noarch.rpm
+pulseaudio-libs-11.1-22.el8.x86_64.rpm
+pulseaudio-libs-devel-11.1-22.el8.x86_64.rpm
+pulseaudio-libs-glib2-11.1-22.el8.x86_64.rpm
+pykickstart-3.16.7-1.el8.noarch.rpm
+python3-libsemanage-2.8-5.el8.x86_64.rpm
+python3-msgpack-0.6.2-1.el8.x86_64.rpm
+python3-pysocks-1.6.8-3.el8.noarch.rpm
+python3-requests-mock-1.7.0-1.el8.noarch.rpm
+python3-scapy-2.4.3-2.el8.noarch.rpm
+python3-urllib3-1.23-5.el8.noarch.rpm
+rest-0.8.1-2.el8.x86_64.rpm
+selinux-policy-3.14.1-61.el8_0.2.noarch.rpm
+selinux-policy-devel-3.14.1-61.el8_0.2.noarch.rpm
+spice-protocol-0.12.14-1.el8.noarch.rpm
+spice-server-0.14.0-7.el8.x86_64.rpm
+spice-server-devel-0.14.0-7.el8.x86_64.rpm
+systemtap-4.0-7.el8.x86_64.rpm
+systemtap-client-4.0-7.el8.x86_64.rpm
+systemtap-devel-4.0-7.el8.x86_64.rpm
+systemtap-runtime-4.0-7.el8.x86_64.rpm
+systemtap-sdt-devel-4.0-7.el8.x86_64.rpm
+valgrind-3.14.0-10.el8.x86_64.rpm
+valgrind-devel-3.14.0-10.el8.x86_64.rpm

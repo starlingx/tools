@@ -1,38 +1,16 @@
-# audit-libs-2.8.4-4.el7.x86_64.rpm provided by mock
-audit-libs-devel-2.8.4-4.el7.x86_64.rpm
-audit-libs-python-2.8.4-4.el7.x86_64.rpm
-devtoolset-7-gcc-c++-7.3.1-5.10.el7.x86_64.rpm
-devtoolset-7-libstdc++-devel-7.3.1-5.10.el7.x86_64.rpm
-# elfutils-default-yama-scope-0.176-2.el7.noarch.rpm provided by mock
-# elfutils-devel-0.176-2.el7.x86_64.rpm provided by mock
-# elfutils-libelf-0.176-2.el7.x86_64.rpm provided by mock
-# elfutils-libelf-devel-0.176-2.el7.x86_64.rpm provided by mock
-# elfutils-libs-0.176-2.el7.x86_64.rpm provided by mock
-# glib2-2.56.1-2.el7.x86_64.rpm provided by mock
-ima-evm-utils-devel-1.1-2.el7.x86_64.rpm
-# libblkid-2.23.2-59.el7.x86_64.rpm provided by mock
-# libcom_err-1.42.9-13.el7.x86_64.rpm provided by mock
-libcom_err-devel-1.42.9-13.el7.x86_64.rpm
-libdrm-2.4.91-3.el7.x86_64.rpm
-libdrm-devel-2.4.91-3.el7.x86_64.rpm
-# libsemanage-2.5-14.el7.x86_64.rpm provided by mock
-libsemanage-devel-2.5-14.el7.x86_64.rpm
-mesa-libEGL-18.0.5-3.el7.x86_64.rpm
-mesa-libEGL-devel-18.0.5-3.el7.x86_64.rpm
-mesa-libgbm-18.0.5-3.el7.x86_64.rpm
-mesa-libGL-18.0.5-3.el7.x86_64.rpm
-mesa-libglapi-18.0.5-3.el7.x86_64.rpm
-mesa-libGL-devel-18.0.5-3.el7.x86_64.rpm
-# nss-softokn-3.36.0-5.el7_5.x86_64.rpm provided by mock
-nss-softokn-devel-3.36.0-5.el7_5.x86_64.rpm
-# nss-softokn-freebl-3.36.0-5.el7_5.x86_64.rpm provided by mock
-nss-softokn-freebl-devel-3.36.0-5.el7_5.x86_64.rpm
-# openldap-2.4.44-20.el7.x86_64.rpm provided by mock
-# systemd-219-67.el7.x86_64.rpm provided by mock
-# systemd-devel-219-67.el7.x86_64.rpm provided by mock
-# systemd-libs-219-67.el7.x86_64.rpm provided by mock
-# systemd-sysv-219-67.el7.x86_64.rpm provided by mock
-systemtap-sdt-devel-3.3-3.el7.x86_64.rpm
-# util-linux-2.23.2-59.el7.x86_64.rpm provided by mock
-valgrind-3.13.0-13.el7.x86_64.rpm
-valgrind-devel-3.13.0-13.el7.x86_64.rpm
+audit-libs-devel-3.0-0.13.20190507gitf58ec40.el8.x86_64.rpm
+ima-evm-utils-devel-1.1-4.el8.x86_64.rpm
+libcom_err-devel-1.44.3-2.el8.x86_64.rpm
+libdrm-2.4.96-2.el8.x86_64.rpm
+libdrm-devel-2.4.96-2.el8.x86_64.rpm
+mesa-libEGL-18.3.1-5.el8_0.x86_64.rpm
+mesa-libEGL-devel-18.3.1-5.el8_0.x86_64.rpm
+mesa-libgbm-18.3.1-5.el8_0.x86_64.rpm
+mesa-libGL-18.3.1-5.el8_0.x86_64.rpm
+mesa-libglapi-18.3.1-5.el8_0.x86_64.rpm
+mesa-libGL-devel-18.3.1-5.el8_0.x86_64.rpm
+nss-softokn-devel-3.44.0-7.el8_0.x86_64.rpm
+nss-softokn-freebl-devel-3.44.0-7.el8_0.x86_64.rpm
+systemtap-sdt-devel-4.0-7.el8.x86_64.rpm
+valgrind-3.14.0-10.el8.x86_64.rpm
+valgrind-devel-3.14.0-10.el8.x86_64.rpm
