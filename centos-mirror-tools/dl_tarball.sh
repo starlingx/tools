@@ -290,6 +290,13 @@ for line in $(cat $tarball_file); do
             tar czvf $tarball_name $directory_name
             rm -rf $directory_name
             popd > /dev/null   # pushd $directory_name
+        elif [[ "$tarball_name" = 'chartmuseum-v0.12.0-amd64' ]]; then
+            wget -q -t 5 --wait=15 -O "$tarball_name" "$tarball_url"
+            if [ $? -ne 0 ]; then
+                error_count=$((error_count + 1))
+                popd > /dev/null   # pushd $output_tarball
+                continue
+            fi
         elif [[ "$tarball_name" = 'MLNX_OFED_SRC-4.7-3.2.9.0.tgz' ]]; then
             srpm_path="${directory_name}/SRPMS/"
             download_package "$tarball_name" "$tarball_url"
