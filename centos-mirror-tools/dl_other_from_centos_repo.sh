@@ -5,7 +5,7 @@
 #
 
 #
-# Download non-RPM files from http://vault.centos.org/7.4.1708/os/x86_64/
+# Download non-RPM files from http://vault.centos.org/8.1.1911/os/x86_64/
 #
 
 DL_OTHER_FROM_CENTOS_REPO_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
@@ -98,7 +98,7 @@ if [ ! -e $download_list ];then
 fi
 
 save_path=$2
-upstream_url_prefix="http://mirror.centos.org/centos/8/BaseOS/x86_64/os/"
+upstream_url_prefix="http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/"
 stx_mirror_url_prefix="$(url_to_stx_mirror_url "$upstream_url_prefix" "$distro")"
 
 echo "NOTE: please assure Internet access to $upstream_url_prefix !!"

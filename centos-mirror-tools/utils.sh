@@ -12,9 +12,18 @@ get_dnf_command() {
     local _file=$1
     local _level=$2
     local rpm_name=""
+    local arr=( $(split_filename $_file) )
+    local arch=${arr[3]}
+    local dnf_download_extra_opts=""
     rpm_name="$(get_rpm_level_name $_file $_level)"
 
-    echo "dnf download -q ${DNFCONFOPT} ${RELEASEVER} $rpm_name"
+    if [ "$arch" == "src" ]; then
+        dnf_download_extra_opts="--source"
+    else
+        dnf_download_extra_opts="--exclude='*.i686' --archlist=$arch"
+    fi
+
+    echo "dnf download -q -C ${DNFCONFOPT} ${RELEASEVER} $dnf_download_extra_opts $rpm_name"
 }
 
 get_wget_command() {

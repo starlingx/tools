@@ -1,2 +1,2 @@
-more-itertools===5.0.0;python_version=='2.7' # Last version with official 2.7 support
+more-itertools===5.0.0;python_version=='3.6' # Last version with official 3.6 support
 
