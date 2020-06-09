@@ -270,7 +270,7 @@ for line in $(cat $tarball_file); do
     if [[ "$line" =~ ^'!' ]]; then
         echo $tarball_name
         pushd $output_tarball > /dev/null
-        if [ "$tarball_name" = "mariadb-10.1.28.tar.gz" ]; then
+        if [ "$tarball_name" = "mariadb-10.3.17.tar.gz" ]; then
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
@@ -283,8 +283,9 @@ for line in $(cat $tarball_file); do
             rm $tarball_name
             pushd $directory_name > /dev/null
             rm -rf storage/tokudb
-            rm ./man/tokuft_logdump.1 ./man/tokuftdump.1
-            sed -e s/tokuft_logdump.1//g -i man/CMakeLists.txt
+            rm ./debian/mariadb-plugin-tokudb.install
+            rm ./man/tokuft_logprint.1 ./man/tokuftdump.1
+            sed -e s/tokuft_logprint.1//g -i man/CMakeLists.txt
             sed -e s/tokuftdump.1//g -i man/CMakeLists.txt
             popd > /dev/null
             tar czvf $tarball_name $directory_name
