@@ -44,3 +44,31 @@ baseurl=https://dl.fedoraproject.org/pub/epel/testing/8/Everything/SRPMS/
 gpgcheck=0
 #gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
+
+[Starlingx-epel-8-testing-modular]
+name=Extra Packages for Enterprise Linux Modular $releasever - Testing - $basearch
+baseurl=https://download.fedoraproject.org/pub/epel/testing/8/Modular/$basearch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
+
+[Starlingx-epel-8-testing-modular-source]
+name=Extra Packages for Enterprise Linux Modular $releasever - Testing - $basearch - Source
+baseurl=https://download.fedoraproject.org/pub/epel/testing/8/Modular/SRPMS
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
+gpgcheck=1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
