@@ -247,6 +247,17 @@ RUN chown $MYUNAME /home/$MYUNAME && \
     runuser -u $MYUNAME -- git config --global user.name $MYUNAME && \
     runuser -u $MYUNAME -- git config --global color.ui false
 
+# Customizations for mirror creation
+RUN rm /etc/yum.repos.d/*
+COPY centos-mirror-tools/yum.repos.d/* /etc/yum.repos.d/
+COPY centos-mirror-tools/rpm-gpg-keys/* /etc/pki/rpm-gpg/
+
+# Import GPG keys
+RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
+
+# Try to continue a yum command even if a StarlingX repo is unavailable.
+RUN yum-config-manager --setopt=StarlingX\*.skip_if_unavailable=1 --save
+
 # When we run 'init' below, it will run systemd, and systemd requires RTMIN+3
 # to exit cleanly. By default, docker stop uses SIGTERM, which systemd ignores.
 STOPSIGNAL RTMIN+3
