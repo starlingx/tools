@@ -13,7 +13,7 @@
 # Copyright (C) 2019 Intel Corporation
 #
 
-FROM centos:7.4.1708
+FROM centos:7.8.2003
 
 # Proxy configuration
 #ENV http_proxy  "http://your.actual_http_proxy.com:your_port"
@@ -24,27 +24,43 @@ FROM centos:7.4.1708
 #    echo -e "export http_proxy=$http_proxy\nexport https_proxy=$https_proxy\n\
 #export ftp_proxy=$ftp_proxy" >> /root/.bashrc
 
-RUN echo "http_caching=packages" >> /etc/yum.conf
-
 # username you will docker exec into the container as.
 # It should NOT be your host username so you can easily tell
 # if you are in our out of the container.
 ARG MYUNAME=builder
 ARG MYUID=1000
+# CentOS & EPEL URLs that match the base image
+# Override these with --build-arg if you have a mirror
+ARG CENTOS_7_8_URL=http://mirror.centos.org/centos/7.8.2003
+ARG EPEL_7_8_URL=https://archives.fedoraproject.org/pub/archive/epel/7.2020-04-20
 
 ENV container=docker
 
+# Lock down centos & epel repos
+RUN rm -f /etc/yum.repos.d/*
+COPY toCOPY/yum.repos.d/*.repo /etc/yum.repos.d/
+COPY centos-mirror-tools/rpm-gpg-keys/RPM-GPG-KEY-EPEL-7 /etc/pki/rpm-gpg/
+RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && \
+    echo "http_caching=packages" >> /etc/yum.conf && \
+    # yum variables must be in lower case ; \
+    echo "$CENTOS_7_8_URL" >/etc/yum/vars/centos_7_8_url && \
+    echo "$EPEL_7_8_URL" >/etc/yum/vars/epel_7_8_url && \
+    # disable fastestmirror plugin because we are not using mirrors ; \
+    # FIXME: use a mirrorlist URL for centos/vault/epel archives. I couldn't find one.
+    sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf && \
+    yum clean all && \
+    yum makecache && \
+    yum install -y deltarpm
+
+# Without this, init won't start the enabled services and exec'ing and starting
+# them reports "Failed to get D-Bus connection: Operation not permitted".
+VOLUME /run /tmp
+
 # Download required dependencies by mirror/build processes.
-# Notice there are 3 invocations to yum package manage.
-# 1) Enable EPEL repository.
-# 2) Download required packages.
-# 3) Clean yum cache.
 RUN groupadd -g 751 cgts && \
     echo "mock:x:751:root" >> /etc/group && \
     echo "mockbuild:x:9001:" >> /etc/group && \
-    yum install -y epel-release && \
     yum install -y anaconda \
-        anaconda-help \
         anaconda-runtime \
         autoconf-archive \
         autogen \
@@ -54,6 +70,7 @@ RUN groupadd -g 751 cgts && \
         bind-utils \
         cpanminus \
         createrepo \
+        createrepo_c \
         deltarpm \
         expat-devel \
         isomd5sum \
@@ -68,7 +85,8 @@ RUN groupadd -g 751 cgts && \
         lighttpd-mod_geoip \
         net-tools \
         mkisofs \
-        mock \
+        http://mirror.starlingx.cengn.ca/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-1.4.16-1.el7.noarch.rpm \
+        http://mirror.starlingx.cengn.ca/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-core-configs-31.6-1.el7.noarch.rpm \
         mongodb \
         mongodb-server \
         pax \
@@ -95,11 +113,9 @@ RUN groupadd -g 751 cgts && \
         sudo \
         systemd \
         syslinux \
-        syslinux-utils \
         udisks2 \
         vim-enhanced \
-        wget \
-        yumdownloader
+        wget
 
 # This image requires a set of scripts and helpers
 # for working correctly, in this section they are
@@ -214,10 +230,6 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == system
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*
 
-# Without this, init won't start the enabled services and exec'ing and starting
-# them reports "Failed to get D-Bus connection: Operation not permitted".
-VOLUME /run /tmp
-
 RUN useradd -r -u $MYUID -g cgts -m $MYUNAME && \
     ln -s /home/$MYUNAME/.ssh /mySSH && \
     rsync -av /etc/skel/ /home/$MYUNAME/
@@ -234,18 +246,6 @@ RUN chown $MYUNAME /home/$MYUNAME && \
     runuser -u $MYUNAME -- git config --global user.email $MYUNAME@starlingx.com && \
     runuser -u $MYUNAME -- git config --global user.name $MYUNAME && \
     runuser -u $MYUNAME -- git config --global color.ui false
-
-# Customizations for mirror creation
-RUN rm /etc/yum.repos.d/CentOS-Sources.repo
-RUN rm /etc/yum.repos.d/epel.repo
-COPY centos-mirror-tools/yum.repos.d/* /etc/yum.repos.d/
-COPY centos-mirror-tools/rpm-gpg-keys/* /etc/pki/rpm-gpg/
-
-# Import GPG keys
-RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
-
-# Try to continue a yum command even if a StarlingX repo is unavailable.
-RUN yum-config-manager --setopt=StarlingX\*.skip_if_unavailable=1 --save
 
 # When we run 'init' below, it will run systemd, and systemd requires RTMIN+3
 # to exit cleanly. By default, docker stop uses SIGTERM, which systemd ignores.
