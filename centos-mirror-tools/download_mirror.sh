@@ -68,6 +68,8 @@ other_downloads="./other_downloads.lst"
 # Overall success
 success=1
 
+SUDO=sudo
+
 # Permitted values of dl_source
 dl_from_stx_mirror="stx_mirror"
 dl_from_upstream="upstream"
@@ -109,6 +111,7 @@ while getopts "c:nghsSuU" o; do
         n)
             # Pass -n ("no-sudo") to rpm downloader
             rpm_downloader_extra_args="${rpm_downloader_extra_args} -n"
+            SUDO=""
             ;;
         c)
             # Pass -c ("use alternate yum.conf") to rpm downloader
@@ -182,7 +185,7 @@ if [ ${use_system_yum_conf} -ne 0 ]; then
     REPO_SOURCE_DIR=/localdisk/yum.repos.d
     REPO_DIR=/etc/yum.repos.d
     if [ -d $REPO_SOURCE_DIR ] && [ -d $REPO_DIR ]; then
-        \cp -f $REPO_SOURCE_DIR/*.repo $REPO_DIR/
+        ${SUDO} \cp -f $REPO_SOURCE_DIR/*.repo $REPO_DIR/
     fi
 fi
 
@@ -272,9 +275,11 @@ fi
 
 if [ ${use_system_yum_conf} -eq 1 ]; then
     # deleting the StarlingX_3rd to avoid pull centos packages from the 3rd Repo.
-    \rm -f $REPO_DIR/StarlingX_3rd*.repo
+    ${SUDO} \rm -f $REPO_DIR/StarlingX_3rd*.repo
+    ${SUDO} \rm -f $REPO_DIR/StarlingX_cengn*.repo
     if [ "$TEMP_DIR" != "" ]; then
-        \rm -f $TEMP_DIR/yum.repos.d/StarlingX_3rd*.repo
+        ${SUDO} \rm -f $TEMP_DIR/yum.repos.d/StarlingX_3rd*.repo
+        ${SUDO} \rm -f $TEMP_DIR/yum.repos.d/StarlingX_cengn*.repo
     fi
 fi
 
@@ -362,7 +367,9 @@ fi
 
 if [ $change_group_ids -eq 1 ]; then
     # change "./output" and sub-folders to 751 (cgcs) group
-    chown  751:751 -R ./output
+    NEW_UID=$(id -u)
+    NEW_GID=751
+    ${SUDO} chown  ${NEW_UID}:${NEW_GID} -R ./output
 fi
 
 
@@ -402,7 +409,8 @@ fi
 # Clean up the mktemp directory, if required.
 #
 if [ "$TEMP_DIR" != "" ]; then
-    \rm -rf "$TEMP_DIR"
+    echo "${SUDO} rm -rf $TEMP_DIR"
+    ${SUDO} \rm -rf "$TEMP_DIR"
 fi
 
 echo "IMPORTANT: The following 3 files are just bootstrap versions. Based"
