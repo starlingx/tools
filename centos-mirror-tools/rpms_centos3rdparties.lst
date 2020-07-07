@@ -42,7 +42,7 @@ iprutils-2.4.16.1-1.el7.x86_64.rpm
 java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64.rpm
 java-1.8.0-openjdk-devel-1.8.0.191.b12-1.el7_6.x86_64.rpm
 java-1.8.0-openjdk-headless-1.8.0.191.b12-1.el7_6.x86_64.rpm
-kernel-rt-3.10.0-1062.1.2.rt56.1025.el7.src.rpm
+kernel-rt-3.10.0-1127.13.1.rt56.1110.el7.src.rpm
 kexec-tools-2.0.15-21.el7.x86_64.rpm
 libblkid-2.23.2-59.el7.x86_64.rpm
 libcom_err-1.42.9-13.el7.x86_64.rpm

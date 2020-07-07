@@ -22,7 +22,7 @@ fi
 mirror_dir=$1
 tarball_lst=${MY_REPO_ROOT_DIR}/stx-tools/centos-mirror-tools/tarball-dl.lst
 downloads_dir=${MY_REPO}/stx/downloads
-extra_downloads="mlnx-ofa_kernel-4.5-OFED.4.5.1.0.1.1.gb4fdfac.src.rpm libibverbs-41mlnx1-OFED.4.5.0.1.0.45101.src.rpm rdma-core-45mlnx1-1.45101.src.rpm"
+extra_downloads="mlnx-ofa_kernel-5.0-OFED.5.0.2.1.8.1.g5f67178.src.rpm libibverbs-41mlnx1-OFED.5.0.0.0.9.50218.src.rpm rdma-core-50mlnx1-1.50218.src.rpm"
 
 mkdir -p ${MY_REPO}/stx/downloads
 
