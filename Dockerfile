@@ -132,9 +132,10 @@ COPY toCOPY/lst_utils.sh /usr/local/bin
 COPY toCOPY/.inputrc /home/$MYUNAME/
 COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
 
-# This is included for backward compatibility, and
+# Thes are included for backward compatibility, and
 # should be removed after a reasonable time.
 COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
+COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
 
 # cpan modules, installing with cpanminus to avoid stupid questions since cpan is whack
 RUN cpanm --notest Fatal && \
