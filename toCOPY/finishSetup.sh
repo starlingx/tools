@@ -27,7 +27,7 @@ mkdir -p /localdisk/loadbuild/mock-cache
 sudo chmod 775 /localdisk/loadbuild/mock-cache
 sudo chown root:mock /localdisk/loadbuild/mock-cache
 ### may need to add these later. once it works will try on clean localdisk setup
-# [builder@bavery-WS-DESK cgcs-root]$ history | grep mkdir
+# [builder@bavery-WS-DESK root]$ history | grep mkdir
 # 55  mkdir -p $MY_WORKSPACE/results
 # 66  mkdir -p $MY_WORKSPACE/std/results/$MY_BUILD_ENVIRONMENT-std
 # 78  mkdir -p $MY_WORKSPACE/rt/rpmbuild/RPMS

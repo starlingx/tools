@@ -5,9 +5,9 @@
 # Copyright (C) 2019 Intel Corporation
 #
 
-GENERATE_CGCS_CENTOS_REPO_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
+GENERATE_CENTOS_REPO_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
-source $GENERATE_CGCS_CENTOS_REPO_DIR/lst_utils.sh
+source $GENERATE_CENTOS_REPO_DIR/lst_utils.sh
 
 mirror_dir=""
 layer_dirs=""
@@ -76,8 +76,7 @@ if [ -z "$MY_REPO" ]; then
     exit -1
 fi
 
-
-TEMP=$(getopt -o h --long help,config-dir:,distro:,layer:,layer-dir:,layer-inc-url:,layer-pkg-url:,layer-wheels-inc-url:,mirror-dir: -n 'generate-cgcs-centos-repo' -- "$@")
+TEMP=$(getopt -o h --long help,config-dir:,distro:,layer:,layer-dir:,layer-inc-url:,layer-pkg-url:,layer-wheels-inc-url:,mirror-dir: -n 'generate-centos-repo' -- "$@")
 if [ $? -ne 0 ]; then
     echo "getopt error"
     usage
@@ -123,12 +122,12 @@ echo
 echo "layer_wheels_inc_urls=${layer_wheels_inc_urls[@]}"
 echo
 
-dest_dir=$MY_REPO/cgcs-centos-repo
+dest_dir=$MY_REPO/centos-repo
 timestamp="$(date +%F_%H%M)"
 mock_cfg_file=$MY_REPO/build-tools/repo_files/mock.cfg.proto
 comps_xml_file=$MY_REPO/build-tools/repo_files/comps.xml
-mock_cfg_dest_file=$MY_REPO/cgcs-centos-repo/mock.cfg.proto
-comps_xml_dest_file=$MY_REPO/cgcs-centos-repo/Binary/comps.xml
+mock_cfg_dest_file=$MY_REPO/centos-repo/mock.cfg.proto
+comps_xml_dest_file=$MY_REPO/centos-repo/Binary/comps.xml
 
 TMP_LST_DIR=$(mktemp -d /tmp/tmp_lst_dir_XXXXXX)
 mkdir -p $TMP_LST_DIR
@@ -443,13 +442,13 @@ cp "$mock_cfg_file" "$mock_cfg_dest_file"
 cat ${lst_file_dir}/${other_lst_file} | grep -v "#" | while IFS=":" read targettype item extrafields; do
     if [ "${targettype}" == "folder" ]; then
         echo "Creating folder ${item}"
-        mkdir -p $MY_REPO/cgcs-centos-repo/Binary/${item}
+        mkdir -p $MY_REPO/centos-repo/Binary/${item}
     fi
 
     if [ "${targettype}" == "file" ]; then
-        mkdir -p $MY_REPO/cgcs-centos-repo/Binary/$(dirname ${item})
-        echo "Creating symlink for $MY_REPO/cgcs-centos-repo/Binary/${item}"
-        ln -sf ${mirror_dir}/Binary/${item} $MY_REPO/cgcs-centos-repo/Binary/${item}
+        mkdir -p $MY_REPO/centos-repo/Binary/$(dirname ${item})
+        echo "Creating symlink for $MY_REPO/centos-repo/Binary/${item}"
+        ln -sf ${mirror_dir}/Binary/${item} $MY_REPO/centos-repo/Binary/${item}
     fi
 done
 

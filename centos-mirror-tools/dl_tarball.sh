@@ -109,7 +109,7 @@ fi
 # The 2 categories we can divide the list of packages in the output directory:
 # - General hosted under "downloads" output directory.
 # - Puppet hosted under "downloads/puppet" output directory.
-# to be populated under $MY_REPO/addons/wr-cgcs/layers/cgcs/downloads/puppet
+# to be populated under $MY_REPO/downloads/puppet
 
 export DL_MIRROR_LOG_DIR="${DL_MIRROR_LOG_DIR:-./logs}"
 export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx/CentOS}"

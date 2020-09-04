@@ -164,7 +164,7 @@ Tweaks in the StarlingX build system.
 NOTE: You do not need to do the following step if you've synced the latest codebase.
 
 Go into the StarlingX build system (i.e. *another* container that hosts the
-cgcs build system) and perform the following steps:
+build system) and perform the following steps:
 
 Build packages/ISO creation
 ---------------------------
@@ -293,16 +293,16 @@ Initialize the source tree.
     repo init -u https://opendev.org/starlingx/manifest.git -m default.xml
     repo sync
 
-To generate cgcs-centos-repo
+To generate centos-repo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The cgcs-centos-repo is a set of symbolic links to the packages in the
+The centos-repo is a set of symbolic links to the packages in the
 mirror and the mock configuration file. It is needed to create these
 links if this is the first build or the mirror has been updated.
 
 .. code-block:: bash
 
-    generate-cgcs-centos-repo.sh /import/mirrors/CentOS
+    generate-centos-repo.sh /import/mirrors/CentOS
 
 Where the argument to the script is the path of the mirror.
 
