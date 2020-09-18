@@ -15,7 +15,7 @@ export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx/CentOS}"
 #
 # Relocate downloaded rpms from the old location to the new.
 pike_dir="./output/stx-r1/CentOS/pike"
-if [ -d $pike_dir && ! -d $DL_MIRROR_OUTPUT_DIR ]; then
+if [ -d $pike_dir ] && [ ! -d $DL_MIRROR_OUTPUT_DIR ]; then
     mkdir -p $(dirname $DL_MIRROR_OUTPUT_DIR)
     mv $pike_dir $DL_MIRROR_OUTPUT_DIR
 fi
