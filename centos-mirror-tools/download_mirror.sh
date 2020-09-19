@@ -18,6 +18,7 @@ pike_dir="./output/stx-r1/CentOS/pike"
 if [ -d $pike_dir ] && [ ! -d $DL_MIRROR_OUTPUT_DIR ]; then
     mkdir -p $(dirname $DL_MIRROR_OUTPUT_DIR)
     mv $pike_dir $DL_MIRROR_OUTPUT_DIR
+    \rm -rf ./output/stx-r1
 fi
 
 usage() {
