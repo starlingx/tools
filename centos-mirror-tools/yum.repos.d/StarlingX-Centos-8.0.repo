@@ -31,22 +31,6 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
 
-
-[StarlingX-C8.0.1905-HighAvailability]
-name=StarlingX-CentOS-8.0.1905 - HighAvailability
-baseurl=http://vault.centos.org/8.0.1905/HighAvailability/x86_64/os/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
-enabled=1
-
-[StarlingX-C8.0.1905-HighAvailability-Source]
-name=StarlingX-CentOS-8.0.1905 - HighAvailability Source
-baseurl=http://vault.centos.org/8.0.1905/HighAvailability/Source/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
-enabled=1
-
-
 [StarlingX-C8.0.1905-PowerTools]
 name=StarlingX-CentOS-8.0.1905 - PowerTools
 baseurl=http://vault.centos.org/8.0.1905/PowerTools/x86_64/os/
