@@ -124,10 +124,12 @@ echo
 
 dest_dir=$MY_REPO/centos-repo
 timestamp="$(date +%F_%H%M)"
-mock_cfg_file=$MY_REPO/build-tools/repo_files/mock.cfg.proto
+
+mock_cfg_proto_default=mock.cfg.proto
+mock_cfg_dir=$MY_REPO/build-tools/repo_files
+mock_cfg_dest_dir=$MY_REPO/centos-repo
 comps_xml_file=$MY_REPO/build-tools/repo_files/comps.xml
-mock_cfg_dest_file=$MY_REPO/centos-repo/mock.cfg.proto
-comps_xml_dest_file=$MY_REPO/centos-repo/Binary/comps.xml
+comps_xml_dest_dir=$MY_REPO/centos-repo/Binary
 
 TMP_LST_DIR=$(mktemp -d /tmp/tmp_lst_dir_XXXXXX)
 mkdir -p $TMP_LST_DIR
@@ -382,6 +384,32 @@ process_lst_file () {
     done
 }
 
+copy_with_backup () {
+    src_file="$1"
+    dest_dir="$2"
+    dest_file=${dest_dir}/$(basename ${src_file})
+
+    if [ ! -f "${src_file}" ]; then
+        echo "source file '${src_file}' does not exist!"
+        exit 1
+    fi
+
+    if [ ! -d ${dest_dir} ]; then
+        echo "destination directory '${dest_dir}' does not exist!"
+        exit 1
+    fi
+
+    if [ -f "${dest_file}" ]; then
+        \mv -f -v "${dest_file}" "${dest_file}-backup-${timestamp}"
+    fi
+
+    \cp -v "${src_file}" "${dest_file}"
+    if [ $? -ne 0 ]; then
+        echo "failed to copy '${src_file} into directory '${dest_dir}'"
+        exit 1
+    fi
+}
+
 for lst_file in ${rpm_lst_files} ; do
     process_lst_file "${lst_file}" "${dest_dir}" || exit 1
 done
@@ -393,15 +421,7 @@ done
 
 echo "Copying comps.xml file."
 
-if [ ! -f "$comps_xml_file" ]; then
-    echo "Cannot find comps.xml file!"
-    exit 1
-fi
-
-if [ -f "$comps_xml_dest_file" ]; then
-    \cp -f "$comps_xml_dest_file" "$comps_xml_dest_file-backup-$timestamp"
-fi
-cp "$comps_xml_file" "$comps_xml_dest_file"
+copy_with_backup ${comps_xml_file} ${comps_xml_dest_dir}
 
 
 echo "Createing yum repodata."
@@ -427,16 +447,18 @@ done
 
 echo "Copying mock.cfg.proto file."
 
-if [ ! -f "$mock_cfg_file" ]; then
-    echo "Cannot find mock.cfg.proto file!"
-    exit 1
+# First look for layer specific file to copy.
+mock_cfg_file="${mock_cfg_dir}/mock.cfg.${layer}.proto"
+if [ -f "$mock_cfg_file" ]; then
+    copy_with_backup ${mock_cfg_file} ${mock_cfg_dest_dir}
 fi
 
-if [ -f "$mock_cfg_dest_file" ]; then
-    \cp -f "$mock_cfg_dest_file" "$mock_cfg_dest_file-backup-$timestamp"
-fi
-cp "$mock_cfg_file" "$mock_cfg_dest_file"
+# Always copy the default
+mock_cfg_file=${mock_cfg_dir}/${mock_cfg_proto_default}
+copy_with_backup ${mock_cfg_file} ${mock_cfg_dest_dir}
 
+
+echo "Copying contents from other list files."
 
 # Populate the contents from other list files
 cat ${lst_file_dir}/${other_lst_file} | grep -v "#" | while IFS=":" read targettype item extrafields; do
