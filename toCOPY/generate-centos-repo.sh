@@ -385,9 +385,9 @@ process_lst_file () {
 }
 
 copy_with_backup () {
-    src_file="$1"
-    dest_dir="$2"
-    dest_file=${dest_dir}/$(basename ${src_file})
+    local src_file="$1"
+    local dest_dir="$2"
+    local dest_file=${dest_dir}/$(basename ${src_file})
 
     if [ ! -f "${src_file}" ]; then
         echo "source file '${src_file}' does not exist!"
