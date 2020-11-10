@@ -571,6 +571,7 @@ nss-devel-3.36.0-7.el7_5.x86_64.rpm
 nss-util-devel-3.36.0-1.el7_5.x86_64.rpm
 numactl-devel-2.0.9-7.el7.x86_64.rpm
 numactl-libs-2.0.9-7.el7.x86_64.rpm
+nvme-cli-1.8.1-3.el7.x86_64.rpm
 oniguruma-5.9.5-3.el7.x86_64.rpm
 openjade-1.3.2-45.el7.x86_64.rpm
 openjpeg2-2.3.1-1.el7.x86_64.rpm
