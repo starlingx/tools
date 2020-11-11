@@ -23,7 +23,6 @@ bzip2-devel-1.0.6-13.el7.x86_64.rpm
 # cracklib-2.9.0-11.el7.x86_64.rpm provided by mock
 # cracklib-dicts-2.9.0-11.el7.x86_64.rpm provided by mock
 # cryptsetup-libs-2.0.3-3.el7.x86_64.rpm provided by mock
-# curl-7.29.0-51.el7_6.3.x86_64.rpm provided by mock
 # cyrus-sasl-lib-2.1.26-23.el7.x86_64.rpm provided by mock
 # dbus-1.10.24-12.el7.x86_64.rpm provided by mock
 dbus-devel-1.10.24-12.el7.x86_64.rpm
@@ -99,8 +98,6 @@ libcap-devel-2.22-9.el7.x86_64.rpm
 # libcap-ng-0.7.5-4.el7.x86_64.rpm provided by mock
 libcap-ng-devel-0.7.5-4.el7.x86_64.rpm
 libcroco-0.6.12-4.el7.x86_64.rpm
-# libcurl-7.29.0-51.el7_6.3.x86_64.rpm provided by mock
-# libcurl-devel-7.29.0-51.el7_6.3.x86_64.rpm provided by mock
 # libdb-5.3.21-24.el7.x86_64.rpm provided by mock
 libdb-devel-5.3.21-24.el7.x86_64.rpm
 # libdb-utils-5.3.21-24.el7.x86_64.rpm provided by mock
@@ -132,7 +129,6 @@ libselinux-devel-2.5-14.1.el7.x86_64.rpm
 # libsepol-2.5-10.el7.x86_64.rpm provided by mock
 libsepol-devel-2.5-10.el7.x86_64.rpm
 # libsmartcols-2.23.2-59.el7.x86_64.rpm provided by mock
-# libssh2-1.4.3-12.el7.x86_64.rpm provided by mock
 # libstdc++-4.8.5-36.el7.x86_64.rpm provided by mock
 # libstdc++-devel-4.8.5-36.el7.x86_64.rpm provided by mock
 # libtasn1-4.10-1.el7.x86_64.rpm provided by mock
