@@ -2,6 +2,7 @@ ansible-2.7.5-1.el7.ans.noarch.rpm#https://releases.ansible.com/ansible/rpm/rele
 # glib2-2.56.1-7.el7.x86_64.rpm provided by mock
 glib2-devel-2.56.1-7.el7.x86_64.rpm#http://mirror.centos.org/centos/7/os/x86_64/Packages/glib2-devel-2.56.1-7.el7.x86_64.rpm
 influxdb-0.9.5.1-1.x86_64.rpm#https://s3.amazonaws.com/influxdb/influxdb-0.9.5.1-1.x86_64.rpm
+libpng-1.5.13-8.el7.x86_64.rpm#http://mirror.centos.org/centos/7/os/x86_64/Packages/libpng-1.5.13-8.el7.x86_64.rpm
 novnc-0.6.2-1.el7.noarch.rpm#http://cbs.centos.org/kojifiles/packages/novnc/0.6.2/1.el7/noarch/novnc-0.6.2-1.el7.noarch.rpm
 libvirt-python-4.7.0-1.fc28.src.rpm#https://libvirt.org/sources/python/libvirt-python-4.7.0-1.fc28.src.rpm
 python2-httpbin-0.5.0-6.el7.noarch.rpm#http://cbs.centos.org/kojifiles/packages/python-httpbin/0.5.0/6.el7/noarch/python2-httpbin-0.5.0-6.el7.noarch.rpm
