@@ -98,7 +98,7 @@ if [ ! -e $download_list ];then
 fi
 
 save_path=$2
-upstream_url_prefix="http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/"
+upstream_url_prefix="http://vault.centos.org/8.1.1911/BaseOS/x86_64/os"
 stx_mirror_url_prefix="$(url_to_stx_mirror_url "$upstream_url_prefix" "$distro")"
 
 echo "NOTE: please assure Internet access to $upstream_url_prefix !!"
