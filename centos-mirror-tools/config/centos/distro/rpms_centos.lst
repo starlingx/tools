@@ -416,8 +416,6 @@ libpcap-devel-1.5.3-11.el7.x86_64.rpm
 libpciaccess-0.14-1.el7.x86_64.rpm
 libpciaccess-devel-0.14-1.el7.x86_64.rpm
 libpipeline-1.2.3-3.el7.x86_64.rpm
-libpng-1.5.13-7.el7_2.x86_64.rpm
-libpng-devel-1.5.13-7.el7_2.x86_64.rpm
 libproxy-0.4.11-11.el7.x86_64.rpm
 # libpwquality-1.2.3-5.el7.x86_64.rpm provided by mock
 librdmacm-devel-1.1.0-2.el7.x86_64.rpm
