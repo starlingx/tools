@@ -1,4 +1,5 @@
 ansible-2.7.5-1.el7.ans.noarch.rpm#https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.7.5-1.el7.ans.noarch.rpm
+# expat-2.1.0-12.el7.x86_64.rpm provided by mock
 # glib2-2.56.1-7.el7.x86_64.rpm provided by mock
 glib2-devel-2.56.1-7.el7.x86_64.rpm#http://mirror.centos.org/centos/7/os/x86_64/Packages/glib2-devel-2.56.1-7.el7.x86_64.rpm
 influxdb-0.9.5.1-1.x86_64.rpm#https://s3.amazonaws.com/influxdb/influxdb-0.9.5.1-1.x86_64.rpm
