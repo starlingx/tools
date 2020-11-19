@@ -12,7 +12,7 @@ export PATH="${MY_REPO}/build-tools:${PATH}"
 
 EXPORTS="$MY_WORKSPACE/export/mirrors/"
 DISTRO="CentOS"
-HEAD_FILE="${MY_REPO_ROOT_DIR}/.repo/projects/root.git/HEAD"
+HEAD_FILE="${MY_REPO_ROOT_DIR}/.repo/projects/cgcs-root.git/HEAD"
 STAT="$(stat -c %Y ${HEAD_FILE})"
 TIMESTAMP=$(date -d @$(stat -c %Y ${HEAD_FILE}) +%Y-%m-%dT%H:%M:%S)
 STD_PKG_DIR="${MY_WORKSPACE}/std/rpmbuild/RPMS"
