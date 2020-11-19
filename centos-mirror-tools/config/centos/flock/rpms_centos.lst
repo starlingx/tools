@@ -204,14 +204,6 @@ jbigkit-libs-2.1-14.el8.x86_64.rpm
 json-c-0.13.1-0.2.el8.x86_64.rpm
 json-c-devel-0.13.1-0.2.el8.x86_64.rpm
 json-glib-1.4.4-1.el8.x86_64.rpm
-kata-containers-image-1.11.1-5.1.x86_64.rpm
-kata-ksm-throttler-1.11.1-5.1.x86_64.rpm
-kata-linux-container-5.4.32.73-5.1.x86_64.rpm
-kata-proxy-1.11.1-5.1.x86_64.rpm
-kata-proxy-bin-1.11.1-5.1.x86_64.rpm
-kata-runtime-1.11.1-5.1.x86_64.rpm
-kata-shim-1.11.1-5.1.x86_64.rpm
-kata-shim-bin-1.11.1-5.1.x86_64.rpm
 kbd-2.0.4-8.el8.x86_64.rpm
 kbd-legacy-2.0.4-8.el8.noarch.rpm
 kbd-misc-2.0.4-8.el8.noarch.rpm
@@ -716,9 +708,6 @@ python-oslo-utils-lang-3.41.5-1.el8.noarch.rpm
 python-oslo-versionedobjects-lang-1.36.1-1.el8.noarch.rpm
 python-pycadf-common-2.10.0-2.el8.noarch.rpm
 python-sphinx-locale-1.7.6-1.el8.noarch.rpm
-qemu-vanilla-4.1.1+git.99c5874a9b-5.1.x86_64.rpm
-qemu-vanilla-bin-4.1.1+git.99c5874a9b-5.1.x86_64.rpm
-qemu-vanilla-data-4.1.1+git.99c5874a9b-5.1.x86_64.rpm
 qpid-proton-c-0.30.0-2.el8.x86_64.rpm
 quota-4.04-10.el8.x86_64.rpm
 quota-nls-4.04-10.el8.noarch.rpm

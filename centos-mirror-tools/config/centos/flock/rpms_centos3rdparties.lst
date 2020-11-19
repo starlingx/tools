@@ -11,6 +11,15 @@ gssproxy-0.8.0-14.el8.x86_64.rpm
 gtk3-3.22.30-4.el8.x86_64.rpm
 gtk-update-icon-cache-3.22.30-4.el8.x86_64.rpm
 iprutils-2.4.16.1-2.el8.x86_64.rpm
+kata-containers-image-1.11.5-10.1.x86_64.rpm
+kata-ksm-throttler-1.11.5-10.1.x86_64.rpm
+kata-linux-container-5.4.32.76-11.1.x86_64.rpm
+kata-linux-container-debug-5.4.32.76-11.1.x86_64.rpm
+kata-proxy-1.11.5-10.1.x86_64.rpm
+kata-proxy-bin-1.11.5-10.1.x86_64.rpm
+kata-runtime-1.11.5-10.1.x86_64.rpm
+kata-shim-1.11.5-10.1.x86_64.rpm
+kata-shim-bin-1.11.5-10.1.x86_64.rpm
 kexec-tools-2.0.17-28.el8.x86_64.rpm
 libcom_err-devel-1.44.6-3.el8.x86_64.rpm
 libdrm-2.4.98-2.el8.x86_64.rpm
@@ -43,6 +52,9 @@ python3-msgpack-0.6.2-1.el8.x86_64.rpm
 python3-policycoreutils-2.9-3.el8_1.1.noarch.rpm
 python3-pysocks-1.6.8-3.el8.noarch.rpm
 python3-urllib3-1.24.2-2.el8.noarch.rpm
+qemu-vanilla-4.1.1+git.99c5874a9b-10.1.x86_64.rpm
+qemu-vanilla-bin-4.1.1+git.99c5874a9b-10.1.x86_64.rpm
+qemu-vanilla-data-4.1.1+git.99c5874a9b-10.1.x86_64.rpm
 rest-0.8.1-2.el8.x86_64.rpm
 selinux-policy-3.14.3-20.el8.noarch.rpm
 selinux-policy-minimum-3.14.3-20.el8.noarch.rpm
