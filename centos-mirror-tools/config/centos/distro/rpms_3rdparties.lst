@@ -15,7 +15,7 @@ python3-django-debreach-2.0.1-1.el8.noarch.rpm#https://cbs.centos.org/kojifiles/
 python3-django-nose-1.4.7-2.el8.noarch.rpm#https://cbs.centos.org/kojifiles/packages/python-django-nose/1.4.7/2.el8/noarch/python3-django-nose-1.4.7-2.el8.noarch.rpm
 python3-glanceclient-2.17.0-1.el8.noarch.rpm#http://mirror.digitalone.com/centos/8/cloud/x86_64/openstack-train/Packages/p/python3-glanceclient-2.17.0-1.el8.noarch.rpm
 python3-httpretty-0.9.6-2.el8.noarch.rpm#https://repo.cloudlinux.com/cloudlinux/8.1/PowerTools/x86_64/python3-httpretty-0.9.6-2.el8.noarch.rpm
-python3-keystoneauth1-3.17.2-1.el8.noarch.rpm#https://cbs.centos.org/kojifiles/packages/python-keystoneauth1/3.17.2/1.el8/src/python-keystoneauth1-3.17.2-1.el8.src.rpm
+python3-keystoneauth1-3.17.2-1.el8.noarch.rpm#https://cbs.centos.org/kojifiles/packages/python-keystoneauth1/3.17.2/1.el8/noarch/python3-keystoneauth1-3.17.2-1.el8.noarch.rpm
 python3-neutronclient-6.14.0-1.el8.noarch.rpm#https://cbs.centos.org/kojifiles/packages/python-neutronclient/6.14.0/1.el8/noarch/python3-neutronclient-6.14.0-1.el8.noarch.rpm
 python3-nose-exclude-0.5.0-7.el8.noarch.rpm#https://cbs.centos.org/kojifiles/packages/python-nose-exclude/0.5.0/7.el8/noarch/python3-nose-exclude-0.5.0-7.el8.noarch.rpm
 python3-openstackdocstheme-1.29.0-6.el8.noarch.rpm#https://cbs.centos.org/kojifiles/packages/python-openstackdocstheme/1.29.0/6.el8/noarch/python3-openstackdocstheme-1.29.0-6.el8.noarch.rpm
