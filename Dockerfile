@@ -33,6 +33,7 @@ ARG MYUID=1000
 # Override these with --build-arg if you have a mirror
 ARG CENTOS_7_8_URL=http://vault.centos.org/centos/7.8.2003
 ARG EPEL_7_8_URL=https://archives.fedoraproject.org/pub/archive/epel/7.2020-04-20
+ARG MY_EMAIL=
 
 ENV container=docker
 
@@ -230,6 +231,20 @@ RUN echo "$MYUNAME ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     sed -i "s/dir-listing.activate/#dir-listing.activate/g" /etc/lighttpd/conf.d/dirlisting.conf && \
     echo "dir-listing.activate = \"enable\"" >> /etc/lighttpd/conf.d/dirlisting.conf
 
+# Uprev git, git-review, repo
+RUN yum install -y dh-autoreconf curl-devel expat-devel gettext-devel  openssl-devel perl-devel zlib-devel asciidoc xmlto docbook2X && \
+    cd /tmp && \
+    wget https://github.com/git/git/archive/v2.29.2.tar.gz -O git-2.29.2.tar.gz && \
+    tar xzvf git-2.29.2.tar.gz && \
+    cd git-2.29.2 && \
+    make configure && \
+    ./configure --prefix=/usr/local && \
+    make all doc && \
+    make install install-doc && \
+    cd /tmp && \
+    rm -rf git-2.29.2.tar.gz git-2.29.2 && \
+    pip install git-review --upgrade
+
 # Systemd Enablement
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
     rm -f /lib/systemd/system/multi-user.target.wants/*;\
@@ -253,7 +268,8 @@ RUN echo "bash -C /usr/local/bin/finishSetup.sh" >> /home/$MYUNAME/.bashrc && \
 # Genrate a git configuration file in order to save an extra step
 # for end users, this file is required by "repo" tool.
 RUN chown $MYUNAME /home/$MYUNAME && \
-    runuser -u $MYUNAME -- git config --global user.email $MYUNAME@starlingx.com && \
+    if [ -z $MY_EMAIL ]; then MY_EMAIL=$MYUNAME@opendev.org; fi && \
+    runuser -u $MYUNAME -- git config --global user.email $MY_EMAIL && \
     runuser -u $MYUNAME -- git config --global user.name $MYUNAME && \
     runuser -u $MYUNAME -- git config --global color.ui false
 
