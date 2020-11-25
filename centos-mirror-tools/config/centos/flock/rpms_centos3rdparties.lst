@@ -14,8 +14,6 @@ docker-ce-cli-18.09.6-3.el7.x86_64.rpm
 # elfutils-libelf-0.176-2.el7.x86_64.rpm provided by mock
 # elfutils-libelf-devel-0.176-2.el7.x86_64.rpm provided by mock
 # elfutils-libs-0.176-2.el7.x86_64.rpm provided by mock
-# glib2-2.56.1-2.el7.x86_64.rpm provided by mock
-glib2-devel-2.56.1-2.el7.x86_64.rpm
 gsettings-desktop-schemas-3.28.0-2.el7.x86_64.rpm
 gssproxy-0.7.0-21.el7.x86_64.rpm
 # ima-evm-utils-1.1-2.el7.x86_64.rpm provided by mock
