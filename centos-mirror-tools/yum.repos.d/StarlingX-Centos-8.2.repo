@@ -11,7 +11,7 @@ enabled=1
 
 [StarlingX-C8.2.2004-BaseOS-Source]
 name=StarlingX-CentOS-8.2.2004 - BaseOS Source
-baseurl=http://vault.centos.org/8.2.2004/BaseOS/Source/
+baseurl=https://vault.centos.org/8.2.2004/BaseOS/Source/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
@@ -26,7 +26,7 @@ enabled=1
 
 [StarlingX-C8.2.2004-AppStream-Source]
 name=StarlingX-CentOS-8.2.2004 - AppStream Source
-baseurl=http://vault.centos.org/8.2.2004/AppStream/Source/
+baseurl=https://vault.centos.org/8.2.2004/AppStream/Source/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
@@ -41,7 +41,7 @@ enabled=1
 
 [StarlingX-C8.2.2004-HighAvailability-Source]
 name=StarlingX-CentOS-8.2.2004 - HighAvailability Source
-baseurl=http://vault.centos.org/8.2.2004/HighAvailability/Source/
+baseurl=https://vault.centos.org/8.2.2004/HighAvailability/Source/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
@@ -56,7 +56,7 @@ enabled=1
 
 [StarlingX-C8.2.2004-PowerTools-Source]
 name=StarlingX-CentOS-8.2.2004 - PowerTools Source
-baseurl=http://vault.centos.org/8.2.2004/PowerTools/Source/
+baseurl=https://vault.centos.org/8.2.2004/PowerTools/Source/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
@@ -71,7 +71,7 @@ enabled=1
 
 [StarlingX-C8.2.2004-centosplus-Source]
 name=StarlingX-CentOS-8.2.2004 - centosplus Source
-baseurl=http://vault.centos.org/8.2.2004/centosplus/Source/
+baseurl=https://vault.centos.org/8.2.2004/centosplus/Source/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
@@ -86,7 +86,7 @@ enabled=1
 
 [StarlingX-C8.2.2004-extras-Source]
 name=StarlingX-CentOS-8.2.2004 - extras Source
-baseurl=http://vault.centos.org/8.2.2004/extras/Source/
+baseurl=https://vault.centos.org/8.2.2004/extras/Source/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
