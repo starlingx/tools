@@ -26,9 +26,16 @@ TC_CONTAINER_TAG=local/${MYUNAME}-stx-builder:7.8
 TC_DOCKERFILE=Dockerfile
 
 function create_container {
+    local EXTRA_ARGS=""
+
+    if [ ! -z ${MY_EMAIL} ]; then
+        EXTRA_ARGS="--build-arg MY_EMAIL=${MY_EMAIL}"
+    fi
+
     docker build \
         --build-arg MYUID=$(id -u) \
         --build-arg MYUNAME=${USER} \
+        ${EXTRA_ARGS} \
         --ulimit core=0 \
         --network host \
         -t ${TC_CONTAINER_TAG} \
@@ -37,6 +44,7 @@ function create_container {
 }
 
 function exec_container {
+    echo "docker cp ${WORK_DIR}/buildrc ${TC_CONTAINER_NAME}:/home/${MYUNAME}"
     docker cp ${WORK_DIR}/buildrc ${TC_CONTAINER_NAME}:/home/${MYUNAME}
     docker cp ${WORK_DIR}/localrc ${TC_CONTAINER_NAME}:/home/${MYUNAME}
     docker exec -it --user=${MYUNAME} -e MYUNAME=${MYUNAME} ${TC_CONTAINER_NAME} script -q -c "/bin/bash" /dev/null
@@ -52,7 +60,7 @@ function run_container {
         --name ${TC_CONTAINER_NAME} \
         --detach \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        -v ${LOCALDISK}:/${GUEST_LOCALDISK} \
+        -v $(readlink -f ${LOCALDISK}):/${GUEST_LOCALDISK} \
         -v ${HOST_MIRROR_DIR}:/import/mirrors:ro \
         -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
         -v ~/.ssh:/mySSH:ro \
@@ -93,6 +101,8 @@ case $CMD in
         echo "MY_RELEASE=${MY_RELEASE}"
         echo "MY_REPO_ROOT_DIR=${MY_REPO_ROOT_DIR}"
         echo "LAYER=${LAYER}"
+        echo "MYUNAME=${MYUNAME}"
+        echo "MY_EMAIL=${MY_EMAIL}"
         ;;
     create)
         create_container
