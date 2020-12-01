@@ -8,7 +8,7 @@ cppcheck-1.83-1.el8.x86_64.rpm
 glib2-devel-2.56.4-7.el8.x86_64.rpm
 gsettings-desktop-schemas-3.32.0-3.el8.x86_64.rpm
 gssproxy-0.8.0-14.el8.x86_64.rpm
-gtk3-3.22.30-4.el8.x86_64.rpm
+gtk3-3.22.30-3.el8.x86_64.rpm
 gtk-update-icon-cache-3.22.30-4.el8.x86_64.rpm
 iprutils-2.4.16.1-2.el8.x86_64.rpm
 kata-containers-image-1.11.5-10.1.x86_64.rpm
@@ -44,9 +44,9 @@ openscap-1.3.0-7.el8.x86_64.rpm
 openscap-scanner-1.3.0-7.el8.x86_64.rpm
 policycoreutils-2.9-3.el8_1.1.x86_64.rpm
 policycoreutils-python-utils-2.9-3.el8_1.1.noarch.rpm
-pulseaudio-libs-11.1-22.el8.x86_64.rpm
-pulseaudio-libs-devel-11.1-22.el8.x86_64.rpm
-pulseaudio-libs-glib2-11.1-22.el8.x86_64.rpm
+pulseaudio-libs-11.1-23.el8.x86_64.rpm
+pulseaudio-libs-devel-11.1-23.el8.x86_64.rpm
+pulseaudio-libs-glib2-11.1-23.el8.x86_64.rpm
 python3-libsemanage-2.9-1.el8.x86_64.rpm
 python3-msgpack-0.6.2-1.el8.x86_64.rpm
 python3-policycoreutils-2.9-3.el8_1.1.noarch.rpm
@@ -59,8 +59,8 @@ rest-0.8.1-2.el8.x86_64.rpm
 selinux-policy-3.14.3-20.el8.noarch.rpm
 selinux-policy-minimum-3.14.3-20.el8.noarch.rpm
 selinux-policy-targeted-3.14.3-20.el8.noarch.rpm
-spice-server-0.14.0-7.el8.x86_64.rpm
-spice-server-devel-0.14.0-7.el8.x86_64.rpm
+spice-server-0.14.2-1.el8.x86_64.rpm
+spice-server-devel-0.14.2-1.el8.x86_64.rpm
 systemtap-sdt-devel-4.1-6.el8.x86_64.rpm
 tcpdump-4.9.2-5.el8.x86_64.rpm
 tuned-2.12.0-3.el8_1.1.noarch.rpm

@@ -126,7 +126,7 @@ perl-Test-Harness-3.42-1.el8.noarch.rpm
 perl-Text-Unidecode-1.30-5.el8.noarch.rpm
 popt-devel-1.16-14.el8.x86_64.rpm
 python3-libs-3.6.8-15.1.el8.x86_64.rpm
-python3-pyparsing-2.1.10-7.el8.noarch.rpm
+python3-pyparsing-2.4.6-1.el8.noarch.rpm
 python3-rpm-4.14.2-26.el8_1.x86_64.rpm
 readline-devel-7.0-10.el8.x86_64.rpm
 rpm-4.14.2-26.el8_1.x86_64.rpm
