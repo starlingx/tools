@@ -20,6 +20,15 @@ usage () {
     echo "  --mirror-dir=<dir>: Set the mirror directory.  This is where the previously download tarballs are located."
 }
 
+cleanup () {
+    if [ -e "${TMP_LST_DIR}" ]; then
+        \rm -rf ${TMP_LST_DIR}
+    fi
+}
+
+trap "cleanup ; exit 1" INT HUP TERM QUIT
+trap "cleanup" EXIT
+
 mirror_dir=""
 
 if [ -z "$MY_REPO" ]; then
@@ -68,6 +77,7 @@ extra_downloads_template="extra_downloads.lst"
 
 TMP_LST_DIR=$(mktemp -d /tmp/tmp_lst_dir_XXXXXX)
 mkdir -p $TMP_LST_DIR
+
 tarball_lst="$TMP_LST_DIR/${tarball_downloads_template}"
 extra_downloads_lst="$TMP_LST_DIR/${extra_downloads_template}"
 merge_lst ${config_dir} ${distro} ${tarball_downloads_template} > ${tarball_lst}
@@ -111,5 +121,3 @@ done
 for x in ${extra_downloads}; do
     ln -sf ${mirror_dir}/downloads/$x ${downloads_dir}
 done
-
-\rm -rf ${TMP_LST_DIR}
