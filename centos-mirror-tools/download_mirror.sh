@@ -10,6 +10,15 @@ source $DOWNLOAD_MIRROR_DIR/../toCOPY/lst_utils.sh
 export DL_MIRROR_LOG_DIR="${DL_MIRROR_LOG_DIR:-./logs}"
 export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx/CentOS}"
 
+cleanup () {
+    if [ -e "${TMP_LST_DIR}" ]; then
+        \rm -rf ${TMP_LST_DIR}
+    fi
+}
+
+trap "cleanup ; exit 1" INT HUP TERM QUIT
+trap "cleanup" EXIT
+
 # A temporary compatability step to save download time
 # during the shift to the new DL_MIRROR_OUTPUT_DIR location.
 #

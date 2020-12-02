@@ -67,7 +67,8 @@ cleanup () {
     fi
 }
 
-trap "cleanup ; exit 1" INT
+trap "cleanup ; exit 1" INT HUP TERM QUIT
+trap "cleanup" EXIT
 
 if [ -z "$MY_REPO" ]; then
     echo "\$MY_REPO is not set. Ensure you are running this script"
@@ -128,11 +129,16 @@ timestamp="$(date +%F_%H%M)"
 mock_cfg_prefix="mock.cfg"
 mock_cfg_default_suffix="proto"
 mock_cfg_suffix="${mock_cfg_default_suffix}"
-if [ -f /etc/os-release ]; then
-    mock_cfg_distro="$(source /etc/os-release; echo ${ID}${VERSION_ID}.proto)"
-fi
+mock_cfg_distro=""
+mock_cfg_release_prefix=${mock_cfg_prefix}
 mock_cfg_dir=$MY_REPO/build-tools/repo_files
 mock_cfg_dest_dir=$MY_REPO/centos-repo
+if [ -f /etc/os-release ]; then
+    mock_cfg_distro="$(source /etc/os-release; echo ${ID}${VERSION_ID})"
+    if [ ! -z "${mock_cfg_distro}" ]; then
+        mock_cfg_release_prefix=${mock_cfg_prefix}.${mock_cfg_distro}
+    fi
+fi
 comps_xml_file=$MY_REPO/build-tools/repo_files/comps.xml
 comps_xml_dest_dir=$MY_REPO/centos-repo/Binary
 
@@ -412,7 +418,7 @@ copy_with_backup () {
 
     if [ ! -d ${dest_dir} ]; then
         dest_file="$2"
-        dest_dir=$(dir_name ${dest_file})
+        dest_dir=$(dirname ${dest_file})
         if [ ! -d ${dest_dir} ]; then
             echo "destination directory '${dest_dir}' does not exist!"
             exit 1
@@ -467,15 +473,32 @@ done
 
 echo "Copying mock.cfg.proto file."
 
-# First look for layer specific file to copy.
-mock_cfg_file="${mock_cfg_dir}/${mock_cfg_prefix}.${layer}.${mock_cfg_suffix}"
-if [ -f "$mock_cfg_file" ]; then
-    copy_with_backup ${mock_cfg_file} ${mock_cfg_dest_dir}/${mock_cfg_prefix}.${layer}.${mock_cfg_default_suffix}
+#
+# There are several mock.cfg.proto to choose from.
+# They may be specific to release (e.g. centos7/8),
+# specific to layer (e.g. distro), or both.
+#
+
+# First look for release specific, layer specific file to copy.
+mock_cfg_file="${mock_cfg_dir}/${mock_cfg_release_prefix}.${layer}.${mock_cfg_suffix}"
+if [ ! -f "${mock_cfg_file}" ]; then
+    # Substitute release default, layer specific file to copy.
+    mock_cfg_file="${mock_cfg_dir}/${mock_cfg_prefix}.${layer}.${mock_cfg_suffix}"
+fi
+if [ -f "${mock_cfg_file}" ]; then
+    echo "copy_with_backup '${mock_cfg_file}' '${mock_cfg_dest_dir}/${mock_cfg_prefix}.${layer}.${mock_cfg_default_suffix}'"
+    copy_with_backup "${mock_cfg_file}" "${mock_cfg_dest_dir}/${mock_cfg_prefix}.${layer}.${mock_cfg_default_suffix}"
 fi
 
-# Always copy the default
-mock_cfg_file=${mock_cfg_dir}/${mock_cfg_prefix}.${mock_cfg_suffix}
-copy_with_backup ${mock_cfg_file} ${mock_cfg_dest_dir}/${mock_cfg_prefix}.${mock_cfg_default_suffix}
+# Always copy the default (with respect to layer)
+# First look for release specific, layer default file to copy.
+mock_cfg_file="${mock_cfg_dir}/${mock_cfg_release_prefix}.${mock_cfg_suffix}"
+if [ ! -f "${mock_cfg_file}" ]; then
+    # Substitute release default, layer default file to copy.
+    mock_cfg_file="${mock_cfg_dir}/${mock_cfg_prefix}.${mock_cfg_suffix}"
+fi
+echo "copy_with_backup '${mock_cfg_file}' '${mock_cfg_dest_dir}/${mock_cfg_prefix}.${mock_cfg_default_suffix}'"
+copy_with_backup "${mock_cfg_file}" "${mock_cfg_dest_dir}/${mock_cfg_prefix}.${mock_cfg_default_suffix}"
 
 
 echo "Copying contents from other list files."
