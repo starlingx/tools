@@ -23,7 +23,7 @@ get_dnf_command() {
         dnf_download_extra_opts="--exclude='*.i686' --archlist=$arch"
     fi
 
-    echo "dnf download -q -C ${DNFCONFOPT} ${RELEASEVER} $dnf_download_extra_opts $rpm_name"
+    echo "dnf download -q ${DNFCONFOPT} ${RELEASEVER} $dnf_download_extra_opts $rpm_name"
 }
 
 get_wget_command() {
