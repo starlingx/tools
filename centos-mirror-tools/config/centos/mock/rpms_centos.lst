@@ -25,6 +25,7 @@ dracut-033-554.el7.x86_64.rpm
 dwz-0.11-3.el7.x86_64.rpm
 epel-release-7-11.noarch.rpm
 epel-rpm-macros-7-21.noarch.rpm
+fedpkg-minimal-1.1.0-7.el7.noarch.rpm
 file-5.11-35.el7.x86_64.rpm
 file-libs-5.11-35.el7.x86_64.rpm
 filesystem-3.2-25.el7.x86_64.rpm
