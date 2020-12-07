@@ -1,0 +1,27 @@
+[forensics]
+name=CERT Forensics Tools Repository 
+baseurl=http://www.cert.org/forensics/repository/centos/cert/$releasever/$basearch
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cert-forensics-2022-04-03
+gpgcheck=1
+
+[forensics-test]
+name=CERT Forensics Tools Test Repository 
+baseurl=http://www.cert.org/forensics/repository/centos/cert-test/$releasever/$basearch
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cert-forensics-2022-04-03
+gpgcheck=1
+
+[forensics-splunk]
+name=CERT Forensics Tools Repository - Splunk
+baseurl=http://www.cert.org/forensics/repository/centos/splunk/$releasever/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-splunk
+enabled=1
+gpgcheck=1
+
+[forensics-sip]
+name=CERT Forensics Tools Repository - SiLK, IPA, and Postgresql
+baseurl=http://www.cert.org/forensics/repository/centos/sip/$releasever/$basearch
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cert-forensics-2022-04-03
+gpgcheck=1
