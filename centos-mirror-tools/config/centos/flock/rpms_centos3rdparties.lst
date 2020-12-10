@@ -47,8 +47,10 @@ policycoreutils-python-utils-2.9-3.el8_1.1.noarch.rpm
 pulseaudio-libs-11.1-23.el8.x86_64.rpm
 pulseaudio-libs-devel-11.1-23.el8.x86_64.rpm
 pulseaudio-libs-glib2-11.1-23.el8.x86_64.rpm
+python3-crypto-2.6.1-28.1.el8.x86_64.rpm
 python3-libsemanage-2.9-1.el8.x86_64.rpm
 python3-msgpack-0.6.2-1.el8.x86_64.rpm
+python3-ply-3.11-2.el8.noarch.rpm
 python3-policycoreutils-2.9-3.el8_1.1.noarch.rpm
 python3-pysocks-1.6.8-3.el8.noarch.rpm
 python3-urllib3-1.24.2-2.el8.noarch.rpm
