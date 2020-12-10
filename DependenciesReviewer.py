@@ -29,7 +29,7 @@ DISTRO = SELECT["centos"]
 # Global variables
 USER = getpass.getuser()
 WORK = os.path.abspath("..")
-REPOS = os.path.join(WORK, "cgcs-root/stx/")
+REPOS = os.path.join(WORK, "root/stx/")
 MTOOLS = os.path.join(WORK, "stx-tools/centos-mirror-tools")
 
 class PkgInfo:

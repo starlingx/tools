@@ -118,7 +118,7 @@ def get_affectedpackages(data, cve_id):
     return: affected packages by the CVE and fix/unfix status of each package
     """
     affectedpackages_list = []
-    status_list = []
+    allfixed = "fixed"
     try:
         affectedpackages = data["scannedCves"][cve_id]["affectedPackages"]
     except KeyError:
@@ -126,19 +126,9 @@ def get_affectedpackages(data, cve_id):
     else:
         for pkg in affectedpackages:
             affectedpackages_list.append(pkg["name"])
-            status_list.append(pkg["notFixedYet"])
-    return affectedpackages_list, status_list
-
-def get_status(status_list):
-    """
-    return: status of CVE. If one of the pkgs is not fixed, CVE is not fixed
-    """
-    status = None
-    if True in status_list:
-        status = "unfixed"
-    else:
-        status = "fixed"
-    return status
+            if 'notFixedYet' in pkg and pkg["notFixedYet"] is True:
+                allfixed = "unfixed"
+    return affectedpackages_list, allfixed
 
 def main():
     """
@@ -186,7 +176,7 @@ def main():
     for cve in cves:
         cve_id = cve["id"]
         affectedpackages_list = []
-        status_list = []
+        allfixed = "fixed"
         try:
             nvd2_score = data["scannedCves"][cve_id]["cveContents"]["nvd"]["cvss2Score"]
             cvss2vector = data["scannedCves"][cve_id]["cveContents"]["nvd"]["cvss2Vector"]
@@ -209,9 +199,9 @@ def main():
             cve["ai"] = str(_ai)
             cve["summary"] = get_summary(data, cve_id)
             cve["sourcelink"] = get_source_link(data, cve_id)
-            affectedpackages_list, status_list = get_affectedpackages(data, cve_id)
+            affectedpackages_list, allfixed = get_affectedpackages(data, cve_id)
             cve["affectedpackages"] = affectedpackages_list
-            cve["status"] = get_status(status_list)
+            cve["status"] = allfixed
             cves_valid.append(cve)
 
     for cve in cves_valid:
