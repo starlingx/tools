@@ -178,7 +178,7 @@ timestamp=$(date +%F_%H%M)
 echo $timestamp
 
 export DL_MIRROR_LOG_DIR="${DL_MIRROR_LOG_DIR:-./logs}"
-export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx-r1/CentOS/pike}"
+export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx/CentOS}"
 
 dl_dir="$(readlink -f ${DL_MIRROR_OUTPUT_DIR})/layer_repos/${lower_layer}/${build_type}"
 

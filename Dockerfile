@@ -25,29 +25,44 @@ FROM centos:8.1.1911
 #    echo -e "export http_proxy=$http_proxy\nexport https_proxy=$https_proxy\n\
 #export ftp_proxy=$ftp_proxy\nexport no_proxy=$no_proxy" >> /root/.bashrc
 
-RUN echo "http_caching=packages" >> /etc/dnf/dnf.conf
-
 # username you will docker exec into the container as.
 # It should NOT be your host username so you can easily tell
 # if you are in our out of the container.
 ARG MYUNAME=builder
 ARG MYUID=1000
+# CentOS & EPEL URLs that match the base image
+# Override these with --build-arg if you have a mirror
+ARG CENTOS_8_1_URL=https://vault.centos.org/8.1.1911
+ARG EPEL_8_1_URL=https://archives.fedoraproject.org/pub/archive/epel/8.1.2020-04-22/Everything
+ARG MY_EMAIL=
 
 ENV container=docker
 
+# Lock down centos & epel repos
+RUN rm -f /etc/yum.repos.d/*
+COPY toCOPY/yum.repos.d/*.repo /etc/yum.repos.d/
+COPY centos-mirror-tools/rpm-gpg-keys/RPM-GPG-KEY-EPEL-8 /etc/pki/rpm-gpg/
+RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && \
+    echo "http_caching=packages" >> /etc/dnf/dnf.conf && \
+    # dnf variables must be in lower case ; \
+    echo "$CENTOS_8_1_URL" > /etc/dnf/vars/centos_8_1_url && \
+    echo "$EPEL_8_1_URL" > /etc/dnf/vars/epel_8_1_url && \
+    # disable fastestmirror plugin because we are not using mirrors ; \
+    # FIXME: use a mirrorlist URL for centos/vault/epel archives. I couldn't find one.
+    echo "fastestmirror=False" >> /etc/dnf/dnf.conf && \
+    dnf clean all && \
+    dnf makecache && \
+    dnf install -y drpm
+
+# Without this, init won't start the enabled services and exec'ing and starting
+# them reports "Failed to get D-Bus connection: Operation not permitted".
+VOLUME /run /tmp
+
 # Download required dependencies by mirror/build processes.
-# Notice there are 3 invocations to dnf package manage.
-# 1) Enable EPEL repository.
-# 2) Download required packages.
-# 3) Clean dnf cache.
 RUN groupadd -g 751 cgts && \
     echo "mock:x:751:root" >> /etc/group && \
     echo "mockbuild:x:9001:" >> /etc/group && \
-    dnf install -y epel-release && \
-    dnf install -y dnf-utils && \
-    dnf config-manager --enable PowerTools && \
     dnf install -y anaconda \
-        #anaconda-help \
         anaconda-runtime \
         autoconf-archive \
         autogen \
@@ -58,7 +73,8 @@ RUN groupadd -g 751 cgts && \
         bison \
         cpanminus \
         createrepo \
-        #deltarpm \
+        createrepo_c \
+        drpm \
         #docker-client \
         expat-devel \
         flex \
@@ -86,12 +102,13 @@ RUN groupadd -g 751 cgts && \
         #python-psutil \
         python3-psutil \
         #python36-psutil \
-        #python-sphinx \
+        python3-sphinx \
         #python-subunit \
         python3-rpm \
         #python-testrepository \
         #python-tox \
         python3-yaml \
+        python3-ruamel-yaml \
         postgresql \
         qemu-kvm \
         quilt \
@@ -101,7 +118,6 @@ RUN groupadd -g 751 cgts && \
         sudo \
         systemd \
         syslinux \
-        #syslinux-utils \
         udisks2 \
         vim-enhanced \
         wget
@@ -111,11 +127,16 @@ RUN groupadd -g 751 cgts && \
 # copied inside the image.
 COPY toCOPY/finishSetup.sh /usr/local/bin
 COPY toCOPY/populate_downloads.sh /usr/local/bin
-COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
-COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
+COPY toCOPY/generate-local-repo.sh /usr/local/bin
+COPY toCOPY/generate-centos-repo.sh /usr/local/bin
 COPY toCOPY/lst_utils.sh /usr/local/bin
 COPY toCOPY/.inputrc /home/$MYUNAME/
 COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
+
+# Thes are included for backward compatibility, and
+# should be removed after a reasonable time.
+COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
+COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
 
 # cpan modules, installing with cpanminus to avoid stupid questions since cpan is whack
 RUN cpanm --notest Fatal && \
@@ -210,6 +231,20 @@ RUN echo "$MYUNAME ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     sed -i "s/dir-listing.activate/#dir-listing.activate/g" /etc/lighttpd/conf.d/dirlisting.conf && \
     echo "dir-listing.activate = \"enable\"" >> /etc/lighttpd/conf.d/dirlisting.conf
 
+# Uprev git, git-review, repo
+RUN dnf install -y dh-autoreconf curl-devel expat-devel gettext-devel  openssl-devel perl-devel zlib-devel asciidoc xmlto docbook2X && \
+    cd /tmp && \
+    wget https://github.com/git/git/archive/v2.29.2.tar.gz -O git-2.29.2.tar.gz && \
+    tar xzvf git-2.29.2.tar.gz && \
+    cd git-2.29.2 && \
+    make configure && \
+    ./configure --prefix=/usr/local && \
+    make all doc && \
+    make install install-doc && \
+    cd /tmp && \
+    rm -rf git-2.29.2.tar.gz git-2.29.2 && \
+    pip3 install git-review --upgrade
+
 # Systemd Enablement
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
     rm -f /lib/systemd/system/multi-user.target.wants/*;\
@@ -219,10 +254,6 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == system
     rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*
-
-# Without this, init won't start the enabled services and exec'ing and starting
-# them reports "Failed to get D-Bus connection: Operation not permitted".
-VOLUME /run /tmp
 
 RUN useradd -r -u $MYUID -g cgts -m $MYUNAME && \
     ln -s /home/$MYUNAME/.ssh /mySSH && \
@@ -237,13 +268,13 @@ RUN echo "bash -C /usr/local/bin/finishSetup.sh" >> /home/$MYUNAME/.bashrc && \
 # Genrate a git configuration file in order to save an extra step
 # for end users, this file is required by "repo" tool.
 RUN chown $MYUNAME /home/$MYUNAME && \
-    runuser -u $MYUNAME -- git config --global user.email $MYUNAME@starlingx.com && \
+    if [ -z $MY_EMAIL ]; then MY_EMAIL=$MYUNAME@opendev.org; fi && \
+    runuser -u $MYUNAME -- git config --global user.email $MY_EMAIL && \
     runuser -u $MYUNAME -- git config --global user.name $MYUNAME && \
     runuser -u $MYUNAME -- git config --global color.ui false
 
 # Customizations for mirror creation
-RUN rm /etc/yum.repos.d/CentOS-Sources.repo
-RUN rm /etc/yum.repos.d/epel.repo
+RUN rm /etc/yum.repos.d/*
 COPY centos-mirror-tools/yum.repos.d/* /etc/yum.repos.d/
 COPY centos-mirror-tools/rpm-gpg-keys/* /etc/pki/rpm-gpg/
 

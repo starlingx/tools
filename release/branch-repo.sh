@@ -128,6 +128,7 @@ function branch_repo {
     local sha=$3
     local branch=$4
     local tag=${5:-""}
+    local branch_created=0
 
     local repo_dir
     if [[ -n $SKIP_PATH || "$path" == "-" ]]; then
@@ -154,11 +155,16 @@ function branch_repo {
     if ! git branch | grep ${branch}$; then
         # Create the new branch if it does not exist
         git branch $branch $sha
+        branch_created=1
     fi
 
     if [[ -n $tag ]]; then
         # tag branch point at $sha
-        git tag -s -m "Branch $branch" -f $tag $sha
+        if [ $branch_created -eq 1 ]; then
+            git tag -s -m "Branch $branch" -f $tag $sha
+        else
+            git tag -s -m "Tag $tag Release" -f $tag $sha
+        fi
     fi
 
     # Push the new goodness back up

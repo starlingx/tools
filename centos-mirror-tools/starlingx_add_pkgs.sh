@@ -90,11 +90,11 @@ source $STARLINGX_ADD_PKGS_DIR/../toCOPY/lst_utils.sh
 
 STXTOOLS=${MY_REPO_ROOT_DIR}/stx-tools
 
-CGCSREPO_PATH=$MY_REPO/cgcs-centos-repo/Binary
-TISREPO_PATH=$MY_WORKSPACE/std/rpmbuild/RPMS
-TISREPO_PATH_ARGS=
-if [ -e $TISREPO_PATH/repodata/repomd.xml ]; then
-    TISREPO_PATH_ARGS="--repofrompath tis,$TISREPO_PATH"
+LOCALREPO_PATH=$MY_REPO/centos-repo/Binary
+STDREPO_PATH=$MY_WORKSPACE/std/rpmbuild/RPMS
+STDREPO_PATH_ARGS=
+if [ -e $STDREPO_PATH/repodata/repomd.xml ]; then
+    STDREPO_PATH_ARGS="--repofrompath tis,$STDREPO_PATH"
 fi
 
 RESULTS_LOG=downloaded.log
@@ -117,14 +117,14 @@ function show_usage {
 Usage:
     $(basename $0) [ -C <config_dir> ] [ -l <layer> ] [ -d <pkgname> ] ... [ <rpmfile> ] ...
 
-This utility uses the cgcs-centos-repo repo, and optionally the rpmbuild/RPMS
+This utility uses the centos-repo repo, and optionally the rpmbuild/RPMS
 repo from \$MY_WORKSPACE/std, as a baseline, downloading packages required
 to support the list provided at command-line. The -d option allows the user to
 specify a package to download, or the user can specify a downloaded RPM file
 that has dependencies that must be downloaded.
 
 The downloaded RPMs will be written to the appropriate location under the
-\$MY_REPO/cgcs-centos-repo directory. The user should be able to differentiate
+\$MY_REPO/centos-repo directory. The user should be able to differentiate
 the downloaded files versus symlinks pointing to a downloaded or shared mirror.
 
 In addition, this utility will record a list of downloaded RPMs in the $RESULTS_LOG
@@ -200,7 +200,7 @@ REPOQUERY_STD_CMD="$REPOQUERY_CMD --quiet -c $REPOCFG_STD_MERGED"
 REPOQUERY_3RD_CMD="$REPOQUERY_CMD --quiet -c $REPOCFG_3RD_MERGED"
 REPOQUERY_LOWER_LAYER_CMD="$REPOQUERY_CMD --quiet -c $REPOCFG_LOWER_LAYER_MERGED"
 REPOQUERY_ALL_CMD="$REPOQUERY_CMD --quiet -c $REPOCFG_ALL_MERGED"
-REPOQUERY_LOCAL_CMD="$REPOQUERY_CMD --quiet --repofrompath cgcs,$CGCSREPO_PATH $TISREPO_PATH_ARGS"
+REPOQUERY_LOCAL_CMD="$REPOQUERY_CMD --quiet --repofrompath local,$LOCALREPO_PATH $STDREPO_PATH_ARGS"
 
 
 function rpmfile_requires {
@@ -268,7 +268,7 @@ function simplified_pkg {
     echo $pkg | sed 's/-[0-9]*:/-/'
 }
 
-function pkg_in_cgcsrepo {
+function pkg_in_localrepo {
     #
     # Check whether the specified package is already in the downloaded (or built) repo
     #
@@ -331,7 +331,7 @@ function download_pkg {
     fi
 
     echo "Downloading $url"
-    rpm_path=$CGCSREPO_PATH/$arch/$(basename $relativepath)
+    rpm_path=$LOCALREPO_PATH/$arch/$(basename $relativepath)
     wget -q -O $rpm_path $url
 
     if [ $? -ne 0 ]; then
@@ -341,7 +341,7 @@ function download_pkg {
     fi
 
     # Update repo
-    pushd $CGCSREPO_PATH >/dev/null
+    pushd $LOCALREPO_PATH >/dev/null
     createrepo -q -g comps.xml .
     if [ $? -ne 0 ]; then
         echo "createrepo failed... Aborting" >&2
@@ -369,7 +369,7 @@ function download_rpm_dependencies {
             continue
         fi
 
-        pkg_in_cgcsrepo $pkg && continue
+        pkg_in_localrepo $pkg && continue
         download_pkg $pkg
     done || exit $?
 }
@@ -383,7 +383,7 @@ if [ -n "$RPMLIST" ]; then
                 continue
             fi
 
-            pkg_in_cgcsrepo $pkg && continue
+            pkg_in_localrepo $pkg && continue
             download_pkg $pkg
 
         done || exit $?
@@ -392,7 +392,7 @@ fi
 
 if [ -n "$DOWNLOAD_LIST" ]; then
     for df in $DOWNLOAD_LIST; do
-        pkg_in_cgcsrepo $df && continue
+        pkg_in_localrepo $df && continue
         download_pkg $df
     done
 fi

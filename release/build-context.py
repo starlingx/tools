@@ -58,7 +58,7 @@ def load_manifest(name):
 
 def load_context(name):
     # Extract the workspace path and git SHA for each repo
-    # (cd ./cgcs-root/stx/stx-config && git checkout -f 22a60625f169202a68b524ac0126afb1d10921cd)\n
+    # (cd ./root/stx/stx-config && git checkout -f 22a60625f169202a68b524ac0126afb1d10921cd)\n
     ctx = {}
     if "://" in name:
         # Open a URL

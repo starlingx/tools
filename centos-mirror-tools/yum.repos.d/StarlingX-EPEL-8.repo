@@ -15,14 +15,12 @@ gpgcheck=0
 #gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
 
-
 [Starlingx-epel-8-source]
 name=Starlingx-Epel-8-source
 baseurl=https://dl.fedoraproject.org/pub/epel/8/Everything/SRPMS/
 gpgcheck=0
 #gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
-
 
 [Starlingx-epel-8-testing]
 name=Starlingx-Epel-8-testing
@@ -58,17 +56,3 @@ baseurl=https://download.fedoraproject.org/pub/epel/testing/8/Modular/SRPMS
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
 gpgcheck=1
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -109,10 +109,10 @@ fi
 # The 2 categories we can divide the list of packages in the output directory:
 # - General hosted under "downloads" output directory.
 # - Puppet hosted under "downloads/puppet" output directory.
-# to be populated under $MY_REPO/addons/wr-cgcs/layers/cgcs/downloads/puppet
+# to be populated under $MY_REPO/downloads/puppet
 
 export DL_MIRROR_LOG_DIR="${DL_MIRROR_LOG_DIR:-./logs}"
-export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx-r1/CentOS/pike}"
+export DL_MIRROR_OUTPUT_DIR="${DL_MIRROR_OUTPUT_DIR:-./output/stx/CentOS}"
 
 logs_dir="${DL_MIRROR_LOG_DIR}"
 output_log="$logs_dir/log_download_tarball_missing.txt"
@@ -291,7 +291,14 @@ for line in $(cat $tarball_file); do
             tar czvf $tarball_name $directory_name
             rm -rf $directory_name
             popd > /dev/null   # pushd $directory_name
-        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-4.7-3.2.9.0.tgz' ]]; then
+        elif [[ "$tarball_name" = 'chartmuseum-v0.12.0-amd64' ]]; then
+            wget -q -t 5 --wait=15 -O "$tarball_name" "$tarball_url"
+            if [ $? -ne 0 ]; then
+                error_count=$((error_count + 1))
+                popd > /dev/null   # pushd $output_tarball
+                continue
+            fi
+        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-5.0-2.1.8.0.tgz' ]]; then
             srpm_path="${directory_name}/SRPMS/"
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
@@ -301,9 +308,9 @@ for line in $(cat $tarball_file); do
             fi
 
             tar -xf "$tarball_name"
-            cp "${srpm_path}/mlnx-ofa_kernel-4.7-OFED.4.7.3.2.9.1.g457f064.src.rpm" .
-            cp "${srpm_path}/rdma-core-47mlnx1-1.47329.src.rpm" .
-            cp "${srpm_path}/libibverbs-41mlnx1-OFED.4.7.0.0.2.47329.src.rpm" .
+            cp "${srpm_path}/mlnx-ofa_kernel-5.0-OFED.5.0.2.1.8.1.g5f67178.src.rpm" .
+            cp "${srpm_path}/rdma-core-50mlnx1-1.50218.src.rpm" .
+            cp "${srpm_path}/libibverbs-41mlnx1-OFED.5.0.0.0.9.50218.src.rpm" .
             # Don't delete the original MLNX_OFED_LINUX tarball.
             # We don't use it, but it will prevent re-downloading this file.
             #   rm -f "$tarball_name"

@@ -1,0 +1,164 @@
+########
+# Centos 7.9.2009
+#
+
+[StarlingX-C7.9.2009-atomic]
+name=StarlingX-CentOS-7.9.2009 - atomic
+baseurl=http://mirror.centos.org/centos/7.9.2009/atomic/x86_64/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-centosplus]
+name=StarlingX-CentOS-7.9.2009 - centosplus
+baseurl=http://mirror.centos.org/centos/7.9.2009/centosplus/x86_64/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-centosplus-source]
+name=StarlingX-CentOS-7.9.2009 - centosplus-source
+baseurl=https://vault.centos.org/7.9.2009/centosplus/Source/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-extras]
+name=StarlingX-CentOS-7.9.2009 - extras
+baseurl=http://mirror.centos.org/centos/7.9.2009/extras/x86_64/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-extras-source]
+name=StarlingX-CentOS-7.9.2009 - extras-source
+baseurl=https://vault.centos.org/7.9.2009/extras/Source/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-nfv-fdio]
+name=StarlingX-CentOS-7.9.2009 - nfv
+baseurl=http://mirror.centos.org/centos/7.9.2009/nfv/x86_64/fdio/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-opstools]
+name=StarlingX-CentOS-7.9.2009 - opstools
+baseurl=http://mirror.centos.org/centos/7.9.2009/opstools/x86_64/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+# [StarlingX-C7.9.2009-opstools-source]
+# name=StarlingX-CentOS-7.9.2009 - opstools-source
+# baseurl=https://vault.centos.org/7.9.2009/opstools/Source/
+# gpgcheck=1
+# gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+# enabled=1
+
+[StarlingX-C7.9.2009-os]
+name=StarlingX-CentOS-7.9.2009 - os
+baseurl=http://mirror.centos.org/centos/7.9.2009/os/x86_64/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-os-source]
+name=StarlingX-CentOS-7.9.2009 - os-source
+baseurl=https://vault.centos.org/7.9.2009/os/Source/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-paas-openshift-origin]
+name=StarlingX-CentOS-7.9.2009 - paas-openshift-origin
+baseurl=http://mirror.centos.org/centos/7.9.2009/paas/x86_64/openshift-origin/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-paas-openshift-origin311]
+name=StarlingX-CentOS-7.9.2009 - paas-openshift-origin311
+baseurl=http://mirror.centos.org/centos/7.9.2009/paas/x86_64/openshift-origin311/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-rt]
+name=StarlingX-CentOS-7.9.2009 - rt
+baseurl=http://mirror.centos.org/centos/7.9.2009/rt/x86_64/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-sclo-sclo]
+name=StarlingX-CentOS-7.9.2009 - sclo-sclo
+baseurl=http://mirror.centos.org/centos/7.9.2009/sclo/x86_64/sclo/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-storage-ceph-jewel]
+name=StarlingX-CentOS-7.9.2009 - storage-ceph-jewel
+baseurl=http://mirror.centos.org/centos/7.9.2009/storage/x86_64/ceph-jewel/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-storage-ceph-luminous]
+name=StarlingX-CentOS-7.9.2009 - storage-ceph-luminous
+baseurl=http://mirror.centos.org/centos/7.9.2009/storage/x86_64/ceph-luminous/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-storage-ceph-nautilus]
+name=StarlingX-CentOS-7.9.2009 - storage-ceph-nautilus
+baseurl=http://mirror.centos.org/centos/7.9.2009/storage/x86_64/ceph-nautilus/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-storage-gluster-5]
+name=StarlingX-CentOS-7.9.2009 - storage-gluster-5
+baseurl=http://mirror.centos.org/centos/7.9.2009/storage/x86_64/gluster-5/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-updates]
+name=StarlingX-CentOS-7.9.2009 - updates
+baseurl=http://mirror.centos.org/centos/7.9.2009/updates/x86_64/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-updates-source]
+name=StarlingX-CentOS-7.9.2009 - updates-source
+baseurl=https://vault.centos.org/7.9.2009/updates/Source/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-virt-kvm]
+name=StarlingX-CentOS-7.9.2009 - virt-kvm
+baseurl=http://mirror.centos.org/centos/7.9.2009/virt/x86_64/kvm-common/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
+
+[StarlingX-C7.9.2009-virt-libvirt]
+name=StarlingX-CentOS-7.9.2009 - virt-libvirt
+baseurl=http://mirror.centos.org/centos/7.9.2009/virt/x86_64/libvirt-latest/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=0
+
+[StarlingX-C7.9.2009-sclo-rh]
+name=StarlingX-CentOS-7.9.2009 - sclo-rh
+baseurl=http://mirror.centos.org/centos/7.9.2009/sclo/x86_64/rh/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=1
