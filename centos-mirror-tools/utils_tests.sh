@@ -40,7 +40,7 @@ check_result "$res" "$expect"
 # get_url
 
 res=$(get_url "acpid-2.0.19-9.el7.x86_64.rpm" "L1")
-expect="http://vault.centos.org/centos/7.4.1708/cr/x86_64/Packages/acpid-2.0.19-9.el7.x86_64.rpm"
+expect="https://vault.centos.org/centos/7.4.1708/cr/x86_64/Packages/acpid-2.0.19-9.el7.x86_64.rpm"
 check_result "$res" "$expect"
 
 res=$(get_url "python2-httpbin-0.5.0-6.el7.noarch.rpm#http://cbs.centos.org/kojifiles/packages/python-httpbin/0.5.0/6.el7/noarch/python2-httpbin-0.5.0-6.el7.noarch.rpm" "L1")
