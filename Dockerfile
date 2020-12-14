@@ -31,7 +31,7 @@ ARG MYUNAME=builder
 ARG MYUID=1000
 # CentOS & EPEL URLs that match the base image
 # Override these with --build-arg if you have a mirror
-ARG CENTOS_7_8_URL=http://vault.centos.org/centos/7.8.2003
+ARG CENTOS_7_8_URL=https://vault.centos.org/centos/7.8.2003
 ARG EPEL_7_8_URL=https://archives.fedoraproject.org/pub/archive/epel/7.2020-04-20
 ARG MY_EMAIL=
 

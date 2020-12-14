@@ -5,7 +5,7 @@
 #
 
 #
-# Download non-RPM files from http://vault.centos.org/7.4.1708/os/x86_64/
+# Download non-RPM files from https://vault.centos.org/7.4.1708/os/x86_64/
 #
 
 DL_OTHER_FROM_CENTOS_REPO_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
