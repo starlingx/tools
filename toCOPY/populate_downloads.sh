@@ -91,7 +91,12 @@ if [ -f  ${extra_downloads_lst} ]; then
 fi
 
 
-mkdir -p ${MY_REPO}/stx/downloads
+if [ -d "${downloads_dir}" ]; then
+    timestamp="$(date +%F_%H%M)"
+    mv -f "${downloads_dir}" "${downloads_dir}-backup-${timestamp}"
+fi
+
+mkdir -p ${downloads_dir}
 
 grep -v "^#" ${tarball_lst} | while read x; do
     if [ -z "$x" ]; then
