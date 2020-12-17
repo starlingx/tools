@@ -122,6 +122,9 @@ RUN groupadd -g 751 cgts && \
         vim-enhanced \
         wget
 
+RUN alternatives --set python /usr/bin/python3
+RUN alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+
 # This image requires a set of scripts and helpers
 # for working correctly, in this section they are
 # copied inside the image.
