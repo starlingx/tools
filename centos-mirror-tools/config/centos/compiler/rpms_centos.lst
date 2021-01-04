@@ -132,6 +132,7 @@ libsepol-devel-2.5-10.el7.x86_64.rpm
 # libstdc++-4.8.5-36.el7.x86_64.rpm provided by mock
 # libstdc++-devel-4.8.5-36.el7.x86_64.rpm provided by mock
 # libtasn1-4.10-1.el7.x86_64.rpm provided by mock
+libtirpc-0.2.4-0.15.el7.x86_64.rpm
 libtool-2.4.2-22.el7_3.x86_64.rpm
 libunistring-0.9.3-9.el7.x86_64.rpm
 # libuser-0.60-9.el7.x86_64.rpm provided by mock
@@ -240,8 +241,11 @@ pyparsing-2.1.10-3.el7.noarch.rpm
 python2-pyparsing-2.1.10-3.el7.noarch.rpm
 python3-3.6.8-10.el7.x86_64.rpm
 python3-devel-3.6.8-10.el7.x86_64.rpm
+python3-libs-3.6.8-10.el7.x86_64.rpm
+python3-pip-9.0.3-5.el7.noarch.rpm
 python3-rpm-generators-6-2.el7.noarch.rpm
 python3-rpm-macros-3-32.el7.noarch.rpm
+python3-setuptools-39.2.0-10.el7.noarch.rpm
 python-2.7.5-76.el7.x86_64.rpm
 python-devel-2.7.5-76.el7.x86_64.rpm
 python-libs-2.7.5-76.el7.x86_64.rpm
