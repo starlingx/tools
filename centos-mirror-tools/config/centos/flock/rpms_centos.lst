@@ -107,6 +107,7 @@ cups-libs-1.6.3-35.el7.x86_64.rpm
 cyrus-sasl-2.1.26-23.el7.x86_64.rpm
 cyrus-sasl-gssapi-2.1.26-23.el7.x86_64.rpm
 # cyrus-sasl-lib-2.1.26-23.el7.x86_64.rpm provided by mock
+daxctl-libs-65-5.el7.x86_64.rpm
 # dbus-1.10.24-12.el7.x86_64.rpm provided by mock
 dbus-glib-0.100-7.el7.x86_64.rpm
 # dbus-libs-1.10.24-12.el7.x86_64.rpm provided by mock
@@ -138,6 +139,7 @@ dosfstools-3.0.20-10.el7.x86_64.rpm
 # dracut-033-554.el7.x86_64.rpm provided by mock
 dracut-config-rescue-033-554.el7.x86_64.rpm
 dracut-network-033-554.el7.x86_64.rpm
+dstat-0.7.2-12.el7.noarch.rpm
 e2fsprogs-1.42.9-13.el7.x86_64.rpm
 e2fsprogs-libs-1.42.9-13.el7.x86_64.rpm
 easymock2-2.5.2-12.el7.noarch.rpm
@@ -184,6 +186,7 @@ felix-framework-4.2.1-5.el7.noarch.rpm
 # file-libs-5.11-35.el7.x86_64.rpm provided by mock
 # filesystem-3.2-25.el7.x86_64.rpm provided by mock
 # findutils-4.5.11-6.el7.x86_64.rpm provided by mock
+fio-3.7-2.el7.x86_64.rpm
 fipscheck-1.4.1-6.el7.x86_64.rpm
 fipscheck-lib-1.4.1-6.el7.x86_64.rpm
 firewalld-0.5.3-5.el7.noarch.rpm
@@ -451,6 +454,7 @@ libpcap-1.5.3-11.el7.x86_64.rpm
 libpciaccess-0.14-1.el7.x86_64.rpm
 libpipeline-1.2.3-3.el7.x86_64.rpm
 libpmem-1.5.1-2.1.el7.x86_64.rpm
+libpmemblk-1.5.1-2.1.el7.x86_64.rpm
 libproxy-0.4.11-11.el7.x86_64.rpm
 libpsm2-10.3.58-1.el7.x86_64.rpm
 libpsm2-compat-10.3.58-1.el7.x86_64.rpm
@@ -583,6 +587,7 @@ netcf-libs-0.2.8-4.el7.x86_64.rpm
 nettle-2.7.1-8.el7.x86_64.rpm
 newt-0.52.15-4.el7.x86_64.rpm
 newt-python-0.52.15-4.el7.x86_64.rpm
+ndctl-libs-65-5.el7.x86_64.rpm
 nfs-utils-1.3.0-0.61.el7.x86_64.rpm
 nmap-ncat-6.40-16.el7.x86_64.rpm
 nscd-2.17-260.el7.x86_64.rpm
