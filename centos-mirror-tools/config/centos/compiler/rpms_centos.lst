@@ -39,7 +39,7 @@ device-mapper-multipath-libs-0.4.9-119.el7.x86_64.rpm
 device-mapper-persistent-data-0.7.3-3.el7.x86_64.rpm
 # diffutils-3.3-4.el7.x86_64.rpm provided by mock
 # dracut-033-554.el7.x86_64.rpm provided by mock
-file-devel-5.11-35.el7.x86_64.rpm
+file-devel-5.11-37.el7.x86_64.rpm
 # filesystem-3.2-25.el7.x86_64.rpm provided by mock
 # findutils-4.5.11-6.el7.x86_64.rpm provided by mock
 fipscheck-1.4.1-6.el7.x86_64.rpm

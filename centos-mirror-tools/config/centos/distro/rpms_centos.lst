@@ -186,8 +186,8 @@ erlang-syntax_tools-18.3.4.4-2.el7.x86_64.rpm
 erlang-tools-18.3.4.4-2.el7.x86_64.rpm
 erlang-xmerl-18.3.4.4-2.el7.x86_64.rpm
 expect-5.45-14.el7_1.x86_64.rpm
-# file-5.11-35.el7.x86_64.rpm provided by mock
-# file-libs-5.11-35.el7.x86_64.rpm provided by mock
+# file-5.11-37.el7.x86_64.rpm provided by mock
+# file-libs-5.11-37.el7.x86_64.rpm provided by mock
 # filesystem-3.2-25.el7.x86_64.rpm provided by mock
 # findutils-4.5.11-6.el7.x86_64.rpm provided by mock
 fipscheck-1.4.1-6.el7.x86_64.rpm

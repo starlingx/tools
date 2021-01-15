@@ -180,8 +180,8 @@ fedfs-utils-devel-0.10.5-0.el7.x86_64.rpm
 fedfs-utils-lib-0.10.5-0.el7.x86_64.rpm
 fedfs-utils-nsdbparams-0.10.5-0.el7.x86_64.rpm
 felix-framework-4.2.1-5.el7.noarch.rpm
-# file-5.11-35.el7.x86_64.rpm provided by mock
-# file-libs-5.11-35.el7.x86_64.rpm provided by mock
+# file-5.11-37.el7.x86_64.rpm provided by mock
+# file-libs-5.11-37.el7.x86_64.rpm provided by mock
 # filesystem-3.2-25.el7.x86_64.rpm provided by mock
 # findutils-4.5.11-6.el7.x86_64.rpm provided by mock
 fipscheck-1.4.1-6.el7.x86_64.rpm
