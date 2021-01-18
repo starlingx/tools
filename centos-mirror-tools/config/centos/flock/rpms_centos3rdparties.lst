@@ -87,7 +87,7 @@ selinux-policy-mls-3.13.1-229.el7_6.6.noarch.rpm
 selinux-policy-targeted-3.13.1-229.el7_6.6.noarch.rpm
 spice-server-0.14.0-6.el7.x86_64.rpm
 systemtap-sdt-devel-3.3-3.el7.x86_64.rpm
-tcpdump-4.9.2-3.el7.x86_64.rpm
+tcpdump-4.9.2-4.el7_7.1.x86_64.rpm
 tkinter-2.7.5-76.el7.x86_64.rpm
 tuned-2.8.0-5.el7.noarch.rpm
 tuned-profiles-realtime-2.8.0-5.el7.noarch.rpm
