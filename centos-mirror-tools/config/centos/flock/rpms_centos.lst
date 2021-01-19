@@ -523,9 +523,9 @@ libXi-1.7.9-1.el7.x86_64.rpm
 # libxml2-2.9.1-6.el7_2.3.x86_64.rpm provided by mock
 libxml2-python-2.9.1-6.el7_2.3.x86_64.rpm
 libXpm-devel-3.5.12-1.el7.x86_64.rpm
-libxslt-1.1.28-5.el7.x86_64.rpm
-libxslt-devel-1.1.28-5.el7.x86_64.rpm
-libxslt-python-1.1.28-5.el7.x86_64.rpm
+libxslt-1.1.28-6.el7.x86_64.rpm
+libxslt-devel-1.1.28-6.el7.x86_64.rpm
+libxslt-python-1.1.28-6.el7.x86_64.rpm
 libXt-devel-1.1.5-3.el7.x86_64.rpm
 libXtst-1.2.3-1.el7.x86_64.rpm
 libXv-1.0.11-1.el7.x86_64.rpm
