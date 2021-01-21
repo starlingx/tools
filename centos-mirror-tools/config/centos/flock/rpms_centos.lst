@@ -36,7 +36,7 @@ attr-2.4.46-13.el7.x86_64.rpm
 augeas-libs-1.4.0-6.el7.x86_64.rpm
 authconfig-6.2.8-30.el7.x86_64.rpm
 autogen-libopts-5.18-5.el7.x86_64.rpm
-avahi-libs-0.6.31-19.el7.x86_64.rpm
+avahi-libs-0.6.31-20.el7.x86_64.rpm
 avalon-framework-4.3-10.el7.noarch.rpm
 avalon-logkit-2.1-14.el7.noarch.rpm
 # basesystem-10.0-7.el7.centos.noarch.rpm provided by mock

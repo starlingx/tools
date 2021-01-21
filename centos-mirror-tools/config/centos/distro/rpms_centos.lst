@@ -19,9 +19,9 @@ autogen-5.18-5.el7.x86_64.rpm
 autogen-libopts-5.18-5.el7.x86_64.rpm
 autogen-libopts-devel-5.18-5.el7.x86_64.rpm
 automake-1.13.4-3.el7.noarch.rpm
-avahi-0.6.31-19.el7.x86_64.rpm
-avahi-devel-0.6.31-19.el7.x86_64.rpm
-avahi-libs-0.6.31-19.el7.x86_64.rpm
+avahi-0.6.31-20.el7.x86_64.rpm
+avahi-devel-0.6.31-20.el7.x86_64.rpm
+avahi-libs-0.6.31-20.el7.x86_64.rpm
 # basesystem-10.0-7.el7.centos.noarch.rpm provided by mock
 bash-completion-2.1-6.el7.noarch.rpm
 bc-1.06.95-13.el7.x86_64.rpm
