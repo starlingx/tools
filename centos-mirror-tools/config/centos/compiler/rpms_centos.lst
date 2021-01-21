@@ -5,7 +5,7 @@ at-spi2-atk-devel-2.26.2-1.el7.x86_64.rpm
 autoconf-2.69-11.el7.noarch.rpm
 automake-1.13.4-3.el7.noarch.rpm
 # basesystem-10.0-7.el7.centos.noarch.rpm provided by mock
-bash-4.2.46-31.el7.x86_64.rpm
+bash-4.2.46-34.el7.x86_64.rpm
 # binutils-2.27-34.base.el7.x86_64.rpm provided by mock
 binutils-devel-2.27-41.base.el7.x86_64.rpm
 bison-3.0.4-2.el7.x86_64.rpm
