@@ -47,6 +47,8 @@ bind-libs-9.9.4-72.el7.x86_64.rpm
 bind-libs-lite-9.9.4-72.el7.x86_64.rpm
 bind-license-9.9.4-72.el7.noarch.rpm
 bind-utils-9.9.4-72.el7.x86_64.rpm
+bind-export-libs-9.11.4-26.P2.el7.x86_64.rpm
+bind-export-devel-9.11.4-26.P2.el7.x86_64.rpm
 # binutils-2.27-34.base.el7.x86_64.rpm provided by mock
 biosdevname-0.7.3-1.el7.x86_64.rpm
 bitmap-console-fonts-0.3-21.el7.noarch.rpm

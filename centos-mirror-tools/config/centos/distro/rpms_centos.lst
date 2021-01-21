@@ -29,6 +29,8 @@ bind-libs-lite-9.9.4-72.el7.x86_64.rpm
 bind-license-9.9.4-72.el7.noarch.rpm
 bind-lite-devel-9.9.4-72.el7.x86_64.rpm
 bind-utils-9.9.4-72.el7.x86_64.rpm
+bind-export-libs-9.11.4-26.P2.el7.x86_64.rpm
+bind-export-devel-9.11.4-26.P2.el7.x86_64.rpm
 # binutils-2.27-41.base.el7.x86_64.rpm provided by mock
 binutils-devel-2.27-41.base.el7.x86_64.rpm
 bison-3.0.4-2.el7.x86_64.rpm
