@@ -1010,8 +1010,8 @@ snappy-devel-1.1.0-3.el7.x86_64.rpm
 socat-1.7.3.2-2.el7.x86_64.rpm
 source-highlight-3.1.6-6.el7.x86_64.rpm
 spax-1.5.2-13.el7.x86_64.rpm
-# sqlite-3.7.17-8.el7.x86_64.rpm provided by mock
-sqlite-devel-3.7.17-8.el7.x86_64.rpm
+# sqlite-3.7.17-8.el7_7.1.x86_64.rpm provided by mock
+sqlite-devel-3.7.17-8.el7_7.1.x86_64.rpm
 ssmtp-2.64-14.el7.x86_64.rpm
 subversion-1.7.14-14.el7.x86_64.rpm
 subversion-libs-1.7.14-14.el7.x86_64.rpm
