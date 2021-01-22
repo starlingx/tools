@@ -340,7 +340,7 @@ libcacard-devel-2.5.2-2.1.el7.x86_64.rpm
 libcap-devel-2.22-9.el7.x86_64.rpm
 # libcap-ng-0.7.5-4.el7.x86_64.rpm provided by mock
 libcap-ng-devel-0.7.5-4.el7.x86_64.rpm
-libcgroup-0.41-20.el7.x86_64.rpm
+libcgroup-0.41-21.el7.x86_64.rpm
 libcmocka-1.1.5-1.el7.x86_64.rpm
 libcmocka-devel-1.1.5-1.el7.x86_64.rpm
 libcollection-0.7.0-32.el7.x86_64.rpm
