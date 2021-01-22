@@ -291,8 +291,8 @@ horai-ume-uigothic-fonts-610-2.el7.noarch.rpm
 # hostname-3.13-3.el7.x86_64.rpm provided by mock
 httpcomponents-client-4.2.5-5.el7_0.noarch.rpm
 httpcomponents-core-4.2.4-6.el7.noarch.rpm
-httpd-2.4.6-88.el7.centos.x86_64.rpm
-httpd-tools-2.4.6-88.el7.centos.x86_64.rpm
+httpd-2.4.6-95.el7.centos.x86_64.rpm
+httpd-tools-2.4.6-95.el7.centos.x86_64.rpm
 hwdata-0.252-9.1.el7.x86_64.rpm
 hwloc-libs-1.11.8-4.el7.x86_64.rpm
 impallari-lobster-fonts-1.4-8.el7.noarch.rpm
