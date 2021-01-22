@@ -385,8 +385,8 @@ libimagequant-2.8.2-2.el7.x86_64.rpm
 libini_config-1.3.1-32.el7.x86_64.rpm
 libiscsi-1.9.0-7.el7.x86_64.rpm
 libiscsi-devel-1.9.0-7.el7.x86_64.rpm
-libjpeg-turbo-1.2.90-6.el7.x86_64.rpm
-libjpeg-turbo-devel-1.2.90-6.el7.x86_64.rpm
+libjpeg-turbo-1.2.90-8.el7.x86_64.rpm
+libjpeg-turbo-devel-1.2.90-8.el7.x86_64.rpm
 libkadm5-1.15.1-34.el7.x86_64.rpm
 libmicrohttpd-0.9.59-2.el7.x86_64.rpm
 libmicrohttpd-devel-0.9.59-2.el7.x86_64.rpm
