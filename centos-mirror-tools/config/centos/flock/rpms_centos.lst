@@ -1208,8 +1208,8 @@ snappy-1.1.0-3.el7.x86_64.rpm
 socat-1.7.3.2-2.el7.x86_64.rpm
 spawn-fcgi-1.6.3-5.el7.x86_64.rpm
 speex-1.2-0.19.rc1.el7.x86_64.rpm
-# sqlite-3.7.17-8.el7.x86_64.rpm provided by mock
-sqlite-devel-3.7.17-8.el7.x86_64.rpm
+# sqlite-3.7.17-8.el7_7.1.x86_64.rpm provided by mock
+sqlite-devel-3.7.17-8.el7_7.1.x86_64.rpm
 squashfs-tools-4.3-0.21.gitaae0aff4.el7.x86_64.rpm
 sshpass-1.06-1.el7.x86_64.rpm
 stix-fonts-1.1.0-5.el7.noarch.rpm
