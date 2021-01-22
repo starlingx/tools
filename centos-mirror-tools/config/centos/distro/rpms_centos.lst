@@ -1247,7 +1247,7 @@ trousers-devel-0.3.14-2.el7.x86_64.rpm
 ttmkfdir-3.0.9-42.el7.x86_64.rpm
 # tzdata-2018g-1.el7.noarch.rpm provided by mock
 tzdata-java-2018g-1.el7.noarch.rpm
-unbound-libs-1.6.6-1.el7.x86_64.rpm
+unbound-libs-1.6.6-5.el7_8.x86_64.rpm
 unixODBC-2.3.1-11.el7.x86_64.rpm
 unixODBC-devel-2.3.1-11.el7.x86_64.rpm
 # unzip-6.0-19.el7.x86_64.rpm provided by mock
