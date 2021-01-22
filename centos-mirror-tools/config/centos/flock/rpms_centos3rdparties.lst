@@ -85,7 +85,7 @@ selinux-policy-3.13.1-229.el7_6.6.noarch.rpm
 selinux-policy-minimum-3.13.1-229.el7_6.6.noarch.rpm
 selinux-policy-mls-3.13.1-229.el7_6.6.noarch.rpm
 selinux-policy-targeted-3.13.1-229.el7_6.6.noarch.rpm
-spice-server-0.14.0-6.el7.x86_64.rpm
+spice-server-0.14.0-9.el7.x86_64.rpm
 systemtap-sdt-devel-3.3-3.el7.x86_64.rpm
 tcpdump-4.9.2-4.el7_7.1.x86_64.rpm
 tkinter-2.7.5-76.el7.x86_64.rpm

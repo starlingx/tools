@@ -71,8 +71,8 @@ rest-0.8.1-2.el7.x86_64.rpm
 selinux-policy-3.13.1-229.el7_6.6.noarch.rpm
 selinux-policy-devel-3.13.1-229.el7_6.6.noarch.rpm
 spice-protocol-0.12.14-1.el7.noarch.rpm
-spice-server-0.14.0-6.el7.x86_64.rpm
-spice-server-devel-0.14.0-6.el7.x86_64.rpm
+spice-server-0.14.0-9.el7.x86_64.rpm
+spice-server-devel-0.14.0-9.el7.x86_64.rpm
 # systemd-219-67.el7.x86_64.rpm provided by mock
 # systemd-devel-219-67.el7.x86_64.rpm provided by mock
 # systemd-libs-219-67.el7.x86_64.rpm provided by mock
