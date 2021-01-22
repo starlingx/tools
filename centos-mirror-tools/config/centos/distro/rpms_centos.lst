@@ -436,7 +436,7 @@ libsoup-2.62.2-2.el7.x86_64.rpm
 # libtasn1-4.10-1.el7.x86_64.rpm provided by mock
 libtasn1-devel-4.10-1.el7.x86_64.rpm
 libthai-0.1.14-9.el7.x86_64.rpm
-libtiff-4.0.3-27.el7_3.x86_64.rpm
+libtiff-4.0.3-35.el7.x86_64.rpm
 libtimezonemap-0.4.4-1.el7.x86_64.rpm
 libtimezonemap-devel-0.4.4-1.el7.x86_64.rpm
 libtirpc-0.2.4-0.15.el7.x86_64.rpm

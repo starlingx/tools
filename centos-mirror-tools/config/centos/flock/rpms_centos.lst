@@ -487,8 +487,8 @@ libsysfs-2.1.0-16.el7.x86_64.rpm
 # libtasn1-4.10-1.el7.x86_64.rpm provided by mock
 libteam-1.27-5.el7.x86_64.rpm
 libtheora-1.1.1-8.el7.x86_64.rpm
-libtiff-4.0.3-27.el7_3.x86_64.rpm
-libtiff-devel-4.0.3-27.el7_3.x86_64.rpm
+libtiff-4.0.3-35.el7.x86_64.rpm
+libtiff-devel-4.0.3-35.el7.x86_64.rpm
 libtirpc-0.2.4-0.15.el7.x86_64.rpm
 libtirpc-devel-0.2.4-0.15.el7.x86_64.rpm
 libtomcrypt-1.17-33.20170623gitcd6e602.el7.x86_64.rpm
