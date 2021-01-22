@@ -1279,10 +1279,10 @@ userspace-rcu-devel-0.10.0-3.el7.x86_64.rpm
 # ustr-1.0.4-16.el7.x86_64.rpm provided by mock
 uuid-1.6.2-26.el7.x86_64.rpm
 uuid-devel-1.6.2-26.el7.x86_64.rpm
-vim-common-7.4.160-5.el7.x86_64.rpm
-vim-enhanced-7.4.160-5.el7.x86_64.rpm
-vim-filesystem-7.4.160-5.el7.x86_64.rpm
-vim-minimal-7.4.160-5.el7.x86_64.rpm
+vim-common-7.4.629-7.el7.x86_64.rpm
+vim-enhanced-7.4.629-7.el7.x86_64.rpm
+vim-filesystem-7.4.629-7.el7.x86_64.rpm
+vim-minimal-7.4.629-7.el7.x86_64.rpm
 virt-what-1.18-4.el7.x86_64.rpm
 vlgothic-fonts-20130607-2.el7.noarch.rpm
 vlgothic-p-fonts-20130607-2.el7.noarch.rpm
