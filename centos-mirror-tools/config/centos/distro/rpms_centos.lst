@@ -429,7 +429,7 @@ libselinux-utils-2.5-14.1.el7.x86_64.rpm
 libsepol-devel-2.5-10.el7.x86_64.rpm
 libSM-1.2.2-2.el7.x86_64.rpm
 # libsmartcols-2.23.2-59.el7.x86_64.rpm provided by mock
-libsndfile-1.0.25-10.el7.x86_64.rpm
+libsndfile-1.0.25-12.el7.x86_64.rpm
 libsolv-0.6.34-4.el7.x86_64.rpm
 libsoup-2.62.2-2.el7.x86_64.rpm
 # libstdc++-4.8.5-36.el7.x86_64.rpm provided by mock
