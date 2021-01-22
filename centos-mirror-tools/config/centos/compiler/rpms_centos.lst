@@ -24,9 +24,9 @@ bzip2-devel-1.0.6-13.el7.x86_64.rpm
 # cracklib-dicts-2.9.0-11.el7.x86_64.rpm provided by mock
 # cryptsetup-libs-2.0.3-3.el7.x86_64.rpm provided by mock
 # cyrus-sasl-lib-2.1.26-23.el7.x86_64.rpm provided by mock
-# dbus-1.10.24-12.el7.x86_64.rpm provided by mock
-dbus-devel-1.10.24-12.el7.x86_64.rpm
-# dbus-libs-1.10.24-12.el7.x86_64.rpm provided by mock
+# dbus-1.10.24-15.el7.x86_64.rpm provided by mock
+dbus-devel-1.10.24-15.el7.x86_64.rpm
+# dbus-libs-1.10.24-15.el7.x86_64.rpm provided by mock
 dejavu-fonts-common-2.33-6.el7.noarch.rpm
 dejavu-sans-fonts-2.33-6.el7.noarch.rpm
 # device-mapper-1.02.146-4.el7.x86_64.rpm provided by mock

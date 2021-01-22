@@ -105,11 +105,11 @@ cyrus-sasl-2.1.26-23.el7.x86_64.rpm
 cyrus-sasl-devel-2.1.26-23.el7.x86_64.rpm
 cyrus-sasl-gssapi-2.1.26-23.el7.x86_64.rpm
 # cyrus-sasl-lib-2.1.26-23.el7.x86_64.rpm provided by mock
-# dbus-1.10.24-12.el7.x86_64.rpm provided by mock
-dbus-devel-1.10.24-12.el7.x86_64.rpm
+# dbus-1.10.24-15.el7.x86_64.rpm provided by mock
+dbus-devel-1.10.24-15.el7.x86_64.rpm
 dbus-glib-0.100-7.el7.x86_64.rpm
 dbus-glib-devel-0.100-7.el7.x86_64.rpm
-# dbus-libs-1.10.24-12.el7.x86_64.rpm provided by mock
+# dbus-libs-1.10.24-15.el7.x86_64.rpm provided by mock
 dbus-python-1.1.1-9.el7.x86_64.rpm
 dconf-0.28.0-4.el7.x86_64.rpm
 dejavu-fonts-common-2.33-6.el7.noarch.rpm
