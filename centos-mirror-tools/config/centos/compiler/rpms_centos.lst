@@ -59,11 +59,11 @@ gettext-common-devel-0.19.8.1-3.el7.noarch.rpm
 gettext-devel-0.19.8.1-3.el7.x86_64.rpm
 gettext-libs-0.19.8.1-3.el7.x86_64.rpm
 git-1.8.3.1-20.el7.x86_64.rpm
-# glibc-2.17-260.el7.x86_64.rpm provided by mock
-# glibc-common-2.17-260.el7.x86_64.rpm provided by mock
-# glibc-devel-2.17-260.el7.x86_64.rpm provided by mock
-# glibc-headers-2.17-260.el7.x86_64.rpm provided by mock
-glibc-static-2.17-260.el7.x86_64.rpm
+# glibc-2.17-317.el7.x86_64.rpm provided by mock
+# glibc-common-2.17-317.el7.x86_64.rpm provided by mock
+# glibc-devel-2.17-317.el7.x86_64.rpm provided by mock
+# glibc-headers-2.17-317.el7.x86_64.rpm provided by mock
+glibc-static-2.17-317.el7.x86_64.rpm
 gl-manpages-1.1-7.20130122.el7.noarch.rpm
 # gmp-6.0.0-15.el7.x86_64.rpm provided by mock
 gmp-devel-6.0.0-15.el7.x86_64.rpm

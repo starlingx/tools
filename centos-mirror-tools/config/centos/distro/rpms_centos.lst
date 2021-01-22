@@ -230,11 +230,11 @@ giflib-4.1.6-9.el7.x86_64.rpm
 git-1.8.3.1-20.el7.x86_64.rpm
 glade-devel-3.20.0-1.el7.x86_64.rpm
 glade-libs-3.20.0-1.el7.x86_64.rpm
-# glibc-2.17-260.el7.x86_64.rpm provided by mock
-# glibc-common-2.17-260.el7.x86_64.rpm provided by mock
-# glibc-devel-2.17-260.el7.x86_64.rpm provided by mock
-# glibc-headers-2.17-260.el7.x86_64.rpm provided by mock
-glibc-static-2.17-260.el7.x86_64.rpm
+# glibc-2.17-317.el7.x86_64.rpm provided by mock
+# glibc-common-2.17-317.el7.x86_64.rpm provided by mock
+# glibc-devel-2.17-317.el7.x86_64.rpm provided by mock
+# glibc-headers-2.17-317.el7.x86_64.rpm provided by mock
+glibc-static-2.17-317.el7.x86_64.rpm
 glib-networking-2.56.1-1.el7.x86_64.rpm
 gl-manpages-1.1-7.20130122.el7.noarch.rpm
 glusterfs-5.2-1.el7.x86_64.rpm
