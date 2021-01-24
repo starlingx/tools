@@ -678,7 +678,7 @@ postgresql-9.2.24-1.el7_5.x86_64.rpm
 postgresql-devel-9.2.24-1.el7_5.x86_64.rpm
 postgresql-libs-9.2.24-1.el7_5.x86_64.rpm
 pps-tools-devel-0-0.9.20120407git0deb9c.el7.x86_64.rpm
-# procps-ng-3.3.10-23.el7.x86_64.rpm provided by mock
+# procps-ng-3.3.10-28.el7.x86_64.rpm provided by mock
 psmisc-22.20-15.el7.x86_64.rpm
 # pth-2.0.7-23.el7.x86_64.rpm provided by mock
 pycairo-1.8.10-8.el7.x86_64.rpm
