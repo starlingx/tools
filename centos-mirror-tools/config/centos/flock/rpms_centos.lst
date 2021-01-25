@@ -560,7 +560,7 @@ mdi-common-1.4.57.0-4.el7.noarch.rpm
 mdi-fonts-1.4.57.0-4.el7.noarch.rpm
 memcached-1.4.39-1.el7.x86_64.rpm
 mercurial-2.6.2-8.el7_4.x86_64.rpm
-microcode_ctl-2.1-47.2.el7_6.x86_64.rpm
+microcode_ctl-2.1-73.el7.x86_64.rpm
 mod_wsgi-3.4-18.el7.x86_64.rpm
 moyogo-molengo-fonts-0.10-9.el7.noarch.rpm
 mozilla-fira-fonts-common-4.202-1.el7.noarch.rpm
