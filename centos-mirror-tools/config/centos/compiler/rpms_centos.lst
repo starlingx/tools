@@ -187,8 +187,8 @@ nss-devel-3.53.1-3.el7_9.x86_64.rpm
 # nss-tools-3.53.1-3.el7_9.x86_64.rpm provided by mock
 # nss-util-3.53.1-1.el7_9.x86_64.rpm provided by mock
 nss-util-devel-3.53.1-1.el7_9.x86_64.rpm
-openssh-7.4p1-16.el7.x86_64.rpm
-openssh-clients-7.4p1-16.el7.x86_64.rpm
+openssh-7.4p1-21.el7.x86_64.rpm
+openssh-clients-7.4p1-21.el7.x86_64.rpm
 openssl-devel-1.0.2k-16.el7.x86_64.rpm
 # openssl-libs-1.0.2k-16.el7.x86_64.rpm provided by mock
 # p11-kit-0.23.5-3.el7.x86_64.rpm provided by mock

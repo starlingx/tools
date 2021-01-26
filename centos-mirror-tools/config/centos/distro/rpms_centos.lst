@@ -570,8 +570,8 @@ openjpeg-libs-1.5.1-18.el7.x86_64.rpm
 openpgm-5.2.122-2.el7.x86_64.rpm
 opensc-0.16.0-10.20170227git777e2a3.el7.x86_64.rpm
 opensp-1.5.2-19.el7.x86_64.rpm
-openssh-7.4p1-16.el7.x86_64.rpm
-openssh-clients-7.4p1-16.el7.x86_64.rpm
+openssh-7.4p1-21.el7.x86_64.rpm
+openssh-clients-7.4p1-21.el7.x86_64.rpm
 openssl-1.0.2k-16.el7.x86_64.rpm
 openssl-devel-1.0.2k-16.el7.x86_64.rpm
 # openssl-libs-1.0.2k-16.el7.x86_64.rpm provided by mock
