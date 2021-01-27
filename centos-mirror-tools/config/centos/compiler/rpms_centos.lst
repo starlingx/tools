@@ -246,9 +246,9 @@ python3-pip-9.0.3-5.el7.noarch.rpm
 python3-rpm-generators-6-2.el7.noarch.rpm
 python3-rpm-macros-3-32.el7.noarch.rpm
 python3-setuptools-39.2.0-10.el7.noarch.rpm
-python-2.7.5-76.el7.x86_64.rpm
-python-devel-2.7.5-76.el7.x86_64.rpm
-python-libs-2.7.5-76.el7.x86_64.rpm
+python-2.7.5-89.el7.x86_64.rpm
+python-devel-2.7.5-89.el7.x86_64.rpm
+python-libs-2.7.5-89.el7.x86_64.rpm
 # qrencode-libs-3.4.1-3.el7.x86_64.rpm provided by mock
 # readline-6.2-10.el7.x86_64.rpm provided by mock
 readline-devel-6.2-10.el7.x86_64.rpm
