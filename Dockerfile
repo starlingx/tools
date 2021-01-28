@@ -44,6 +44,7 @@ COPY toCOPY/yum.repos.d/*.repo /etc/yum.repos.d/
 COPY centos-mirror-tools/rpm-gpg-keys/RPM-GPG-KEY-EPEL-8 /etc/pki/rpm-gpg/
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && \
     echo "http_caching=packages" >> /etc/dnf/dnf.conf && \
+    echo "skip_missing_names_on_install=0" >>/etc/dnf/dnf.conf && \
     # dnf variables must be in lower case ; \
     echo "$CENTOS_8_1_URL" > /etc/dnf/vars/centos_8_1_url && \
     echo "$EPEL_8_1_URL" > /etc/dnf/vars/epel_8_1_url && \
