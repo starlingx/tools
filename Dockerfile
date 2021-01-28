@@ -43,6 +43,7 @@ COPY toCOPY/yum.repos.d/*.repo /etc/yum.repos.d/
 COPY centos-mirror-tools/rpm-gpg-keys/RPM-GPG-KEY-EPEL-7 /etc/pki/rpm-gpg/
 RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && \
     echo "http_caching=packages" >> /etc/yum.conf && \
+    echo "skip_missing_names_on_install=0" >>/etc/yum.conf && \
     # yum variables must be in lower case ; \
     echo "$CENTOS_7_8_URL" >/etc/yum/vars/centos_7_8_url && \
     echo "$EPEL_7_8_URL" >/etc/yum/vars/epel_7_8_url && \
