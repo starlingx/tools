@@ -236,7 +236,7 @@ perl-Text-Unidecode-0.04-20.el7.noarch.rpm
 # pkgconfig-0.27.1-4.el7.x86_64.rpm provided by mock
 # popt-1.13-16.el7.x86_64.rpm provided by mock
 popt-devel-1.13-16.el7.x86_64.rpm
-# procps-ng-3.3.10-23.el7.x86_64.rpm provided by mock
+# procps-ng-3.3.10-28.el7.x86_64.rpm provided by mock
 pyparsing-2.1.10-3.el7.noarch.rpm
 python2-pyparsing-2.1.10-3.el7.noarch.rpm
 python3-3.6.8-10.el7.x86_64.rpm
