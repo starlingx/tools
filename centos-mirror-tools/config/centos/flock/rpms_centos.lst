@@ -904,7 +904,7 @@ python2-requests-oauthlib-0.8.0-5.el7.noarch.rpm
 python2-retryz-0.1.8-1.el7.noarch.rpm
 python2-rfc3986-1.2.0-1.el7.noarch.rpm
 python2-rjsmin-1.0.12-2.el7.x86_64.rpm
-# python2-rpm-macros-3-25.el7.noarch.rpm provided by mock
+# python2-rpm-macros-3-34.el7.noarch.rpm provided by mock
 python2-rsa-3.4.1-1.el7.noarch.rpm
 python2-ruamel-ordereddict-0.4.9-3.el7.x86_64.rpm
 python2-ruamel-yaml-0.13.14-2.el7.x86_64.rpm
@@ -1095,7 +1095,7 @@ python-repoze-lru-0.4-3.el7.noarch.rpm
 python-repoze-who-2.1-1.el7.noarch.rpm
 python-retrying-1.2.3-4.el7.noarch.rpm
 python-routes-2.4.1-1.el7.noarch.rpm
-# python-rpm-macros-3-25.el7.noarch.rpm provided by mock
+# python-rpm-macros-3-34.el7.noarch.rpm provided by mock
 python-rtslib-2.1.fb63-13.el7.noarch.rpm
 python-s3transfer-0.1.13-1.el7.noarch.rpm
 python-schedutils-0.4-6.el7.x86_64.rpm
@@ -1108,7 +1108,7 @@ python-slip-dbus-0.4.0-4.el7.noarch.rpm
 python-sphinx-locale-1.6.2-3.el7.noarch.rpm
 python-sqlalchemy-utils-0.31.3-2.el7.noarch.rpm
 python-sqlparse-0.1.18-5.el7.noarch.rpm
-# python-srpm-macros-3-25.el7.noarch.rpm provided by mock
+# python-srpm-macros-3-34.el7.noarch.rpm provided by mock
 python-subprocess32-3.2.6-4.el7.x86_64.rpm
 python-subunit-1.0.0-1.el7.noarch.rpm
 python-swift-2.15.1-1.el7.noarch.rpm
