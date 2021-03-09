@@ -649,16 +649,16 @@ pciutils-3.5.1-3.el7.x86_64.rpm
 pciutils-libs-3.5.1-3.el7.x86_64.rpm
 # pcre-8.32-17.el7.x86_64.rpm provided by mock
 pcre-devel-8.32-17.el7.x86_64.rpm
-# perl-5.16.3-294.el7_6.x86_64.rpm provided by mock
+# perl-5.16.3-299.el7_9.x86_64.rpm provided by mock
 # perl-Carp-1.26-244.el7.noarch.rpm provided by mock
 # perl-constant-1.27-2.el7.noarch.rpm provided by mock
 perl-Data-Dumper-2.145-3.el7.x86_64.rpm
-perl-devel-5.16.3-294.el7_6.x86_64.rpm
+perl-devel-5.16.3-299.el7_9.x86_64.rpm
 # perl-Encode-2.51-7.el7.x86_64.rpm provided by mock
 perl-Encode-Locale-1.03-5.el7.noarch.rpm
 perl-Error-0.17020-2.el7.noarch.rpm
 # perl-Exporter-5.68-3.el7.noarch.rpm provided by mock
-perl-ExtUtils-Install-1.58-294.el7_6.noarch.rpm
+perl-ExtUtils-Install-1.58-299.el7_9.noarch.rpm
 perl-ExtUtils-MakeMaker-6.68-3.el7.noarch.rpm
 perl-ExtUtils-Manifest-1.61-244.el7.noarch.rpm
 perl-ExtUtils-ParseXS-3.18-3.el7.noarch.rpm
@@ -670,11 +670,11 @@ perl-generators-1.08-7.el7.noarch.rpm
 perl-Git-1.8.3.1-20.el7.noarch.rpm
 perl-hivex-1.3.10-6.9.el7.x86_64.rpm
 # perl-HTTP-Tiny-0.033-3.el7.noarch.rpm provided by mock
-# perl-libs-5.16.3-294.el7_6.x86_64.rpm provided by mock
-# perl-macros-5.16.3-294.el7_6.x86_64.rpm provided by mock
+# perl-libs-5.16.3-299.el7_9.x86_64.rpm provided by mock
+# perl-macros-5.16.3-299.el7_9.x86_64.rpm provided by mock
 # perl-parent-0.225-244.el7.noarch.rpm provided by mock
 # perl-PathTools-3.40-5.el7.x86_64.rpm provided by mock
-# perl-Pod-Escapes-1.04-294.el7_6.noarch.rpm provided by mock
+# perl-Pod-Escapes-1.04-299.el7_9.noarch.rpm provided by mock
 # perl-podlators-2.5.1-3.el7.noarch.rpm provided by mock
 # perl-Pod-Perldoc-3.20-4.el7.noarch.rpm provided by mock
 # perl-Pod-Simple-3.28-4.el7.noarch.rpm provided by mock

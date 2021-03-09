@@ -596,7 +596,7 @@ pcre-devel-8.32-17.el7.x86_64.rpm
 pcsc-lite-1.8.8-8.el7.x86_64.rpm
 pcsc-lite-ccid-1.4.10-14.el7.x86_64.rpm
 pcsc-lite-libs-1.8.8-8.el7.x86_64.rpm
-# perl-5.16.3-294.el7_6.x86_64.rpm provided by mock
+# perl-5.16.3-299.el7_9.x86_64.rpm provided by mock
 perl-Business-ISBN-2.06-2.el7.noarch.rpm
 perl-Business-ISBN-Data-20120719.001-2.el7.noarch.rpm
 # perl-Carp-1.26-244.el7.noarch.rpm provided by mock
@@ -604,7 +604,7 @@ perl-Compress-Raw-Zlib-2.061-4.el7.x86_64.rpm
 perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64.rpm
 # perl-constant-1.27-2.el7.noarch.rpm provided by mock
 perl-Data-Dumper-2.145-3.el7.x86_64.rpm
-perl-devel-5.16.3-294.el7_6.x86_64.rpm
+perl-devel-5.16.3-299.el7_9.x86_64.rpm
 perl-Digest-1.17-245.el7.noarch.rpm
 perl-Digest-MD5-2.52-3.el7.x86_64.rpm
 # perl-Encode-2.51-7.el7.x86_64.rpm provided by mock
@@ -612,8 +612,8 @@ perl-Encode-Locale-1.03-5.el7.noarch.rpm
 perl-Env-1.04-2.el7.noarch.rpm
 perl-Error-0.17020-2.el7.noarch.rpm
 # perl-Exporter-5.68-3.el7.noarch.rpm provided by mock
-perl-ExtUtils-Embed-1.30-294.el7_6.noarch.rpm
-perl-ExtUtils-Install-1.58-294.el7_6.noarch.rpm
+perl-ExtUtils-Embed-1.30-299.el7_9.noarch.rpm
+perl-ExtUtils-Install-1.58-299.el7_9.noarch.rpm
 perl-ExtUtils-MakeMaker-6.68-3.el7.noarch.rpm
 perl-ExtUtils-Manifest-1.61-244.el7.noarch.rpm
 perl-ExtUtils-ParseXS-3.18-3.el7.noarch.rpm
@@ -631,12 +631,12 @@ perl-HTTP-Message-6.06-6.el7.noarch.rpm
 perl-IO-Compress-2.061-2.el7.noarch.rpm
 perl-IO-HTML-1.00-2.el7.noarch.rpm
 perl-libintl-1.20-12.el7.x86_64.rpm
-# perl-libs-5.16.3-294.el7_6.x86_64.rpm provided by mock
+# perl-libs-5.16.3-299.el7_9.x86_64.rpm provided by mock
 perl-LWP-MediaTypes-6.02-2.el7.noarch.rpm
-# perl-macros-5.16.3-294.el7_6.x86_64.rpm provided by mock
+# perl-macros-5.16.3-299.el7_9.x86_64.rpm provided by mock
 # perl-parent-0.225-244.el7.noarch.rpm provided by mock
 # perl-PathTools-3.40-5.el7.x86_64.rpm provided by mock
-# perl-Pod-Escapes-1.04-294.el7_6.noarch.rpm provided by mock
+# perl-Pod-Escapes-1.04-299.el7_9.noarch.rpm provided by mock
 # perl-podlators-2.5.1-3.el7.noarch.rpm provided by mock
 # perl-Pod-Perldoc-3.20-4.el7.noarch.rpm provided by mock
 # perl-Pod-Simple-3.28-4.el7.noarch.rpm provided by mock
