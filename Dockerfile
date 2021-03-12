@@ -59,10 +59,8 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && \
 VOLUME /run /tmp
 
 # Download required dependencies by mirror/build processes.
-RUN groupadd -g 751 cgts && \
-    echo "mock:x:751:root" >> /etc/group && \
-    echo "mockbuild:x:9001:" >> /etc/group && \
-    yum install -y anaconda \
+RUN yum install -y \
+        anaconda \
         anaconda-runtime \
         autoconf-archive \
         autogen \
@@ -90,8 +88,6 @@ RUN groupadd -g 751 cgts && \
         lighttpd-mod_geoip \
         net-tools \
         mkisofs \
-        http://mirror.starlingx.cengn.ca/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-1.4.16-1.el7.noarch.rpm \
-        http://mirror.starlingx.cengn.ca/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-core-configs-31.6-1.el7.noarch.rpm \
         mongodb \
         mongodb-server \
         pax \
@@ -123,21 +119,26 @@ RUN groupadd -g 751 cgts && \
         vim-enhanced \
         wget
 
-# This image requires a set of scripts and helpers
-# for working correctly, in this section they are
-# copied inside the image.
-COPY toCOPY/finishSetup.sh /usr/local/bin
-COPY toCOPY/populate_downloads.sh /usr/local/bin
-COPY toCOPY/generate-local-repo.sh /usr/local/bin
-COPY toCOPY/generate-centos-repo.sh /usr/local/bin
-COPY toCOPY/lst_utils.sh /usr/local/bin
-COPY toCOPY/.inputrc /home/$MYUNAME/
-COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
+# Finally install a locked down version of mock
+RUN groupadd -g 751 cgts && \
+    echo "mock:x:751:root" >> /etc/group && \
+    echo "mockbuild:x:9001:" >> /etc/group && \
+    yum install -y \
+        http://mirror.starlingx.cengn.ca/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-1.4.16-1.el7.noarch.rpm \
+        http://mirror.starlingx.cengn.ca/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-core-configs-31.6-1.el7.noarch.rpm
 
-# Thes are included for backward compatibility, and
-# should be removed after a reasonable time.
-COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
-COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
+# mock custumizations
+# forcing chroots since a couple of packages naughtily insist on network access and
+# we dont have nspawn and networks happy together.
+RUN useradd -s /sbin/nologin -u 9001 -g 9001 mockbuild && \
+    rmdir /var/lib/mock && \
+    ln -s /localdisk/loadbuild/mock /var/lib/mock && \
+    rmdir /var/cache/mock && \
+    ln -s /localdisk/loadbuild/mock-cache /var/cache/mock && \
+    echo "config_opts['use_nspawn'] = False" >> /etc/mock/site-defaults.cfg && \
+    echo "config_opts['rpmbuild_networking'] = True" >> /etc/mock/site-defaults.cfg && \
+    echo  >> /etc/mock/site-defaults.cfg
+
 
 # cpan modules, installing with cpanminus to avoid stupid questions since cpan is whack
 RUN cpanm --notest Fatal && \
@@ -145,10 +146,6 @@ RUN cpanm --notest Fatal && \
     cpanm --notest XML::SAX::Expat && \
     cpanm --notest XML::Parser && \
     cpanm --notest XML::Simple
-
-# pip installs
-RUN pip install -c /home/$MYUNAME/builder-constraints.txt python-subunit junitxml --upgrade && \
-    pip install -c /home/$MYUNAME/builder-constraints.txt tox --upgrade
 
 # Install repo tool
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo && \
@@ -161,17 +158,34 @@ RUN yum install -y golang && \
     mkdir -p ${GOPATH}/bin && \
     curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
-# mock time
-# forcing chroots since a couple of packages naughtily insist on network access and
-# we dont have nspawn and networks happy together.
-RUN useradd -s /sbin/nologin -u 9001 -g 9001 mockbuild && \
-    rmdir /var/lib/mock && \
-    ln -s /localdisk/loadbuild/mock /var/lib/mock && \
-    rmdir /var/cache/mock && \
-    ln -s /localdisk/loadbuild/mock-cache /var/cache/mock && \
-    echo "config_opts['use_nspawn'] = False" >> /etc/mock/site-defaults.cfg && \
-    echo "config_opts['rpmbuild_networking'] = True" >> /etc/mock/site-defaults.cfg && \
-    echo  >> /etc/mock/site-defaults.cfg
+# Uprev git, git-review, repo
+RUN yum install -y dh-autoreconf curl-devel expat-devel gettext-devel  openssl-devel perl-devel zlib-devel asciidoc xmlto docbook2X && \
+    cd /tmp && \
+    wget https://github.com/git/git/archive/v2.29.2.tar.gz -O git-2.29.2.tar.gz && \
+    tar xzvf git-2.29.2.tar.gz && \
+    cd git-2.29.2 && \
+    make configure && \
+    ./configure --prefix=/usr/local && \
+    make all doc && \
+    make install install-doc && \
+    cd /tmp && \
+    rm -rf git-2.29.2.tar.gz git-2.29.2 && \
+    pip install git-review --upgrade
+
+# Systemd Enablement
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+    rm -f /lib/systemd/system/multi-user.target.wants/*;\
+    rm -f /etc/systemd/system/*.wants/*;\
+    rm -f /lib/systemd/system/local-fs.target.wants/*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+    rm -f /lib/systemd/system/basic.target.wants/*;\
+    rm -f /lib/systemd/system/anaconda.target.wants/*
+
+# pip installs
+COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
+RUN pip install -c /home/$MYUNAME/builder-constraints.txt python-subunit junitxml --upgrade && \
+    pip install -c /home/$MYUNAME/builder-constraints.txt tox --upgrade
 
 # Inherited  tools for mock stuff
 # we at least need the mock_cache_unlock tool
@@ -180,6 +194,21 @@ COPY toCOPY/mock_overlay /opt/mock_overlay
 RUN cd /opt/mock_overlay && \
     make && \
     make install
+
+# This image requires a set of scripts and helpers
+# for working correctly, in this section they are
+# copied inside the image.
+COPY toCOPY/finishSetup.sh /usr/local/bin
+COPY toCOPY/populate_downloads.sh /usr/local/bin
+COPY toCOPY/generate-local-repo.sh /usr/local/bin
+COPY toCOPY/generate-centos-repo.sh /usr/local/bin
+COPY toCOPY/lst_utils.sh /usr/local/bin
+COPY toCOPY/.inputrc /home/$MYUNAME/
+
+# Thes are included for backward compatibility, and
+# should be removed after a reasonable time.
+COPY toCOPY/generate-cgcs-tis-repo /usr/local/bin
+COPY toCOPY/generate-cgcs-centos-repo.sh /usr/local/bin
 
 #  ENV setup
 RUN echo "# Load stx-builder configuration" >> /etc/profile.d/stx-builder-conf.sh && \
@@ -231,30 +260,6 @@ RUN echo "$MYUNAME ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     echo "server.document-root   = \"/www/root/htdocs\"" >> /etc/lighttpd/lighttpd.conf && \
     sed -i "s/dir-listing.activate/#dir-listing.activate/g" /etc/lighttpd/conf.d/dirlisting.conf && \
     echo "dir-listing.activate = \"enable\"" >> /etc/lighttpd/conf.d/dirlisting.conf
-
-# Uprev git, git-review, repo
-RUN yum install -y dh-autoreconf curl-devel expat-devel gettext-devel  openssl-devel perl-devel zlib-devel asciidoc xmlto docbook2X && \
-    cd /tmp && \
-    wget https://github.com/git/git/archive/v2.29.2.tar.gz -O git-2.29.2.tar.gz && \
-    tar xzvf git-2.29.2.tar.gz && \
-    cd git-2.29.2 && \
-    make configure && \
-    ./configure --prefix=/usr/local && \
-    make all doc && \
-    make install install-doc && \
-    cd /tmp && \
-    rm -rf git-2.29.2.tar.gz git-2.29.2 && \
-    pip install git-review --upgrade
-
-# Systemd Enablement
-RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
-    rm -f /lib/systemd/system/multi-user.target.wants/*;\
-    rm -f /etc/systemd/system/*.wants/*;\
-    rm -f /lib/systemd/system/local-fs.target.wants/*; \
-    rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
-    rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
-    rm -f /lib/systemd/system/basic.target.wants/*;\
-    rm -f /lib/systemd/system/anaconda.target.wants/*
 
 RUN useradd -r -u $MYUID -g cgts -m $MYUNAME && \
     ln -s /home/$MYUNAME/.ssh /mySSH && \
