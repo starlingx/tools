@@ -383,7 +383,7 @@ npm-6.13.4-1.10.19.0.2.module_el8.1.0+296+bef51246.x86_64.rpm
 nss-pam-ldapd-0.9.9-3.el8.x86_64.rpm
 numactl-devel-2.0.12-7.el8.x86_64.rpm
 numactl-libs-2.0.12-7.el8.x86_64.rpm
-nvme-cli-1.8.1-3.el7.x86_64.rpm
+nvme-cli-1.8.1-3.el8.x86_64.rpm
 openpgm-5.2.122-21.el8.x86_64.rpm
 openssl-1.1.1c-2.el8_1.1.x86_64.rpm
 openssl-devel-1.1.1c-2.el8_1.1.x86_64.rpm
