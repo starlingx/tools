@@ -23,7 +23,7 @@ get_yum_command() {
         yumdownloader_extra_opts="--exclude='*.i686' --archlist=noarch,x86_64"
     fi
 
-    echo "yumdownloader -q -C ${YUMCONFOPT} ${RELEASEVER} $yumdownloader_extra_opts $rpm_name"
+    echo "${SUDO} yumdownloader -q -C ${YUMCONFOPT} ${RELEASEVER} $yumdownloader_extra_opts $rpm_name"
 }
 
 get_wget_command() {
@@ -74,7 +74,7 @@ get_url() {
         # filter urls for the desitered arch.
         local arr=( $(split_filename $_name) )
         local arch=${arr[3]}
-        _ret="$($_url_cmd | grep "[.]$arch[.]rpm$" | head -n 1)"
+        _ret="$(${SUDO} $_url_cmd | grep "[.]$arch[.]rpm$" | head -n 1)"
     fi
     echo "$_ret"
 }
@@ -173,7 +173,8 @@ get_download_cmd() {
             download_cmd="$(get_wget_command $rpm_name)"
         else
             # yumdownloader with the appropriate flag for src, noarch or x86_64
-            download_cmd="${SUDOCMD} $(get_yum_command $rpm_name $_level)"
+            # download_cmd="${SUDOCMD} $(get_yum_command $rpm_name $_level)"
+            download_cmd="$(get_yum_command $rpm_name $_level)"
         fi
     else
         # Build wget command
