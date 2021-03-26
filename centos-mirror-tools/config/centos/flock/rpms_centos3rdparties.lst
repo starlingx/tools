@@ -5,6 +5,7 @@ alsa-lib-devel-1.1.9-4.el8.x86_64.rpm
 audit-3.0-0.13.20190507gitf58ec40.el8.x86_64.rpm
 containernetworking-plugins-0.8.3-4.module_el8.1.0+298+41f9343a.x86_64.rpm
 cppcheck-1.83-1.el8.x86_64.rpm
+docker-ce-19.03.13-3.el8.x86_64.rpm
 glib2-devel-2.56.4-7.el8.x86_64.rpm
 gsettings-desktop-schemas-3.32.0-3.el8.x86_64.rpm
 gssproxy-0.8.0-14.el8.x86_64.rpm
