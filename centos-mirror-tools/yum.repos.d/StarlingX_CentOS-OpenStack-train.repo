@@ -5,7 +5,7 @@
 
 [centos-openstack-train]
 name=CentOS-7 - OpenStack train
-baseurl=http://mirror.centos.org/centos/7/cloud/$basearch/openstack-train/
+baseurl=http://mirror.centos.org/centos/7/cloud/x86_64/openstack-train/
 gpgcheck=1
 enabled=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud
@@ -13,14 +13,14 @@ exclude=sip,PyQt4
 
 [centos-openstack-train-test]
 name=CentOS-7 - OpenStack train Testing
-baseurl=https://buildlogs.centos.org/centos/7/cloud/$basearch/openstack-train/
+baseurl=https://buildlogs.centos.org/centos/7/cloud/x86_64/openstack-train/
 gpgcheck=0
 enabled=0
 exclude=sip,PyQt4
 
 [centos-openstack-train-debuginfo]
 name=CentOS-7 - OpenStack train - Debug
-baseurl=http://debuginfo.centos.org/centos/7/cloud/$basearch/
+baseurl=http://debuginfo.centos.org/centos/7/cloud/x86_64/
 gpgcheck=1
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud
