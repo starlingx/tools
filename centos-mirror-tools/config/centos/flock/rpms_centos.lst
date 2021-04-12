@@ -380,6 +380,7 @@ nmap-ncat-7.70-5.el8.x86_64.rpm
 nodejs-10.19.0-2.module_el8.1.0+296+bef51246.x86_64.rpm
 novnc-1.1.0-6.el8.noarch.rpm
 npm-6.13.4-1.10.19.0.2.module_el8.1.0+296+bef51246.x86_64.rpm
+nscd-2.28-72.el8_1.1.x86_64.rpm
 nss-pam-ldapd-0.9.9-3.el8.x86_64.rpm
 numactl-devel-2.0.12-7.el8.x86_64.rpm
 numactl-libs-2.0.12-7.el8.x86_64.rpm
