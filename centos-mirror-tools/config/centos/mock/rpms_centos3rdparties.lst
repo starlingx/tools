@@ -10,8 +10,8 @@ ima-evm-utils-1.1-5.el8.x86_64.rpm
 libblkid-2.32.1-17.el8.x86_64.rpm
 libcom_err-1.44.6-3.el8.x86_64.rpm
 libsemanage-2.9-1.el8.x86_64.rpm
-nss-softokn-3.44.0-9.el8_1.x86_64.rpm
-nss-softokn-freebl-3.44.0-9.el8_1.x86_64.rpm
+nss-softokn-3.53.1-11.el8_2.x86_64.rpm
+nss-softokn-freebl-3.53.1-11.el8_2.x86_64.rpm
 systemd-239-18.el8_1.5.x86_64.rpm
 systemd-devel-239-18.el8_1.5.x86_64.rpm
 systemd-libs-239-18.el8_1.5.x86_64.rpm

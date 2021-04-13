@@ -108,9 +108,9 @@ mesa-libGLU-devel-9.0.0-15.el8.x86_64.rpm
 ncurses-devel-6.1-7.20180224.el8.x86_64.rpm
 neon-0.30.2-6.el8.x86_64.rpm
 nettle-3.4.1-1.el8.x86_64.rpm
-nspr-devel-4.21.0-2.el8_0.x86_64.rpm
-nss-devel-3.44.0-9.el8_1.x86_64.rpm
-nss-util-devel-3.44.0-9.el8_1.x86_64.rpm
+nspr-devel-4.25.0-2.el8_2.x86_64.rpm
+nss-devel-3.53.1-11.el8_2.x86_64.rpm
+nss-util-devel-3.53.1-11.el8_2.x86_64.rpm
 openssh-8.0p1-4.el8_1.x86_64.rpm
 openssh-clients-8.0p1-4.el8_1.x86_64.rpm
 openssl-devel-1.1.1c-2.el8_1.1.x86_64.rpm

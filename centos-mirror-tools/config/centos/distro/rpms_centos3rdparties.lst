@@ -33,8 +33,8 @@ mesa-libgbm-19.1.4-3.el8_1.x86_64.rpm
 mesa-libGL-19.1.4-3.el8_1.x86_64.rpm
 mesa-libglapi-19.1.4-3.el8_1.x86_64.rpm
 mesa-libGL-devel-19.1.4-3.el8_1.x86_64.rpm
-nss-softokn-devel-3.44.0-9.el8_1.x86_64.rpm
-nss-softokn-freebl-devel-3.44.0-9.el8_1.x86_64.rpm
+nss-softokn-devel-3.53.1-11.el8_2.x86_64.rpm
+nss-softokn-freebl-devel-3.53.1-11.el8_2.x86_64.rpm
 policycoreutils-2.9-3.el8_1.1.x86_64.rpm
 policycoreutils-devel-2.9-3.el8_1.1.x86_64.rpm
 policycoreutils-python-utils-2.9-3.el8_1.1.noarch.rpm

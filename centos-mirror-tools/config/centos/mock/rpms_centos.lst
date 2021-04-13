@@ -38,11 +38,14 @@ dwz-0.12-9.el8.x86_64.rpm
 efi-srpm-macros-3-2.el8.noarch.rpm
 emacs-filesystem-26.1-5.el8.noarch.rpm
 epel-release-8-8.el8.noarch.rpm
+epel-rpm-macros-8-18.noarch.rpm
+fedpkg-minimal-1.1.0-12.el8.noarch.rpm
 expat-2.2.5-3.el8.x86_64.rpm
 file-5.33-8.el8.x86_64.rpm
 file-libs-5.33-8.el8.x86_64.rpm
 filesystem-3.8-2.el8.x86_64.rpm
 findutils-4.6.0-20.el8.x86_64.rpm
+fpc-srpm-macros-1.3-1.el8.noarch.rpm
 gawk-4.2.1-1.el8.x86_64.rpm
 gc-7.6.4-3.el8.x86_64.rpm
 gcc-8.3.1-4.5.el8.x86_64.rpm
@@ -76,6 +79,8 @@ kmod-25-13.el8.x86_64.rpm
 kmod-libs-25-13.el8.x86_64.rpm
 kpartx-0.8.0-5.el8.x86_64.rpm
 krb5-libs-1.17-9.el8.x86_64.rpm
+lbzip2-2.5-1.el7.x86_64.rpm
+## libssh2-1.8.0-8.module_el8.0.0+189+f9babebb.1.x86_64.rpm
 libacl-2.2.53-1.el8.x86_64.rpm
 libarchive-3.3.2-8.el8_1.x86_64.rpm
 libassuan-2.5.1-3.el8.x86_64.rpm
@@ -141,6 +146,7 @@ libxml2-2.9.7-5.el8.x86_64.rpm
 libyaml-0.1.7-5.el8.x86_64.rpm
 lua-5.3.4-11.el8.x86_64.rpm
 lua-libs-5.3.4-11.el8.x86_64.rpm
+lua-srpm-macros-1-3.el8.noarch.rpm
 lz4-1.8.1.2-4.el8.x86_64.rpm
 lz4-libs-1.8.1.2-4.el8.x86_64.rpm
 lzo-2.08-14.el8.x86_64.rpm
@@ -151,11 +157,11 @@ ncurses-base-6.1-7.20180224.el8.noarch.rpm
 ncurses-c++-libs-6.1-7.20180224.el8.x86_64.rpm
 ncurses-libs-6.1-7.20180224.el8.x86_64.rpm
 npth-1.5-4.el8.x86_64.rpm
-nspr-4.21.0-2.el8_0.x86_64.rpm
-nss-3.44.0-9.el8_1.x86_64.rpm
-nss-sysinit-3.44.0-9.el8_1.x86_64.rpm
-nss-tools-3.44.0-9.el8_1.x86_64.rpm
-nss-util-3.44.0-9.el8_1.x86_64.rpm
+nspr-4.25.0-2.el8_2.x86_64.rpm
+nss-3.53.1-11.el8_2.x86_64.rpm
+nss-sysinit-3.53.1-11.el8_2.x86_64.rpm
+nss-tools-3.53.1-11.el8_2.x86_64.rpm
+nss-util-3.53.1-11.el8_2.x86_64.rpm
 ocaml-srpm-macros-5-4.el8.noarch.rpm
 openblas-srpm-macros-2-2.el8.noarch.rpm
 openldap-2.4.46-11.el8_1.x86_64.rpm
@@ -320,6 +326,7 @@ platform-python-setuptools-39.2.0-5.el8.noarch.rpm
 popt-1.16-14.el8.x86_64.rpm
 procps-ng-3.3.15-1.el8.x86_64.rpm
 publicsuffix-list-dafsa-20180723-1.el8.noarch.rpm
+python2-rpm-macros-3-38.module_el8.1.0+219+cf9e6ac9.noarch.rpm
 python36-3.6.8-2.module_el8.1.0+245+c39af44f.x86_64.rpm
 python36-devel-3.6.8-2.module_el8.1.0+245+c39af44f.x86_64.rpm
 python3-dateutil-2.6.1-6.el8.noarch.rpm
