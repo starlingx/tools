@@ -27,10 +27,10 @@ nss-softokn-devel-3.53.1-6.el7_9.x86_64.rpm
 # nss-softokn-freebl-3.53.1-6.el7_9.x86_64.rpm provided by mock
 nss-softokn-freebl-devel-3.53.1-6.el7_9.x86_64.rpm
 # openldap-2.4.44-20.el7.x86_64.rpm provided by mock
-# systemd-219-67.el7.x86_64.rpm provided by mock
-# systemd-devel-219-67.el7.x86_64.rpm provided by mock
-# systemd-libs-219-67.el7.x86_64.rpm provided by mock
-# systemd-sysv-219-67.el7.x86_64.rpm provided by mock
+# systemd-219-78.el7_9.3.x86_64.rpm provided by mock
+# systemd-devel-219-78.el7_9.3.x86_64.rpm provided by mock
+# systemd-libs-219-78.el7_9.3.x86_64.rpm provided by mock
+# systemd-sysv-219-78.el7_9.3.x86_64.rpm provided by mock
 systemtap-sdt-devel-3.3-3.el7.x86_64.rpm
 # util-linux-2.23.2-59.el7.x86_64.rpm provided by mock
 valgrind-3.13.0-13.el7.x86_64.rpm
