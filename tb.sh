@@ -64,6 +64,8 @@ function run_container {
         -v ${HOST_MIRROR_DIR}:/import/mirrors:ro \
         -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
         -v ~/.ssh:/mySSH:ro \
+        --tmpfs /tmp \
+        --tmpfs /run \
         -e "container=docker" \
         -e MYUNAME=${MYUNAME} \
         --privileged=true \
