@@ -183,13 +183,13 @@ if [ ! -d "${dest_dir}" ]; then
 fi
 
 for t in "Binary" "Source" ; do
-    target_dir=${dest_dir}/$t
-    if [ ! -d "$target_dir" ]; then
-        mkdir -p "$target_dir"
-    else
-        mv -f "$target_dir" "$target_dir-backup-$timestamp"
-        mkdir -p "$target_dir"
+    target_dir=${dest_dir}/${t}
+
+    if [ -d "${target_dir}" ]; then
+        mv -f "${target_dir}" "${target_dir}-backup-${timestamp}"
     fi
+
+    mkdir -p "${target_dir}"
 done
 
 #
