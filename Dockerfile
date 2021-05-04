@@ -158,7 +158,7 @@ RUN yum install -y golang && \
     mkdir -p ${GOPATH}/bin && \
     curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
-# Uprev git, git-review, repo
+# Uprev git, repo
 RUN yum install -y dh-autoreconf curl-devel expat-devel gettext-devel  openssl-devel perl-devel zlib-devel asciidoc xmlto docbook2X && \
     cd /tmp && \
     wget https://github.com/git/git/archive/v2.29.2.tar.gz -O git-2.29.2.tar.gz && \
@@ -169,8 +169,7 @@ RUN yum install -y dh-autoreconf curl-devel expat-devel gettext-devel  openssl-d
     make all doc && \
     make install install-doc && \
     cd /tmp && \
-    rm -rf git-2.29.2.tar.gz git-2.29.2 && \
-    pip install git-review --upgrade
+    rm -rf git-2.29.2.tar.gz git-2.29.2
 
 # Systemd Enablement
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
@@ -184,8 +183,10 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == system
 
 # pip installs
 COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
-RUN pip install -c /home/$MYUNAME/builder-constraints.txt python-subunit junitxml --upgrade && \
-    pip install -c /home/$MYUNAME/builder-constraints.txt tox --upgrade
+RUN pip install -c /home/$MYUNAME/builder-constraints.txt pbr==5.6.0 --upgrade && \
+    pip install -c /home/$MYUNAME/builder-constraints.txt git-review==2.1.0 --upgrade && \
+    pip install -c /home/$MYUNAME/builder-constraints.txt python-subunit==1.4.0 junitxml==0.7 --upgrade && \
+    pip install -c /home/$MYUNAME/builder-constraints.txt tox==3.23.0 --upgrade
 
 # Inherited  tools for mock stuff
 # we at least need the mock_cache_unlock tool
