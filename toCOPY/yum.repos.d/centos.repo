@@ -1,29 +1,29 @@
-# centos_8_1_url must be defined in /etc/dnf/vars/
+# centos_8_2_url must be defined in /etc/dnf/vars/
 
 [centos-appstream]
 name=centos-os
-baseurl=$centos_8_1_url/AppStream/$basearch/os/
+baseurl=$centos_8_2_url/AppStream/$basearch/os/
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 
 [centos-extras]
 name=centos-extras
-baseurl=$centos_8_1_url/extras/$basearch/os/
+baseurl=$centos_8_2_url/extras/$basearch/os/
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 
 [centos-powertools]
 name=centos-powertools
-baseurl=$centos_8_1_url/PowerTools/$basearch/os/
+baseurl=$centos_8_2_url/PowerTools/$basearch/os/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 enabled=1
 
 [centos-baseos]
 name=centos-baseos
-baseurl=$centos_8_1_url/BaseOS/$basearch/os/
+baseurl=$centos_8_2_url/BaseOS/$basearch/os/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 enabled=1

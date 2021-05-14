@@ -13,7 +13,7 @@
 # Copyright (C) 2019 Intel Corporation
 #
 
-FROM centos:8.1.1911
+FROM centos:8.2.2004
 
 # Proxy configuration
 #ENV http_proxy  "http://your.actual_http_proxy.com:your_port"
@@ -32,8 +32,8 @@ ARG MYUNAME=builder
 ARG MYUID=1000
 # CentOS & EPEL URLs that match the base image
 # Override these with --build-arg if you have a mirror
-ARG CENTOS_8_1_URL=https://vault.centos.org/8.1.1911
-ARG EPEL_8_1_URL=https://archives.fedoraproject.org/pub/archive/epel/8.1.2020-04-22/Everything
+ARG CENTOS_8_2_URL=https://vault.centos.org/8.2.2004
+ARG EPEL_8_2_URL=https://archives.fedoraproject.org/pub/archive/epel/8.2.2020-11-04/Everything
 ARG MY_EMAIL=
 
 ENV container=docker
@@ -46,8 +46,8 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && \
     echo "http_caching=packages" >> /etc/dnf/dnf.conf && \
     echo "skip_missing_names_on_install=0" >>/etc/dnf/dnf.conf && \
     # dnf variables must be in lower case ; \
-    echo "$CENTOS_8_1_URL" > /etc/dnf/vars/centos_8_1_url && \
-    echo "$EPEL_8_1_URL" > /etc/dnf/vars/epel_8_1_url && \
+    echo "$CENTOS_8_2_URL" > /etc/dnf/vars/centos_8_2_url && \
+    echo "$EPEL_8_2_URL" > /etc/dnf/vars/epel_8_1_url && \
     # disable fastestmirror plugin because we are not using mirrors ; \
     # FIXME: use a mirrorlist URL for centos/vault/epel archives. I couldn't find one.
     echo "fastestmirror=False" >> /etc/dnf/dnf.conf && \
