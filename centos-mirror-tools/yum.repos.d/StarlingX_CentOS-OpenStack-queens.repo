@@ -5,7 +5,7 @@
 
 [centos-openstack-queens]
 name=CentOS-7 - OpenStack queens
-baseurl=http://mirror.centos.org/centos/7/cloud/$basearch/openstack-queens/
+baseurl=http://mirror.centos.org/centos/7/cloud/x86_64/openstack-queens/
 gpgcheck=1
 enabled=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud
@@ -13,14 +13,14 @@ exclude=sip,PyQt4
 
 [centos-openstack-queens-test]
 name=CentOS-7 - OpenStack queens Testing
-baseurl=https://buildlogs.centos.org/centos/7/cloud/$basearch/openstack-queens/
+baseurl=https://buildlogs.centos.org/centos/7/cloud/x86_64/openstack-queens/
 gpgcheck=0
 enabled=0
 exclude=sip,PyQt4
 
 [centos-openstack-queens-debuginfo]
 name=CentOS-7 - OpenStack queens - Debug
-baseurl=http://debuginfo.centos.org/centos/7/cloud/$basearch/
+baseurl=http://debuginfo.centos.org/centos/7/cloud/x86_64/
 gpgcheck=1
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud

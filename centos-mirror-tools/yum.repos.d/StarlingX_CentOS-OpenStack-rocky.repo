@@ -5,7 +5,7 @@
 
 [centos-openstack-rocky]
 name=CentOS-7 - OpenStack rocky
-baseurl=http://mirror.centos.org/centos/7/cloud/$basearch/openstack-rocky/
+baseurl=http://mirror.centos.org/centos/7/cloud/x86_64/openstack-rocky/
 gpgcheck=1
 enabled=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud
@@ -13,14 +13,14 @@ exclude=sip,PyQt4
 
 [centos-openstack-rocky-test]
 name=CentOS-7 - OpenStack rocky Testing
-baseurl=https://buildlogs.centos.org/centos/7/cloud/$basearch/openstack-rocky/
+baseurl=https://buildlogs.centos.org/centos/7/cloud/x86_64/openstack-rocky/
 gpgcheck=0
 enabled=0
 exclude=sip,PyQt4
 
 [centos-openstack-rocky-debuginfo]
 name=CentOS-7 - OpenStack rocky - Debug
-baseurl=http://debuginfo.centos.org/centos/7/cloud/$basearch/
+baseurl=http://debuginfo.centos.org/centos/7/cloud/x86_64/
 gpgcheck=1
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-Cloud

@@ -5,6 +5,7 @@ localrc
 toCOPY/.gitconfig
 centos-mirror-tools/logs/
 centos-mirror-tools/output/
+centos-mirror-tools/mirror-check-failures.log
 
 # Sphinx documentation
 doc/build/

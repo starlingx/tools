@@ -74,7 +74,7 @@ get_url() {
         # filter urls for the desitered arch.
         local arr=( $(split_filename $_name) )
         local arch=${arr[3]}
-        _ret="$($_url_cmd | grep "[.]$arch[.]rpm$" | head -n 1)"
+        _ret="$(${SUDO} $_url_cmd | grep "[.]$arch[.]rpm$" | head -n 1)"
     fi
     echo "$_ret"
 }

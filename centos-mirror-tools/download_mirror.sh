@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -18,6 +18,11 @@ cleanup () {
 
 trap "cleanup ; exit 1" INT HUP TERM QUIT
 trap "cleanup" EXIT
+
+# Clear the error log before we begin
+if [ -f $DL_MIRROR_LOG_DIR/errors ]; then
+    rm -f $DL_MIRROR_LOG_DIR/errors
+fi
 
 # A temporary compatability step to save download time
 # during the shift to the new DL_MIRROR_OUTPUT_DIR location.
@@ -115,8 +120,8 @@ make_stx_mirror_yum_conf="${DOWNLOAD_MIRROR_DIR}/make_stx_mirror_yum_conf.sh"
 
 # track optional arguments
 change_group_ids=1
-use_system_yum_conf=1
-alternate_yum_conf=""
+use_system_yum_conf=0
+alternate_yum_conf="${DOWNLOAD_MIRROR_DIR}/yum.conf.sample"
 alternate_repo_dir=""
 rpm_downloader_extra_args=""
 tarball_downloader_extra_args=""
@@ -166,6 +171,8 @@ dl_from_upstream () {
 
 
 MULTIPLE_DL_FLAG_ERROR_MSG="Error: Please use only one of: -s,-S,-u,-U"
+TEMP_DIR=""
+TEMP_DIR_CLEANUP=""
 
 multiple_dl_flag_check () {
     if [ "$dl_flag" != "" ]; then
@@ -177,7 +184,7 @@ multiple_dl_flag_check () {
 
 
 # Parse out optional arguments
-while getopts "c:Cd:ghI:sl:L:nSuUW:" o; do
+while getopts "c:Cd:ghI:sl:L:nt:ySuUW:" o; do
     case "${o}" in
         c)
             # Pass -c ("use alternate dnf.conf") to rpm downloader
@@ -213,6 +220,15 @@ while getopts "c:Cd:ghI:sl:L:nSuUW:" o; do
             # Pass -n ("no-sudo") to rpm downloader
             rpm_downloader_extra_args="${rpm_downloader_extra_args} -n"
             SUDO=""
+            ;;
+        t)
+            # Set TEMP_DIR
+            TEMP_DIR="${OPTARG}"
+            ;;
+        y)
+            # Use hosts /etc/yum.conf
+            use_system_yum_conf=1
+            alternate_yum_conf=""
             ;;
         s)
             # Download from StarlingX mirror only. Do not use upstream sources.
@@ -383,16 +399,15 @@ echo "step #0: Configuring yum repos ..."
 
 if [ ${use_system_yum_conf} -ne 0 ]; then
     # Restore StarlingX_3rd repos from backup
-    REPO_SOURCE_DIR=/localdisk/yum.repos.d
     REPO_DIR=/etc/yum.repos.d
-    if [ -d $REPO_SOURCE_DIR ] && [ -d $REPO_DIR ]; then
-        ${SUDO} \cp -f $REPO_SOURCE_DIR/*.repo $REPO_DIR/
-    fi
 
     if [ $layer != "all" ]; then
         if [ -d ${config_dir}/${distro}/${layer}/yum.repos.d ]; then
-            ${SUDO} \cp -f ${config_dir}/${distro}/${layer}/yum.repos.d/*.repo $REPO_DIR
+            ${SUDO} \cp -f -v ${config_dir}/${distro}/${layer}/yum.repos.d/*.repo $REPO_DIR/
         fi
+    else
+        # copy all layers
+        ${SUDO} \cp -f -v ${config_dir}/${distro}/*/yum.repos.d/*.repo $REPO_DIR/
     fi
 fi
 
@@ -411,7 +426,6 @@ if [ $use_system_yum_conf -eq 0 ]; then
     fi
 fi
 
-TEMP_DIR=""
 rpm_downloader_extra_args="${rpm_downloader_extra_args} -D $distro"
 
 if [ "$dl_flag" != "" ]; then
@@ -428,8 +442,20 @@ if ! dl_from_stx; then
 else
     # We want to use stx mirror, so we need to create a new, modified dnf.conf and yum.repos.d.
     # The modifications will add or substitute repos pointing to the StralingX mirror.
-    TEMP_DIR=$(mktemp -d /tmp/stx_mirror_XXXXXX)
-    TEMP_CONF="$TEMP_DIR/dnf.conf"
+    if [ "$TEMP_DIR" == "" ]; then
+        if [ "$MY_WORKSPACE" != "" ]; then
+            TEMP_DIR="$MY_WORKSPACE/tmp/yum"
+        else
+            TEMP_DIR=$(mktemp -d /tmp/stx_mirror_XXXXXX)
+            TEMP_DIR_CLEANUP="y"
+        fi
+    fi
+
+    if [ ! -d $TEMP_DIR ]; then
+        mkdir -p ${TEMP_DIR}
+    fi
+
+    TEMP_CONF="$TEMP_DIR/yum.conf"
     need_file ${make_stx_mirror_yum_conf}
     need_dir ${TEMP_DIR}
 
@@ -685,7 +711,7 @@ fi
 #
 # Clean up the mktemp directory, if required.
 #
-if [ "$TEMP_DIR" != "" ]; then
+if [ "$TEMP_DIR" != "" ] && [ "$TEMP_DIR_CLEANUP" == "y" ]; then
     echo "${SUDO} rm -rf $TEMP_DIR"
     ${SUDO} \rm -rf "$TEMP_DIR"
 fi

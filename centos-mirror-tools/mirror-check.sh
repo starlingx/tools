@@ -40,14 +40,43 @@ ERROR_LOG_FILE="mirror-check-failures.log"
 truncate -s 0 $ERROR_LOG_FILE
 retcode=0
 extra_opts=""
+layer="$LAYER"
+valid_layers=('compiler' 'distro' 'flock')
+
+
+# Cloned from cgcs-root/build-tools/pkg-manager-utils.sh
+# Ideally this can still be used when tools is the only git
+# that has been cloned.
+
+# Yum vs DNF compatibility
+YUM=$(which yum 2>> /dev/null)
+DNF=$(which dnf 2>> /dev/null)
+PKG_MANAGER=""
+REPOQUERY=$(which repoquery 2>> /dev/null)
+REPOQUERY_SUB_COMMAND=""
+REPOQUERY_RESOLVE="--resolve"
+REPOQUERY_WHATPROVIDES_DELIM=" "
+if [ ! -z ${DNF} ]; then
+    PKG_MANAGER="dnf"
+    REPOQUERY=${DNF}
+    REPOQUERY_SUB_COMMAND="repoquery --disable-modular-filtering"
+    REPOQUERY_RESOLVE=""
+    REPOQUERY_WHATPROVIDES_DELIM=","
+elif [ ! -z ${YUM} ]; then
+    PKG_MANAGER="yum"
+else
+    >&2 echo "ERROR: Couldn't find a supported package manager"
+    exit 1
+fi
 
 
 usage() {
-    echo "$0 [-c <dnf.conf>]"
+    echo "$0 [-c <dnf.conf>] [-l <layer>]"
     echo ""
     echo "Options:"
     echo "  -c: Use an alternate dnf.conf rather than the system file (option passed"
     echo "      on to subscripts when appropriate)"
+    echo "  -l: Check specific layer (one of 'all ${valid_layers[@]}')"
     echo ""
 }
 
@@ -79,8 +108,10 @@ get_repoquery_info() {
     else
         repoquery_opts=
     fi
-    repoquery $extra_opts ${RELEASEVER} -C --qf '%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}' \
-              $repoquery_opts "$_package_name"
+    $REPOQUERY  $REPOQUERY_SUB_COMMAND \
+        $extra_opts ${RELEASEVER} -C \
+        --qf '%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}' \
+        $repoquery_opts "$_package_name"
 }
 
 _check_rpms() {
@@ -113,11 +144,26 @@ check_rpms() {
     done
 }
 
-while getopts "c:" opt; do
+while getopts "c:l:" opt; do
     case $opt in
         c)
             extra_opts="-c ${OPTARG}"
             grep -q "releasever=" $OPTARG && RELEASEVER="--$(grep releasever= ${OPTARG})"
+            ;;
+        l)
+            layer="${OPTARG}"
+            if [ "$layer" == "all" ]; then
+                layer=""
+            else
+                case " ${valid_layers[@]} " in
+                    *" $layer "* ) echo "found layer $layer"
+                        ;;
+                    *) echo "'$layer' is invalid"
+                        usage
+                        exit 1
+                        ;;
+                esac
+            fi
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -133,11 +179,11 @@ if ! dnf $extra_opts ${RELEASEVER} makecache; then
     exit 1
 fi
 
-for rpm_list in "$RPMS_CENTOS_LIST" "$RPMS_3RD_PARTY_LIST"; do
+for rpm_list in $(find config/centos/$layer -name "$RPMS_CENTOS_LIST" -o -name "$RPMS_3RD_PARTY_LIST"); do
     info "Reading $rpm_list..."
     for arch in "src" "noarch" "x86_64"; do
         info "Getting info for $arch packages..."
-        rpms=$(echo "$(grep -F "$arch.rpm" < $rpm_list)")
+        rpms=$(echo "$(grep -v '^#' $rpm_list | grep -F "$arch.rpm")")
         check_rpms "$rpms"
     done
 done

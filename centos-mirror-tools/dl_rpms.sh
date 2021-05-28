@@ -1,12 +1,12 @@
-#!/bin/bash -e
+#!/bin/bash
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 # download RPMs/SRPMs from different sources.
 # this script was originated by Brian Avery, and later updated by Yong Hu
 
-set -o errexit
-set -o nounset
+# set -o errexit
+# set -o nounset
 
 # By default, we use "sudo" and we don't use a local dnf.conf. These can
 # be overridden via flags.
@@ -185,6 +185,181 @@ if [ $CLEAN_LOGS_ONLY -eq 1 ];then
     exit 0
 fi
 
+STOP_SCHEDULING=0
+FOUND_ERRORS=0
+MAX_WORKERS=8
+workers=0
+max_workers=$MAX_WORKERS
+
+# An array that maps worker index to pid, or to two special values
+# 'Idle' indicates no running thread.
+# 'Busy' indicates the worker is allocated, but it's pid isn't known yet.
+declare -A dl_env
+
+#
+# init_dl_env: Init the array that maps worker index to pid.
+#
+init_dl_env () {
+    local i=0
+    local stop
+
+    stop=$((max_workers-1))
+    for i in $(seq 0 $stop); do
+        dl_env[$i]='Idle'
+    done
+}
+
+#
+# get_idle_dl_env: Find an idle worker, mark it allocated
+#                  and return it's index.
+get_idle_dl_env () {
+    local i=0
+    local stop
+
+    stop=$((max_workers-1))
+    if [ $stop -ge 255 ]; then
+        stop=254
+    fi
+
+    for i in $(seq 0 $stop); do
+        if [ ${dl_env[$i]} == 'Idle' ]; then
+            dl_env[$i]='Busy'
+            return $i
+        fi
+    done
+
+    return 255
+}
+
+#
+# set_dl_env_pid: Set the pid of a previously allocated worker
+#
+set_dl_env_pid () {
+    local idx=$1
+    local val=$2
+    dl_env[$idx]=$val
+}
+
+#
+# release_dl_env: Mark a worker as idle.  Call after reaping the thread.
+#
+release_dl_env () {
+    local idx=$1
+    dl_env[$idx]='Idle'
+}
+
+#
+# reaper: Look for worker threads that have exited.
+#         Check/log it's exit code, and release the worker.
+#         Return the number of threads reaped.
+#
+reaper ()  {
+    local reaped=0
+    local last_reaped=-1
+    local i=0
+    local stop
+    local p=0
+    local ret=0
+
+    stop=$((max_workers-1))
+    if [ $stop -ge 255 ]; then
+        stop=254
+    fi
+
+    while [ $reaped -gt $last_reaped ]; do
+        last_reaped=$reaped
+        for i in $(seq 0 $stop); do
+            p=${dl_env[$i]}
+            if [ "$p" == "Idle" ] || [ "$p" == "Busy" ]; then
+                continue
+            fi
+            # echo "test $i $p"
+            kill -0 $p &> /dev/null
+            if [ $? -ne 0 ]; then
+                wait $p
+                ret=$?
+                workers=$((workers-1))
+                reaped=$((reaped+1))
+                release_dl_env $i
+                if [ $ret -ne 0 ]; then
+                    sleep 1
+                    echo "ERROR: $FUNCNAME (${LINENO}): Failed to download in 'b$i'"
+                    cat "$DL_MIRROR_LOG_DIR/$i" >> $DL_MIRROR_LOG_DIR/errors
+                    echo "ERROR: $FUNCNAME (${LINENO}): Failed to download in 'b$i'" >> $DL_MIRROR_LOG_DIR/errors
+                    echo "" >> $DL_MIRROR_LOG_DIR/errors
+                    FOUND_ERRORS=1
+                fi
+            fi
+        done
+    done
+    return $reaped
+}
+
+#
+# download_worker: Download one file.
+#                  This is the entry point for a worker thread.
+#
+download_worker () {
+    local dl_idx=$1
+    local ff="$2"
+    local _level=$3
+
+    local rpm_name=""
+    local dest_dir=""
+    local rc=0
+    local dl_result=1
+    local lvl=""
+    local download_cmd=""
+    local download_url=""
+    local SFILE=""
+    local _arch=""
+
+    _arch=$(get_arch_from_rpm $ff)
+    rpm_name="$(get_rpm_name $ff)"
+    dest_dir="$(get_dest_directory $_arch)"
+
+    if [ ! -e $dest_dir/$rpm_name ]; then
+        for dl_src in $dl_source; do
+            case $dl_src in
+                $dl_from_stx_mirror)
+                    lvl=$dl_from_stx_mirror
+                    ;;
+                $dl_from_upstream)
+                lvl=$_level
+                    ;;
+                *)
+                    echo "Error: Unknown dl_source '$dl_src'"
+                    continue
+                    ;;
+            esac
+
+            download_cmd="$(get_download_cmd $ff $lvl)"
+
+            echo "Looking for $rpm_name"
+            echo "--> run: $download_cmd"
+            if $download_cmd ; then
+                download_url="$(get_url $ff $lvl)"
+                SFILE="$(get_rpm_level_name $rpm_name $lvl)"
+                process_result "$_arch" "$dest_dir" "$download_url" "$SFILE"
+                dl_result=0
+                break
+            else
+                echo "Warning: $rpm_name not found"
+            fi
+        done
+
+        if [ $dl_result -eq 1 ]; then
+            echo "Error: $rpm_name not found"
+            echo "missing_srpm:$rpm_name" >> $LOG
+            echo $rpm_name >> $MISSING_SRPMS
+            rc=1
+        fi
+    else
+        echo "Already have $dest_dir/$rpm_name"
+    fi
+    return $rc
+}
+
 # Function to download different types of RPMs in different ways
 download () {
     local _file=$1
@@ -194,68 +369,55 @@ download () {
 
     local _arch=""
 
-    local rc=0
-    local download_cmd=""
-    local download_url=""
-    local rpm_name=""
-    local SFILE=""
-    local lvl
-    local dl_result
 
+    FOUND_ERRORS=0
     _list=$(cat $_file)
     _from=$(get_from $_file)
 
     echo "now the rpm will come from: $_from"
     for ff in $_list; do
-        _arch=$(get_arch_from_rpm $ff)
-        rpm_name="$(get_rpm_name $ff)"
-        dest_dir="$(get_dest_directory $_arch)"
-
-        if [ ! -e $dest_dir/$rpm_name ]; then
-            dl_result=1
-            for dl_src in $dl_source; do
-                case $dl_src in
-                    $dl_from_stx_mirror)
-                        lvl=$dl_from_stx_mirror
-                        ;;
-                    $dl_from_upstream)
-                        lvl=$_level
-                        ;;
-                    *)
-                        echo "Error: Unknown dl_source '$dl_src'"
-                        continue
-                        ;;
-                esac
-
-                download_cmd="$(get_download_cmd $ff $lvl)"
-
-                echo "Looking for $rpm_name"
-                echo "--> run: $download_cmd"
-                if $download_cmd ; then
-                    download_url="$(get_url $ff $lvl)"
-                    SFILE="$(get_rpm_level_name $rpm_name $lvl)"
-                    process_result "$_arch" "$dest_dir" "$download_url" "$SFILE"
-                    dl_result=0
-                    break
-                else
-                    echo "Warning: $rpm_name not found"
-                fi
-            done
-
-            if [ $dl_result -eq 1 ]; then
-                echo "Error: $rpm_name not found"
-                echo "missing_srpm:$rpm_name" >> $LOG
-                echo $rpm_name >> $MISSING_SRPMS
-                rc=1
+        # Free up a worker if none available
+        while [ $workers -ge $max_workers ]; do
+            reaper
+            reaped=$?
+            if [ $reaped -eq 0 ]; then
+                sleep 0.1
             fi
-        else
-            echo "Already have $dest_dir/$rpm_name"
+        done
+
+        # Allocate a worker.  b=the worker index
+        workers=$((workers+1))
+        get_idle_dl_env
+        b=$?
+        if [ $b -ge 255 ]; then
+            echo "get_idle_dl_env failed to find a free slot"
+            exit 1
         fi
-        echo
+        PREFIX="b$b"
+
+        # Launch a thread in the background
+        ( download_worker $b $ff $_level 2>&1 | sed "s#^#${PREFIX}: #"  | tee $DL_MIRROR_LOG_DIR/$b; exit ${PIPESTATUS[0]} ) &
+
+        # Record the pid of background process
+        pp=$!
+        set_dl_env_pid $b $pp
     done
 
-    return $rc
+    # Wait for remaining workers to exit
+    while [ $workers -gt 0 ]; do
+        reaper
+        reaped=$?
+        if [ $reaped -eq 0 ]; then
+            sleep 0.1
+        fi
+    done
+
+    return $FOUND_ERRORS
 }
+
+
+# Init the pool of worker threads
+init_dl_env
 
 
 # Prime the cache

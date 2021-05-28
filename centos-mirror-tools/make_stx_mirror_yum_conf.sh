@@ -15,6 +15,7 @@ MAKE_STX_MIRROR_DNF_CONF_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 source "$MAKE_STX_MIRROR_DNF_CONF_DIR/url_utils.sh"
 
 DISTRO="centos"
+SUDO=sudo
 
 TEMP_DIR=""
 SRC_REPO_DIR="$MAKE_STX_MIRROR_DNF_CONF_DIR/yum.repos.d"
@@ -38,6 +39,7 @@ usage () {
     echo "                 'yum.repos.d' in same directory as this script"
     echo "-l <layer> = Download only packages required to build a given layer"
     echo "-u <lower-layer>,<build-type>,<repo_url> = Add/change the repo baseurl for a lower layer"
+    echo "-n don't use sudo"
 }
 
 declare -A layer_urls
@@ -61,7 +63,7 @@ set_layer_urls () {
 #
 # option processing
 #
-while getopts "D:d:l:Rr:u:y:" o; do
+while getopts "D:d:l:nRr:u:y:" o; do
     case "${o}" in
         D)
             DISTRO="${OPTARG}"
@@ -71,6 +73,9 @@ while getopts "D:d:l:Rr:u:y:" o; do
             ;;
         l)
             LAYER="${OPTARG}"
+            ;;
+        n)
+            SUDO=""
             ;;
         r)
             SRC_REPO_DIR="${OPTARG}"

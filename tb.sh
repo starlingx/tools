@@ -24,12 +24,17 @@ CMD=$1
 TC_CONTAINER_NAME=${MYUNAME}-centos-builder
 TC_CONTAINER_TAG=local/${MYUNAME}-stx-builder:8.2.2004
 TC_DOCKERFILE=Dockerfile
+NO_CACHE=0
 
 function create_container {
     local EXTRA_ARGS=""
 
     if [ ! -z ${MY_EMAIL} ]; then
-        EXTRA_ARGS="--build-arg MY_EMAIL=${MY_EMAIL}"
+        EXTRA_ARGS+="--build-arg MY_EMAIL=${MY_EMAIL}"
+    fi
+
+    if [ $NO_CACHE -eq 1 ]; then
+        EXTRA_ARGS+=" --no-cache"
     fi
 
     docker build \
@@ -87,7 +92,7 @@ function clean_container {
 }
 
 function usage {
-    echo "$0 [create|run|exec|env|stop|kill|clean]"
+    echo "$0 [create|create_no_cache|run|exec|env|stop|kill|clean]"
 }
 
 case $CMD in
@@ -107,6 +112,10 @@ case $CMD in
         echo "MY_EMAIL=${MY_EMAIL}"
         ;;
     create)
+        create_container
+        ;;
+    create_no_cache)
+        NO_CACHE=1
         create_container
         ;;
     exec)

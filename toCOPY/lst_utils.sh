@@ -52,7 +52,10 @@ merge_lst () {
         return 1
     fi
 
-    layers=$(cat ${layer_cfgs} | sort --unique)
+    # Grep to ignore empty lines or whole line comments.
+    # Sed to drop any trailing comments.
+    # Side effect of grep over cat is adding any missing EOL.
+    layers=$(grep -h -v -e '^$' -e '^[ \t]*#' ${layer_cfgs} | sed -e 's/[ \t]*#.*$//' | sort --unique)
     layers+=" mock"
 
     (
