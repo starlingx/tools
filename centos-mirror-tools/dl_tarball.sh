@@ -297,6 +297,22 @@ for line in $(cat $tarball_file); do
                 popd > /dev/null   # pushd $output_tarball
                 continue
             fi
+        elif [[ "$tarball_name" = 'OPAE_1.3.7-5_el7.zip' ]]; then
+            srpm_path="${directory_name}/source_code/
+            wget -q -t 5 --wait=15 -O "$tarball_name" "$tarball_url"
+            if [ $? -ne 0 ]; then
+                error_count=$((error_count + 1))
+                popd > /dev/null   # pushd $output_tarball
+                continue
+            fi
+
+            unzip "$tarball_name"
+            cp "${srpm_path}/opae-intel-fpga-driver-2.0.1-10.src.rpm" .
+            # Don't delete the original OPAE_1.3.7-5_el7.zip tarball.
+            # We don't use it, but it will prevent re-downloading this file.
+            #   rm -f "$tarball_name"
+
+            rm -rf "$directory_name"
         elif [[ "$tarball_name" = 'MLNX_OFED_SRC-5.0-2.1.8.0.tgz' ]]; then
             srpm_path="${directory_name}/SRPMS/"
             download_package "$tarball_name" "$tarball_url"
@@ -322,6 +338,33 @@ for line in $(cat $tarball_file); do
                 popd > /dev/null  # pushd $output_tarball
                 continue
             fi
+        elif [ "$tarball_name" = "QAT1.7.L.4.14.0-00031.tar.gz" ]; then
+            download_package "$tarball_name" "$tarball_url"
+            if [ $? -ne 0 ]; then
+                error_count=$((error_count + 1))
+                popd > /dev/null  # pushd $output_tarball
+                continue
+            fi
+        elif [ "$tarball_name" = "dpdk-kmods-2a9f0f72a2d926382634cf8f1de10e1acf57542b.tar.gz" ]; then
+            dest_dir=dpdk-kmods
+            git clone $tarball_url $dest_dir
+
+            if [ ! -d $dest_dir ]; then
+                echo "Error: Failed to git clone from '$tarball_url'"
+                echo "$tarball_url" > "$output_log"
+                error_count=$((error_count + 1))
+                popd > /dev/null # pushd $output_tarball
+                continue
+            fi
+
+            pushd $dest_dir > /dev/null
+            rev=$util
+            git checkout -b temp $rev
+            rm -rf .git
+            popd > /dev/null
+            mv dpdk-kmods $directory_name
+            tar czvf $tarball_name $directory_name
+            rm -rf $directory_name
         elif [ "$tarball_name" = "tss2-930.tar.gz" ]; then
             dest_dir=ibmtpm20tss-tss
             for dl_src in $dl_source; do
