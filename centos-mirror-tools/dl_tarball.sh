@@ -126,6 +126,8 @@ if [ ! -d "$logs_dir" ]; then
     mkdir "$logs_dir"
 fi
 
+cat /dev/null > $output_log
+
 is_tarball() {
     local tarball_name="$1"
     local mime_type
