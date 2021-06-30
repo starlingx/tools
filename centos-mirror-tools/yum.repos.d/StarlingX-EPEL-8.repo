@@ -10,7 +10,7 @@ enabled=1
 
 [Starlingx-epel-8-Everything-source]
 name=Starlingx-Epel-8-Everything-source
-baseurl=https://dl.fedoraproject.org/pub/epel/8/Everything/SRPMS/
+baseurl=https://dl.fedoraproject.org/pub/epel/8/Everything/source/tree/
 gpgcheck=0
 #gpgkey=file:///export/config/rpm-gpg-keys/RPM-GPG-KEY-EPEL-8
 enabled=1

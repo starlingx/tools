@@ -18,7 +18,7 @@ enabled=1
 
 [Starlingx-epel-7-source]
 name=Starlingx-Epel-7-source
-baseurl=https://dl.fedoraproject.org/pub/epel/7/SRPMS/
+baseurl=https://dl.fedoraproject.org/pub/epel/7/source/tree/
 gpgcheck=0
 #gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 enabled=1
@@ -40,7 +40,7 @@ enabled=1
 
 [Starlingx-epel-7-testing-source]
 name=Starlingx-Epel-7-testing-source
-baseurl=https://dl.fedoraproject.org/pub/epel/testing/7/SRPMS/
+baseurl=https://dl.fedoraproject.org/pub/epel/testing/7/source/tree/
 gpgcheck=0
 #gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 enabled=1
