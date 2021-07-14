@@ -300,7 +300,7 @@ for line in $(cat $tarball_file); do
                 continue
             fi
         elif [[ "$tarball_name" = 'OPAE_1.3.7-5_el7.zip' ]]; then
-            srpm_path="${directory_name}/source_code/
+            srpm_path="${directory_name}/source_code/"
             wget -q -t 5 --wait=15 -O "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
