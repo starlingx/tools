@@ -43,7 +43,7 @@ extension-pkg-whitelist=lxml.etree,greenlet
 # See "Messages Control" section of
 # https://pylint.readthedocs.io/en/latest/user_guide
 # We are disabling (C)onvention
-disable=C,
+disable=C
 
 [REPORTS]
 # Set the output format. Available formats are text, parseable, colorized, msvs

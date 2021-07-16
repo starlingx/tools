@@ -1,0 +1,2 @@
+export PRJDIR=$(pwd)
+export PATH=$PRJDIR/stx/bin:$PATH
