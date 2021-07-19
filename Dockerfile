@@ -185,7 +185,7 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == system
 COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
 RUN pip install -c /home/$MYUNAME/builder-constraints.txt pbr==5.6.0 --upgrade && \
     pip install -c /home/$MYUNAME/builder-constraints.txt git-review==2.1.0 --upgrade && \
-    pip install -c /home/$MYUNAME/builder-constraints.txt python-subunit==1.4.0 junitxml==0.7 --upgrade && \
+    pip install -c /home/$MYUNAME/builder-constraints.txt python-subunit==1.4.0 junitxml==0.7 testtools==2.4.0 --upgrade && \
     pip install -c /home/$MYUNAME/builder-constraints.txt tox==3.23.0 --upgrade
 
 # Inherited  tools for mock stuff
