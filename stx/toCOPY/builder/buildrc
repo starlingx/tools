@@ -1,0 +1,35 @@
+# Common configuration for StarlingX builder
+
+# Find the other rc files
+BUILDRC_DIR=$(cd $(dirname "${BASH_SOURCE:-$0}") && pwd)
+
+# Allow local overrides of env variables
+if [[ -f $BUILDRC_DIR/localrc ]]; then
+    source $BUILDRC_DIR/localrc
+fi
+
+# In the docker run command this will be correct for the host side of the mapping
+LOCALDISK="/localdisk"
+
+# Release Variable
+export MY_RELEASE=${MY_RELEASE:-6.0}
+
+# avoid calling your project 'build' it will break some SDEBs
+export PROJECT=${PROJECT:-stx}
+
+# These are used in the Dockerfile, not sure where else
+export MYUNAME=${MYUNAME:-builder}
+
+# All of the below are dependent on variables defined earlier, right now
+# we are not going to support directly setting them in localrc
+export MY_BUILD_PKG_DIR=${LOCALDISK}/loadbuild/$MYUNAME/$PROJECT/
+export MY_WORKSPACE=${LOCALDISK}/loadbuild/$MYUNAME/$PROJECT/
+export MY_LOCAL_DISK=${LOCALDISK}/designer/$MYUNAME
+export MY_REPO_ROOT_DIR=$MY_LOCAL_DISK/$PROJECT
+export MY_REPO=$MY_REPO_ROOT_DIR/cgcs-root
+export MY_BUILD_TOOLS_DIR=$MY_REPO/build-tools
+export LAYER=$LAYER
+export STX_CONFIG_DIR=$MY_REPO/stx-tools
+export STX_GIT_SRC_DIR=$MY_REPO/stx/git
+export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx
+export PYTHONPATH=$PYTHONPATH:$MY_BUILD_TOOLS_DIR/stx
