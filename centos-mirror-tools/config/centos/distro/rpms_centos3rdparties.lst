@@ -16,8 +16,10 @@ devtoolset-7-runtime-7.1-4.el7.x86_64.rpm
 # elfutils-0.176-2.el7.x86_64.rpm provided by mock
 # elfutils-default-yama-scope-0.176-2.el7.noarch.rpm provided by mock
 # elfutils-devel-0.176-2.el7.x86_64.rpm provided by mock
+elfutils-devel-static-0.176-2.el7.x86_64.rpm
 # elfutils-libelf-0.176-2.el7.x86_64.rpm provided by mock
 # elfutils-libelf-devel-0.176-2.el7.x86_64.rpm provided by mock
+elfutils-libelf-devel-static-0.176-2.el7.x86_64.rpm
 # elfutils-libs-0.176-2.el7.x86_64.rpm provided by mock
 gsettings-desktop-schemas-3.28.0-2.el7.x86_64.rpm
 gssproxy-0.7.0-21.el7.x86_64.rpm
@@ -85,3 +87,4 @@ systemtap-sdt-devel-3.3-3.el7.x86_64.rpm
 # util-linux-2.23.2-59.el7.x86_64.rpm provided by mock
 valgrind-3.13.0-13.el7.x86_64.rpm
 valgrind-devel-3.13.0-13.el7.x86_64.rpm
+zlib-static-1.2.7-18.el7.x86_64.rpm

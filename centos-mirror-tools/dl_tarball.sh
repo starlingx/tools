@@ -444,6 +444,24 @@ for line in $(cat $tarball_file); do
             popd > /dev/null # pushd rt-setup
             # Cleanup
             rm -rf rt-setup
+        elif [[ "$tarball_name" = "kdump-anaconda-addon-003-29-g4c517c5.tar.gz" ]]; then
+            mkdir -p "$directory_name"
+            pushd "$directory_name"
+
+            src_rpm_name="$(echo "$tarball_url" | rev | cut -d/ -f1 | rev)"
+
+            wget -q -t 5 --wait=15 -O "$src_rpm_name" "$tarball_url"
+            if [ $? -eq 0 ]; then
+                rpm2cpio "$src_rpm_name" | cpio --quiet -i "$tarball_name"
+                mv "$tarball_name" ..
+            else
+                echo "Error: Failed to download '$tarball_url'"
+                echo "$tarball_url" > "$output_log"
+                error_count=$((error_count + 1))
+            fi
+
+            popd >/dev/null # pushd "$directory_name"
+            rm -rf "$directory_name"
         fi
         popd > /dev/null # pushd $output_tarball
         continue
