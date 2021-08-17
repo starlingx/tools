@@ -46,7 +46,7 @@ merge_lst () {
         return 1
     fi
 
-    layer_cfgs=$(find ${MY_REPO} -maxdepth 3 -name ${cfg_name})
+    layer_cfgs=$(find ${MY_REPO} -maxdepth 4 -name ${cfg_name})
     if [ "$layer_cfgs" == "" ]; then
         echo "ERROR: merge_lst: Could not find any '${cfg_name}' files" >&2
         return 1
@@ -65,11 +65,10 @@ merge_lst () {
         done
     done
 
-    for f in $(find ${MY_REPO} -maxdepth 3 -name ${distro}_${template};  \
-                find ${MY_REPO} -maxdepth 3 -name ${distro}_s${template}; \
-                ); do
-        grep -v '^#' $f || true
-    done
+    find ${MY_REPO} -maxdepth 4 \
+        \( -name ${distro}_${template} -o -name ${distro}_s${template} \) \
+        \! -type d \
+        -exec grep --no-filename -v '^#' '{}' '+'
     ) | sort --unique
 }
 
