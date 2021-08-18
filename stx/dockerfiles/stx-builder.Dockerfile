@@ -15,13 +15,11 @@
 FROM debian:bullseye
 
 ENV container=docker \
-    MYUNAME=builder \
-    PROJECT=stx \
     PATH=/opt/LAT/lat:$PATH
-ARG MYUID=1000
 
-RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
-RUN echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.list
+RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
+    echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
+    echo "deb http://ftp.de.debian.org/debian bullseye main contrib" >> /etc/apt/sources.list
 
 # Download required dependencies by mirror/build processes.
 RUN     apt-get update && apt-get install --no-install-recommends -y \
@@ -31,6 +29,8 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         wget \
         curl \
         vim \
+        rpm2cpio \
+        cpio \
         python3 \
         python3-yaml \
         python3-pip \
@@ -43,11 +43,13 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         dpkg-dev \
         git-buildpackage \
         fakeroot \
+        pristine-tar \
+        repo \
         proxychains && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \
         pip3 install \
-        git \
+        gitpython \
         requests \
         python-debian \
         pulpcore_client \
@@ -55,12 +57,12 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         pulp_file_client \
         progressbar \
         git+git://github.com/masselstine/aptly-api-client.git && \
-        groupadd -g 751 cgts && \
-        useradd -r -u $MYUID -g cgts -m $MYUNAME && \
         sed -i '/^proxy_dns*/d' /etc/proxychains.conf && \
         sed -i 's/^socks4.*/socks5 127.0.0.1 8080/g' /etc/proxychains.conf && \
-        chown $MYUNAME /home/$MYUNAME && \
-        echo "$MYUNAME ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+        ln -sf /usr/local/bin/stx/stx-localrc /root/localrc && \
+        echo '. /usr/local/bin/finishSetup.sh' >> /root/.bashrc
 
-COPY stx/toCOPY/builder/buildrc /home/$MYUNAME/
-USER $MYUNAME
+COPY stx/toCOPY/lat-tool/lat /opt/LAT/lat
+COPY stx/toCOPY/builder/finishSetup.sh /usr/local/bin
+COPY stx/toCOPY/builder/userenv /root/
+COPY stx/toCOPY/builder/buildrc /root/
