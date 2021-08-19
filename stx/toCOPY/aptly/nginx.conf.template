@@ -1,0 +1,16 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name $HOSTNAME;
+
+    if ( $https = "on" ) {
+       return 301 http://$host$request_uri;
+    }
+
+    root /var/aptly/public;
+
+    location / {
+        autoindex on;
+        try_files $uri $uri/ =404;
+    }
+}
