@@ -1,0 +1,75 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "stx-repomgr.fullname" . }}
+  labels:
+    {{- include "stx-repomgr.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "stx-repomgr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "stx-repomgr.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          tty: true
+          volumeMounts:
+          - name: {{ .Values.volumeMounts.name }}
+            mountPath: {{ .Values.volumeMounts.mountPath}}
+          - name: {{ .Values.volumeMounts.storagename }}
+            mountPath: {{ .Values.volumeMounts.storagemountPath}}
+          - name: {{ .Values.volumeMounts.pgsqlname }}
+            mountPath: {{ .Values.volumeMounts.pgsqlmountPath}}
+          - name: {{ .Values.volumeMounts.containersname }}
+            mountPath: {{ .Values.volumeMounts.containersmountPath}}
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+      volumes:
+      - name: {{ .Values.volumes.name }}
+        configMap:
+          name: {{ .Values.volumes.configmapname }}
+      - name: {{ .Values.volumes.storagename }}
+        hostPath:
+          path: {{ .Values.volumes.storagehostPath.path }}
+      - name: {{ .Values.volumes.pgsqlname }}
+        hostPath:
+          path: {{ .Values.volumes.pgsqlhostPath.path }}
+      - name: {{ .Values.volumes.containersname }}
+        hostPath:
+          path: {{ .Values.volumes.containershostPath.path }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

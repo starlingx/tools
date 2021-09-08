@@ -1,0 +1,54 @@
+#!/bin/bash
+
+git config --global user.name "$GITUSER"
+git config --global user.email "$GITEMAIL"
+git config --global color.ui false
+
+cd $MY_REPO_ROOT_DIR
+if [[ x"$PROXY" == x"true" ]]; then
+    ps aux|grep ssh|grep qTfnN 2>&1>/dev/null
+    ret=$?
+    if [[ x"$ret" != x"0" ]];then
+        echo "*************************************************************************************"
+        echo "Note: Next we will create the proxy and connect the proxyserver $PROXYSERVER!!!"
+        echo ""
+        echo ""
+        echo "*************************************************************************************"
+        ssh -D 8080 -qTfnN $HOSTUSERNAME@$PROXYSERVER
+    fi
+
+    proxychains repo init -u git://lxgit.wrs.com/stx-debian/manifest.git
+    proxychains repo sync
+else
+    repo init -u git://lxgit.wrs.com/stx-debian/manifest.git
+    repo sync
+fi
+
+sudo apt-get update
+
+if [[ x"$CENGNURL" != x"" ]]; then
+    repo_manage.py mirror --url $CENGNURL
+fi
+
+if [[ x"$SOURCESLIST" != x"" ]]; then
+    if [[ x"$DEBLIST" == x"" ]]; then
+	if [[ x"$DSCLIST" == x"" ]]; then
+            echo "Either deblist or dsclist must not NULL!!!!"
+	    return 1
+	else
+            repo_manage.py download --sources_list=$SOURCESLIST  --dsc_list=$DSCLIST
+	fi
+    else
+	if [[ x"$DSCLIST" == x"" ]]; then
+	    repo_manage.py download --sources_list=$SOURCESLIST --deb_list=$DEBLIST
+	else
+            repo_manage.py download --sources_list=$SOURCESLIST --deb_list=$DEBLIST --dsc_list=$DSCLIST
+	fi
+    fi
+fi
+
+touch /home/$MYUNAME/prepare-build.done
+
+echo "************************************************************************************************"
+echo "Prepare Done!"
+echo "************************************************************************************************"

@@ -1,2 +1,25 @@
+#!/bin/bash
+
+if [ -z "$MINIKUBE_HOME" ];then
+    MINIKUBE_HOME=$HOME
+else
+    if [ ! -d "$MINIKUBE_HOME" ]; then
+        echo "The directory defined by \$MINIKUBE_HOME doesn't exist"
+        return 1
+    fi
+fi
+
+FSTYPE=$(stat -f -L -c %T $MINIKUBE_HOME)
+if [ x"$FSTYPE" == x"nfs" ]; then
+    echo ""
+    echo "Warning: stx minikube doesn't allow \$MINIKUBE_HOME or \$HOME directory as nfs mount point!!!"
+    echo "         Please set non-nfs MINIKUBE_HOME with the command 'export MINIKUBE_HOME=XXX/YYY'"
+    echo ""
+    unset MINIKUBE_HOME
+    return 1
+fi
+
 export PRJDIR=$(pwd)
 export PATH=$PRJDIR/stx/bin:$PATH
+export MINIKUBENAME=minikube-$USER-upstream
+export KUBECONFIG=$MINIKUBE_HOME/.kube/config

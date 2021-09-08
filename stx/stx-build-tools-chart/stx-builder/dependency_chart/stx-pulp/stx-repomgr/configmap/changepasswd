@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pulpcore-manager reset-admin-password -p admin

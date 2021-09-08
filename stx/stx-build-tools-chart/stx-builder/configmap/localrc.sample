@@ -1,0 +1,47 @@
+# Release Variable
+export MY_RELEASE=@MY_RELEASE@
+
+# avoid calling your project 'build' it will break some SDEBs
+export PROJECT=@PROJECT@
+
+# uid
+export MYUID=@MYUID@
+
+# These are used in the Dockerfile, not sure where else
+export MYUNAME=@MYUNAME@
+
+export DIST=@DIST@
+
+export STX_DIST=@STX_DIST@
+
+export REPOMGR_TYPE=@REPOMGR_TYPE@
+
+export GITUSER="@GITUSER@"
+
+export GITEMAIL=@GITEMAIL@
+
+export DEBFULLNAME="@DEBFULLNAME@"
+
+export DEBEMAIL=@DEBEMAIL@
+
+export PROXY=@PROXY@
+
+export PROXYSERVER=@PROXYSERVER@
+
+export PROXYPORT=@PROXYPORT@
+
+export HOSTUSERNAME=@HOSTUSERNAME@
+
+export CENGNURL=@CENGNURL@
+
+if [[ x"@fetch@" == x"true" ]];then
+    export SOURCESLIST=/usr/local/bin/stx/@SOURCESLIST@
+    export DEBLIST=/usr/local/bin/stx/@DEBLIST@
+    export DSCLIST=/usr/local/bin/stx/@DSCLIST@
+fi
+
+export REPOMGR_URL=http://@PROJECT@-stx-repomgr:8080
+
+export REPOMGR_DEPLOY_URL=http://@PROJECT@-stx-repomgr:80/
+
+export BUILDER_URL=http://@PROJECT@-stx-pkgbuilder:8080/pkgbuilder/

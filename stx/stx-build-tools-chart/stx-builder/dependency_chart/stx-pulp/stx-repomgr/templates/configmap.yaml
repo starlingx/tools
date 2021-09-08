@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.volumes.configmapname }}
+data:
+{{ (.Files.Glob "configmap/*").AsConfig | indent 2 }}

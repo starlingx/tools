@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "stx-repomgr.fullname" . }}
+  labels:
+    {{- include "stx-repomgr.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.sendservice.type }}
+  ports:
+    - port: {{ .Values.sendservice.port }}
+      targetPort: 80
+      protocol: TCP
+      name: http-send
+    - port: {{ .Values.recvservice.port }}
+      targetPort: 8080
+      protocol: TCP
+      name: http-recv
+  selector:
+    {{- include "stx-repomgr.selectorLabels" . | nindent 4 }}

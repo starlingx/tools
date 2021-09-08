@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -f "$MY_REPO_ROOT_DIR/cgcs-root/build-tools/stx/repo_manage.py" ]; then
+    repo_manage.py clean
+fi
+
+rm -rf $MY_REPO_ROOT_DIR/stx-tools
+rm -rf $MY_REPO_ROOT_DIR/cgcs-root
+rm -rf $MY_REPO_ROOT_DIR/.repo
+rm -f /home/$MYUNAME/prepare-build.done
+
+echo "**************************************************************************"
+echo "Cleanup Finished!"
+echo "**************************************************************************"
