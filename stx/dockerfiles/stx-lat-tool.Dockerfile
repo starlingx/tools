@@ -1,0 +1,41 @@
+# Copyright (c) 2021 Wind River Systems, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+FROM debian:bullseye
+
+MAINTAINER Chen Qi <Qi.Chen@windriver.com>
+
+# Install necessary packages
+RUN apt-get -y update && apt-get --no-install-recommends -y install \
+        python3 \
+        xz-utils \
+        file \
+        bzip2 \
+        locales-all \
+        python3-yaml && \
+        apt-get clean && \
+        rm -rf /var/lib/apt/lists/* && \
+        mkdir -p /opt/LAT/SDK
+
+# Prepare executables
+COPY stx/toCOPY/lat-tool/lat/ /opt/LAT/lat
+# Prepare LAT SDK.
+# Current URL is an internal one for development. ${LAT_BINARY_RESOURCE_PATH}
+# needs to be replaced by a public one, once the lat sdk binary was open
+# sourced, and it's coming...
+ADD ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh /opt/LAT/AppSDK.sh
+RUN chmod +x /opt/LAT/AppSDK.sh
+RUN /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y
+
+ENTRYPOINT ["/opt/LAT/lat/latd"]

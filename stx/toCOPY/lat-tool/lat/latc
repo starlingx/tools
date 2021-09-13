@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+
+# Copyright (c) 2021 Wind River Systems, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import os
+import sys
+import time
+import logging
+import subprocess
+import argparse
+import signal
+import yaml
+
+import utils
+import volume as channel
+
+logger = logging.getLogger('latc')
+utils.set_logger(logger)
+
+WORKSPACE_DIR = channel.workspace_dir
+CHANNEL_DIR = channel.channel_dir
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="LAT Daemon which runs inside LAT container",
+        epilog="Use %(prog)s --help to get help")
+    parser.add_argument("-d", "--debug",
+                        help = "Enable debug output",
+                        action="store_const", const=logging.DEBUG, dest="loglevel",
+                        default=logging.INFO)
+    parser.add_argument("-q", "--quiet",
+                        help = "Hide all output except error messages",
+                        action="store_const", const=logging.ERROR, dest="loglevel")
+    parser.add_argument('action', metavar='action', type=str, nargs=1,
+                        help = 'Action to take. e.g. getyaml/build/status/stop/clean/logs')
+    parser.add_argument('--file', required=False,
+                        help = 'Yaml file path which is fed to LAT')
+
+    args = parser.parse_args()
+    logger.setLevel(args.loglevel)
+
+    client_action = args.action[0]
+
+    msg = {}
+    if client_action == 'getyaml':
+        msg['action'] = 'getyaml'
+    elif client_action == 'build':
+        if not args.file:
+            logger.error('latc build --file /path/to/some.yaml')
+            sys.exit(1)
+        msg['action'] = 'build'
+        if not os.path.exists(args.file):
+            logger.error("Yaml file does not exist: %s" % args.file)
+            sys.exit(1)
+        msg['yaml_file'] = os.path.abspath(args.file)
+    elif client_action == 'status':
+        msg['action'] = 'status'
+    elif client_action == 'stop':
+        msg['action'] = 'stop'
+    elif client_action == 'clean':
+        msg['action'] = 'clean'
+    elif client_action == 'logs':
+        msg['action'] = 'logs'
+    else:
+        logger.error("Action supported: getyaml/build/status/stop/clean/logs")
+        sys.exit(1)
+
+    channel.send_message_to_server(msg)
+    smsg = channel.get_server_message()
+    if smsg['result'] == 'fail':
+        fail_reason = smsg['fail_reason'] if 'fail_reason' in smsg else 'Unknown'
+        logger.error("%s failed: %s" % (client_action, fail_reason))
+    else:
+        logger.info("%s request handled by server" % client_action)
+        for key in ['status_file', 'log_file_path', 'yaml_file_path']:
+            if key in smsg:
+                logger.info("%s: %s" % (key, smsg[key]))
+                subprocess.check_call('cat %s' % smsg[key], shell=True)
+
+
+if __name__ == "__main__":
+    try:
+        ret = main()
+    except Exception as esc:
+        ret = 1
+        import traceback
+        traceback.print_exc()
+
+    sys.exit(ret)
