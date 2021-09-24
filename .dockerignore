@@ -2,3 +2,4 @@
 !toCOPY
 !centos-mirror-tools/yum.repos.d/*
 !centos-mirror-tools/rpm-gpg-keys/*
+!stx/toCOPY
