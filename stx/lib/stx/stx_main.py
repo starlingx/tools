@@ -18,6 +18,7 @@ import logging
 from stx import command  # pylint: disable=E0611
 from stx import stx_configparser  # pylint: disable=E0611
 from stx import stx_control  # pylint: disable=E0611
+from stx import stx_repomgr  # pylint: disable=E0611
 from stx import utils  # pylint: disable=E0611
 
 logger = logging.getLogger('STX')
@@ -87,6 +88,16 @@ settings.\t\teg: [ --show|--get|--add|--unset|--remove-section ]')
                                       config file.\n\n', nargs=1,
                                       required=False)
         config_subparser.set_defaults(handle=self.handleconfig.handleConfig)
+
+        repo_subparser = subparsers.add_parser('repomgr',
+                                               help='Manage source|binary \
+packages.\t\teg: [ list|download|sync|mirror|clean|remove_repo|upload_pkg|\
+delete_pkg ]')
+        repo_subparser.add_argument('repomgr_task',
+                                    help='[ list|download|sync|mirror|clean|\
+                                    remove_repo|upload_pkg|delete_pkg ]: \
+                                    Execute the management task.\n\n')
+        repo_subparser.set_defaults(handle=stx_repomgr.handleRepomgr)
 
         parser.add_argument('-d', '--debug',
                             help='Enable debug output\n\n',
