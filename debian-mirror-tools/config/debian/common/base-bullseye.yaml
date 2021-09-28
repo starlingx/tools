@@ -1,0 +1,91 @@
+---
+name: debian-image-demo
+machine: intel-x86-64
+image_type:
+- iso
+- ostree-repo
+- ustart
+package_feeds:
+- deb [trusted=yes] http://128.224.153.74/debian ./
+package_type: external-debian
+wic:
+  OSTREE_WKS_BOOT_SIZE: ''
+  OSTREE_WKS_EFI_SIZE: --size=32M
+  OSTREE_WKS_ROOT_SIZE: ''
+  OSTREE_WKS_FLUX_SIZE: ''
+  OSTREE_FLUX_PART: fluxdata
+gpg:
+  gpg_path: /tmp/.lat_gnupg_root
+  ostree:
+    gpgid: Wind-River-Linux-Sample
+    gpgkey: $OECORE_NATIVE_SYSROOT/usr/share/genimage/rpm_keys/RPM-GPG-PRIVKEY-Wind-River-Linux-Sample
+    gpg_password: windriver
+  grub:
+    BOOT_GPG_NAME: SecureBootCore
+    BOOT_GPG_PASSPHRASE: SecureCore
+    BOOT_KEYS_DIR: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys
+packages: []
+external-packages: []
+include-default-packages: '0'
+rootfs-pre-scripts:
+- |
+  # The StarlingX customize pacakges includes:
+  # - ostree 2019.1
+  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+  chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
+  set -e
+  apt update
+  apt install -y --no-install-recommends linux-image-amd64 grub-common
+  apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
+  apt install --no-install-recommends -y network-manager
+  SCRIPT_ENDOF
+rootfs-post-scripts:
+- |-
+  # Remove user admin whether it exists or not
+  # Add a new user and create user's home directory
+  # Add the user to sudo group
+  # Username: admin
+  # Password: 123456
+  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+  chroot $IMAGE_ROOTFS deluser admin
+  chroot $IMAGE_ROOTFS useradd admin -m --shell /bin/bash -G sudo --password '$6$YcX9PtwnWDeeZfLG$NO64/Frq0xXcMVLKFXqdKxdwBBF42I5TpEiaWfnuj6u6V5GMb0XCASZE7bG4Iiof8QtttCAN4F6xpdNhldIJl/'
+- |-
+  # Set password 'root' to root"
+  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+  chroot $IMAGE_ROOTFS usermod -p '$6$hEv/K.fPeg/$ezIWhJPrMG3WtdEwqQRdyBwdYmPZkqW2PONFAcDd6TqWliYc9dHAwW4MFTlLanVH3/clE0/34FheDMpbAqZVG.' root;
+- |-
+  # Set bash as default shell
+  ln -snf --relative $IMAGE_ROOTFS/bin/bash $IMAGE_ROOTFS/bin/sh
+- |-
+  # Allow root ssh login
+  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+  chroot $IMAGE_ROOTFS sed -i 's/^[#[:space:]]*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+- |-
+  # From appsdk
+  # Copy kernel images and grub-efi to deploydir
+  # Copy efi to rootfs
+  set -x
+  set -e
+  cp -rf $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/grub.cfg $DEPLOY_DIR/grub.cfg
+  cp -rf $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64.efi $DEPLOY_DIR/bootx64.efi
+  cp -rf $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64.efi $DEPLOY_DIR/grub-efi-bootx64.efi
+  cp -rf $OECORE_TARGET_SYSROOT/boot/efi $IMAGE_ROOTFS/boot/
+  cp -rf $IMAGE_ROOTFS/boot/*-amd64 $DEPLOY_DIR
+  KERNEL=`ls $DEPLOY_DIR/vmlinuz-*-amd64`
+  ln -snf --relative $KERNEL  $DEPLOY_DIR/bzImage
+environments:
+- NO_RECOMMENDATIONS="1"
+- DEBIAN_FRONTEND=noninteractive
+ostree:
+  ostree_use_ab: '1'
+  ostree_osname: wrlinux
+  ostree_skip_boot_diff: '2'
+  ostree_remote_url: ''
+  OSTREE_GRUB_USER: root
+  OSTREE_GRUB_PW_FILE: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys/ostree_grub_pw
+  OSTREE_FDISK_BLM: 2506
+  OSTREE_FDISK_BSZ: 512
+  OSTREE_FDISK_RSZ: 4096
+  OSTREE_FDISK_VSZ: 0
+  OSTREE_FDISK_FSZ: 32
+  OSTREE_CONSOLE: console=ttyS0,115200 console=tty1

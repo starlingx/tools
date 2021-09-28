@@ -1,0 +1,3 @@
+#StarlingX patched package's name
+#Packages here will be built into rt image
+#dpkg
