@@ -1,0 +1,2 @@
+#The OS binary packages that depended by StarlingX patched packages,
+#but they are not in the base packages list
