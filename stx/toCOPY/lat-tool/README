@@ -1,0 +1,101 @@
+# Copyright (c) 2021 Wind River Systems, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+latd
+---
+
+This is a daemon expected to run inside the LAT container as the entry point.
+It accepts requests from clients and issue correspoing commands to generate the image.
+
+Functionalities:
+* Accept request to give client an example yaml file to start with
+  latc getyaml
+* Accept build request to build image, with a yaml file supplied.
+  latc build --file stx.yaml
+* Accept request to stop the previous build
+  latc stop
+* Accept request to clean things up, including all build results
+  latc clean
+* Accept status query request, return meaningful contents
+  latc status
+  e.g.
+  lat_status: idle/busy
+  latest_build_status: running/succeed/fail/not-started
+* Accept logs requrest, return log information about the latest build
+  latc logs
+
+latc(builder container client)
+---
+
+A dummy implementation to only show how to make use of volume.py to communicate with latd.
+e.g.
+latc status/stop/clean/logs/build
+
+volume communication implementation
+---
+
+* channel/c-2-s.msg
+
+  Client to server message. Convey info about what to do.
+
+  action: build/status/stop/logs/clean/getyaml
+  yaml_file: /mnt/workspace/stx.yaml
+
+* channel/c-2-s.done
+
+  A file to watch, when it appears, latd read c-2-s.msg and act accordingly.
+
+* channel/s-2-c.msg
+
+  Server to client message. Same format as c-2-s.msg
+
+* channel/s-2-c.done
+
+  A file to watch, when it appears, latc reads s-2-c.msg and act accordingly.
+
+* channel/invalid_message
+
+  A file which, if exists, indicates the an invalid client request.
+
+* channel/status.lat
+
+  File containing LAT container status.
+
+* log/log.appsdk
+
+  Hold information about the appsdk debug output.
+
+* client_message_history
+
+  Hold message history from client.
+
+* hack/lat-genimage-cmd
+
+  A hack file, which replace the 'appsdk genimage ...' command with the contents inside it.
+  e.g.
+  echo "sleep 10" > hack/lat-genimage-cmd
+
+  This is ONLY for debugging purpose. This mechanism should be removed in formal release.
+
+* latd workflow
+
+  Watch c-2-s.done, when it appears, read c-2-s.msg, delete c-2-s.done file.
+  Fork a subprocess to do the actual work if needed, record its PID; otherwise, perform some action. Send result to client.
+  Note that the result only means whether the client request is handled by latd or not.
+
+
+Assumption
+---
+
+* At any time, at most one build is run inside LAT container.
