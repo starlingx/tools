@@ -1,0 +1,51 @@
+# Common configuration for StarlingX builder
+
+# Find the other rc files
+BUILDRC_DIR=$(cd $(dirname "${BASH_SOURCE:-$0}") && pwd)
+
+# Allow local overrides of env variables
+if [[ -f $BUILDRC_DIR/localrc ]]; then
+    source $BUILDRC_DIR/localrc
+fi
+# Allow local overrides of env variables
+if [[ -f $BUILDRC_DIR/buildrc ]]; then
+    source $BUILDRC_DIR/buildrc
+fi
+
+if [ ! -d $MY_REPO_ROOT_DIR ]; then
+    mkdir -p $MY_REPO_ROOT_DIR > /dev/null 2>&1
+fi
+if [ ! -d $MY_WORKSPACE ]; then
+    mkdir -p $MY_WORKSPACE > /dev/null 2>&1
+fi
+
+cat <<EOF
+To ease checkout do:
+!!!! Mandatory:
+    sudo apt-get update
+    git config --global user.name <username>
+    git config --global user.email <email>
+
+If proxy used:
+    ssh -D 8080 -qTfnN <proxy host>
+    echo "alias wget='proxychains wget'" >>~/.bashrc
+    echo "alias repo='proxychains repo'" >>~/.bashrc
+    source ~/.bashrc
+
+To start a fresh source tree:
+    cd \$MY_REPO_ROOT_DIR
+    repo init -u https://opendev.org/starlingx/manifest.git -m default.xml
+    repo sync
+
+To build all packages:
+    build-pkgs or build-pkgs -p <packageA,packageB...>
+
+To fill local binary repo:
+    debdownloader <path binary package list>
+
+To make image:
+    build-image [ -t std|rt ]
+
+EOF
+
+cd ${MY_WORKSPACE}

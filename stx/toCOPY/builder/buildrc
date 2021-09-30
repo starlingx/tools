@@ -31,5 +31,6 @@ export MY_BUILD_TOOLS_DIR=$MY_REPO/build-tools
 export LAYER=$LAYER
 export STX_CONFIG_DIR=$MY_REPO/stx-tools
 export STX_GIT_SRC_DIR=$MY_REPO/stx/git
-export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx
+
+export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx:/opt/LAT/lat
 export PYTHONPATH=$PYTHONPATH:$MY_BUILD_TOOLS_DIR/stx
