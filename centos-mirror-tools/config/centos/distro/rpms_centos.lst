@@ -491,9 +491,9 @@ libwayland-cursor-1.15.0-1.el7.x86_64.rpm
 libwayland-egl-1.15.0-1.el7.x86_64.rpm
 libwayland-server-1.15.0-1.el7.x86_64.rpm
 libwebp-0.3.0-7.el7.x86_64.rpm
-libX11-1.6.7-2.el7.x86_64.rpm
-libX11-common-1.6.7-2.el7.noarch.rpm
-libX11-devel-1.6.7-2.el7.x86_64.rpm
+libX11-1.6.7-4.el7_9.x86_64.rpm
+libX11-common-1.6.7-4.el7_9.noarch.rpm
+libX11-devel-1.6.7-4.el7_9.x86_64.rpm
 libXau-1.0.8-2.1.el7.x86_64.rpm
 libXau-devel-1.0.8-2.1.el7.x86_64.rpm
 libXaw-1.0.13-4.el7.x86_64.rpm
