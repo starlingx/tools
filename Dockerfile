@@ -139,6 +139,8 @@ RUN useradd -s /sbin/nologin -u 9001 -g 9001 mockbuild && \
     echo "config_opts['rpmbuild_networking'] = True" >> /etc/mock/site-defaults.cfg && \
     echo  >> /etc/mock/site-defaults.cfg
 
+# root CA cert expired on October 1st, 2021
+RUN yum update -y ca-certificates
 
 # cpan modules, installing with cpanminus to avoid stupid questions since cpan is whack
 RUN cpanm --notest Fatal && \
