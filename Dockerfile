@@ -32,6 +32,7 @@ ARG MYUID=1000
 # CentOS & EPEL URLs that match the base image
 # Override these with --build-arg if you have a mirror
 ARG CENTOS_7_8_URL=https://vault.centos.org/centos/7.8.2003
+ARG CENTOS_7_9_URL=http://mirror.centos.org/centos-7/7.9.2009
 ARG EPEL_7_8_URL=https://archives.fedoraproject.org/pub/archive/epel/7.2020-04-20
 ARG MY_EMAIL=
 
@@ -47,9 +48,12 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && \
     # yum variables must be in lower case ; \
     echo "$CENTOS_7_8_URL" >/etc/yum/vars/centos_7_8_url && \
     echo "$EPEL_7_8_URL" >/etc/yum/vars/epel_7_8_url && \
+    echo "$CENTOS_7_9_URL" >/etc/yum/vars/centos_7_9_url && \
     # disable fastestmirror plugin because we are not using mirrors ; \
     # FIXME: use a mirrorlist URL for centos/vault/epel archives. I couldn't find one.
     sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf && \
+    echo "[main]" >> /etc/yum/pluginconf.d/subscription-manager.conf && \
+    echo "enabled=0" >> /etc/yum/pluginconf.d/subscription-manager.conf && \
     yum clean all && \
     yum makecache && \
     yum install -y deltarpm
@@ -57,6 +61,9 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY* && \
 # Without this, init won't start the enabled services and exec'ing and starting
 # them reports "Failed to get D-Bus connection: Operation not permitted".
 VOLUME /run /tmp
+
+# root CA cert expired on October 1st, 2021
+RUN yum update -y --enablerepo=centos-7.9-updates ca-certificates
 
 # Download required dependencies by mirror/build processes.
 RUN yum install -y \
@@ -139,8 +146,6 @@ RUN useradd -s /sbin/nologin -u 9001 -g 9001 mockbuild && \
     echo "config_opts['rpmbuild_networking'] = True" >> /etc/mock/site-defaults.cfg && \
     echo  >> /etc/mock/site-defaults.cfg
 
-# root CA cert expired on October 1st, 2021
-RUN yum update -y ca-certificates
 
 # cpan modules, installing with cpanminus to avoid stupid questions since cpan is whack
 RUN cpanm --notest Fatal && \
