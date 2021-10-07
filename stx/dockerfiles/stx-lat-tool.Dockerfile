@@ -16,6 +16,8 @@ FROM debian:bullseye
 
 MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
+ARG LAT_BINARY_RESOURCE_PATH=http://mirror.starlingx.cengn.ca/mirror/lat-sdk/lat-sdk-20210820
+
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \
         python3 \
@@ -31,9 +33,6 @@ RUN apt-get -y update && apt-get --no-install-recommends -y install \
 # Prepare executables
 COPY stx/toCOPY/lat-tool/lat/ /opt/LAT/lat
 # Prepare LAT SDK.
-# Current URL is an internal one for development. ${LAT_BINARY_RESOURCE_PATH}
-# needs to be replaced by a public one, once the lat sdk binary was open
-# sourced, and it's coming...
 ADD ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh /opt/LAT/AppSDK.sh
 RUN chmod +x /opt/LAT/AppSDK.sh
 RUN /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y
