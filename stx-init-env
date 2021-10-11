@@ -1,25 +1,94 @@
 #!/bin/bash
 
-if [ -z "$MINIKUBE_HOME" ];then
-    MINIKUBE_HOME=$HOME
+# Starlingx Debian Build Enviroment Setup Script
+
+# Normally this is called as 'source stx-init-env <sharedvolumedir>'
+# Also we can execute the command 'source stx-init-env' as default
+
+source import-stx
+if [ $? -ne 0 ]; then
+    return 1
+fi
+
+MINIKUBE=minikube
+HELM=helm
+DOCKER=docker
+
+if ! command -v $MINIKUBE &> /dev/null; then
+    echo "Command $MINIKUBE could not be found."
+    echo "Please install it as https://minikube.sigs.k8s.io/docs/start/"
+    echo ""
+fi
+if ! command -v $HELM &> /dev/null; then
+    echo "Command $HELM could not be found."
+    echo "Please install it as https://helm.sh/"
+    echo ""
+fi
+if ! command -v $DOCKER &> /dev/null; then
+    echo "Command $DOCKER could not be found. Please install it."
+    echo ""
+fi
+
+MINIKUBE_EXIST=$(docker ps | grep kicbase | grep $MINIKUBENAME)
+if [ x"$MINIKUBE_EXIST" == x"" ]; then
+    echo "Start the new minikube $MINIKUBENAME"
 else
-    if [ ! -d "$MINIKUBE_HOME" ]; then
-        echo "The directory defined by \$MINIKUBE_HOME doesn't exist"
+    echo "The minikube $MINIKUBENAME exists, we will try to stop it..."
+    echo "Then restart it..."
+    echo ""
+    $MINIKUBE stop -p $MINIKUBENAME >> /dev/null
+    ret=$(docker ps | grep kicbase | grep $MINIKUBENAME)
+    if [ x"$ret" != x"" ]; then
+        echo "minikube container $MINIKUBENAME exist!"
+        echo "And the command 'minikube -p $MINIKUBENAME stop' failed. The reason may be"
+        echo "the current MINIKUBE_HOME/HOME is not the same as the $MINIKUBENAME"
+        echo "Please change the MINIKUBE_HOME/HOME directory to the previous value"
+        echo "then re-execute this script"
+        unset MINIKUBE_HOME
         return 1
     fi
 fi
 
-FSTYPE=$(stat -f -L -c %T $MINIKUBE_HOME)
-if [ x"$FSTYPE" == x"nfs" ]; then
-    echo ""
-    echo "Warning: stx minikube doesn't allow \$MINIKUBE_HOME or \$HOME directory as nfs mount point!!!"
-    echo "         Please set non-nfs MINIKUBE_HOME with the command 'export MINIKUBE_HOME=XXX/YYY'"
-    echo ""
-    unset MINIKUBE_HOME
+VolumePath=$1
+
+if [ x"$VolumePath"==x"" ]; then
+
+    VolumePath="/localdisk/$USER"
+
+    if [ ! -d "$VolumePath" ]; then
+        echo "Warning: The directory $VolumePath doesn't exist, please create it with the command:"
+        echo ""
+        echo "  mkdir -p $VolumePath"
+        echo ""
+        echo "or User the command 'source stx-init-env Your/Path' to redefine the shared volume"
+        return 1
+    fi
+else
+    if [ ! -d "$VolumePath" ]; then
+        echo "Warning: The directory $VolumePath doesn't exist, please create it with the command:"
+        echo ""
+        echo "  mkdir -p $VolumePath"
+        echo ""
+        echo "Then execute this script again!"
+        return 1
+    fi
+fi
+
+$MINIKUBE start --driver=docker -p $MINIKUBENAME --mount=true --mount-string="$VolumePath:/workspace"
+if [ $? -ne 0 ]; then
     return 1
 fi
 
-export PRJDIR=$(pwd)
-export PATH=$PRJDIR/stx/bin:$PATH
-export MINIKUBENAME=minikube-$USER-upstream
-export KUBECONFIG=$MINIKUBE_HOME/.kube/config
+# Build the container images from the dockerfiles
+DOCKERNAMES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
+
+eval $(minikube -p $MINIKUBENAME docker-env)
+
+for i in $DOCKERNAMES; do
+    docker build -t $i:v0.1.0 -f stx/dockerfiles/$i.Dockerfile .
+    if [ $? -ne 0 ]; then
+        return 1
+    fi
+done
+
+eval $(minikube -p $MINIKUBENAME docker-env -u)
