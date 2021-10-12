@@ -17,11 +17,11 @@ if [[ x"$PROXY" == x"true" ]]; then
         ssh -D 8080 -qTfnN $HOSTUSERNAME@$PROXYSERVER
     fi
 
-    proxychains repo init -u git://lxgit.wrs.com/stx-debian/manifest.git
-    proxychains repo sync
+    proxychains repo init -u https://opendev.org/starlingx/manifest -b $BUILD_BRANCH -m ${MANIFEST}
+    proxychains repo sync --force-sync
 else
-    repo init -u git://lxgit.wrs.com/stx-debian/manifest.git
-    repo sync
+    repo init -u https://opendev.org/starlingx/manifest -b $BUILD_BRANCH -m ${MANIFEST}
+    repo sync --force-sync
 fi
 
 sudo apt-get update
