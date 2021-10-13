@@ -43,6 +43,13 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         pip3 install Flask && \
         sudo sbuild-adduser root
 
+# workaround for docker debootstrap bug
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=968927
+RUN cd /tmp && \
+    wget \
+    http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.124_all.deb && \
+    dpkg -i debootstrap_1.0.124_all.deb
+
 COPY stx/toCOPY/pkgbuilder/app.py /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.py /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.conf /etc/sbuild/sbuild.conf
