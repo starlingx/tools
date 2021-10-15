@@ -17,8 +17,11 @@ import shutil
 import subprocess
 
 BUILD_ROOT = '/localdisk/loadbuild/'
+STORE_ROOT = '/localdisk/pkgbuilder'
 BUILD_ENGINE = 'sbuild'
 DEBDIST = 'bullseye'
+STX_LOCALRC = '/usr/local/bin/stx/stx-localrc'
+SBUILD_CONF = '/etc/sbuild/sbuild.conf'
 
 
 class Debbuilder:
@@ -47,6 +50,7 @@ class Debbuilder:
         self.chroot_processes = {}
         self.sbuild_processes = {}
         self.ctlog = None
+        self.set_extra_repos()
 
     @property
     def state(self):
@@ -59,6 +63,34 @@ class Debbuilder:
     @mode.setter
     def mode(self, mode):
         self._mode = mode
+
+    def set_extra_repos(self):
+        repomgr_url = None
+        if not os.path.exists(STX_LOCALRC):
+            self.logger.warning('stx-localrc does not exist')
+            return
+
+        env_list = []
+        with open(STX_LOCALRC) as f:
+            env_list = list(f)
+        for item in env_list:
+            if item.startswith('export '):
+                envvar = item.replace('export ', '').split('=')
+                if envvar and envvar[0] == 'REPOMGR_DEPLOY_URL':
+                    repomgr_url = envvar[1]
+                    break
+
+        if repomgr_url:
+            try:
+                with open(SBUILD_CONF, '+r') as f:
+                    sconf = f.read()
+                    sconf = sconf.replace('http://stx-stx-repomgr:80/',
+                                          repomgr_url.strip())
+                    f.seek(0, 0)
+                    f.write(sconf)
+                    f.truncate()
+            except IOError as e:
+                self.logger.error(str(e))
 
     def has_chroot(self, chroot):
         chroots = os.popen('schroot -l')
@@ -83,7 +115,7 @@ class Debbuilder:
             response['msg'] = 'chroot exists'
             return response
 
-        user_dir = os.path.join(BUILD_ROOT, user, project)
+        user_dir = os.path.join(STORE_ROOT, user, project)
         user_chroots_dir = os.path.join(user_dir, 'chroots')
         if not os.path.exists(user_chroots_dir):
             os.makedirs(user_chroots_dir)
@@ -94,26 +126,32 @@ class Debbuilder:
             self.logger.debug("Invalid chroot %s, clean it" % user_chroot)
             shutil.rmtree(user_chroot)
 
-        self.ctlog = open(os.path.join(user_chroots_dir, 'chroot.log'), 'w')
-        chroot_suffix = '--chroot-suffix=-' + user
-        chroot_cmd = ' '.join(['sbuild-createchroot', chroot_suffix,
-                               '--include=eatmydata', DEBDIST, user_chroot])
-        if mirror:
-            chroot_cmd = ' '.join([chroot_cmd, mirror])
-        self.logger.debug("Command to creat chroot:%s" % chroot_cmd)
+        try:
+            self.ctlog = open(os.path.join(user_dir, 'chroot.log'), 'w')
+        except IOError as e:
+            self.logger.error(str(e))
+            response['status'] = 'fail'
+            response['msg'] = 'fail to create log file'
+        else:
+            chroot_suffix = '--chroot-suffix=-' + user
+            chroot_cmd = ' '.join(['sbuild-createchroot', chroot_suffix,
+                                   '--include=eatmydata', DEBDIST, user_chroot])
+            if mirror:
+                chroot_cmd = ' '.join([chroot_cmd, mirror])
+            self.logger.debug("Command to creat chroot:%s" % chroot_cmd)
 
-        p = subprocess.Popen(chroot_cmd, shell=True, stdout=self.ctlog,
-                             stderr=self.ctlog)
-        self.chroot_processes.setdefault(user, []).append(p)
+            p = subprocess.Popen(chroot_cmd, shell=True, stdout=self.ctlog,
+                                 stderr=self.ctlog)
+            self.chroot_processes.setdefault(user, []).append(p)
 
-        response['status'] = 'creating'
-        response['msg'] = ' '.join(['please check',
-                                    user_chroots_dir + '/chroot.log'])
+            response['status'] = 'creating'
+            response['msg'] = ' '.join(['please check',
+                                        user_dir + '/chroot.log'])
         return response
 
     def load_chroot(self, user, project):
         response = {}
-        user_dir = os.path.join(BUILD_ROOT, user, project)
+        user_dir = os.path.join(STORE_ROOT, user, project)
         user_chroots = os.path.join(user_dir, 'chroots/chroot.d')
         if not os.path.exists(user_chroots):
             self.logger.warn("Not find chroots %s" % user_chroots)
@@ -133,7 +171,7 @@ class Debbuilder:
 
     def save_chroot(self, user, project):
         response = {}
-        user_dir = os.path.join(BUILD_ROOT, user, project)
+        user_dir = os.path.join(STORE_ROOT, user, project)
         user_chroots = os.path.join(user_dir, 'chroots/chroot.d')
         if os.path.exists(user_chroots):
             shutil.rmtree(user_chroots)
