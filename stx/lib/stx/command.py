@@ -70,6 +70,12 @@ grep stx-' + dockername + ' | awk \'{print $1}\' '
 def helm_release_exists(projectname):
     '''Check if the helm release exists'''
 
+    cmd = 'helm ls > /dev/null'
+    ret = subprocess.call(cmd, shell=True)
+    if ret:
+        logger.error('helm command failed, please check minikube env!')
+        sys.exit(1)
+
     cmd = 'helm ls | grep ' + projectname
     ret = subprocess.getoutput(cmd)
     if ret:
