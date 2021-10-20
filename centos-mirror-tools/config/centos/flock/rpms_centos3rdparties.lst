@@ -27,7 +27,6 @@ kata-proxy-bin-1.11.0-3.1.x86_64.rpm
 kata-runtime-1.11.0-3.1.x86_64.rpm
 kata-shim-1.11.0-3.1.x86_64.rpm
 kata-shim-bin-1.11.0-3.1.x86_64.rpm
-kexec-tools-2.0.15-21.el7.x86_64.rpm
 # libblkid-2.23.2-59.el7.x86_64.rpm provided by mock
 # libcom_err-1.42.9-13.el7.x86_64.rpm provided by mock
 libcom_err-devel-1.42.9-13.el7.x86_64.rpm
