@@ -17,6 +17,7 @@ bzip2-devel-1.0.6-13.el7.x86_64.rpm
 # ca-certificates-2018.2.22-70.0.el7_5.noarch.rpm provided by mock
 # centos-release-7-6.1810.2.el7.centos.x86_64.rpm provided by mock
 # chkconfig-1.7.4-1.el7.x86_64.rpm provided by mock
+cmake-2.8.12.2-2.el7.x86_64.rpm
 # coreutils-8.22-23.el7.x86_64.rpm provided by mock
 # cpio-2.11-27.el7.x86_64.rpm provided by mock
 # cpp-4.8.5-36.el7.x86_64.rpm provided by mock
