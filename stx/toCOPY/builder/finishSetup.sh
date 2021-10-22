@@ -22,7 +22,13 @@ ret=`cat /etc/sudoers | grep "${MYUNAME}"`
 if [ "x$ret" == "x" ]; then
     echo "${MYUNAME} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 fi
-chown -R ${MYUNAME}:cgts /localdisk
+dirs_list=$(find /localdisk -maxdepth 1)
+for path in $dirs_list; do
+    if [[ $path != "/localdisk" && $path != "/localdisk/pkgbuilder" ]]; then
+        chown -R ${MYUNAME}:cgts $path
+    fi
+done
+[ ! -d "/localdisk/pkgbuilder" ] && mkdir /localdisk/pkgbuilder
 cp -f /root/buildrc /home/$MYUNAME/
 cp -f /root/localrc /home/$MYUNAME/
 cp -f /root/userenv /home/$MYUNAME/
