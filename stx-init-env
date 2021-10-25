@@ -49,32 +49,16 @@ else
     fi
 fi
 
-VolumePath=$1
-
-if [ x"$VolumePath"==x"" ]; then
-
-    VolumePath="/localdisk/$USER"
-
-    if [ ! -d "$VolumePath" ]; then
-        echo "Warning: The directory $VolumePath doesn't exist, please create it with the command:"
-        echo ""
-        echo "  mkdir -p $VolumePath"
-        echo ""
-        echo "or User the command 'source stx-init-env Your/Path' to redefine the shared volume"
-        return 1
-    fi
-else
-    if [ ! -d "$VolumePath" ]; then
-        echo "Warning: The directory $VolumePath doesn't exist, please create it with the command:"
-        echo ""
-        echo "  mkdir -p $VolumePath"
-        echo ""
-        echo "Then execute this script again!"
-        return 1
-    fi
+if [ ! -d "$STX_BUILD_HOME" ]; then
+    echo "Warning: The directory $STX_BUILD_HOME doesn't exist, please create it with the command:"
+    echo ""
+    echo "  mkdir -p $STX_BUILD_HOME"
+    echo ""
+    echo "Then execute this script again!"
+    return 1
 fi
 
-$MINIKUBE start --driver=docker -p $MINIKUBENAME --mount=true --mount-string="$VolumePath:/workspace"
+$MINIKUBE start --driver=docker -p $MINIKUBENAME --mount=true --mount-string="$STX_BUILD_HOME:/workspace"
 if [ $? -ne 0 ]; then
     return 1
 fi
