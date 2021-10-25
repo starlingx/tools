@@ -232,7 +232,10 @@ argument. eg: %s \n', container_list)
             else:
                 cmd = prefix_exec_cmd + podname + ' -- bash'
             self.logger.debug('Execute the enter command: %s', cmd)
-            subprocess.call(cmd, shell=True)
+            # Return exit status to shell w/o raising an exception
+            # in case the user did "echo COMMAND ARGS | stx control enter"
+            ret = subprocess.call(cmd, shell=True)
+            sys.exit(ret)
         else:
             self.logger.error('Please ensure the docker container you want to \
 enter has been started!!!\n')
