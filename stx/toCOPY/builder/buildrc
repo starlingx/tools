@@ -30,6 +30,8 @@ export MY_REPO=$MY_REPO_ROOT_DIR/cgcs-root
 export MY_BUILD_TOOLS_DIR=$MY_REPO/build-tools
 export LAYER=$LAYER
 export STX_CONFIG_DIR=$MY_REPO_ROOT_DIR/stx-tools
+export PREFIX_BINARYLIST_DIR=debian-mirror-tools/config/debian/
+export STX_BINARYLIST_DIR=$STX_CONFIG_DIR/$PREFIX_BINARYLIST_DIR
 export STX_GIT_SRC_DIR=$MY_REPO/stx/git
 
 export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx:/opt/LAT/lat
