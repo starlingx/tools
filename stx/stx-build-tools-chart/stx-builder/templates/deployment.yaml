@@ -39,6 +39,8 @@ spec:
             mountPath: {{ .Values.volumeMounts.mountPath}}
           - name: {{ .Values.volumeMounts.usersetupname }}
             mountPath: {{ .Values.volumeMounts.usersetupmountPath}}
+          - name: {{ .Values.volumeMounts.mirrorName }}
+            mountPath: {{ .Values.volumeMounts.mirrorMountPath }}
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -50,6 +52,9 @@ spec:
       - name: {{ .Values.volumes.usersetupname }}
         configMap:
           name: {{ .Values.volumes.configmapname }}
+      - name: {{ .Values.volumes.mirrorName }}
+        hostPath:
+          path: {{ .Values.volumes.mirrorHostPath.path }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:

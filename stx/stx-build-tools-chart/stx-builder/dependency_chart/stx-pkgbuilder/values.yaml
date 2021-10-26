@@ -16,6 +16,8 @@ volumeMounts:
   mountPath: /localdisk
   envsetupname: env-setting
   envsetupmountPath: /usr/local/bin/stx
+  mirrorName: mirror
+  mirrorMountPath: /import/mirrors/starlingx
 
 volumes:
   name: shared-workspace
@@ -23,6 +25,9 @@ volumes:
     path: /workspace/localdisk
   envsetupname: env-setting
   configmapname: pkgbuilder
+  mirrorName: mirror
+  mirrorHostPath:
+    path: /workspace/mirrors/starlingx
 
 imagePullSecrets: []
 nameOverride: ""
