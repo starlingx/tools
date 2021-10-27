@@ -26,6 +26,14 @@ fi
 
 sudo apt-get update
 
+# create deb-local-binary empty repo for building first package, certainly the developer
+# also could select to download the other binary list in deb-mirror-tools directory with
+# debdownloader command, for example we download the base-bullseye.lst before building
+# image.
+TMPLIST=`mktemp /tmp/XXXXXX.lst`
+debdownloader $TMPLIST
+rm $TMPLIST
+
 if [[ x"$CENGNURL" != x"" ]]; then
     repo_manage.py mirror --url $CENGNURL
 fi
