@@ -34,3 +34,5 @@ export STX_GIT_SRC_DIR=$MY_REPO/stx/git
 
 export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx:/opt/LAT/lat
 export PYTHONPATH=$PYTHONPATH:$MY_BUILD_TOOLS_DIR/stx
+
+export STX_MIRROR=/import/mirrors/starlingx
