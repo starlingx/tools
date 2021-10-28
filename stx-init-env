@@ -1,78 +1,200 @@
 #!/bin/bash
 
-# Starlingx Debian Build Enviroment Setup Script
-
-# Normally this is called as 'source stx-init-env <sharedvolumedir>'
-# Also we can execute the command 'source stx-init-env' as default
-
-source import-stx
-if [ $? -ne 0 ]; then
+if [[ "$0" != "${BASH_SOURCE[0]}" ]] ; then
+    echo >&2 "Don't source this file, execute it instead, eg: ${BASH_SOURCE[0]} --help"
     return 1
 fi
 
+usage() {
+    cat <<END
+Usage: $0 OPTIONS
+Initialize StarlingX build environment & (re-)start builder pods
+
+     --nuke       delete minikube cluster and exit
+
+  -R,--restart-minikube
+                  restart minikube cluster before starting pods
+
+     --rebuild    build pod images instead of downloading them
+
+END
+}
+
+notice() {
+    local tty_on tty_off
+    if [[ -t 2 ]] ; then
+        tty_on=$'\033[1;36m'
+        tty_off=$'\033[0m'
+    fi
+    echo >&2 "${tty_on}$*${tty_off}"
+}
+
+
+PROGNAME=$(basename "$0")
 MINIKUBE=minikube
 HELM=helm
 DOCKER=docker
+PYTHON3=python3
+DOCKER_PREFIX="starlingx/"
+DOCKER_IMAGES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
+DOCKER_TAG="master-debian-latest"
+DOCKER_TAG_LOCAL="v0.1.0"
 
+BUILD_DOCKER=0
+DELETE_MINIKUBE=0
+RESTART_MINIKUBE=0
+
+minikube_started() {
+    docker ps | grep kicbase | grep -q $MINIKUBENAME
+}
+
+minikube_exists() {
+    local script=$(cat <<'END'
+import json,sys
+data = json.load (sys.stdin)
+for x in data['valid']+data['invalid']:
+    if x['Name'] == sys.argv[1]:
+        sys.exit(0)
+sys.exit(1)
+END
+)
+    $MINIKUBE profile list -l -o json | $PYTHON3 -c "$script" "$MINIKUBENAME"
+}
+
+cmdline_error() {
+    if [[ -n "$1" ]] ; then
+        echo "error: $1" >&2
+    fi
+    echo "Type \`$0 --help' for more info." >&2
+    exit 1
+}
+
+# process command line
+temp=$(getopt -o hR --long help,restart-minikube,rebuild,nuke -n "$PROGNAME" -- "$@") || cmdline_error
+eval set -- "$temp"
+while true ; do
+    case "$1" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -R|--restart-minikube)
+            RESTART_MINIKUBE=1
+            shift
+            ;;
+        --rebuild)
+            BUILD_DOCKER=1
+            shift
+            ;;
+        --nuke)
+            DELETE_MINIKUBE=1
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -?*)
+            cmdline_error
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+[[ "$#" -le 0 ]] || cmdline_error "too many arguments"
+
+
+# import environment
+source import-stx  || return 1
+
+# make sure required programs are installed
 if ! command -v $MINIKUBE &> /dev/null; then
-    echo "Command $MINIKUBE could not be found."
-    echo "Please install it as https://minikube.sigs.k8s.io/docs/start/"
+    echo >&2 "Command $MINIKUBE could not be found."
+    echo >&2 "Please install it as https://minikube.sigs.k8s.io/docs/start/"
     echo ""
+    exit 1
 fi
 if ! command -v $HELM &> /dev/null; then
-    echo "Command $HELM could not be found."
-    echo "Please install it as https://helm.sh/"
+    echo >&2 "Command $HELM could not be found."
+    echo >&2 "Please install it as https://helm.sh/"
     echo ""
+    exit 1
 fi
 if ! command -v $DOCKER &> /dev/null; then
-    echo "Command $DOCKER could not be found. Please install it."
-    echo ""
+    echo >&2 "Command $DOCKER could not be found. Please install it."
+    echo >&2 ""
+    exit 1
 fi
 
-MINIKUBE_EXIST=$(docker ps | grep kicbase | grep $MINIKUBENAME)
-if [ x"$MINIKUBE_EXIST" == x"" ]; then
-    echo "Start the new minikube $MINIKUBENAME"
-else
-    echo "The minikube $MINIKUBENAME exists, we will try to stop it..."
-    echo "Then restart it..."
-    echo ""
-    $MINIKUBE stop -p $MINIKUBENAME >> /dev/null
-    ret=$(docker ps | grep kicbase | grep $MINIKUBENAME)
-    if [ x"$ret" != x"" ]; then
-        echo "minikube container $MINIKUBENAME exist!"
-        echo "And the command 'minikube -p $MINIKUBENAME stop' failed. The reason may be"
-        echo "the current MINIKUBE_HOME/HOME is not the same as the $MINIKUBENAME"
-        echo "Please change the MINIKUBE_HOME/HOME directory to the previous value"
-        echo "then re-execute this script"
-        unset MINIKUBE_HOME
-        return 1
+# Make sure $STX_BUILD_HOME exists
+if [[ ! -d "$STX_BUILD_HOME" ]] ; then
+    echo >&2 "The directory $STX_BUILD_HOME doesn't exist, please create it with the command:"
+    echo >&2 ""
+    echo >&2 "  mkdir -p $STX_BUILD_HOME"
+    echo >&2 ""
+    echo >&2 "Then execute this script again!"
+    exit 1
+fi
+
+# --nuke: just delete the cluster and exit
+if [[ $DELETE_MINIKUBE -eq 1 ]] ; then
+    if minikube_exists ; then
+        notice "Deleting minikube cluster \`$MINIKUBENAME'"
+        $MINIKUBE delete -p "$MINIKUBENAME" || exit 1
     fi
+    exit 0
 fi
 
-if [ ! -d "$STX_BUILD_HOME" ]; then
-    echo "Warning: The directory $STX_BUILD_HOME doesn't exist, please create it with the command:"
-    echo ""
-    echo "  mkdir -p $STX_BUILD_HOME"
-    echo ""
-    echo "Then execute this script again!"
-    return 1
+# Stop minikube if necessary
+WANT_START_MINIKUBE=0
+if [[ $RESTART_MINIKUBE -eq 1 ]] ; then
+    if minikube_started ; then
+        notice "Stopping minikube cluster \`$MINIKUBENAME'"
+        $MINIKUBE stop -p $MINIKUBENAME
+        if minikube_started ; then
+            echo >&2 "minikube container $MINIKUBENAME exist!"
+            echo >&2 "And the command 'minikube -p $MINIKUBENAME stop' failed. The reason may be"
+            echo >&2 "the current MINIKUBE_HOME/HOME is not the same as the $MINIKUBENAME"
+            echo >&2 "Please change the MINIKUBE_HOME/HOME directory to the previous value"
+            echo >&2 "then re-execute this script"
+            exit 1
+        fi
+    fi
+    WANT_START_MINIKUBE=1
+elif ! minikube_started ; then
+    WANT_START_MINIKUBE=1
 fi
 
-$MINIKUBE start --driver=docker -p $MINIKUBENAME --mount=true --mount-string="$STX_BUILD_HOME:/workspace"
-if [ $? -ne 0 ]; then
-    return 1
+# Start minikube
+if [[ $WANT_START_MINIKUBE -eq 1 ]] ; then
+    notice "Starting minikube cluster \`$MINIKUBENAME'"
+    $MINIKUBE start --driver=docker -p $MINIKUBENAME \
+        --mount=true \
+        --mount-string="$STX_BUILD_HOME:/workspace" \
+        || exit 1
 fi
 
-# Build the container images from the dockerfiles
-DOCKERNAMES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
-
+# Import minikube's docker environment
 eval $(minikube -p $MINIKUBENAME docker-env)
 
-for i in $DOCKERNAMES; do
-    docker build -t $i:v0.1.0 -f stx/dockerfiles/$i.Dockerfile .
-    if [ $? -ne 0 ]; then
-        return 1
-    fi
-done
+# Build container images
+if [[ $BUILD_DOCKER -eq 1 ]] ; then
+    notice "Building docker images"
+    for img in $DOCKER_IMAGES; do
+        docker build --no-cache -t $img:$DOCKER_TAG_LOCAL -f stx/dockerfiles/$img.Dockerfile . || exit 1
+    done
+# else: download and retag
+else
+    notice "Pulling docker images"
+    for img in $DOCKER_IMAGES; do
+        docker pull ${DOCKER_PREFIX}${img}:${DOCKER_TAG} || exit 1
+        docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL} || exit 1
+    done
+fi
 
-eval $(minikube -p $MINIKUBENAME docker-env -u)
+# Restart pods
+notice "Restarting pods"
+stx control stop || exit 1
+stx control start || exit 1
+

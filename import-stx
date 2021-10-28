@@ -1,4 +1,4 @@
-#!/bin/bash
+# bash
 
 if [ -z "$MINIKUBE_HOME" ];then
     MINIKUBE_HOME=$HOME
