@@ -313,6 +313,7 @@ openssl  1.1.1k-1+deb11u1
 passwd  1:4.8.1-1
 perl-base  5.32.1-4+deb11u2
 pinentry-curses  1.1.0-4
+pipexec  2.5.5-2+b1
 policykit-1  0.105-31
 procps  2:3.3.17-5
 psmisc  23.4-2
