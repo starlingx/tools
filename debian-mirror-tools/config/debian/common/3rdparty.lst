@@ -1,0 +1,5 @@
+# These are 3rd party binary debian packages to 
+# be included locally.
+docker-ce 5:20.10.10~3-0~debian-bullseye
+docker-ce-cli 5:20.10.10~3-0~debian-bullseye
+containerd.io 1.4.11-1
