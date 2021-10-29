@@ -310,9 +310,6 @@ iperf3-3.1.7-2.el7.x86_64.rpm
 ipmitool-1.8.18-9.el7_7.x86_64.rpm
 ipset-6.38-3.el7_6.x86_64.rpm
 ipset-libs-6.38-3.el7_6.x86_64.rpm
-iptables-1.4.21-28.el7.x86_64.rpm
-iptables-services-1.4.21-28.el7.x86_64.rpm
-iptables-utils-1.4.21-28.el7.x86_64.rpm
 iputils-20160308-10.el7.x86_64.rpm
 ipxe-roms-qemu-20170123-1.git4e85b27.el7_4.1.noarch.rpm
 iscsi-initiator-utils-6.2.0.874-10.el7.x86_64.rpm

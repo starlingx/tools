@@ -324,8 +324,6 @@ ibacm-22.4-5.el7.x86_64.rpm
 # info-5.1-5.el7.x86_64.rpm provided by mock
 initscripts-9.49.53-1.el7.x86_64.rpm
 intltool-0.50.2-7.el7.noarch.rpm
-iptables-1.4.21-28.el7.x86_64.rpm
-iptables-devel-1.4.21-28.el7.x86_64.rpm
 iputils-20160308-10.el7.x86_64.rpm
 iscsi-initiator-utils-6.2.0.874-10.el7.x86_64.rpm
 iscsi-initiator-utils-iscsiuio-6.2.0.874-10.el7.x86_64.rpm
