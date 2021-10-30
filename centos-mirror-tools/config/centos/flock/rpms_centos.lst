@@ -466,6 +466,8 @@ libpsm2-compat-10.3.58-1.el7.x86_64.rpm
 libqhull-2015.2-1.el7.x86_64.rpm
 libquadmath-4.8.5-36.el7.x86_64.rpm
 libraw1394-2.1.0-2.el7.x86_64.rpm
+librabbitmq-0.8.0-3.el7.x86_64.rpm
+librdkafka-0.11.4-1.el7.x86_64.rpm
 librdmacm-17.2-3.el7.x86_64.rpm
 libref_array-0.1.5-32.el7.x86_64.rpm
 librepo-1.8.1-7.el7.x86_64.rpm
@@ -485,6 +487,9 @@ libSM-devel-1.2.2-2.el7.x86_64.rpm
 libsndfile-1.0.25-12.el7.x86_64.rpm
 libsolv-0.6.34-4.el7.x86_64.rpm
 # libstdc++-4.8.5-36.el7.x86_64.rpm provided by mock
+libstoragemgmt-1.8.1-1.el7.x86_64.rpm
+libstoragemgmt-python-1.8.1-1.el7.noarch.rpm
+libstoragemgmt-python-clibs-1.8.1-1.el7.x86_64.rpm
 libsysfs-2.1.0-16.el7.x86_64.rpm
 # libtasn1-4.10-1.el7.x86_64.rpm provided by mock
 libteam-1.27-5.el7.x86_64.rpm
