@@ -63,6 +63,14 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         ln -sf /usr/local/bin/stx/stx-localrc /root/localrc && \
         echo '. /usr/local/bin/finishSetup.sh' >> /root/.bashrc
 
+# 3rd party apt repositories
+# docker-cli
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+    echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+  apt-get update
+
 COPY stx/toCOPY/lat-tool/lat /opt/LAT/lat
 COPY stx/toCOPY/builder/finishSetup.sh /usr/local/bin
 COPY stx/toCOPY/builder/userenv /root/
