@@ -88,7 +88,7 @@ def add_chroot():
 @app.route('/pkgbuilder/addtask', methods=['GET'])
 def add_task():
     response = {}
-    attrs = ['user', 'project', 'dsc', 'type', 'name', 'mode']
+    attrs = ['user', 'project', 'dsc', 'type', 'name', 'mode', 'run_tests']
     if not all(t in request.form for t in attrs):
         log.error("Invalid request to add task")
         response['status'] = 'fail'
@@ -98,8 +98,13 @@ def add_task():
         user = request.form['user']
         project = request.form['project']
 
-        task_info = {'package': request.form['name'],
-                     'dsc': request.form['dsc'], 'type': request.form['type']}
+        task_info = {
+            'package': request.form['name'],
+            'dsc': request.form['dsc'],
+            'type': request.form['type'],
+            'run_tests': request.form['run_tests']
+            }
+
         response = dbuilder.add_task(user, project, task_info)
         log.info("Reply to add task, response=%s", str(response))
     return jsonify(response)
