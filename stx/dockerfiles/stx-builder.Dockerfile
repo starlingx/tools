@@ -57,7 +57,7 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         pulp_deb_client \
         pulp_file_client \
         progressbar \
-        git+git://github.com/masselstine/aptly-api-client.git && \
+        git+https://github.com/masselstine/aptly-api-client.git && \
         sed -i '/^proxy_dns*/d' /etc/proxychains.conf && \
         sed -i 's/^socks4.*/socks5 127.0.0.1 8080/g' /etc/proxychains.conf && \
         ln -sf /usr/local/bin/stx/stx-localrc /root/localrc && \
