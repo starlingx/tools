@@ -24,6 +24,18 @@ cves_to_omit = []
 cves_report = {}
 
 
+class NVDLengthException(Exception):
+    """
+    Throw the exception when the length of NVD list != 1
+    """
+    def __init__(self, length):
+        self.length = length
+
+    def __str__(self):
+        print("Warning: NVD length: %d, not 1, Please check again!" \
+            % self.length)
+
+
 def print_html_report(cves_report, title):
     """
     Print the html report
@@ -123,7 +135,7 @@ def get_summary(data, cve_id):
     return: nvd summary
     """
     try:
-        summary = data["scannedCves"][cve_id]["cveContents"]["nvd"]["summary"]
+        summary = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["summary"]
     except KeyError:
         summary = None
     return summary
@@ -133,7 +145,7 @@ def get_source_link(data, cve_id):
     return: web link to the nvd report
     """
     try:
-        source_link = data["scannedCves"][cve_id]["cveContents"]["nvd"]["sourceLink"]
+        source_link = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["sourceLink"]
     except KeyError:
         source_link = None
     return source_link
@@ -227,12 +239,16 @@ def cvssv3_parse_n_report(cves,title,data):
         affectedpackages_list = []
         allfixed = "fixed"
         try:
-            nvd2_score = data["scannedCves"][cve_id]["cveContents"]["nvd"]["cvss3Score"]
-            cvss3vector = data["scannedCves"][cve_id]["cveContents"]["nvd"]["cvss3Vector"]
+            nvdlength = len(data["scannedCves"][cve_id]["cveContents"]["nvd"])
+            if nvdlength != 1:
+                raise NVDLengthException(nvdlength)
+
+            nvd3_score = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss3Score"]
+            cvss3vector = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss3Vector"]
         except KeyError:
             cves_w_errors.append(cve)
         else:
-            cve["cvss3Score"] = nvd2_score
+            cve["cvss3Score"] = nvd3_score
             for element in cvss3vector.split("/"):
                 if "AV:" in element:
                     _av = element.split(":")[1]
@@ -266,8 +282,12 @@ def cvssv2_parse_n_report(cves,title,data):
         affectedpackages_list = []
         allfixed = "fixed"
         try:
-            nvd2_score = data["scannedCves"][cve_id]["cveContents"]["nvd"]["cvss2Score"]
-            cvss2vector = data["scannedCves"][cve_id]["cveContents"]["nvd"]["cvss2Vector"]
+            nvdlength = len(data["scannedCves"][cve_id]["cveContents"]["nvd"])
+            if nvdlength != 1:
+                raise NVDLengthException(nvdlength)
+
+            nvd2_score = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss2Score"]
+            cvss2vector = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss2Vector"]
         except KeyError:
             cves_w_errors.append(cve)
         else:
