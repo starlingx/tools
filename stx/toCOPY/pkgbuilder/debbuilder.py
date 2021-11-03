@@ -211,15 +211,19 @@ class Debbuilder:
             response['msg'] = dsc_target + ' does not exist'
             return response
 
-        # Disable unit tests globally to speed up builds
-        nocheck = os.environ
-        nocheck["DEB_BUILD_OPTIONS"] = "nocheck"
         bcommand = ' '.join([BUILD_ENGINE, '-d', DEBDIST, '-c', chroot,
                             '--build-dir', build_dir, dsc_target])
         self.logger.debug("Build command: %s" % bcommand)
 
         self._state = 'works'
-        p = subprocess.Popen(bcommand, shell=True, env=nocheck)
+
+        # verify if tests need to be executed
+        if task_info['run_tests'] == 'True':
+            p = subprocess.Popen(bcommand, shell=True)
+        else:
+            self.logger.debug("No tests needed, setting DEB_BUILD_OPTIONS=nocheck")
+            p = subprocess.Popen(bcommand, shell=True, env={**os.environ, 'DEB_BUILD_OPTIONS': 'nocheck'})
+
         self.sbuild_processes.setdefault(user, []).append(p)
 
         response['status'] = 'success'
