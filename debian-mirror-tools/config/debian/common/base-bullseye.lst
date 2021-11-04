@@ -71,6 +71,7 @@ init  1.60
 initramfs-tools  0.140
 initramfs-tools-core  0.140
 init-system-helpers  1.60
+install-info  6.7.0.dfsg.2-6
 iproute2  5.10.0-4
 iputils-ping  3:20210202-1
 isc-dhcp-client  4.4.1-2.3
