@@ -180,9 +180,8 @@ stx-pkgbuilder/configmap/')
         cmd = 'helm install ' + projectname + ' ' + helmchartdir
         self.logger.debug('Execute the helm start command: %s', cmd)
         if helmstatus:
-            self.logger.error('The helm release %s already exists.',
-                              projectname)
-            sys.exit(1)
+            self.logger.warning('The helm release %s already exists - nothing to do',
+                                projectname)
         else:
             repomgr_type = self.finish_configure()
             subprocess.check_call(cmd, shell=True, cwd=os.environ['PRJDIR'])
@@ -195,9 +194,8 @@ stx-pkgbuilder/configmap/')
             self.logger.debug('Execute the helm stop command: %s', cmd)
             subprocess.check_call(cmd, shell=True)
         else:
-            self.logger.error('The helm release %s does not exist.',
-                              projectname)
-            sys.exit(1)
+            self.logger.warning('The helm release %s does not exist - nothing to do',
+                                projectname)
 
     def handleUpgradeTask(self, helmstatus, projectname):
         command.check_prjdir_env()
