@@ -53,6 +53,9 @@ fm-mgr
 #fm-rest-api
 fm-rest-api
 
+#openstack-ras
+openstack-resource-agents
+
 #parted
 #libparted-dev  # not used
 libparted-fs-resize0-dbgsym
@@ -135,6 +138,21 @@ python3-cephclient
 
 #python-fmclient
 python3-fmclient
+
+#python-glanceclient
+python-glanceclient-doc
+#python3-glanceclient-wheel  # not used in deployment
+python3-glanceclient
+
+#python-keystoneclient
+python-keystoneclient-doc
+#python3-keystoneclient-wheel  # not used in deployment
+python3-keystoneclient
+
+#python-novaclient
+python-novaclient-doc
+#python3-novaclient-wheel  # not used in deployment
+python3-novaclient
 
 #storageconfig
 #storageconfig  # integration issue
