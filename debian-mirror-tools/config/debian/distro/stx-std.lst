@@ -32,7 +32,7 @@ drbd-utils
 
 #facter
 facter-dbgsym
-#facter-dev
+#facter-dev  # not used
 facter
 libfacter3.14.12-dbgsym
 libfacter3.14.12
@@ -42,7 +42,7 @@ python3-fm-api
 
 #fm-common
 fm-common-dbgsym
-#fm-common-dev
+#fm-common-dev  # not used
 fm-common-doc
 fm-common
 
@@ -54,7 +54,7 @@ fm-mgr
 fm-rest-api
 
 #parted
-#libparted-dev
+#libparted-dev  # not used
 libparted-fs-resize0-dbgsym
 libparted-fs-resize0
 libparted-i18n
@@ -75,7 +75,7 @@ python3-platform-util
 playbookconfig
 
 #puppet-5.5.22
-#puppet-master-passenger
+#puppet-master-passenger  # not used
 puppet-master
 puppet
 
@@ -93,15 +93,6 @@ puppet-drbd
 
 #puppet-keystone-17.4.0
 puppet-module-keystone
-
-#puppetlabs-haproxy-2.1.0
-puppet-module-puppetlabs-haproxy
-
-#puppetlabs-postgresql-6.7.0
-puppet-module-puppetlabs-postgresql
-
-#puppetlabs-stdlib-5.0.0
-puppet-module-puppetlabs-stdlib
 
 #puppet-ldap
 puppet-ldap
@@ -130,6 +121,15 @@ puppet-module-puppetlabs-rabbitmq
 #puppet-staging
 puppet-module-nanliu-staging
 
+#puppetlabs-haproxy-2.1.0
+puppet-module-puppetlabs-haproxy
+
+#puppetlabs-postgresql-6.7.0
+puppet-module-puppetlabs-postgresql
+
+#puppetlabs-stdlib-5.0.0
+puppet-module-puppetlabs-stdlib
+
 #python-cephclient
 python3-cephclient
 
@@ -137,7 +137,7 @@ python3-cephclient
 python3-fmclient
 
 #storageconfig
-#storageconfig
+#storageconfig  # integration issue
 
 #sysinv
 sysinv-wheels
@@ -157,4 +157,4 @@ tsconfig-wheel
 tsconfig
 
 #workerconfig
-#workerconfig-standalone
+#workerconfig-standalone  # integration issue
