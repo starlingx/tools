@@ -202,19 +202,24 @@ number_of_cpus () {
     /usr/bin/nproc
 }
 
+# FIXME: curl would work better here, but it doesn't support recursive downloads.
+#
+# Wget corrupts files in some cases:
+# - if the download stalls half-way and --tries is set to > 1, and the web
+#   server doesn't support the Range header with the upper limit omitted,
+#   (eg Range: bytes=18671712-) wget returns success (0) and leaves a partial
+#   file behind
+# - if download fails half-way, or wget is interrupted, wget returns
+#   non-zero, but may leave a partial file behind. This is to be expected,
+#   but we can't easily tell which files were downloaded fully in this case.
+#
+# See https://bugs.launchpad.net/starlingx/+bug/1950017
 get_remote_dir () {
     local url="${1}"
     local dest_dir="${2}"
     mkdir -p "${dest_dir}" || return 1
     \rm "${dest_dir}/"index.html*
-    wget  -c -N --recursive --no-parent --no-host-directories --no-directories --directory-prefix="${dest_dir}" "${url}/"
-}
-
-get_remote_file () {
-    local url="${1}"
-    local dest_dir="${2}"
-    mkdir -p "${dest_dir}" || return 1
-    wget  -c -N --no-parent --no-host-directories --no-directories --directory-prefix="${dest_dir}" "${url}"
+    wget -c -N --timeout 15 --recursive --no-parent --no-host-directories --no-directories --directory-prefix="${dest_dir}" "${url}/"
 }
 
 get_remote_file_overwrite () {
@@ -226,7 +231,7 @@ get_remote_file_overwrite () {
     if [ -f "${dest_file}" ]; then
         \rm "${dest_file}"
     fi
-    wget  -c -N --no-parent --no-host-directories --no-directories --directory-prefix="${dest_dir}" "${url}"
+    download_file --timestamps "$url" "$dest_file"
 }
 
 clean_repodata () {

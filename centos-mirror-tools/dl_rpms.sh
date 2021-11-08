@@ -345,6 +345,8 @@ download_worker () {
                 break
             else
                 echo "Warning: $rpm_name not found"
+                SFILE="$(get_rpm_level_name $rpm_name $lvl)"
+                \rm -f "$SFILE"
             fi
         done
 

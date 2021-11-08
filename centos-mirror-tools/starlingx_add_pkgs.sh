@@ -86,7 +86,8 @@ fi
 
 STARLINGX_ADD_PKGS_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
-source $STARLINGX_ADD_PKGS_DIR/../toCOPY/lst_utils.sh
+source $STARLINGX_ADD_PKGS_DIR/../toCOPY/lst_utils.sh || exit 1
+source $STARLINGX_ADD_PKGS_DIR/utils.sh || exit 1
 
 STXTOOLS=${MY_REPO_ROOT_DIR}/stx-tools
 
@@ -332,7 +333,7 @@ function download_pkg {
 
     echo "Downloading $url"
     rpm_path=$LOCALREPO_PATH/$arch/$(basename $relativepath)
-    wget -q -O $rpm_path $url
+    download_file --quiet "$url" "$rpm_path"
 
     if [ $? -ne 0 ]; then
         echo "Failed to download $url" >&2

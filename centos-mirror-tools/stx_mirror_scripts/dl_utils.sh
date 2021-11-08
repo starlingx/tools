@@ -8,12 +8,12 @@
 
 DL_UTILS_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
-if [ -f "$DL_UTILS_DIR/url_utils.sh" ]; then
-    source "$DL_UTILS_DIR/url_utils.sh"
-elif [ -f "$DL_UTILS_DIR/../url_utils.sh" ]; then
-    source "$DL_UTILS_DIR/../url_utils.sh"
+if [ -f "$DL_UTILS_DIR/utils.sh" ]; then
+    source "$DL_UTILS_DIR/utils.sh"
+elif [ -f "$DL_UTILS_DIR/../utils.sh" ]; then
+    source "$DL_UTILS_DIR/../utils.sh"
 else
-    echo "Error: Can't find 'url_utils.sh'"
+    echo "Error: Can't find 'utils.sh'"
     exit 1
 fi
 
@@ -257,13 +257,15 @@ dl_file_from_url () {
                 fi
             fi
 
-            CMD="wget '$URL' --tries=5 --wait=15 --output-document='$DOWNLOAD_PATH'"
+            CMD="$(get_download_file_command $URL $DOWNLOAD_PATH.dl_part)"
             echo "$CMD"
             eval $CMD
             if [ $? -ne 0 ]; then
+                \rm -f "$DOWNLOAD_PATH.dl_part"
                 echo "Error: $CMD"
                 return 1
             fi
+            \mv -fT "$DOWNLOAD_PATH.dl_part" "$DOWNLOAD_PATH"
             ;;
         *)
             echo "Error: Unknown protocol '$PROTOCOL' for url '$URL'"

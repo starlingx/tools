@@ -18,7 +18,7 @@ source utils.sh
 check_result() {
     local _res="$1"
     local _expect="$2"
-    if [ "$_res" != "$_expect" ]; then
+    if [[ "$_res" != $_expect ]]; then
         echo "Fail"
         echo "expected $_expect"
         echo "returned $_res"
@@ -27,14 +27,14 @@ check_result() {
     echo "Success"
 }
 
-# get_wget_command
+# get_download_file_command
 
-res=$(get_wget_command "https://libvirt.org/sources/python/libvirt-python-3.5.0-1.fc24.src.rpm")
-expect="wget -q https://libvirt.org/sources/python/libvirt-python-3.5.0-1.fc24.src.rpm"
+res=$(get_download_file_command "https://libvirt.org/sources/python/libvirt-python-3.5.0-1.fc24.src.rpm")
+expect="curl* https://libvirt.org/sources/python/libvirt-python-3.5.0-1.fc24.src.rpm"
 check_result "$res" "$expect"
 
-res=$(get_wget_command "python2-httpbin-0.5.0-6.el7.noarch.rpm")
-expect="wget -q https://kojipkgs.fedoraproject.org/packages/python2-httpbin/0.5.0/6.el7/noarch/python2-httpbin-0.5.0-6.el7.noarch.rpm"
+res=$(get_download_file_command --quiet "python2-httpbin-0.5.0-6.el7.noarch.rpm")
+expect="curl*--silent* https://kojipkgs.fedoraproject.org/packages/python2-httpbin/0.5.0/6.el7/noarch/python2-httpbin-0.5.0-6.el7.noarch.rpm"
 check_result "$res" "$expect"
 
 # get_url

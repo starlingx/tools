@@ -11,6 +11,7 @@
 DL_OTHER_FROM_CENTOS_REPO_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
 source $DL_OTHER_FROM_CENTOS_REPO_DIR/url_utils.sh
+source $DL_OTHER_FROM_CENTOS_REPO_DIR/utils.sh
 
 usage () {
     echo "$0 [-D <distro>] [-s|-S|-u|-U] [-h] <other_download_list.ini> <save_path> [<force_update>]"
@@ -144,7 +145,7 @@ for ff in $all; do
 
             echo "remote path: $url_prefix/$_name"
             echo "local path: $save_path/$_name"
-            if wget $url_prefix/$_name; then
+            if download_file $url_prefix/$_name; then
                 file_name=`basename $_name`
                 sub_path=`dirname $_name`
                 if [ -e "./$file_name" ]; then
