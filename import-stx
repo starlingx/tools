@@ -24,3 +24,7 @@ export PATH=$PRJDIR/stx/bin:$PATH
 export MINIKUBENAME=${MINIKUBENAME:-minikube-$USER-upstream}
 export KUBECONFIG=$MINIKUBE_HOME/.kube/config
 export STX_BUILD_HOME="${STX_BUILD_HOME:-/localdisk/$USER}"
+
+if [ ! -f "stx.conf" ]; then
+    cp stx.conf.sample stx.conf
+fi
