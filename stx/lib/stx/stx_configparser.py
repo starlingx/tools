@@ -79,6 +79,14 @@ class STXConfigParser:
 
         if not self.cf.has_section(section):
             self.cf.add_section(section)
+        if not self.cf.has_option(section, option):
+            logger.warning("Option [%s] will be new added. perhaps you " +
+                           "need to restart the helm project with the " +
+                           "command 'stx control stop' and " +
+                           "'stx control start' to make sure the new " +
+                           "config be effective, if the helm release " +
+                           "exists.", option)
+
         self.cf.set(section, option, value)
         self.syncConfigFile()
 
