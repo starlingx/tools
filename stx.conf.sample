@@ -7,6 +7,7 @@ proxyserver = opendev.org
 proxyport = 8080
 buildbranch = master
 manifest = default.xml
+ostree_osname = wrlinux
 
 [builder]
 uid = 1000
