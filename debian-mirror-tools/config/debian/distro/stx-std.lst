@@ -56,6 +56,11 @@ fm-rest-api
 #openstack-ras
 openstack-resource-agents
 
+#lighttpd
+lighttpd
+lighttpd-mod-geoip
+lighttpd-modules-mysql
+
 #parted
 #libparted-dev  # not used
 libparted-fs-resize0-dbgsym
@@ -135,6 +140,9 @@ puppet-module-puppetlabs-stdlib
 
 #python-cephclient
 python3-cephclient
+
+#python-docker
+python3-docker
 
 #python-fmclient
 python3-fmclient
