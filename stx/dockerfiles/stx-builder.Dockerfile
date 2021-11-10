@@ -46,6 +46,7 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         pristine-tar \
         repo \
         libdistro-info-perl \
+        debian-keyring \
         proxychains && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \
