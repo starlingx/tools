@@ -32,7 +32,7 @@ class HandleBuildTask:
     def buildImageCMD(self, args, prefixcmd):
 
         if args.type:
-            if (args.type != 'rt' and args.type != 'std'):
+            if args.type not in ['rt', 'std']:
                 self.logger.error('Option -t for generaing image only should \
 be [ rt|std ]')
                 self.logger.error('Please use "stx build -h" to show the help\
