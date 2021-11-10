@@ -137,6 +137,12 @@ if [[ ! -d "$STX_BUILD_HOME" ]] ; then
     exit 1
 fi
 
+# Make sure mirror directory exists. If this directory doesn't exist,
+# it will be automatically created with root permission.
+if [[ ! -d "$STX_BUILD_HOME/mirrors/starlingx" ]] ; then
+    mkdir -p $STX_BUILD_HOME/mirrors/starlingx || exit 1
+fi
+
 # --nuke: just delete the cluster and exit
 if [[ $DELETE_MINIKUBE -eq 1 ]] ; then
     if minikube_exists ; then
@@ -174,6 +180,12 @@ if [[ $WANT_START_MINIKUBE -eq 1 ]] ; then
         --mount-string="$STX_BUILD_HOME:/workspace" \
         || exit 1
 fi
+
+# Record the project environment variables
+echo "The last minikube cluster startup date: `date`" > minikube_history.log
+echo "MINIKUBE_HOME: $MINIKUBE_HOME" >> minikube_history.log
+echo "MINIKUBENAME: $MINIKUBENAME" >> minikube_history.log
+echo "STX_BUILD_HOME: $STX_BUILD_HOME" >> minikube_history.log
 
 # Import minikube's docker environment
 eval $(minikube -p $MINIKUBENAME docker-env)
