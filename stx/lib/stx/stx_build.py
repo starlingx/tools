@@ -60,6 +60,12 @@ be [ rt|std ]')
         cmd = prefixcmd + '". /usr/local/bin/stx/stx-cleanup"\''
         return cmd
 
+    def buildDebdownloaderCMD(self, prefixcmd):
+
+        cmd = prefixcmd + '"debdownloader ' + \
+            '$STX_BINARYLIST_DIR/common/base-bullseye.lst"\''
+        return cmd
+
     def buildPackageCMD(self, args, prefixcmd):
 
         if args.force:
@@ -115,6 +121,10 @@ the setup step before building')
         elif args.build_task == 'cleanup':
             cmd = self.buildCleanupCMD(prefix_cmd)
             self.logger.debug('Execute the cleanup command: [%s].', cmd)
+
+        elif args.build_task == 'debdownloader':
+            cmd = self.buildDebdownloaderCMD(prefix_cmd)
+            self.logger.debug('Execute the debdownloader command: [%s].', cmd)
 
         else:
             cmd = self.buildPackageCMD(args, prefix_cmd)
