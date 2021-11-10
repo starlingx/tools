@@ -112,7 +112,10 @@ libbpf0  1:0.3-2
 libbrotli1  1.0.9-2+b2
 libbsd0  0.11.3-1
 libbz2-1.0  1.0.8-4
+libc-bin  2.31-13+deb11u2
+libc-dev-bin  2.31-13+deb11u2
 libc6  2.31-13+deb11u2
+libc6-dev  2.31-13+deb11u2
 libcap2  1:2.44-1
 libcap2-bin  1:2.44-1
 libcap-ng0  0.7.9-2.2+b1
@@ -120,6 +123,7 @@ libc-bin  2.31-13+deb11u2
 libcbor0  0.5.0+dfsg-2
 libcom-err2  1.46.2-2
 libcpp-hocon0.3.0  0.3.0-1+b2
+libcrypt-dev  1:4.4.18-4
 libcrypt1  1:4.4.18-4
 libcryptsetup12  2:2.3.5-1
 libcurl3-gnutls  7.74.0-1.3+b1
@@ -138,6 +142,7 @@ libelf1  0.183-1
 libestr0  0.1.10-2.1+b1
 libevent-2.1-7  2.1.12-stable-1
 libexpat1  2.2.10-2
+libexpat1-dev  2.2.10-2
 libext2fs2  1.46.2-2
 libfastjson4  0.99.9-1
 libfdisk1  2.36.1-8
@@ -212,6 +217,7 @@ libnl-route-3-200  3.4.0-1+b1
 libnm0  1.30.0-2
 libnorm1  1.5.9+dfsg-2
 libnpth0  1.6-3
+libnsl-dev  1.3.0-2
 libnsl2  1.3.0-2
 libopenhpi3  3.8.0-2.1
 libopenipmi0  2.0.29-0.1+b1
@@ -238,7 +244,9 @@ libpq5  13.4-0+deb11u1
 libprocps8  2:3.3.17-5
 libproxy1v5  0.4.17-1
 libpsl5  0.21.0-1.2
+libpython3-dev  3.9.2-3
 libpython3.9  3.9.2-1
+libpython3.9-dev  3.9.2-1
 libpython3.9-minimal  3.9.2-1
 libpython3.9-stdlib  3.9.2-1
 libpython3-stdlib  3.9.2-3
@@ -284,6 +292,7 @@ libtimedate-perl  2.3300-2
 libtinfo6  6.2+20201114-2
 libtirpc3  1.3.1-1
 libtirpc-common  1.3.1-1
+libtirpc-dev  1.3.1-1
 libudev1  247.3-6
 libunistring2  0.9.10-4
 libuuid1  2.36.1-8
@@ -308,6 +317,7 @@ lighttpd  1.4.59-1
 linux-base  4.6
 linux-image-5.10.0-9-amd64  5.10.70-1
 linux-image-amd64  5.10.70-1
+linux-libc-dev  5.10.70-1
 login  1:4.8.1-1
 logrotate  3.18.0-2
 logsave  1.46.2-2
@@ -364,6 +374,7 @@ pv  1.6.6-1+b1
 pycadf-common  3.1.1-2
 python3  3.9.2-3
 python3.9  3.9.2-1
+python3.9-dev  3.9.2-1
 python3.9-minimal  3.9.2-1
 python3-alembic  1.4.3-1
 python3-amqp  5.0.3-3
@@ -390,6 +401,7 @@ python3-cryptography  3.3.2-1
 python3-dateutil  2.8.1-6
 python3-debtcollector  2.2.0-3
 python3-decorator  4.4.2-2
+python3-dev  3.9.2-3
 python3-distutils  3.9.2-1
 python3-dnspython  2.0.0-1
 python3-docker  4.1.0-1.2
@@ -589,3 +601,4 @@ xclip  0.13-2
 xml-core  0.18+nmu1
 xxd  2:8.2.2434-3
 zlib1g  1:1.2.11.dfsg-2
+zlib1g-dev  1:1.2.11.dfsg-2
