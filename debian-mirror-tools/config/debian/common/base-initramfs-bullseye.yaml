@@ -1,0 +1,77 @@
+---
+name: debian-initramfs-ostree-image
+machine: intel-x86-64
+image_type:
+- initramfs
+package_feeds:
+- deb [trusted=yes] http://128.224.153.74/debian ./
+- deb http://ftp.cn.debian.org/debian bullseye main contrib
+package_type: external-debian
+gpg:
+  gpg_path: /tmp/.lat_gnupg_root
+  ostree:
+    gpgid: Wind-River-Linux-Sample
+    gpgkey: $OECORE_NATIVE_SYSROOT/usr/share/genimage/rpm_keys/RPM-GPG-PRIVKEY-Wind-River-Linux-Sample
+    gpg_password: windriver
+  grub:
+    BOOT_GPG_NAME: SecureBootCore
+    BOOT_GPG_PASSPHRASE: SecureCore
+    BOOT_KEYS_DIR: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys
+packages:
+- base-passwd
+- bash
+- busybox
+- bzip2
+- ca-certificates
+- curl
+- dosfstools
+- e2fsprogs
+- eject
+- fdisk
+- findutils
+- gawk
+- glib-networking
+- gnupg
+- grep
+- grub2
+- gzip
+- initramfs-ostree
+- kbd
+- kmod
+- libostree-1-1=2019.1-1
+- linux-image-amd64
+- mdadm
+- mount
+- mttyexec
+- ostree-boot=2019.1-1
+- ostree=2019.1-1
+- parted
+- psmisc
+- pv
+- rng-tools
+- sed
+- tar
+- udev
+- udhcpc
+- util-linux
+- watchdog
+external-packages: []
+include-default-packages: '0'
+rootfs-pre-scripts:
+- echo "run script before do_rootfs in $IMAGE_ROOTFS"
+rootfs-post-scripts:
+- |-
+  # Reduce rootfs size AMAP
+  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+  chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
+  set -x
+  rm -rf /boot/*
+  rm -rf /var/lib/* /var/cache/*
+  rm -rf /usr/share/locale /usr/share/man /usr/share/doc /usr/share/zoneinfo /usr/share/vim
+  SCRIPT_ENDOF
+- |-
+  # Set bash as default shell
+  ln -snf --relative $IMAGE_ROOTFS/bin/bash $IMAGE_ROOTFS/bin/sh
+environments:
+- NO_RECOMMENDATIONS="1"
+- DEBIAN_FRONTEND=noninteractive
