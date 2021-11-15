@@ -112,9 +112,8 @@ libboost-thread1.74.0  1.74.0-9
 libbpf0  1:0.3-2
 libbrotli1  1.0.9-2+b2
 libbsd0  0.11.3-1
+libbson-1.0-0  1.17.6-1
 libbz2-1.0  1.0.8-4
-libc-bin  2.31-13+deb11u2
-libc-dev-bin  2.31-13+deb11u2
 libc6  2.31-13+deb11u2
 libc6-dev  2.31-13+deb11u2
 libcap2  1:2.44-1
@@ -122,14 +121,16 @@ libcap2-bin  1:2.44-1
 libcap-ng0  0.7.9-2.2+b1
 libc-bin  2.31-13+deb11u2
 libcbor0  0.5.0+dfsg-2
+libc-dev-bin  2.31-13+deb11u2
 libcom-err2  1.46.2-2
 libcpp-hocon0.3.0  0.3.0-1+b2
-libcrypt-dev  1:4.4.18-4
 libcrypt1  1:4.4.18-4
+libcrypt-dev  1:4.4.18-4
 libcryptsetup12  2:2.3.5-1
 libcurl3-gnutls  7.74.0-1.3+b1
 libcurl4 7.74.0-1.3+b1
 libdb5.3  5.3.28+dfsg1-0.8
+libdbi1  0.9.0-6
 libdbus-1-3  1.12.20-2
 libdconf1  0.38.0-2
 libdebconfclient0  0.260
@@ -172,6 +173,7 @@ libicu67  67.1-7
 libidn2-0  2.3.0-5
 libip4tc2  1.8.7-1
 libisc-export1105  1:9.11.19+dfsg-2.1
+libivykis0  0.42.4-1
 libjansson4  2.13.1-1.1
 libjs-jquery  3.5.1+dfsg+~3.5.5-7
 libjson-c5  0.15-2
@@ -200,6 +202,8 @@ libmariadb3  1:10.5.12-0+deb11u1
 libmd0  1.0.3-3
 libmm-glib0  1.14.12-0.2
 libmnl0  1.0.4-3
+libmongoc-1.0-0  1.17.6-1
+libmongocrypt0  1.1.0-1
 libmount1  2.36.1-8
 libmpdec3  2.5.1-1
 libmpfr6  4.1.0-3
@@ -219,8 +223,8 @@ libnl-route-3-200  3.4.0-1+b1
 libnm0  1.30.0-2
 libnorm1  1.5.9+dfsg-2
 libnpth0  1.6-3
-libnsl-dev  1.3.0-2
 libnsl2  1.3.0-2
+libnsl-dev  1.3.0-2
 libopenhpi3  3.8.0-2.1
 libopenipmi0  2.0.29-0.1+b1
 libp11-kit0  0.23.22-1
@@ -246,11 +250,11 @@ libpq5  13.4-0+deb11u1
 libprocps8  2:3.3.17-5
 libproxy1v5  0.4.17-1
 libpsl5  0.21.0-1.2
-libpython3-dev  3.9.2-3
 libpython3.9  3.9.2-1
 libpython3.9-dev  3.9.2-1
 libpython3.9-minimal  3.9.2-1
 libpython3.9-stdlib  3.9.2-1
+libpython3-dev  3.9.2-3
 libpython3-stdlib  3.9.2-3
 libquadmath0  10.2.1-6
 librdkafka1  1.6.0-1
@@ -276,6 +280,7 @@ libsigsegv2  2.13-1
 libslang2  2.3.2-5
 libsm6  2:1.2.3-1
 libsmartcols1  2.36.1-8
+libsnappy1v5  1.1.8-1
 libsnmp40  5.9+dfsg-3+b1
 libsnmp-base  5.9+dfsg-3
 libsodium23  1.0.18-1
@@ -558,7 +563,6 @@ rng-tools  5migrate1
 rng-tools-debian  2.3
 rpcbind  1.2.5-9
 rpm-common  4.16.1.2+dfsg1-3
-rsyslog  8.2102.0-2
 ruby  1:2.7+2
 ruby2.7  2.7.4-1
 ruby-augeas  1:0.5.0-3+b8
@@ -579,6 +583,10 @@ sgml-base  1.30
 sqlite3  3.34.1-3
 sshpass  1.09-1+b1
 sudo  1.9.5p2-3
+syslog-ng  3.28.1-2
+syslog-ng-core  3.28.1-2+b1
+syslog-ng-mod-mongodb  3.28.1-2+b1
+syslog-ng-mod-sql  3.28.1-2+b1
 systemd  247.3-6
 systemd-sysv  247.3-6
 systemd-timesyncd  247.3-6
