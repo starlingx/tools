@@ -144,7 +144,7 @@ is_tarball() {
     return $FOUND
 }
 
-# Download function using wget command
+# Download function using curl or similar command
 
 download_package() {
     local tarball_name="$1"
@@ -169,11 +169,11 @@ download_package() {
                 ;;
         esac
 
-        wget --spider "$url"
+        url_exists "$url"
         if [ $? != 0 ]; then
             echo "Warning: '$url' is broken"
         else
-            wget -q -t 5 --wait=15 -O "$tarball_name" "$url"
+            download_file --quiet "$url" "$tarball_name"
             if [ $? -eq 0 ]; then
                 if is_tarball "$tarball_name"; then
                     echo "Ok: $download_path"
@@ -293,7 +293,7 @@ for line in $(cat $tarball_file); do
             rm -rf $directory_name
             popd > /dev/null   # pushd $directory_name
         elif [[ "$tarball_name" = 'chartmuseum-v0.12.0-amd64' ]]; then
-            wget -q -t 5 --wait=15 -O "$tarball_name" "$tarball_url"
+            download_file --quiet "$tarball_url" "$tarball_name"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
                 popd > /dev/null   # pushd $output_tarball
@@ -301,7 +301,7 @@ for line in $(cat $tarball_file); do
             fi
         elif [[ "$tarball_name" = 'OPAE_1.3.7-5_el7.zip' ]]; then
             srpm_path="${directory_name}/source_code/"
-            wget -q -t 5 --wait=15 -O "$tarball_name" "$tarball_url"
+            download_file --quiet "$tarball_url" "$tarball_name"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
                 popd > /dev/null   # pushd $output_tarball
@@ -450,7 +450,7 @@ for line in $(cat $tarball_file); do
 
             src_rpm_name="$(echo "$tarball_url" | rev | cut -d/ -f1 | rev)"
 
-            wget -q -t 5 --wait=15 -O "$src_rpm_name" "$tarball_url"
+            download_file --quiet "$tarball_url" "$src_rpm_name"
             if [ $? -eq 0 ]; then
                 rpm2cpio "$src_rpm_name" | cpio --quiet -i "$tarball_name"
                 mv "$tarball_name" ..
@@ -486,9 +486,8 @@ for line in $(cat $tarball_file); do
                 ;;
         esac
 
-        download_cmd="wget -q -t 5 --wait=15 $url -O $download_path"
-
-        if $download_cmd ; then
+        download_file --quiet "$url" "$download_path"
+        if [[ $? -eq 0 ]] ; then
             if ! is_tarball "$download_path"; then
                 echo "Warning: file from $url is not a tarball."
                 \rm "$download_path"

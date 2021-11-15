@@ -12,7 +12,7 @@
 
 MAKE_STX_MIRROR_YUM_CONF_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
-source "$MAKE_STX_MIRROR_YUM_CONF_DIR/url_utils.sh"
+source "$MAKE_STX_MIRROR_YUM_CONF_DIR/utils.sh" || exit 1
 
 DISTRO="centos"
 SUDO=sudo
@@ -252,7 +252,7 @@ for REPO in $(find "$CENGN_REPOS_DIR" -type f -name '*repo'); do
         CENGN_URL="$(url_to_stx_mirror_url "$URL" "$DISTRO")"
 
         # Test CENGN url
-        wget -q --spider $CENGN_URL
+        url_exists --quiet "$CENGN_URL"
         if [ $? -eq 0 ]; then
             # OK, make substitution
             sed "s#^baseurl=$URL\$#baseurl=$CENGN_URL#" -i "$REPO"

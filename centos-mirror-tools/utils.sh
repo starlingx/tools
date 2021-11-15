@@ -6,7 +6,9 @@
 
 UTILS_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}" )" )"
 
-source $UTILS_DIR/url_utils.sh
+: ${_CURL_OPTS="--fail --location --connect-timeout 15 --speed-time 15 --speed-limit 1 --retry 5"}
+
+source $UTILS_DIR/url_utils.sh || exit 1
 
 get_yum_command() {
     local _file=$1
@@ -26,15 +28,75 @@ get_yum_command() {
     echo "${SUDO} yumdownloader -q -C ${YUMCONFOPT} ${RELEASEVER} $yumdownloader_extra_opts $rpm_name"
 }
 
-get_wget_command() {
+# Usage: get_download_file_command [--quiet] [--timestamps] URL [OUTPUT_FILE]
+get_download_file_command() {
+    local _opts="$_CURL_OPTS"
+    while true ; do
+        case "$1" in
+            --quiet)      _opts+=" --silent --show-error" ;;
+            --timestamps) _opts+=" --remote-time" ;;
+            -*)
+                echo >&2 "Unknown option $1"
+                return 1
+                ;;
+            *)
+                break
+        esac
+        shift
+    done
+
     local _name="$1"
     local _ret=""
-    if [[ "$_name" == http?(s)://* ]]; then
-        _ret="wget -q $_name"
+    if [[ $# -gt 1 ]]; then
+        _opts+=" -o $2"
     else
-        _ret="wget -q $(koji_url $_name)"
+        _opts+=" -O"
+    fi
+    if [[ "$_name" == http?(s)://* ]]; then
+        _ret="curl $_opts $_name"
+    else
+        _ret="curl $_opts $(koji_url $_name)"
     fi
     echo "$_ret"
+}
+
+# Usage: download_file [--quiet] [--timestamps] URL [OUTPUT_FILE]
+download_file() {
+    local _opts="$_CURL_OPTS"
+    while true ; do
+        case "$1" in
+            --quiet)      _opts+=" --silent --show-error" ;;
+            --timestamps) _opts+=" --remote-time" ;;
+            -*)
+                echo >&2 "Unknown option $1"
+                return 1
+                ;;
+            *)
+                break
+        esac
+        shift
+    done
+    if [[ "$#" -gt 1 ]] ; then
+        local _dest_file="$2"
+    else
+        local _dest_file="$(basename "$1")"
+    fi
+    if curl $_opts -o "${_dest_file}.dl_part" "$1" ; then
+        \mv -fT "${_dest_file}.dl_part" "${_dest_file}"
+        return 0
+    fi
+    \rm -f "${_dest_file}.dl_part"
+    return 1
+}
+
+# Usage: url_exists [--quiet] URL
+url_exists() {
+    local _opts
+    if [[ "$1" == "--quiet" ]] ; then
+        _opts+=" --quiet"
+        shift
+    fi
+    wget $_opts --spider "$1"
 }
 
 get_rpm_level_name() {
@@ -166,20 +228,20 @@ get_download_cmd() {
     local ff="$1"
     local _level="$2"
 
-    # Decide if the list will be downloaded using yumdownloader or wget
+    # Decide if the list will be downloaded using yumdownloader or curl
     if [[ $ff != *"#"* ]]; then
         rpm_name=$ff
         if [ $_level == "K1" ]; then
-            download_cmd="$(get_wget_command $rpm_name)"
+            download_cmd="$(get_download_file_command --quiet $rpm_name)"
         else
             # yumdownloader with the appropriate flag for src, noarch or x86_64
             # download_cmd="${SUDOCMD} $(get_yum_command $rpm_name $_level)"
             download_cmd="$(get_yum_command $rpm_name $_level)"
         fi
     else
-        # Build wget command
+        # Build the download command
         rpm_url=$(get_url "$ff" "$_level")
-        download_cmd="$(get_wget_command $rpm_url)"
+        download_cmd="$(get_download_file_command --quiet $rpm_url)"
     fi
 
     echo "$download_cmd"

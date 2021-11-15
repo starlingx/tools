@@ -539,7 +539,7 @@ else
 fi
 
 
-#download RPMs/SRPMs from 3rd_party websites (not CentOS repos) by "wget"
+#download RPMs/SRPMs from 3rd_party websites (not CentOS repos) using curl
 echo "step #2: start downloading RPMs/SRPMs from 3rd-party websites..."
 list=${rpms_from_3rd_parties}
 level=L1
