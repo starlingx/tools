@@ -105,7 +105,7 @@ image.\t\teg: [ prepare|distro|image|${pkgname}]')
                                      ', action='store_true', required=False)
         build_subparser.add_argument('-t', '--type',
                                      help='[ rt|std ]: Select the kernel type.\
-                                     ', nargs=1, required=False)
+                                     ', required=False)
         build_subparser.set_defaults(handle=self.handlebuild.handleBuild)
 
         repo_subparser = subparsers.add_parser('repomgr',
