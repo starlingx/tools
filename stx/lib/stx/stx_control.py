@@ -85,6 +85,7 @@ class HandleControlTask:
         sourceslist = self.stxconfig.getConfig('repomgr', 'sourceslist')
         deblist = self.stxconfig.getConfig('repomgr', 'deblist')
         dsclist = self.stxconfig.getConfig('repomgr', 'dsclist')
+        ostree_osname = self.stxconfig.getConfig('project', 'ostree_osname')
         if sourceslist:
             if not (deblist or dsclist):
                 self.logger.warning('*************************************\
@@ -155,6 +156,7 @@ stx-pkgbuilder/configmap/')
                 line = line.replace("@MANIFEST@", manifest)
                 line = line.replace("@HOSTUSERNAME@", hostusername)
                 line = line.replace("@CENGNURL@", cengnurl)
+                line = line.replace("@OSTREE_OSNAME@", ostree_osname)
                 if sourceslist:
                     line = line.replace("@fetch@", "true")
                     line = line.replace("@SOURCESLIST@", sourceslist)

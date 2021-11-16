@@ -22,6 +22,7 @@ BUILD_ENGINE = 'sbuild'
 DEBDIST = 'bullseye'
 STX_LOCALRC = '/usr/local/bin/stx/stx-localrc'
 SBUILD_CONF = '/etc/sbuild/sbuild.conf'
+ENVIRON_VARS = ['OSTREE_OSNAME']
 
 
 class Debbuilder:
@@ -51,6 +52,7 @@ class Debbuilder:
         self.sbuild_processes = {}
         self.ctlog = None
         self.set_extra_repos()
+        self.set_environ_vars()
 
     @property
     def state(self):
@@ -63,6 +65,21 @@ class Debbuilder:
     @mode.setter
     def mode(self, mode):
         self._mode = mode
+
+    def set_environ_vars(self):
+        if not os.path.exists(STX_LOCALRC):
+            self.logger.warning('stx-localrc does not exist')
+            return
+
+        for var in ENVIRON_VARS:
+            cmd = "grep '^export *%s=.*' %s | cut -d \\= -f 2" % (var, STX_LOCALRC)
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                       universal_newlines=True, shell=True)
+            outs, errs = process.communicate()
+            value = outs.strip().split("\n")[0]
+            if value:
+                cmd = "sed -ie 's#@%s@#%s#g' %s" % (var, value, SBUILD_CONF)
+                process = subprocess.Popen(cmd, shell=True, stdout=self.ctlog, stderr=self.ctlog)
 
     def set_extra_repos(self):
         repomgr_url = None
