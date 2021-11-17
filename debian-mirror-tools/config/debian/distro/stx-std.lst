@@ -2,8 +2,17 @@
 #Packages here will be built into std image
 #dpkg
 
+#armada
+armada
+
+#armada-helm-toolkit
+#armada-helm-toolkit  # only used for build
+
 #cert-alarm
 cert-alarm
+
+#cert-manager-helm
+cert-manager-helm
 
 #cert-mon
 cert-mon
@@ -18,17 +27,39 @@ python3-cgcs-patch
 cgts-client-wheel
 cgts-client
 
+#chartmuseum
+#chartmuseum  # only used for build
+
 #config-gate
 config-gate-worker
 config-gate
+
+#containerd
+containerd-dbgsym
+containerd
+#golang-github-containerd-containerd-dev  # not used
 
 #controllerconfig
 controllerconfig-wheels
 controllerconfig
 
+#crictl
+crictl
+
+#docker-distribution
+docker-registry
+#golang-github-docker-distribution-dev  # not used
+
 #drbd-tools
 drbd-utils-dbgsym
 drbd-utils
+
+#etcd
+etcd-client
+etcd-server-dbgsym
+etcd-server
+etcd
+#golang-etcd-server-dev  # not used
 
 #facter
 facter-dbgsym
@@ -53,13 +84,86 @@ fm-mgr
 #fm-rest-api
 fm-rest-api
 
-#openstack-ras
-openstack-resource-agents
+#helm
+helm
+
+#isolcpus-device-plugin
+isolcpus-device-plugin-dbgsym
+isolcpus-device-plugin
+
+#k8s-pod-recovery
+k8s-pod-recovery
 
 #lighttpd
-lighttpd
+lighttpd-dbgsym
+#lighttpd-doc  # not used
+#lighttpd-mod-authn-gssapi-dbgsym  # not used
+#lighttpd-mod-authn-gssapi  # not used
+#lighttpd-mod-authn-pam-dbgsym  # not used
+#lighttpd-mod-authn-pam  # not used
+#lighttpd-mod-authn-sasl-dbgsym  # not used
+#lighttpd-mod-authn-sasl  # not used
+lighttpd-mod-geoip-dbgsym
 lighttpd-mod-geoip
+#lighttpd-mod-maxminddb-dbgsym  # not used
+#lighttpd-mod-maxminddb  # not used
+#lighttpd-mod-trigger-b4-dl-dbgsym  # not used
+#lighttpd-mod-trigger-b4-dl  # not used
+#lighttpd-mod-vhostdb-dbi-dbgsym  # not used
+#lighttpd-mod-vhostdb-dbi  # not used
+#lighttpd-mod-vhostdb-pgsql-dbgsym  # not used
+#lighttpd-mod-vhostdb-pgsql  # not used
+#lighttpd-mod-webdav-dbgsym  # not used
+#lighttpd-mod-webdav  # not used
+lighttpd-modules-mysql-dbgsym
 lighttpd-modules-mysql
+lighttpd
+
+#mtce
+mtce-dbgsym
+#mtce-dev  # not used
+mtce-hostw-dbgsym
+mtce-hostw
+mtce-hwmon-dbgsym
+mtce-hwmon
+mtce-lmon-dbgsym
+mtce-lmon
+mtce-pmon-dbgsym
+mtce-pmon
+mtce
+
+#mtce-common
+#mtce-common-dev  # not used
+
+#mtce-compute
+mtce-compute
+
+#mtce-control
+mtce-control
+
+#mtce-guest
+mtce-guest-agent-dbgsym
+mtce-guest-agent
+mtce-guest-server-dbgsym
+mtce-guest-server
+
+#mtce-storage
+mtce-storage
+
+#nfv
+nfv-client
+nfv-common
+nfv-plugins
+nfv-tools
+nfv-vim
+nfv-wheels
+
+#nova-api-proxy
+nova-api-proxy-wheels
+nova-api-proxy
+
+#openstack-ras
+openstack-resource-agents
 
 #parted
 #libparted-dev  # not used
@@ -82,6 +186,10 @@ python3-platform-util
 #playbookconfig
 playbookconfig
 
+#plugins
+containernetworking-plugins
+#golang-github-containernetworking-plugins-dev  # not used
+
 #puppet-5.5.22
 #puppet-master-passenger  # not used
 puppet-master
@@ -93,11 +201,23 @@ puppet-boolean
 #puppet-ceph-3.1.1
 puppet-module-ceph
 
+#puppet-dcdbsync
+puppet-dcdbsync
+
+#puppet-dcmanager
+puppet-dcmanager
+
+#puppet-dcorch
+puppet-dcorch
+
 #puppet-dnsmasq
 puppet-dnsmasq
 
 #puppet-drbd-0.5.2
 puppet-drbd
+
+#puppet-fm
+puppet-fm
 
 #puppet-keystone-17.4.0
 puppet-module-keystone
@@ -108,8 +228,17 @@ puppet-ldap
 #puppet-lvm-1.4.0
 puppet-lvm
 
+#puppet-manifests
+puppet-manifests
+
+#puppet-mtce
+puppet-mtce
+
 #puppet-network
 puppet-network
+
+#puppet-nfv
+puppet-nfv
 
 #puppet-nslcd
 puppet-nslcd
@@ -120,14 +249,26 @@ puppet-module-openstacklib
 #puppet-oslo-17.4.0
 puppet-module-oslo
 
+#puppet-patching
+puppet-patching
+
 #puppet-puppi
 puppet-puppi
 
 #puppet-rabbitmq-8.5.0
 puppet-module-puppetlabs-rabbitmq
 
+#puppet-smapi
+puppet-smapi
+
+#puppet-sshd
+puppet-sshd
+
 #puppet-staging
 puppet-module-nanliu-staging
+
+#puppet-sysinv
+puppet-sysinv
 
 #puppetlabs-haproxy-2.1.0
 puppet-module-puppetlabs-haproxy
@@ -138,8 +279,15 @@ puppet-module-puppetlabs-postgresql
 #puppetlabs-stdlib-5.0.0
 puppet-module-puppetlabs-stdlib
 
+#python-barbicanclient
+#python3-barbicanclient-wheel  # not used in deployment
+python3-barbicanclient
+
 #python-cephclient
 python3-cephclient
+
+#python-cinderclient
+python3-cinderclient
 
 #python-docker
 python3-docker
@@ -152,21 +300,114 @@ python-glanceclient-doc
 #python3-glanceclient-wheel  # not used in deployment
 python3-glanceclient
 
+#python-gnocchiclient
+python-gnocchiclient-doc
+#python3-gnocchiclient-wheel  # not used in deployment
+python3-gnocchiclient
+
+#python-heatclient
+#python3-heatclient-wheel  # not used in deployment
+python3-heatclient
+
+#python-ironicclient
+python-ironicclient-doc
+#python3-ironicclient-wheel  # not used in deployment
+python3-ironicclient
+
+#python-k8sapp-cert-manager
+#python3-k8sapp-cert-manager-wheels  # installed by app framework
+#python3-k8sapp-cert-manager  # not used
+
+#python-k8sapp-nginx-ingress-controller
+#python3-k8sapp-nginx-ingress-controller-wheels  # installed by app framework
+#python3-k8sapp-nginx-ingress-controller  # not used
+
 #python-keystoneclient
 python-keystoneclient-doc
 #python3-keystoneclient-wheel  # not used in deployment
 python3-keystoneclient
+
+#python-neutronclient
+#python3-neutronclient-wheel  # not used in deployment
+python3-neutronclient
 
 #python-novaclient
 python-novaclient-doc
 #python3-novaclient-wheel  # not used in deployment
 python3-novaclient
 
+#python-openstackclient
+python-openstackclient-doc
+#python3-openstackclient-wheel  # not used in deployment
+python3-openstackclient
+
+#python-osc-lib
+python-osc-lib-doc
+python3-osc-lib
+
+#python-oslo-messaging
+python3-oslo.messaging
+
+#python-pankoclient
+python-pankoclient-doc
+#python3-pankoclient-wheel  # not used in deployment
+python3-pankoclient
+
+#python-wsme
+python3-wsme
+
 #rabbitmq-server
 rabbitmq-server
 
+#registry-token-server
+registry-token-server
+
+#runc
+#golang-github-opencontainers-runc-dev  # not used
+runc-dbgsym
+runc
+
+#service-mgmt-api
+sm-api-wheels
+sm-api
+
+#service-mgmt-client
+sm-client-wheels
+sm-client
+
+#service-mgmt-tools
+sm-tools-wheels
+sm-tools
+
+#sm
+sm-dbgsym
+sm
+
+#sm-common
+sm-common-dbgsym
+#sm-common-dev  # not used
+sm-common-libs-dbgsym
+sm-common-libs
+sm-common
+sm-eru-dbgsym
+sm-eru
+
+#sm-db
+sm-db-dbgsym
+#sm-db-dev  # not used
+sm-db
+
 #storageconfig
 #storageconfig  # integration issue
+
+#stx-cert-manager-helm
+stx-cert-manager-helm
+
+#stx-nginx-ingress-controller-helm
+stx-nginx-ingress-controller-helm
+
+#stx-ocf-scripts
+stx-ocf-scripts
 
 #sysinv
 sysinv-wheels

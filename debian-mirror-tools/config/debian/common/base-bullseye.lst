@@ -453,7 +453,6 @@ python3-anyjson  0.3.3-2
 python3-appdirs  1.4.4-1
 python3-attr  20.3.0-1
 python3-babel  2.8.0+dfsg.1-7
-python3-barbicanclient  5.0.1-2
 python3-bcrypt  3.1.7-4
 python3-binary-memcached  0.30.0+dfsg1-2
 python3-blinker  1.4+dfsg1-0.3
@@ -469,7 +468,6 @@ python3-certifi  2020.6.20-1
 python3-cffi  1.14.5-1
 python3-cffi-backend  1.14.5-1
 python3-chardet  4.0.0-1
-python3-cinderclient  1:7.2.0-3
 python3-click  7.1.2-1
 python3-cliff  3.4.0-2
 python3-cmd2  0.8.5-2.1
@@ -562,7 +560,6 @@ python3-oslo.context  3.1.1-2
 python3-oslo.db  8.4.0-2
 python3-oslo.i18n  5.0.1-2
 python3-oslo.log  4.4.0-2
-python3-oslo.messaging  12.5.2-1
 python3-oslo.middleware  4.1.1-2
 python3-oslo.policy  3.5.0-2
 python3-oslo.rootwrap  6.2.0-2
@@ -663,7 +660,6 @@ python3-webtest  2.0.35-1
 python3-werkzeug  1.0.1+dfsg1-2
 python3-wheel  0.34.2-1
 python3-wrapt  1.12.1-4+b1
-python3-wsme  0.10.0-3
 python3-xmlschema  1.4.2-1
 python3-xstatic  1.0.0-7
 python3-xstatic-angular  1.5.8.0-5
