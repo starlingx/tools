@@ -268,8 +268,10 @@ libncurses6  6.2+20201114-2
 libncursesw6  6.2+20201114-2
 libndp0  1.6-1+b1
 libnet1  1.1.6+dfsg-3.1
+libnetfilter-conntrack3  1.0.8-3
 libnettle8  3.7.3-1
 libnewt0.52  0.52.21-4+b3
+libnfnetlink0  1.0.1-3+b1
 libnfsidmap2  0.25-6
 libnftables1  0.9.8-3.1
 libnftnl11  1.1.9-1
