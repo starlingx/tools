@@ -30,6 +30,11 @@ cgts-client
 #chartmuseum
 #chartmuseum  # only used for build
 
+#cluster-resource-agents
+#ldirectord  # not used
+resource-agents-dbgsym
+resource-agents
+
 #config-gate
 config-gate-worker
 config-gate
@@ -45,6 +50,26 @@ controllerconfig
 
 #crictl
 crictl
+
+#dhcp
+isc-dhcp-client-dbgsym
+#isc-dhcp-client-ddns-dbgsym  # not used
+#isc-dhcp-client-ddns  # not used
+isc-dhcp-client
+isc-dhcp-common
+#isc-dhcp-dev  # not used
+#isc-dhcp-relay-dbgsym  # not used
+#isc-dhcp-relay  # not used
+#isc-dhcp-server-dbgsym  # not used
+#isc-dhcp-server-ldap-dbgsym  # not used
+#isc-dhcp-server-ldap  # not used
+#isc-dhcp-server  # not used
+
+#dnsmasq
+#dnsmasq-base-lua  # not used
+dnsmasq-base
+dnsmasq-utils
+dnsmasq
 
 #docker-distribution
 docker-registry
@@ -94,6 +119,10 @@ isolcpus-device-plugin
 #k8s-pod-recovery
 k8s-pod-recovery
 
+#libfdt
+libfdt-dbgsym
+libfdt
+
 #lighttpd
 lighttpd-dbgsym
 #lighttpd-doc  # not used
@@ -118,6 +147,11 @@ lighttpd-mod-geoip
 lighttpd-modules-mysql-dbgsym
 lighttpd-modules-mysql
 lighttpd
+
+#lldpd
+#liblldpctl-dev  # not used
+lldpd-dbgsym
+lldpd
 
 #mtce
 mtce-dbgsym
@@ -418,6 +452,39 @@ sysinv-agent
 
 #sysinv-fpga-agent
 sysinv-fpga-agent
+
+#systemd
+#libnss-myhostname-dbgsym  # not used
+#libnss-myhostname  # not used
+#libnss-mymachines-dbgsym  # not used
+#libnss-mymachines  # not used
+#libnss-resolve-dbgsym  # not used
+#libnss-resolve  # not used
+#libnss-systemd-dbgsym  # not used
+#libnss-systemd  # not used
+libpam-systemd-dbgsym
+libpam-systemd
+#libsystemd-dev  # not used
+libsystemd0-dbgsym
+libsystemd0
+#libudev-dev  # not used
+libudev1-dbgsym
+libudev1
+#systemd-container-dbgsym  # not used
+#systemd-container  # not used
+#systemd-coredump-dbgsym  # not used
+#systemd-coredump  # not used
+systemd-dbgsym
+#systemd-journal-remote-dbgsym  # not used
+#systemd-journal-remote  # not used
+systemd-sysv
+#systemd-tests-dbgsym  # not used
+#systemd-tests  # not used
+systemd-timesyncd-dbgsym
+systemd-timesyncd
+systemd
+udev-dbgsym
+udev
 
 #trident-installer
 trident-installer
