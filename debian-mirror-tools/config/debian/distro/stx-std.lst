@@ -162,6 +162,9 @@ python-novaclient-doc
 #python3-novaclient-wheel  # not used in deployment
 python3-novaclient
 
+#rabbitmq-server
+rabbitmq-server
+
 #storageconfig
 #storageconfig  # integration issue
 
