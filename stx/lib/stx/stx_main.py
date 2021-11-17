@@ -93,19 +93,29 @@ settings.\t\teg: [ --show|--get|--add|--unset|--remove-section ]')
 
         build_subparser = subparsers.add_parser('build',
                                                 help='Run to build packages or\
-image.\t\teg: [ prepare|distro|image|${pkgname}]')
+image.\t\teg: [ prepare|layer|image|debdownloader|world|${pkgname}]')
         build_subparser.add_argument('build_task',
-                                     help='[ prepare|cleanup|distro|image|\
-                                             ${pkgname} ]: \
+                                     help='[ prepare|cleanup|layer|image|' +
+                                     'debdownloader|world|${pkgname} ]:\
                                      Prepare for building enviroment and \
                                      build packages, distro layer or image.\
                                      \n\n')
+        build_subparser.add_argument('-e', '--exit-on-fail',
+                                     help="Exit for any fail.",
+                                     action='store_true', required=False)
         build_subparser.add_argument('-f', '--force',
                                      help='Force to compile the package again.\
                                      ', action='store_true', required=False)
-        build_subparser.add_argument('-t', '--type',
-                                     help='[ rt|std ]: Select the kernel type.\
+        build_subparser.add_argument('-l', '--layers',
+                                     help='[ flock|distro ]: Compile the \
+                                     packages for the layer.', required=False)
+        build_subparser.add_argument('-t', '--buildtype',
+                                     help='[ rt|std ]: Select the build type.\
                                      ', required=False)
+        build_subparser.add_argument('--enable-test',
+                                     help='Enable the automatical test for \
+                                     the package building.',
+                                     action='store_true', required=False)
         build_subparser.set_defaults(handle=self.handlebuild.handleBuild)
 
         repo_subparser = subparsers.add_parser('repomgr',

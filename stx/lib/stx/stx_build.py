@@ -21,6 +21,9 @@ import sys
 from stx import command  # pylint: disable=E0611
 from stx import utils  # pylint: disable=E0611
 
+STX_BUILD_TYPES = ['rt', 'std']
+STX_LAYERS = ['distro', 'flock']
+
 
 class HandleBuildTask:
     '''Handle the task for the build sub-command'''
@@ -31,23 +34,45 @@ class HandleBuildTask:
 
     def buildImageCMD(self, args, prefixcmd):
 
-        if args.type:
-            if args.type not in ['rt', 'std']:
-                self.logger.error('Option -t for generaing image only should \
-be [ rt|std ]')
-                self.logger.error('Please use "stx build -h" to show the help\
-\n')
+        if args.buildtype:
+            if args.buildtype not in STX_BUILD_TYPES:
+                self.logger.error('Option "-t|--buildtype" for generating ' +
+                                  'image only should be %s.', STX_BUILD_TYPES)
+                self.logger.error('Please use "stx build -h" to show the help')
                 sys.exit(1)
 
-            cmd = prefixcmd + '"build-image -t ' + args.type + '"\''
+            cmd = prefixcmd + '"build-image -t ' + args.buildtype + '"\''
         else:
             cmd = prefixcmd + '"build-image"\''
 
         return cmd
 
-    def buildDistroCMD(self, prefixcmd):
+    def buildLayerCMD(self, args, prefixcmd):
 
-        cmd = prefixcmd + '"build-pkgs"\''
+        cmd = prefixcmd + '"build-pkgs '
+        if not args.layers:
+            self.logger.error('Must use "-l|--layers" option for layer ' +
+                              'building.')
+            sys.exit(1)
+
+        if args.layers not in STX_LAYERS:
+            self.logger.error('Option "-l|--layers" for layer building ' +
+                              'only should be %s.', STX_LAYERS)
+            self.logger.error('Please use "stx build -h" to show the help')
+            sys.exit(1)
+
+        cmd = cmd + '--layers ' + args.layers + ' '
+
+        if args.exit_on_fail:
+            cmd = cmd + '--exit_on_fail '
+
+        if args.force:
+            cmd = cmd + '--clean '
+
+        if args.enable_test:
+            cmd = cmd + '--test '
+
+        cmd = cmd + '"\''
         return cmd
 
     def buildPrepareCMD(self, prefixcmd):
@@ -66,12 +91,23 @@ be [ rt|std ]')
             '$STX_BINARYLIST_DIR/common/base-bullseye.lst"\''
         return cmd
 
-    def buildPackageCMD(self, args, prefixcmd):
+    def buildPackageCMD(self, args, prefixcmd, world):
+
+        if world:
+            cmd = prefixcmd + '"build-pkgs -a '
+        else:
+            cmd = prefixcmd + '"build-pkgs -p ' + args.build_task + ' '
+
+        if args.exit_on_fail:
+            cmd = cmd + '--exit_on_fail '
 
         if args.force:
-            cmd = prefixcmd + '"build-pkgs -c -p ' + args.build_task + '"\''
-        else:
-            cmd = prefixcmd + '"build-pkgs -p ' + args.build_task + '"\''
+            cmd = cmd + '--clean '
+
+        if args.enable_test:
+            cmd = cmd + '--test '
+
+        cmd = cmd + '"\''
         return cmd
 
     def handleBuild(self, args):
@@ -80,26 +116,25 @@ be [ rt|std ]')
 
         podname = command.get_pod_name('builder')
         if not podname:
-            self.logger.error('The builder container does not exist, \
-so please use the control module to start.')
+            self.logger.error('The builder container does not exist, ' +
+                              'so please use the control module to start.')
             sys.exit(1)
 
         if args.build_task != 'prepare' and args.build_task != 'cleanup':
 
-            bashcmd = '\'find /home/${MYUNAME}/prepare-build.done \
-&>/dev/null\''
+            bashcmd = "\'find /home/${MYUNAME}/prepare-build.done "
+            bashcmd += "&>/dev/null\'"
             cmd = command.generatePrefixCommand(podname, bashcmd, 0)
 
             ret = subprocess.call(cmd, shell=True)
             if ret != 0:
-                self.logger.warning('****************************************\
-******************************')
-                self.logger.warning('The building env not be initialized yet!\
-')
-                self.logger.warning('Execute \'stx build prepare\' to finish \
-the setup step before building')
-                self.logger.warning('****************************************\
-******************************')
+                self.logger.warning('***********************************' +
+                                    '***********************************')
+                self.logger.warning('The building env not be initialized yet!')
+                self.logger.warning('Execute \'stx build prepare\' to ' +
+                                    'finish the setup step before building')
+                self.logger.warning('***********************************' +
+                                    '***********************************')
                 sys.exit(1)
 
         prefix_cmd = command.generatePrefixCommand(podname, '', 1)
@@ -109,9 +144,9 @@ the setup step before building')
             self.logger.debug('Execute the generation image command: [%s]',
                               cmd)
 
-        elif args.build_task == 'distro':
-            cmd = self.buildDistroCMD(prefix_cmd)
-            self.logger.debug('Execute the distro compiling command: [%s].',
+        elif args.build_task == 'layer':
+            cmd = self.buildLayerCMD(args, prefix_cmd)
+            self.logger.debug('Execute the layer compiling command: [%s].',
                               cmd)
 
         elif args.build_task == 'prepare':
@@ -126,13 +161,17 @@ the setup step before building')
             cmd = self.buildDebdownloaderCMD(prefix_cmd)
             self.logger.debug('Execute the debdownloader command: [%s].', cmd)
 
+        elif args.build_task == 'world':
+            cmd = self.buildPackageCMD(args, prefix_cmd, True)
+            self.logger.debug('Execute the build world command: [%s].', cmd)
+
         else:
-            cmd = self.buildPackageCMD(args, prefix_cmd)
-            self.logger.debug('Compile the package: [%s] with the command \
-[%s]', args.build_task, cmd)
+            cmd = self.buildPackageCMD(args, prefix_cmd, False)
+            self.logger.debug('Compile the package: [%s] with the command ' +
+                              '[%s]', args.build_task, cmd)
 
         try:
             subprocess.check_call(cmd, shell=True)
         except subprocess.CalledProcessError as exc:
-            raise Exception('Failed to build with the command [%s].\n \
-Returncode: %s' % (cmd, exc.returncode))
+            raise Exception('Failed to build with the command [%s].\n' +
+                            'Returncode: %s' % cmd, exc.returncode)
