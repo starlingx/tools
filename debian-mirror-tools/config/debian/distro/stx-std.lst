@@ -8,6 +8,10 @@ armada
 #armada-helm-toolkit
 #armada-helm-toolkit  # only used for build
 
+#base-passwd
+base-passwd-dbgsym
+base-passwd
+
 #cert-alarm
 cert-alarm
 
@@ -119,6 +123,12 @@ isolcpus-device-plugin
 #k8s-pod-recovery
 k8s-pod-recovery
 
+#keyrings.alt
+python3-keyrings.alt
+
+#ldapscripts
+ldapscripts
+
 #libfdt
 libfdt-dbgsym
 libfdt
@@ -196,6 +206,20 @@ nfv-wheels
 nova-api-proxy-wheels
 nova-api-proxy
 
+#openldap
+ldap-utils-dbgsym
+ldap-utils
+libldap-2.4-2-dbgsym
+libldap-2.4-2
+libldap-common
+#libldap2-dev  # not used
+#slapd-contrib-dbgsym  # not used
+#slapd-contrib  # not used
+slapd-dbgsym
+#slapd-smbk5pwd  # not used
+slapd
+#slapi-dev  # not used
+
 #openstack-ras
 openstack-resource-agents
 
@@ -209,6 +233,9 @@ libparted2
 parted-dbgsym
 parted-doc
 parted
+
+#pf-bb-config
+pf-bb-config
 
 #platform-util
 platform-util-controller
@@ -356,6 +383,9 @@ python3-ironicclient
 #python3-k8sapp-nginx-ingress-controller-wheels  # installed by app framework
 #python3-k8sapp-nginx-ingress-controller  # not used
 
+#python-keyring
+python3-keyring
+
 #python-keystoneclient
 python-keystoneclient-doc
 #python3-keystoneclient-wheel  # not used in deployment
@@ -492,6 +522,10 @@ trident-installer
 #tsconfig
 tsconfig-wheel
 tsconfig
+
+#watchdog
+watchdog-dbgsym
+watchdog
 
 #workerconfig
 #workerconfig-standalone  # integration issue
