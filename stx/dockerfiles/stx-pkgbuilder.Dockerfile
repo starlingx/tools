@@ -47,8 +47,8 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=968927
 RUN cd /tmp && \
     wget \
-    http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.124_all.deb && \
-    dpkg -i debootstrap_1.0.124_all.deb
+    http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.126_all.deb && \
+    dpkg -i debootstrap_1.0.126_all.deb
 RUN groupadd crontab
 
 COPY stx/toCOPY/pkgbuilder/app.py /opt/
