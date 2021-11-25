@@ -176,6 +176,8 @@ fi
 if [[ $WANT_START_MINIKUBE -eq 1 ]] ; then
     notice "Starting minikube cluster \`$MINIKUBENAME'"
     $MINIKUBE start --driver=docker -p $MINIKUBENAME \
+        --cpus=$MINIKUBECPUS \
+        --memory=$MINIKUBEMEMORY \
         --mount=true \
         --mount-string="$STX_BUILD_HOME:/workspace" \
         || exit 1

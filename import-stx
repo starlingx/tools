@@ -19,12 +19,67 @@ if [ x"$FSTYPE" == x"nfs" ]; then
     return 1
 fi
 
+notice_warn() {
+    local tty_on tty_off
+    if [[ -t 2 ]] ; then
+        tty_on=$'\033[1;33m'
+        tty_off=$'\033[0m'
+    fi
+    echo >&2 "${tty_on}$*${tty_off}"
+}
+
 export PRJDIR=$(pwd)
 export PATH=$PRJDIR/stx/bin:$PATH
+export MINIKUBECPUS=${MINIKUBECPUS:-2}
+export MINIKUBEMEMORY=${MINIKUBEMEMORY:-16000}
 export MINIKUBENAME=${MINIKUBENAME:-minikube-$USER-upstream}
 export KUBECONFIG=$MINIKUBE_HOME/.kube/config
 export STX_BUILD_HOME="${STX_BUILD_HOME:-/localdisk/$USER}"
 
 if [ ! -f "stx.conf" ]; then
     cp stx.conf.sample stx.conf
+fi
+
+number_of_users () {
+    users | tr ' ' '\n' | sort --uniq | wc -l
+}
+
+number_of_cpus () {
+    /usr/bin/nproc
+}
+
+sqrt () {
+    echo -e "sqrt($1)" | bc -q -i | head -2 | tail -1
+}
+
+# Consider many users are just working with code and not actually building.
+NUM_USERS=$(sqrt $(number_of_users))
+ABSOLUTE_MAX_CPUS=$(($(number_of_cpus)/$NUM_USERS))
+MAX_CPUS=$(number_of_cpus)
+if [ "$MAX_CPUS" == "" ] || [ "$MAX_CPUS" == "0" ]; then
+    MAX_CPUS=1
+fi
+
+if [ $MAX_CPUS -gt $ABSOLUTE_MAX_CPUS ]; then
+    MAX_CPUS=$ABSOLUTE_MAX_CPUS
+fi
+
+if [ $MINIKUBECPUS -gt $MAX_CPUS ]; then
+    notice_warn "MINIKUBECPUS setting:$MINIKUBECPUS is more than MAX_CPUS: $MAX_CPUS."
+    notice_warn "Limit the minikube cluster with MAX_CPUS."
+
+    export MINIKUBECPUS=$MAX_CPUS
+fi
+
+MAX_MEMORY=`expr $(cat /proc/meminfo |grep MemTotal | awk '{print $2}') / 1024`
+if [ "$MAX_MEMORY" == "" ] || [ "$MAX_MEMORY" == "0" ]; then
+    MAX_MEMORY=2048
+fi
+
+if [ $MINIKUBEMEMORY -gt $MAX_MEMORY ]; then
+
+    notice_warn "MINIKUBEMEMORY setting:$MINIKUBEMEMORY is more than system MAX_MEMORY: $MAX_MEMORY M."
+    notice_warn "Limit the minikube cluster with MAX_MEMORY."
+
+    export MINIKUBEMEMORY=$MAX_MEMORY
 fi
