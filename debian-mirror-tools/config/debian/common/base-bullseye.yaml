@@ -89,3 +89,6 @@ ostree:
   OSTREE_FDISK_VSZ: 0
   OSTREE_FDISK_FSZ: 32
   OSTREE_CONSOLE: console=ttyS0,115200 console=tty1
+system:
+- contains:
+  - /localdisk/deploy/lat-initramfs.yaml
