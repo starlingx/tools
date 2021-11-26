@@ -38,7 +38,7 @@ To start a fresh source tree:
     repo sync
 
 To build all packages:
-    build-pkgs or build-pkgs -p <packageA,packageB...>
+    build-pkgs -a | build-pkgs -p <packageA,packageB...>
 
 To fill local binary repo:
     debdownloader <path binary package list>
