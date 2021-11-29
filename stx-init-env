@@ -43,6 +43,7 @@ DOCKER_TAG_LOCAL="v0.1.0"
 BUILD_DOCKER=0
 DELETE_MINIKUBE=0
 RESTART_MINIKUBE=0
+CLEAN_CONFIG=0
 
 minikube_started() {
     docker ps | grep kicbase | grep -q $MINIKUBENAME
@@ -61,6 +62,10 @@ END
     $MINIKUBE profile list -l -o json | $PYTHON3 -c "$script" "$MINIKUBENAME"
 }
 
+helm_started() {
+    helm ls | grep -q stx
+}
+
 cmdline_error() {
     if [[ -n "$1" ]] ; then
         echo "error: $1" >&2
@@ -70,7 +75,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hR --long help,restart-minikube,rebuild,nuke -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild,nuke -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -80,6 +85,10 @@ while true ; do
             ;;
         -R|--restart-minikube)
             RESTART_MINIKUBE=1
+            shift
+            ;;
+        --clean)
+            CLEAN_CONFIG=1
             shift
             ;;
         --rebuild)
@@ -104,10 +113,6 @@ while true ; do
 done
 [[ "$#" -le 0 ]] || cmdline_error "too many arguments"
 
-
-# import environment
-source import-stx  || return 1
-
 # make sure required programs are installed
 if ! command -v $MINIKUBE &> /dev/null; then
     echo >&2 "Command $MINIKUBE could not be found."
@@ -126,6 +131,29 @@ if ! command -v $DOCKER &> /dev/null; then
     echo >&2 ""
     exit 1
 fi
+
+# clean the configuration and configmap data
+if [[ $CLEAN_CONFIG -eq 1 ]] ; then
+    if helm_started ; then
+        notice "Please firstly stop the helm project with 'stx control stop' command."
+        notice "Then execute this cleanup operation again."
+        exit 1
+    fi
+    notice "Clean the config file and configmap data for builder|pkgbuilder container."
+    # copy a fresh config file
+    rm -f stx.conf
+    cp stx.conf.sample stx.conf
+
+    rm -f stx/lib/stx/__pycache__/*
+    rm -f stx/stx-build-tools-chart/stx-builder/Chart.lock
+    rm -f stx/stx-build-tools-chart/stx-builder/charts/*
+    rm -f stx/stx-build-tools-chart/stx-builder/configmap/stx-localrc
+    rm -f stx/stx-build-tools-chart/stx-builder/dependency_chart/stx-pkgbuilder/configmap/stx-localrc
+    exit 0
+fi
+
+# import environment
+source import-stx  || return 1
 
 # Make sure $STX_BUILD_HOME exists
 if [[ ! -d "$STX_BUILD_HOME" ]] ; then
