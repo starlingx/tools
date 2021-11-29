@@ -247,7 +247,6 @@ libkrb5-3  1.18.3-6+deb11u1
 libkrb5support0  1.18.3-6+deb11u1
 libksba8  1.5.0-3
 liblapack3  3.9.0-3
-libldap-2.4-2  2.4.57+dfsg-3
 libleatherman1.12.1  1.12.1+dfsg-1.1
 liblocale-gettext-perl  1.07-4+b1
 liblognorm5  2.0.5-1.1
@@ -529,7 +528,6 @@ python3-jsonpatch  1.25-3
 python3-json-pointer  2.0-2
 python3-jsonschema  3.2.0-3
 python3-jwt  1.7.1-2
-python3-keyring  22.0.1-1
 python3-keystoneauth1  4.2.1-2
 python3-keystonemiddleware  9.1.0-2
 python3-kombu  5.0.2-3
@@ -760,7 +758,6 @@ vim  2:8.2.2434-3
 vim-common  2:8.2.2434-3
 vim-runtime  2:8.2.2434-3
 vim-tiny  2:8.2.2434-3
-watchdog  5.16-1+b1
 wget  1.21-1+b1
 whiptail  0.52.21-4+b3
 wpasupplicant  2:2.9.0-21
