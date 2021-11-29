@@ -69,12 +69,12 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
 
-[StarlingX-C8.5.2111-centosplus-Source]
-name=StarlingX-CentOS-8.5.2111 - centosplus Source
-baseurl=https://vault.centos.org/8.5.2111/centosplus/Source/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
-enabled=0
+# [StarlingX-C8.5.2111-centosplus-Source]
+# name=StarlingX-CentOS-8.5.2111 - centosplus Source
+# baseurl=https://vault.centos.org/8.5.2111/centosplus/Source/
+# gpgcheck=1
+# gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
+# enabled=1
 
 
 [StarlingX-C8.5.2111-extras]
@@ -84,9 +84,9 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
 enabled=1
 
-[StarlingX-C8.5.2111-extras-Source]
-name=StarlingX-CentOS-8.5.2111 - extras Source
-baseurl=https://vault.centos.org/8.5.2111/extras/Source/
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
-enabled=0
+# [StarlingX-C8.5.2111-extras-Source]
+# name=StarlingX-CentOS-8.5.2111 - extras Source
+# baseurl=https://vault.centos.org/8.5.2111/extras/Source/
+# gpgcheck=1
+# gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-8
+# enabled=1
