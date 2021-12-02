@@ -51,3 +51,5 @@ export REPOMGR_DEPLOY_URL=http://@PROJECT@-stx-repomgr:80/
 export BUILDER_URL=http://@PROJECT@-stx-pkgbuilder:8080/pkgbuilder/
 
 export OSTREE_OSNAME=@OSTREE_OSNAME@
+
+export MAX_CPUS=@MAX_CPUS@

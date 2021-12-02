@@ -64,6 +64,8 @@ class HandleControlTask:
     def finish_configure(self):
         '''Before starting, we need to finish the setup'''
 
+        max_cpus = os.environ['MINIKUBECPUS']
+
         projectname = self.stxconfig.getConfig('project', 'name')
         builder_uid = self.stxconfig.getConfig('builder', 'uid')
         builder_myuname = self.stxconfig.getConfig('builder', 'myuname')
@@ -157,6 +159,7 @@ stx-pkgbuilder/configmap/')
                 line = line.replace("@HOSTUSERNAME@", hostusername)
                 line = line.replace("@CENGNURL@", cengnurl)
                 line = line.replace("@OSTREE_OSNAME@", ostree_osname)
+                line = line.replace("@MAX_CPUS@", max_cpus)
                 if sourceslist:
                     line = line.replace("@fetch@", "true")
                     line = line.replace("@SOURCESLIST@", sourceslist)
