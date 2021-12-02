@@ -8,9 +8,26 @@ armada
 #armada-helm-toolkit
 #armada-helm-toolkit  # only used for build
 
+#barbican
+barbican-api
+barbican-common
+barbican-doc
+barbican-keystone-listener
+barbican-worker
+python3-barbican
+
 #base-passwd
 base-passwd-dbgsym
 base-passwd
+
+#bash
+bash-builtins-dbgsym
+bash-builtins
+bash-dbgsym
+bash-doc
+bash-static-dbgsym
+bash-static
+bash
 
 #cert-alarm
 cert-alarm
@@ -75,6 +92,12 @@ dnsmasq-base
 dnsmasq-utils
 dnsmasq
 
+#dnsmasq-config
+dnsmasq-config
+
+#docker-config
+docker-config
+
 #docker-distribution
 docker-registry
 #golang-github-docker-distribution-dev  # not used
@@ -113,8 +136,20 @@ fm-mgr
 #fm-rest-api
 fm-rest-api
 
+#golang-1.16.6
+#golang-1.16-doc  # only used for build
+#golang-1.16-go  # only used for build
+#golang-1.16-src  # only used for build
+#golang-1.16  # only used for build
+
+#golang-dep
+#go-dep  # only used for build
+
 #helm
 helm
+
+#initramfs-ostree
+#initramfs-ostree  # only used for build
 
 #isolcpus-device-plugin
 isolcpus-device-plugin-dbgsym
@@ -125,6 +160,19 @@ k8s-pod-recovery
 
 #keyrings.alt
 python3-keyrings.alt
+
+#keystone
+keystone-doc
+keystone
+python3-keystone
+
+#kubernetes-1.21.3
+kubernetes-1.21.3-client
+kubernetes-1.21.3-kubeadm
+kubernetes-1.21.3-master
+kubernetes-1.21.3-misc
+kubernetes-1.21.3-node
+#kubernetes-1.21.3-unit-test  # not used
 
 #ldapscripts
 ldapscripts
@@ -194,6 +242,10 @@ mtce-guest-server
 #mtce-storage
 mtce-storage
 
+#mttyexec
+#mttyexec-dbgsym  # not used
+#mttyexec  # only used for build
+
 #nfv
 nfv-client
 nfv-common
@@ -220,8 +272,30 @@ slapd-dbgsym
 slapd
 #slapi-dev  # not used
 
+#openldap-config
+openldap-config
+
+#openstack-pkg-tools
+#openstack-pkg-tools  # only used for build
+
 #openstack-ras
 openstack-resource-agents
+
+#ostree
+#gir1.2-ostree-1.0  # only used for build
+#libostree-1-1-dbgsym  # only used for build
+#libostree-1-1  # only used for build
+#libostree-dev  # only used for build
+#libostree-doc  # only used for build
+#ostree-boot-dbgsym  # only used for build
+#ostree-boot  # only used for build
+#ostree-dbgsym  # only used for build
+#ostree-tests-dbgsym  # only used for build
+#ostree-tests  # only used for build
+#ostree  # only used for build
+
+#ostree-upgrade-mgr
+#ostree-upgrade-mgr  # only used for build
 
 #parted
 #libparted-dev  # not used
@@ -340,6 +414,11 @@ puppet-module-puppetlabs-postgresql
 #puppetlabs-stdlib-5.0.0
 puppet-module-puppetlabs-stdlib
 
+#python-aodhclient
+python-aodhclient-doc
+#python3-aodhclient-wheel  # not used in deployment
+python3-aodhclient
+
 #python-barbicanclient
 #python3-barbicanclient-wheel  # not used in deployment
 python3-barbicanclient
@@ -369,6 +448,12 @@ python3-gnocchiclient
 #python-heatclient
 #python3-heatclient-wheel  # not used in deployment
 python3-heatclient
+
+#python-horizon
+horizon-doc
+openstack-dashboard-apache
+openstack-dashboard
+python3-django-horizon
 
 #python-ironicclient
 python-ironicclient-doc
@@ -405,6 +490,11 @@ python-openstackclient-doc
 #python3-openstackclient-wheel  # not used in deployment
 python3-openstackclient
 
+#python-openstacksdk
+python-openstacksdk-doc
+#python3-openstacksdk-wheel  # not used in deployment
+python3-openstacksdk
+
 #python-osc-lib
 python-osc-lib-doc
 python3-osc-lib
@@ -423,8 +513,14 @@ python3-wsme
 #rabbitmq-server
 rabbitmq-server
 
+#rabbitmq-server-config
+rabbitmq-server-config
+
 #registry-token-server
 registry-token-server
+
+#rsync-config
+rsync-config
 
 #runc
 #golang-github-opencontainers-runc-dev  # not used
@@ -473,6 +569,9 @@ stx-nginx-ingress-controller-helm
 #stx-ocf-scripts
 stx-ocf-scripts
 
+#sudo-config
+sudo-config
+
 #sysinv
 sysinv-wheels
 sysinv
@@ -482,6 +581,9 @@ sysinv-agent
 
 #sysinv-fpga-agent
 sysinv-fpga-agent
+
+#syslog-ng-config
+syslog-ng-config
 
 #systemd
 #libnss-myhostname-dbgsym  # not used
