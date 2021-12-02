@@ -67,7 +67,7 @@ rootfs-post-scripts:
   set -x
   rm -rf /boot/*
   rm -rf /var/lib/* /var/cache/*
-  rm -rf /usr/share/locale /usr/share/man /usr/share/doc /usr/share/zoneinfo /usr/share/vim
+  rm -rf /usr/share/man /usr/share/doc /usr/share/zoneinfo /usr/share/vim
   SCRIPT_ENDOF
 - |-
   # Set bash as default shell
