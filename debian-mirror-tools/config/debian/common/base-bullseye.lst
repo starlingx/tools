@@ -10,7 +10,6 @@ apt  2.2.4
 apt-utils  2.2.4
 augeas-lenses  1.12.0-2
 base-files  11.1+deb11u1
-base-passwd  3.5.51
 bash  5.1-2+b3
 bash-completion  1:2.11-2
 bsdutils  1:2.36.1-8
