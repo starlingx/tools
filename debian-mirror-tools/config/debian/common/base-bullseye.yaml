@@ -5,8 +5,7 @@ image_type:
 - iso
 - ostree-repo
 - ustart
-package_feeds:
-- deb [trusted=yes] http://128.224.153.74/debian ./
+package_feeds: []
 package_type: external-debian
 wic:
   OSTREE_WKS_BOOT_SIZE: ''

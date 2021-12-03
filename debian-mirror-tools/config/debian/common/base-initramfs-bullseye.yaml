@@ -4,7 +4,6 @@ machine: intel-x86-64
 image_type:
 - initramfs
 package_feeds:
-- deb [trusted=yes] http://128.224.153.74/debian ./
 - deb http://ftp.cn.debian.org/debian bullseye main contrib
 package_type: external-debian
 gpg:
