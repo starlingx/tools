@@ -210,6 +210,7 @@ libhogweed6  3.7.3-1
 libice6  2:1.0.10-1
 libicu67  67.1-7
 libidn2-0  2.3.0-5
+libinih1  53-1+b2
 libip4tc2  1.8.7-1
 libip6tc2  1.8.7-1
 libisc-export1105  1:9.11.19+dfsg-2.1
@@ -775,6 +776,7 @@ whiptail  0.52.21-4+b3
 wpasupplicant  2:2.9.0-21
 x11-common  1:7.7+22
 xclip  0.13-2
+xfsprogs  5.10.0-4
 xml-core  0.18+nmu1
 xmlsec1  1.2.31-1
 xxd  2:8.2.2434-3
