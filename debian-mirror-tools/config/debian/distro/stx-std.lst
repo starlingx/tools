@@ -72,6 +72,9 @@ controllerconfig
 #crictl
 crictl
 
+#dex-helm
+#dex-helm  # only used for build
+
 #dhcp
 isc-dhcp-client-dbgsym
 #isc-dhcp-client-ddns-dbgsym  # not used
@@ -174,6 +177,9 @@ kubernetes-1.21.3-misc
 kubernetes-1.21.3-node
 #kubernetes-1.21.3-unit-test  # not used
 
+#kubernetes-unversioned
+kubernetes-unversioned
+
 #ldapscripts
 ldapscripts
 
@@ -210,6 +216,12 @@ lighttpd
 #liblldpctl-dev  # not used
 lldpd-dbgsym
 lldpd
+
+#monitor-helm
+#monitor-helm  # only used for build
+
+#monitor-helm-elastic
+#monitor-helm-elastic  # only used for build
 
 #mtce
 mtce-dbgsym
@@ -258,6 +270,10 @@ nfv-wheels
 nova-api-proxy-wheels
 nova-api-proxy
 
+#oidc-auth-tools
+#python3-oidcauthtools-wheels  # installed by app framework
+#python3-oidcauthtools  # not used
+
 #openldap
 ldap-utils-dbgsym
 ldap-utils
@@ -274,6 +290,12 @@ slapd
 
 #openldap-config
 openldap-config
+
+#openstack-helm
+#openstack-helm  # only used for build
+
+#openstack-helm-infra
+#openstack-helm-infra  # only used for build
 
 #openstack-pkg-tools
 #openstack-pkg-tools  # only used for build
@@ -324,6 +346,9 @@ playbookconfig
 #plugins
 containernetworking-plugins
 #golang-github-containernetworking-plugins-dev  # not used
+
+#portieris-helm
+#portieris-helm  # only used for build
 
 #puppet-5.5.22
 #puppet-master-passenger  # not used
@@ -460,6 +485,10 @@ python-ironicclient-doc
 #python3-ironicclient-wheel  # not used in deployment
 python3-ironicclient
 
+#python-k8sapp-auditd
+#python3-k8sapp-auditd-wheels  # installed by app framework
+#python3-k8sapp-auditd  # not used
+
 #python-k8sapp-cert-manager
 #python3-k8sapp-cert-manager-wheels  # installed by app framework
 #python3-k8sapp-cert-manager  # not used
@@ -467,6 +496,30 @@ python3-ironicclient
 #python-k8sapp-nginx-ingress-controller
 #python3-k8sapp-nginx-ingress-controller-wheels  # installed by app framework
 #python3-k8sapp-nginx-ingress-controller  # not used
+
+#python-k8sapp-oidc
+#python3-k8sapp-oidc-wheels  # installed by app framework
+#python3-k8sapp-oidc  # not used
+
+#python-k8sapp-openstack
+#python3-k8sapp-openstack-wheels  # installed by app framework
+#python3-k8sapp-openstack  # not used
+
+#python-k8sapp-platform
+#python3-k8sapp-platform-wheels  # installed by app framework
+#python3-k8sapp-platform  # not used
+
+#python-k8sapp-portieris
+#python3-k8sapp-portieris-wheels  # installed by app framework
+#python3-k8sapp-portieris  # not used
+
+#python-k8sapp-ptp-notification
+#python3-k8sapp-ptp-notification-wheels  # installed by app framework
+#python3-k8sapp-ptp-notification  # not used
+
+#python-k8sapp-vault
+#python3-k8sapp-vault-wheels  # installed by app framework
+#python3-k8sapp-vault  # not used
 
 #python-keyring
 python3-keyring
@@ -560,14 +613,38 @@ sm-db
 #storageconfig
 #storageconfig  # integration issue
 
+#stx-audit-helm
+stx-audit-helm
+
 #stx-cert-manager-helm
 stx-cert-manager-helm
+
+#stx-monitor-helm
+#stx-monitor-helm  # integration issue
 
 #stx-nginx-ingress-controller-helm
 stx-nginx-ingress-controller-helm
 
 #stx-ocf-scripts
 stx-ocf-scripts
+
+#stx-oidc-auth-helm
+stx-oidc-auth-helm
+
+#stx-openstack-helm
+stx-openstack-helm
+
+#stx-platform-helm
+stx-platform-helm
+
+#stx-portieris-helm
+stx-portieris-helm
+
+#stx-ptp-notification-helm
+stx-ptp-notification-helm
+
+#stx-vault-helm
+stx-vault-helm
 
 #sudo-config
 sudo-config
@@ -624,6 +701,9 @@ trident-installer
 #tsconfig
 tsconfig-wheel
 tsconfig
+
+#vault-helm
+#vault-helm  # only used for build
 
 #watchdog
 watchdog-dbgsym
