@@ -53,6 +53,7 @@ RUN groupadd crontab
 
 COPY stx/toCOPY/pkgbuilder/app.py /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.py /opt/
+COPY stx/toCOPY/pkgbuilder/setup.sh /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.conf /etc/sbuild/sbuild.conf
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
