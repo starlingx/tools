@@ -3,10 +3,10 @@
 
 [Starlingx-cengn_compiler_std_layer]
 name=Starlingx-cengn_compiler_std_layer
-baseurl=http://mirror.starlingx.cengn.ca/mirror/starlingx/master/centos/compiler/latest_build/outputs/RPMS/std/
+baseurl=http://mirror.starlingx.cengn.ca/mirror/starlingx/rc/6.0/centos/compiler/latest_build/outputs/RPMS/std/
 enabled=1
 
 [Starlingx-cengn_compiler_installer_layer]
 name=Starlingx-cengn_compiler_installer_layer
-baseurl=http://mirror.starlingx.cengn.ca/mirror/starlingx/master/centos/compiler/latest_build/outputs/RPMS/installer/
+baseurl=http://mirror.starlingx.cengn.ca/mirror/starlingx/rc/6.0/centos/compiler/latest_build/outputs/RPMS/installer/
 enabled=1
