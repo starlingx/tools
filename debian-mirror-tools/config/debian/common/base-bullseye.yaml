@@ -41,13 +41,8 @@ rootfs-pre-scripts:
 rootfs-post-scripts:
 - |-
   # Remove user admin whether it exists or not
-  # Add a new user and create user's home directory
-  # Add the user to sudo group
-  # Username: admin
-  # Password: 123456
   export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-  chroot $IMAGE_ROOTFS deluser admin
-  chroot $IMAGE_ROOTFS useradd admin -m --shell /bin/bash -G sudo --password '$6$YcX9PtwnWDeeZfLG$NO64/Frq0xXcMVLKFXqdKxdwBBF42I5TpEiaWfnuj6u6V5GMb0XCASZE7bG4Iiof8QtttCAN4F6xpdNhldIJl/'
+  chroot $IMAGE_ROOTFS deluser admin || true
 - |-
   # Set password 'root' to root"
   export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
@@ -72,6 +67,14 @@ rootfs-post-scripts:
   cp -rf $IMAGE_ROOTFS/boot/*-amd64 $DEPLOY_DIR
   KERNEL=`ls $DEPLOY_DIR/vmlinuz-*-amd64`
   ln -snf --relative $KERNEL  $DEPLOY_DIR/bzImage
+- |-
+  # Setup the sysadmin user and force the user to change the password
+  # on first login.
+  # Lock the root account
+  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+  chroot $IMAGE_ROOTFS useradd sysadmin -m --shell /bin/bash -G sudo --password 4SuW8cnXFyxsk
+  chroot $IMAGE_ROOTFS chage -d 0 sysadmin
+  chroot $IMAGE_ROOTFS passwd -l root
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
