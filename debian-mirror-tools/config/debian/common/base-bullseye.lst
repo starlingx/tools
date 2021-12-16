@@ -478,7 +478,7 @@ python3-aniso8601  8.1.1-1
 python3-anyjson  0.3.3-2
 python3-appdirs  1.4.4-1
 python3-attr  20.3.0-1
-python3-babel  2.6.0+dfsg.1-1+deb10u1
+python3-babel  2.8.0+dfsg.1-7
 python3-bcrypt  3.1.7-4
 python3-binary-memcached  0.30.0+dfsg1-2
 python3-blinker  1.4+dfsg1-0.3
