@@ -16,7 +16,7 @@ FROM debian:bullseye
 
 MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
-ARG LAT_BINARY_RESOURCE_PATH=http://mirror.starlingx.cengn.ca/mirror/lat-sdk/lat-sdk-20211013
+ARG LAT_BINARY_RESOURCE_PATH=http://mirror.starlingx.cengn.ca/mirror/lat-sdk/lat-sdk-20211216
 
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \

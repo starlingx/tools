@@ -3,6 +3,7 @@ name: debian-initramfs-ostree-image
 machine: intel-x86-64
 image_type:
 - initramfs
+debootstrap-mirror: http://ftp.cn.debian.org/debian
 package_feeds:
 - deb http://ftp.cn.debian.org/debian bullseye main contrib
 package_type: external-debian
