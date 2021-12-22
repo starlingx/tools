@@ -34,10 +34,6 @@ TMPLIST=`mktemp /tmp/XXXXXX.lst`
 debdownloader $TMPLIST
 rm $TMPLIST
 
-if [[ x"$CENGNURL" != x"" ]]; then
-    repo_manage.py mirror --url $CENGNURL
-fi
-
 if [[ x"$SOURCESLIST" != x"" ]]; then
     if [[ x"$DEBLIST" == x"" ]]; then
 	if [[ x"$DSCLIST" == x"" ]]; then
