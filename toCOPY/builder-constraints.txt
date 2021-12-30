@@ -1,2 +1,3 @@
 more-itertools===5.0.0;python_version=='2.7' # Last version with official 2.7 support
-pyparsing===2.4.7;python_version=='2.7'
+pyparsing===2.4.7
+filelock===3.4.0  # Last version with official support was 3.2.1, but 3.4.0 is known to work
