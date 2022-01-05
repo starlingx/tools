@@ -93,27 +93,33 @@ settings.\t\teg: [ --show|--get|--add|--unset|--remove-section ]')
 
         build_subparser = subparsers.add_parser('build',
                                                 help='Run to build packages or\
-image.\t\teg: [ prepare|layer|image|debdownloader|world|${pkgname}]')
+image.\t\teg: [ prepare|layer|image|download|world|${pkgname}]')
         build_subparser.add_argument('build_task',
                                      help='[ prepare|cleanup|layer|image|' +
-                                     'debdownloader|world|${pkgname} ]:\
+                                     'download|world|${pkgname} ]:\
                                      Prepare for building enviroment and \
                                      build packages, distro layer or image.\
                                      \n\n')
+        build_subparser.add_argument('-b', '--download-binary',
+                                     help="download binary debs",
+                                     action='store_true', required=False)
         build_subparser.add_argument('-e', '--exit-on-fail',
-                                     help="Exit for any fail.",
+                                     help="Exit for any failure.",
                                      action='store_true', required=False)
         build_subparser.add_argument('-f', '--force',
-                                     help='Force to compile the package again.\
-                                     ', action='store_true', required=False)
+                                     help='Force to execute the task again.',
+                                     action='store_true', required=False)
         build_subparser.add_argument('-l', '--layers',
                                      help='[ flock|distro ]: Compile the \
                                      packages for the layer.', required=False)
+        build_subparser.add_argument('-s', '--download-source',
+                                     help="download starlingx source recipes",
+                                     action='store_true', required=False)
         build_subparser.add_argument('-t', '--buildtype',
                                      help='[ rt|std ]: Select the build type.\
                                      ', required=False)
         build_subparser.add_argument('--enable-test',
-                                     help='Enable the automatical test for \
+                                     help='Enable the automatic test for \
                                      the package building.',
                                      action='store_true', required=False)
         build_subparser.set_defaults(handle=self.handlebuild.handleBuild)

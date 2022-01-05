@@ -85,10 +85,21 @@ class HandleBuildTask:
         cmd = prefixcmd + '". /usr/local/bin/stx/stx-cleanup"\''
         return cmd
 
-    def buildDebdownloaderCMD(self, prefixcmd):
+    def buildDownloadCMD(self, args, prefixcmd):
 
-        cmd = prefixcmd + '"debdownloader ' + \
-            '$STX_BINARYLIST_DIR/common/base-bullseye.lst"\''
+        cmd = prefixcmd + '"downloader '
+
+        if args.download_binary:
+            cmd = cmd + '--download_binary '
+        elif args.download_source:
+            cmd = cmd + '--download_source '
+        else:
+            cmd = cmd + '--download_binary --download_source '
+
+        if args.force:
+            cmd = cmd + '--clean_mirror '
+
+        cmd = cmd + '"\''
         return cmd
 
     def buildPackageCMD(self, args, prefixcmd, world):
@@ -157,9 +168,9 @@ class HandleBuildTask:
             cmd = self.buildCleanupCMD(prefix_cmd)
             self.logger.debug('Execute the cleanup command: [%s].', cmd)
 
-        elif args.build_task == 'debdownloader':
-            cmd = self.buildDebdownloaderCMD(prefix_cmd)
-            self.logger.debug('Execute the debdownloader command: [%s].', cmd)
+        elif args.build_task == 'download':
+            cmd = self.buildDownloadCMD(args, prefix_cmd)
+            self.logger.debug('Execute the download command: [%s].', cmd)
 
         elif args.build_task == 'world':
             cmd = self.buildPackageCMD(args, prefix_cmd, True)
