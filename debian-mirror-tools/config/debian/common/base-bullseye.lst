@@ -407,9 +407,6 @@ libz3-4  4.8.10-1
 libzmq5  4.3.4-1
 libzstd1  1.4.8+dfsg-2.1
 linux-base  4.6
-linux-image-5.10.0-10-amd64  5.10.84-1
-linux-image-amd64  5.10.84-1
-linux-libc-dev  5.10.84-1
 locales  2.31-13+deb11u2
 locales-all  2.31-13+deb11u2
 login  1:4.8.1-1

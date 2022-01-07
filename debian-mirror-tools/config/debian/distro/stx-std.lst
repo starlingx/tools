@@ -154,12 +154,31 @@ helm
 #initramfs-ostree
 #initramfs-ostree  # only used for build
 
+#intel-i40e
+i40e
+
+#intel-iavf
+iavf
+
+#intel-ice
+ice
+
+#intel-igb_uio
+igb-uio
+
+#intel-opae-fpga
+kmod-opae-fpga-driver
+
 #isolcpus-device-plugin
 isolcpus-device-plugin-dbgsym
 isolcpus-device-plugin
 
 #k8s-pod-recovery
 k8s-pod-recovery
+
+#kernel-std
+linux-image-5.10.0-6-amd64-unsigned
+linux-libc-dev
 
 #keyrings.alt
 python3-keyrings.alt
@@ -216,6 +235,10 @@ lighttpd
 #liblldpctl-dev  # not used
 lldpd-dbgsym
 lldpd
+
+#mlnx-ofa_kernel
+mlnx-ofed-kernel-modules
+mlnx-ofed-kernel-utils
 
 #monitor-helm
 #monitor-helm  # only used for build
@@ -563,11 +586,18 @@ python3-pankoclient
 #python-wsme
 python3-wsme
 
+#qat17
+qat1.7.l
+
 #rabbitmq-server
 rabbitmq-server
 
 #rabbitmq-server-config
 rabbitmq-server-config
+
+#rdma-core
+libibverbs1
+rdma-core
 
 #registry-token-server
 registry-token-server
