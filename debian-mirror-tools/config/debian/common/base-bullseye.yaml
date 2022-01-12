@@ -37,7 +37,7 @@ rootfs-pre-scripts:
   apt update
   apt install -y --no-install-recommends linux-image-amd64 grub-common
   apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
-  apt install --no-install-recommends -y network-manager
+  apt install --no-install-recommends -y ifupdown
   SCRIPT_ENDOF
 rootfs-post-scripts:
 - |-
