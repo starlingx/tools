@@ -39,6 +39,11 @@ rootfs-pre-scripts:
   apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
   apt install --no-install-recommends -y network-manager
   SCRIPT_ENDOF
+- |
+  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+  chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
+  groupadd nobody
+  SCRIPT_ENDOF
 rootfs-post-scripts:
 - |-
   # Remove user admin whether it exists or not
