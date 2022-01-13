@@ -416,6 +416,7 @@ login  1:4.8.1-1
 logrotate  3.18.0-2
 logsave  1.46.2-2
 lsb-base  11.1.0
+lsof  4.93.2+dfsg-1.1
 lvm2  2.03.11-2.1
 mailcap  3.69
 man-db  2.9.4-2
