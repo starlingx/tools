@@ -322,7 +322,6 @@ hmaccalc-0.9.13-4.el7.x86_64.rpm
 hwdata-0.252-9.1.el7.x86_64.rpm
 ibacm-22.4-5.el7.x86_64.rpm
 # info-5.1-5.el7.x86_64.rpm provided by mock
-initscripts-9.49.53-1.el7.x86_64.rpm
 intltool-0.50.2-7.el7.noarch.rpm
 iputils-20160308-10.el7.x86_64.rpm
 iscsi-initiator-utils-6.2.0.874-10.el7.x86_64.rpm
@@ -902,6 +901,7 @@ python3-pip-9.0.3-5.el7.noarch.rpm
 python3-rpm-generators-6-2.el7.noarch.rpm
 python3-rpm-macros-3-32.el7.noarch.rpm
 python3-setuptools-39.2.0-10.el7.noarch.rpm
+python36-Cython-0.28.6-1.el7.x86_64.rpm
 python36-docutils-0.14-1.el7.noarch.rpm
 python36-mock-2.0.0-2.el7.noarch.rpm
 python36-pbr-4.2.0-3.el7.noarch.rpm
