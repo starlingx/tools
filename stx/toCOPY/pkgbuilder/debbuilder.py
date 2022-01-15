@@ -53,6 +53,7 @@ class Debbuilder:
         self.ctlog = None
         self.set_extra_repos()
         self.set_environ_vars()
+        os.system('/opt/setup.sh')
 
     @property
     def state(self):
@@ -152,7 +153,8 @@ class Debbuilder:
         else:
             chroot_suffix = '--chroot-suffix=-' + user
             chroot_cmd = ' '.join(['sbuild-createchroot', chroot_suffix,
-                                   '--include=eatmydata', DEBDIST, user_chroot])
+                                   '--include=eatmydata', '--command-prefix=eatmydata',
+                                   DEBDIST, user_chroot])
             if mirror:
                 chroot_cmd = ' '.join([chroot_cmd, mirror])
             self.logger.debug("Command to creat chroot:%s" % chroot_cmd)
@@ -228,7 +230,10 @@ class Debbuilder:
             response['msg'] = dsc_target + ' does not exist'
             return response
 
-        bcommand = ' '.join([BUILD_ENGINE, '-d', DEBDIST, '-c', chroot,
+        jobs = '-j4'
+        if 'jobs' in task_info:
+            jobs = '-j' + task_info['jobs']
+        bcommand = ' '.join([BUILD_ENGINE, jobs, '-d', DEBDIST, '-c', chroot,
                             '--build-dir', build_dir, dsc_target])
         self.logger.debug("Build command: %s" % bcommand)
 

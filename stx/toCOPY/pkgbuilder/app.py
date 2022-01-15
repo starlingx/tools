@@ -104,6 +104,8 @@ def add_task():
             'type': request.form['type'],
             'run_tests': request.form['run_tests']
             }
+        if 'jobs' in request.form:
+            task_info['jobs'] = request.form['jobs']
 
         response = dbuilder.add_task(user, project, task_info)
         log.info("Reply to add task, response=%s", str(response))
