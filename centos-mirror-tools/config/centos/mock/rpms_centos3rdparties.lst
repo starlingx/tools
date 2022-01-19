@@ -9,8 +9,8 @@ ima-evm-utils-1.1-2.el7.x86_64.rpm
 libblkid-2.23.2-59.el7.x86_64.rpm
 libcom_err-1.42.9-13.el7.x86_64.rpm
 libsemanage-2.5-14.el7.x86_64.rpm
-nss-softokn-3.53.1-6.el7_9.x86_64.rpm
-nss-softokn-freebl-3.53.1-6.el7_9.x86_64.rpm
+nss-softokn-3.67.0-3.el7_9.x86_64.rpm
+nss-softokn-freebl-3.67.0-3.el7_9.x86_64.rpm
 systemd-219-78.el7_9.3.x86_64.rpm
 systemd-devel-219-78.el7_9.3.x86_64.rpm
 systemd-libs-219-78.el7_9.3.x86_64.rpm

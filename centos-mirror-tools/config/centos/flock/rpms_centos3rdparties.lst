@@ -43,10 +43,10 @@ libtevent-0.9.39-1.el7.x86_64.rpm
 libwbclient-4.10.16-5.el7.x86_64.rpm
 lvm2-2.02.177-4.el7.x86_64.rpm
 lvm2-libs-2.02.177-4.el7.x86_64.rpm
-# nss-softokn-3.53.1-6.el7_9.x86_64.rpm provided by mock
-nss-softokn-devel-3.53.1-6.el7_9.x86_64.rpm
-# nss-softokn-freebl-3.53.1-6.el7_9.x86_64.rpm provided by mock
-nss-softokn-freebl-devel-3.53.1-6.el7_9.x86_64.rpm
+# nss-softokn-3.67.0-3.el7_9.x86_64.rpm provided by mock
+nss-softokn-devel-3.67.0-3.el7_9.x86_64.rpm
+# nss-softokn-freebl-3.67.0-3.el7_9.x86_64.rpm provided by mock
+nss-softokn-freebl-devel-3.67.0-3.el7_9.x86_64.rpm
 ntfs-3g-2017.3.23-11.el7.x86_64.rpm
 ntfs-3g-devel-2017.3.23-11.el7.x86_64.rpm
 ntfsprogs-2017.3.23-11.el7.x86_64.rpm

@@ -22,10 +22,10 @@ mesa-libgbm-18.0.5-3.el7.x86_64.rpm
 mesa-libGL-18.0.5-3.el7.x86_64.rpm
 mesa-libglapi-18.0.5-3.el7.x86_64.rpm
 mesa-libGL-devel-18.0.5-3.el7.x86_64.rpm
-# nss-softokn-3.53.1-6.el7_9.x86_64.rpm provided by mock
-nss-softokn-devel-3.53.1-6.el7_9.x86_64.rpm
-# nss-softokn-freebl-3.53.1-6.el7_9.x86_64.rpm provided by mock
-nss-softokn-freebl-devel-3.53.1-6.el7_9.x86_64.rpm
+# nss-softokn-3.67.0-3.el7_9.x86_64.rpm provided by mock
+nss-softokn-devel-3.67.0-3.el7_9.x86_64.rpm
+# nss-softokn-freebl-3.67.0-3.el7_9.x86_64.rpm provided by mock
+nss-softokn-freebl-devel-3.67.0-3.el7_9.x86_64.rpm
 # openldap-2.4.44-20.el7.x86_64.rpm provided by mock
 # systemd-219-78.el7_9.3.x86_64.rpm provided by mock
 # systemd-devel-219-78.el7_9.3.x86_64.rpm provided by mock
