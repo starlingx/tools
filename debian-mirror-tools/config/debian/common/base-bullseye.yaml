@@ -44,6 +44,15 @@ rootfs-pre-scripts:
   chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
   groupadd nobody
   SCRIPT_ENDOF
+- |-
+  # FIXME: Temporary - Centos kickstarts set initial view of this file
+  mkdir -p -m 0775 $IMAGE_ROOTFS/etc/platform
+  cat << SCRIPT_ENDOF > $IMAGE_ROOTFS/etc/platform/platform.conf
+  nodetype=controller
+  subfunction=controller,worker
+  system_type=All-in-one
+  security_profile=standard
+  SCRIPT_ENDOF
 rootfs-post-scripts:
 - |-
   # Remove user admin whether it exists or not
@@ -81,6 +90,9 @@ rootfs-post-scripts:
   chroot $IMAGE_ROOTFS useradd sysadmin -m --shell /bin/bash -G sudo --password 4SuW8cnXFyxsk
   chroot $IMAGE_ROOTFS chage -d 0 sysadmin
   chroot $IMAGE_ROOTFS passwd -l root
+- |-
+  # FIXME: Temporary - Centos kickstarts set initial view of this file
+  echo "localhost" > $IMAGE_ROOTFS/etc/hostname
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
