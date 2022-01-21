@@ -29,6 +29,10 @@ bash-static-dbgsym
 bash-static
 bash
 
+#build-info
+#build-info-dev  # not used
+build-info
+
 #cert-alarm
 cert-alarm
 
@@ -72,6 +76,9 @@ controllerconfig
 #crictl
 crictl
 
+#debian-release-config
+debian-release-config
+
 #dex-helm
 #dex-helm  # only used for build
 
@@ -109,6 +116,9 @@ docker-registry
 drbd-utils-dbgsym
 drbd-utils
 
+#enable-dev-patch
+#enable-dev-patch  # not used in deployment
+
 #etcd
 etcd-client
 etcd-server-dbgsym
@@ -139,7 +149,7 @@ fm-mgr
 #fm-rest-api
 fm-rest-api
 
-#golang-1.16.6
+#golang-1.16.12
 #golang-1.16-doc  # only used for build
 #golang-1.16-go  # only used for build
 #golang-1.16-src  # only used for build
@@ -147,6 +157,13 @@ fm-rest-api
 
 #golang-dep
 #go-dep  # only used for build
+
+#grub2
+grub-common
+grub-pc-bin
+grub-pc
+grub2-common
+grub2
 
 #helm
 helm
@@ -169,13 +186,13 @@ keystone-doc
 keystone
 python3-keystone
 
-#kubernetes-1.21.3
-kubernetes-1.21.3-client
-kubernetes-1.21.3-kubeadm
-kubernetes-1.21.3-master
-kubernetes-1.21.3-misc
-kubernetes-1.21.3-node
-#kubernetes-1.21.3-unit-test  # not used
+#kubernetes-1.21.8
+kubernetes-1.21.8-client
+kubernetes-1.21.8-kubeadm
+kubernetes-1.21.8-master
+kubernetes-1.21.8-misc
+kubernetes-1.21.8-node
+kubernetes-1.21.8-unit-test
 
 #kubernetes-unversioned
 kubernetes-unversioned
@@ -211,6 +228,13 @@ lighttpd-mod-geoip
 lighttpd-modules-mysql-dbgsym
 lighttpd-modules-mysql
 lighttpd
+
+#lighttpd-config
+lighttpd-config
+
+#linuxptp
+linuxptp-dbgsym
+linuxptp
 
 #lldpd
 #liblldpctl-dev  # not used
@@ -257,6 +281,10 @@ mtce-storage
 #mttyexec
 #mttyexec-dbgsym  # not used
 #mttyexec  # only used for build
+
+#net-tools
+net-tools-dbgsym
+net-tools
 
 #nfv
 nfv-client
@@ -329,6 +357,10 @@ libparted2
 parted-dbgsym
 parted-doc
 parted
+
+#patch-alarm
+#python3-patch-alarm-wheels  # not used in deployment
+python3-patch-alarm
 
 #pf-bb-config
 pf-bb-config
@@ -517,6 +549,10 @@ python3-ironicclient
 #python3-k8sapp-ptp-notification-wheels  # installed by app framework
 #python3-k8sapp-ptp-notification  # not used
 
+#python-k8sapp-snmp
+#python3-k8sapp-snmp-wheels  # installed by app framework
+#python3-k8sapp-snmp  # not used
+
 #python-k8sapp-vault
 #python3-k8sapp-vault-wheels  # installed by app framework
 #python3-k8sapp-vault  # not used
@@ -592,6 +628,10 @@ sm-client
 sm-tools-wheels
 sm-tools
 
+#shim-unsigned
+shim-helpers-amd64-signed-template
+shim-unsigned
+
 #sm
 sm-dbgsym
 sm
@@ -619,6 +659,9 @@ stx-audit-helm
 #stx-cert-manager-helm
 stx-cert-manager-helm
 
+#stx-metrics-server-helm
+stx-metrics-server-helm
+
 #stx-monitor-helm
 #stx-monitor-helm  # integration issue
 
@@ -642,6 +685,9 @@ stx-portieris-helm
 
 #stx-ptp-notification-helm
 stx-ptp-notification-helm
+
+#stx-snmp-helm
+stx-snmp-helm
 
 #stx-vault-helm
 stx-vault-helm
