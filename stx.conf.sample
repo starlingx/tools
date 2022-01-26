@@ -24,6 +24,7 @@ mode = local
 [repomgr]
 type = aptly
 cengnurl = http://mirror.starlingx.cengn.ca:80/mirror
+cengnstrategy = cengn_first
 sourceslist =
 deblist =
 dsclist =

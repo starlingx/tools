@@ -38,6 +38,9 @@ export HOSTUSERNAME=@HOSTUSERNAME@
 
 export CENGNURL=@CENGNURL@
 
+# CENGN_STRATEGY value: [ cengn|cengn_first|upstream|upstream_first ]
+export CENGN_STRATEGY=@CENGNSTRATEGY@
+
 if [[ x"@fetch@" == x"true" ]];then
     export SOURCESLIST=/usr/local/bin/stx/@SOURCESLIST@
     export DEBLIST=/usr/local/bin/stx/@DEBLIST@
