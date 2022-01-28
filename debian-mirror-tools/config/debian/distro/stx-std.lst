@@ -192,7 +192,7 @@ kubernetes-1.21.8-kubeadm
 kubernetes-1.21.8-master
 kubernetes-1.21.8-misc
 kubernetes-1.21.8-node
-kubernetes-1.21.8-unit-test
+#kubernetes-1.21.8-unit-test # not needed
 
 #kubernetes-unversioned
 kubernetes-unversioned
@@ -710,7 +710,7 @@ syslog-ng-config
 
 #systemd
 #libnss-myhostname-dbgsym  # not used
-#libnss-myhostname  # not used
+libnss-myhostname
 #libnss-mymachines-dbgsym  # not used
 #libnss-mymachines  # not used
 #libnss-resolve-dbgsym  # not used
@@ -735,8 +735,8 @@ systemd-dbgsym
 systemd-sysv
 #systemd-tests-dbgsym  # not used
 #systemd-tests  # not used
-systemd-timesyncd-dbgsym
-systemd-timesyncd
+#systemd-timesyncd-dbgsym  # not used
+#systemd-timesyncd  # not used
 systemd
 udev-dbgsym
 udev
