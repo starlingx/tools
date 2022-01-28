@@ -94,16 +94,19 @@ class Debbuilder:
         for item in env_list:
             if item.startswith('export '):
                 envvar = item.replace('export ', '').split('=')
-                if envvar and envvar[0] == 'REPOMGR_DEPLOY_URL':
-                    repomgr_url = envvar[1]
+                if envvar and len(envvar) >= 2 and envvar[0].strip() == 'REPOMGR_DEPLOY_URL':
+                    repomgr_url = envvar[1].strip()
                     break
 
         if repomgr_url:
+            url_parts = repomgr_url.split(':')
+            repo_origin = url_parts[1][2:]
+            self.logger.debug('The origin of local repositories is %s', repo_origin)
             try:
                 with open(SBUILD_CONF, '+r') as f:
                     sconf = f.read()
-                    sconf = sconf.replace('http://stx-stx-repomgr:80/',
-                                          repomgr_url.strip())
+                    sconf = sconf.replace('http://stx-stx-repomgr:80/', repomgr_url)
+                    sconf = sconf.replace('stx-stx-repomgr', repo_origin)
                     f.seek(0, 0)
                     f.write(sconf)
                     f.truncate()
