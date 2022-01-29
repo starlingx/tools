@@ -36,7 +36,9 @@ spec:
           tty: true
           volumeMounts:
           - name: {{ .Values.volumes.name }}
-            mountPath: {{ .Values.volumeMounts.mountPath}}
+            mountPath: {{ .Values.volumeMounts.mountPath }}
+          - name: {{ .Values.volumes.entropyname }}
+            mountPath: {{ .Values.volumeMounts.entropymountPath }}
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -45,6 +47,9 @@ spec:
       - name: {{ .Values.volumes.name }}
         hostPath:
           path: {{ .Values.volumes.hostPath.path }}
+      - name: {{ .Values.volumes.entropyname }}
+        hostPath:
+          path: {{ .Values.volumes.entropyhostPath.path }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:

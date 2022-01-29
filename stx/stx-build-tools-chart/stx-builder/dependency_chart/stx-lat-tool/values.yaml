@@ -14,11 +14,16 @@ image:
 volumeMounts:
   name: latd-shared-workspace
   mountPath: /localdisk
+  entropyname: entropy-device
+  entropymountPath: /dev/random
 
 volumes:
   name: latd-shared-workspace
   hostPath:
     path: /workspace/localdisk
+  entropyname: entropydevice
+  entropyhostPath:
+    path: /dev/urandom
 
 imagePullSecrets: []
 nameOverride: ""
