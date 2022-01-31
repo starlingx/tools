@@ -39,5 +39,10 @@ ADD ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh /opt/LAT/AppSDK.sh
 RUN chmod +x /opt/LAT/AppSDK.sh
 RUN /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y
 
+# Workaround for using minbase variant for debootstrap
+# See https://bugs.launchpad.net/starlingx/+bug/1959607
+RUN sed -i -e 's#--no-check-gpg#--variant=minbase --no-check-gpg#g' \
+  /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/package_manager/deb/__init__.py
+
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/opt/LAT/lat/latd"]
