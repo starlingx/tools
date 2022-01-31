@@ -41,7 +41,23 @@ if [ ! -f "stx.conf" ]; then
 fi
 
 number_of_users () {
-    users | tr ' ' '\n' | sort --uniq | wc -l
+    local count
+
+    count=$(users | tr ' ' '\n' | sort --uniq | wc -l)
+    
+    # Add in non-login users that might trigger a parallel build
+    # based on a timer, or other trigger.
+    if getent passwd | grep -q jenkins; then
+        count=$((count+1))
+    fi
+
+    # Always return at least one.  i.e. someone is
+    # running this script.
+    if [ $count -le 0 ]; then
+        count=1
+    fi
+
+    echo $count
 }
 
 number_of_cpus () {
