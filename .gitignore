@@ -12,3 +12,7 @@ doc/build/
 
 # Release Notes documentation
 releasenotes/build
+
+# stx init/config/controller files
+stx.conf
+minikube_history.log
