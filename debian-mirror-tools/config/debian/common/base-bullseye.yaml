@@ -93,6 +93,14 @@ rootfs-post-scripts:
 - |-
   # FIXME: Temporary - Centos kickstarts set initial view of this file
   echo "localhost" > $IMAGE_ROOTFS/etc/hostname
+- |-
+  # FIXME: Temporary - Anaconda/kickstarts set up initial view of /etc/fstab
+  mkdir -p $IMAGE_ROOTFS/opt/platform-backup
+  mkdir -p $IMAGE_ROOTFS/scratch
+  mkdir -p $IMAGE_ROOTFS/var/log
+  echo -e "LABEL=platform_backup\t/opt/platform-backup\text4\tdefaults\t1 2" >> $IMAGE_ROOTFS/etc/fstab
+  echo -e "/dev/mapper/cgts--vg-scratch--lv\t/scratch\text4\tdefaults\t1 2" >> $IMAGE_ROOTFS/etc/fstab
+  echo -e "/dev/mapper/cgts--vg-log--lv\t/var/log\text4\tdefaults\t1 2" >> $IMAGE_ROOTFS/etc/fstab
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
@@ -101,12 +109,13 @@ ostree:
   ostree_osname: wrlinux
   ostree_skip_boot_diff: '2'
   ostree_remote_url: ''
+  ostree_extra_install_args: 'inststx=1'
   OSTREE_GRUB_USER: root
   OSTREE_GRUB_PW_FILE: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys/ostree_grub_pw
   OSTREE_FDISK_BLM: 2506
   OSTREE_FDISK_BSZ: 512
   OSTREE_FDISK_RSZ: 20480
-  OSTREE_FDISK_VSZ: 0
+  OSTREE_FDISK_VSZ: 20480
   OSTREE_FDISK_FSZ: 32
   OSTREE_CONSOLE: console=ttyS0,115200 console=tty1
 system:
