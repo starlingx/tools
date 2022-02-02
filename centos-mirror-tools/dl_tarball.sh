@@ -315,6 +315,21 @@ for line in $(cat $tarball_file); do
             #   rm -f "$tarball_name"
 
             rm -rf "$directory_name"
+        elif [[ "${tarball_name}" = '800-Series-DDP-Comms-Package-1.3.31.0.zip' ]]; then
+            download_file --quiet "${tarball_url}" "${tarball_name}"
+            if [ $? -ne 0 ]; then
+                echo "Warning: failed to download '${tarball_url}'"
+                error_count=$((error_count + 1))
+                popd > /dev/null   # pushd $output_tarball
+                continue
+            fi
+
+            # Just extract exactly what we want, leaving no garbage behind to cleanup
+            unzip "${tarball_name}" ice_comms-1.3.31.0.zip
+            # Don't delete the original zip archive we just extracted from.
+            # We don't use it, but it will prevent re-downloading this file.
+            #   rm -f "${tarball_name}"
+
         elif [[ "$tarball_name" = 'MLNX_OFED_SRC-5.0-2.1.8.0.tgz' ]]; then
             srpm_path="${directory_name}/SRPMS/"
             download_package "$tarball_name" "$tarball_url"
