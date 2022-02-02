@@ -44,5 +44,8 @@ RUN /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y
 RUN sed -i -e 's#--no-check-gpg#--variant=minbase --no-check-gpg#g' \
   /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/package_manager/deb/__init__.py
 
+# Fix: Use Debian CDN address for geo-frendly servers
+RUN sed -i 's/ftp.cn.debian.org/deb.debian.org/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
+
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/opt/LAT/lat/latd"]

@@ -19,7 +19,7 @@ ENV container=docker \
 
 RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
     echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
-    echo "deb http://ftp.de.debian.org/debian bullseye main contrib" >> /etc/apt/sources.list
+    echo "deb http://deb.debian.org/debian bullseye main contrib" >> /etc/apt/sources.list
 
 # Download required dependencies by mirror/build processes.
 RUN     apt-get update && apt-get install --no-install-recommends -y \
