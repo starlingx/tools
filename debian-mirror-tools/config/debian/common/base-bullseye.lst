@@ -110,6 +110,7 @@ initramfs-tools  0.140
 initramfs-tools-core  0.140
 init-system-helpers  1.60
 install-info  6.7.0.dfsg.2-6
+iperf3 3.9-1
 ipmitool  1.8.18-10.1
 iproute2  5.10.0-4
 iptables  1.8.7-1
@@ -220,6 +221,7 @@ libidn2-0  2.3.0-5
 libinih1  53-1+b2
 libip4tc2  1.8.7-1
 libip6tc2  1.8.7-1
+libiperf0 3.9-1
 libisc-export1105  1:9.11.19+dfsg-2.1
 libivykis0  0.42.4-1
 libjansson4  2.13.1-1.1
@@ -350,6 +352,7 @@ librtmp1  2.4+20151223.gitfa8646d.1-2+b2
 libruby2.7  2.7.4-1
 libsasl2-2  2.1.27+dfsg-2.1
 libsasl2-modules-db  2.1.27+dfsg-2.1
+libsctp1 1.0.18+dfsg-1
 libseccomp2  2.5.1-1+deb11u1
 libsecret-1-0  0.20.4-2
 libsecret-common  0.20.4-2
