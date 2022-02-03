@@ -35,7 +35,6 @@ class HandleControlTask:
     def __init__(self):
         self.stxconfig = stx_configparser.STXConfigParser()
         self.projectname = self.stxconfig.getConfig('project', 'name')
-        self.helm_status = command.helm_release_exists(self.projectname)
         self.logger = logging.getLogger('STX-Control')
         utils.set_logger(self.logger)
 
@@ -183,10 +182,11 @@ stx-pkgbuilder/configmap/')
 
         return repomgr_type
 
-    def handleStartTask(self, helmstatus, projectname):
+    def handleStartTask(self, projectname):
         cmd = 'helm install ' + projectname + ' ' + helmchartdir
         self.logger.debug('Execute the helm start command: %s', cmd)
-        if helmstatus:
+        helm_status = command.helm_release_exists(self.projectname)
+        if helm_status:
             self.logger.warning('The helm release %s already exists - nothing to do',
                                 projectname)
         else:
@@ -195,8 +195,9 @@ stx-pkgbuilder/configmap/')
             if repomgr_type == 'pulp':
                 self.configurePulp()
 
-    def handleStopTask(self, helmstatus, projectname):
-        if helmstatus:
+    def handleStopTask(self, projectname):
+        helm_status = command.helm_release_exists(self.projectname)
+        if helm_status:
             cmd = 'helm uninstall ' + projectname
             self.logger.debug('Execute the helm stop command: %s', cmd)
             subprocess.check_call(cmd, shell=True)
@@ -204,10 +205,11 @@ stx-pkgbuilder/configmap/')
             self.logger.warning('The helm release %s does not exist - nothing to do',
                                 projectname)
 
-    def handleUpgradeTask(self, helmstatus, projectname):
+    def handleUpgradeTask(self, projectname):
         command.check_prjdir_env()
         self.finish_configure()
-        if helmstatus:
+        helm_status = command.helm_release_exists(self.projectname)
+        if helm_status:
             cmd = 'helm upgrade ' + projectname + ' ' + helmchartdir
             self.logger.debug('Execute the upgrade command: %s', cmd)
             subprocess.call(cmd, shell=True, cwd=os.environ['PRJDIR'])
@@ -254,13 +256,13 @@ enter has been started!!!\n')
             projectname = 'stx'
 
         if args.ctl_task == 'start':
-            self.handleStartTask(self.helm_status, projectname)
+            self.handleStartTask(projectname)
 
         elif args.ctl_task == 'stop':
-            self.handleStopTask(self.helm_status, projectname)
+            self.handleStopTask(projectname)
 
         elif args.ctl_task == 'upgrade':
-            self.handleUpgradeTask(self.helm_status, projectname)
+            self.handleUpgradeTask(projectname)
 
         elif args.ctl_task == 'enter':
             self.handleEnterTask(args)
