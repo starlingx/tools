@@ -30,7 +30,7 @@ notice_warn() {
 
 export PRJDIR=$(pwd)
 export PATH=$PRJDIR/stx/bin:$PATH
-export MINIKUBECPUS=${MINIKUBECPUS:-2}
+export MINIKUBECPUS=${MINIKUBECPUS:-6}
 export MINIKUBEMEMORY=${MINIKUBEMEMORY:-16000}
 export MINIKUBENAME=${MINIKUBENAME:-minikube-$USER-upstream}
 export KUBECONFIG=$MINIKUBE_HOME/.kube/config
