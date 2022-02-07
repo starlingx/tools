@@ -39,7 +39,7 @@ packages:
 - kbd
 - kmod
 - libostree-1-1=2019.1-1
-- linux-image-amd64
+- linux-image-5.10.0-6-amd64-unsigned
 - mdadm
 - mount
 - mttyexec
