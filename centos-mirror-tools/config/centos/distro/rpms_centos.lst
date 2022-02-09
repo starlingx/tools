@@ -717,9 +717,9 @@ pixman-0.34.0-1.el7.x86_64.rpm
 pixman-devel-0.34.0-1.el7.x86_64.rpm
 # pkgconfig-0.27.1-4.el7.x86_64.rpm provided by mock
 po4a-0.44-10.el7.noarch.rpm
-polkit-0.112-26.el7.x86_64.rpm
-polkit-devel-0.112-26.el7.x86_64.rpm
-polkit-docs-0.112-26.el7.noarch.rpm
+polkit-0.112-26.el7_9.1.x86_64.rpm
+polkit-devel-0.112-26.el7_9.1.x86_64.rpm
+polkit-docs-0.112-26.el7_9.1.noarch.rpm
 polkit-pkla-compat-0.1-4.el7.x86_64.rpm
 poppler-0.26.5-20.el7.x86_64.rpm
 poppler-data-0.4.6-3.el7.noarch.rpm
