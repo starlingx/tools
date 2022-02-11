@@ -26,13 +26,13 @@ volumes:
   configmapname: pulp
   storagename: pulp-storage
   storagehostPath:
-    path: /workspace/pulp/pulp-storage
+    path: /pulp/pulp-storage
   pgsqlname: pulp-pgsql
   pgsqlhostPath:
-    path: /workspace/pulp/pulp-pgsql
+    path: /pulp/pulp-pgsql
   containersname: pulp-containers
   containershostPath:
-    path: /workspace/pulp/pulp-containers
+    path: /pulp/pulp-containers
 
 imagePullSecrets: []
 nameOverride: ""

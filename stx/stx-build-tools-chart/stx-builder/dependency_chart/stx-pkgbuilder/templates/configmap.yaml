@@ -2,6 +2,6 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.volumes.configmapname }}
+  name: {{ .Values.volumes.envsetup.configMapName }}
 data:
 {{ (.Files.Glob "configmap/stx*").AsConfig | indent 2 }}

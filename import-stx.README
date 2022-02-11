@@ -1,0 +1,70 @@
+import-stx: Import StarlingX build environment and stx tool
+
+For more information: https://wiki.openstack.org/wiki/StarlingX/DebianBuildEnvironment
+
+###############################################
+# STX Environment variables
+###############################################
+
+$PROJECT
+
+* Required
+* Project name, used by docker image tagging for multiuser/multiproject environments. It is also used on the
+default STX_BUILD_HOME path.
+
+$STX_PLATFORM
+
+* Required for Kubernetes.
+* Platforms supported: "minikube" and "kubernetes"
+* Default value: "minikube"
+
+$STX_BUILD_HOME
+
+* Optional
+* Default value: "/localdisk/designer/$USER/$PROJECT"
+* Working directory for the build.
+
+$STX_BUILD_CPUS
+
+* Optional
+* Default value: 6
+* Number of cpus that build-pkgs can use for parallel jobs, in a minikube environment this option is also used
+to set the minikube cluster cpus.
+
+###############################################
+# Minikube only
+###############################################
+
+$MINIKUBENAME
+
+* Optional
+* Default value: minikube-$USER-upstream
+* Sets the minikube cluster profile name.
+
+$MINIKUBE_HOME
+
+* Optional
+* Default value: $HOME
+* Sets the path for the .minikube and .kube directories that minikube uses for state/configuration.
+
+$MINIKUBEMEMORY
+
+* Optional
+* Default value: 16000
+* Amount of memory available for the minikube cluster.
+
+###############################################
+# Kubernetes only
+###############################################
+
+$STX_K8S_NAMESPACE
+
+* Required
+* Kubernetes namespace name for your project, currently each namespace can host 1 stx deployment. Namespace must
+be created and access setup prior to sourcing import-stx and starting your build environment.
+
+$KUBECONFIG
+
+* Optional
+* Default value: $STX_BUILD_HOME/.kube/config
+* Path to your Kubernetes config file.

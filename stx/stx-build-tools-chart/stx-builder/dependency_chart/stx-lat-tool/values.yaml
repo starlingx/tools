@@ -20,7 +20,7 @@ volumeMounts:
 volumes:
   name: latd-shared-workspace
   hostPath:
-    path: /workspace/localdisk
+    path: /localdisk
   entropyname: entropydevice
   entropyhostPath:
     path: /dev/urandom

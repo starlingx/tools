@@ -31,30 +31,30 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           tty: true
           volumeMounts:
-          - name: {{ .Values.volumeMounts.name }}
-            mountPath: {{ .Values.volumeMounts.mountPath}}
-          - name: {{ .Values.volumeMounts.usersetupname }}
-            mountPath: {{ .Values.volumeMounts.usersetupmountPath}}
-          - name: {{ .Values.volumeMounts.mirrorName }}
-            mountPath: {{ .Values.volumeMounts.mirrorMountPath }}
+          - name: {{ .Values.volumeMounts.workspace.name }}
+            mountPath: {{ .Values.volumeMounts.workspace.mountPath}}
+          - name: {{ .Values.volumeMounts.userSetting.name }}
+            mountPath: {{ .Values.volumeMounts.userSetting.mountPath}}
+          - name: {{ .Values.volumeMounts.mirror.name }}
+            mountPath: {{ .Values.volumeMounts.mirror.mountPath }}
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 
       volumes:
-      - name: {{ .Values.volumes.name }}
+      - name: {{ .Values.volumes.workspace.name }}
         hostPath:
-          path: {{ .Values.volumes.hostPath.path }}
-      - name: {{ .Values.volumes.usersetupname }}
+          path: {{ .Values.global.hostDir }}{{ .Values.volumes.workspace.hostPath.path }}
+      - name: {{ .Values.volumes.userSetting.name }}
         configMap:
-          name: {{ .Values.volumes.configmapname }}
-      - name: {{ .Values.volumes.mirrorName }}
+          name: {{ .Values.volumes.userSetting.configMapName }}
+      - name: {{ .Values.volumes.mirror.name }}
         hostPath:
-          path: {{ .Values.volumes.mirrorHostPath.path }}
+          path: {{ .Values.global.hostDir }}{{ .Values.volumes.mirror.hostPath.path }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:

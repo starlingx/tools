@@ -29,19 +29,18 @@ notice() {
     echo >&2 "${tty_on}$*${tty_off}"
 }
 
-
 PROGNAME=$(basename "$0")
 MINIKUBE=minikube
 HELM=helm
 DOCKER=docker
 PYTHON3=python3
+KUBECTL=kubectl
 DOCKER_PREFIX="starlingx/"
 DOCKER_IMAGES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
 DOCKER_TAG="master-debian-latest"
-DOCKER_TAG_LOCAL="v0.1.0"
 
 BUILD_DOCKER=0
-DELETE_MINIKUBE=0
+DELETE_ENV=0
 RESTART_MINIKUBE=0
 CLEAN_CONFIG=0
 
@@ -96,7 +95,7 @@ while true ; do
             shift
             ;;
         --nuke)
-            DELETE_MINIKUBE=1
+            DELETE_ENV=1
             shift
             ;;
         --)
@@ -114,19 +113,30 @@ done
 [[ "$#" -le 0 ]] || cmdline_error "too many arguments"
 
 # make sure required programs are installed
-if ! command -v $MINIKUBE &> /dev/null; then
-    echo >&2 "Command $MINIKUBE could not be found."
-    echo >&2 "Please install it as https://minikube.sigs.k8s.io/docs/start/"
-    echo ""
-    exit 1
+if [ "$STX_PLATFORM" = "minikube" ]; then
+    if ! command -v "$MINIKUBE" &> /dev/null; then
+        echo >&2 "Command $MINIKUBE could not be found."
+        echo >&2 "Please install it as https://minikube.sigs.k8s.io/docs/start/"
+        echo ""
+        exit 1
+    fi
 fi
-if ! command -v $HELM &> /dev/null; then
+if [ "$STX_PLATFORM" = "kubernetes" ]; then
+    if ! command -v "$KUBECTL" &> /dev/null; then
+        echo >&2 "Command $KUBECTL could not be found."
+        echo >&2 "Please install and configure kubectl."
+        echo ""
+        exit 1
+    fi
+fi
+
+if ! command -v "$HELM" &> /dev/null; then
     echo >&2 "Command $HELM could not be found."
     echo >&2 "Please install it as https://helm.sh/"
     echo ""
     exit 1
 fi
-if ! command -v $DOCKER &> /dev/null; then
+if ! command -v "$DOCKER" &> /dev/null; then
     echo >&2 "Command $DOCKER could not be found. Please install it."
     echo >&2 ""
     exit 1
@@ -171,54 +181,63 @@ if [[ ! -d "$STX_BUILD_HOME/mirrors/starlingx" ]] ; then
     mkdir -p $STX_BUILD_HOME/mirrors/starlingx || exit 1
 fi
 
-# --nuke: just delete the cluster and exit
-if [[ $DELETE_MINIKUBE -eq 1 ]] ; then
-    if minikube_exists ; then
-        notice "Deleting minikube cluster \`$MINIKUBENAME'"
-        $MINIKUBE delete -p "$MINIKUBENAME" || exit 1
-    fi
-    exit 0
-fi
 
-# Stop minikube if necessary
-WANT_START_MINIKUBE=0
-if [[ $RESTART_MINIKUBE -eq 1 ]] ; then
-    if minikube_started ; then
-        notice "Stopping minikube cluster \`$MINIKUBENAME'"
-        $MINIKUBE stop -p $MINIKUBENAME
-        if minikube_started ; then
-            echo >&2 "minikube container $MINIKUBENAME exist!"
-            echo >&2 "And the command 'minikube -p $MINIKUBENAME stop' failed. The reason may be"
-            echo >&2 "the current MINIKUBE_HOME/HOME is not the same as the $MINIKUBENAME"
-            echo >&2 "Please change the MINIKUBE_HOME/HOME directory to the previous value"
-            echo >&2 "then re-execute this script"
-            exit 1
+if [ "$STX_PLATFORM" = "minikube" ]; then
+    # MINIKUBE
+    # --nuke: just delete the cluster and exit
+    if [[ $DELETE_ENV -eq 1 ]] ; then
+        if minikube_exists ; then
+            notice "Deleting minikube cluster \`$MINIKUBENAME'"
+            $MINIKUBE delete -p "$MINIKUBENAME" || exit 1
         fi
+        exit 0
     fi
-    WANT_START_MINIKUBE=1
-elif ! minikube_started ; then
-    WANT_START_MINIKUBE=1
+
+    # Stop minikube if necessary
+    WANT_START_MINIKUBE=0
+    if [[ $RESTART_MINIKUBE -eq 1 ]] ; then
+        if minikube_started ; then
+            notice "Stopping minikube cluster \`$MINIKUBENAME'"
+            $MINIKUBE stop -p $MINIKUBENAME
+            if minikube_started ; then
+                echo >&2 "minikube container $MINIKUBENAME exist!"
+                echo >&2 "And the command 'minikube -p $MINIKUBENAME stop' failed. The reason may be"
+                echo >&2 "the current MINIKUBE_HOME/HOME is not the same as the $MINIKUBENAME"
+                echo >&2 "Please change the MINIKUBE_HOME/HOME directory to the previous value"
+                echo >&2 "then re-execute this script"
+                exit 1
+            fi
+        fi
+        WANT_START_MINIKUBE=1
+    elif ! minikube_started ; then
+        WANT_START_MINIKUBE=1
+    fi
+
+    # Start minikube
+    if [[ $WANT_START_MINIKUBE -eq 1 ]] ; then
+        notice "Starting minikube cluster \`$MINIKUBENAME'"
+        $MINIKUBE start --driver=docker -p $MINIKUBENAME \
+            --cpus=$STX_BUILD_CPUS \
+            --memory=$MINIKUBEMEMORY \
+            --mount=true \
+            --mount-string="$STX_BUILD_HOME:/workspace" \
+            || exit 1
+    fi
+
+    # Record the project environment variables
+    echo "The last minikube cluster startup date: `date`" > minikube_history.log
+    echo "MINIKUBE_HOME: $MINIKUBE_HOME" >> minikube_history.log
+    echo "MINIKUBENAME: $MINIKUBENAME" >> minikube_history.log
+    echo "STX_BUILD_HOME: $STX_BUILD_HOME" >> minikube_history.log
+
+    # Import minikube's docker environment
+    eval $(minikube -p $MINIKUBENAME docker-env)
+
+elif [ "$STX_PLATFORM" = "kubernetes" ]; then
+    if [[ $DELETE_ENV -eq 1 ]] ; then
+        notice "--nuke not supported for Kubernetes platform"
+    fi
 fi
-
-# Start minikube
-if [[ $WANT_START_MINIKUBE -eq 1 ]] ; then
-    notice "Starting minikube cluster \`$MINIKUBENAME'"
-    $MINIKUBE start --driver=docker -p $MINIKUBENAME \
-        --cpus=$MINIKUBECPUS \
-        --memory=$MINIKUBEMEMORY \
-        --mount=true \
-        --mount-string="$STX_BUILD_HOME:/workspace" \
-        || exit 1
-fi
-
-# Record the project environment variables
-echo "The last minikube cluster startup date: `date`" > minikube_history.log
-echo "MINIKUBE_HOME: $MINIKUBE_HOME" >> minikube_history.log
-echo "MINIKUBENAME: $MINIKUBENAME" >> minikube_history.log
-echo "STX_BUILD_HOME: $STX_BUILD_HOME" >> minikube_history.log
-
-# Import minikube's docker environment
-eval $(minikube -p $MINIKUBENAME docker-env)
 
 # Build container images
 if [[ $BUILD_DOCKER -eq 1 ]] ; then
@@ -240,3 +259,4 @@ notice "Restarting pods"
 stx control stop || exit 1
 stx control start || exit 1
 
+notice "Run 'stx control status' to check the pod startup status"

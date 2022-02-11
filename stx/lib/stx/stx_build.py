@@ -18,7 +18,7 @@ import logging
 import subprocess
 import sys
 
-from stx import command  # pylint: disable=E0611
+from stx.k8s import KubeHelper
 from stx import utils  # pylint: disable=E0611
 
 STX_BUILD_TYPES = ['rt', 'std']
@@ -28,7 +28,9 @@ STX_LAYERS = ['distro', 'flock']
 class HandleBuildTask:
     '''Handle the task for the build sub-command'''
 
-    def __init__(self):
+    def __init__(self, config):
+        self.config = config
+        self.k8s = KubeHelper(config)
         self.logger = logging.getLogger('STX-Build')
         utils.set_logger(self.logger)
 
@@ -125,7 +127,7 @@ class HandleBuildTask:
 
         self.logger.setLevel(args.loglevel)
 
-        podname = command.get_pod_name('builder')
+        podname = self.k8s.get_pod_name('builder')
         if not podname:
             self.logger.error('The builder container does not exist, ' +
                               'so please use the control module to start.')
@@ -135,7 +137,7 @@ class HandleBuildTask:
 
             bashcmd = "\'find /home/${MYUNAME}/prepare-build.done "
             bashcmd += "&>/dev/null\'"
-            cmd = command.generatePrefixCommand(podname, bashcmd, 0)
+            cmd = self.k8s.generatePrefixCommand(podname, bashcmd, 0)
 
             ret = subprocess.call(cmd, shell=True)
             if ret != 0:
@@ -148,7 +150,7 @@ class HandleBuildTask:
                                     '***********************************')
                 sys.exit(1)
 
-        prefix_cmd = command.generatePrefixCommand(podname, '', 1)
+        prefix_cmd = self.k8s.generatePrefixCommand(podname, '', 1)
 
         if args.build_task == 'image':
             cmd = self.buildImageCMD(args, prefix_cmd)
