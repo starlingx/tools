@@ -108,8 +108,7 @@ RUN yum install -y \
         python3-devel \
         python-sphinx \
         python-subunit \
-        python-testrepository \
-        python-tox \
+        python-virtualenv \
         python-yaml \
         python2-ruamel-yaml \
         postgresql \
@@ -190,10 +189,31 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == system
 
 # pip installs
 COPY toCOPY/builder-constraints.txt /home/$MYUNAME/
-RUN pip install -c /home/$MYUNAME/builder-constraints.txt pbr==5.6.0 --upgrade && \
-    pip install -c /home/$MYUNAME/builder-constraints.txt git-review==2.1.0 --upgrade && \
-    pip install -c /home/$MYUNAME/builder-constraints.txt python-subunit==1.4.0 junitxml==0.7 testtools==2.4.0 --upgrade && \
-    pip install -c /home/$MYUNAME/builder-constraints.txt tox==3.23.0 --upgrade
+# Install required python modules globally; versions are in the constraints file.
+# Be careful not to replace modules provided by RPMs as it may break
+# other system packages. Look for warnings similar to "Uninstalling a
+# distutils installed project has been deprecated" from pip.
+RUN pip install -c /home/$MYUNAME/builder-constraints.txt \
+        testrepository \
+        fixtures \
+        pbr \
+        git-review \
+        python-subunit \
+        junitxml \
+        testtools
+
+
+# Create a sane py27 virtualenv
+COPY toCOPY/builder-opt-py27-constraints.txt /home/$MYUNAME
+RUN virtualenv /opt/py27 && \
+    source /opt/py27/bin/activate && \
+    pip install -c /home/$MYUNAME/builder-opt-py27-constraints.txt \
+            tox \
+        && \
+    for prog in tox ; do \
+        ln -s /opt/py27/bin/$prog /usr/bin ; \
+    done
+
 
 # Inherited  tools for mock stuff
 # we at least need the mock_cache_unlock tool
