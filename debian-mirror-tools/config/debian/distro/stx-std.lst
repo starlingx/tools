@@ -33,6 +33,9 @@ bash
 #build-info-dev  # not used
 build-info
 
+#centos-debian-compat
+centos-debian-compat
+
 #cert-alarm
 cert-alarm
 
@@ -59,6 +62,9 @@ cgts-client
 #ldirectord  # not used
 resource-agents-dbgsym
 resource-agents
+
+#collector
+collector
 
 #config-gate
 config-gate-worker
@@ -95,6 +101,20 @@ isc-dhcp-common
 #isc-dhcp-server-ldap-dbgsym  # not used
 #isc-dhcp-server-ldap  # not used
 #isc-dhcp-server  # not used
+
+#dhcp-config
+dhcp-config
+
+#distributedcloud
+distributedcloud-dccommon
+distributedcloud-dcdbsync
+distributedcloud-dcmanager
+distributedcloud-dcorch
+distributedcloud-wheels
+
+#distributedcloud-client
+distributedcloud-client-dcmanagerclient
+distributedcloud-client-wheels
 
 #dnsmasq
 #dnsmasq-base-lua  # not used
@@ -142,6 +162,9 @@ fm-common-dbgsym
 fm-common-doc
 fm-common
 
+#fm-doc
+fm-doc
+
 #fm-mgr
 fm-mgr-dbgsym
 fm-mgr
@@ -159,14 +182,49 @@ fm-rest-api
 #go-dep  # only used for build
 
 #grub2
+#grub-common-dbgsym  # not used
 grub-common
+#grub-coreboot-bin  # not used
+#grub-coreboot-dbg  # not used
+#grub-coreboot  # not used
+#grub-efi-amd64-bin  # not used
+#grub-efi-amd64-dbg  # not used
+#grub-efi-amd64-signed-template  # not used
+#grub-efi-amd64  # not used
+#grub-efi-ia32-bin  # not used
+#grub-efi-ia32-dbg  # not used
+#grub-efi-ia32  # not used
+#grub-efi  # not used
+#grub-emu-dbg  # not used
+#grub-emu  # not used
+#grub-firmware-qemu  # not used
+#grub-ieee1275-bin  # not used
+#grub-ieee1275-dbg  # not used
+#grub-ieee1275  # not used
+#grub-linuxbios  # not used
+#grub-pc-bin-dbgsym  # not used
 grub-pc-bin
+#grub-pc-dbg  # not used
 grub-pc
+#grub-rescue-pc  # not used
+#grub-theme-starfield  # not used
+#grub-xen-bin  # not used
+#grub-xen-dbg  # not used
+#grub-xen-host  # not used
+#grub-xen  # not used
+grub2-common-dbgsym
 grub2-common
 grub2
 
+#grubby
+grubby-dbgsym
+grubby
+
 #helm
 helm
+
+#hostdata-collectors
+engtools
 
 #initramfs-ostree
 #initramfs-ostree  # only used for build
@@ -194,8 +252,34 @@ isolcpus-device-plugin
 k8s-pod-recovery
 
 #kernel-std
+#bpftool-dbgsym  # not used
+#bpftool  # not used
+#hyperv-daemons-dbgsym  # not used
+#hyperv-daemons  # not used
+#libcpupower-dev  # not used
+#libcpupower1-dbgsym  # not used
+#libcpupower1  # not used
+linux-compiler-gcc-10-x86
+#linux-config-5.10  # not used
+#linux-cpupower-dbgsym  # not used
+#linux-cpupower  # not used
+linux-headers-5.10.0-6-amd64
+linux-headers-5.10.0-6-common
+#linux-image-5.10.0-6-amd64-dbg  # not used
 linux-image-5.10.0-6-amd64-unsigned
+#linux-image-amd64-dbg  # not used
+#linux-image-amd64-signed-template  # not used
+linux-kbuild-5.10-dbgsym
+linux-kbuild-5.10
 linux-libc-dev
+#linux-perf-5.10-dbgsym  # not used
+#linux-perf-5.10  # not used
+#linux-perf  # not used
+#linux-source-5.10  # not used
+#linux-source  # not used
+#linux-support-5.10.0-6  # not used
+#usbip-dbgsym  # not used
+#usbip  # not used
 
 #keyrings.alt
 python3-keyrings.alt
@@ -211,7 +295,7 @@ kubernetes-1.21.8-kubeadm
 kubernetes-1.21.8-master
 kubernetes-1.21.8-misc
 kubernetes-1.21.8-node
-#kubernetes-1.21.8-unit-test # not needed
+#kubernetes-1.21.8-unit-test  # not used
 
 #kubernetes-unversioned
 kubernetes-unversioned
@@ -260,6 +344,10 @@ linuxptp
 lldpd-dbgsym
 lldpd
 
+#logmgmt
+logmgmt-wheels
+logmgmt
+
 #mlnx-ofa_kernel
 mlnx-ofed-kernel-modules
 mlnx-ofed-kernel-utils
@@ -305,9 +393,16 @@ mtce-storage
 #mttyexec-dbgsym  # not used
 #mttyexec  # only used for build
 
+#namespace-utils
+namespace-utils-dbgsym
+namespace-utils
+
 #net-tools
 net-tools-dbgsym
 net-tools
+
+#nfscheck
+nfscheck
 
 #nfv
 nfv-client
@@ -370,6 +465,9 @@ openstack-resource-agents
 #ostree-upgrade-mgr
 #ostree-upgrade-mgr  # only used for build
 
+#pam-config
+#pam-config  # integration issue
+
 #parted
 #libparted-dev  # not used
 libparted-fs-resize0-dbgsym
@@ -384,6 +482,9 @@ parted
 #patch-alarm
 #python3-patch-alarm-wheels  # not used in deployment
 python3-patch-alarm
+
+#pci-irq-affinity-agent
+pci-irq-affinity-agent
 
 #pf-bb-config
 pf-bb-config
@@ -623,6 +724,7 @@ python3-pankoclient
 python3-wsme
 
 #qat17
+qat1.7.l-dbgsym
 qat1.7.l
 
 #rabbitmq-server
@@ -632,8 +734,37 @@ rabbitmq-server
 rabbitmq-server-config
 
 #rdma-core
+ibacm-dbgsym
+ibacm
+ibverbs-providers-dbgsym
+ibverbs-providers
+ibverbs-utils-dbgsym
+ibverbs-utils
+infiniband-diags-dbgsym
+infiniband-diags
+#libibmad-dev  # not used
+libibmad5-dbg
+libibmad5
+#libibnetdisc-dev  # not used
+libibnetdisc5-dbg
+libibnetdisc5
+#libibumad-dev  # not used
+libibumad3-dbg
+libibumad3
+#libibverbs-dev  # not used
+libibverbs1-dbg
 libibverbs1
+#librdmacm-dev  # not used
+librdmacm1-dbg
+librdmacm1
+python3-pyverbs-dbgsym
+python3-pyverbs
+rdma-core-dbgsym
 rdma-core
+rdmacm-utils-dbgsym
+rdmacm-utils
+srptools-dbgsym
+srptools
 
 #registry-token-server
 registry-token-server
@@ -657,6 +788,9 @@ sm-client
 #service-mgmt-tools
 sm-tools-wheels
 sm-tools
+
+#shadow-utils-config
+shadow-utils-config
 
 #shim-unsigned
 shim-helpers-amd64-signed-template
@@ -688,6 +822,9 @@ stx-audit-helm
 
 #stx-cert-manager-helm
 stx-cert-manager-helm
+
+#stx-extensions
+stx-extensions
 
 #stx-metrics-server-helm
 stx-metrics-server-helm
@@ -739,7 +876,7 @@ sysinv-fpga-agent
 syslog-ng-config
 
 #systemd
-#libnss-myhostname-dbgsym  # not used
+libnss-myhostname-dbgsym
 libnss-myhostname
 #libnss-mymachines-dbgsym  # not used
 #libnss-mymachines  # not used
@@ -771,6 +908,9 @@ systemd
 udev-dbgsym
 udev
 
+#systemd-config
+systemd-config
+
 #trident-installer
 trident-installer
 
@@ -778,12 +918,18 @@ trident-installer
 tsconfig-wheel
 tsconfig
 
+#update-motd
+update-motd
+
 #vault-helm
 #vault-helm  # only used for build
 
 #watchdog
 watchdog-dbgsym
 watchdog
+
+#worker-utils
+worker-utils
 
 #workerconfig
 #workerconfig-standalone  # integration issue
