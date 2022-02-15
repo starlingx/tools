@@ -18,6 +18,7 @@ gpg:
     BOOT_GPG_PASSPHRASE: SecureCore
     BOOT_KEYS_DIR: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys
 packages:
+- apt-utils
 - base-passwd
 - bash
 - busybox
@@ -35,7 +36,11 @@ packages:
 - grep
 - grub2
 - gzip
+- ifupdown
 - initramfs-ostree
+- iproute2
+- isc-dhcp-client
+- isc-dhcp-common
 - kbd
 - kmod
 - libostree-1-1=2019.1-1
@@ -46,6 +51,7 @@ packages:
 - ostree-boot=2019.1-1
 - ostree=2019.1-1
 - parted
+- procps
 - psmisc
 - pv
 - rng-tools

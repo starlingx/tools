@@ -80,7 +80,7 @@ rootfs-post-scripts:
   cp -rf $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64.efi $DEPLOY_DIR/grub-efi-bootx64.efi
   cp -rf $OECORE_TARGET_SYSROOT/boot/efi $IMAGE_ROOTFS/boot/
   cp -rf $IMAGE_ROOTFS/boot/*-amd64 $DEPLOY_DIR
-  KERNEL=`ls $DEPLOY_DIR/vmlinuz-*-amd64`
+  KERNEL=`ls -t $DEPLOY_DIR/vmlinuz-*-amd64 | head -n 1`
   ln -snf --relative $KERNEL  $DEPLOY_DIR/bzImage
 - |-
   # Setup the sysadmin user and force the user to change the password

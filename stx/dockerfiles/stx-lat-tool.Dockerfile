@@ -16,7 +16,7 @@ FROM debian:bullseye
 
 MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
-ARG LAT_BINARY_RESOURCE_PATH=http://mirror.starlingx.cengn.ca/mirror/lat-sdk/lat-sdk-20211216
+ARG LAT_BINARY_RESOURCE_PATH=http://mirror.starlingx.cengn.ca/mirror/lat-sdk/lat-sdk-20220214
 
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \
@@ -38,11 +38,6 @@ COPY stx/toCOPY/lat-tool/lat/ /opt/LAT/lat
 ADD ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh /opt/LAT/AppSDK.sh
 RUN chmod +x /opt/LAT/AppSDK.sh
 RUN /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y
-
-# Workaround for using minbase variant for debootstrap
-# See https://bugs.launchpad.net/starlingx/+bug/1959607
-RUN sed -i -e 's#--no-check-gpg#--variant=minbase --no-check-gpg#g' \
-  /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/package_manager/deb/__init__.py
 
 # Fix: Use Debian CDN address for geo-frendly servers
 RUN sed -i 's/ftp.cn.debian.org/deb.debian.org/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
