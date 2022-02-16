@@ -21,9 +21,8 @@ import subprocess
 import sys
 import time
 
-from stx import command  # pylint: disable=E0611
 from stx import helper  # pylint: disable=E0611
-from stx import stx_configparser  # pylint: disable=E0611
+from stx.k8s import KubeHelper
 from stx import utils  # pylint: disable=E0611
 
 helmchartdir = 'stx/stx-build-tools-chart/stx-builder'
@@ -32,9 +31,10 @@ helmchartdir = 'stx/stx-build-tools-chart/stx-builder'
 class HandleControlTask:
     '''Handle the task for the control sub-command'''
 
-    def __init__(self):
-        self.stxconfig = stx_configparser.STXConfigParser()
-        self.projectname = self.stxconfig.getConfig('project', 'name')
+    def __init__(self, config):
+        self.config = config
+        self.k8s = KubeHelper(config)
+        self.projectname = self.config.get('project', 'name')
         self.logger = logging.getLogger('STX-Control')
         utils.set_logger(self.logger)
 
@@ -46,9 +46,9 @@ class HandleControlTask:
         remote_cmd = ' -- bash /etc/pulp/changepasswd'
         pulpname = ' stx-pulp'
         while count:
-            podname = command.get_pod_name(pulpname)
+            podname = self.k8s.get_pod_name(pulpname)
             if podname:
-                cmd = 'minikube -p $MINIKUBENAME kubectl -- exec -ti '
+                cmd = self.config.kubectl() + ' exec -ti '
                 cmd = cmd + podname + remote_cmd
                 subprocess.call(cmd, shell=True)
                 count = 0
@@ -63,31 +63,30 @@ class HandleControlTask:
     def finish_configure(self):
         '''Before starting, we need to finish the setup'''
 
-        max_cpus = os.environ['MINIKUBECPUS']
+        max_cpus = os.environ['STX_BUILD_CPUS']
 
-        projectname = self.stxconfig.getConfig('project', 'name')
-        builder_uid = self.stxconfig.getConfig('builder', 'uid')
-        builder_myuname = self.stxconfig.getConfig('builder', 'myuname')
-        builder_release = self.stxconfig.getConfig('builder', 'release')
-        builder_dist = self.stxconfig.getConfig('builder', 'dist')
-        builder_stx_dist = self.stxconfig.getConfig('builder', 'stx_dist')
-        builder_debfullname = self.stxconfig.getConfig('builder',
-                                                       'debfullname')
-        builder_debemail = self.stxconfig.getConfig('builder', 'debemail')
-        repomgr_type = self.stxconfig.getConfig('repomgr', 'type')
-        gituser = self.stxconfig.getConfig('project', 'gituser')
-        gitemail = self.stxconfig.getConfig('project', 'gitemail')
-        proxy = self.stxconfig.getConfig('project', 'proxy')
-        proxyserver = self.stxconfig.getConfig('project', 'proxyserver')
-        proxyport = self.stxconfig.getConfig('project', 'proxyport')
-        buildbranch = self.stxconfig.getConfig('project', 'buildbranch')
-        manifest = self.stxconfig.getConfig('project', 'manifest')
-        cengnurl = self.stxconfig.getConfig('repomgr', 'cengnurl')
-        cengnstrategy = self.stxconfig.getConfig('repomgr', 'cengnstrategy')
-        sourceslist = self.stxconfig.getConfig('repomgr', 'sourceslist')
-        deblist = self.stxconfig.getConfig('repomgr', 'deblist')
-        dsclist = self.stxconfig.getConfig('repomgr', 'dsclist')
-        ostree_osname = self.stxconfig.getConfig('project', 'ostree_osname')
+        projectname = self.config.get('project', 'name')
+        builder_uid = self.config.get('builder', 'uid')
+        builder_myuname = self.config.get('builder', 'myuname')
+        builder_release = self.config.get('builder', 'release')
+        builder_dist = self.config.get('builder', 'dist')
+        builder_stx_dist = self.config.get('builder', 'stx_dist')
+        builder_debfullname = self.config.get('builder', 'debfullname')
+        builder_debemail = self.config.get('builder', 'debemail')
+        repomgr_type = self.config.get('repomgr', 'type')
+        gituser = self.config.get('project', 'gituser')
+        gitemail = self.config.get('project', 'gitemail')
+        proxy = self.config.get('project', 'proxy')
+        proxyserver = self.config.get('project', 'proxyserver')
+        proxyport = self.config.get('project', 'proxyport')
+        buildbranch = self.config.get('project', 'buildbranch')
+        manifest = self.config.get('project', 'manifest')
+        cengnurl = self.config.get('repomgr', 'cengnurl')
+        cengnstrategy = self.config.get('repomgr', 'cengnstrategy')
+        sourceslist = self.config.get('repomgr', 'sourceslist')
+        deblist = self.config.get('repomgr', 'deblist')
+        dsclist = self.config.get('repomgr', 'dsclist')
+        ostree_osname = self.config.get('project', 'ostree_osname')
         if sourceslist:
             if not (deblist or dsclist):
                 self.logger.warning('*************************************\
@@ -98,7 +97,7 @@ when sourceslist is enabled!!!')
 *********************************')
                 sys.exit(1)
 
-        repomgr_type = self.stxconfig.getConfig('repomgr', 'type')
+        repomgr_type = self.config.get('repomgr', 'type')
         if repomgr_type not in ('aptly', 'pulp'):
             self.logger.warning('Repomgr type only supports [aptly] or [pulp],\
  please modify the value with config command!!!')
@@ -183,9 +182,16 @@ stx-pkgbuilder/configmap/')
         return repomgr_type
 
     def handleStartTask(self, projectname):
-        cmd = 'helm install ' + projectname + ' ' + helmchartdir
+        cmd = self.config.helm() + ' install ' + projectname + ' ' + helmchartdir \
+            + ' --set global.image.tag=' + self.config.docker_tag
+
+        if not self.config.use_minikube:
+            # Override hostDir for k8s local host mount
+            # need to review this to support multi node (PV/PVCs)
+            cmd += ' --set global.hostDir=' + self.config.build_home
+
         self.logger.debug('Execute the helm start command: %s', cmd)
-        helm_status = command.helm_release_exists(self.projectname)
+        helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
             self.logger.warning('The helm release %s already exists - nothing to do',
                                 projectname)
@@ -196,9 +202,9 @@ stx-pkgbuilder/configmap/')
                 self.configurePulp()
 
     def handleStopTask(self, projectname):
-        helm_status = command.helm_release_exists(self.projectname)
+        helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
-            cmd = 'helm uninstall ' + projectname
+            cmd = self.config.helm() + ' uninstall ' + projectname
             self.logger.debug('Execute the helm stop command: %s', cmd)
             subprocess.check_call(cmd, shell=True)
         else:
@@ -206,11 +212,10 @@ stx-pkgbuilder/configmap/')
                                 projectname)
 
     def handleUpgradeTask(self, projectname):
-        command.check_prjdir_env()
         self.finish_configure()
-        helm_status = command.helm_release_exists(self.projectname)
+        helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
-            cmd = 'helm upgrade ' + projectname + ' ' + helmchartdir
+            cmd = self.config.helm() + ' upgrade ' + projectname + ' ' + helmchartdir
             self.logger.debug('Execute the upgrade command: %s', cmd)
             subprocess.call(cmd, shell=True, cwd=os.environ['PRJDIR'])
         else:
@@ -221,7 +226,7 @@ stx-pkgbuilder/configmap/')
     def handleEnterTask(self, args):
         default_docker = 'builder'
         container_list = ['builder', 'pkgbuilder', 'repomgr', 'lat']
-        prefix_exec_cmd = 'minikube -p $MINIKUBENAME kubectl -- exec -ti '
+        prefix_exec_cmd = self.config.kubectl() + ' exec -ti '
 
         if args.dockername:
             if args.dockername not in container_list:
@@ -230,7 +235,7 @@ argument. eg: %s \n', container_list)
                 sys.exit(1)
             default_docker = args.dockername
 
-        podname = command.get_pod_name(default_docker)
+        podname = self.k8s.get_pod_name(default_docker)
         if podname:
             if default_docker == 'builder':
                 cmd = prefix_exec_cmd + podname
@@ -251,7 +256,7 @@ enter has been started!!!\n')
     def handleControl(self, args):
 
         self.logger.setLevel(args.loglevel)
-        projectname = self.stxconfig.getConfig('project', 'name')
+        projectname = self.config.get('project', 'name')
         if not projectname:
             projectname = 'stx'
 
@@ -268,9 +273,9 @@ enter has been started!!!\n')
             self.handleEnterTask(args)
 
         elif args.ctl_task == 'status':
-            command.get_helm_info()
-            command.get_deployment_info()
-            command.get_pods_info()
+            self.k8s.get_helm_info()
+            self.k8s.get_deployment_info()
+            self.k8s.get_pods_info()
 
         else:
             self.logger.error('Control module doesn\'t support your \

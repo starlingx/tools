@@ -15,7 +15,7 @@
 import argparse
 import logging
 
-from stx import command  # pylint: disable=E0611
+from stx import config
 from stx import stx_build  # pylint: disable=E0611
 from stx import stx_configparser  # pylint: disable=E0611
 from stx import stx_control  # pylint: disable=E0611
@@ -34,10 +34,11 @@ class CommandLine:
     '''Handles parsing the commandline parameters for stx tool'''
 
     def __init__(self):
-        command.check_prjdir_env()
-        self.handleconfig = stx_configparser.HandleConfigTask()
-        self.handlecontrol = stx_control.HandleControlTask()
-        self.handlebuild = stx_build.HandleBuildTask()
+        self.config = config.Config().load()
+        self.handleconfig = stx_configparser.HandleConfigTask(self.config)
+        self.handlecontrol = stx_control.HandleControlTask(self.config)
+        self.handlebuild = stx_build.HandleBuildTask(self.config)
+        self.handlerepomgr = stx_repomgr.HandleRepomgrTask(self.config)
         self.parser = self.parseCommandLine()
 
     def parseCommandLine(self):
@@ -132,7 +133,7 @@ delete_pkg ]')
                                     help='[ list|download|sync|mirror|clean|\
                                     remove_repo|upload_pkg|delete_pkg ]: \
                                     Execute the management task.\n\n')
-        repo_subparser.set_defaults(handle=stx_repomgr.handleRepomgr)
+        repo_subparser.set_defaults(handle=self.handlerepomgr.handleCommand)
 
         parser.add_argument('-d', '--debug',
                             help='Enable debug output\n\n',

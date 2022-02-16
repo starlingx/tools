@@ -22,7 +22,7 @@ from stx import helper  # pylint: disable=E0611
 from stx import utils   # pylint: disable=E0611
 import sys
 
-logger = logging.getLogger('STX-Config')
+logger = logging.getLogger('STX-Config-Parser')
 utils.set_logger(logger)
 
 
@@ -128,8 +128,8 @@ class STXConfigParser:
 class HandleConfigTask:
     '''Handle the task for the config sub-command'''
 
-    def __init__(self):
-        self.stxconfig = STXConfigParser()
+    def __init__(self, config):
+        self.stxconfig = config.impl()
 
     def handleShow(self):
         self.stxconfig.showAll()

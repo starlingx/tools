@@ -13,32 +13,37 @@
 # limitations under the License.
 
 import logging
-from stx import command  # pylint: disable=E0611
+from stx.k8s import KubeHelper
 from stx import utils  # pylint: disable=E0611
 import subprocess
-
 
 logger = logging.getLogger('STX-Repomgr')
 utils.set_logger(logger)
 
 
-def handleRepomgr(args):
-    '''Sync the repo '''
+class HandleRepomgrTask:
 
-    logger.setLevel(args.loglevel)
-    logger.debug('Execute the repomgr command: [%s]', args.repomgr_task)
+    def __init__(self, config):
+        self.config = config
+        self.k8s = KubeHelper(config)
 
-    podname = command.get_pod_name('builder')
-    if not podname:
-        logger.error('The builder container does not exist, so please \
-                     consider to use the control module')
+    def handleCommand(self, args):
+        '''Sync the repo '''
 
-    prefix_cmd = command.generatePrefixCommand(podname, '', 1)
-    cmd = prefix_cmd + '"repo_manage.py ' + args.repomgr_task + '"\''
-    logger.debug('Manage the repo with the command [%s]', cmd)
+        logger.setLevel(args.loglevel)
+        logger.debug('Execute the repomgr command: [%s]', args.repomgr_task)
 
-    try:
-        subprocess.check_call(cmd, shell=True)
-    except subprocess.CalledProcessError as exc:
-        raise Exception('Failed to manage the repo with the command [%s].\n \
-Returncode: %s' % (cmd, exc.returncode))
+        podname = self.k8s.get_pod_name('builder')
+        if not podname:
+            logger.error('The builder container does not exist, so please \
+                         consider to use the control module')
+
+        prefix_cmd = self.k8s.generatePrefixCommand(podname, '', 1)
+        cmd = prefix_cmd + '"repo_manage.py ' + args.repomgr_task + '"\''
+        logger.debug('Manage the repo with the command [%s]', cmd)
+
+        try:
+            subprocess.check_call(cmd, shell=True)
+        except subprocess.CalledProcessError as exc:
+            raise Exception('Failed to manage the repo with the command [%s].\n \
+    Returncode: %s' % (cmd, exc.returncode))

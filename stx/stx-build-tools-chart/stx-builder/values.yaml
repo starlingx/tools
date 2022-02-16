@@ -8,26 +8,41 @@ replicaCount: 1
 image:
   repository: stx-builder
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.1.0"
+
+global:
+  # This is the host source directory, all the other directories are under it
+  # On minikube this is the /workspace, on K8s we can customize to any host directory
+  # In the future we should move to PV/PVCs
+  hostDir: /workspace
+  image:
+    # Overrides the image tag whose default is the chart appVersion.
+    # Setting as global so all dependencies can use the same TAG
+    # Not sure if this is the best way to handle this
+    tag: "v.0.1.0"
 
 volumeMounts:
-  name: shared-workspace
-  mountPath: /localdisk
-  usersetupname: user-setting
-  usersetupmountPath: /usr/local/bin/stx
-  mirrorName: mirror
-  mirrorMountPath: /import/mirrors/starlingx
+  workspace:
+    name: shared-workspace
+    mountPath: /localdisk
+  userSetting:
+    name: user-setting
+    mountPath: /usr/local/bin/stx
+  mirror:
+    name: mirror
+    mountPath: /import/mirrors/starlingx
 
 volumes:
-  name: shared-workspace
-  hostPath:
-    path: /workspace/localdisk
-  usersetupname: user-setting
-  configmapname: builder
-  mirrorName: mirror
-  mirrorHostPath:
-    path: /workspace/mirrors/starlingx
+  workspace:
+    name: shared-workspace
+    hostPath:
+      path: /localdisk
+  userSetting:
+    name: user-setting
+    configMapName: builder
+  mirror:
+    name: mirror
+    hostPath:
+      path: /mirrors/starlingx
 
 imagePullSecrets: []
 nameOverride: ""

@@ -12,22 +12,28 @@ image:
   tag: "v0.1.0"
 
 volumeMounts:
-  name: shared-workspace
-  mountPath: /localdisk
-  envsetupname: env-setting
-  envsetupmountPath: /usr/local/bin/stx
-  mirrorName: mirror
-  mirrorMountPath: /import/mirrors/starlingx
+  workspace:
+    name: shared-workspace
+    mountPath: /localdisk
+  envsetup:
+    name: env-setting
+    mountPath: /usr/local/bin/stx
+  mirror:
+    name: mirror
+    mountPath: /import/mirrors/starlingx
 
 volumes:
-  name: shared-workspace
-  hostPath:
-    path: /workspace/localdisk
-  envsetupname: env-setting
-  configmapname: pkgbuilder
-  mirrorName: mirror
-  mirrorHostPath:
-    path: /workspace/mirrors/starlingx
+  workspace:
+    name: shared-workspace
+    hostPath:
+      path: /localdisk
+  envsetup:
+    name: env-setting
+    configMapName: pkgbuilder
+  mirror:
+    name: mirror
+    hostPath:
+      path: /mirrors/starlingx
 
 imagePullSecrets: []
 nameOverride: ""

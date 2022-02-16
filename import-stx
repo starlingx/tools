@@ -1,25 +1,6 @@
 # bash
 
-if [ -z "$MINIKUBE_HOME" ];then
-    MINIKUBE_HOME=$HOME
-else
-    if [ ! -d "$MINIKUBE_HOME" ]; then
-        echo "The directory defined by \$MINIKUBE_HOME doesn't exist"
-        return 1
-    fi
-fi
-
-FSTYPE=$(stat -f -L -c %T $MINIKUBE_HOME)
-if [ x"$FSTYPE" == x"nfs" ]; then
-    echo ""
-    echo "Warning: stx minikube doesn't allow \$MINIKUBE_HOME or \$HOME directory as nfs mount point!!!"
-    echo "         Please set non-nfs MINIKUBE_HOME with the command 'export MINIKUBE_HOME=XXX/YYY'"
-    echo ""
-    unset MINIKUBE_HOME
-    return 1
-fi
-
-notice_warn() {
+notice_warn () {
     local tty_on tty_off
     if [[ -t 2 ]] ; then
         tty_on=$'\033[1;33m'
@@ -28,23 +9,11 @@ notice_warn() {
     echo >&2 "${tty_on}$*${tty_off}"
 }
 
-export PRJDIR=$(pwd)
-export PATH=$PRJDIR/stx/bin:$PATH
-export MINIKUBECPUS=${MINIKUBECPUS:-6}
-export MINIKUBEMEMORY=${MINIKUBEMEMORY:-16000}
-export MINIKUBENAME=${MINIKUBENAME:-minikube-$USER-upstream}
-export KUBECONFIG=$MINIKUBE_HOME/.kube/config
-export STX_BUILD_HOME="${STX_BUILD_HOME:-/localdisk/$USER}"
-
-if [ ! -f "stx.conf" ]; then
-    cp stx.conf.sample stx.conf
-fi
-
 number_of_users () {
     local count
 
     count=$(users | tr ' ' '\n' | sort --uniq | wc -l)
-    
+
     # Add in non-login users that might trigger a parallel build
     # based on a timer, or other trigger.
     if getent passwd | grep -q jenkins; then
@@ -68,34 +37,125 @@ sqrt () {
     echo -e "sqrt($1)" | bc -q -i | head -2 | tail -1
 }
 
-# Consider many users are just working with code and not actually building.
-NUM_USERS=$(sqrt $(number_of_users))
-ABSOLUTE_MAX_CPUS=$(($(number_of_cpus)/$NUM_USERS))
-MAX_CPUS=$(number_of_cpus)
-if [ "$MAX_CPUS" == "" ] || [ "$MAX_CPUS" == "0" ]; then
-    MAX_CPUS=1
+
+if [ -z "$PROJECT" ]; then
+    notice_warn "\$PROJECT needs to be defined, this will be your project name."
+    notice_warn "It will be used on the docker image tagging to support multiusers."
+    return 1
 fi
 
-if [ $MAX_CPUS -gt $ABSOLUTE_MAX_CPUS ]; then
-    MAX_CPUS=$ABSOLUTE_MAX_CPUS
+# Host side path, exports STX lib to user's PATH
+export PRJDIR=$(pwd)
+export PATH=$PRJDIR/stx/bin:$PATH
+# Used by helm/stx-init to tag the user images
+DOCKER_TAG_VERSION="v0.1.0"
+export DOCKER_TAG_LOCAL="${USER}-${PROJECT}-${DOCKER_TAG_VERSION}"
+# Platform 'minikube' or 'kubernetes'
+export STX_PLATFORM="${STX_PLATFORM:-minikube}"
+# Max cpus for the build parallel jobs, replaces MINIKUBECPUS env var
+export STX_BUILD_CPUS=${STX_BUILD_CPUS:-6}
+
+STX_BUILD_HOME_DEFAULT_v1="/localdisk/$USER"
+STX_BUILD_HOME_DEFAULT_v2="/localdisk/designer/$USER/$PROJECT"
+
+if [ ! -f "stx.conf" ]; then
+    cp stx.conf.sample stx.conf
 fi
 
-if [ $MINIKUBECPUS -gt $MAX_CPUS ]; then
-    notice_warn "MINIKUBECPUS setting:$MINIKUBECPUS is more than MAX_CPUS: $MAX_CPUS."
-    notice_warn "Limit the minikube cluster with MAX_CPUS."
+# Platform specifics
+if [ "$STX_PLATFORM" = "minikube" ]; then
+    # MINIKUBE Settings
+    if [ -z "$STX_BUILD_HOME" ]; then
+        # Verify default build home
+        if [ -d "${STX_BUILD_HOME_DEFAULT_v1}/localdisk/designer/$USER" ]; then
+            STX_BUILD_HOME="${STX_BUILD_HOME_DEFAULT_v1}"
+        else
+            STX_BUILD_HOME="${STX_BUILD_HOME_DEFAULT_v2}"
+        fi
+        export STX_BUILD_HOME
+    fi
 
-    export MINIKUBECPUS=$MAX_CPUS
-fi
+    if [ -z "$MINIKUBE_HOME" ]; then
+        MINIKUBE_HOME=$HOME
+    else
+        if [ ! -d "$MINIKUBE_HOME" ]; then
+            echo "The directory defined by \$MINIKUBE_HOME doesn't exist"
+            return 1
+        fi
+    fi
 
-MAX_MEMORY=`expr $(cat /proc/meminfo |grep MemTotal | awk '{print $2}') / 1024`
-if [ "$MAX_MEMORY" == "" ] || [ "$MAX_MEMORY" == "0" ]; then
-    MAX_MEMORY=2048
-fi
+    FSTYPE=$(stat -f -L -c %T $MINIKUBE_HOME)
+    if [ x"$FSTYPE" == x"nfs" ]; then
+        echo ""
+        echo "Warning: stx minikube doesn't allow \$MINIKUBE_HOME or \$HOME directory as nfs mount point!!!"
+        echo "         Please set non-nfs MINIKUBE_HOME with the command 'export MINIKUBE_HOME=XXX/YYY'"
+        echo ""
+        unset MINIKUBE_HOME
+        return 1
+    fi
 
-if [ $MINIKUBEMEMORY -gt $MAX_MEMORY ]; then
+    export MINIKUBEMEMORY=${MINIKUBEMEMORY:-16000}
+    export MINIKUBENAME=${MINIKUBENAME:-minikube-$USER-upstream}
+    export KUBECONFIG=$MINIKUBE_HOME/.kube/config
 
-    notice_warn "MINIKUBEMEMORY setting:$MINIKUBEMEMORY is more than system MAX_MEMORY: $MAX_MEMORY M."
-    notice_warn "Limit the minikube cluster with MAX_MEMORY."
+    # Consider many users are just working with code and not actually building.
+    NUM_USERS=$(sqrt $(number_of_users))
+    ABSOLUTE_MAX_CPUS=$(($(number_of_cpus)/$NUM_USERS))
+    MAX_CPUS=$(number_of_cpus)
+    if [ "$MAX_CPUS" == "" ] || [ "$MAX_CPUS" == "0" ]; then
+        MAX_CPUS=1
+    fi
 
-    export MINIKUBEMEMORY=$MAX_MEMORY
+    if [ $MAX_CPUS -gt $ABSOLUTE_MAX_CPUS ]; then
+        MAX_CPUS=$ABSOLUTE_MAX_CPUS
+    fi
+
+    if [ $STX_BUILD_CPUS -gt $MAX_CPUS ]; then
+        notice_warn "\$STX_BUILD_CPUS setting:$STX_BUILD_CPUS is more than MAX_CPUS: $MAX_CPUS."
+        notice_warn "Limit the minikube cluster with MAX_CPUS."
+
+        export STX_BUILD_CPUS=$MAX_CPUS
+    fi
+
+    MAX_MEMORY=`expr $(cat /proc/meminfo |grep MemTotal | awk '{print $2}') / 1024`
+    if [ "$MAX_MEMORY" == "" ] || [ "$MAX_MEMORY" == "0" ]; then
+        MAX_MEMORY=2048
+    fi
+
+    if [ $MINIKUBEMEMORY -gt $MAX_MEMORY ]; then
+
+        notice_warn "MINIKUBEMEMORY setting:$MINIKUBEMEMORY is more than system MAX_MEMORY: $MAX_MEMORY M."
+        notice_warn "Limit the minikube cluster with MAX_MEMORY."
+
+        export MINIKUBEMEMORY=$MAX_MEMORY
+    fi
+
+elif [ "$STX_PLATFORM" = "kubernetes" ]; then
+    # Host side path STX_BUILD_HOME
+    export STX_BUILD_HOME="${STX_BUILD_HOME:-${STX_BUILD_HOME_DEFAULT_v2}}"
+
+    if [ -z "$STX_K8S_NAMESPACE" ]; then
+        notice_warn "\$STX_K8S_NAMESPACE needs to be defined, this will be your namespace name"
+        return 1
+    fi
+
+    if ! kubectl get namespace 2>/dev/null | grep -q $STX_K8S_NAMESPACE; then
+        notice_warn "namespace $STX_K8S_NAMESPACE not found"
+        return 1
+    fi
+
+    if [ -z "$KUBECONFIG" ]; then
+        # Kubeconfig default location inside STX_BUILD_HOME
+        export KUBECONFIG=$STX_BUILD_HOME/.kube/config
+    fi
+
+    if [ ! -f "$KUBECONFIG" ]; then
+        notice_warn "KUBECONFIG: $KUBECONFIG not found"
+        notice_warn "Fix the kube config and try again."
+        return 1
+    fi
+
+else
+    notice_warn "\$STX_PLATFORM not specified, valid options are: 'minikube' or 'kubernetes'"
+    return 1
 fi

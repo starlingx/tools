@@ -22,7 +22,7 @@ volumeMounts:
 volumes:
   name: shared-workspace
   hostPath:
-    path: /workspace/aptly
+    path: /aptly
 
 podAnnotations: {}
 
