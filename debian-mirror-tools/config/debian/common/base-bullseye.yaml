@@ -35,7 +35,7 @@ rootfs-pre-scripts:
   chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
   set -e
   apt update
-  apt install -y --no-install-recommends grub-common
+  apt install -y --no-install-recommends linux-image-5.10.0-6-amd64-unsigned grub-common
   apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
   apt install --no-install-recommends -y ifupdown
   SCRIPT_ENDOF

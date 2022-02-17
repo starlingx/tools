@@ -45,5 +45,8 @@ RUN sed -i 's/ftp.cn.debian.org/deb.debian.org/g' /opt/LAT/SDK/sysroots/x86_64-w
 # Fix: Align DEFAULT_INITRD_NAME with our custom names
 RUN sed -i 's/debian-initramfs-ostree-image/starlingx-initramfs-ostree-image/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
 
+# Fix: Align kernel with custom starlingx kernel
+RUN sed -i 's/linux-image-amd64/linux-image-5.10.0-6-amd64-unsigned/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
+
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/opt/LAT/lat/latd"]
