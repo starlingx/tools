@@ -1,5 +1,5 @@
 ---
-name: debian-initramfs-ostree-image
+name: starlingx-initramfs
 machine: intel-x86-64
 image_type:
 - initramfs

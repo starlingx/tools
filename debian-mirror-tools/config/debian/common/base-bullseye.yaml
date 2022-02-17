@@ -1,5 +1,5 @@
 ---
-name: debian-image-demo
+name: starlingx
 machine: intel-x86-64
 image_type:
 - iso
@@ -106,8 +106,8 @@ environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
 ostree:
-  ostree_use_ab: '1'
-  ostree_osname: wrlinux
+  ostree_use_ab: '0'
+  ostree_osname: debian
   ostree_skip_boot_diff: '2'
   ostree_remote_url: ''
   ostree_extra_install_args: 'inststx=1'
