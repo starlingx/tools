@@ -52,6 +52,7 @@ rootfs-pre-scripts:
   subfunction=controller,worker
   system_type=All-in-one
   security_profile=standard
+  management_interface=lo
   SCRIPT_ENDOF
 rootfs-post-scripts:
 - |-
