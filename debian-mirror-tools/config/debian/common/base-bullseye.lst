@@ -26,6 +26,7 @@ conntrack  1:1.4.6-2
 conntrackd  1:1.4.6-2
 coreutils  8.32-4+b1
 cpio  2.13+dfsg-4
+cpp-10  10.2.1-6
 cracklib-runtime  2.9.6-3.4
 cron  3.0pl1-137
 cryptsetup-bin  2:2.3.5-1
@@ -77,6 +78,7 @@ fonts-materialdesignicons-webfont  1.6.50-3
 fonts-roboto-fontface  0.5.0-3
 freeipmi-common  1.6.6-4+deb11u1
 gawk  1:5.1.0-1
+gcc-10  10.2.1-6
 gcc-10-base  10.2.1-6
 gcc-9-base  9.3.0-22
 gdisk  1.0.6-1.1
@@ -138,7 +140,9 @@ libaprutil1-ldap  1.6.1-5
 libapt-pkg6.0  2.2.4
 libarchive13  3.4.3-2+b1
 libargon2-1  0~20171227-0.2
+libasan6  10.2.1-6
 libassuan0  2.5.3-7.1
+libatomic1  10.2.1-6
 libattr1  1:2.4.48-6
 libaudit1  1:3.0-2
 libaudit-common  1:3.0-2
@@ -174,6 +178,7 @@ libcap2-bin  1:2.44-1
 libcap-ng0  0.7.9-2.2+b1
 libc-bin  2.31-13+deb11u2
 libcbor0  0.5.0+dfsg-2
+libcc1-0  10.2.1-6
 libc-dev-bin  2.31-13+deb11u2
 libc-l10n  2.31-13+deb11u2
 libcom-err2  1.46.2-2
@@ -213,6 +218,7 @@ libfido2-1  1.6.0-2
 libfreeipmi17  1.6.6-4+deb11u1
 libfreetype6  2.10.4+dfsg-1
 libfuse2  2.9.9-5
+libgcc-10-dev  10.2.1-6
 libgcc-s1  10.2.1-6
 libgcrypt20  1.8.7-6
 libgdbm6  1.19-2
@@ -238,6 +244,8 @@ libip4tc2  1.8.7-1
 libip6tc2  1.8.7-1
 libiperf0 3.9-1
 libisc-export1105  1:9.11.19+dfsg-2.1
+libisl23  0.23-1
+libitm1  10.2.1-6
 libivykis0  0.42.4-1
 libjansson4  2.13.1-1.1
 libjs-angular-file-upload  12.0.4+dfsg1-2.1
@@ -281,6 +289,7 @@ libllvm11  1:11.0.1-2
 liblocale-gettext-perl  1.07-4+b1
 liblognorm5  2.0.5-1.1
 liblrm2  1.0.12-20
+liblsan0  10.2.1-6
 libltdl7  2.4.6-15
 liblua5.2-0  5.2.4-1.1+b3
 liblua5.3-0  5.3.3-1.1+b1
@@ -296,6 +305,7 @@ libmnl0  1.0.4-3
 libmongoc-1.0-0  1.17.6-1
 libmongocrypt0  1.1.0-1
 libmount1  2.36.1-8
+libmpc3  1.2.0-1
 libmpdec3  2.5.1-1
 libmpfr6  4.1.0-3
 libncurses6  6.2+20201114-2
@@ -410,6 +420,8 @@ libtinfo6  6.2+20201114-2
 libtirpc3  1.3.1-1
 libtirpc-common  1.3.1-1
 libtirpc-dev  1.3.1-1
+libtsan0  10.2.1-6
+libubsan1  10.2.1-6
 libuchardet0  0.0.7-1
 libunistring2  0.9.10-4
 libunwind8  1.3.2-2
