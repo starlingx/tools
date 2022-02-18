@@ -36,6 +36,9 @@ packages:
 - grep
 - grub2
 - gzip
+- iavf
+- ice
+- i40e
 - ifupdown
 - initramfs-ostree
 - iproute2
