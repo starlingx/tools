@@ -139,11 +139,6 @@ elif [ "$STX_PLATFORM" = "kubernetes" ]; then
         return 1
     fi
 
-    if ! kubectl get namespace 2>/dev/null | grep -q $STX_K8S_NAMESPACE; then
-        notice_warn "namespace $STX_K8S_NAMESPACE not found"
-        return 1
-    fi
-
     if [ -z "$KUBECONFIG" ]; then
         # Kubeconfig default location inside STX_BUILD_HOME
         export KUBECONFIG=$STX_BUILD_HOME/.kube/config
@@ -152,6 +147,11 @@ elif [ "$STX_PLATFORM" = "kubernetes" ]; then
     if [ ! -f "$KUBECONFIG" ]; then
         notice_warn "KUBECONFIG: $KUBECONFIG not found"
         notice_warn "Fix the kube config and try again."
+        return 1
+    fi
+
+    if ! kubectl get namespace 2>/dev/null | grep -q $STX_K8S_NAMESPACE; then
+        notice_warn "namespace $STX_K8S_NAMESPACE not found"
         return 1
     fi
 
