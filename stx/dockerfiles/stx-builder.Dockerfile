@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright (C) 2021 Wind River Systems,Inc.
+# Copyright (C) 2021-2022 Wind River Systems,Inc.
 #
 FROM debian:bullseye
 
@@ -79,3 +79,6 @@ COPY stx/toCOPY/lat-tool/lat /opt/LAT/lat
 COPY stx/toCOPY/builder/finishSetup.sh /usr/local/bin
 COPY stx/toCOPY/builder/userenv /root/
 COPY stx/toCOPY/builder/buildrc /root/
+
+COPY stx/toCOPY/builder/pubkey.rsa /root
+RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa

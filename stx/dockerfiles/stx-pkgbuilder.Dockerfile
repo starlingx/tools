@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright (C) 2021 Wind River Systems,Inc.
+# Copyright (C) 2021-2022 Wind River Systems,Inc.
 #
 FROM debian:bullseye
 
@@ -55,6 +55,9 @@ COPY stx/toCOPY/pkgbuilder/app.py /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.py /opt/
 COPY stx/toCOPY/pkgbuilder/setup.sh /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.conf /etc/sbuild/sbuild.conf
+
+COPY stx/toCOPY/pkgbuilder/pubkey.rsa /root
+RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 WORKDIR /opt

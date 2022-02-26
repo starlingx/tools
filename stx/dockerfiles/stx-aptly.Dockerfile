@@ -1,28 +1,18 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# MIT License
+#      http://www.apache.org/licenses/LICENSE-2.0
 #
-# Copyright (c) 2021 Mark Asselstine
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
+# Copyright (C) 2021-2022 Wind River Systems,Inc.
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-#
-
-FROM golang:1.16.5-buster AS builder
+FROM golang:1.17.5-bullseye AS builder
 LABEL stage=builder
 
 
@@ -36,7 +26,7 @@ RUN mkdir -p $GOPATH/src/github.com/aptly-dev/aptly && \
     curl -O https://nginx.org/keys/nginx_signing.key && apt-key add ./nginx_signing.key
 
 # Build our actual container
-FROM debian:buster
+FROM debian:bullseye
 
 MAINTAINER mark.asselstine@windriver.com
 
@@ -44,7 +34,7 @@ COPY --from=builder /go/nginx_signing.key nginx_signing.key
 
 # Add Nginx repository and install required packages
 RUN apt-get -q update && apt-get -y install gnupg2 && \
-    echo "deb http://nginx.org/packages/debian/ buster nginx" > /etc/apt/sources.list.d/nginx.list && \
+    echo "deb http://nginx.org/packages/debian/ bullseye nginx" > /etc/apt/sources.list.d/nginx.list && \
     apt-key add ./nginx_signing.key && \
     apt-get -q update && apt-get -y install \
                                             aptly \
@@ -74,6 +64,11 @@ VOLUME [ "/var/aptly" ]
 
 # Ports
 EXPOSE 80 8080
+
+# Import private key for repo signatures
+COPY stx/toCOPY/aptly/privkey.rsa /root
+RUN gpg --import --pinentry-mode loopback --batch --passphrase starlingx /root/privkey.rsa && \
+    rm -f /root/privkey.rsa
 
 # Configure startup
 COPY stx/toCOPY/aptly/entrypoint.sh /bin/entrypoint.sh
