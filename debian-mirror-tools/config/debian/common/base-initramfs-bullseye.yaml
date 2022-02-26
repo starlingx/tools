@@ -1,5 +1,5 @@
 ---
-name: starlingx-initramfs
+name: starlingx-initramfs-ostree-image
 machine: intel-x86-64
 image_type:
 - initramfs
