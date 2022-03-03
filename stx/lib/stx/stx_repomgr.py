@@ -16,6 +16,7 @@ import logging
 from stx.k8s import KubeHelper
 from stx import utils  # pylint: disable=E0611
 import subprocess
+import sys
 
 logger = logging.getLogger('STX-Repomgr')
 utils.set_logger(logger)
@@ -38,12 +39,14 @@ class HandleRepomgrTask:
             logger.error('The builder container does not exist, so please \
                          consider to use the control module')
 
-        prefix_cmd = self.k8s.generatePrefixCommand(podname, '', 1)
-        cmd = prefix_cmd + '"repo_manage.py ' + args.repomgr_task + '"\''
+        prefix_cmd = self.k8s.generatePrefixCommand(podname, '', 1, 0)
+        cmd = prefix_cmd + ' '.join(['"repo_manage.py', args.repomgr_task, ' '.join(args.args), '"\''])
         logger.debug('Manage the repo with the command [%s]', cmd)
 
         try:
             subprocess.check_call(cmd, shell=True)
         except subprocess.CalledProcessError as exc:
-            raise Exception('Failed to manage the repo with the command [%s].\n \
+            # raise Exception('Failed to manage the repo with the command [%s].\n \
+            logger.error('Failed to manage the repo with the command [%s].\n \
     Returncode: %s' % (cmd, exc.returncode))
+            sys.exit(2)

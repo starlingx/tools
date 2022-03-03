@@ -127,12 +127,14 @@ image.\t\teg: [ prepare|layer|image|download|world|${pkgname}]')
 
         repo_subparser = subparsers.add_parser('repomgr',
                                                help='Manage source|binary \
-packages.\t\teg: [ list|download|sync|mirror|clean|remove_repo|upload_pkg|\
-delete_pkg ]')
+packages.\t\teg: [ list|download|sync|merge|mirror|clean|\
+remove_repo|search_pkg|upload_pkg|delete_pkg ]')
         repo_subparser.add_argument('repomgr_task',
-                                    help='[ list|download|sync|mirror|clean|\
-                                    remove_repo|upload_pkg|delete_pkg ]: \
+                                    help='[ list|download|sync|merge|mirror|clean|\
+                                    remove_repo|search_pkg|upload_pkg|delete_pkg ]: \
                                     Execute the management task.\n\n')
+        # Pass remaining arguements into repo_manage.py for additional processing
+        repo_subparser.add_argument('args', nargs=argparse.REMAINDER)
         repo_subparser.set_defaults(handle=self.handlerepomgr.handleCommand)
 
         parser.add_argument('-d', '--debug',

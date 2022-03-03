@@ -150,7 +150,7 @@ class HandleBuildTask:
                                     '***********************************')
                 sys.exit(1)
 
-        prefix_cmd = self.k8s.generatePrefixCommand(podname, '', 1)
+        prefix_cmd = self.k8s.generatePrefixCommand(podname, '', 1, 1)
 
         if args.build_task == 'image':
             cmd = self.buildImageCMD(args, prefix_cmd)
