@@ -63,6 +63,8 @@ packages:
 - udev
 - udhcpc
 - util-linux
+- uuid-runtime
+- vim
 - watchdog
 external-packages: []
 include-default-packages: '0'
