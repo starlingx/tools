@@ -36,6 +36,75 @@ build-info
 #centos-debian-compat
 centos-debian-compat
 
+#ceph
+#ceph-base-dbgsym  # debug symbols
+ceph-base
+#ceph-common-dbgsym  # debug symbols
+ceph-common
+#ceph-fuse-dbgsym  # debug symbols
+ceph-fuse
+#ceph-grafana-dashboards  # not used
+#ceph-mds-dbgsym  # debug symbols
+ceph-mds
+#ceph-mgr-dashboard  # not used
+#ceph-mgr-dbgsym  # debug symbols
+#ceph-mgr-diskprediction-cloud  # not used
+#ceph-mgr-diskprediction-local  # not used
+#ceph-mgr-k8sevents  # not used
+#ceph-mgr-rook  # not used
+#ceph-mgr-ssh  # not used
+ceph-mgr
+#ceph-mon-dbgsym  # debug symbols
+ceph-mon
+#ceph-osd-dbgsym  # debug symbols
+ceph-osd
+#ceph-resource-agents  # not used
+ceph
+#cephfs-shell  # not used
+#libcephfs-dev  # not used
+#libcephfs-java  # not used
+#libcephfs-jni-dbgsym  # debug symbols
+#libcephfs-jni  # not used
+#libcephfs2-dbgsym  # debug symbols
+libcephfs2
+#librados-dev-dbgsym  # debug symbols
+#librados-dev  # not used
+#librados2-dbgsym  # debug symbols
+librados2
+#libradospp-dev  # not used
+#libradosstriper-dev  # not used
+#libradosstriper1-dbgsym  # debug symbols
+libradosstriper1
+#librbd-dev  # not used
+#librbd1-dbgsym  # debug symbols
+librbd1
+#librgw-dev  # not used
+#librgw2-dbgsym  # debug symbols
+librgw2
+python3-ceph-argparse
+python3-ceph
+#python3-cephfs-dbgsym  # debug symbols
+python3-cephfs
+#python3-rados-dbgsym  # debug symbols
+python3-rados
+#python3-rbd-dbgsym  # debug symbols
+python3-rbd
+#python3-rgw-dbgsym  # debug symbols
+python3-rgw
+#rados-objclass-dev  # not used
+#radosgw-dbgsym  # debug symbols
+radosgw
+#rbd-fuse-dbgsym  # debug symbols
+#rbd-fuse  # not used
+#rbd-mirror-dbgsym  # debug symbols
+#rbd-mirror  # not used
+#rbd-nbd-dbgsym  # debug symbols
+#rbd-nbd  # not used
+
+#ceph-manager
+#ceph-manager-wheels  # not used in deployment
+ceph-manager
+
 #cert-alarm
 cert-alarm
 
