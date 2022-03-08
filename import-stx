@@ -1,5 +1,55 @@
 # bash
 
+#
+# ENVIRONMENT
+# ===========
+#
+# These variables may be defined before sourcing this script:
+#
+#   PROJECT (required)
+#     unique (within k8s) name of your prooject. Used as part of
+#     pod names etc.
+#
+#   USER (required)
+#     usually defined by the shell; used in file names as well as
+#     the user that runs the build inside the builder container
+#
+#   STX_PLATFORM
+#     "minikube" or "kubernetes" (for vanilla k8s)
+#     Default: "minikube"
+#
+#   STX_BUILD_HOME
+#     root directory of all files used by this project
+#     Default: /localdisk/designer/$USER/$PROJECT
+#
+#   MINIKUBE_HOME
+#     Minikube saves its profile information here. Must be on a local
+#     file system, not NFS.
+#     Default: $HOME
+#
+#   MINIKUBEMEMORY
+#     Max amount of RAM for minikube in mebibytes (1024-based)
+#     Default: 16000
+#
+#   STX_BUILD_CPUS
+#     How may CPU cores to allocate to PODs.
+#     Default: 6
+#
+#   MINIKUBENAME
+#     Minikube's profile name
+#     Default: minikube-$USER-upstream
+#
+#   KUBECONFIG
+#     Location of kubectl config file
+#     Default: $MINIKUBE_HOME/.kube/config or $HOME/.kube/config
+#              depending on $STX_PLATFORM
+#
+#   STX_K8S_NAMESPACE (required on vanilla k8s)
+#     K8s namespace for builder pods & services. For vanilla k8s only.
+#     Minikube always uses the default namespace.
+#
+#
+
 notice_warn () {
     local tty_on tty_off
     if [[ -t 2 ]] ; then
