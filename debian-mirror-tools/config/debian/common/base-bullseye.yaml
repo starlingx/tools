@@ -38,6 +38,7 @@ rootfs-pre-scripts:
   apt install -y --no-install-recommends linux-image-5.10.0-6-amd64-unsigned grub-common
   apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
   apt install --no-install-recommends -y ifupdown
+  apt install -y vim uuid-runtime
   SCRIPT_ENDOF
 - |
   export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
