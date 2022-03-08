@@ -792,6 +792,11 @@ python3-pankoclient
 #python-wsme
 python3-wsme
 
+#python3-setuptools
+#python-setuptools-doc
+python3-pkg-resources
+python3-setuptools
+
 #qat17
 qat1.7.l-dbgsym
 qat1.7.l
