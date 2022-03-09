@@ -239,7 +239,7 @@ argument. eg: %s \n', container_list)
         if podname:
             if default_docker == 'builder':
                 cmd = prefix_exec_cmd + podname
-                cmd = cmd + ' -- bash -l -c \'sudo -u ${MYUNAME} bash \
+                cmd = cmd + ' -- bash -l -c \'runuser -u ${MYUNAME} -- bash \
 --rcfile /home/$MYUNAME/userenv\''
             else:
                 cmd = prefix_exec_cmd + podname + ' -- bash'
