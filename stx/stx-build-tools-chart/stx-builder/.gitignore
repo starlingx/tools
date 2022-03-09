@@ -1,0 +1,5 @@
+Chart.lock
+charts/
+configmap/stx-localrc
+dependency_chart/stx-pkgbuilder/configmap/stx-localrc
+
