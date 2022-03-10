@@ -426,19 +426,48 @@ for line in $(cat $tarball_file); do
             tar czvf $tarball_name $directory_name
             rm -rf $directory_name
             popd > /dev/null  # pushd $dest_dir
-        elif [[ "$tarball_name" =~ ^kernel-rt-.*.rpm ]]; then
-            git clone -b c8 --single-branch $tarball_url
+        elif [[ "$tarball_name" =~ ^kernel-rt-.*[.]el.*[.]rpm ]]; then
+            local el_release=""
+            el_release=$(echo $tarball_name | rev | cut -d '.' -f 3 | rev)
+            local extra_clone_args=""
+            if [[ "$el_release" =~ ^el([0-9]*)[0-9_]*$ ]]; then
+                extra_clone_args="-b c${BASH_REMATCH[1]} --single-branch"
+            else
+                echo "error: $tarball_name is not a valid EPEL kernel"
+                error_count=$((error_count + 1))
+                continue
+            fi
+
+            if ! (git clone $extra_clone_args $tarball_url || \
+                    git clone $tarball_url ); then
+                echo "error: failed to clone from $tarball_url"
+                error_count=$((error_count + 1))
+                continue
+            fi
+
             pushd kernel-rt
-            rev=$util
-            git checkout -b spec $rev
+            (
+                rev=$util
+                if ! git checkout $rev; then
+                    echo "failed to checkout $rev from $tarball_url"
+                    exit 1
+                fi
 
-            # get the CentOS tools for building SRPMs
-            git clone https://git.centos.org/centos-git-common
+                # get the CentOS tools for building SRPMs
+                if ! git clone https://git.centos.org/centos-git-common; then
+                    echo "error: failed to clone https://git.centos.org/centos-git-common"
+                    exit 1
+                fi
 
-            # Create the SRPM using CentOS tools
-            # bracketed to contain the PATH change
-            (PATH=$PATH:./centos-git-common into_srpm.sh -d .el8)
-            mv SRPMS/*.rpm ../${tarball_name}
+                # Create the SRPM using CentOS tools
+                # bracketed to contain the PATH change
+                if ! (PATH=$PATH:./centos-git-common into_srpm.sh -d .$el_release); then
+                    echo "error: into_srpm.sh failed to build $tarball_name"
+                    exit 1
+                fi
+
+                mv SRPMS/*.rpm ../${tarball_name}
+            ) || error_count=$((error_count + 1))
 
             popd > /dev/null # pushd kernel-rt
             # Cleanup
