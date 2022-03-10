@@ -2,16 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "stx-builder.fullname" . }}
+  name: {{ include "stx-docker.fullname" . }}
   labels:
-    {{- include "stx-builder.labels" . | nindent 4 }}
+    {{- include "stx-docker.labels" . | nindent 4 }}
 spec:
 {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
 {{- end }}
   selector:
     matchLabels:
-      {{- include "stx-builder.selectorLabels" . | nindent 6 }}
+      {{- include "stx-docker.selectorLabels" . | nindent 6 }}
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -19,7 +19,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "stx-builder.selectorLabels" . | nindent 8 }}
+        {{- include "stx-docker.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -31,34 +31,32 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           tty: true
           env:
-          - name: DOCKER_HOST
-            value: "tcp://{{ .Release.Name }}-stx-docker"
+          - name: DOCKER_TLS_CERTDIR
+            value: ""
+          command:
+          - "/usr/local/bin/dockerd-entrypoint.sh"
+          {{- range .Values.insecureRegistries }}
+          - "--insecure-registry={{ . }}"
+          {{- end }}
           volumeMounts:
-          - name: {{ .Values.volumeMounts.workspace.name }}
-            mountPath: {{ .Values.volumeMounts.workspace.mountPath}}
-          - name: {{ .Values.volumeMounts.userSetting.name }}
-            mountPath: {{ .Values.volumeMounts.userSetting.mountPath}}
-          - name: {{ .Values.volumeMounts.mirror.name }}
-            mountPath: {{ .Values.volumeMounts.mirror.mountPath }}
-
+          - name: shared-workspace
+            mountPath: {{ .Values.volumes.sharedWorkspace.mountPath }}
+          - name: docker-run
+            mountPath: {{ .Values.volumes.dockerRun.mountPath }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 
       volumes:
-      - name: {{ .Values.volumes.workspace.name }}
+      - name: shared-workspace
         hostPath:
-          path: {{ .Values.global.hostDir }}{{ .Values.volumes.workspace.hostPath.path }}
-      - name: {{ .Values.volumes.userSetting.name }}
-        configMap:
-          name: {{ .Values.volumes.userSetting.configMapName }}
-      - name: {{ .Values.volumes.mirror.name }}
+          path: {{ .Values.global.hostDir }}{{ .Values.volumes.sharedWorkspace.hostPath }}
+      - name: docker-run
         hostPath:
-          path: {{ .Values.global.hostDir }}{{ .Values.volumes.mirror.hostPath.path }}
-
+          path: {{ .Values.global.hostDir }}{{ .Values.volumes.dockerRun.hostPath }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

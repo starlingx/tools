@@ -190,6 +190,9 @@ stx-pkgbuilder/configmap/')
             # need to review this to support multi node (PV/PVCs)
             cmd += ' --set global.hostDir=' + self.config.build_home
 
+        for reg_index, reg in enumerate(self.config.insecure_docker_reg_list):
+            cmd += f' --set stx-docker.insecureRegistries[{reg_index}]={reg}'
+
         self.logger.debug('Execute the helm start command: %s', cmd)
         helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
@@ -225,7 +228,7 @@ stx-pkgbuilder/configmap/')
 
     def handleEnterTask(self, args):
         default_docker = 'builder'
-        container_list = ['builder', 'pkgbuilder', 'repomgr', 'lat']
+        container_list = ['builder', 'pkgbuilder', 'repomgr', 'lat', 'docker']
         prefix_exec_cmd = self.config.kubectl() + ' exec -ti '
 
         if args.dockername:
@@ -241,6 +244,8 @@ argument. eg: %s \n', container_list)
                 cmd = prefix_exec_cmd + podname
                 cmd = cmd + ' -- bash -l -c \'runuser -u ${MYUNAME} -- bash \
 --rcfile /home/$MYUNAME/userenv\''
+            elif default_docker == 'docker':
+                cmd = prefix_exec_cmd + podname + ' -- sh'
             else:
                 cmd = prefix_exec_cmd + podname + ' -- bash'
             self.logger.debug('Execute the enter command: %s', cmd)

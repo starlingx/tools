@@ -71,7 +71,8 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor
     echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-  apt-get update
+  apt-get update && \
+  apt-get install --no-install-recommends -y docker-ce-cli
 
 COPY stx/toCOPY/lat-tool/lat /opt/LAT/lat
 COPY stx/toCOPY/builder/finishSetup.sh /usr/local/bin

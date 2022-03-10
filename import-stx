@@ -48,6 +48,10 @@
 #     K8s namespace for builder pods & services. For vanilla k8s only.
 #     Minikube always uses the default namespace.
 #
+#   STX_INSECURE_DOCKER_REGISTRIES
+#     Space-separated list of docker registries for which we want to disable
+#     SSL certificate validation. Only affects docker running in builder pods.
+#     Requires pod restart when changed.
 #
 
 notice_warn () {

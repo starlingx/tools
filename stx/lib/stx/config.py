@@ -15,6 +15,7 @@
 #
 import logging
 import os
+import re
 
 from stx import stx_configparser
 from stx import utils
@@ -72,6 +73,12 @@ class Config:
         self.kubectl_cmd = None
         self.helm_cmd = None
 
+        reg_list_str = os.getenv('STX_INSECURE_DOCKER_REGISTRIES')
+        if reg_list_str:
+            self._insecure_docker_reg_list = re.split(r'[ \t;,]+', reg_list_str)
+        else:
+            self._insecure_docker_reg_list = []
+
     def load(self):
         """Load stx.conf"""
         self.data = stx_configparser.STXConfigParser(self.config_filename)
@@ -100,6 +107,11 @@ class Config:
         """Returns the command for invoking helm"""
         assert self.data
         return self.helm_cmd
+
+    @property
+    def insecure_docker_reg_list(self):
+        """List of insecure docker registries we are allowed to access"""
+        return self._insecure_docker_reg_list
 
     def _init_kubectl_cmd(self):
         # helm

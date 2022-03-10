@@ -61,11 +61,10 @@ task.\t\teg: [start|enter|stop|status|upgrade]')
                                        Upgrade the stx-builder/obs/lat/pulp \
                                        containers.\n\n')
         control_subparser.add_argument('--dockername',
-                                       help='[ builder|pkgbuilder|repomgr|lat \
-                                       ], the four dockers you can enter, if \
-                                       there is no this argument for enter \
-                                       task, default enter the stx-builder \
-                                       container\n\n', required=False)
+                                       help='[ builder|pkgbuilder|repomgr|' +
+                                       'lat|docker ]: container name to ' +
+                                       'enter, default: builder\n\n',
+                                       required=False)
         control_subparser.set_defaults(handle=self.handlecontrol.handleControl)
 
         config_subparser = subparsers.add_parser('config',

@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "stx-docker.fullname" . }}
+  labels:
+    {{- include "stx-docker.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.services.dockerDaemon.type }}
+  ports:
+    - port: {{ .Values.services.dockerDaemon.port }}
+      targetPort: 2375
+      protocol: TCP
+      name: docker-socket
+  selector:
+    {{- include "stx-repomgr.selectorLabels" . | nindent 4 }}
