@@ -330,7 +330,7 @@ for line in $(cat $tarball_file); do
             # We don't use it, but it will prevent re-downloading this file.
             #   rm -f "${tarball_name}"
 
-        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-5.0-2.1.8.0.tgz' ]]; then
+        elif [[ "$tarball_name" = 'MLNX_OFED_SRC-5.5-1.0.3.2.tgz' ]]; then
             srpm_path="${directory_name}/SRPMS/"
             download_package "$tarball_name" "$tarball_url"
             if [ $? -ne 0 ]; then
@@ -340,9 +340,10 @@ for line in $(cat $tarball_file); do
             fi
 
             tar -xf "$tarball_name"
-            cp "${srpm_path}/mlnx-ofa_kernel-5.0-OFED.5.0.2.1.8.1.g5f67178.src.rpm" .
-            cp "${srpm_path}/rdma-core-50mlnx1-1.50218.src.rpm" .
-            cp "${srpm_path}/libibverbs-41mlnx1-OFED.5.0.0.0.9.50218.src.rpm" .
+            cp "${srpm_path}/mlnx-ofa_kernel-5.5-OFED.5.5.1.0.3.1.src.rpm" .
+            cp "${srpm_path}/rdma-core-55mlnx37-1.55103.src.rpm" .
+            cp "${srpm_path}/mlnx-tools-5.2.0-0.55103.src.rpm" .
+            cp "${srpm_path}/mstflint-4.16.0-1.55103.src.rpm" .
             # Don't delete the original MLNX_OFED_LINUX tarball.
             # We don't use it, but it will prevent re-downloading this file.
             #   rm -f "$tarball_name"
