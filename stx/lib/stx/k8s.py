@@ -71,20 +71,27 @@ class KubeHelper:
         else:
             return False
 
-    def generatePrefixCommand(self, podname, command, enableuser):
+    def generatePrefixCommand(self, podname, command, enableuser, interactive=False):
         '''Generate the command executed in the host'''
 
         prefix_exec_cmd = self.config.kubectl() + ' exec -ti '
         builder_exec_cmd = prefix_exec_cmd + podname
         prefix_bash_cmd = ' -- bash -l -c '
-        prefix_bash_with_user_cmd = ' -- bash -l -c \'sudo -u ${MYUNAME} bash \
+        prefix_bash_with_user_cmd = ' -- bash -l -c \'sudo -u ${MYUNAME} \
+    BASH_ENV=/home/$MYUNAME/userenv bash --rcfile /home/$MYUNAME/userenv -c '
+        prefix_bash_with_interactive_user_cmd = ' -- bash -l -i -c \'sudo -u ${MYUNAME} bash \
     --rcfile /home/$MYUNAME/userenv -i -c '
         builder_exec_bash_cmd = builder_exec_cmd + prefix_bash_cmd
         builder_exec_bash_with_user_cmd = builder_exec_cmd + \
             prefix_bash_with_user_cmd
+        builder_exec_bash_with_interactive_user_cmd = builder_exec_cmd + \
+            prefix_bash_with_interactive_user_cmd
 
         if enableuser:
-            cmd = builder_exec_bash_with_user_cmd + command
+            if interactive:
+                cmd = builder_exec_bash_with_interactive_user_cmd + command
+            else:
+                cmd = builder_exec_bash_with_user_cmd + command
         else:
             cmd = builder_exec_bash_cmd + command
 

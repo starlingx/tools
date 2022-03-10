@@ -19,6 +19,7 @@ if [ ! -d $MY_WORKSPACE ]; then
     mkdir -p $MY_WORKSPACE > /dev/null 2>&1
 fi
 
+if echo $- | grep -q i ; then
 cat <<EOF
 To ease checkout do:
 !!!! Mandatory:
@@ -47,5 +48,5 @@ To make image:
     build-image [ -t std|rt ]
 
 EOF
-
+fi
 cd ${MY_WORKSPACE}
