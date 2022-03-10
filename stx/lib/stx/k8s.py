@@ -64,7 +64,7 @@ class KubeHelper:
     def helm_release_exists(self, projectname):
         '''Check if the helm release exists'''
 
-        cmd = self.config.helm() + ' ls | grep ' + projectname
+        cmd = self.config.helm() + " ls | awk '{ print $1 }' | grep '^" + projectname + "$'"
         ret = subprocess.getoutput(cmd)
         if ret:
             return True
