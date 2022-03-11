@@ -67,6 +67,7 @@ COPY stx/toCOPY/aptly/supervisord.aptly.conf /etc/supervisor/conf.d/aptly.conf
 # Configure Nginx
 COPY stx/toCOPY/aptly/nginx.conf.template /etc/nginx/nginx.conf.template
 COPY stx/toCOPY/aptly/supervisord.nginx.conf /etc/supervisor/conf.d/nginx.conf
+COPY stx/toCOPY/aptly/nginx.conf /etc/nginx/nginx.conf
 
 # Bind mount locations
 VOLUME [ "/var/aptly" ]
