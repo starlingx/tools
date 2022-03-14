@@ -21,6 +21,7 @@ packages:
 - apt-utils
 - base-passwd
 - bash
+- bc
 - busybox
 - bzip2
 - ca-certificates
