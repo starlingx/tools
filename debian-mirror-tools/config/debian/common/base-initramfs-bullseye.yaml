@@ -84,6 +84,13 @@ rootfs-post-scripts:
 - |-
   # Set bash as default shell
   ln -snf --relative $IMAGE_ROOTFS/bin/bash $IMAGE_ROOTFS/bin/sh
+- |-
+  # Update the installer script with partition size parameters
+  # so they don't have to be specified on the grub command line
+  sed -i "s/^FSZ=.*/FSZ=32/g" ${IMAGE_ROOTFS}/install
+  sed -i "s/^BSZ=.*/BSZ=512/g" ${IMAGE_ROOTFS}/install
+  sed -i "s/^RSZ=.*/RSZ=20480/g" ${IMAGE_ROOTFS}/install
+  sed -i "s/^VSZ=.*/VSZ=20480/g" ${IMAGE_ROOTFS}/install
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
