@@ -350,6 +350,9 @@ linux-libc-dev
 #usbip-dbgsym  # not used
 #usbip  # not used
 
+# lvm2-config
+lvm2-config
+
 #keyrings.alt
 python3-keyrings.alt
 
