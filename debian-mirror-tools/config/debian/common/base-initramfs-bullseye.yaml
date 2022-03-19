@@ -67,6 +67,7 @@ packages:
 - uuid-runtime
 - vim
 - watchdog
+- wget
 external-packages: []
 include-default-packages: '0'
 rootfs-pre-scripts:
