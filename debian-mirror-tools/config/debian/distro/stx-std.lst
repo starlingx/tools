@@ -151,6 +151,9 @@ controllerconfig
 #crictl
 crictl
 
+#debian-integration
+debian-integration
+
 #debian-release-config
 debian-release-config
 
