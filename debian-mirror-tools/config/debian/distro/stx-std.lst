@@ -417,6 +417,10 @@ lldpd
 logmgmt-wheels
 logmgmt
 
+#lsb
+lsb-base
+#lsb-release  # not used
+
 #mlnx-ofa_kernel
 mlnx-ofed-kernel-modules
 mlnx-ofed-kernel-utils
