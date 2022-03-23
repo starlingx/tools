@@ -667,6 +667,9 @@ puppet-module-puppetlabs-postgresql
 #puppetlabs-stdlib-5.0.0
 puppet-module-puppetlabs-stdlib
 
+#pxe-network-installer
+pxe-network-installer
+
 #python-aodhclient
 python-aodhclient-doc
 #python3-aodhclient-wheel  # not used in deployment
