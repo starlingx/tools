@@ -572,6 +572,7 @@ python3-platform-util
 playbookconfig
 
 #plugins
+bond-cni
 containernetworking-plugins
 #golang-github-containernetworking-plugins-dev  # not used
 
