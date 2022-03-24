@@ -279,3 +279,10 @@ get_from() {
     from=$(echo $base | rev | cut -d'_' -f1-1 | rev)
     echo $from
 }
+
+check_sha256sum() {
+    local file="${1}"
+    local sha256sum="${2}"
+
+    sha256sum "${file}" | cut -d' ' -f1 | grep -q -F -x "${sha256sum}"
+}

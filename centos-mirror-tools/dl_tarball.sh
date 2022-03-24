@@ -507,6 +507,53 @@ for line in $(cat $tarball_file); do
 
             popd >/dev/null # pushd "$directory_name"
             rm -rf "$directory_name"
+        elif [ "${tarball_name}" = "bcm_220.0.83.0.tar.gz" ]; then
+
+            # "${util}" is the expected sha256sum of the downloaded tar archive.
+            #
+            # Check if the file is already downloaded and if its sha256sum is
+            # correct.
+            if [ -f "${tarball_name}" ] && \
+                    ! check_sha256sum "${tarball_name}" "${util}"; then
+                # Incorrect checksum. Maybe the previous download attempt
+                # failed? Remove the file and attempt to re-download.
+                rm -f "${tarball_name}"
+            fi
+
+            if ! [ -f "${tarball_name}" ]; then
+                download_file --quiet "${tarball_url}" "${tarball_name}"
+                if [ $? -ne 0 ]; then
+                    echo "Warning: failed to download '${tarball_url}'"
+                    error_count=$((error_count + 1))
+                    popd > /dev/null   # pushd $output_tarball
+                    continue
+                fi
+
+                if ! check_sha256sum "${tarball_name}" "${util}"; then
+                    echo "Warning: incorrect sha256sum for '${tarball_url}'"
+                    error_count=$((error_count + 1))
+                    popd > /dev/null   # pushd $output_tarball
+                    continue
+                fi
+            fi
+
+            rm -rf "${directory_name}"
+
+            if ! tar -xf "${tarball_name}" || \
+                    ! cp "${directory_name}/Linux/Linux_Driver/netxtreme-bnxt_en-1.10.2-220.0.13.0.tar.gz" . || \
+                    ! cp "${directory_name}/Linux/KMP-RoCE-Lib/KMP/Redhat/rhel7.9/libbnxt_re-220.0.5.0-rhel7u9.src.rpm" . ; then
+                # Extraction failed. Remove the tar archive to allow another
+                # attempt.
+                rm -f "${tarball_name}"
+                echo "Warning: Could not extract '${tarball_name}' or could not find expected files."
+                error_count=$((error_count + 1))
+            fi
+
+            rm -rf "${directory_name}"
+
+            # We do not delete the original tar archive we just extracted from,
+            # so that it will not need to be downloaded again.
+            #   rm -f "${tarball_name}"
         fi
         popd > /dev/null # pushd $output_tarball
         continue
