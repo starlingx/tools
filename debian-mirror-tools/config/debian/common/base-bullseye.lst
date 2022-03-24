@@ -58,6 +58,7 @@ dosfstools  4.2-1
 dpkg  1.20.9
 e2fsprogs  1.46.2-2
 eject  2.36.1-8
+elfutils  0.183-1
 erlang-asn1  1:23.2.6+dfsg-1
 erlang-base  1:23.2.6+dfsg-1
 erlang-crypto  1:23.2.6+dfsg-1
@@ -148,6 +149,7 @@ libapt-pkg6.0  2.2.4
 libarchive13  3.4.3-2+b1
 libargon2-1  0~20171227-0.2
 libasan6  10.2.1-6
+libasm1  0.183-1
 libassuan0  2.5.3-7.1
 libatomic1  10.2.1-6
 libattr1  1:2.4.48-6
