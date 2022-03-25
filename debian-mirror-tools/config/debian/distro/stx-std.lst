@@ -575,6 +575,8 @@ platform-util-wheel
 platform-util
 python3-platform-util
 
+platform-kickstarts
+
 #playbookconfig
 playbookconfig
 
