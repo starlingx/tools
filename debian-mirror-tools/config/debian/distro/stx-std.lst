@@ -614,6 +614,9 @@ puppet-dnsmasq
 #puppet-drbd-0.5.2
 puppet-drbd
 
+#puppet-etcd-1.12.3
+puppet-module-cristifalcas-etcd
+
 #puppet-fm
 puppet-fm
 
