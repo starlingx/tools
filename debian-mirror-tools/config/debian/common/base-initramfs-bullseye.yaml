@@ -17,6 +17,7 @@ gpg:
     BOOT_GPG_NAME: SecureBootCore
     BOOT_GPG_PASSPHRASE: SecureCore
     BOOT_KEYS_DIR: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys
+    BOOT_GPG_KEY: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys/BOOT-GPG-PRIVKEY-SecureBootCore
 packages:
 - apt-utils
 - base-passwd

@@ -25,6 +25,14 @@ gpg:
     BOOT_GPG_NAME: SecureBootCore
     BOOT_GPG_PASSPHRASE: SecureCore
     BOOT_KEYS_DIR: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys
+    BOOT_GPG_KEY: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys/BOOT-GPG-PRIVKEY-SecureBootCore
+    BOOT_SINGED_SHIM: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64.efi
+    BOOT_SINGED_SHIMTOOL: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/mmx64.efi
+    BOOT_SINGED_GRUB: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/grubx64.efi
+    BOOT_EFITOOL: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/LockDown.efi
+    BOOT_GRUB_CFG: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/grub.cfg
+    BOOT_NOSIG_GRUB: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64-nosig.efi
+    EFI_SECURE_BOOT: disable
 packages: []
 external-packages: []
 include-default-packages: '0'
@@ -72,19 +80,6 @@ rootfs-post-scripts:
   # Allow root ssh login
   export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
   chroot $IMAGE_ROOTFS sed -i 's/^[#[:space:]]*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-- |-
-  # From appsdk
-  # Copy kernel images and grub-efi to deploydir
-  # Copy efi to rootfs
-  set -x
-  set -e
-  cp -rf $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/grub.cfg $DEPLOY_DIR/grub.cfg
-  cp -rf $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64.efi $DEPLOY_DIR/bootx64.efi
-  cp -rf $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64.efi $DEPLOY_DIR/grub-efi-bootx64.efi
-  cp -rf $OECORE_TARGET_SYSROOT/boot/efi $IMAGE_ROOTFS/boot/
-  cp -rf $IMAGE_ROOTFS/boot/*-amd64 $DEPLOY_DIR
-  KERNEL=`ls -t $DEPLOY_DIR/vmlinuz-*-amd64 | head -n 1`
-  ln -snf --relative $KERNEL  $DEPLOY_DIR/bzImage
 - |-
   # Setup the sysadmin user and force the user to change the password
   # on first login.
