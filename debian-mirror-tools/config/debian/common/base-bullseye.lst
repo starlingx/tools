@@ -19,7 +19,7 @@ bind9-libs 1:9.16.27-1~deb11u1
 binutils  2.35.2-2
 binutils-common  2.35.2-2
 binutils-x86-64-linux-gnu  2.35.2-2
-bsdextrautils  1:2.36.1-8+deb11u1
+bsdextrautils  2.36.1-8+deb11u1
 bsdutils  1:2.36.1-8+deb11u1
 busybox  1:1.30.1-6+b3
 bzip2  1.0.8-4
@@ -514,7 +514,7 @@ openrc 0.42-2.1
 openssh-client  1:8.4p1-5
 openssh-server  1:8.4p1-5
 openssh-sftp-server  1:8.4p1-5
-openssl  1.1.1k-1+deb11u2
+openssl  1.1.1n-0+deb11u1
 original-awk  2018-08-27-1
 passwd  1:4.8.1-1
 pci.ids  0.0~2021.02.08-1
