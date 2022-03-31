@@ -29,6 +29,7 @@ packages:
 - curl
 - dosfstools
 - e2fsprogs
+- efibootmgr
 - eject
 - fdisk
 - findutils
