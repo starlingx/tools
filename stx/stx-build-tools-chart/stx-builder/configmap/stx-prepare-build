@@ -17,11 +17,17 @@ if [[ x"$PROXY" == x"true" ]]; then
         ssh -D 8080 -qTfnN $HOSTUSERNAME@$PROXYSERVER
     fi
 
-    proxychains repo init -u https://opendev.org/starlingx/manifest -b $BUILD_BRANCH -m ${MANIFEST}
-    proxychains repo sync --force-sync
+    if [[ ! -f .repo-init-done ]] ; then
+        proxychains repo init -u https://opendev.org/starlingx/manifest -b $BUILD_BRANCH -m ${MANIFEST} && \
+        proxychains repo sync --force-sync && \
+        touch .repo-init-done
+    fi
 else
-    repo init -u https://opendev.org/starlingx/manifest -b $BUILD_BRANCH -m ${MANIFEST}
-    repo sync --force-sync
+    if [[ ! -f .repo-init-done ]] ; then
+        repo init -u https://opendev.org/starlingx/manifest -b $BUILD_BRANCH -m ${MANIFEST} && \
+        repo sync --force-sync && \
+        touch .repo-init-done
+    fi
 fi
 
 sudo apt-get update
