@@ -26,6 +26,7 @@ RUN apt-get -y update && apt-get --no-install-recommends -y install \
         bzip2 \
         procps \
         tini \
+        wget \
         locales-all \
         python3-yaml && \
         apt-get clean && \
@@ -35,7 +36,7 @@ RUN apt-get -y update && apt-get --no-install-recommends -y install \
 # Prepare executables
 COPY stx/toCOPY/lat-tool/lat/ /opt/LAT/lat
 # Prepare LAT SDK.
-ADD ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh /opt/LAT/AppSDK.sh
+RUN wget --quiet ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh --output-document=/opt/LAT/AppSDK.sh
 RUN chmod +x /opt/LAT/AppSDK.sh
 RUN /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y
 
