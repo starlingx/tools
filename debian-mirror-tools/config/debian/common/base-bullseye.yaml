@@ -32,7 +32,7 @@ gpg:
     BOOT_EFITOOL: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/LockDown.efi
     BOOT_GRUB_CFG: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/grub.cfg
     BOOT_NOSIG_GRUB: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64-nosig.efi
-    EFI_SECURE_BOOT: disable
+    EFI_SECURE_BOOT: enable
 packages: []
 external-packages: []
 include-default-packages: '0'
