@@ -16,6 +16,9 @@ barbican-keystone-listener
 barbican-worker
 python3-barbican
 
+# base-files-config
+base-files-config
+
 #base-passwd
 base-passwd-dbgsym
 base-passwd
