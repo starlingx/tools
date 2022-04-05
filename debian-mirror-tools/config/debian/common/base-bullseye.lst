@@ -355,6 +355,7 @@ libnsl2  1.3.0-2
 libnsl-dev  1.3.0-2
 libnspr4  2:4.29-1
 libnss3  2:3.61-1+deb11u2
+libnss-ldapd  0.9.11-1
 libnss-mdns 0.14.1-2
 liboath0  2.6.6-3
 libodbc1  2.3.6-0.1+b1
@@ -364,7 +365,7 @@ libopeniscsiusr  2.1.3-5
 libopts25  1:5.18.16-4
 libp11-kit0  0.23.22-1
 libpam0g  1.4.0-9+deb11u1
-libpam-ldap  186-4+b1
+libpam-ldapd  0.9.11-1
 libpam-modules  1.4.0-9+deb11u1
 libpam-modules-bin  1.4.0-9+deb11u1
 libpam-pwquality  1.4.4-1

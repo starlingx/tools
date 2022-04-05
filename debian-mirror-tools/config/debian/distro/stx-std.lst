@@ -515,6 +515,7 @@ slapd-dbgsym
 #slapd-smbk5pwd  # not used
 slapd
 #slapi-dev  # not used
+slapd-ppolicy-check-password
 
 #openldap-config
 openldap-config
