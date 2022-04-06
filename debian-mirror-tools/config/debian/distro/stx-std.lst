@@ -295,6 +295,9 @@ grub2
 grubby-dbgsym
 grubby
 
+#gui
+starlingx-dashboard
+
 #helm
 helm
 
