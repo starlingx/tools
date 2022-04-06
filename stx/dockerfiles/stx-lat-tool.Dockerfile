@@ -49,5 +49,7 @@ RUN sed -i 's/debian-initramfs-ostree-image/starlingx-initramfs-ostree-image/g' 
 # Fix: Align kernel with custom starlingx kernel
 RUN sed -i 's/linux-image-amd64/linux-image-5.10.0-6-amd64-unsigned/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
 
+RUN sed -i 's/Wind River Linux Graphics development .* ostree/StarlingX ostree/g' /opt/LAT/SDK/sysroots/corei7-64-wrs-linux/boot/efi/EFI/BOOT/grub.cfg
+
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/opt/LAT/lat/latd"]
