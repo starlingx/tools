@@ -8,6 +8,7 @@ proxyport = 8080
 buildbranch = master
 manifest = default.xml
 ostree_osname = debian
+debian_snapshot = http://snapshot.debian.org/archive/debian/20220331T000000Z
 
 [builder]
 uid = 1000

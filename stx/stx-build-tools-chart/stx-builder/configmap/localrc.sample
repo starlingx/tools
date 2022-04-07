@@ -55,4 +55,6 @@ export BUILDER_URL=http://@PROJECT@-stx-pkgbuilder:8080/pkgbuilder/
 
 export OSTREE_OSNAME=@OSTREE_OSNAME@
 
+export DEBIAN_SNAPSHOT=@DEBIAN_SNAPSHOT@
+
 export MAX_CPUS=@MAX_CPUS@
