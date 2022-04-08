@@ -8,6 +8,9 @@ armada
 #armada-helm-toolkit
 #armada-helm-toolkit  # only used for build
 
+#audit-config
+audit-config
+
 #barbican
 barbican-api
 barbican-common
