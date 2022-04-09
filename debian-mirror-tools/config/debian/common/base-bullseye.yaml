@@ -106,7 +106,7 @@ ostree:
   ostree_osname: debian
   ostree_skip_boot_diff: '2'
   ostree_remote_url: ''
-  ostree_extra_install_args: 'inststx=1'
+  ostree_install_device: '/dev/sda'
   OSTREE_GRUB_USER: root
   OSTREE_GRUB_PW_FILE: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys/ostree_grub_pw
   OSTREE_FDISK_BLM: 2506
@@ -139,7 +139,7 @@ iso-post-script: |
   mkdir -p pxeboot/pxelinux.cfg
 
   # 2.1 Kernel and initramfs
-  install -m 644 bzImage*  pxeboot
+  install -m 644 bzImage* pxeboot
   install -m 644 initrd* pxeboot
 
   # 2.2 Bootloader
@@ -171,7 +171,7 @@ iso-post-script: |
   BOOT_PARAMS="ks=http://pxecontroller:8080/feed/debian/kickstart/pxe-ks.cfg"
 
   # 2.3.4 Verbose installation
-  BOOT_PARAMS="${BOOT_PARAMS} instsh=2"
+  #BOOT_PARAMS="${BOOT_PARAMS} instsh=2"
 
   # 2.3.5 Update boot params
   sed -i "s#@BOOTPARAMS@#${BOOT_PARAMS}#g" \
@@ -207,10 +207,10 @@ iso-post-script: |
   # 3. ISO
   # 3.1 Edit grub.cfg and isolinux.cfg
   # 3.1.1 Configure local kickstart url
-  BOOT_PARAMS="ks=file:///kickstart/iso-ks.cfg"
+  BOOT_PARAMS="ks=file:///kickstart/kickstart.cfg"
 
   # 3.1.2 Verbose installation
-  BOOT_PARAMS="${BOOT_PARAMS} instsh=2"
+  #BOOT_PARAMS="${BOOT_PARAMS} instsh=2"
 
   # 3.1.3 Update boot params
   sed -i "s#instl=/ostree_repo#& ${BOOT_PARAMS}#g" \
