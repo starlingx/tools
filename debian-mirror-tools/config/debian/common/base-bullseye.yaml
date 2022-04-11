@@ -5,7 +5,6 @@ image_type:
 - iso
 - ostree-repo
 - ustart
-- pxe
 debootstrap-mirror: http://deb.debian.org/debian
 package_feeds: []
 package_type: external-debian
