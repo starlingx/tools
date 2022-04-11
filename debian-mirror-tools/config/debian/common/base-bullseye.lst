@@ -10,6 +10,10 @@ apparmor  2.13.6-10
 apt  2.2.4
 apt-utils  2.2.4
 augeas-lenses  1.12.0-2
+autoconf  2.69-14
+automake  1:1.16.3-2
+autopoint  0.21-4
+autotools-dev  20180224.1+nmu1
 avahi-daemon  0.8-5
 base-files  11.1+deb11u3
 bash-completion  1:2.11-2
@@ -19,6 +23,7 @@ bind9-libs  1:9.16.27-1~deb11u1
 binutils  2.35.2-2
 binutils-common  2.35.2-2
 binutils-x86-64-linux-gnu  2.35.2-2
+bison  2:3.7.5+dfsg-1
 bsdextrautils  2.36.1-8+deb11u1
 bsdutils  1:2.36.1-8+deb11u1
 busybox  1:1.30.1-6+b3
@@ -32,6 +37,7 @@ conntrack  1:1.4.6-2
 conntrackd  1:1.4.6-2
 coreutils  8.32-4+b1
 cpio  2.13+dfsg-4
+cpp  4:10.2.1-1
 cpp-10  10.2.1-6
 cracklib-runtime  2.9.6-3.4
 cron  3.0pl1-137
@@ -45,8 +51,11 @@ dconf-gsettings-backend  0.38.0-2
 dconf-service  0.38.0-2
 debconf  1.5.77
 debconf-i18n  1.5.77
+debhelper  13.3.4
 debian-archive-keyring  2021.1.1
 debianutils  4.11.2
+dh-autoreconf  20
+dh-strip-nondeterminism  1.12.0-1
 diffutils  1:3.7-5
 dirmngr  2.2.27-2+deb11u1
 dmeventd  2:1.02.175-2.1
@@ -58,6 +67,8 @@ docker.io  20.10.5+dfsg1-1+deb11u1
 docutils-common  0.16+dfsg-4
 dosfstools  4.2-1
 dpkg  1.20.9
+dpkg-dev  1.20.9
+dwz  0.13+20210201-1
 e2fsprogs  1.46.2-2
 eject  2.36.1-8+deb11u1
 elfutils  0.183-1
@@ -83,6 +94,7 @@ expect  5.45.4-2+b1
 fdisk  2.36.1-8+deb11u1
 file  1:5.39-3
 findutils  4.8.0-1
+flex  2.6.4-8
 fontconfig  2.13.1-4.2
 fontconfig-config  2.13.1-4.2
 fonts-dejavu-core  2.37-2
@@ -92,12 +104,14 @@ fonts-materialdesignicons-webfont  1.6.50-3
 fonts-roboto-fontface  0.5.0-3
 freeipmi-common  1.6.6-4+deb11u1
 gawk  1:5.1.0-1
+gcc  4:10.2.1-1
 gcc-10  10.2.1-6
 gcc-10-base  10.2.1-6
 gcc-9-base  9.3.0-22
 gdisk  1.0.6-1.1
 genisoimage  9:1.1.11-3.2
 gettext-base  0.21-4
+gettext  0.21-4
 gir1.2-glib-2.0  1.66.1-1+b1
 glib-networking  2.66.0-2
 glib-networking-common  2.66.0-2
@@ -133,6 +147,7 @@ initramfs-tools-core  0.140
 initscripts  2.96-7+deb11u1
 insserv  1.21.0-1.1
 install-info  6.7.0.dfsg.2-6
+intltool-debian  0.35.0+20060710.5
 iperf3  3.9-1
 ipmitool  1.8.18-10.1
 iproute2  5.10.0-4
@@ -141,6 +156,7 @@ iptables-persistent  1.0.15
 iputils-arping  3:20210202-1
 iputils-ping  3:20210202-1
 kbd  2.3.0-3
+kernel-wedge  2.104
 keyutils  1.6.1-2
 klibc-utils  2.0.8-6.1
 kmod  28-1
@@ -155,6 +171,7 @@ libaprutil1-dbd-sqlite3  1.6.1-5
 libaprutil1-ldap  1.6.1-5
 libapt-pkg6.0  2.2.4
 libarchive13  3.4.3-2+deb11u1
+libarchive-zip-perl  1.68-1
 libargon2-1  0~20171227-0.2
 libasan6  10.2.1-6
 libasm1  0.183-1
@@ -218,6 +235,7 @@ libdbi1  0.9.0-6
 libdbus-1-3  1.12.20-2
 libdconf1  0.38.0-2
 libdebconfclient0  0.260
+libdebhelper-perl  13.3.4
 libdebian-installer4  0.121
 libdevmapper-event1.02.1  2:1.02.175-2.1
 libdevmapper1.02.1  2:1.02.175-2.1
@@ -225,12 +243,14 @@ libdnf2  0.55.2-6
 libdnf2-common  0.55.2-6
 libdns-export1110  1:9.11.19+dfsg-2.1
 libdouble-conversion3  3.1.5-6.1
+libdpkg-perl  1.20.9
 libdw1  0.183-1
 libedit2  3.1-20191231-2+b1
 libefiboot1  37-6
 libefivar1  37-6
 libeinfo1  0.42-2.1
 libelf1  0.183-1
+libelf-dev  0.183-1
 libestr0  0.1.10-2.1+b1
 libevent-2.1-7  2.1.12-stable-1
 libexpat1  2.2.10-2+deb11u3
@@ -241,6 +261,7 @@ libfastjson4  0.99.9-1
 libfdisk1  2.36.1-8+deb11u1
 libffi7  3.3-6
 libfido2-1  1.6.0-2
+libfile-stripnondeterminism-perl  1.12.0-1
 libfontconfig1  2.13.1-4.2
 libfreeipmi17  1.6.6-4+deb11u1
 libfreetype6  2.10.4+dfsg-1
@@ -456,8 +477,10 @@ libsqlite3-0  3.34.1-3
 libss2  1.46.2-2
 libssh2-1  1.9.0-2
 libssl1.1  1.1.1n-0+deb11u1
+libssl-dev  1.1.1n-0+deb11u1
 libstdc++6  10.2.1-6
 libstonith1  1.0.12-20
+libsub-override-perl  0.09-2
 libtasn1-6  4.16.0-2
 libtcl8.6  8.6.11+dfsg-1
 libtcmalloc-minimal4  2.8.1-1
@@ -473,6 +496,7 @@ libtinfo6  6.2+20201114-2
 libtirpc-common  1.3.1-1
 libtirpc-dev  1.3.1-1
 libtirpc3  1.3.1-1
+libtool  2.4.6-15
 libtsan0  10.2.1-6
 libubsan1  10.2.1-6
 libuchardet0  0.0.7-1
@@ -511,7 +535,9 @@ logrotate  3.18.0-2
 logsave  1.46.2-2
 lsof  4.93.2+dfsg-1.1
 lvm2  2.03.11-2.1
+m4  1.4.18-5
 mailcap  3.69
+make  4.3-4.1
 man-db  2.9.4-2
 mariadb-common  1:10.5.15-0+deb11u1
 mawk  1.3.4.20200120-2
@@ -544,6 +570,7 @@ openssh-sftp-server  1:8.4p1-5
 openssl  1.1.1n-0+deb11u1
 original-awk  2018-08-27-1
 passwd  1:4.8.1-1
+patch  2.7.6-7
 pci.ids  0.0~2021.02.08-1
 pciutils  1:3.7.0-5
 perl  5.32.1-4+deb11u2
@@ -551,6 +578,7 @@ perl-base  5.32.1-4+deb11u2
 perl-modules-5.32  5.32.1-4+deb11u2
 pinentry-curses  1.1.0-4
 pipexec  2.5.5-2+b1
+po-debconf  1.0.21+nmu1
 policykit-1  0.105-31+deb11u1
 postgresql-13  13.5-0+deb11u1
 postgresql-client-13  13.5-0+deb11u1
@@ -926,5 +954,6 @@ xfsprogs  5.10.0-4
 xml-core  0.18+nmu1
 xmlsec1  1.2.31-1
 xxd  2:8.2.2434-3+deb11u1
+xz-utils  5.2.5-2
 zlib1g  1:1.2.11.dfsg-2
 zlib1g-dev  1:1.2.11.dfsg-2

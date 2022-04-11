@@ -343,7 +343,7 @@ linux-compiler-gcc-10-x86
 #linux-cpupower  # not used
 linux-headers-5.10.0-6-amd64
 linux-headers-5.10.0-6-common
-#linux-image-5.10.0-6-amd64-dbg  # not used
+linux-image-5.10.0-6-amd64-dbg
 linux-image-5.10.0-6-amd64-unsigned
 #linux-image-amd64-dbg  # not used
 #linux-image-amd64-signed-template  # not used
@@ -353,7 +353,7 @@ linux-libc-dev
 #linux-perf-5.10-dbgsym  # not used
 #linux-perf-5.10  # not used
 #linux-perf  # not used
-#linux-source-5.10  # not used
+linux-source-5.10
 #linux-source  # not used
 #linux-support-5.10.0-6  # not used
 #usbip-dbgsym  # not used
@@ -369,6 +369,10 @@ python3-keyrings.alt
 keystone-doc
 keystone
 python3-keystone
+
+#kpatch-0.9.5
+kpatch
+kpatch-build
 
 #kubernetes-1.21.8
 kubernetes-1.21.8-client
