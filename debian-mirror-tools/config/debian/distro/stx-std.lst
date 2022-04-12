@@ -228,6 +228,9 @@ facter
 libfacter3.14.12-dbgsym
 libfacter3.14.12
 
+#filesystem-scripts
+filesystem-scripts
+
 #fm-api
 python3-fm-api
 
@@ -297,6 +300,10 @@ grubby
 
 #gui
 starlingx-dashboard
+
+#haproxy-config
+haproxy
+haproxy-config
 
 #helm
 helm
