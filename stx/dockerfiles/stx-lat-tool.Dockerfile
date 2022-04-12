@@ -33,6 +33,9 @@ RUN apt-get -y update && apt-get --no-install-recommends -y install \
         rm -rf /var/lib/apt/lists/* && \
         mkdir -p /opt/LAT/SDK
 
+# Insert pubkey of the package repository
+COPY stx/toCOPY/builder/pubkey.rsa /opt/LAT/
+
 # Prepare executables
 COPY stx/toCOPY/lat-tool/lat/ /opt/LAT/lat
 # Prepare LAT SDK.
