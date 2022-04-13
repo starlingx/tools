@@ -135,6 +135,9 @@ cgts-client
 resource-agents-dbgsym
 resource-agents
 
+#collectd
+collectd-extensions
+
 #collector
 collector
 
@@ -374,6 +377,10 @@ python3-keystone
 kpatch
 kpatch-build
 
+#kubernetes monitoring
+kube-cpusets
+kube-memory
+
 #kubernetes-1.21.8
 kubernetes-1.21.8-client
 kubernetes-1.21.8-kubeadm
@@ -437,6 +444,9 @@ logmgmt
 lsb-base
 #lsb-release  # not used
 
+#memcached-custom
+memcached-custom
+
 #mlnx-ofa_kernel
 mlnx-ofed-kernel-modules
 mlnx-ofed-kernel-utils
@@ -446,6 +456,9 @@ mlnx-ofed-kernel-utils
 
 #monitor-helm-elastic
 #monitor-helm-elastic  # only used for build
+
+#monitor-tools
+monitor-tools
 
 #mtce
 mtce-dbgsym
@@ -505,6 +518,9 @@ nfv-wheels
 nova-api-proxy-wheels
 nova-api-proxy
 
+#ntp-config
+ntp-config
+
 #oidc-auth-tools
 #python3-oidcauthtools-wheels  # installed by app framework
 #python3-oidcauthtools  # not used
@@ -526,6 +542,9 @@ slapd-ppolicy-check-password
 
 #openldap-config
 openldap-config
+
+#openssh-config
+openssh-config
 
 #openstack-helm
 #openstack-helm  # only used for build
