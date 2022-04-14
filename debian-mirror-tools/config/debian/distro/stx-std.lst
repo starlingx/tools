@@ -211,8 +211,8 @@ docker-registry
 drbd-utils-dbgsym
 drbd-utils
 
-#enable-dev-patch
-#enable-dev-patch  # not used in deployment
+#enable-dev-patch (not used in deployment)
+enable-dev-patch
 
 #etcd
 etcd-client
