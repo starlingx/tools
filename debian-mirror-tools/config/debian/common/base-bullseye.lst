@@ -76,7 +76,7 @@ erlang-syntax-tools  1:23.2.6+dfsg-1
 erlang-tftp  1:23.2.6+dfsg-1
 erlang-tools  1:23.2.6+dfsg-1
 erlang-xmerl  1:23.2.6+dfsg-1
-ethtool  5.9-1
+ethtool  1:5.9-1
 expect  5.45.4-2+b1
 fdisk  2.36.1-8+deb11u1
 file  1:5.39-3
