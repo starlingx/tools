@@ -322,6 +322,9 @@ igb-uio
 #intel-opae-fpga
 kmod-opae-fpga-driver
 
+#iptables-config
+iptables-config
+
 #isolcpus-device-plugin
 isolcpus-device-plugin-dbgsym
 isolcpus-device-plugin
