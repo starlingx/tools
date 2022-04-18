@@ -23,6 +23,7 @@ packages:
 - base-passwd
 - bash
 - bc
+- bnxt-en
 - busybox
 - bzip2
 - ca-certificates
