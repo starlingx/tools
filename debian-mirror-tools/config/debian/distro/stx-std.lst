@@ -866,6 +866,9 @@ rdmacm-utils
 srptools-dbgsym
 srptools
 
+#mstflint
+mstflint
+
 #registry-token-server
 registry-token-server
 
