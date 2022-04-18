@@ -87,6 +87,7 @@ class HandleControlTask:
         deblist = self.config.get('repomgr', 'deblist')
         dsclist = self.config.get('repomgr', 'dsclist')
         ostree_osname = self.config.get('project', 'ostree_osname')
+        debian_snapshot = self.config.get('project', 'debian_snapshot')
         if sourceslist:
             if not (deblist or dsclist):
                 self.logger.warning('*************************************\
@@ -159,6 +160,7 @@ stx-pkgbuilder/configmap/')
                 line = line.replace("@CENGNURL@", cengnurl)
                 line = line.replace("@CENGNSTRATEGY@", cengnstrategy)
                 line = line.replace("@OSTREE_OSNAME@", ostree_osname)
+                line = line.replace("@DEBIAN_SNAPSHOT@", debian_snapshot)
                 line = line.replace("@MAX_CPUS@", max_cpus)
                 if sourceslist:
                     line = line.replace("@fetch@", "true")
