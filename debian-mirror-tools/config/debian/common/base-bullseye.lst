@@ -59,6 +59,7 @@ docutils-common  0.16+dfsg-4
 dosfstools  4.2-1
 dpkg  1.20.9
 e2fsprogs  1.46.2-2
+efibootmgr  17-1
 eject  2.36.1-8+deb11u1
 elfutils  0.183-1
 erlang-asn1  1:23.2.6+dfsg-1

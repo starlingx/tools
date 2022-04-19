@@ -4,8 +4,7 @@ machine: intel-x86-64
 image_type:
 - initramfs
 debootstrap-mirror: http://deb.debian.org/debian
-package_feeds:
-- deb http://deb.debian.org/debian bullseye main contrib
+package_feeds: []
 package_type: external-debian
 gpg:
   gpg_path: /tmp/.lat_gnupg_root
