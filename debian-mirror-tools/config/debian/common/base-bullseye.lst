@@ -132,7 +132,6 @@ groff-base  1.22.4-6
 gsettings-desktop-schemas  3.38.0-2
 gunicorn  20.1.0-1
 gzip  1.10-4
-haproxy  2.2.9-2+deb11u3
 hdparm  9.60+ds-1
 hiera  3.2.0-2.1
 hostname  3.23
