@@ -17,6 +17,11 @@ Initialize StarlingX build environment & (re-)start builder pods
 
      --rebuild    build pod images instead of downloading them
 
+     --cache      allow docker to use its filesystem cache (with --rebuild)
+                    CAUTION: this option may not pick up all the changes to
+                             docker source files and is meant for debugging
+                             the build scripts.
+
 END
 }
 
@@ -43,6 +48,7 @@ BUILD_DOCKER=0
 DELETE_ENV=0
 RESTART_MINIKUBE=0
 CLEAN_CONFIG=0
+USE_DOCKER_CACHE=0
 
 minikube_started() {
     docker ps | grep kicbase | grep -q $MINIKUBENAME
@@ -74,7 +80,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild,nuke -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild,cache,nuke -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -92,6 +98,10 @@ while true ; do
             ;;
         --rebuild)
             BUILD_DOCKER=1
+            shift
+            ;;
+        --cache)
+            USE_DOCKER_CACHE=1
             shift
             ;;
         --nuke)
@@ -242,8 +252,12 @@ fi
 # Build container images
 if [[ $BUILD_DOCKER -eq 1 ]] ; then
     notice "Building docker images"
+    declare -a docker_build_args
+    if [[ "$USE_DOCKER_CACHE" != "1" ]] ; then
+        docker_build_args+=("--no-cache")
+    fi
     for img in $DOCKER_IMAGES; do
-        docker build --no-cache -t $img:$DOCKER_TAG_LOCAL -f stx/dockerfiles/$img.Dockerfile . || exit 1
+        docker build "${docker_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f stx/dockerfiles/$img.Dockerfile . || exit 1
     done
 # else: download and retag
 else
