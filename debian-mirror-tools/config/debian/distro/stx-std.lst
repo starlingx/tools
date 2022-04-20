@@ -381,6 +381,9 @@ kubernetes-unversioned
 #ldapscripts
 ldapscripts
 
+#logrotate-config
+logrotate-config
+
 #libfdt
 libfdt-dbgsym
 libfdt
