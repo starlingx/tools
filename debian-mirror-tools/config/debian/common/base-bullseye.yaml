@@ -85,9 +85,6 @@ rootfs-post-scripts:
   chroot $IMAGE_ROOTFS chage -d 0 sysadmin
   chroot $IMAGE_ROOTFS passwd -l root
 - |-
-  # FIXME: Temporary - Centos kickstarts set initial view of this file
-  echo "localhost" > $IMAGE_ROOTFS/etc/hostname
-- |-
   # FIXME: Temporary - Anaconda/kickstarts set up initial view of /etc/fstab
   mkdir -p $IMAGE_ROOTFS/opt/platform-backup
   mkdir -p $IMAGE_ROOTFS/scratch
