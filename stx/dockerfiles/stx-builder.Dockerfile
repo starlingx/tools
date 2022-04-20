@@ -82,3 +82,8 @@ COPY stx/toCOPY/builder/buildrc /root/
 
 COPY stx/toCOPY/builder/pubkey.rsa /root
 RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa
+
+# Add vimrc
+RUN mkdir -p /etc/vim
+COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+RUN chmod 0644 /etc/vim/vimrc.local

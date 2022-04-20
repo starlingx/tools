@@ -59,6 +59,11 @@ COPY stx/toCOPY/pkgbuilder/debbuilder.conf /etc/sbuild/sbuild.conf
 COPY stx/toCOPY/pkgbuilder/pubkey.rsa /root
 RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa
 
+# Add vimrc
+RUN mkdir -p /etc/vim
+COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+RUN chmod 0644 /etc/vim/vimrc.local
+
 ENTRYPOINT ["/usr/bin/tini", "--"]
 WORKDIR /opt
 CMD ["python3", "app.py"]

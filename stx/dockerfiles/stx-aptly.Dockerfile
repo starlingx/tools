@@ -70,6 +70,11 @@ COPY stx/toCOPY/aptly/privkey.rsa /root
 RUN gpg --import --pinentry-mode loopback --batch --passphrase starlingx /root/privkey.rsa && \
     rm -f /root/privkey.rsa
 
+# Add vimrc
+RUN mkdir -p /etc/vim
+COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+RUN chmod 0644 /etc/vim/vimrc.local
+
 # Configure startup
 COPY stx/toCOPY/aptly/entrypoint.sh /bin/entrypoint.sh
 ENTRYPOINT [ "/bin/entrypoint.sh" ]

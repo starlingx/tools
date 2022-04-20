@@ -51,5 +51,10 @@ RUN sed -i 's/linux-image-amd64/linux-image-5.10.0-6-amd64-unsigned/g' /opt/LAT/
 
 RUN sed -i 's/Wind River Linux Graphics development .* ostree/StarlingX ostree/g' /opt/LAT/SDK/sysroots/corei7-64-wrs-linux/boot/efi/EFI/BOOT/grub.cfg
 
+# Add vimrc
+RUN mkdir /etc/vim
+COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+RUN chmod 0644 /etc/vim/vimrc.local
+
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/opt/LAT/lat/latd"]
