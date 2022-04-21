@@ -54,14 +54,11 @@ rootfs-pre-scripts:
   groupadd nobody
   SCRIPT_ENDOF
 - |-
-  # FIXME: Temporary - Centos kickstarts set initial view of this file
+  # FIXME: openstack-dashboard will not install without this due to
+  # FileNotFoundError: [Errno 2] No such file or directory: '/etc/platform/platform.conf'
+  # dpkg: error processing package openstack-dashboard (--configure):
   mkdir -p -m 0775 $IMAGE_ROOTFS/etc/platform
   cat << SCRIPT_ENDOF > $IMAGE_ROOTFS/etc/platform/platform.conf
-  nodetype=controller
-  subfunction=controller,worker
-  system_type=All-in-one
-  security_profile=standard
-  management_interface=lo
   SCRIPT_ENDOF
 rootfs-post-scripts:
 - |-
