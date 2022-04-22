@@ -50,6 +50,11 @@ fullnameOverride: ""
 
 podAnnotations: {}
 
+dnsConfig:
+  options:
+    - name: ndots
+      value: "1"
+
 podSecurityContext: {}
 # fsGroup: 2000
 
