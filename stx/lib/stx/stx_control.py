@@ -100,6 +100,7 @@ class HandleControlTask:
             '/' + \
             self.config.get('project', 'debian_snapshot_timestamp')
         debian_distribution = self.config.get('project', 'debian_distribution')
+        debian_version = self.config.get('project', 'debian_version')
         if sourceslist:
             if not (deblist or dsclist):
                 self.logger.warning('*************************************\
@@ -173,6 +174,7 @@ stx-pkgbuilder/configmap/')
                 line = line.replace("@DEBIAN_SNAPSHOT@", debian_snapshot)
                 line = line.replace("@DEBIAN_SECURITY_SNAPSHOT@", debian_security_snapshot)
                 line = line.replace("@DEBIAN_DISTRIBUTION@", debian_distribution)
+                line = line.replace("@DEBIAN_VERSION@", debian_version)
                 line = line.replace("@MAX_CPUS@", max_cpus)
                 if sourceslist:
                     line = line.replace("@fetch@", "true")

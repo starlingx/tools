@@ -9,6 +9,7 @@ buildbranch = master
 manifest = default.xml
 ostree_osname = debian
 debian_distribution = bullseye
+debian_version = 11.3
 
 # These URLs must contain snapshots of debian & debian-security repos.
 # We will append debian_snapshot_timestamp to each of them when creating

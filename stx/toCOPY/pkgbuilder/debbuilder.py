@@ -22,7 +22,7 @@ BUILD_ENGINE = 'sbuild'
 DEBDIST = 'bullseye'
 STX_LOCALRC = '/usr/local/bin/stx/stx-localrc'
 SBUILD_CONF = '/etc/sbuild/sbuild.conf'
-ENVIRON_VARS = ['OSTREE_OSNAME']
+ENVIRON_VARS = ['OSTREE_OSNAME', 'CENGNURL', 'DEBIAN_DISTRIBUTION', 'DEBIAN_VERSION']
 
 
 class Debbuilder:
@@ -77,7 +77,7 @@ class Debbuilder:
             process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                        universal_newlines=True, shell=True)
             outs, errs = process.communicate()
-            value = outs.strip().split("\n")[0]
+            value = outs.strip().split("\n")[0].strip('"')
             if value:
                 cmd = "sed -ie 's#@%s@#%s#g' %s" % (var, value, SBUILD_CONF)
                 process = subprocess.Popen(cmd, shell=True, stdout=self.ctlog, stderr=self.ctlog)
