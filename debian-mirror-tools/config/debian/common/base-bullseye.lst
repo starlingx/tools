@@ -219,6 +219,7 @@ libcc1-0  10.2.1-6
 libcom-err2  1.46.2-2
 libcomps0  0.1.15-4
 libcpp-hocon0.3.0  0.3.0-1+b2
+libcpupower1  5.10.106-1
 libcrack2  2.9.6-3.4
 libcrypt-dev  1:4.4.18-4
 libcrypt1  1:4.4.18-4
@@ -527,6 +528,7 @@ libz3-4  4.8.10-1
 libzmq5  4.3.4-1
 libzstd1  1.4.8+dfsg-2.1
 linux-base  4.6
+linux-cpupower  5.10.106-1
 locales  2.31-13+deb11u3
 locales-all  2.31-13+deb11u3
 login  1:4.8.1-1
