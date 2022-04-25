@@ -69,7 +69,7 @@ task.\t\teg: [start|enter|stop|status|upgrade]')
 
         config_subparser = subparsers.add_parser('config',
                                                  help='Change stx config \
-settings.\t\teg: [ --show|--get|--add|--unset|--remove-section ]')
+settings.\t\teg: [ --show|--get|--add|--unset|--remove-section|--upgrade ]')
         config_subparser.add_argument('--show',
                                       help='Show all the content of the config\
                                       file\n\n', action='store_true')
@@ -89,6 +89,9 @@ settings.\t\teg: [ --show|--get|--add|--unset|--remove-section ]')
                                       help='Remove the section from the \
                                       config file.\n\n', nargs=1,
                                       required=False)
+        config_subparser.add_argument('--upgrade',
+                                      help='Upgrade stx.conf',
+                                      action='store_true')
         config_subparser.set_defaults(handle=self.handleconfig.handleConfig)
 
         build_subparser = subparsers.add_parser('build',

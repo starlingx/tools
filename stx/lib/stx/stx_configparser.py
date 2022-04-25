@@ -124,6 +124,23 @@ class STXConfigParser:
     def syncConfigFile(self):
         self.cf.write(open(self.configpath, "w"))
 
+    def upgradeConfigFile(self):
+        ref_config_path = os.path.join(os.environ['PRJDIR'], "stx.conf.sample")
+        ref_config = configparser.ConfigParser()
+        ref_config.read(ref_config_path, encoding="utf-8")
+        for section_name, data in ref_config.items():
+            if section_name == 'DEFAULT':
+                ref_options = ref_config.defaults()
+            else:
+                ref_options = ref_config.options(section_name)
+                if not self.cf.has_section(section_name):
+                    self.cf.add_section(section_name)
+            for key in ref_options:
+                value = ref_config.get(section_name, key, raw=True)
+                if not self.cf.has_option(section_name, key):
+                    self.cf.set(section_name, key, value)
+        self.syncConfigFile()
+
 
 class HandleConfigTask:
     '''Handle the task for the config sub-command'''
@@ -187,6 +204,9 @@ class HandleConfigTask:
 
         elif args.show is True:
             self.handleShow()
+
+        elif args.upgrade:
+            self.stxconfig.upgradeConfigFile()
 
         else:
             print(helper.help_config())
