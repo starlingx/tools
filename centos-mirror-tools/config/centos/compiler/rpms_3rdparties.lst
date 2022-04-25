@@ -1,5 +1,3 @@
-# expat-2.1.0-12.el7.x86_64.rpm provided by mock
-expat-devel-2.1.0-12.el7.x86_64.rpm#http://mirror.centos.org/centos/7/os/x86_64/Packages/expat-devel-2.1.0-12.el7.x86_64.rpm
 # glib2-2.56.1-7.el7.x86_64.rpm provided by mock
 kernel-headers-4.18.0-147.3.1.el8_1.x86_64.rpm#http://mirror.centos.org/centos/8.1.1911/BaseOS/x86_64/os/Packages/kernel-headers-4.18.0-147.3.1.el8_1.x86_64.rpm
 libpng-1.5.13-8.el7.x86_64.rpm#http://mirror.centos.org/centos/7/os/x86_64/Packages/libpng-1.5.13-8.el7.x86_64.rpm
