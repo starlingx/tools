@@ -15,7 +15,8 @@ Initialize StarlingX build environment & (re-)start builder pods
   -R,--restart-minikube
                   restart minikube cluster before starting pods
 
-     --rebuild    build pod images instead of downloading them
+     --rebuild[=IMG,...]
+                  build specified pod images instead of downloading them
 
      --cache      allow docker to use its filesystem cache (with --rebuild)
                     CAUTION: this option may not pick up all the changes to
@@ -80,7 +81,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild,cache,nuke -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild::,cache,nuke -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -97,8 +98,24 @@ while true ; do
             shift
             ;;
         --rebuild)
-            BUILD_DOCKER=1
-            shift
+            if [[ -n "$2" ]] ; then
+                for img in $(echo "$2" | sed 's/,,*/ /g') ; do
+                    img_ok=no
+                    for known_img in $DOCKER_IMAGES ; do
+                        if [[ "$img" == "$known_img" || "stx-$img" == "$known_img" ]] ; then
+                            BUILD_DOCKER_IMAGES+="$known_img "
+                            img_ok=yes
+                            break
+                        fi
+                    done
+                    if [[ $img_ok != yes ]] ; then
+                        cmdline_error "invalid image \"$img\""
+                    fi
+                done
+            else
+                BUILD_DOCKER_IMAGES="$DOCKER_IMAGES"
+            fi
+            shift 2
             ;;
         --cache)
             USE_DOCKER_CACHE=1
@@ -249,20 +266,36 @@ elif [ "$STX_PLATFORM" = "kubernetes" ]; then
     fi
 fi
 
-# Build container images
-if [[ $BUILD_DOCKER -eq 1 ]] ; then
+# Build docker images
+if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     notice "Building docker images"
     declare -a docker_build_args
     if [[ "$USE_DOCKER_CACHE" != "1" ]] ; then
         docker_build_args+=("--no-cache")
     fi
-    for img in $DOCKER_IMAGES; do
+    for img in $BUILD_DOCKER_IMAGES; do
         docker build "${docker_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f stx/dockerfiles/$img.Dockerfile . || exit 1
     done
-# else: download and retag
-else
+fi
+
+# Pull images that we didn't rebuild
+PULL_DOCKER_IMAGES=$(
+    for img in ${DOCKER_IMAGES} ; do
+        found=no
+        for build_img in ${BUILD_DOCKER_IMAGES} ; do
+            if [[ "$img" == "$build_img" ]] ; then
+                found=yes
+                break
+            fi
+        done
+        if [[ "$found" != "yes" ]] ; then
+            echo "$img"
+        fi
+    done
+)
+if [[ -n "$PULL_DOCKER_IMAGES" ]] ; then
     notice "Pulling docker images"
-    for img in $DOCKER_IMAGES; do
+    for img in $PULL_DOCKER_IMAGES; do
         docker pull ${DOCKER_PREFIX}${img}:${DOCKER_TAG} || exit 1
         docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL} || exit 1
     done
