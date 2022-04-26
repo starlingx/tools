@@ -271,6 +271,7 @@ fi
 # Restart pods
 notice "Restarting pods"
 stx control stop || exit 1
+stx config --upgrade || exit 1
 stx control start || exit 1
 
 notice "Run 'stx control status' to check the pod startup status"
