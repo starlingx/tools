@@ -24,6 +24,11 @@ services:
     type: ClusterIP
     port: 2375
 
+dnsConfig:
+  options:
+    - name: ndots
+      value: "1"
+
 insecureRegistries:
 #  - "registry.address:port"
 

@@ -43,6 +43,9 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 
+      dnsConfig:
+        {{- toYaml .Values.dnsConfig | nindent 8 }}
+
       volumes:
       - name: {{ .Values.volumes.name }}
         hostPath:
