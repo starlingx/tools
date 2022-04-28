@@ -85,13 +85,10 @@ rootfs-post-scripts:
   chroot $IMAGE_ROOTFS chage -d 0 sysadmin
   chroot $IMAGE_ROOTFS passwd -l root
 - |-
-  # FIXME: Temporary - Anaconda/kickstarts set up initial view of /etc/fstab
-  mkdir -p $IMAGE_ROOTFS/opt/platform-backup
-  mkdir -p $IMAGE_ROOTFS/scratch
-  mkdir -p $IMAGE_ROOTFS/var/log
-  echo -e "LABEL=platform_backup\t/opt/platform-backup\text4\tdefaults\t1 2" >> $IMAGE_ROOTFS/etc/fstab
-  echo -e "/dev/mapper/cgts--vg-scratch--lv\t/scratch\text4\tdefaults\t1 2" >> $IMAGE_ROOTFS/etc/fstab
-  echo -e "/dev/mapper/cgts--vg-log--lv\t/var/log\text4\tdefaults\t1 2" >> $IMAGE_ROOTFS/etc/fstab
+  # FIXME: OSTree will not set up a link to scratch automagically. Need to
+  # relocate scratch to a more ostree friendly locale
+  mkdir $IMAGE_ROOTFS/var/rootdirs/scratch
+  ln -snf --relative $IMAGE_ROOTFS/var/rootdirs/scratch $IMAGE_ROOTFS/scratch
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
