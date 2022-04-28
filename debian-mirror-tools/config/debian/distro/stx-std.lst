@@ -1054,6 +1054,9 @@ trident-installer
 tsconfig-wheel
 tsconfig
 
+#tuned
+tuned-config
+
 #update-motd
 update-motd
 
