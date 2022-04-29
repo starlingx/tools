@@ -1058,7 +1058,7 @@ tsconfig-wheel
 tsconfig
 
 #tuned
-tuned-config
+#tuned-config
 
 #update-motd
 update-motd
