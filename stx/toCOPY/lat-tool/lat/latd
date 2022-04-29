@@ -60,9 +60,13 @@ class LATD(object):
             # record the message into history
             msg_hist = CHANNEL_DIR + "/client_message_history"
             record_message(msg_hist, message)
+            self.workspace_dir = message['workdir']
+            logger.info("Set work directory to %s" % self.workspace_dir)
             if message['action'] == 'build':
                 msg_latd = {}
                 msg_latd['action'] = 'build'
+                cmd = 'rm -f log/log.appsdk'
+                subprocess.check_call(cmd, shell=True, cwd=self.workspace_dir)
 
                 if 'yaml_file' in message:
                     yaml_file = message['yaml_file']

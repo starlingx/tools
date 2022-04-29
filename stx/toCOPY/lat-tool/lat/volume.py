@@ -25,10 +25,10 @@ import yaml
 
 logger = logging.getLogger('latd.volume')
 
-workspace_dir = "/localdisk" if 'WORKSPACE_DIR' not in os.environ \
+workspace_dir = "/localdisk/lat" if 'WORKSPACE_DIR' not in os.environ \
                 else os.environ['WORKSPACE_DIR']
 
-channel_dir = workspace_dir + "/channel"
+channel_dir = "/localdisk/channel"
 
 client_message_watch_file = channel_dir + "/c-2-s.done"
 client_message_content_file = channel_dir + "/c-2-s.msg"
