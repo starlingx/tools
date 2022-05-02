@@ -52,6 +52,7 @@ packages:
 - libostree-1-1=2019.1-1
 - linux-image-5.10.0-6-amd64-unsigned
 - mdadm
+- mlnx-ofed-kernel-modules
 - mount
 - mttyexec
 - ostree-boot=2019.1-1
