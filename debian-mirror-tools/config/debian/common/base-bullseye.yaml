@@ -106,6 +106,9 @@ ostree:
   OSTREE_FDISK_VSZ: 20480
   OSTREE_FDISK_FSZ: 32
   OSTREE_CONSOLE: console=ttyS0,115200 console=tty1
+debootstrap-key: ''
+apt-keys:
+- /opt/LAT/pubkey.rsa
 iso-post-script: |
   cd ${ISO_DIR}
 

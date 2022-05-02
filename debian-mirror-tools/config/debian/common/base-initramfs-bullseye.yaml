@@ -97,3 +97,6 @@ rootfs-post-scripts:
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
+debootstrap-key: ''
+apt-keys:
+- /opt/LAT/pubkey.rsa
