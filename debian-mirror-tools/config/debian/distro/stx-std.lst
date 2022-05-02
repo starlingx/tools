@@ -35,6 +35,9 @@ bash-static-dbgsym
 bash-static
 bash
 
+# bnxt_en - Broadcom kernel modules
+bnxt-en
+
 #build-info
 #build-info-dev  # not used
 build-info
@@ -344,6 +347,9 @@ isolcpus-device-plugin
 
 #k8s-pod-recovery
 k8s-pod-recovery
+
+# libbnxt_re - Broadcom Infiniband verbs library
+libbnxt-re
 
 #kernel-std
 #bpftool-dbgsym  # not used
