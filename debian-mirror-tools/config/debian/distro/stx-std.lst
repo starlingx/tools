@@ -614,9 +614,6 @@ parted
 #python3-patch-alarm-wheels  # not used in deployment
 python3-patch-alarm
 
-#pci-irq-affinity-agent
-pci-irq-affinity-agent
-
 #pf-bb-config
 pf-bb-config
 
