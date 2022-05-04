@@ -178,6 +178,7 @@ erlang-xmerl-18.3.4.4-2.el7.x86_64.rpm
 ethtool-4.8-9.el7.x86_64.rpm
 eventlog-0.2.13-4.el7.x86_64.rpm
 eventlog-devel-0.2.13-4.el7.x86_64.rpm
+# expat-2.1.0-14.el7_9.x86_64.rpm provided by mock
 expect-5.45-14.el7_1.x86_64.rpm
 fcgi-2.4.0-25.el7.x86_64.rpm
 fcgi-devel-2.4.0-25.el7.x86_64.rpm
