@@ -36,6 +36,8 @@ class HandleControlTask:
         self.k8s = KubeHelper(config)
         self.projectname = self.config.get('project', 'name')
         self.logger = logging.getLogger('STX-Control')
+        self.abs_helmchartdir = os.path.join(os.environ['PRJDIR'],
+                                             helmchartdir)
         utils.set_logger(self.logger)
 
     def configurePulp(self):
@@ -106,8 +108,7 @@ when sourceslist is enabled!!!')
  please modify the value with config command!!!')
             sys.exit(1)
 
-        builder_chartfile = os.path.join(os.environ['PRJDIR'],
-                                         helmchartdir, 'Chart.yaml')
+        builder_chartfile = os.path.join(self.abs_helmchartdir, 'Chart.yaml')
         cmd = 'sed -i -e "s:aptly:%s:g" %s' % (repomgr_type, builder_chartfile)
         self.logger.debug('Write the repomgr type [%s] to the chart file \
 with the command [%s]', repomgr_type, cmd)
@@ -120,11 +121,10 @@ with the command [%s]', repomgr_type, cmd)
 
         # os.system(cmd)
 
-        builderhelmchartdir = os.path.join(os.environ['PRJDIR'], helmchartdir)
-        configmap_dir = os.path.join(builderhelmchartdir, 'configmap/')
+        configmap_dir = os.path.join(self.abs_helmchartdir, 'configmap/')
         self.logger.debug('builder localrc file is located at %s',
                           configmap_dir)
-        pkgbuilder_configmap_dir = os.path.join(builderhelmchartdir,
+        pkgbuilder_configmap_dir = os.path.join(self.abs_helmchartdir,
                                                 'dependency_chart/\
 stx-pkgbuilder/configmap/')
         self.logger.debug('pkgbuilder localrc file is located at %s',
@@ -181,14 +181,15 @@ stx-pkgbuilder/configmap/')
         os.system(cmd)
 
         # Update the dependency charts
-        cmd = 'helm dependency update ' + helmchartdir
+        cmd = 'helm dependency update ' + self.abs_helmchartdir
         self.logger.debug('Dependency build command: %s', cmd)
         subprocess.call(cmd, shell=True)
 
         return repomgr_type
 
     def handleStartTask(self, projectname):
-        cmd = self.config.helm() + ' install ' + projectname + ' ' + helmchartdir \
+        cmd = self.config.helm() + ' install ' + projectname + ' ' \
+            + self.abs_helmchartdir \
             + ' --set global.image.tag=' + self.config.docker_tag
 
         if not self.config.use_minikube:
@@ -224,7 +225,8 @@ stx-pkgbuilder/configmap/')
         self.finish_configure()
         helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
-            cmd = self.config.helm() + ' upgrade ' + projectname + ' ' + helmchartdir
+            cmd = self.config.helm() + ' upgrade ' + projectname + ' ' \
+                + self.abs_helmchartdir
             self.logger.debug('Execute the upgrade command: %s', cmd)
             subprocess.call(cmd, shell=True, cwd=os.environ['PRJDIR'])
         else:
