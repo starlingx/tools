@@ -596,8 +596,7 @@ openstack-resource-agents
 #ostree-upgrade-mgr
 #ostree-upgrade-mgr  # only used for build
 
-#pam-config
-#pam-config  # integration issue
+pam-config
 
 #parted
 #libparted-dev  # not used
