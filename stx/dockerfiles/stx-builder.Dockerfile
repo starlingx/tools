@@ -22,37 +22,49 @@ RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/source
     echo "deb http://deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
 
 # Download required dependencies by mirror/build processes.
-RUN     apt-get update && apt-get install --no-install-recommends -y \
-        sudo \
-        ssh \
-        git \
-        wget \
-        curl \
-        vim \
-        rpm2cpio \
-        cpio \
-        python3 \
-        python3-yaml \
-        python3-pip \
-        xz-utils \
-        file \
+RUN apt-get update && apt-get install --no-install-recommends -y \
         bzip2 \
-        dnsutils \
-        locales-all \
-        python3-apt \
-        dpkg-dev \
-        git-buildpackage \
-        fakeroot \
-        pristine-tar \
-        less \
-        repo \
-        libdistro-info-perl \
+        cpio \
+        curl \
         debian-keyring \
+        dnsutils \
+        dpkg-dev \
+        fakeroot \
+        file \
+        git \
+        git-buildpackage \
+        less \
+        libdistro-info-perl \
+        locales-all \
+        pristine-tar \
+        proxychains \
+        python3 \
+        python3-apt \
+        python3-pip \
+        python3-yaml \
+        repo \
+        rpm2cpio \
+        ssh \
+        sudo \
         unzip \
-        proxychains && \
-        apt-get clean && \
-        rm -rf /var/lib/apt/lists/* && \
-        pip3 install \
+        vim \
+        wget \
+        xz-utils \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# 3rd party apt repositories
+# docker-cli
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+    echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y docker-ce-cli
+
+# Python modules
+RUN pip3 --no-cache-dir install \
         gitpython \
         requests \
         python-debian \
@@ -60,20 +72,13 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         pulp_deb_client \
         pulp_file_client \
         progressbar \
-        git+https://github.com/masselstine/aptly-api-client.git && \
-        sed -i '/^proxy_dns*/d' /etc/proxychains.conf && \
-        sed -i 's/^socks4.*/socks5 127.0.0.1 8080/g' /etc/proxychains.conf && \
-        ln -sf /usr/local/bin/stx/stx-localrc /root/localrc && \
-        echo '. /usr/local/bin/finishSetup.sh' >> /root/.bashrc
+        git+https://github.com/masselstine/aptly-api-client.git
 
-# 3rd party apt repositories
-# docker-cli
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
-    echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-  apt-get update && \
-  apt-get install --no-install-recommends -y docker-ce-cli
+# Misc files
+RUN sed -i '/^proxy_dns*/d' /etc/proxychains.conf && \
+    sed -i 's/^socks4.*/socks5 127.0.0.1 8080/g' /etc/proxychains.conf && \
+    ln -sf /usr/local/bin/stx/stx-localrc /root/localrc && \
+    echo '. /usr/local/bin/finishSetup.sh' >> /root/.bashrc
 
 COPY stx/toCOPY/lat-tool/lat /opt/LAT/lat
 COPY stx/toCOPY/builder/finishSetup.sh /usr/local/bin
