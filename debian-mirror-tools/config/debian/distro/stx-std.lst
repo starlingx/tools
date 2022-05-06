@@ -722,6 +722,9 @@ puppet-module-nanliu-staging
 #puppet-sysinv
 puppet-sysinv
 
+#puppetlabs-firewall-1.12.0
+puppet-module-puppetlabs-firewall
+
 #puppetlabs-haproxy-2.1.0
 puppet-module-puppetlabs-haproxy
 
