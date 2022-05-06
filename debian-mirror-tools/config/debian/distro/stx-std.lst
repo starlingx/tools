@@ -868,6 +868,9 @@ python3-wsme
 python3-pkg-resources
 python3-setuptools
 
+#python-siteconfig
+python-siteconfig
+
 #qat17
 qat1.7.l-dbgsym
 qat1.7.l
