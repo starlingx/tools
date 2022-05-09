@@ -175,6 +175,7 @@ iso-post-script: |
   # 2.3.6 Add `Boot from hard drive' entry to grub.cfg
   cat <<ENDOF>> pxeboot/EFI/BOOT/grub.cfg
 
+  export skip_check_cfg
   menuentry 'UEFI Boot from hard drive' {
       search --set=root --label otaefi
       configfile /efi/boot/grub.cfg
@@ -222,6 +223,8 @@ iso-post-script: |
                              --passphrase-fd 0 \
                              EFI/BOOT/grub.cfg
   fi
+multiple-kernels: vmlinuz-*-amd64
+default-kernel: vmlinuz-*-amd64
 system:
 - contains:
   - /localdisk/deploy/lat-initramfs.yaml
