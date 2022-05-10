@@ -112,8 +112,8 @@ gcc-10-base  10.2.1-6
 gcc-9-base  9.3.0-22
 gdisk  1.0.6-1.1
 genisoimage  9:1.1.11-3.2
-gettext-base  0.21-4
 gettext  0.21-4
+gettext-base  0.21-4
 gir1.2-glib-2.0  1.66.1-1+b1
 glib-networking  2.66.0-2
 glib-networking-common  2.66.0-2
@@ -161,6 +161,7 @@ kernel-wedge  2.104
 keyutils  1.6.1-2
 klibc-utils  2.0.8-6.1
 kmod  28-1
+kpartx  0.8.5-2
 less  551-2
 libacl1  2.2.53-10
 libaio1  0.3.112-9
@@ -171,8 +172,8 @@ libaprutil1  1.6.1-5
 libaprutil1-dbd-sqlite3  1.6.1-5
 libaprutil1-ldap  1.6.1-5
 libapt-pkg6.0  2.2.4
-libarchive13  3.4.3-2+deb11u1
 libarchive-zip-perl  1.68-1
+libarchive13  3.4.3-2+deb11u1
 libargon2-1  0~20171227-0.2
 libasan6  10.2.1-6
 libasm1  0.183-1
@@ -252,8 +253,8 @@ libedit2  3.1-20191231-2+b1
 libefiboot1  37-6
 libefivar1  37-6
 libeinfo1  0.42-2.1
-libelf1  0.183-1
 libelf-dev  0.183-1
+libelf1  0.183-1
 libestr0  0.1.10-2.1+b1
 libevent-2.1-7  2.1.12-stable-1
 libexpat1  2.2.10-2+deb11u3
@@ -466,6 +467,7 @@ libsemanage1  3.1-1+b2
 libsensors-config  1:3.6.0-7
 libsensors5  1:3.6.0-7
 libsepol1  3.1-1
+libsgutils2-2  1.45-1
 libsigsegv2  2.13-1
 libslang2  2.3.2-5
 libsm6  2:1.2.3-1
@@ -480,8 +482,8 @@ libsoup2.4-1  2.72.0-2
 libsqlite3-0  3.34.1-3
 libss2  1.46.2-2
 libssh2-1  1.9.0-2
-libssl1.1  1.1.1n-0+deb11u1
 libssl-dev  1.1.1n-0+deb11u1
+libssl1.1  1.1.1n-0+deb11u1
 libstdc++6  10.2.1-6
 libstonith1  1.0.12-20
 libsub-override-perl  0.09-2
@@ -506,6 +508,7 @@ libubsan1  10.2.1-6
 libuchardet0  0.0.7-1
 libunistring2  0.9.10-4
 libunwind8  1.3.2-2
+liburcu6  0.12.2-1
 libuuid1  2.36.1-8+deb11u1
 libuv1  1.40.0-2
 libwrap0  7.6.q-31
@@ -552,6 +555,7 @@ memcached  1.6.9+dfsg-1
 mime-support  3.66
 mksh  59c-9+b2
 mount  2.36.1-8+deb11u1
+multipath-tools  0.8.5-2
 mysql-common  5.8+1.0.7
 nano  5.4-2
 ncat  7.91+dfsg1+really7.80+dfsg1-2
@@ -916,6 +920,8 @@ rubygems-integration  1.18
 runit-helper  2.10.3
 sed  4.7-1
 sensible-utils  0.0.14
+sg3-utils  1.45-1
+sg3-utils-udev  1.45-1
 sgml-base  1.30
 smartmontools  7.2-1
 socat  1.7.4.1-3
