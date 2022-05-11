@@ -8,6 +8,9 @@ armada
 #armada-helm-toolkit
 #armada-helm-toolkit  # only used for build
 
+#audit-config
+audit-config
+
 #barbican
 barbican-api
 barbican-common
@@ -31,6 +34,10 @@ bash-doc
 bash-static-dbgsym
 bash-static
 bash
+
+# bnxt_en - Broadcom kernel modules
+bnxt-en-rt
+
 
 #build-info
 #build-info-dev  # not used
@@ -135,6 +142,9 @@ cgts-client
 resource-agents-dbgsym
 resource-agents
 
+#collectd
+collectd-extensions
+
 #collector
 collector
 
@@ -211,9 +221,6 @@ docker-registry
 drbd-utils-dbgsym
 drbd-utils
 
-#enable-dev-patch
-#enable-dev-patch  # not used in deployment
-
 #etcd
 etcd-client
 etcd-server-dbgsym
@@ -227,6 +234,9 @@ facter-dbgsym
 facter
 libfacter3.14.12-dbgsym
 libfacter3.14.12
+
+#filesystem-scripts
+filesystem-scripts
 
 #fm-api
 python3-fm-api
@@ -298,6 +308,10 @@ grubby
 #gui
 starlingx-dashboard
 
+#haproxy-config
+haproxy
+haproxy-config
+
 #helm
 helm
 
@@ -322,12 +336,18 @@ igb-uio-rt
 #intel-opae-fpga
 kmod-opae-fpga-driver-rt
 
+#iptables-config
+iptables-config
+
 #isolcpus-device-plugin
 isolcpus-device-plugin-dbgsym
 isolcpus-device-plugin
 
 #k8s-pod-recovery
 k8s-pod-recovery
+
+# libbnxt_re - Broadcom Infiniband verbs library
+libbnxt-re
 
 #kernel-std
 #bpftool-dbgsym  # not used
@@ -343,7 +363,7 @@ linux-compiler-gcc-10-x86
 #linux-cpupower  # not used
 linux-rt-headers-5.10.0-6-amd64
 linux-rt-headers-5.10.0-6-common
-#linux-image-5.10.0-6-amd64-dbg  # not used
+linux-rt-image-5.10.0-6-amd64-dbg
 linux-rt-image-5.10.0-6-amd64-unsigned
 #linux-image-amd64-dbg  # not used
 #linux-image-amd64-signed-template  # not used
@@ -353,7 +373,7 @@ linux-libc-dev
 #linux-perf-5.10-dbgsym  # not used
 #linux-perf-5.10  # not used
 #linux-perf  # not used
-#linux-source-5.10  # not used
+linux-rt-source-5.10
 #linux-source  # not used
 #linux-support-5.10.0-6  # not used
 #usbip-dbgsym  # not used
@@ -370,6 +390,10 @@ keystone-doc
 keystone
 python3-keystone
 
+#kubernetes monitoring
+kube-cpusets
+kube-memory
+
 #kubernetes-1.21.8
 kubernetes-1.21.8-client
 kubernetes-1.21.8-kubeadm
@@ -383,6 +407,9 @@ kubernetes-unversioned
 
 #ldapscripts
 ldapscripts
+
+#logrotate-config
+logrotate-config
 
 #libfdt
 libfdt-dbgsym
@@ -433,6 +460,9 @@ logmgmt
 lsb-base
 #lsb-release  # not used
 
+#memcached-custom
+memcached-custom
+
 #mlnx-ofa_kernel
 mlnx-ofed-kernel-modules-rt
 mlnx-ofed-kernel-utils-rt
@@ -442,6 +472,9 @@ mlnx-ofed-kernel-utils-rt
 
 #monitor-helm-elastic
 #monitor-helm-elastic  # only used for build
+
+#monitor-tools
+monitor-tools
 
 #mtce
 mtce-dbgsym
@@ -501,6 +534,9 @@ nfv-wheels
 nova-api-proxy-wheels
 nova-api-proxy
 
+#ntp-config
+ntp-config
+
 #oidc-auth-tools
 #python3-oidcauthtools-wheels  # installed by app framework
 #python3-oidcauthtools  # not used
@@ -522,6 +558,9 @@ slapd-ppolicy-check-password
 
 #openldap-config
 openldap-config
+
+#openssh-config
+openssh-config
 
 #openstack-helm
 #openstack-helm  # only used for build
@@ -823,6 +862,9 @@ python3-wsme
 python3-pkg-resources
 python3-setuptools
 
+#python-siteconfig
+python-siteconfig
+
 #qat17
 qat1.7.l-rt-dbgsym
 qat1.7.l-rt
@@ -865,6 +907,9 @@ rdmacm-utils-dbgsym
 rdmacm-utils
 srptools-dbgsym
 srptools
+
+#mstflint
+mstflint
 
 #registry-token-server
 registry-token-server
@@ -1017,6 +1062,9 @@ trident-installer
 #tsconfig
 tsconfig-wheel
 tsconfig
+
+#tuned
+tuned-config
 
 #update-motd
 update-motd
