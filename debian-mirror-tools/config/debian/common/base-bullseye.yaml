@@ -4,7 +4,6 @@ machine: intel-x86-64
 image_type:
 - iso
 - ostree-repo
-- ustart
 debootstrap-mirror: http://deb.debian.org/debian
 package_feeds: []
 package_type: external-debian
