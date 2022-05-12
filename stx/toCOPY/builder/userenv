@@ -45,7 +45,7 @@ To build all packages:
     build-pkgs -a | build-pkgs -p <packageA,packageB...>
 
 To make image:
-    build-image [ -t std|rt ]
+    build-image [ --std|--rt ]
 
 EOF
 fi

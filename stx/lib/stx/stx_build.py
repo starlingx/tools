@@ -43,7 +43,14 @@ class HandleBuildTask:
                 self.logger.error('Please use "stx build -h" to show the help')
                 sys.exit(1)
 
-            cmd = prefixcmd + '"build-image -t ' + args.buildtype + '"\''
+            if args.buildtype == 'std':
+                build_type_opt = "--std"
+            elif args.buildtype == 'rt':
+                build_type_opt = "--rt"
+            else:
+                build_type_opt = ''
+
+            cmd = prefixcmd + '"build-image ' + build_type_opt + '"\''
         else:
             cmd = prefixcmd + '"build-image"\''
 
@@ -101,6 +108,9 @@ class HandleBuildTask:
         if args.force:
             cmd = cmd + '--clean_mirror '
 
+        if args.buildtype:
+            cmd = cmd + f'-B {args.buildtype} '
+
         cmd = cmd + '"\''
         return cmd
 
@@ -119,6 +129,9 @@ class HandleBuildTask:
 
         if args.enable_test:
             cmd = cmd + '--test '
+
+        if args.buildtype:
+            cmd = cmd + f'-b {args.buildtype} '
 
         cmd = cmd + '"\''
         return cmd
