@@ -41,6 +41,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         python3 \
         python3-apt \
         python3-pip \
+        python3-ruamel.yaml \
         python3-yaml \
         repo \
         rpm2cpio \
