@@ -671,6 +671,9 @@ puppet-fm
 #puppet-keystone-17.4.0
 puppet-module-keystone
 
+#puppet-module-horizon-17.4.0
+puppet-module-horizon
+
 #puppet-ldap
 puppet-ldap
 
