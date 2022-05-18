@@ -343,6 +343,12 @@ iptables-config
 isolcpus-device-plugin-dbgsym
 isolcpus-device-plugin
 
+#istio-helm
+#istio-helm  # only used for build
+
+#kiali-helm
+#kiali-helm  # only used for build
+
 #k8s-pod-recovery
 k8s-pod-recovery
 
@@ -786,6 +792,10 @@ python3-ironicclient
 #python3-k8sapp-cert-manager-wheels  # installed by app framework
 #python3-k8sapp-cert-manager  # not used
 
+#python-k8sapp-istio
+#python3-k8sapp-istio-wheels  # installed by app framework
+#python3-k8sapp-istio  # not used
+
 #python-k8sapp-nginx-ingress-controller
 #python3-k8sapp-nginx-ingress-controller-wheels  # installed by app framework
 #python3-k8sapp-nginx-ingress-controller  # not used
@@ -973,6 +983,9 @@ stx-cert-manager-helm
 
 #stx-extensions
 stx-extensions
+
+#stx-istio-helm
+stx-istio-helm
 
 #stx-metrics-server-helm
 stx-metrics-server-helm
