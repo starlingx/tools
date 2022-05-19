@@ -40,8 +40,11 @@ packages:
 - grub2
 - gzip
 - iavf
+- iavf-rt
 - ice
+- ice-rt
 - i40e
+- i40e-rt
 - ifupdown
 - initramfs-ostree
 - iproute2
@@ -51,8 +54,10 @@ packages:
 - kmod
 - libostree-1-1=2019.1-1
 - linux-image-5.10.0-6-amd64-unsigned
+- linux-rt-image-5.10.0-6-rt-amd64-unsigned
 - mdadm
 - mlnx-ofed-kernel-modules
+- mlnx-ofed-kernel-modules-rt
 - mount
 - mttyexec
 - ostree-boot=2019.1-1
