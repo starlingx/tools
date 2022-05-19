@@ -20,6 +20,7 @@ from stx import stx_build  # pylint: disable=E0611
 from stx import stx_configparser  # pylint: disable=E0611
 from stx import stx_control  # pylint: disable=E0611
 from stx import stx_repomgr  # pylint: disable=E0611
+from stx import stx_shell  # pylint: disable=E0611
 from stx import utils  # pylint: disable=E0611
 
 logger = logging.getLogger('STX')
@@ -39,6 +40,7 @@ class CommandLine:
         self.handlecontrol = stx_control.HandleControlTask(self.config)
         self.handlebuild = stx_build.HandleBuildTask(self.config)
         self.handlerepomgr = stx_repomgr.HandleRepomgrTask(self.config)
+        self.handleshell = stx_shell.HandleShellTask(self.config)
         self.parser = self.parseCommandLine()
 
     def parseCommandLine(self):
@@ -157,6 +159,25 @@ remove_repo|search_pkg|upload_pkg|delete_pkg ]')
         parser.add_argument('-v', '--version',
                             help='Stx build tools version\n\n',
                             action='version', version='%(prog)s 1.0.0')
+
+        shell_subparser = subparsers.add_parser(
+            'shell',
+            help='Run a shell command or start an interactive shell')
+        shell_subparser.add_argument(
+            '-c', '--command',
+            help='Shell snippet to execute inside a container. If omitted ' +
+                 'start a shell that reads commands from STDIN.')
+        shell_subparser.add_argument(
+            '--no-tty',
+            help="Disable terminal emulation for STDIN and start shell in " +
+                 "non-interactive mode, even if STDIN is a TTY",
+            action='store_const', const=True)
+        shell_subparser.add_argument(
+            '--container',
+            metavar='builder|pkgbuilder|lat|repomgr|docker',
+            help='Container name (default: builder)')
+        shell_subparser.set_defaults(handle=self.handleshell.cmd_shell)
+
         return parser
 
     def parseArgs(self):
