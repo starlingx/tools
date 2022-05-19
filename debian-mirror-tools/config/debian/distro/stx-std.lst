@@ -111,7 +111,6 @@ radosgw
 #rbd-nbd  # not used
 
 #ceph-manager
-#ceph-manager-wheels  # not used in deployment
 ceph-manager
 
 #cert-alarm
@@ -130,7 +129,6 @@ cgcs-patch
 python3-cgcs-patch
 
 #cgts-client
-cgts-client-wheel
 cgts-client
 
 #chartmuseum
@@ -157,7 +155,6 @@ containerd
 #golang-github-containerd-containerd-dev  # not used
 
 #controllerconfig
-controllerconfig-wheels
 controllerconfig
 
 #crictl
@@ -194,11 +191,9 @@ distributedcloud-dccommon
 distributedcloud-dcdbsync
 distributedcloud-dcmanager
 distributedcloud-dcorch
-distributedcloud-wheels
 
 #distributedcloud-client
 distributedcloud-client-dcmanagerclient
-distributedcloud-client-wheels
 
 #dnsmasq
 #dnsmasq-base-lua  # not used
@@ -465,7 +460,6 @@ lldpd-dbgsym
 lldpd
 
 #logmgmt
-logmgmt-wheels
 logmgmt
 
 #lsb
@@ -540,17 +534,14 @@ nfv-common
 nfv-plugins
 nfv-tools
 nfv-vim
-nfv-wheels
 
 #nova-api-proxy
-nova-api-proxy-wheels
 nova-api-proxy
 
 #ntp-config
 ntp-config
 
 #oidc-auth-tools
-#python3-oidcauthtools-wheels  # installed by app framework
 #python3-oidcauthtools  # not used
 
 #openldap
@@ -616,7 +607,6 @@ parted-doc
 parted
 
 #patch-alarm
-#python3-patch-alarm-wheels  # not used in deployment
 python3-patch-alarm
 
 #pf-bb-config
@@ -625,7 +615,6 @@ pf-bb-config
 #platform-util
 platform-util-controller
 platform-util-noncontroller
-platform-util-wheel
 platform-util
 python3-platform-util
 
@@ -745,11 +734,9 @@ pxe-network-installer
 
 #python-aodhclient
 python-aodhclient-doc
-#python3-aodhclient-wheel  # not used in deployment
 python3-aodhclient
 
 #python-barbicanclient
-#python3-barbicanclient-wheel  # not used in deployment
 python3-barbicanclient
 
 #python-cephclient
@@ -766,16 +753,13 @@ python3-fmclient
 
 #python-glanceclient
 python-glanceclient-doc
-#python3-glanceclient-wheel  # not used in deployment
 python3-glanceclient
 
 #python-gnocchiclient
 python-gnocchiclient-doc
-#python3-gnocchiclient-wheel  # not used in deployment
 python3-gnocchiclient
 
 #python-heatclient
-#python3-heatclient-wheel  # not used in deployment
 python3-heatclient
 
 #python-horizon
@@ -786,51 +770,39 @@ python3-django-horizon
 
 #python-ironicclient
 python-ironicclient-doc
-#python3-ironicclient-wheel  # not used in deployment
 python3-ironicclient
 
 #python-k8sapp-auditd
-#python3-k8sapp-auditd-wheels  # installed by app framework
 #python3-k8sapp-auditd  # not used
 
 #python-k8sapp-cert-manager
-#python3-k8sapp-cert-manager-wheels  # installed by app framework
 #python3-k8sapp-cert-manager  # not used
 
 #python-k8sapp-istio
-#python3-k8sapp-istio-wheels  # installed by app framework
 #python3-k8sapp-istio  # not used
 
 #python-k8sapp-nginx-ingress-controller
-#python3-k8sapp-nginx-ingress-controller-wheels  # installed by app framework
 #python3-k8sapp-nginx-ingress-controller  # not used
 
 #python-k8sapp-oidc
-#python3-k8sapp-oidc-wheels  # installed by app framework
 #python3-k8sapp-oidc  # not used
 
 #python-k8sapp-openstack
-#python3-k8sapp-openstack-wheels  # installed by app framework
 #python3-k8sapp-openstack  # not used
 
 #python-k8sapp-platform
-#python3-k8sapp-platform-wheels  # installed by app framework
 #python3-k8sapp-platform  # not used
 
 #python-k8sapp-portieris
-#python3-k8sapp-portieris-wheels  # installed by app framework
 #python3-k8sapp-portieris  # not used
 
 #python-k8sapp-ptp-notification
-#python3-k8sapp-ptp-notification-wheels  # installed by app framework
 #python3-k8sapp-ptp-notification  # not used
 
 #python-k8sapp-snmp
-#python3-k8sapp-snmp-wheels  # installed by app framework
 #python3-k8sapp-snmp  # not used
 
 #python-k8sapp-vault
-#python3-k8sapp-vault-wheels  # installed by app framework
 #python3-k8sapp-vault  # not used
 
 #python-keyring
@@ -838,26 +810,21 @@ python3-keyring
 
 #python-keystoneclient
 python-keystoneclient-doc
-#python3-keystoneclient-wheel  # not used in deployment
 python3-keystoneclient
 
 #python-neutronclient
-#python3-neutronclient-wheel  # not used in deployment
 python3-neutronclient
 
 #python-novaclient
 python-novaclient-doc
-#python3-novaclient-wheel  # not used in deployment
 python3-novaclient
 
 #python-openstackclient
 python-openstackclient-doc
-#python3-openstackclient-wheel  # not used in deployment
 python3-openstackclient
 
 #python-openstacksdk
 python-openstacksdk-doc
-#python3-openstacksdk-wheel  # not used in deployment
 python3-openstacksdk
 
 #python-osc-lib
@@ -869,7 +836,6 @@ python3-oslo.messaging
 
 #python-pankoclient
 python-pankoclient-doc
-#python3-pankoclient-wheel  # not used in deployment
 python3-pankoclient
 
 #python-wsme
@@ -941,15 +907,12 @@ runc-dbgsym
 runc
 
 #service-mgmt-api
-sm-api-wheels
 sm-api
 
 #service-mgmt-client
-sm-client-wheels
 sm-client
 
 #service-mgmt-tools
-sm-tools-wheels
 sm-tools
 
 #shadow-utils-config
@@ -1029,7 +992,6 @@ stx-vault-helm
 sudo-config
 
 #sysinv
-sysinv-wheels
 sysinv
 
 #sysinv-agent
@@ -1081,7 +1043,6 @@ systemd-config
 trident-installer
 
 #tsconfig
-tsconfig-wheel
 tsconfig
 
 #tuned
