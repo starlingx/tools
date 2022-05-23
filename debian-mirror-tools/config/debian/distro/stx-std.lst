@@ -884,7 +884,6 @@ python3-setuptools
 python-siteconfig
 
 #qat17
-qat1.7.l-dbgsym
 qat1.7.l
 
 #rabbitmq-server
