@@ -523,6 +523,9 @@ mtce-storage
 #mttyexec-dbgsym  # not used
 #mttyexec  # only used for build
 
+#multus-config
+multus-config
+
 #namespace-utils
 namespace-utils-dbgsym
 namespace-utils
