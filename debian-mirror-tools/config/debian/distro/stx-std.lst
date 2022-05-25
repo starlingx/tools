@@ -341,6 +341,9 @@ kmod-opae-fpga-driver
 #iptables-config
 iptables-config
 
+#iscsi-initiator-utils-config
+iscsi-initiator-utils-config
+
 #isolcpus-device-plugin
 isolcpus-device-plugin-dbgsym
 isolcpus-device-plugin
