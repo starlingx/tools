@@ -537,6 +537,9 @@ net-tools
 #nfscheck
 nfscheck
 
+#nfs-utils-config
+nfs-utils-config
+
 #nfv
 nfv-client
 nfv-common
