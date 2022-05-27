@@ -352,6 +352,9 @@ isolcpus-device-plugin
 #k8s-pod-recovery
 k8s-pod-recovery
 
+#k8s-cni-cache-cleanup
+k8s-cni-cache-cleanup
+
 # libbnxt_re - Broadcom Infiniband verbs library
 libbnxt-re
 
