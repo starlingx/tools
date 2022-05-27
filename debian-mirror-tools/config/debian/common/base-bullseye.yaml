@@ -108,8 +108,66 @@ ostree:
 debootstrap-key: ''
 apt-keys:
 - /opt/LAT/pubkey.rsa
+iso-grub-entry: |
+  menuentry "UEFI All-in-one Controller Configuration" --unrestricted {
+    set fallback=1
+    efi-watchdog enable 0 180
+    linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
+    initrd @INITRD@
+  }
+
+  menuentry "UEFI Standard Controller Configuration" --unrestricted {
+    set fallback=1
+    efi-watchdog enable 0 180
+    linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
+    initrd @INITRD@
+  }
+
+  menuentry "UEFI All-in-one (lowlatency) Controller Configuration" --unrestricted {
+    set fallback=1
+    efi-watchdog enable 0 180
+    linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime
+    initrd @INITRD@
+  }
+
+iso-syslinux-entry: |
+  LABEL 0
+    menu label ^All-in-one Controller Configuration
+    kernel /bzImage-std
+    ipappend 2
+    append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
+
+  LABEL 1
+    menu label ^Standard Controller Configuration
+    kernel /bzImage-std
+    ipappend 2
+    append initrd=@INITRD@ %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
+
+  LABEL 2
+    menu label ^All-in-one (lowlatency) Controller Configuration
+    kernel /bzImage-rt
+    ipappend 2
+    append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64
+
 iso-post-script: |
   cd ${ISO_DIR}
+
+  # 0. Prepare
+  # According to `multiple-kernels' in lat yaml, install std
+  # or rt kernel to ISO
+  for k in ${OSTREE_MULTIPLE_KERNELS}; do
+    if [ "${k%%-rt-amd64}" != "${k}" ]; then
+      cp ${DEPLOY_DIR_IMAGE}/${k} bzImage-rt
+      if [ -e ${DEPLOY_DIR_IMAGE}/${k}.sig ]; then
+        cp ${DEPLOY_DIR_IMAGE}/${k}.sig bzImage-rt.sig
+      fi
+    else
+      cp ${DEPLOY_DIR_IMAGE}/${k} bzImage-std
+      if [ -e ${DEPLOY_DIR_IMAGE}/${k}.sig ]; then
+        cp ${DEPLOY_DIR_IMAGE}/${k}.sig bzImage-std.sig
+      fi
+    fi
+  done
 
   # 1. Kickstart
   mkdir -p kickstart
@@ -210,6 +268,21 @@ iso-post-script: |
   sed -i "s#instl=/ostree_repo#& ${BOOT_PARAMS}#g" \
     EFI/BOOT/grub.cfg \
     isolinux/isolinux.cfg
+
+  # According to `default-kernel' in lat yaml, set which
+  # bootloader menu entry to boot
+  if [ "${OSTREE_DEFAULT_KERNEL%%-rt-amd64}" != "${OSTREE_DEFAULT_KERNEL}" ]; then
+    # Boot rt kernel by default
+    sed -i "s/ set default=.*/ set default=2/g" \
+      EFI/BOOT/grub.cfg
+
+    sed -i "s/^DEFAULT .*/DEFAULT 2/g" \
+      isolinux/isolinux.cfg
+  else
+    # Boot std kernel by default
+    sed -i "s/^DEFAULT .*/DEFAULT 0/g" \
+      isolinux/isolinux.cfg
+  fi
 
   # 3.2 Resign grub.cfg if EFI secure boot enabled
   if [ "$EFI_SECURE_BOOT" = enable ]; then
