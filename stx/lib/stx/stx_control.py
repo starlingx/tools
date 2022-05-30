@@ -89,8 +89,14 @@ class HandleControlTask:
         deblist = self.config.get('repomgr', 'deblist')
         dsclist = self.config.get('repomgr', 'dsclist')
         ostree_osname = self.config.get('project', 'ostree_osname')
-        debian_snapshot = self.config.get('project', 'debian_snapshot')
-        debian_security_snapshot = self.config.get('project', 'debian_security_snapshot')
+        debian_snapshot = \
+            self.config.get('project', 'debian_snapshot_base') + \
+            '/' + \
+            self.config.get('project', 'debian_snapshot_timestamp')
+        debian_security_snapshot = \
+            self.config.get('project', 'debian_security_snapshot_base') + \
+            '/' + \
+            self.config.get('project', 'debian_snapshot_timestamp')
         debian_distribution = self.config.get('project', 'debian_distribution')
         if sourceslist:
             if not (deblist or dsclist):
