@@ -23,8 +23,6 @@ from stx import utils
 logger = logging.getLogger('STX-Config')
 utils.set_logger(logger)
 
-ALL_CONTAINER_NAMES = ['builder', 'pkgbuilder', 'lat', 'docker', 'repomgr']
-
 
 def require_env(var):
     value = os.getenv(var)
@@ -109,9 +107,6 @@ class Config:
         """Returns the command for invoking helm"""
         assert self.data
         return self.helm_cmd
-
-    def all_container_names(self):
-        return ALL_CONTAINER_NAMES + []
 
     @property
     def insecure_docker_reg_list(self):

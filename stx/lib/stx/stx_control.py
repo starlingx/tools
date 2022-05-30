@@ -23,7 +23,6 @@ import time
 
 from stx import helper  # pylint: disable=E0611
 from stx.k8s import KubeHelper
-from stx import stx_shell
 from stx import utils  # pylint: disable=E0611
 
 helmchartdir = 'stx/stx-build-tools-chart/stx-builder'
@@ -39,7 +38,6 @@ class HandleControlTask:
         self.logger = logging.getLogger('STX-Control')
         self.abs_helmchartdir = os.path.join(os.environ['PRJDIR'],
                                              helmchartdir)
-        self.shell = stx_shell.HandleShellTask(config)
         utils.set_logger(self.logger)
 
     def configurePulp(self):
@@ -237,7 +235,36 @@ stx-pkgbuilder/configmap/')
             sys.exit(1)
 
     def handleEnterTask(self, args):
-        self.shell.cmd_control_enter(args)
+        default_docker = 'builder'
+        container_list = ['builder', 'pkgbuilder', 'repomgr', 'lat', 'docker']
+        prefix_exec_cmd = self.config.kubectl() + ' exec -ti '
+
+        if args.dockername:
+            if args.dockername not in container_list:
+                self.logger.error('Please input the correct docker name \
+argument. eg: %s \n', container_list)
+                sys.exit(1)
+            default_docker = args.dockername
+
+        podname = self.k8s.get_pod_name(default_docker)
+        if podname:
+            if default_docker == 'builder':
+                cmd = prefix_exec_cmd + podname
+                cmd = cmd + ' -- bash -l -c \'runuser -u ${MYUNAME} -- bash \
+--rcfile /home/$MYUNAME/userenv\''
+            elif default_docker == 'docker':
+                cmd = prefix_exec_cmd + podname + ' -- sh'
+            else:
+                cmd = prefix_exec_cmd + podname + ' -- bash'
+            self.logger.debug('Execute the enter command: %s', cmd)
+            # Return exit status to shell w/o raising an exception
+            # in case the user did "echo COMMAND ARGS | stx control enter"
+            ret = subprocess.call(cmd, shell=True)
+            sys.exit(ret)
+        else:
+            self.logger.error('Please ensure the docker container you want to \
+enter has been started!!!\n')
+            sys.exit(1)
 
     def handleControl(self, args):
 
