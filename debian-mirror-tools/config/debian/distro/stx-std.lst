@@ -325,18 +325,23 @@ engtools
 
 #intel-i40e
 i40e
+i40e-rt
 
 #intel-iavf
 iavf
+iavf-rt
 
 #intel-ice
 ice
+ice-rt
 
 #intel-igb_uio
 igb-uio
+igb-uio-rt
 
 #intel-opae-fpga
 kmod-opae-fpga-driver
+kmod-opae-fpga-driver-rt
 
 #iptables-config
 iptables-config
@@ -376,18 +381,25 @@ linux-compiler-gcc-10-x86
 #linux-cpupower-dbgsym  # not used
 #linux-cpupower  # not used
 linux-headers-5.10.0-6-amd64
+linux-rt-headers-5.10.0-6-rt-amd64
 linux-headers-5.10.0-6-common
+linux-rt-headers-5.10.0-6-rt-common
 linux-image-5.10.0-6-amd64-dbg
+linux-rt-image-5.10.0-6-rt-amd64-dbg
 linux-image-5.10.0-6-amd64-unsigned
+linux-rt-image-5.10.0-6-rt-amd64-unsigned
 #linux-image-amd64-dbg  # not used
 #linux-image-amd64-signed-template  # not used
 linux-kbuild-5.10-dbgsym
+linux-rt-kbuild-5.10-dbgsym
 linux-kbuild-5.10
+linux-rt-kbuild-5.10
 linux-libc-dev
 #linux-perf-5.10-dbgsym  # not used
 #linux-perf-5.10  # not used
 #linux-perf  # not used
 linux-source-5.10
+linux-rt-source-5.10
 #linux-source  # not used
 #linux-support-5.10.0-6  # not used
 #usbip-dbgsym  # not used
@@ -483,6 +495,7 @@ memcached-custom
 
 #mlnx-ofa_kernel
 mlnx-ofed-kernel-modules
+mlnx-ofed-kernel-modules-rt
 mlnx-ofed-kernel-utils
 
 #monitor-helm
@@ -897,6 +910,7 @@ python-siteconfig
 
 #qat17
 qat1.7.l
+qat1.7.l-rt
 
 #rabbitmq-server
 rabbitmq-server
