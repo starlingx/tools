@@ -18,6 +18,7 @@
 import configparser
 import logging
 import os
+import re
 from stx import helper  # pylint: disable=E0611
 from stx import utils   # pylint: disable=E0611
 import sys
@@ -124,6 +125,22 @@ class STXConfigParser:
     def syncConfigFile(self):
         self.cf.write(open(self.configpath, "w"))
 
+    def __delete_key(self, section, option):
+        if self.cf.has_option(section, option):
+            self.cf.remove_option(section, option)
+
+    def __upgrade_nonempty_key(self, section, option, value):
+        old_value = self.cf.get(section, option)
+        if old_value != value:
+            logger.warn('%s: setting option %s.%s to %s', self.configpath,
+                        section, option, value)
+            self.cf.set(section, option, value)
+
+    def __raise_upgrade_error(self, bad_section_key):
+        logger.error('%s: unexpected %s', self.configpath, bad_section_key)
+        logger.error("Please upgrade %s manually", self.configpath)
+        raise RuntimeError("Failed to upgrade %s" % self.configpath)
+
     def upgradeConfigFile(self):
         ref_config_path = os.path.join(os.environ['PRJDIR'], "stx.conf.sample")
         ref_config = configparser.ConfigParser()
@@ -134,11 +151,51 @@ class STXConfigParser:
             else:
                 ref_options = ref_config.options(section_name)
                 if not self.cf.has_section(section_name):
+                    logger.info('%s: adding missing section "%s"',
+                                self.configpath, section_name)
                     self.cf.add_section(section_name)
             for key in ref_options:
                 value = ref_config.get(section_name, key, raw=True)
                 if not self.cf.has_option(section_name, key):
+                    logger.info(
+                        '%s: adding missing option %s.%s = %s',
+                        self.configpath, section_name, key, value)
                     self.cf.set(section_name, key, value)
+
+        # Convert debian_snapshot => debian_snapshot_{base,timestamp}
+        if self.cf.has_option('project', 'debian_snapshot'):
+            obsolete = self.cf.get('project', 'debian_snapshot')
+            match = re.fullmatch(r'^(.*)/+(\d{4,}[^/]*)/*$', obsolete)
+            if match:
+                self.__upgrade_nonempty_key(
+                    'project', 'debian_snapshot_base', match.group(1))
+                self.__upgrade_nonempty_key(
+                    'project', 'debian_snapshot_timestamp', match.group(2))
+            else:
+                self.__raise_upgrade_error('project.debian_snapshot')
+            # delete old key
+            self.__delete_key('project', 'debian_snapshot')
+
+        # Convert debian_security_snapshot => debian_security_snapshot_base
+        if self.cf.has_option('project', 'debian_security_snapshot'):
+            obsolete = self.cf.get('project', 'debian_security_snapshot')
+            match = re.fullmatch(r'^(.*)/+(\d{4,}[^/]*)/*$', obsolete)
+            fail = True
+            if match:
+                self.__upgrade_nonempty_key(
+                    'project', 'debian_security_snapshot_base', match.group(1))
+                # make sure the timestamp portion in debian_security_snapshot
+                # is the same as debian_snapshot_timestamp
+                timestamp = self.cf.get(
+                    'project', 'debian_snapshot_timestamp', fallback='')
+                if timestamp == match.group(2):
+                    fail = False
+            if fail:
+                self.__raise_upgrade_error('project.debian_security_snapshot')
+            # delete old key
+            self.__delete_key('project', 'debian_security_snapshot')
+
+        # Save changes
         self.syncConfigFile()
 
 
