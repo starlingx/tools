@@ -88,6 +88,8 @@ rootfs-post-scripts:
   # relocate scratch to a more ostree friendly locale
   mkdir $IMAGE_ROOTFS/var/rootdirs/scratch
   ln -snf --relative $IMAGE_ROOTFS/var/rootdirs/scratch $IMAGE_ROOTFS/scratch
+- |-
+  cat /dev/null > $IMAGE_ROOTFS/etc/resolv.conf
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
