@@ -398,6 +398,7 @@ libnspr4  2:4.29-1
 libnss-ldapd  0.9.11-1
 libnss-mdns  0.14.1-2
 libnss3  2:3.61-1+deb11u2
+libnuma1  2.0.12-1+b1
 liboath0  2.6.6-3
 libodbc1  2.3.6-0.1+b1
 libopenhpi3  3.8.0-2.1
