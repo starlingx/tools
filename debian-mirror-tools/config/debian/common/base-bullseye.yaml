@@ -90,6 +90,9 @@ rootfs-post-scripts:
   ln -snf --relative $IMAGE_ROOTFS/var/rootdirs/scratch $IMAGE_ROOTFS/scratch
 - |-
   cat /dev/null > $IMAGE_ROOTFS/etc/resolv.conf
+- |-
+  # Work around to fix the failing systemd-sysusers.service job at boot
+  chroot $IMAGE_ROOTFS /usr/sbin/grpconv
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
