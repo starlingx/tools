@@ -747,6 +747,9 @@ puppet-module-puppetlabs-firewall
 #puppetlabs-haproxy-2.1.0
 puppet-module-puppetlabs-haproxy
 
+#puppetlabs-mysql-8.1.0
+puppet-module-puppetlabs-mysql
+
 #puppetlabs-postgresql-6.7.0
 puppet-module-puppetlabs-postgresql
 
