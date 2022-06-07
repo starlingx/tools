@@ -154,6 +154,9 @@ containerd-dbgsym
 containerd
 #golang-github-containerd-containerd-dev  # not used
 
+#containerd-config
+containerd-config
+
 #controllerconfig
 controllerconfig
 
@@ -318,6 +321,9 @@ engtools
 #initramfs-ostree
 #initramfs-ostree  # only used for build
 
+#initscripts-config
+initscripts-config
+
 #intel-i40e
 i40e
 i40e-rt
@@ -337,6 +343,9 @@ igb-uio-rt
 #intel-opae-fpga
 kmod-opae-fpga-driver
 kmod-opae-fpga-driver-rt
+
+#io-scheduler
+io-scheduler
 
 #iptables-config
 iptables-config
@@ -618,6 +627,7 @@ openstack-resource-agents
 #ostree-upgrade-mgr
 #ostree-upgrade-mgr  # only used for build
 
+#pam-config
 pam-config
 
 #parted
