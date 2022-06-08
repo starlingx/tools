@@ -111,21 +111,21 @@ debootstrap-key: ''
 apt-keys:
 - /opt/LAT/pubkey.rsa
 iso-grub-entry: |
-  menuentry "UEFI All-in-one Controller Configuration" --unrestricted {
-    set fallback=1
-    efi-watchdog enable 0 180
-    linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
-    initrd @INITRD@
-  }
-
-  menuentry "UEFI Standard Controller Configuration" --unrestricted {
+  menuentry "UEFI Debian Controller Install" --unrestricted {
     set fallback=1
     efi-watchdog enable 0 180
     linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
     initrd @INITRD@
   }
 
-  menuentry "UEFI All-in-one (lowlatency) Controller Configuration" --unrestricted {
+  menuentry "UEFI Debian All-in-one Install" --unrestricted {
+    set fallback=1
+    efi-watchdog enable 0 180
+    linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
+    initrd @INITRD@
+  }
+
+  menuentry "UEFI Debian All-in-one (lowlatency) Install" --unrestricted {
     set fallback=1
     efi-watchdog enable 0 180
     linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime
@@ -134,19 +134,19 @@ iso-grub-entry: |
 
 iso-syslinux-entry: |
   LABEL 0
-    menu label ^All-in-one Controller Configuration
-    kernel /bzImage-std
-    ipappend 2
-    append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
-
-  LABEL 1
-    menu label ^Standard Controller Configuration
+    menu label ^Debian Controller Install
     kernel /bzImage-std
     ipappend 2
     append initrd=@INITRD@ %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
 
+  LABEL 1
+    menu label ^Debian All-in-one Install
+    kernel /bzImage-std
+    ipappend 2
+    append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
+
   LABEL 2
-    menu label ^All-in-one (lowlatency) Controller Configuration
+    menu label ^Debian All-in-one (lowlatency) Install
     kernel /bzImage-rt
     ipappend 2
     append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64
