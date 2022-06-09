@@ -106,50 +106,109 @@ ostree:
   OSTREE_FDISK_RSZ: 20480
   OSTREE_FDISK_VSZ: 20480
   OSTREE_FDISK_FSZ: 32
-  OSTREE_CONSOLE: console=ttyS0,115200 console=tty1
+  OSTREE_CONSOLE: console=ttyS0,115200
 debootstrap-key: ''
 apt-keys:
 - /opt/LAT/pubkey.rsa
 iso-grub-entry: |
-  menuentry "UEFI Debian Controller Install" --unrestricted {
-    set fallback=1
-    efi-watchdog enable 0 180
-    linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
-    initrd @INITRD@
+  submenu 'UEFI Debian Controller Install' --unrestricted --id=standard {
+    menuentry 'Serial Console' --unrestricted --id=serial {
+      set fallback=1
+      efi-watchdog enable 0 180
+      linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
+      initrd @INITRD@
+    }
+    menuentry 'Graphical Console' --unrestricted --id=graphical {
+      set fallback=1
+      efi-watchdog enable 0 180
+      linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
+      initrd @INITRD@
+    }
   }
 
-  menuentry "UEFI Debian All-in-one Install" --unrestricted {
-    set fallback=1
-    efi-watchdog enable 0 180
-    linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
-    initrd @INITRD@
+  submenu 'UEFI Debian All-in-one Install' --unrestricted --id=aio {
+    menuentry 'Serial Console' --unrestricted --id=serial {
+      set fallback=1
+      efi-watchdog enable 0 180
+      linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
+      initrd @INITRD@
+    }
+    menuentry 'Graphical Console' --unrestricted --id=graphical {
+      set fallback=1
+      efi-watchdog enable 0 180
+      linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
+      initrd @INITRD@
+    }
   }
 
-  menuentry "UEFI Debian All-in-one (lowlatency) Install" --unrestricted {
-    set fallback=1
-    efi-watchdog enable 0 180
-    linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime
-    initrd @INITRD@
+  submenu 'UEFI Debian All-in-one (lowlatency) Install' --unrestricted --id=aio-lowlat {
+    menuentry 'Serial Console' --unrestricted --id=serial {
+      set fallback=1
+      efi-watchdog enable 0 180
+      linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime
+      initrd @INITRD@
+    }
+    menuentry 'Graphical Console' --unrestricted --id=graphical {
+      set fallback=1
+      efi-watchdog enable 0 180
+      linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime console=tty1
+      initrd @INITRD@
+    }
   }
 
 iso-syslinux-entry: |
-  LABEL 0
-    menu label ^Debian Controller Install
-    kernel /bzImage-std
-    ipappend 2
-    append initrd=@INITRD@ %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
+  menu start
+  ontimeout LABEL
 
-  LABEL 1
-    menu label ^Debian All-in-one Install
-    kernel /bzImage-std
-    ipappend 2
-    append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
+  menu begin
+    menu title Debian Controller Install
 
-  LABEL 2
-    menu label ^Debian All-in-one (lowlatency) Install
-    kernel /bzImage-rt
-    ipappend 2
-    append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64
+    label 1
+      menu label Serial Console
+      kernel /bzImage-std
+      ipappend 2
+      append initrd=@INITRD@ %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
+
+    label 2
+      menu label Graphical Console
+      kernel /bzImage-std
+      ipappend 2
+      append initrd=@INITRD@ %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
+  menu end
+
+  menu begin
+    menu title Debian All-in-one Install
+    menu DEFAULT-STD
+
+    label 3
+      menu label Serial Console
+      kernel /bzImage-std
+      ipappend 2
+      append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
+
+    label 4
+      menu label Graphical Console
+      kernel /bzImage-std
+      ipappend 2
+      append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
+  menu end
+
+  menu begin
+    menu title Debian All-in-one (lowlatency) Install
+    menu DEFAULT-RT
+
+    label 5
+      menu label Serial Console
+      kernel /bzImage-rt
+      ipappend 2
+      append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64
+
+    label 6
+      menu label Graphical Console
+      kernel /bzImage-rt
+      ipappend 2
+      append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 console=tty1
+  menu end
 
 iso-post-script: |
   cd ${ISO_DIR}
@@ -273,16 +332,28 @@ iso-post-script: |
 
   # According to `default-kernel' in lat yaml, set which
   # bootloader menu entry to boot
+  sed -i "s/^DEFAULT .*//g" \
+    isolinux/isolinux.cfg
+
   if [ "${OSTREE_DEFAULT_KERNEL%%-rt-amd64}" != "${OSTREE_DEFAULT_KERNEL}" ]; then
     # Boot rt kernel by default
     sed -i "s/ set default=.*/ set default=2/g" \
       EFI/BOOT/grub.cfg
-
-    sed -i "s/^DEFAULT .*/DEFAULT 2/g" \
+    sed -i "s/menu DEFAULT-STD//g" \
+      isolinux/isolinux.cfg
+    sed -i "s/menu DEFAULT-RT/menu default/g" \
+      isolinux/isolinux.cfg
+    sed -i "s/ontimeout LABEL/ontimeout 5/g" \
       isolinux/isolinux.cfg
   else
     # Boot std kernel by default
-    sed -i "s/^DEFAULT .*/DEFAULT 0/g" \
+    sed -i "s/ set default=.*/ set default=1/g" \
+      EFI/BOOT/grub.cfg
+    sed -i "s/menu DEFAULT-STD/menu default/g" \
+      isolinux/isolinux.cfg
+    sed -i "s/menu DEFAULT-RT//g" \
+      isolinux/isolinux.cfg
+    sed -i "s/ontimeout LABEL/ontimeout 3/g" \
       isolinux/isolinux.cfg
   fi
 
