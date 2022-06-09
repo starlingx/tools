@@ -350,6 +350,11 @@ io-scheduler
 #iptables-config
 iptables-config
 
+# iputils
+iputils-arping
+iputils-ping
+iputils-tracepath
+
 #iscsi-initiator-utils-config
 iscsi-initiator-utils-config
 
