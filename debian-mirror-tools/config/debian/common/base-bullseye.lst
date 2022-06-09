@@ -382,7 +382,9 @@ libnftables1  0.9.8-3.1
 libnftnl11  1.1.9-1
 libnghttp2-14  1.43.0-1
 libnl-3-200  3.4.0-1+b1
+libnl-cli-3-200  3.4.0-1+b1
 libnl-genl-3-200  3.4.0-1+b1
+libnl-nf-3-200  3.4.0-1+b1
 libnl-route-3-200  3.4.0-1+b1
 libnm0  1.30.0-2
 libnorm1  1.5.9+dfsg-2
@@ -487,6 +489,8 @@ libsub-override-perl  0.09-2
 libtasn1-6  4.16.0-2
 libtcl8.6  8.6.11+dfsg-1
 libtcmalloc-minimal4  2.8.1-1
+libteam-utils  1.31-1
+libteam5  1.31-1
 libteamdctl0  1.31-1
 libtext-charwidth-perl  0.04-10+b1
 libtext-iconv-perl  1.7-7+b1
