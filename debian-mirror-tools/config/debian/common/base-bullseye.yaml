@@ -297,6 +297,14 @@ iso-post-script: |
                              --passphrase-fd 0 \
                              EFI/BOOT/grub.cfg
   fi
+
+  # Put the controller-0 pxeboot install grub menu samples and
+  # setup script into a new the ISO's pxeboot/samples directory.
+  install -v -d -m 0755 pxeboot/samples
+  install -m 0555 ${IMAGE_ROOTFS}/usr/sbin/pxeboot_setup.sh pxeboot/samples
+  echo "See pxeboot_setup.sh --help for usage details" > pxeboot/samples/README
+  install -m 0664 ${IMAGE_ROOTFS}/var/pxeboot/pxelinux.cfg.files/pxeboot.cfg.debian pxeboot/samples
+  install -m 0664 ${IMAGE_ROOTFS}/var/pxeboot/pxelinux.cfg.files/efi-pxeboot.cfg.debian pxeboot/samples
 multiple-kernels: vmlinuz-*[!t]-amd64 vmlinuz-*-rt-amd64
 default-kernel: vmlinuz-*[!t]-amd64
 system:
