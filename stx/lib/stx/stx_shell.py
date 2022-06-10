@@ -84,7 +84,7 @@ class HandleShellTask:
             else:
                 user_cmd += 'bash --norc -c '
                 user_cmd += quote('source %s && { %s ; }' %
-                                  (req_env_file, command))
+                                  (req_env_file, command.strip() or ':'))
 
             kubectl_args += ['--', 'bash', '-l', '-c', user_cmd]
 
