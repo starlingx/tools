@@ -5,6 +5,7 @@ pbr==5.6.0              # Last version with official 2.7 support
 python-subunit==1.4.0
 junitxml==0.7
 testtools==2.4.0
+requests==2.27.1        # Last version with official 2.7 support
 
 testrepository==0.0.20  # Replacement for python-testrepository-0.18 rpm
 fixtures==3.0.0         # Required by testrepository
