@@ -581,7 +581,7 @@ nova-api-proxy
 ntp-config
 
 #oidc-auth-tools
-#python3-oidcauthtools  # not used
+python3-oidcauthtools
 
 #openldap
 ldap-utils-dbgsym
