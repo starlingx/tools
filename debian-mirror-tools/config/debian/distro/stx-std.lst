@@ -343,6 +343,8 @@ ice-rt
 igb-uio
 igb-uio-rt
 
+kdump-tools
+
 #intel-opae-fpga
 kmod-opae-fpga-driver
 kmod-opae-fpga-driver-rt
