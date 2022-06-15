@@ -93,6 +93,7 @@ rootfs-post-scripts:
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
+- KERNEL_PARAMS=crashkernel=2048M
 ostree:
   ostree_use_ab: '0'
   ostree_osname: debian
