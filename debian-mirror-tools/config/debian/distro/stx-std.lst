@@ -318,6 +318,9 @@ helm
 #hostdata-collectors
 engtools
 
+#ifupdown-extra
+ifupdown-extra
+
 #initramfs-ostree
 #initramfs-ostree  # only used for build
 

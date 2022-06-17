@@ -140,7 +140,6 @@ hostname  3.23
 ieee-data  20210605.1
 ifenslave  2.12
 ifupdown  0.8.36
-ifupdown-extra  0.32
 init  1.60
 init-system-helpers  1.60
 initramfs-tools  0.140
