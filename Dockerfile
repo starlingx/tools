@@ -19,10 +19,11 @@ FROM centos:7.8.2003
 #ENV http_proxy  "http://your.actual_http_proxy.com:your_port"
 #ENV https_proxy "https://your.actual_https_proxy.com:your_port"
 #ENV ftp_proxy   "http://your.actual_ftp_proxy.com:your_port"
+#ENV no_proxy    "localhost,127.0.0.1"
 
 #RUN echo "proxy=$http_proxy" >> /etc/yum.conf && \
 #    echo -e "export http_proxy=$http_proxy\nexport https_proxy=$https_proxy\n\
-#export ftp_proxy=$ftp_proxy" >> /root/.bashrc
+#export ftp_proxy=$ftp_proxy\nexport no_proxy=$no_proxy" >> /root/.bashrc
 
 # username you will docker exec into the container as.
 # It should NOT be your host username so you can easily tell
