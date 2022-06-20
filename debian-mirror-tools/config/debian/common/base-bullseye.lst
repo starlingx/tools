@@ -60,9 +60,7 @@ dh-autoreconf  20
 dh-strip-nondeterminism  1.12.0-1
 diffutils  1:3.7-5
 dirmngr  2.2.27-2+deb11u1
-dmeventd  2:1.02.175-2.1
 dmidecode  3.3-2
-dmsetup  2:1.02.175-2.1
 dnf  4.5.2-6
 dnf-data  4.5.2-6
 docker.io  20.10.5+dfsg1-1+deb11u1
@@ -237,8 +235,6 @@ libdconf1  0.38.0-2
 libdebconfclient0  0.260
 libdebhelper-perl  13.3.4
 libdebian-installer4  0.121
-libdevmapper-event1.02.1  2:1.02.175-2.1
-libdevmapper1.02.1  2:1.02.175-2.1
 libdnf2  0.55.2-6
 libdnf2-common  0.55.2-6
 libdns-export1110  1:9.11.19+dfsg-2.1
@@ -348,7 +344,6 @@ liblsan0  10.2.1-6
 libltdl7  2.4.6-15
 liblua5.2-0  5.2.4-1.1+b3
 liblua5.3-0  5.3.3-1.1+b1
-liblvm2cmd2.03  2.03.11-2.1
 liblz4-1  1.9.3-2
 liblzma5  5.2.5-2
 libmagic-mgc  1:5.39-3
@@ -542,7 +537,6 @@ login  1:4.8.1-1
 logrotate  3.18.0-2
 logsave  1.46.2-2
 lsof  4.93.2+dfsg-1.1
-lvm2  2.03.11-2.1
 m4  1.4.18-5
 mailcap  3.69
 make  4.3-4.1

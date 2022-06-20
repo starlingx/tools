@@ -419,6 +419,28 @@ linux-rt-source-5.10
 #usbip-dbgsym  # not used
 #usbip  # not used
 
+# lvm2
+dmeventd
+#dmeventd-dbgsym
+dmsetup
+#dmsetup-dbgsym
+#dmsetup-udeb
+libdevmapper1.02.1
+#libdevmapper1.02.1-dbgsym
+#libdevmapper1.02.1-udeb
+#libdevmapper-dev
+libdevmapper-event1.02.1
+#libdevmapper-event1.02.1-dbgsym
+liblvm2cmd2.03
+#liblvm2cmd2.03-dbgsym
+#liblvm2-dev
+lvm2
+#lvm2-dbgsym
+#lvm2-dbusd
+#lvm2-lockd
+#lvm2-lockd-dbgsym
+#lvm2-udeb
+
 # lvm2-config
 lvm2-config
 
