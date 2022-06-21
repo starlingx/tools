@@ -1,0 +1,6 @@
+MYPROJECTNAME=starlingx
+MYUNAME=`whoami`
+PROJECT=compiler
+HOST_PREFIX=$HOME/starlingx/workspace
+HOST_MIRROR_DIR=$HOME/starlingx/mirror
+LAYER=compiler
