@@ -476,8 +476,8 @@ libsoup2.4-1  2.72.0-2
 libsqlite3-0  3.34.1-3
 libss2  1.46.2-2
 libssh2-1  1.9.0-2
-libssl-dev  1.1.1n-0+deb11u1
-libssl1.1  1.1.1n-0+deb11u1
+libssl-dev  1.1.1n-0+deb11u3 https://snapshot.debian.org/archive/debian-security/20220717T121652Z/pool/updates/main/o/openssl/libssl-dev_1.1.1n-0%2Bdeb11u3_amd64.deb
+libssl1.1  1.1.1n-0+deb11u3 https://snapshot.debian.org/archive/debian-security/20220717T121652Z/pool/updates/main/o/openssl/libssl1.1_1.1.1n-0%2Bdeb11u3_amd64.deb
 libstdc++6  10.2.1-6
 libstonith1  1.0.12-20
 libsub-override-perl  0.09-2
@@ -571,7 +571,7 @@ open-iscsi  2.1.3-5
 openssh-client  1:8.4p1-5
 openssh-server  1:8.4p1-5
 openssh-sftp-server  1:8.4p1-5
-openssl  1.1.1n-0+deb11u1
+openssl  1.1.1n-0+deb11u3 https://snapshot.debian.org/archive/debian-security/20220717T121652Z/pool/updates/main/o/openssl/openssl_1.1.1n-0%2Bdeb11u3_amd64.deb
 original-awk  2018-08-27-1
 passwd  1:4.8.1-1
 patch  2.7.6-7
