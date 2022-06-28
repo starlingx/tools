@@ -923,7 +923,7 @@ sshpass  1.09-1+b1
 ssl-cert  1.1.0+nmu1
 startpar  0.64-3
 strace  5.10-1
-sudo  1.9.5p2-3
+sudo-ldap  1.9.5p2-3
 syslog-ng  3.28.1-2
 syslog-ng-core  3.28.1-2+b1
 syslog-ng-mod-mongodb  3.28.1-2+b1
