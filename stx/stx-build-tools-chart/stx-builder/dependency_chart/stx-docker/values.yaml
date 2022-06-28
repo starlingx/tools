@@ -32,6 +32,10 @@ dnsConfig:
 insecureRegistries:
 #  - "registry.address:port"
 
+# Pass --mtu to docker daemon
+# mtu: "1410"
+mtu:
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""

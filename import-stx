@@ -53,6 +53,11 @@
 #     SSL certificate validation. Only affects docker running in builder pods.
 #     Requires pod restart when changed.
 #
+#   STX_CONTAINER_MTU
+#     Assume container network's MTU is this value. Currently this will be
+#     passed to docker-in-docker's command line. This must be <= to the k8s
+#     container network's MTU.
+#
 
 notice_warn () {
     local tty_on tty_off

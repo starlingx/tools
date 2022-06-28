@@ -81,6 +81,8 @@ class Config:
         else:
             self._insecure_docker_reg_list = []
 
+        self._container_mtu = os.getenv('STX_CONTAINER_MTU')
+
     def load(self):
         """Load stx.conf"""
         self.data = stx_configparser.STXConfigParser(self.config_filename)
@@ -117,6 +119,11 @@ class Config:
     def insecure_docker_reg_list(self):
         """List of insecure docker registries we are allowed to access"""
         return self._insecure_docker_reg_list
+
+    @property
+    def container_mtu(self):
+        """Container network MTU value"""
+        return self._container_mtu
 
     def _init_kubectl_cmd(self):
         # helm

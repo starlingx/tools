@@ -37,10 +37,12 @@ spec:
           env:
           - name: DOCKER_TLS_CERTDIR
             value: ""
-          command:
-          - "/usr/local/bin/dockerd-entrypoint.sh"
+          args:
           {{- range .Values.insecureRegistries }}
           - "--insecure-registry={{ . }}"
+          {{- end }}
+          {{- if .Values.mtu }}
+          - "--mtu={{ .Values.mtu }}"
           {{- end }}
           volumeMounts:
           - name: shared-workspace

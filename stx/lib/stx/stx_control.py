@@ -208,6 +208,9 @@ stx-pkgbuilder/configmap/')
         for reg_index, reg in enumerate(self.config.insecure_docker_reg_list):
             cmd += f' --set stx-docker.insecureRegistries[{reg_index}]={reg}'
 
+        if self.config.container_mtu:
+            cmd += f' --set stx-docker.mtu={self.config.container_mtu}'
+
         self.logger.debug('Execute the helm start command: %s', cmd)
         helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
