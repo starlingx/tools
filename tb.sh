@@ -21,7 +21,7 @@ fi
 
 CMD=$1
 
-TC_CONTAINER_NAME=${MYUNAME}-centos-builder
+TC_CONTAINER_NAME=${MYUNAME}-${LAYER}-centos-builder
 TC_CONTAINER_TAG=local/${MYUNAME}-stx-builder:7.8
 TC_DOCKERFILE=Dockerfile
 NO_CACHE=0
