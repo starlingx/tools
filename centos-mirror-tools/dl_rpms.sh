@@ -11,7 +11,7 @@
 # By default, we use "sudo" and we don't use a local yum.conf. These can
 # be overridden via flags.
 
-SUDOCMD="sudo -E"
+SUDO="sudo -E"
 RELEASEVER="--releasever=7"
 YUMCONFOPT=""
 
@@ -84,7 +84,7 @@ while getopts "c:nxD:sSuUh" o; do
     case "${o}" in
         n)
             # No-sudo
-            SUDOCMD=""
+            SUDO=""
             ;;
         x)
             # Clean only
@@ -425,8 +425,8 @@ init_dl_env
 # Prime the cache
 loop_count=0
 max_loop_count=5
-echo "${SUDOCMD} yum ${YUMCONFOPT} ${RELEASEVER} makecache"
-while ! ${SUDOCMD} yum ${YUMCONFOPT} ${RELEASEVER} makecache fast ; do
+echo "${SUDO} yum ${YUMCONFOPT} ${RELEASEVER} makecache"
+while ! ${SUDO} yum ${YUMCONFOPT} ${RELEASEVER} makecache fast ; do
     # To protect against intermittent 404 errors, we'll retry
     # a few times.  The suspected issue is pulling repodata
     # from multiple source that are temporarily inconsistent.
