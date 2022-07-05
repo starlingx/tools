@@ -460,6 +460,7 @@ for line in $(cat $tarball_file); do
                     exit 1
                 fi
 
+                chmod +x centos-git-common/get_sources.sh
                 # Create the SRPM using CentOS tools
                 # bracketed to contain the PATH change
                 if ! (PATH=$PATH:./centos-git-common into_srpm.sh -d .$el_release); then
@@ -482,6 +483,7 @@ for line in $(cat $tarball_file); do
             # get the CentOS tools for building SRPMs
             git clone https://git.centos.org/centos-git-common
 
+            chmod +x centos-git-common/get_sources.sh
             # Create the SRPM using CentOS tools
             # bracketed to contain the PATH change
             (PATH=$PATH:./centos-git-common into_srpm.sh -d .el8)
