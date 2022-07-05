@@ -41,7 +41,7 @@ device-mapper-persistent-data-0.7.3-3.el7.x86_64.rpm
 # diffutils-3.3-4.el7.x86_64.rpm provided by mock
 # dracut-033-554.el7.x86_64.rpm provided by mock
 # expat-2.1.0-14.el7_9.x86_64.rpm provided by mock
-expat-devel-2.1.0-14.el7_9.x86_64.rpm
+# expat-devel-2.1.0-14.el7_9.x86_64.rpm built from source
 file-devel-5.11-37.el7.x86_64.rpm
 # filesystem-3.2-25.el7.x86_64.rpm provided by mock
 # findutils-4.5.11-6.el7.x86_64.rpm provided by mock
