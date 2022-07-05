@@ -37,6 +37,10 @@ sourceslist =
 deblist =
 dsclist =
 
+# This will be added to "Origin:" field in the Release file
+# of the local deb repos
+origin = starlingx
+
 [aptly]
 mode = local
 
