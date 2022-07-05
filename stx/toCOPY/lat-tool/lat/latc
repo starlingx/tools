@@ -43,8 +43,6 @@ def main():
     parser.add_argument("-q", "--quiet",
                         help = "Hide all output except error messages",
                         action="store_const", const=logging.ERROR, dest="loglevel")
-    parser.add_argument("-t", "--kernel", type=str, choices=['std', 'rt'], default='std',
-                        help = "Image type for standard kernel or rt kernel")
     parser.add_argument('action', metavar='action', type=str, nargs=1,
                         help = 'Action to take. e.g. getyaml/build/status/stop/clean/logs')
     parser.add_argument('--file', required=False,
@@ -55,12 +53,12 @@ def main():
 
     client_action = args.action[0]
 
-    msg = {'workdir': os.path.join(channel.workspace_dir, args.kernel)}
+    msg = {'workdir': channel.workspace_dir}
     if client_action == 'getyaml':
         msg['action'] = 'getyaml'
     elif client_action == 'build':
         if not args.file:
-            logger.error('latc build --file /path/to/some.yaml -t std|rt')
+            logger.error('latc build --file /path/to/some.yaml')
             sys.exit(1)
         msg['action'] = 'build'
         if not os.path.exists(args.file):
