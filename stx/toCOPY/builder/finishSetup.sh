@@ -4,10 +4,10 @@
 
 REPOMGR=aptly
 if [ "$REPOMGR" == "aptly" ]; then
-    CENGN_MIRROR="${CENGNURL}/debian/debian/deb.debian.org/debian/bullseye-11.3 bullseye main"
-    REPO_SNAPSHOT="[check-valid-until=no] ${DEBIAN_SNAPSHOT} bullseye main"
-    REPO_BIN="deb [trusted=yes] ${REPOMGR_DEPLOY_URL}deb-local-binary bullseye main"
-    REPO_SRC="deb-src [trusted=yes] ${REPOMGR_DEPLOY_URL}deb-local-source bullseye main"
+    CENGN_MIRROR="${CENGNURL}/debian/debian/deb.debian.org/debian/${DEBIAN_DISTRIBUTION}-${DEBIAN_VERSION} ${DEBIAN_DISTRIBUTION} main"
+    REPO_SNAPSHOT="[check-valid-until=no] ${DEBIAN_SNAPSHOT} ${DEBIAN_DISTRIBUTION} main"
+    REPO_BIN="deb [trusted=yes] ${REPOMGR_DEPLOY_URL}deb-local-binary ${DEBIAN_DISTRIBUTION} main"
+    REPO_SRC="deb-src [trusted=yes] ${REPOMGR_DEPLOY_URL}deb-local-source ${DEBIAN_DISTRIBUTION} main"
     ret=`grep 'deb-local-binary' /etc/apt/sources.list`
     if [ "x$ret" == "x" ]; then
         sed -i "1i\\${REPO_BIN}" /etc/apt/sources.list
