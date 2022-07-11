@@ -41,6 +41,8 @@ rootfs-pre-scripts:
   export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
   chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
   set -e
+  # Speed up apt/dpkg used for running build-image
+  echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/unsafe-io
   apt update
   apt install -y --no-install-recommends linux-image-5.10.0-6-amd64-unsigned linux-rt-image-5.10.0-6-rt-amd64-unsigned grub-common
   apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
@@ -93,6 +95,9 @@ rootfs-post-scripts:
 - |-
   # Work around to fix the failing systemd-sysusers.service job at boot
   chroot $IMAGE_ROOTFS /usr/sbin/grpconv
+- |-
+  # Only used for running build-image
+  rm -f etc/dpkg/dpkg.cfg.d/unsafe-io
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
