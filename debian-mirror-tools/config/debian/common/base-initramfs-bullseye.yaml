@@ -66,6 +66,7 @@ packages:
 - procps
 - psmisc
 - pv
+- iputils-ping
 - rng-tools
 - sed
 - tar
