@@ -21,8 +21,8 @@ fi
 
 if echo $- | grep -q i ; then
 cat <<EOF
-To ease checkout do:
-!!!! Mandatory:
+To ease checkout from builder container do:
+    !!!! Mandatory:
     sudo apt-get update
     git config --global user.name <username>
     git config --global user.email <email>
@@ -38,14 +38,17 @@ To start a fresh source tree:
     repo init -u https://opendev.org/starlingx/manifest.git -m default.xml
     repo sync
 
-To download the sources & 3rd-party to local mirror:
-    downloader -b -s
+To download binary, sources & 3rd-party to local mirror:
+    downloader -b -s -B std,rt
 
 To build all packages:
     build-pkgs -a | build-pkgs -p <packageA,packageB...>
 
-To make image:
-    build-image [ --std|--rt ]
+To clean and re-build all packages:
+    build-pkgs --clean --all
+
+To make image (std and rt kernels are included):
+    build-image
 
 EOF
 fi
