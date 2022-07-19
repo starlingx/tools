@@ -62,6 +62,7 @@ dh-autoreconf  20
 dh-strip-nondeterminism  1.12.0-1
 diffutils  1:3.7-5
 dirmngr  2.2.27-2+deb11u1
+distro-info-data  0.51+deb11u1
 dmidecode  3.3-2
 dnf  4.5.2-6
 dnf-data  4.5.2-6
@@ -187,6 +188,7 @@ libavahi-common3  0.8-5
 libavahi-core7  0.8-5
 libavahi-glib1  0.8-5
 libbabeltrace1  1.5.8-1+b3
+libbasicobjects0  0.6.1-2
 libbinutils  2.35.2-2
 libblas3  3.9.0-3
 libblkid1  2.36.1-8+deb11u1
@@ -206,6 +208,7 @@ libbrotli1  1.0.9-2+b2
 libbsd0  0.11.3-1
 libbson-1.0-0  1.17.6-1
 libbz2-1.0  1.0.8-4
+libc-ares2  1.17.1-1+deb11u1
 libc-bin  2.31-13+deb11u3
 libc-dev-bin  2.31-13+deb11u3
 libc-l10n  2.31-13+deb11u3
@@ -217,6 +220,7 @@ libcap2  1:2.44-1
 libcap2-bin  1:2.44-1
 libcbor0  0.5.0+dfsg-2
 libcc1-0  10.2.1-6
+libcollection4  0.6.1-2
 libcom-err2  1.46.2-2
 libcomps0  0.1.15-4
 libcpp-hocon0.3.0  0.3.0-1+b2
@@ -227,6 +231,7 @@ libcrypt1  1:4.4.18-4
 libcryptsetup12  2:2.3.7-1+deb11u1
 libctf-nobfd0  2.35.2-2
 libctf0  2.35.2-2
+libcups2  2.3.3op2-3+deb11u1
 libcurl3-gnutls  7.74.0-1.3+deb11u1
 libcurl4  7.74.0-1.3+deb11u1
 libdaemon0  0.14-7.1
@@ -238,6 +243,7 @@ libdconf1  0.38.0-2
 libdebconfclient0  0.260
 libdebhelper-perl  13.3.4
 libdebian-installer4  0.121
+libdhash1  0.6.1-2
 libdnf2  0.55.2-6
 libdnf2-common  0.55.2-6
 libdns-export1110  1:9.11.19+dfsg-2.1
@@ -292,8 +298,10 @@ libice6  2:1.0.10-1
 libicu67  67.1-7
 libidn2-0  2.3.0-5
 libinih1  53-1+b2
+libini-config5  0.6.1-2
 libip4tc2  1.8.7-1
 libip6tc2  1.8.7-1
+libipa-hbac0  2.4.1-2
 libiperf0  3.9-1
 libisc-export1105  1:9.11.19+dfsg-2.1
 libisl23  0.23-1
@@ -336,6 +344,7 @@ libkrb5support0  1.18.3-6+deb11u1
 libksba8  1.5.0-3
 liblapack3  3.9.0-3
 liblbfgsb0  3.0+dfsg.3-9
+libldb2  2:2.2.3-2~deb11u1
 libleatherman1.12.1  1.12.1+dfsg-1.1
 libleveldb1d  1.22-3
 libllvm11  1:11.0.1-2
@@ -391,6 +400,7 @@ libnsl2  1.3.0-2
 libnspr4  2:4.29-1
 libnss-ldapd  0.9.11-1
 libnss-mdns  0.14.1-2
+libnss-sss  2.4.1-2
 libnss3  2:3.61-1+deb11u2
 libnuma1  2.0.12-1+b1
 liboath0  2.6.6-3
@@ -406,9 +416,11 @@ libpam-modules-bin  1.4.0-9+deb11u1
 libpam-pwquality  1.4.4-1
 libpam-runtime  1.4.0-9+deb11u1
 libpam0g  1.4.0-9+deb11u1
+libpam-sss  2.4.1-2
 libpango-1.0-0  1.46.2-3
 libpangocairo-1.0-0  1.46.2-3
 libpangoft2-1.0-0  1.46.2-3
+libpath-utils1  0.6.1-2
 libpcap0.8  1.10.0-2
 libpci3  1:3.7.0-5
 libpcre2-8-0  10.36-2
@@ -443,6 +455,7 @@ librabbitmq4  0.10.0-1
 librdkafka1  1.6.0-1
 librdmacm1  33.2-1
 libreadline8  8.1-1
+libref-array1  0.6.1-2
 librepo0  1.12.1-4
 librpm9  4.16.1.2+dfsg1-3
 librpmbuild9  4.16.1.2+dfsg1-3
@@ -468,6 +481,7 @@ libsigsegv2  2.13-1
 libslang2  2.3.2-5
 libsm6  2:1.2.3-1
 libsmartcols1  2.36.1-8+deb11u1
+libsmbclient  2:4.13.13+dfsg-1~deb11u3
 libsnappy1v5  1.1.8-1
 libsnmp-base  5.9+dfsg-3
 libsnmp40  5.9+dfsg-3+b1
@@ -480,15 +494,21 @@ libss2  1.46.2-2
 libssh2-1  1.9.0-2
 libssl-dev  1.1.1n-0+deb11u3 https://snapshot.debian.org/archive/debian-security/20220717T121652Z/pool/updates/main/o/openssl/libssl-dev_1.1.1n-0%2Bdeb11u3_amd64.deb
 libssl1.1  1.1.1n-0+deb11u3 https://snapshot.debian.org/archive/debian-security/20220717T121652Z/pool/updates/main/o/openssl/libssl1.1_1.1.1n-0%2Bdeb11u3_amd64.deb
+libsss-idmap0  2.4.1-2
+libsss-certmap0  2.4.1-2
+libsss-nss-idmap0  2.4.1-2
 libstdc++6  10.2.1-6
 libstonith1  1.0.12-20
 libsub-override-perl  0.09-2
 libtasn1-6  4.16.0-2
+libtalloc2  2.3.1-2+b1
+libtdb1  1.4.3-1+b1
 libtcl8.6  8.6.11+dfsg-1
 libtcmalloc-minimal4  2.8.1-1
 libteam-utils  1.31-1
 libteam5  1.31-1
 libteamdctl0  1.31-1
+libtevent0  0.10.2-1
 libtext-charwidth-perl  0.04-10+b1
 libtext-iconv-perl  1.7-7+b1
 libtext-wrapi18n-perl  0.06-9
@@ -509,6 +529,7 @@ libunwind8  1.3.2-2
 liburcu6  0.12.2-1
 libuuid1  2.36.1-8+deb11u1
 libuv1  1.40.0-2
+libwbclient0  2:4.13.13+dfsg-1~deb11u3
 libwrap0  7.6.q-31
 libx11-6  2:1.7.2-1
 libx11-data  2:1.7.2-1
@@ -539,6 +560,7 @@ locales-all  2.31-13+deb11u3
 login  1:4.8.1-1
 logrotate  3.18.0-2
 logsave  1.46.2-2
+lsb-release  11.1.0
 lsof  4.93.2+dfsg-1.1
 m4  1.4.18-5
 mailcap  3.69
@@ -593,6 +615,7 @@ postgresql-common  225
 procps  2:3.3.17-5
 psmisc  23.4-2
 puppet-module-adrienthebo-filemapper  1.1.3-2
+puppet-module-asciiduck-sssd  0.3.0-1
 puppet-module-barbican  17.4.0-2
 puppet-module-camptocamp-kmod  2.1.1-2
 puppet-module-duritong-sysctl  0.0.11-2
@@ -709,6 +732,7 @@ python3-kubernetes  12.0.1-1
 python3-ldap  3.2.0-4+b3
 python3-ldap3  2.8.1-1
 python3-ldappool  2.3.1-1.1
+python3-ldb  2:2.2.3-2~deb11u1
 python3-lib2to3  3.9.2-1
 python3-libcomps  0.1.15-4
 python3-libdnf  0.55.2-6
@@ -823,9 +847,11 @@ python3-soupsieve  2.2.1-1
 python3-sphinx  3.4.3-2
 python3-sqlalchemy  1.3.22+ds1-1
 python3-sqlparse  0.4.1-1
+python3-sss  2.4.1-2
 python3-statsd  3.3.0-2
 python3-stevedore  3.2.2-3
 python3-swiftclient  1:3.10.1-2
+python3-talloc  2.3.1-2+b1
 python3-tempita  0.5.2-6
 python3-tenacity  6.2.0-4
 python3-testresources  2.0.1-2
@@ -913,6 +939,7 @@ ruby-xmlrpc  0.3.0-2
 ruby2.7  2.7.4-1+deb11u1
 rubygems-integration  1.18
 runit-helper  2.10.3
+samba-libs  2:4.13.13+dfsg-1~deb11u3
 sed  4.7-1
 sensible-utils  0.0.14
 sg3-utils  1.45-1
@@ -925,6 +952,16 @@ sphinx-common  3.4.3-2
 sqlite3  3.34.1-3
 sshpass  1.09-1+b1
 ssl-cert  1.1.0+nmu1
+sssd  2.4.1-2
+sssd-ad  2.4.1-2
+sssd-ad-common  2.4.1-2
+sssd-common  2.4.1-2
+sssd-ipa  2.4.1-2
+sssd-krb5  2.4.1-2
+sssd-krb5-common  2.4.1-2
+sssd-ldap  2.4.1-2
+sssd-proxy  2.4.1-2
+sssd-tools  2.4.1-2
 startpar  0.64-3
 strace  5.10-1
 sudo-ldap  1.9.5p2-3
