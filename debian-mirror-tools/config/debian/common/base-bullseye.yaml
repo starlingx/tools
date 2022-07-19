@@ -322,6 +322,11 @@ iso-post-script: |
                              pxeboot/EFI/BOOT/grub.cfg
   fi
 
+  # 2.5 copy pxeboot config template files to pxeboot/pxelinux.cfg
+  mkdir -p pxeboot/pxelinux.cfg.files
+  cp ${IMAGE_ROOTFS}/var/pxeboot/pxelinux.cfg.files/efi-pxe-* pxeboot/pxelinux.cfg.files/
+  cp ${IMAGE_ROOTFS}/var/pxeboot/pxelinux.cfg.files/pxe-* pxeboot/pxelinux.cfg.files/
+
   # 3. ISO
   # 3.1 Edit grub.cfg and isolinux.cfg
   # 3.1.1 Configure local kickstart url
