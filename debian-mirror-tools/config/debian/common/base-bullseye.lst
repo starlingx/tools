@@ -1,4 +1,6 @@
 acl  2.2.53-10
+acpid  1:2.0.32-1
+acpi-support-base  0.143-5
 adduser  3.118
 alembic  1.4.3-1
 ansible  2.10.7+merged+base+2.10.8+dfsg-1
