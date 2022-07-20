@@ -61,6 +61,8 @@ minikube_exists() {
     local script=$(cat <<'END'
 import json,sys
 data = json.load (sys.stdin)
+if 'valid' not in data or 'invalid' not in data:
+    sys.exit(1)
 for x in data['valid']+data['invalid']:
     if x['Name'] == sys.argv[1]:
         sys.exit(0)
@@ -218,6 +220,10 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
         if minikube_exists ; then
             notice "Deleting minikube cluster \`$MINIKUBENAME'"
             $MINIKUBE delete -p "$MINIKUBENAME" || exit 1
+        else
+            notice "Please check your minikube cluster MINIKUBENAME: \`$MINIKUBENAME'."
+            notice "It doesn't exist or it existed but not for your MINIKUBE_HOME: \`$MINIKUBE_HOME'."
+            notice "Please re-export the correct project variable pairs!!!"
         fi
         exit 0
     fi
