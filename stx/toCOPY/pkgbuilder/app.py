@@ -20,8 +20,7 @@ from flask import request
 import logging
 
 app = Flask(__name__)
-log = logging.getLogger('pkgbuilder')
-dbuilder = Debbuilder('private', log)
+dbuilder = None
 
 
 @app.route('/pkgbuilder/state', methods=['GET'])
@@ -154,6 +153,8 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     log_format = logging.Formatter('pkgbuilder: %(levelname)s %(message)s')
     handler.setFormatter(log_format)
+    log = logging.getLogger('pkgbuilder')
     log.addHandler(handler)
+    dbuilder = Debbuilder('private', log)
 
     app.run(host='0.0.0.0', port=80, debug=True)

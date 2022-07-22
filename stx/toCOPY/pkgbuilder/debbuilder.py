@@ -69,18 +69,30 @@ class Debbuilder:
 
     def set_environ_vars(self):
         if not os.path.exists(STX_LOCALRC):
-            self.logger.warning('stx-localrc does not exist')
+            self.logger.error("%s does not exist", STX_LOCALRC)
             return
+        self.logger.debug("%s does exist", STX_LOCALRC)
 
         for var in ENVIRON_VARS:
+            self.logger.debug("Fetching %s from stx-localrc", var)
             cmd = "grep '^export *%s=.*' %s | cut -d \\= -f 2" % (var, STX_LOCALRC)
-            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                       universal_newlines=True, shell=True)
-            outs, errs = process.communicate()
-            value = outs.strip().split("\n")[0].strip('"')
-            if value:
-                cmd = "sed -ie 's#@%s@#%s#g' %s" % (var, value, SBUILD_CONF)
-                process = subprocess.Popen(cmd, shell=True, stdout=self.ctlog, stderr=self.ctlog)
+            self.logger.debug('The fetch command is %s', cmd)
+            try:
+                outs = subprocess.check_output(cmd, shell=True).decode()
+            except Exception as e:
+                self.logger.error(str(e))
+                self.logger.error("Failed to fetch %s from %s", var, STX_LOCALRC)
+                break
+            else:
+                if not outs:
+                    self.logger.error("Got null when fetch %s from %s", var, STX_LOCALRC)
+                    break
+                value = outs.strip().split("\n")[0].strip('"')
+                self.logger.debug("Got value %s for %s", value, var)
+                replace_cmd = "sed -i -e 's#@%s@#%s#g' %s" % (var, value, SBUILD_CONF)
+                self.logger.debug('The replacing command is %s', replace_cmd)
+                ret = os.system(replace_cmd)
+                self.logger.debug('The return value of macro replacing is %d', ret)
 
     def set_extra_repos(self):
         repomgr_url = None
