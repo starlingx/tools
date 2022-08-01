@@ -961,6 +961,13 @@ srptools
 #mstflint
 mstflint
 
+#openscap
+libopenscap25
+openscap-common
+openscap-scanner
+openscap-utils
+python3-openscap
+
 #registry-token-server
 registry-token-server
 
