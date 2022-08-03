@@ -676,6 +676,9 @@ python3-patch-alarm
 #pf-bb-config
 pf-bb-config
 
+#platform-upgrades
+platform-upgrades
+
 #platform-util
 platform-util-controller
 platform-util-noncontroller

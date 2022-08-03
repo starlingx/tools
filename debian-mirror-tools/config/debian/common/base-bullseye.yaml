@@ -335,6 +335,15 @@ iso-post-script: |
   cp ${IMAGE_ROOTFS}/var/pxeboot/pxelinux.cfg.files/efi-pxe-* pxeboot/pxelinux.cfg.files/
   cp ${IMAGE_ROOTFS}/var/pxeboot/pxelinux.cfg.files/pxe-* pxeboot/pxelinux.cfg.files/
 
+  # 2.6 upgrades directory and upgrade meta files
+  RELEASE_VER=$(cat ${IMAGE_ROOTFS}/etc/build.info | grep SW_VERSION | cut -f2 -d'=' | tr -d '"')
+  mkdir -p upgrades
+  cp ${IMAGE_ROOTFS}/usr/sbin/pxeboot-update-${RELEASE_VER}.sh upgrades/
+  cp ${IMAGE_ROOTFS}/opt/upgrades/import.sh upgrades/
+  cp ${IMAGE_ROOTFS}/opt/upgrades/metadata.xml upgrades/
+  sed -i "s/xxxSW_VERSIONxxx/${RELEASE_VER}/g" upgrades/metadata.xml
+  echo -n "VERSION=${RELEASE_VER}" > upgrades/version
+
   # 3. ISO
   # 3.1 Edit grub.cfg and isolinux.cfg
   # 3.1.1 Configure local kickstart url
