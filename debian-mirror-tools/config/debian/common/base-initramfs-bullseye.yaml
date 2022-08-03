@@ -22,6 +22,7 @@ packages:
 - base-passwd
 - bash
 - bc
+- bind9-dnsutils
 - bnxt-en
 - busybox
 - bzip2
