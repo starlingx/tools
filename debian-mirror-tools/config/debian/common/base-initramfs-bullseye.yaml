@@ -23,6 +23,7 @@ packages:
 - bash
 - bc
 - bnxt-en
+- bnxt-en-rt
 - busybox
 - bzip2
 - ca-certificates

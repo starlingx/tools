@@ -37,6 +37,7 @@ bash
 
 # bnxt_en - Broadcom kernel modules
 bnxt-en
+bnxt-en-rt
 
 #build-info
 #build-info-dev  # not used
