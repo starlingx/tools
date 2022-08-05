@@ -598,6 +598,11 @@ nfv-plugins
 nfv-tools
 nfv-vim
 
+#nss-pam-ldapd
+libnss-ldapd
+nslcd
+libpam-ldapd
+
 #nova-api-proxy
 nova-api-proxy
 
