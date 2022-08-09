@@ -47,7 +47,7 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=968927
 RUN cd /tmp && \
     wget \
-    http://deb.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.126+nmu1_all.deb && \
+    http://snapshot.debian.org/archive/debian/20211128T160803Z/pool/main/d/debootstrap/debootstrap_1.0.126%2Bnmu1_all.deb && \
     dpkg -i debootstrap_1.0.126+nmu1_all.deb
 RUN groupadd crontab
 
