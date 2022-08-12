@@ -264,6 +264,9 @@ fm-rest-api
 #golang-dep
 #go-dep  # only used for build
 
+#gpu-operator
+gpu-operator
+
 #grub2
 #grub-common-dbgsym  # not used
 grub-common
