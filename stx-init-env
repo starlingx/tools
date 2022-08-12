@@ -45,7 +45,7 @@ PYTHON3=python3
 KUBECTL=kubectl
 DOCKER_PREFIX="starlingx/"
 DOCKER_IMAGES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
-DOCKER_TAG="master-debian-latest"
+DOCKER_TAG="rc-7.0-debian-latest"
 
 BUILD_DOCKER=0
 DELETE_ENV=0
