@@ -401,7 +401,6 @@ libnsl-dev  1.3.0-2
 libnspr4  2:4.29-1
 libnss3  2:3.61-1+deb11u2
 libnss-cache  0.18-1
-libnss-ldapd  0.9.11-1
 libnss-mdns  0.14.1-2
 libnss-sss  2.4.1-2
 libnuma1  2.0.12-1+b1
@@ -414,7 +413,6 @@ libopeniscsiusr  2.1.3-5
 libopts25  1:5.18.16-4
 libp11-kit0  0.23.22-1
 libpam0g  1.4.0-9+deb11u1
-libpam-ldapd  0.9.11-1
 libpam-modules  1.4.0-9+deb11u1
 libpam-modules-bin  1.4.0-9+deb11u1
 libpam-pwquality  1.4.4-1
@@ -590,7 +588,6 @@ nfs-common  1:1.3.4-6
 nfs-kernel-server  1:1.3.4-6
 nftables  0.9.8-3.1
 nscd  2.31-13+deb11u3
-nslcd  0.9.11-1
 ntp  1:4.2.8p15+dfsg-1
 ntpdate  1:4.2.8p15+dfsg-1
 nvme-cli  1.12-5
