@@ -1149,4 +1149,4 @@ watchdog
 worker-utils
 
 #workerconfig
-#workerconfig-standalone  # integration issue
+workerconfig-standalone
