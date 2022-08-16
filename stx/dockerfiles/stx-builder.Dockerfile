@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         cpio \
         curl \
         debian-keyring \
+        debmake \
         dnsutils \
         dpkg-dev \
         fakeroot \
