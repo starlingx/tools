@@ -306,6 +306,13 @@ for line in $(cat $tarball_file); do
                 popd > /dev/null   # pushd $output_tarball
                 continue
             fi
+        elif [[ "$tarball_name" = "helm-mapkubeapis_0.3.0.tar.gz" ]]; then
+            download_file --quiet "$tarball_url" "$tarball_name"
+            if [ $? -ne 0 ]; then
+                error_count=$((error_count + 1))
+                popd > /dev/null   # pushd $output_tarball
+                continue
+            fi
         elif [[ "$tarball_name" = 'OPAE_1.3.7-5_el7.zip' ]]; then
             srpm_path="${directory_name}/source_code/"
             download_file --quiet "$tarball_url" "$tarball_name"
