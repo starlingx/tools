@@ -183,6 +183,10 @@ docker-registry
 #drbd-tools
 drbd-utils
 
+#efitools
+#efitools-dbgsym  # not used
+efitools
+
 #enable-dev-patch (not used in deployment)
 enable-dev-patch
 
