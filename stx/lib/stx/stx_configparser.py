@@ -125,6 +125,16 @@ class STXConfigParser:
     def syncConfigFile(self):
         self.cf.write(open(self.configpath, "w"))
 
+    def __get(self, section, option, fallback=None):
+        if self.cf.has_section(section):
+            return self.cf.get(section, option, fallback=fallback)
+        return fallback
+
+    def __set(self, section, option, value):
+        if not self.cf.has_section(section):
+            self.cf.add_section(section)
+        self.cf.set(section, option, value)
+
     def __delete_key(self, section, option):
         if self.cf.has_option(section, option):
             self.cf.remove_option(section, option)
@@ -141,7 +151,16 @@ class STXConfigParser:
         logger.error("Please upgrade %s manually", self.configpath)
         raise RuntimeError("Failed to upgrade %s" % self.configpath)
 
+    def __upgrade_id_exists(self, upgrade_id):
+        return self.__get('upgrade_ids', upgrade_id, "").lower() in ['1', 'true', 'yes']
+
+    def __save_upgrade_id(self, upgrade_id):
+        self.__set('upgrade_ids', upgrade_id, "1")
+
     def upgradeConfigFile(self):
+
+        need_restart = False
+
         ref_config_path = os.path.join(os.environ['PRJDIR'], "stx.conf.sample")
         ref_config = configparser.ConfigParser()
         ref_config.read(ref_config_path, encoding="utf-8")
@@ -195,8 +214,34 @@ class STXConfigParser:
             # delete old key
             self.__delete_key('project', 'debian_security_snapshot')
 
+        # Change debian_snapshot_* to CENGN
+        if not self.__upgrade_id_exists('debian_snapshot_cengn'):
+            debian_snapshot_cengn_upgraded = False
+            # debian_snapshot_base
+            old_value = 'http://snapshot.debian.org/archive/debian'
+            new_value = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian'
+            current_value = self.__get('project', 'debian_snapshot_base')
+            if current_value == old_value:
+                self.__upgrade_nonempty_key('project', 'debian_snapshot_base', new_value)
+                debian_snapshot_cengn_upgraded = True
+            # debian_security_snapshot_base
+            old_value = 'http://snapshot.debian.org/archive/debian-security'
+            new_value = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
+            current_value = self.__get('project', 'debian_security_snapshot_base')
+            if current_value == old_value:
+                self.__upgrade_nonempty_key('project', 'debian_security_snapshot_base', new_value)
+                debian_snapshot_cengn_upgraded = True
+
+            if debian_snapshot_cengn_upgraded:
+                self.__save_upgrade_id('debian_snapshot_cengn')
+                need_restart = True
+
         # Save changes
         self.syncConfigFile()
+
+        if need_restart:
+            logger.warning("One or more configuration keeys have been upgraded")
+            logger.warning("These changes will take effect after you restart your builder containers")
 
 
 class HandleConfigTask:

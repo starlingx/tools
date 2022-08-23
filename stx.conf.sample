@@ -14,8 +14,10 @@ debian_version = 11.3
 # These URLs must contain snapshots of debian & debian-security repos.
 # We will append debian_snapshot_timestamp to each of them when creating
 # apt.sources lists
-debian_snapshot_base = http://snapshot.debian.org/archive/debian
-debian_security_snapshot_base = http://snapshot.debian.org/archive/debian-security
+#debian_snapshot_base = http://snapshot.debian.org/archive/debian
+debian_snapshot_base = http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian
+#debian_security_snapshot_base = http://snapshot.debian.org/archive/debian-security
+debian_security_snapshot_base = http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian-security
 debian_snapshot_timestamp = 20220331T000000Z
 
 [builder]
