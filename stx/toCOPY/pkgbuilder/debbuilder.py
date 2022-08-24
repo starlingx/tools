@@ -237,13 +237,6 @@ class Debbuilder:
         required_instances = int(request_form['instances'])
         chroot_sequence = 1
 
-        if required_instances < 2:
-            # multiple chroots are not required, just quit
-            self.logger.info("Only one chroot is required, skip cloning chroot")
-            response['status'] = 'success'
-            response['msg'] = 'Required instance number is %d' % required_instances
-            return response
-
         # Try to find the parent chroot
         user_dir = os.path.join(STORE_ROOT, user, project)
         # e.g bullseye-amd64-user
