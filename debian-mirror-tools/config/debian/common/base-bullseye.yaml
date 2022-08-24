@@ -260,6 +260,10 @@ iso-post-script: |
     cp $IMAGE_ROOTFS/var/www/pages/feed/rel-*/miniboot.cfg kickstart/
   fi
 
+  if [ -e $IMAGE_ROOTFS/var/www/pages/feed/rel-*/prestage.cfg ]; then
+    cp $IMAGE_ROOTFS/var/www/pages/feed/rel-*/prestage.cfg kickstart/
+  fi
+
   # 2. PXE
   mkdir -p pxeboot/pxelinux.cfg
 
