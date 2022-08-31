@@ -23,15 +23,12 @@ python3-barbican
 base-files-config
 
 #base-passwd
-base-passwd-dbgsym
 base-passwd
 
 #bash
-bash-builtins-dbgsym
 bash-builtins
 bash-dbgsym
 bash-doc
-bash-static-dbgsym
 bash-static
 bash
 
@@ -47,68 +44,46 @@ build-info
 centos-debian-compat
 
 #ceph
-#ceph-base-dbgsym  # debug symbols
 ceph-base
-#ceph-common-dbgsym  # debug symbols
 ceph-common
-#ceph-fuse-dbgsym  # debug symbols
 ceph-fuse
 #ceph-grafana-dashboards  # not used
-#ceph-mds-dbgsym  # debug symbols
 ceph-mds
 #ceph-mgr-dashboard  # not used
-#ceph-mgr-dbgsym  # debug symbols
 #ceph-mgr-diskprediction-cloud  # not used
 #ceph-mgr-diskprediction-local  # not used
 #ceph-mgr-k8sevents  # not used
 #ceph-mgr-rook  # not used
 #ceph-mgr-ssh  # not used
 ceph-mgr
-#ceph-mon-dbgsym  # debug symbols
 ceph-mon
-#ceph-osd-dbgsym  # debug symbols
 ceph-osd
 #ceph-resource-agents  # not used
 ceph
 #cephfs-shell  # not used
 #libcephfs-dev  # not used
 #libcephfs-java  # not used
-#libcephfs-jni-dbgsym  # debug symbols
 #libcephfs-jni  # not used
-#libcephfs2-dbgsym  # debug symbols
 libcephfs2
-#librados-dev-dbgsym  # debug symbols
 #librados-dev  # not used
-#librados2-dbgsym  # debug symbols
 librados2
 #libradospp-dev  # not used
 #libradosstriper-dev  # not used
-#libradosstriper1-dbgsym  # debug symbols
 libradosstriper1
 #librbd-dev  # not used
-#librbd1-dbgsym  # debug symbols
 librbd1
 #librgw-dev  # not used
-#librgw2-dbgsym  # debug symbols
 librgw2
 python3-ceph-argparse
 python3-ceph
-#python3-cephfs-dbgsym  # debug symbols
 python3-cephfs
-#python3-rados-dbgsym  # debug symbols
 python3-rados
-#python3-rbd-dbgsym  # debug symbols
 python3-rbd
-#python3-rgw-dbgsym  # debug symbols
 python3-rgw
 #rados-objclass-dev  # not used
-#radosgw-dbgsym  # debug symbols
 radosgw
-#rbd-fuse-dbgsym  # debug symbols
 #rbd-fuse  # not used
-#rbd-mirror-dbgsym  # debug symbols
 #rbd-mirror  # not used
-#rbd-nbd-dbgsym  # debug symbols
 #rbd-nbd  # not used
 
 #ceph-manager
@@ -134,7 +109,6 @@ cgts-client
 
 #cluster-resource-agents
 #ldirectord  # not used
-resource-agents-dbgsym
 resource-agents
 
 #collectd
@@ -148,7 +122,6 @@ config-gate-worker
 config-gate
 
 #containerd
-containerd-dbgsym
 containerd
 #golang-github-containerd-containerd-dev  # not used
 
@@ -171,16 +144,11 @@ debian-release-config
 #dex-helm  # only used for build
 
 #dhcp
-isc-dhcp-client-dbgsym
-#isc-dhcp-client-ddns-dbgsym  # not used
 #isc-dhcp-client-ddns  # not used
 isc-dhcp-client
 isc-dhcp-common
 #isc-dhcp-dev  # not used
-#isc-dhcp-relay-dbgsym  # not used
 #isc-dhcp-relay  # not used
-#isc-dhcp-server-dbgsym  # not used
-#isc-dhcp-server-ldap-dbgsym  # not used
 #isc-dhcp-server-ldap  # not used
 #isc-dhcp-server  # not used
 
@@ -213,7 +181,6 @@ docker-registry
 #golang-github-docker-distribution-dev  # not used
 
 #drbd-tools
-drbd-utils-dbgsym
 drbd-utils
 
 #enable-dev-patch (not used in deployment)
@@ -221,16 +188,13 @@ enable-dev-patch
 
 #etcd
 etcd-client
-etcd-server-dbgsym
 etcd-server
 etcd
 #golang-etcd-server-dev  # not used
 
 #facter
-facter-dbgsym
 #facter-dev  # not used
 facter
-libfacter3.14.12-dbgsym
 libfacter3.14.12
 
 #filesystem-scripts
@@ -240,7 +204,6 @@ filesystem-scripts
 python3-fm-api
 
 #fm-common
-fm-common-dbgsym
 #fm-common-dev  # not used
 fm-common-doc
 fm-common
@@ -249,7 +212,6 @@ fm-common
 fm-doc
 
 #fm-mgr
-fm-mgr-dbgsym
 fm-mgr
 
 #fm-rest-api
@@ -268,7 +230,6 @@ fm-rest-api
 gpu-operator
 
 #grub2
-#grub-common-dbgsym  # not used
 grub-common
 #grub-coreboot-bin  # not used
 #grub-coreboot-dbg  # not used
@@ -288,7 +249,6 @@ grub-common
 #grub-ieee1275-dbg  # not used
 #grub-ieee1275  # not used
 #grub-linuxbios  # not used
-#grub-pc-bin-dbgsym  # not used
 grub-pc-bin
 #grub-pc-dbg  # not used
 grub-pc
@@ -298,12 +258,10 @@ grub-pc
 #grub-xen-dbg  # not used
 #grub-xen-host  # not used
 #grub-xen  # not used
-grub2-common-dbgsym
 grub2-common
 grub2
 
 #grubby
-grubby-dbgsym
 grubby
 
 #gui
@@ -365,7 +323,6 @@ iputils-tracepath
 iscsi-initiator-utils-config
 
 #isolcpus-device-plugin
-isolcpus-device-plugin-dbgsym
 isolcpus-device-plugin
 
 #istio-helm
@@ -384,16 +341,12 @@ k8s-cni-cache-cleanup
 libbnxt-re
 
 #kernel-std
-#bpftool-dbgsym  # not used
 #bpftool  # not used
-#hyperv-daemons-dbgsym  # not used
 #hyperv-daemons  # not used
 #libcpupower-dev  # not used
-#libcpupower1-dbgsym  # not used
 #libcpupower1  # not used
 linux-compiler-gcc-10-x86
 #linux-config-5.10  # not used
-#linux-cpupower-dbgsym  # not used
 #linux-cpupower  # not used
 linux-headers-5.10.0-6-amd64
 linux-rt-headers-5.10.0-6-rt-amd64
@@ -405,8 +358,6 @@ linux-image-5.10.0-6-amd64-unsigned
 linux-rt-image-5.10.0-6-rt-amd64-unsigned
 #linux-image-amd64-dbg  # not used
 #linux-image-amd64-signed-template  # not used
-linux-kbuild-5.10-dbgsym
-linux-rt-kbuild-5.10-dbgsym
 linux-kbuild-5.10
 linux-rt-kbuild-5.10
 linux-libc-dev
@@ -417,29 +368,21 @@ linux-source-5.10
 linux-rt-source-5.10
 #linux-source  # not used
 #linux-support-5.10.0-6  # not used
-#usbip-dbgsym  # not used
 #usbip  # not used
 
 # lvm2
 dmeventd
-#dmeventd-dbgsym
 dmsetup
-#dmsetup-dbgsym
 #dmsetup-udeb
 libdevmapper1.02.1
-#libdevmapper1.02.1-dbgsym
 #libdevmapper1.02.1-udeb
 #libdevmapper-dev
 libdevmapper-event1.02.1
-#libdevmapper-event1.02.1-dbgsym
 liblvm2cmd2.03
-#liblvm2cmd2.03-dbgsym
 #liblvm2-dev
 lvm2
-#lvm2-dbgsym
 #lvm2-dbusd
 #lvm2-lockd
-#lvm2-lockd-dbgsym
 #lvm2-udeb
 
 # lvm2-config
@@ -481,31 +424,19 @@ ldapscripts
 logrotate-config
 
 #libfdt
-libfdt-dbgsym
 libfdt
 
 #lighttpd
-lighttpd-dbgsym
 #lighttpd-doc  # not used
-#lighttpd-mod-authn-gssapi-dbgsym  # not used
 #lighttpd-mod-authn-gssapi  # not used
-#lighttpd-mod-authn-pam-dbgsym  # not used
 #lighttpd-mod-authn-pam  # not used
-#lighttpd-mod-authn-sasl-dbgsym  # not used
 #lighttpd-mod-authn-sasl  # not used
-lighttpd-mod-geoip-dbgsym
 lighttpd-mod-geoip
-#lighttpd-mod-maxminddb-dbgsym  # not used
 #lighttpd-mod-maxminddb  # not used
-#lighttpd-mod-trigger-b4-dl-dbgsym  # not used
 #lighttpd-mod-trigger-b4-dl  # not used
-#lighttpd-mod-vhostdb-dbi-dbgsym  # not used
 #lighttpd-mod-vhostdb-dbi  # not used
-#lighttpd-mod-vhostdb-pgsql-dbgsym  # not used
 #lighttpd-mod-vhostdb-pgsql  # not used
-#lighttpd-mod-webdav-dbgsym  # not used
 #lighttpd-mod-webdav  # not used
-lighttpd-modules-mysql-dbgsym
 lighttpd-modules-mysql
 lighttpd
 
@@ -513,12 +444,10 @@ lighttpd
 lighttpd-config
 
 #linuxptp
-linuxptp-dbgsym
 linuxptp
 
 #lldpd
 #liblldpctl-dev  # not used
-lldpd-dbgsym
 lldpd
 
 #logmgmt
@@ -546,15 +475,10 @@ mlnx-ofed-kernel-utils
 monitor-tools
 
 #mtce
-mtce-dbgsym
 #mtce-dev  # not used
-mtce-hostw-dbgsym
 mtce-hostw
-mtce-hwmon-dbgsym
 mtce-hwmon
-mtce-lmon-dbgsym
 mtce-lmon
-mtce-pmon-dbgsym
 mtce-pmon
 mtce
 
@@ -568,27 +492,22 @@ mtce-compute
 mtce-control
 
 #mtce-guest
-mtce-guest-agent-dbgsym
 mtce-guest-agent
-mtce-guest-server-dbgsym
 mtce-guest-server
 
 #mtce-storage
 mtce-storage
 
 #mttyexec
-#mttyexec-dbgsym  # not used
 #mttyexec  # only used for build
 
 #multus-config
 multus-config
 
 #namespace-utils
-namespace-utils-dbgsym
 namespace-utils
 
 #net-tools
-net-tools-dbgsym
 net-tools
 
 #nfscheck
@@ -614,15 +533,11 @@ ntp-config
 python3-oidcauthtools
 
 #openldap
-ldap-utils-dbgsym
 ldap-utils
-libldap-2.4-2-dbgsym
 libldap-2.4-2
 libldap-common
 #libldap2-dev  # not used
-#slapd-contrib-dbgsym  # not used
 #slapd-contrib  # not used
-slapd-dbgsym
 #slapd-smbk5pwd  # not used
 slapd
 #slapi-dev  # not used
@@ -648,14 +563,10 @@ openstack-resource-agents
 
 #ostree
 #gir1.2-ostree-1.0  # only used for build
-#libostree-1-1-dbgsym  # only used for build
 #libostree-1-1  # only used for build
 #libostree-dev  # only used for build
 #libostree-doc  # only used for build
-#ostree-boot-dbgsym  # only used for build
 #ostree-boot  # only used for build
-#ostree-dbgsym  # only used for build
-#ostree-tests-dbgsym  # only used for build
 #ostree-tests  # only used for build
 #ostree  # only used for build
 
@@ -667,12 +578,9 @@ pam-config
 
 #parted
 #libparted-dev  # not used
-libparted-fs-resize0-dbgsym
 libparted-fs-resize0
 libparted-i18n
-libparted2-dbgsym
 libparted2
-parted-dbgsym
 parted-doc
 parted
 
@@ -935,13 +843,9 @@ rabbitmq-server
 rabbitmq-server-config
 
 #rdma-core
-ibacm-dbgsym
 ibacm
-ibverbs-providers-dbgsym
 ibverbs-providers
-ibverbs-utils-dbgsym
 ibverbs-utils
-infiniband-diags-dbgsym
 infiniband-diags
 #libibmad-dev  # not used
 libibmad5-dbg
@@ -958,13 +862,9 @@ libibverbs1
 #librdmacm-dev  # not used
 librdmacm1-dbg
 librdmacm1
-python3-pyverbs-dbgsym
 python3-pyverbs
-rdma-core-dbgsym
 rdma-core
-rdmacm-utils-dbgsym
 rdmacm-utils
-srptools-dbgsym
 srptools
 
 #mstflint
@@ -985,7 +885,6 @@ rsync-config
 
 #runc
 #golang-github-opencontainers-runc-dev  # not used
-runc-dbgsym
 runc
 
 #service-mgmt-api
@@ -1005,19 +904,15 @@ shim-helpers-amd64-signed-template
 shim-unsigned
 
 #sm
-sm-dbgsym
 sm
 
 #sm-common
 #sm-common-dev  # not used
-sm-common-libs-dbgsym
 sm-common-libs
 sm-common
-sm-eru-dbgsym
 sm-eru
 
 #sm-db
-sm-db-dbgsym
 #sm-db-dev  # not used
 sm-db
 
@@ -1085,36 +980,22 @@ sysinv-fpga-agent
 syslog-ng-config
 
 #systemd
-libnss-myhostname-dbgsym
 libnss-myhostname
-#libnss-mymachines-dbgsym  # not used
 #libnss-mymachines  # not used
-#libnss-resolve-dbgsym  # not used
 #libnss-resolve  # not used
-#libnss-systemd-dbgsym  # not used
 #libnss-systemd  # not used
-libpam-systemd-dbgsym
 libpam-systemd
 #libsystemd-dev  # not used
-libsystemd0-dbgsym
 libsystemd0
 #libudev-dev  # not used
-libudev1-dbgsym
 libudev1
-#systemd-container-dbgsym  # not used
 #systemd-container  # not used
-#systemd-coredump-dbgsym  # not used
 #systemd-coredump  # not used
-systemd-dbgsym
-#systemd-journal-remote-dbgsym  # not used
 #systemd-journal-remote  # not used
 systemd-sysv
-#systemd-tests-dbgsym  # not used
 #systemd-tests  # not used
-#systemd-timesyncd-dbgsym  # not used
 #systemd-timesyncd  # not used
 systemd
-udev-dbgsym
 udev
 
 #systemd-config
@@ -1136,7 +1017,6 @@ update-motd
 #vault-helm  # only used for build
 
 #watchdog
-watchdog-dbgsym
 watchdog
 
 #worker-utils
