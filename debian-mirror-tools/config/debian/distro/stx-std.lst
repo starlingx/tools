@@ -1009,7 +1009,6 @@ sm-dbgsym
 sm
 
 #sm-common
-sm-common-dbgsym
 #sm-common-dev  # not used
 sm-common-libs-dbgsym
 sm-common-libs
