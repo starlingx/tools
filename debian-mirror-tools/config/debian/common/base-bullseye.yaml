@@ -4,7 +4,7 @@ machine: intel-x86-64
 image_type:
 - iso
 - ostree-repo
-debootstrap-mirror: http://deb.debian.org/debian
+debootstrap-mirror: deb-merge-all
 package_feeds: []
 package_type: external-debian
 wic:
