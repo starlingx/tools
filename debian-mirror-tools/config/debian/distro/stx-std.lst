@@ -759,9 +759,6 @@ puppet-network
 #puppet-nfv
 puppet-nfv
 
-#puppet-nslcd
-puppet-nslcd
-
 #puppet-openstacklib-17.4.0
 puppet-module-openstacklib
 
