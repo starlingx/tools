@@ -463,13 +463,15 @@ kpatch-prebuilt-rt
 kube-cpusets
 kube-memory
 
+#kubernetes-x (-master, -misc, -unit-test used only for build)
 #kubernetes-1.23.1
 kubernetes-1.23.1-client
 kubernetes-1.23.1-kubeadm
-kubernetes-1.23.1-master
-kubernetes-1.23.1-misc
 kubernetes-1.23.1-node
-#kubernetes-1.23.1-unit-test  # not used
+#kubernetes-1.24.4
+kubernetes-1.24.4-client
+kubernetes-1.24.4-kubeadm
+kubernetes-1.24.4-node
 
 #kubernetes-unversioned
 kubernetes-unversioned
