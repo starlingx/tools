@@ -54,13 +54,6 @@ rootfs-pre-scripts:
   mv /var/lib/dpkg /usr/share/dpkg/database
   ln -sr /usr/share/dpkg/database /var/lib/dpkg
   SCRIPT_ENDOF
-- |-
-  # FIXME: openstack-dashboard will not install without this due to
-  # FileNotFoundError: [Errno 2] No such file or directory: '/etc/platform/platform.conf'
-  # dpkg: error processing package openstack-dashboard (--configure):
-  mkdir -p -m 0775 $IMAGE_ROOTFS/etc/platform
-  cat << SCRIPT_ENDOF > $IMAGE_ROOTFS/etc/platform/platform.conf
-  SCRIPT_ENDOF
 rootfs-post-scripts:
 - |-
   # Set bash as default shell
