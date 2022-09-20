@@ -1033,6 +1033,9 @@ stx-extensions
 #stx-istio-helm
 stx-istio-helm
 
+#stx-sts-silicom-helm
+stx-sts-silicom-helm
+
 #stx-metrics-server-helm
 stx-metrics-server-helm
 
