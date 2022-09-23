@@ -874,6 +874,9 @@ python3-ironicclient
 #python-k8sapp-snmp
 #python3-k8sapp-snmp  # not used
 
+#python-k8sapp-sriov-fec-operator
+#python3-k8sapp-sriov-fec-operator  # not used
+
 #python-k8sapp-vault
 #python3-k8sapp-vault  # not used
 
@@ -1062,6 +1065,9 @@ stx-ptp-notification-helm
 
 #stx-snmp-helm
 stx-snmp-helm
+
+#stx-sriov-fec-operator-helm
+stx-sriov-fec-operator-helm
 
 #stx-vault-helm
 stx-vault-helm
