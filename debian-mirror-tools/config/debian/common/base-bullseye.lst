@@ -99,6 +99,7 @@ expect  5.45.4-2+b1
 fdisk  2.36.1-8+deb11u1
 file  1:5.39-3
 findutils  4.8.0-1
+firmware-qlogic  20210315-3 https://deb.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-qlogic_20210315-3_all.deb
 flake8  3.8.4-1
 flex  2.6.4-8
 fontconfig  2.13.1-4.2
