@@ -974,6 +974,17 @@ openscap-scanner
 openscap-utils
 python3-openscap
 
+#openvswitch
+openvswitch-common
+openvswitch-dbg
+openvswitch-dev
+openvswitch-ipsec
+openvswitch-pki
+openvswitch-switch-dpdk
+openvswitch-switch
+openvswitch-testcontroller
+openvswitch-vtep
+
 #registry-token-server
 registry-token-server
 
