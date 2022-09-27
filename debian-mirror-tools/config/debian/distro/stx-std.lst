@@ -374,6 +374,9 @@ isolcpus-device-plugin
 #kiali-helm
 #kiali-helm  # only used for build
 
+#k8s-coredump
+k8s-coredump
+
 #k8s-pod-recovery
 k8s-pod-recovery
 
@@ -893,6 +896,9 @@ python3-neutronclient
 #python-novaclient
 python-novaclient-doc
 python3-novaclient
+
+#python3-nsenter
+python3-nsenter
 
 #python-openstackclient
 python-openstackclient-doc
