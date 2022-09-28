@@ -1012,6 +1012,7 @@ sudo-config
 
 #sysinv
 sysinv
+zerorpc-python
 
 #sysinv-agent
 sysinv-agent
