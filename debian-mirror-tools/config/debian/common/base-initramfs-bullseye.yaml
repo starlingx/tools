@@ -70,6 +70,7 @@ packages:
 - pv
 - iputils-ping
 - rng-tools
+- rpm2cpio
 - sed
 - tar
 - udev
