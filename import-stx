@@ -1,4 +1,5 @@
 # bash
+# vim:syn=sh
 
 #
 # ENVIRONMENT
@@ -58,6 +59,15 @@
 #     passed to docker-in-docker's command line. This must be <= to the k8s
 #     container network's MTU.
 #
+#   STX_BUILDER_IMAGE_TAG
+#     Assign this tag to builder images generated or downloaded by stx-init-env,
+#     and reference them in builder helm charts.
+#     Default: $USER-$PROJECT-$DOCKER_TAG_VERSION
+#
+#   STX_PREBUILT_BUILDER_IMAGE_TAG
+#     Download pre-built images with this tag. This is used by "stx-init-env"
+#     without the "--rebuild" flag.
+#     Default: master-debian-latest
 
 notice_warn () {
     local tty_on tty_off
@@ -106,9 +116,16 @@ fi
 # Host side path, exports STX lib to user's PATH
 export PRJDIR=$(pwd)
 export PATH=$PRJDIR/stx/bin:$PATH
-# Used by helm/stx-init to tag the user images
-DOCKER_TAG_VERSION="v0.1.0"
-export DOCKER_TAG_LOCAL="${USER}-${PROJECT}-${DOCKER_TAG_VERSION}"
+if [[ -n "$STX_BUILDER_IMAGE_TAG" ]] ; then
+    export DOCKER_TAG_LOCAL="$STX_BUILDER_IMAGE_TAG"
+else
+    DOCKER_TAG_VERSION="v0.1.0"
+    export DOCKER_TAG_LOCAL="${USER}-${PROJECT}-${DOCKER_TAG_VERSION}"
+fi
+if [[ -z "$STX_PREBUILT_BUILDER_IMAGE_TAG" ]] ; then
+    STX_PREBUILT_BUILDER_IMAGE_TAG="master-debian-latest"
+fi
+export STX_PREBUILT_BUILDER_IMAGE_TAG
 # Platform 'minikube' or 'kubernetes'
 export STX_PLATFORM="${STX_PLATFORM:-minikube}"
 # Max cpus for the build parallel jobs, replaces MINIKUBECPUS env var

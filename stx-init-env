@@ -37,6 +37,17 @@ notice() {
     echo >&2 "${tty_on}$*${tty_off}"
 }
 
+info() {
+    local tty_on tty_off
+    if [[ -t 2 ]] ; then
+        tty_on=$'\033[0;36m'
+        tty_off=$'\033[0m'
+    fi
+    echo >&2 "${tty_on}$*${tty_off}"
+}
+
+source "$(dirname "$0")"/import-stx  || return 1
+
 PROGNAME=$(basename "$0")
 MINIKUBE=minikube
 HELM=helm
@@ -45,7 +56,7 @@ PYTHON3=python3
 KUBECTL=kubectl
 DOCKER_PREFIX="starlingx/"
 DOCKER_IMAGES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
-DOCKER_TAG="master-debian-latest"
+DOCKER_TAG="$STX_PREBUILT_BUILDER_IMAGE_TAG"
 
 BUILD_DOCKER=0
 DELETE_ENV=0
@@ -193,9 +204,6 @@ if [[ $CLEAN_CONFIG -eq 1 ]] ; then
     exit 0
 fi
 
-# import environment
-source import-stx  || return 1
-
 # Make sure $STX_BUILD_HOME exists
 if [[ ! -d "$STX_BUILD_HOME" ]] ; then
     echo >&2 "The directory $STX_BUILD_HOME doesn't exist, please create it with the command:"
@@ -283,6 +291,7 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     fi
     for img in $BUILD_DOCKER_IMAGES; do
         docker build "${docker_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f stx/dockerfiles/$img.Dockerfile . || exit 1
+        info "built image $img:$DOCKER_TAG_LOCAL"
     done
 fi
 
@@ -307,6 +316,7 @@ if [[ -n "$PULL_DOCKER_IMAGES" ]] ; then
     for img in $PULL_DOCKER_IMAGES; do
         docker pull ${DOCKER_PREFIX}${img}:${DOCKER_TAG} || exit 1
         docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL} || exit 1
+        info "created image ${img}:${DOCKER_TAG_LOCAL} from pre-built ${DOCKER_PREFIX}${img}:${DOCKER_TAG}"
     done
 fi
 
