@@ -738,6 +738,7 @@ mksh  59c-9+b2
 mokutil  0.6.0-2~deb11u1
 mount  2.36.1-8+deb11u1
 multipath-tools  0.8.5-2
+multipath-tools-boot  0.8.5-2
 mysql-common  5.8+1.0.7
 nano  5.4-2
 ncat  7.91+dfsg1+really7.80+dfsg1-2
