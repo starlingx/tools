@@ -5804,8 +5804,8 @@ function setup_cgts_extend {
     local PROVISION_PV_TIMEOUT=180
 
     for DEVICE in "${DEVICES[@]}"; do
-       # Check if this PV is already in cgts-vg.
-       # Special case: after lab_cleanup we may already have this PV in cgts-vg.
+        # Check if this PV is already in cgts-vg.
+        # Special case: after lab_cleanup we may already have this PV in cgts-vg.
         local CGTS_VG=$(system host-pv-list $NODE ${CLI_NOWRAP} | grep $DEVICE | awk -F'|' '{print $9}')
         if [[ "${CGTS_VG}" == *"cgts-vg"* ]]; then
             log "Skipping adding device $DEVICE to cgts-vg for ${NODE}; already done"
@@ -6235,8 +6235,8 @@ function is_https_security_configuration {
         if [ "${SYSTEM_HTTPS_ENABLED}" != "${HTTPS_ENABLED}" ]; then
             return 0
         else
-                      # configuration value in .conf file matches with system show value .
-                      # no changes needed.
+            # configuration value in .conf file matches with system show value .
+            # no changes needed.
             return 1
         fi
     else
