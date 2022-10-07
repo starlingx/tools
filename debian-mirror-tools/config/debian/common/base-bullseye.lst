@@ -267,6 +267,7 @@ libext2fs2  1.46.2-2
 libfam0  2.7.0-17.3
 libfastjson4  0.99.9-1
 libfdisk1  2.36.1-8+deb11u1
+libfdt1  1.6.0-1
 libffi7  3.3-6
 libfido2-1  1.6.0-2
 libfile-stripnondeterminism-perl  1.12.0-1
@@ -465,6 +466,20 @@ librpmbuild9  4.16.1.2+dfsg1-3
 librpmio9  4.16.1.2+dfsg1-3
 librpmsign9  4.16.1.2+dfsg1-3
 librrd8  1.7.2-3+b7
+librte-eal21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-eal21_20.11.6-1~deb11u1_amd64.deb
+librte-ethdev21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-ethdev21_20.11.6-1~deb11u1_amd64.deb
+librte-kvargs21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-kvargs21_20.11.6-1~deb11u1_amd64.deb
+librte-mbuf21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-mbuf21_20.11.6-1~deb11u1_amd64.deb
+librte-mempool21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-mempool21_20.11.6-1~deb11u1_amd64.deb
+librte-meter21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-meter21_20.11.6-1~deb11u1_amd64.deb
+librte-vhost21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-vhost21_20.11.6-1~deb11u1_amd64.deb
+librte-telemetry21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-telemetry21_20.11.6-1~deb11u1_amd64.deb
+librte-net21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-net21_20.11.6-1~deb11u1_amd64.deb
+librte-ring21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-ring21_20.11.6-1~deb11u1_amd64.deb
+librte-cryptodev21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-cryptodev21_20.11.6-1~deb11u1_amd64.deb
+librte-hash21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-hash21_20.11.6-1~deb11u1_amd64.deb
+librte-pci21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-pci21_20.11.6-1~deb11u1_amd64.deb
+librte-rcu21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-rcu21_20.11.6-1~deb11u1_amd64.deb
 librtmp1  2.4+20151223.gitfa8646d.1-2+b2
 libruby2.7  2.7.4-1+deb11u1
 libsasl2-2  2.1.27+dfsg-2.1+deb11u1
@@ -502,6 +517,7 @@ libsss-idmap0  2.4.1-2
 libsss-nss-idmap0  2.4.1-2
 libstdc++6  10.2.1-6
 libstonith1  1.0.12-20
+libstrongswan  5.9.1-1+deb11u2 http://ftp.br.debian.org/debian/pool/main/s/strongswan/libstrongswan_5.9.1-1+deb11u2_amd64.deb
 libsub-override-perl  0.09-2
 libtalloc2  2.3.1-2+b1
 libtasn1-6  4.16.0-2
@@ -527,6 +543,7 @@ libtool  2.4.6-15
 libtsan0  10.2.1-6
 libubsan1  10.2.1-6
 libuchardet0  0.0.7-1
+libunbound8  1.13.1-1
 libunistring2  0.9.10-4
 libunwind8  1.3.2-2
 liburcu6  0.12.2-1
@@ -849,6 +866,7 @@ python3-six  1.16.0-2
 python3-sklearn  0.23.2-5
 python3-sklearn-lib  0.23.2-5
 python3-snowballstemmer  2.1.0-1
+python3-sortedcontainers 2.1.0-2
 python3-soupsieve  2.2.1-1
 python3-sphinx  3.4.3-2
 python3-sqlalchemy  1.3.22+ds1-1
@@ -973,6 +991,10 @@ sssd-proxy  2.4.1-2
 sssd-tools  2.4.1-2
 startpar  0.64-3
 strace  5.10-1
+strongswan  5.9.1-1+deb11u2
+strongswan-charon  5.9.1-1+deb11u2
+strongswan-libcharon  5.9.1-1+deb11u2 http://ftp.br.debian.org/debian/pool/main/s/strongswan/strongswan-libcharon_5.9.1-1+deb11u2_amd64.deb
+strongswan-starter  5.9.1-1+deb11u2
 sudo-ldap  1.9.5p2-3
 syslog-ng  3.28.1-2
 syslog-ng-core  3.28.1-2+b1
