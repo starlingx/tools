@@ -996,6 +996,7 @@ strongswan-charon  5.9.1-1+deb11u2
 strongswan-libcharon  5.9.1-1+deb11u2 http://ftp.br.debian.org/debian/pool/main/s/strongswan/strongswan-libcharon_5.9.1-1+deb11u2_amd64.deb
 strongswan-starter  5.9.1-1+deb11u2
 sudo-ldap  1.9.5p2-3
+sysstat  12.5.2-2
 syslog-ng  3.28.1-2
 syslog-ng-core  3.28.1-2+b1
 syslog-ng-mod-mongodb  3.28.1-2+b1
