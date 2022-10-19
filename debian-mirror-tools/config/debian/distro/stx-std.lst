@@ -289,14 +289,20 @@ initscripts-config
 #intel-i40e
 i40e
 i40e-rt
+i40e-2.14.13-legacy
+i40e-2.14.13-legacy-rt
 
 #intel-iavf
 iavf
 iavf-rt
+iavf-4.0.1-legacy
+iavf-4.0.1-legacy-rt
 
 #intel-ice
 ice
 ice-rt
+ice-1.5.8.1-legacy
+ice-1.5.8.1-legacy-rt
 
 #intel-igb_uio
 igb-uio
