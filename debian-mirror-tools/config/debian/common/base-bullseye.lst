@@ -277,6 +277,7 @@ libfreetype6  2.10.4+dfsg-1
 libfribidi0  1.0.8-2
 libfstrm0  0.6.0-1+b1
 libfuse2  2.9.9-5
+libgc1  1:8.0.4-3
 libgcc-10-dev  10.2.1-6
 libgcc-s1  10.2.1-6
 libgcrypt20  1.8.7-6
@@ -1028,6 +1029,7 @@ vim-runtime  2:8.2.2434-3+deb11u1
 vim-tiny  2:8.2.2434-3+deb11u1
 virt-what  1.19-1
 vlan  2.0.5
+w3m  0.5.3+git20210102-6
 wget  1.21-1+deb11u1
 whiptail  0.52.21-4+b3
 x11-common  1:7.7+22
