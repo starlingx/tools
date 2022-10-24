@@ -23,7 +23,7 @@
 			{% endfor %}
 		{% endif %}
 		</table>
-	<h2>CVEs to fix w/ a launchpad assigend: {{cves_to_fix_lp | length}}</h2>
+	<h2>CVEs to fix w/ a launchpad assigned: {{cves_to_fix_lp | length}}</h2>
 	<table>
 		{% if cves_to_fix_lp|length >= 1 %}
 			<tr>
