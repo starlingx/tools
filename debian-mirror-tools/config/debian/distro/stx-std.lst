@@ -375,7 +375,7 @@ linux-kbuild-5.10
 linux-rt-kbuild-5.10
 linux-libc-dev
 #linux-perf-5.10-dbgsym  # not used
-#linux-perf-5.10  # not used
+linux-perf-5.10
 #linux-perf  # not used
 linux-source-5.10
 linux-rt-source-5.10
