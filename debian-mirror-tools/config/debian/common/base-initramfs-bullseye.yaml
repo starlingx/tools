@@ -89,6 +89,9 @@ rootfs-post-scripts:
   # Reduce rootfs size AMAP
   export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
   chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
+  # Each time modify this file, change the version number below.
+  echo "Initramfs bullseye yaml file V-1.0.0" > /var/log/rootfs_install.log
+  dpkg-query -l >> /var/log/rootfs_install.log
   set -x
   rm -rf /boot/*
   rm -rf /var/lib/* /var/cache/*
