@@ -49,11 +49,6 @@ rootfs-pre-scripts:
   apt install --no-install-recommends -y ifupdown
   apt install -y bc vim uuid-runtime iputils-ping
   SCRIPT_ENDOF
-- |
-  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-  chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
-  groupadd nobody
-  SCRIPT_ENDOF
 - |-
   # FIXME: openstack-dashboard will not install without this due to
   # FileNotFoundError: [Errno 2] No such file or directory: '/etc/platform/platform.conf'
@@ -63,14 +58,6 @@ rootfs-pre-scripts:
   SCRIPT_ENDOF
 rootfs-post-scripts:
 - |-
-  # Remove user admin whether it exists or not
-  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-  chroot $IMAGE_ROOTFS deluser admin || true
-- |-
-  # Set password 'root' to root"
-  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-  chroot $IMAGE_ROOTFS usermod -p '$6$hEv/K.fPeg/$ezIWhJPrMG3WtdEwqQRdyBwdYmPZkqW2PONFAcDd6TqWliYc9dHAwW4MFTlLanVH3/clE0/34FheDMpbAqZVG.' root;
-- |-
   # Set bash as default shell
   ln -snf --relative $IMAGE_ROOTFS/bin/bash $IMAGE_ROOTFS/bin/sh
 - |-
@@ -78,23 +65,12 @@ rootfs-post-scripts:
   export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
   chroot $IMAGE_ROOTFS sed -i 's/^[#[:space:]]*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 - |-
-  # Setup the sysadmin user and force the user to change the password
-  # on first login.
-  # Lock the root account
-  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-  chroot $IMAGE_ROOTFS useradd sysadmin -m --shell /bin/bash -G sudo --password 4SuW8cnXFyxsk
-  chroot $IMAGE_ROOTFS chage -d 0 sysadmin
-  # chroot $IMAGE_ROOTFS passwd -l root
-- |-
   # FIXME: OSTree will not set up a link to scratch automagically. Need to
   # relocate scratch to a more ostree friendly locale
   mkdir $IMAGE_ROOTFS/var/rootdirs/scratch
   ln -snf --relative $IMAGE_ROOTFS/var/rootdirs/scratch $IMAGE_ROOTFS/scratch
 - |-
   cat /dev/null > $IMAGE_ROOTFS/etc/resolv.conf
-- |-
-  # Work around to fix the failing systemd-sysusers.service job at boot
-  chroot $IMAGE_ROOTFS /usr/sbin/grpconv
 - |-
   # Only used for running build-image
   rm -f etc/dpkg/dpkg.cfg.d/unsafe-io
