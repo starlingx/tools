@@ -48,6 +48,11 @@ rootfs-pre-scripts:
   apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
   apt install --no-install-recommends -y ifupdown
   apt install -y bc vim uuid-runtime iputils-ping
+  # Move dpkg database to /usr so it's accessible after the OS /var is
+  # mounted, but make a symlink so it works without modifications to
+  # dpkg or apt
+  mv /var/lib/dpkg /usr/share/dpkg/database
+  ln -sr /usr/share/dpkg/database /var/lib/dpkg
   SCRIPT_ENDOF
 - |-
   # FIXME: openstack-dashboard will not install without this due to
