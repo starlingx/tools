@@ -2,3 +2,16 @@ more-itertools===5.0.0;python_version=='2.7' # Last version with official 2.7 su
 pyparsing===2.4.7
 filelock===3.4.0  # Last version with official py2.7 support was 3.2.1, but 3.4.0 is known to work
 platformdirs===2.4.0  # Last version with official py2.7 support was 2.0.2, but 2.4.0 is known to work
+git-review==1.28.0      # Last version with official 2.7 support
+pbr==5.6.0              # Last version with official 2.7 support
+python-subunit==1.4.0
+junitxml==0.7
+testtools==2.4.0
+requests==2.27.1        # Last version with official 2.7 support
+
+testrepository==0.0.20  # Replacement for python-testrepository-0.18 rpm
+fixtures==3.0.0         # Required by testrepository
+certifi==2021.10.8
+importlib-metadata==4.10.1
+virtualenv==20.13.0
+importlib_resources==5.4.0
