@@ -1257,7 +1257,8 @@ function get_flavor_modifier {
     if [ "${TENANTNUM}" -gt ${#TENANTNODES[@]} ]; then
         echo ""
     elif [ "${TENANTNODES[${TENANTNUM}]}" == "split" ]; then
-        local NODE=$(($((VMCOUNTER-1)) % ${NUMA_NODE_COUNT}))
+        local NODE=""
+        NODE=$(($((VMCOUNTER-1)) % ${NUMA_NODE_COUNT}))
         echo "node${NODE}"
     elif [ ! -z "${TENANTNODES[${TENANTNUM}]}" ]; then
         echo "${TENANTNODES[${TENANTNUM}]}"
@@ -2238,8 +2239,10 @@ function setup_vxlan_network_segment_ranges {
         RANGES=(${RANGES//,/ })
         for I in ${!RANGES[@]}; do
             local RANGE=${RANGES[${I}]}
-            local RANGE_MIN=$(echo "${RANGE}" | cut -f1 -d-)
-            local RANGE_MAX=$(echo "${RANGE}" | cut -f2 -d-)
+            local RANGE_MIN=""
+            local RANGE_MAX=""
+            RANGE_MIN=$(echo "${RANGE}" | cut -f1 -d-)
+            RANGE_MAX=$(echo "${RANGE}" | cut -f2 -d-)
             local RANGE_NAME=${NAME}-r${INDEX}-${I}
 
             RANGEID=$(get_network_segment_range_id ${RANGE_NAME})
@@ -2274,8 +2277,10 @@ function setup_vlan_network_segment_ranges {
     for I in ${!RANGES[@]}; do
         local RANGE=${RANGES[${I}]}
         local RANGE_NAME=${NAME}-r${INDEX}-${I}
-        local RANGE_MIN=$(echo "${RANGE}" | cut -f1 -d-)
-        local RANGE_MAX=$(echo "${RANGE}" | cut -f2 -d-)
+        local RANGE_MIN=""
+        local RANGE_MAX=""
+        RANGE_MIN=$(echo "${RANGE}" | cut -f1 -d-)
+        RANGE_MAX=$(echo "${RANGE}" | cut -f2 -d-)
 
         RANGEID=$(get_network_segment_range_id ${RANGE_NAME})
         if [ ! -z "${RANGEID}" ]; then
@@ -2488,7 +2493,8 @@ function setup_vlan_interface {
         fi
     fi
 
-    local LOWER_MTU=$(system host-if-show ${NODE} ${LOWER_IFNAME} | awk '($2 == "imtu") {print $4}')
+    local LOWER_MTU=""
+    LOWER_MTU=$(system host-if-show ${NODE} ${LOWER_IFNAME} | awk '($2 == "imtu") {print $4}')
     if [ -z "${LOWER_MTU}" ]; then
         echo "Interface ${LOWER_IFNAME} not found\n"
         return 1
@@ -2696,7 +2702,8 @@ function setup_ae_interface {
     fi
 
     ## Convert to interface names and make sure their network type is None
-    local DATA0IFNAME=$(system host-if-list -a ${NODE} ${CLI_NOWRAP} | awk -v PORT0NAME=[u\'$PORT0NAME\'] '($12 == PORT0NAME) {print $4}')
+    local DATA0IFNAME=""
+    DATA0IFNAME=$(system host-if-list -a ${NODE} ${CLI_NOWRAP} | awk -v PORT0NAME=[u\'$PORT0NAME\'] '($12 == PORT0NAME) {print $4}')
     log_command "system host-if-modify ${NODE} ${DATA0IFNAME} -n ${PORT0NAME} -c none"
     DATA0IFNAME=${PORT0NAME}
 
@@ -2823,7 +2830,8 @@ function write_flag_file {
             continue
         fi
         info "Writing flag for ${NODE}"
-                local IP=$(get_mgmt_ip ${NODE})
+                local IP=""
+                IP=$(get_mgmt_ip ${NODE})
                 echo ${IP}
                 sudo touch ${VIRTDIR}/${IP}
         stage_complete "virtual_flags" ${NODE}
@@ -3014,7 +3022,8 @@ function setup_data_address_pools {
         local ORDER=${FIELDS[3]}
         local RANGES=${FIELDS[4]}
 
-        local ID=$(get_addrpool_id ${NAME})
+        local ID=""
+        ID=$(get_addrpool_id ${NAME})
         if [ -z "${ID}" ]; then
             log_command "system addrpool-add ${NAME} ${NETWORK} ${PREFIX} --order ${ORDER} --ranges ${RANGES}"
         fi
@@ -3385,10 +3394,14 @@ function resize_controller_filesystem {
     fi
 
     source ${OPENRC}
-    local -i DEFAULT_DATABASE_FS_SIZE=$(system controllerfs-show database | grep size | awk '{print $4}')
-    local -i DEFAULT_IMAGE_FS_SIZE=$(system controllerfs-show glance | grep size | awk '{print $4}')
-    local -i DEFAULT_BACKUP_FS_SIZE=$(system controllerfs-show backup | grep size | awk '{print $4}')
-    local -i DEFAULT_IMG_CONVERSIONS_FS_SIZE=$(system controllerfs-show img-conversions | grep size | awk '{print $4}')
+    local -i DEFAULT_DATABASE_FS_SIZE=0
+    local -i DEFAULT_IMAGE_FS_SIZE=0
+    local -i DEFAULT_BACKUP_FS_SIZE=0
+    local -i DEFAULT_IMG_CONVERSIONS_FS_SIZE=0
+    DEFAULT_DATABASE_FS_SIZE=$(system controllerfs-show database | grep size | awk '{print $4}')
+    DEFAULT_IMAGE_FS_SIZE=$(system controllerfs-show glance | grep size | awk '{print $4}')
+    DEFAULT_BACKUP_FS_SIZE=$(system controllerfs-show backup | grep size | awk '{print $4}')
+    DEFAULT_IMG_CONVERSIONS_FS_SIZE=$(system controllerfs-show img-conversions | grep size | awk '{print $4}')
 
     local cmd="system controllerfs-modify "
     local args=""
@@ -3484,7 +3497,8 @@ function setup_ceph_storage_tiers {
 
     local TIER_ARRAY=(${STORAGE_TIERS_CEPH//|/ })
     for TINDEX in ${!TIER_ARRAY[@]}; do
-        local TIER_UUID=$(system storage-tier-list ceph_cluster ${CLI_NOWRAP} | grep ${TIER_ARRAY[${TINDEX}]} | awk '{print $2}')
+        local TIER_UUID=""
+        TIER_UUID=$(system storage-tier-list ceph_cluster ${CLI_NOWRAP} | grep ${TIER_ARRAY[${TINDEX}]} | awk '{print $2}')
         if [ "${TIER_UUID}" == "" ]; then
             # Add the storage tier
             log_command "system storage-tier-add ceph_cluster ${TIER_ARRAY[${TINDEX}]}"
@@ -3515,12 +3529,14 @@ function setup_ceph_storage_tier_backends {
 
     local TIER_ARRAY=(${STORAGE_TIERS_CEPH//|/ })
     for TINDEX in ${!TIER_ARRAY[@]}; do
-        local TIER_UUID=$(system storage-tier-list ceph_cluster ${CLI_NOWRAP} | grep ${TIER_ARRAY[${TINDEX}]} | awk '{print $2}')
+        local TIER_UUID=""
+        TIER_UUID=$(system storage-tier-list ceph_cluster ${CLI_NOWRAP} | grep ${TIER_ARRAY[${TINDEX}]} | awk '{print $2}')
         if [ "${TIER_UUID}" == "" ]; then
             echo "Error adding storage backend for ${TIER_ARRAY[${TINDEX}]}; tier is missing"
             return 1
         else
-            local BACKEND_UUID=$(system storage-backend-list ${CLI_NOWRAP} | grep "${TIER_ARRAY[${TINDEX}]}-store" | awk '{print $2}')
+            local BACKEND_UUID=""
+            BACKEND_UUID=$(system storage-backend-list ${CLI_NOWRAP} | grep "${TIER_ARRAY[${TINDEX}]}-store" | awk '{print $2}')
             if [ "${BACKEND_UUID}" == "" ]; then
                 log_command "system storage-backend-add --services cinder --name ${TIER_ARRAY[${TINDEX}]}-store -t $TIER_UUID ceph"
 
@@ -3550,7 +3566,8 @@ function setup_journal_storage {
             continue
         fi
 
-        local JOURNAL_DEVICES=$(get_node_variable ${NODE} JOURNAL_DEVICES)
+        local JOURNAL_DEVICES=""
+        JOURNAL_DEVICES=$(get_node_variable ${NODE} JOURNAL_DEVICES)
         if [ -z "${JOURNAL_DEVICES}" ]; then
             stage_complete "journals" ${NODE}
             continue
@@ -3585,9 +3602,11 @@ function setup_journal_storage {
 function setup_osd_storage {
     ##OSD can be only added to storage nodes when controller-1 is available
     if [ -z "${AVAIL_CONTROLLER_NODES}" ]; then
-        local ALL_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if ($6=="controller" && ($12 != "offline")) print $4;}')
+        local ALL_NODES=""
+        ALL_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if ($6=="controller" && ($12 != "offline")) print $4;}')
     else
-            local ALL_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if (($6=="controller" || $6=="storage") && ($12 != "offline")) print $4;}')
+        local ALL_NODES=""
+        ALL_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if (($6=="controller" || $6=="storage") && ($12 != "offline")) print $4;}')
     fi
 
     for NODE in ${ALL_NODES}; do
@@ -3600,7 +3619,8 @@ function setup_osd_storage {
             continue
         fi
 
-        local OSD_DEVICES=$(get_node_variable ${NODE} OSD_DEVICES)
+        local OSD_DEVICES=""
+        OSD_DEVICES=$(get_node_variable ${NODE} OSD_DEVICES)
         if [ -z "${OSD_DEVICES}" ]; then
             stage_complete "osd" ${NODE}
             continue
@@ -3965,14 +3985,16 @@ function setup_management_networks {
         local MGMTROUTER="${TENANT}-router"
         source ${HOME}/openrc.${TENANT}
 
-        local EXTERNALNETID=$(get_network_id ${EXTERNALNET})
+        local EXTERNALNETID=""
+        EXTERNALNETID=$(get_network_id ${EXTERNALNET})
         if [ -z "${EXTERNALNETID}" ]; then
             echo "Unable to get external network ${EXTERNALNET} for tenant ${TENANT}"
             return 1
         fi
 
         if [ "${VSWITCH_TYPE}" == "avs" ]; then
-            local QOSID=$(get_qos_id ${MGMTQOS})
+            local QOSID=""
+            QOSID=$(get_qos_id ${MGMTQOS})
             if [ -z "${QOSID}" ]; then
                 echo "Unable to find QoS resource for ${MGMTQOS} for tenant ${TENANT}"
                 return 1
@@ -3982,8 +4004,10 @@ function setup_management_networks {
         fi
 
         for I in $(seq 0 $((MGMTNETS-1))); do
-            local MGMTNET=$(get_mgmt_network_name ${TENANT}-mgmt-net ${I})
-            local ID=$(get_network_id ${MGMTNET})
+            local MGMTNET=""
+            local ID=""
+            MGMTNET=$(get_mgmt_network_name ${TENANT}-mgmt-net ${I})
+            ID=$(get_network_id ${MGMTNET})
             if [ -z "${ID}" ]; then
                 log_command "openstack ${REGION_OPTION} network create ${MGMTNET} ${QOS_ARGS}"
             fi
@@ -4021,7 +4045,8 @@ function setup_management_networks {
 
             ## Distribute the subnets evenly across the number of mgmt networks
             NETWORK=$(((COUNT / ${SUBNETS_PER_NETWORK}) % ${MGMTNETS}))
-            local MGMTNET=$(get_mgmt_network_name ${TENANT}-mgmt-net ${NETWORK})
+            local MGMTNET=""
+            MGMTNET=$(get_mgmt_network_name ${TENANT}-mgmt-net ${NETWORK})
             local MGMTSUBNET="${TENANT}-mgmt${NETWORK}-subnet${COUNT}"
             setup_management_subnet ${TENANT} ${MGMTNET} ${CIDR} ${MGMTSUBNET} ${MGMTROUTER} "${POOL}"
             RET=$?
@@ -4075,7 +4100,8 @@ function flavor_create {
     local USER_ARGS=$*
     local DEFAULT_ARGS="hw:mem_page_size=2048"
 
-    local X=$(get_flavor_id ${NAME})
+    local X=""
+    X=$(get_flavor_id ${NAME})
 
     if [ "$K8S_ENABLED" == "yes" ]; then
         unset OS_AUTH_URL
@@ -5215,7 +5241,8 @@ function write_heat_resource_commands {
 
     VMNAME_UNDERSCORES=$(echo "${VMNAME}" | sed -e 's/-/_/g')
 
-    local GLANCE_ID=$(get_glance_id ${IMAGE})
+    local GLANCE_ID=""
+    GLANCE_ID=$(get_glance_id ${IMAGE})
     if [ -z "${GLANCE_ID}" ]; then
         echo "No glance image with name: ${IMAGE}"
         return 1
@@ -5281,7 +5308,8 @@ function write_cinder_command {
         return 0
     fi
 
-    local GLANCE_ID=$(get_glance_id ${IMAGE})
+    local GLANCE_ID=""
+    GLANCE_ID=$(get_glance_id ${IMAGE})
     if [ -z "${GLANCE_ID}" ]; then
         echo "No glance image with name: ${IMAGE}"
         return 1
@@ -5508,7 +5536,8 @@ function setup_local_storage {
 
     # Special Case: Small system controller-0 (after running lab_cleanup)
     if [[ "${SMALL_SYSTEM}" == "yes" && "${NODE}" == "controller-0" ]]; then
-        local NOVA_VG=$(system host-lvg-list ${NODE} ${CLI_NOWRAP} | awk '{if ($4 == "nova-local" && $6 == "provisioned") print $4}')
+        local NOVA_VG=""
+        NOVA_VG=$(system host-lvg-list ${NODE} ${CLI_NOWRAP} | awk '{if ($4 == "nova-local" && $6 == "provisioned") print $4}')
         if [ "${NOVA_VG}" == "nova-local" ]; then
             info "Skipping local storage configuration for ${NODE}; already done"
             return 0
@@ -5542,7 +5571,8 @@ function setup_local_storage {
     fi
 
     # Volume Group: Create the the nova-local volume group
-    local NOVA_VG=$(system host-lvg-list ${NODE} ${CLI_NOWRAP} | awk '{if ($4 == "nova-local" && ($6 == "provisioned" || $6 ~ /adding/)) print $4}')
+    local NOVA_VG=""
+    NOVA_VG=$(system host-lvg-list ${NODE} ${CLI_NOWRAP} | awk '{if ($4 == "nova-local" && ($6 == "provisioned" || $6 ~ /adding/)) print $4}')
     if [ -z "${NOVA_VG}" ]; then
     log_command "system host-lvg-add ${NODE} nova-local"
     fi
@@ -5551,11 +5581,13 @@ function setup_local_storage {
     if [ "${PVS}" != "none" ]; then
         local DEVICE_ARRAY=(${PVS//,/ })
         for DINDEX in ${!DEVICE_ARRAY[@]}; do
-            local DEVICE_UUID=$(system host-disk-list ${NODE} ${CLI_NOWRAP} | grep ${DEVICE_ARRAY[${DINDEX}]} | awk '{print $2}')
+            local DEVICE_UUID=""
+            DEVICE_UUID=$(system host-disk-list ${NODE} ${CLI_NOWRAP} | grep ${DEVICE_ARRAY[${DINDEX}]} | awk '{print $2}')
 
             if [ "${DEVICE_UUID}" == "" ]; then
                 log "PV is not a disk, looking for a partition"
-                local DEVICE_UUID=$(system host-disk-partition-list ${NODE} ${CLI_NOWRAP} | grep ${DEVICE_ARRAY[${DINDEX}]} | awk '{print $2}')
+                local DEVICE_UUID=""
+                DEVICE_UUID=$(system host-disk-partition-list ${NODE} ${CLI_NOWRAP} | grep ${DEVICE_ARRAY[${DINDEX}]} | awk '{print $2}')
                 if [ "${DEVICE_UUID}" == "" ]; then
                     echo "ERROR: could not find the device (${DEVICE_ARRAY[${DINDEX}]}) UUID for ${NODE}"
                     return 4
@@ -5563,7 +5595,8 @@ function setup_local_storage {
             fi
 
             # Add the addition physical volume
-            local NOVA_PV=$(system host-pv-list ${NODE} ${CLI_NOWRAP} | grep nova-local | grep ${DEVICE_UUID} | awk '{if ($12 == "provisioned" || $12 == "adding") print $4}')
+            local NOVA_PV=""
+            NOVA_PV=$(system host-pv-list ${NODE} ${CLI_NOWRAP} | grep nova-local | grep ${DEVICE_UUID} | awk '{if ($12 == "provisioned" || $12 == "adding") print $4}')
             if [ -z ${NOVA_PV} ];then
                 log_command "system host-pv-add ${NODE} nova-local ${DEVICE_UUID}"
             fi
@@ -5594,7 +5627,8 @@ function add_local_storage {
         if [[ "${SMALL_SYSTEM}" != "yes" && $NODE == *"controller"* ]]; then
             continue
         fi
-        local SETTINGS_STRING=$(get_node_variable ${NODE} LOCAL_STORAGE)
+        local SETTINGS_STRING=""
+        SETTINGS_STRING=$(get_node_variable ${NODE} LOCAL_STORAGE)
         local FIELD_SEPARATORS="${SETTINGS_STRING//[^|]}"
         if [ ${#FIELD_SEPARATORS} -ne 3 ]; then
             echo "Local storage settings for host ${NODE} has an invalid format: Incorrect number of fields"
@@ -5633,7 +5667,8 @@ function setup_cinder_device {
     fi
 
     # Special case: after lab_cleanup we may already have cinder provisioned.
-    local CINDER_VG=$(system host-lvg-list ${NODE} ${CLI_NOWRAP} | awk '{if ($4 == "cinder-volumes") print $4}')
+    local CINDER_VG=""
+    CINDER_VG=$(system host-lvg-list ${NODE} ${CLI_NOWRAP} | awk '{if ($4 == "cinder-volumes") print $4}')
     if [[ "${CINDER_VG}" == *"cinder-volumes"* ]]; then
         info "Skipping cinder device creation for ${NODE}; already done"
         return 0
@@ -5662,7 +5697,8 @@ function setup_cinder_device {
             return 2
         fi
 
-        local CINDER_VG=$(system host-lvg-list ${NODE} ${CLI_NOWRAP} | awk '{if ($4 == "cinder-volumes" && ($6 == "provisioned" || $6 ~ /adding/)) print $4}')
+        local CINDER_VG=""
+        CINDER_VG=$(system host-lvg-list ${NODE} ${CLI_NOWRAP} | awk '{if ($4 == "cinder-volumes" && ($6 == "provisioned" || $6 ~ /adding/)) print $4}')
         if [ -z "${CINDER_VG}" ]; then
             log_command "system host-lvg-add ${NODE} cinder-volumes"
         fi
@@ -5721,7 +5757,8 @@ function setup_partitions {
     fi
 
     # Get the sizes of partitions existing on the current disk.
-    local present_partition_sizes=$(system host-disk-partition-list ${NODE} --disk ${DISK_UUID} ${CLI_NOWRAP} | grep "ba5eba11" | awk -F'|' '{print $7}' | tr '\r\n' ' ')
+    local present_partition_sizes=""
+    present_partition_sizes=$(system host-disk-partition-list ${NODE} --disk ${DISK_UUID} ${CLI_NOWRAP} | grep "ba5eba11" | awk -F'|' '{print $7}' | tr '\r\n' ' ')
     PARTITION_SIZES=$(echo ${partitionArgArray[@]})
 
 
@@ -5751,8 +5788,10 @@ function setup_partitions {
     # Create all the requested partitions.
     for PARTITION_SIZE in ${PARTITION_SIZES}; do
         log "Create part of size $PARTITION_SIZE on node $NODE, disk $DISK_DEVICE_PATH"
-        local new_partition=$(system host-disk-partition-add -t lvm_phys_vol ${NODE} ${DISK_UUID} ${PARTITION_SIZE})
-        local new_partition_uuid=$(echo $new_partition | grep -ow "| uuid | [a-z0-9\-]* |" | awk '{print $4}')
+        local new_partition=""
+        local new_partition_uuid=""
+        new_partition=$(system host-disk-partition-add -t lvm_phys_vol ${NODE} ${DISK_UUID} ${PARTITION_SIZE})
+        new_partition_uuid=$(echo $new_partition | grep -ow "| uuid | [a-z0-9\-]* |" | awk '{print $4}')
 
         if [ "${new_partition_uuid}" == "" ]; then
             echo "ERROR: Could not create partition of ${PARTITION_SIZE} GiB on disk ${DISK_UUID} for ${NODE}"
@@ -5804,9 +5843,10 @@ function setup_cgts_extend {
     local PROVISION_PV_TIMEOUT=180
 
     for DEVICE in "${DEVICES[@]}"; do
-       # Check if this PV is already in cgts-vg.
-       # Special case: after lab_cleanup we may already have this PV in cgts-vg.
-        local CGTS_VG=$(system host-pv-list $NODE ${CLI_NOWRAP} | grep $DEVICE | awk -F'|' '{print $9}')
+        # Check if this PV is already in cgts-vg.
+        # Special case: after lab_cleanup we may already have this PV in cgts-vg.
+        local CGTS_VG=""
+        CGTS_VG=$(system host-pv-list $NODE ${CLI_NOWRAP} | grep $DEVICE | awk -F'|' '{print $9}')
         if [[ "${CGTS_VG}" == *"cgts-vg"* ]]; then
             log "Skipping adding device $DEVICE to cgts-vg for ${NODE}; already done"
             continue
@@ -5847,7 +5887,8 @@ function setup_cgts_extend {
 
 function add_partitions {
     local NODE=""
-    local PART_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if (($6=="controller" || $6=="worker") && ($12 != "offline")) print $4;}')
+    local PART_NODES=""
+    PART_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if (($6=="controller" || $6=="worker") && ($12 != "offline")) print $4;}')
 
     for NODE in ${PART_NODES}; do
         # We should never skip this as we may want to add
@@ -5855,7 +5896,8 @@ function add_partitions {
         # Useful for chaining config files.
         info "Setting partitions for host $NODE"
 
-        local SETTINGS_STRING=$(get_node_variable ${NODE} PARTITIONS)
+        local SETTINGS_STRING=""
+        SETTINGS_STRING=$(get_node_variable ${NODE} PARTITIONS)
         local FIELD_SEPARATORS="${SETTINGS_STRING//[^|]}"
         local SETTINGS_ARRAY=(${SETTINGS_STRING//|/ })
         unset MERGE_PARTITION_INFO
@@ -5905,7 +5947,8 @@ function extend_cgts_vg {
     fi
 
     local NODE=""
-    local ALL_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if (($6=="controller" || $6=="worker") && ($12 != "offline")) print $4;}')
+    local ALL_NODES=""
+    ALL_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if (($6=="controller" || $6=="worker") && ($12 != "offline")) print $4;}')
 
     for NODE in ${ALL_NODES}; do
         if is_stage_complete "extend_cgts_vg" ${NODE}; then
@@ -5913,7 +5956,8 @@ function extend_cgts_vg {
             continue
         fi
 
-        local SETTINGS_STRING=$(get_node_variable ${NODE} CGTS_STORAGE)
+        local SETTINGS_STRING=""
+        SETTINGS_STRING=$(get_node_variable ${NODE} CGTS_STORAGE)
         local FIELD_SEPARATORS="${SETTINGS_STRING//[^|]}"
 
         local SETTINGS_ARRAY=(${SETTINGS_STRING//|/ })
@@ -6235,8 +6279,8 @@ function is_https_security_configuration {
         if [ "${SYSTEM_HTTPS_ENABLED}" != "${HTTPS_ENABLED}" ]; then
             return 0
         else
-                      # configuration value in .conf file matches with system show value .
-                      # no changes needed.
+            # configuration value in .conf file matches with system show value .
+            # no changes needed.
             return 1
         fi
     else
@@ -6311,8 +6355,10 @@ function setup_https_security_configuration {
         done
     else
         echo "HTTPS security confguration change is not required."
-        local CONTROLLER_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if ($6=="controller" && ($12 != "offline")) print $4;}')
-        local COUNT=$(echo ${CONTROLLER_NODES} | wc -w)
+        local CONTROLLER_NODES=""
+        local COUNT=""
+        CONTROLLER_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if ($6=="controller" && ($12 != "offline")) print $4;}')
+        COUNT=$(echo ${CONTROLLER_NODES} | wc -w)
         if [ ${COUNT} -gt 1 ]; then
             # now that the second controller is up, we need to install the CA certificate for https again if using TPM
             if [ ! -z "${CERTIFICATE_FILENAME}" ] && [ "${HTTPS_ENABLED}" == "True" ] && [ "$TPM_ENABLED" == "True" ]; then
@@ -6549,7 +6595,9 @@ function wait_for_ceph_mon {
 
 #add ceph monitor for standard system
 function add_ceph_mon {
-    local STORAGE_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if ($6 == "storage") print $4}')
+    local STORAGE_NODES=""
+    local HOSTS=""
+    STORAGE_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if ($6 == "storage") print $4}')
     if [ ! -z "${STORAGE_NODES}" ]; then
         return 0
     fi
@@ -6557,7 +6605,7 @@ function add_ceph_mon {
         info "Skipping k8s cert configuration; already done"
         return 0
     fi
-    local HOSTS=$(system host-list ${CLI_NOWRAP} | awk '{if ($6 == "worker") print $4}')
+    HOSTS=$(system host-list ${CLI_NOWRAP} | awk '{if ($6 == "worker") print $4}')
     if [ ! -z "${HOSTS}" ]; then
         log_command "system ceph-mon-add "${HOSTS[0]}""
         wait_for_ceph_mon ${HOSTS[0]}
@@ -6592,7 +6640,8 @@ function install_k8s_cert {
 
 #Add labels
 function add_k8s_label {
-    local ALL_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if (($6=="controller" || $6=="worker") && ($12 != "offline")) print $4;}')
+    local ALL_NODES=""
+    ALL_NODES=$(system host-list ${CLI_NOWRAP} | awk '{if (($6=="controller" || $6=="worker") && ($12 != "offline")) print $4;}')
     for NODE in ${ALL_NODES}; do
         if is_stage_complete "k8s_label" ${NODE}; then
             info "Skipping k8s label configuration for ${NODE}; already done"

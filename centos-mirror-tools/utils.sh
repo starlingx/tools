@@ -63,6 +63,7 @@ get_download_file_command() {
 # Usage: download_file [--quiet] [--timestamps] URL [OUTPUT_FILE]
 download_file() {
     local _opts="$_CURL_OPTS"
+    local _dest_file=""
     while true ; do
         case "$1" in
             --quiet)      _opts+=" --silent --show-error" ;;
@@ -77,9 +78,9 @@ download_file() {
         shift
     done
     if [[ "$#" -gt 1 ]] ; then
-        local _dest_file="$2"
+        _dest_file="$2"
     else
-        local _dest_file="$(basename "$1")"
+        _dest_file="$(basename "$1")"
     fi
     if curl $_opts -o "${_dest_file}.dl_part" "$1" ; then
         \mv -fT "${_dest_file}.dl_part" "${_dest_file}"
