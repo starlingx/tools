@@ -46,7 +46,7 @@ def print_html_report(cves_report, title):
     template_env = jinja2.Environment(loader=template_loader)
     if CVSS_VER == "cvssv3":
         template_file = "template_v3.txt"
-        heads = ["cve_id", "status", "cvss3Score", "av", "ac", "ui","a"]
+        heads = ["cve_id", "status", "cvss3Score", "av", "ac", "pr", "ui","a"]
     else:
         template_file = "template.txt"
         heads = ["cve_id", "status", "cvss2Score", "av", "ac", "au", "ai"]
@@ -83,6 +83,7 @@ def print_report(cves_report, title):
         print("Attack Vector: " + cve["av"])
         print("Access Complexity : " + cve["ac"])
         if CVSS_VER == "cvssv3":
+            print("Privileges Required: " + cve["pr"])
             print("User Interaction: " + cve["ui"])
         else:
             print("Authentication: " + cve["au"])
@@ -180,10 +181,11 @@ def cvssv3_pb_alg():
     Patchback algo for CVSSV3 report
     """
     for cve in cves_valid:
-        if (cve["cvss3Score"] >= 7.8
+        if (cve["cvss3Score"] >= 7.0
                 and cve["av"] == "N"
                 and cve["ac"] == "L"
-                and cve["ui"] == "R"
+                and ("N" in cve["pr"] or "L" in cve["pr"])
+                and cve["ui"] == "N"
                 and cve["ai"] != "N"):
                 if cve["status"] == "fixed":
                     bug = find_lp_assigned(cve["id"])
@@ -245,6 +247,8 @@ def cvssv3_parse_n_report(cves,title,data):
 
             nvd3_score = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss3Score"]
             cvss3vector = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss3Vector"]
+            if cvss3vector == "":
+                raise KeyError
         except KeyError:
             cves_w_errors.append(cve)
         else:
@@ -258,11 +262,14 @@ def cvssv3_parse_n_report(cves,title,data):
                     _ai = element.split(":")[1]
                 if "UI:" in element:
                     _ui = element.split(":")[1]
+                if "PR:" in element:
+                    _pr = element.split(":")[1]
             print(cve)
             cve["av"] = str(_av)
             cve["ac"] = str(_ac)
             cve["ai"] = str(_ai)
             cve["ui"] = str(_ui)
+            cve["pr"] = str(_pr)
             cve["summary"] = get_summary(data, cve_id)
             cve["sourcelink"] = get_source_link(data, cve_id)
             affectedpackages_list, allfixed = get_affectedpackages(data, cve_id)
