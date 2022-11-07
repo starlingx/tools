@@ -1055,5 +1055,5 @@ xml-core  0.18+nmu1
 xmlsec1  1.2.31-1
 xxd  2:8.2.2434-3+deb11u1
 xz-utils  5.2.5-2
-zlib1g  1:1.2.11.dfsg-2
-zlib1g-dev  1:1.2.11.dfsg-2
+zlib1g  1:1.2.11.dfsg-2+deb11u2 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/z/zlib/zlib1g_1.2.11.dfsg-2+deb11u2_amd64.deb
+zlib1g-dev  1:1.2.11.dfsg-2+deb11u2 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/z/zlib/zlib1g-dev_1.2.11.dfsg-2+deb11u2_amd64.deb
