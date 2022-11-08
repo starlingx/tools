@@ -287,7 +287,7 @@ libgfortran5  10.2.1-6
 libgirepository-1.0-1  1.66.1-1+b1
 libglib2.0-0  2.66.8-1
 libgmp10  2:6.2.1+dfsg-1+deb11u1
-libgnutls30  3.7.1-5
+libgnutls30  3.7.1-5+deb11u2  https://snapshot.debian.org/archive/debian-security/20220808T192640Z/pool/updates/main/g/gnutls28/libgnutls30_3.7.1-5%2Bdeb11u2_amd64.deb
 libgomp1  10.2.1-6
 libgoogle-perftools4  2.8.1-1
 libgpg-error0  1.38-2
