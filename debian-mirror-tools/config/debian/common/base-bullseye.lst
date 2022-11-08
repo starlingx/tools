@@ -509,7 +509,7 @@ libsigsegv2  2.13-1
 libslang2  2.3.2-5
 libsm6  2:1.2.3-1
 libsmartcols1  2.36.1-8+deb11u1
-libsmbclient  2:4.13.13+dfsg-1~deb11u5
+libsmbclient  2:4.13.13+dfsg-1~deb11u5 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/s/samba/libsmbclient_4.13.13+dfsg-1~deb11u5_amd64.deb
 libsnappy1v5  1.1.8-1
 libsnmp40  5.9+dfsg-3+b1
 libsnmp-base  5.9+dfsg-3
@@ -561,7 +561,7 @@ liburcu6  0.12.2-1
 libutempter0 1.2.1-2
 libuuid1  2.36.1-8+deb11u1
 libuv1  1.40.0-2
-libwbclient0  2:4.13.13+dfsg-1~deb11u5
+libwbclient0  2:4.13.13+dfsg-1~deb11u5 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/s/samba/libwbclient0_4.13.13+dfsg-1~deb11u5_amd64.deb
 libwrap0  7.6.q-31
 libx11-6  2:1.7.2-1
 libx11-data  2:1.7.2-1
@@ -981,7 +981,7 @@ ruby-shadow  2.5.0-1+b4
 ruby-test-unit  3.3.9-1
 ruby-xmlrpc  0.3.0-2
 runit-helper  2.10.3
-samba-libs  2:4.13.13+dfsg-1~deb11u5
+samba-libs  2:4.13.13+dfsg-1~deb11u5 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/s/samba/samba-libs_4.13.13+dfsg-1~deb11u5_amd64.deb
 sbsigntool 0.9.2-2
 screen 4.8.0-6
 sed  4.7-1
