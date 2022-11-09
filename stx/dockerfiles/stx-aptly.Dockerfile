@@ -21,6 +21,7 @@ RUN mkdir -p $GOPATH/src/github.com/aptly-dev/aptly && \
     git clone https://github.com/masselstine/aptly $GOPATH/src/github.com/aptly-dev/aptly && \
     cd $GOPATH/src/github.com/aptly-dev/aptly && \
     go mod init && go mod download && go mod vendor && go mod verify && \
+    export TRAVIS_TAG="StarlingX_Master_v1.0.0" && \
     make install && \
     cd $GOPATH && \
     curl -O https://nginx.org/keys/nginx_signing.key && apt-key add ./nginx_signing.key
