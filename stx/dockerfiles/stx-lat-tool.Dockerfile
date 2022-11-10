@@ -21,6 +21,7 @@ ARG LAT_BINARY_RESOURCE_PATH=http://mirror.starlingx.cengn.ca/mirror/lat-sdk/lat
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \
         python3 \
+        python3-pip \
         xz-utils \
         file \
         bzip2 \
@@ -28,10 +29,15 @@ RUN apt-get -y update && apt-get --no-install-recommends -y install \
         tini \
         wget \
         locales-all \
-        python3-yaml && \
+        python3-yaml \
+        rsync \
+        cpio \
+        vim \
+        && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \
-        mkdir -p /opt/LAT/SDK
+        mkdir -p /opt/LAT/SDK && \
+        pip3 install pycryptodomex requests_toolbelt
 
 # Insert pubkey of the package repository
 COPY stx/toCOPY/builder/pubkey.rsa /opt/LAT/
@@ -56,7 +62,6 @@ RUN sed -i 's/linux-image-amd64/linux-image-5.10.0-6-amd64-unsigned/g' /opt/LAT/
 RUN sed -i 's/Wind River Linux Graphics development .* ostree/StarlingX ostree/g' /opt/LAT/SDK/sysroots/corei7-64-wrs-linux/boot/efi/EFI/BOOT/grub.cfg
 
 # Add vimrc
-RUN mkdir /etc/vim
 COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
 

@@ -17,6 +17,7 @@
 import getpass
 import logging
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -186,6 +187,20 @@ stx-pkgbuilder/configmap/')
                 message += line
 
         with open(localrc, "w") as wf:
+            wf.write(message)
+
+        # Update LAT configmap for patching
+        lat_configmap_dir = os.path.join(self.abs_helmchartdir,
+                                         'dependency_chart/stx-lat-tool/configmap/')
+        patch_env_sample = os.path.join(lat_configmap_dir, 'patch.env.sample')
+        patch_env = os.path.join(lat_configmap_dir, 'stx-patch-env.sh')
+
+        with open(patch_env_sample, "r") as rf:
+            message = rf.read()
+            message = message.replace("@PROJECT@", projectname)
+            message = message.replace("@MYUNAME@", builder_myuname)
+
+        with open(patch_env, "w") as wf:
             wf.write(message)
 
         # Copy stx-localrc file of builder container to pkgbuilder
