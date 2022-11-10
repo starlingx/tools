@@ -957,8 +957,8 @@ python-babel-localedata  2.8.0+dfsg.1-7
 python-is-python3  3.9.2-1
 python-pastedeploy-tpl  2.1.1-1
 python-pip-whl  20.3.4-4+deb11u1
-qemu  1:5.2+dfsg-11+deb11u1
-qemu-utils  1:5.2+dfsg-11+deb11u2
+qemu  1:5.2+dfsg-11+deb11u2  https://snapshot.debian.org/archive/debian/20220606T084757Z/pool/main/q/qemu/qemu_5.2%2Bdfsg-11%2Bdeb11u2_amd64.deb
+qemu-utils  1:5.2+dfsg-11+deb11u2  https://snapshot.debian.org/archive/debian/20220606T084757Z/pool/main/q/qemu/qemu-utils_5.2%2Bdfsg-11%2Bdeb11u2_amd64.deb
 rake  13.0.3-1
 readline-common  8.1-1
 redfishtool  1.1.5-1  http://ftp.debian.org/debian/pool/main/r/redfishtool/redfishtool_1.1.5-1_all.deb
