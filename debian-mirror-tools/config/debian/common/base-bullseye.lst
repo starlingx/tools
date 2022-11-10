@@ -142,7 +142,7 @@ grep  3.6-1
 groff-base  1.22.4-6
 gsettings-desktop-schemas  3.38.0-2
 gunicorn  20.1.0-1
-gzip  1.10-4
+gzip  1.10-4+deb11u1 https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/g/gzip/gzip_1.10-4%2Bdeb11u1_amd64.deb
 hdparm  9.60+ds-1
 hiera  3.2.0-2.1
 hostname  3.23
@@ -1056,6 +1056,6 @@ xfsprogs  5.10.0-4
 xml-core  0.18+nmu1
 xmlsec1  1.2.31-1
 xxd  2:8.2.2434-3+deb11u1
-xz-utils  5.2.5-2
+xz-utils  5.2.5-2.1~deb11u1 https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/x/xz-utils/xz-utils_5.2.5-2.1~deb11u1_amd64.deb
 zlib1g  1:1.2.11.dfsg-2+deb11u2 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/z/zlib/zlib1g_1.2.11.dfsg-2+deb11u2_amd64.deb
 zlib1g-dev  1:1.2.11.dfsg-2+deb11u2 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/z/zlib/zlib1g-dev_1.2.11.dfsg-2+deb11u2_amd64.deb
