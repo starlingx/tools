@@ -968,6 +968,9 @@ stx-extensions
 #stx-istio-helm
 stx-istio-helm
 
+#stx-kubevirt-app-helm
+stx-kubevirt-app-helm
+
 #stx-sts-silicom-helm
 stx-sts-silicom-helm
 
