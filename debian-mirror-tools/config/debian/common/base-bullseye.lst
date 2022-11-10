@@ -439,7 +439,7 @@ libpangoft2-1.0-0  1.46.2-3
 libpath-utils1  0.6.1-2
 libpcap0.8  1.10.0-2
 libpci3  1:3.7.0-5
-libpcre2-8-0  10.36-2
+libpcre2-8-0  10.36-2+deb11u1  https://snapshot.debian.org/archive/debian/20220930T210437Z/pool/main/p/pcre2/libpcre2-8-0_10.36-2%2Bdeb11u1_amd64.deb
 libpcre3  2:8.39-13
 libpcsclite1  1.9.1-1
 libperl5.32  5.32.1-4+deb11u2
