@@ -68,6 +68,11 @@ rootfs-post-scripts:
   mkdir $IMAGE_ROOTFS/var/rootdirs/scratch
   ln -snf --relative $IMAGE_ROOTFS/var/rootdirs/scratch $IMAGE_ROOTFS/scratch
 - |-
+  # Make /opt/branding to writable (To make end-user enable to place their branding archive)
+  mkdir $IMAGE_ROOTFS/var/branding
+  mkdir -p $IMAGE_ROOTFS/var/rootdirs/opt
+  ln -snf --relative $IMAGE_ROOTFS/var/branding $IMAGE_ROOTFS/var/rootdirs/opt/branding
+- |-
   cat /dev/null > $IMAGE_ROOTFS/etc/resolv.conf
 - |-
   # Only used for running build-image
