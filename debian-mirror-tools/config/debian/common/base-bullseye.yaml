@@ -231,16 +231,12 @@ iso-post-script: |
   ENDOF
 
   # 1.3 Kickstart from image rootfs (provided by package platform-kickstarts)
-  if [ -e $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart.cfg ]; then
-    cp $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart.cfg kickstart/
+  if [ -e $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart/kickstart.cfg ]; then
+    cp $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart/kickstart.cfg kickstart/
   fi
 
-  if [ -e $IMAGE_ROOTFS/var/www/pages/feed/rel-*/miniboot.cfg ]; then
-    cp $IMAGE_ROOTFS/var/www/pages/feed/rel-*/miniboot.cfg kickstart/
-  fi
-
-  if [ -e $IMAGE_ROOTFS/var/www/pages/feed/rel-*/prestage.cfg ]; then
-    cp $IMAGE_ROOTFS/var/www/pages/feed/rel-*/prestage.cfg kickstart/
+  if [ -e $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart/miniboot.cfg ]; then
+    cp $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart/miniboot.cfg kickstart/
   fi
 
   # 2. PXE
