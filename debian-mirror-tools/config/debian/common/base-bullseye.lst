@@ -104,7 +104,28 @@ expect  5.45.4-2+b1
 fdisk  2.36.1-8+deb11u1
 file  1:5.39-3
 findutils  4.8.0-1
+firmware-amd-graphics 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-amd-graphics_20210315-3_all.deb
+firmware-ath9k-htc 1.4.0-106-gc583009+dfsg1 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/main/o/open-ath9k-htc-firmware/firmware-ath9k-htc_1.4.0-106-gc583009%2Bdfsg1-1_all.deb
+firmware-atheros 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-atheros_20210315-3_all.deb
+firmware-bnx2   20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-bnx2_20210315-3_all.deb
+firmware-bnx2x   20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-bnx2x_20210315-3_all.deb
+firmware-brcm80211 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-brcm80211_20210315-3_all.deb
+firmware-cavium 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-cavium_20210315-3_all.deb
+firmware-intel-sound 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-intel-sound_20210315-3_all.deb
+firmware-iwlwifi 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-iwlwifi_20210315-3_all.deb
+firmware-libertas 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-libertas_20210315-3_all.deb
+firmware-linux-free 20200122-1 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/main/f/firmware-free/firmware-linux-free_20200122-1_all.deb
+firmware-linux-nonfree 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-linux-nonfree_20210315-3_all.deb
+firmware-linux 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-linux_20210315-3_all.deb
+firmware-misc-nonfree 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-misc-nonfree_20210315-3_all.deb
+firmware-myricom 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-myricom_20210315-3_all.deb
+firmware-netronome 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-netronome_20210315-3_all.deb
+firmware-netxen 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-netxen_20210315-3_all.deb
+firmware-qcom-soc 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-qcom-soc_20210315-3_all.deb
 firmware-qlogic  20210315-3 https://deb.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-qlogic_20210315-3_all.deb
+firmware-realtek 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-realtek_20210315-3_all.deb
+firmware-samsung 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-samsung_20210315-3_all.deb
+firmware-siano 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-siano_20210315-3_all.deb
 flake8  3.8.4-1
 flex  2.6.4-8
 fontconfig  2.13.1-4.2
