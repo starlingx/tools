@@ -9,6 +9,7 @@ apache2-bin  2.4.54-1~deb11u1 https://snapshot.debian.org/archive/debian/2022070
 apache2-data  2.4.54-1~deb11u1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/a/apache2/apache2-data_2.4.54-1~deb11u1_all.deb
 apache2-utils  2.4.54-1~deb11u1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/a/apache2/apache2-utils_2.4.54-1~deb11u1_amd64.deb
 apparmor  2.13.6-10
+apparmor-utils 2.13.6-10
 apt  2.2.4
 apt-utils  2.2.4
 auditd  1:3.0-2
@@ -675,6 +676,7 @@ python3-amqp  5.0.3-3
 python3-amqplib  1.0.2-2
 python3-aniso8601  8.1.1-1
 python3-anyjson  0.3.3-2
+python3-apparmor 2.13.6-10
 python3-appdirs  1.4.4-1
 python3-attr  20.3.0-1
 python3-babel  2.8.0+dfsg.1-7
@@ -769,6 +771,7 @@ python3-ldap3  2.8.1-1
 python3-ldappool  2.3.1-1.1
 python3-ldb  2:2.2.3-2~deb11u2
 python3-lib2to3  3.9.2-1
+python3-libapparmor 2.13.6-10
 python3-libcomps  0.1.15-4
 python3-libdnf  0.55.2-6
 python3-linecache2  1.0.0-4
