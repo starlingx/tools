@@ -35,10 +35,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           tty: true
           volumeMounts:
-          - name: {{ .Values.volumes.name }}
-            mountPath: {{ .Values.volumeMounts.mountPath }}
-          - name: {{ .Values.volumes.entropyname }}
-            mountPath: {{ .Values.volumeMounts.entropymountPath }}
+          - name: {{ .Values.volumeMounts.workspace.name }}
+            mountPath: {{ .Values.volumeMounts.workspace.mountPath }}
+          - name: {{ .Values.volumeMounts.entropy.name }}
+            mountPath: {{ .Values.volumeMounts.entropy.mountPath }}
+          - name: {{ .Values.volumeMounts.patchConfig.name }}
+            mountPath: {{ .Values.volumeMounts.patchConfig.mountPath }}
+            subPath: {{ .Values.volumeMounts.patchConfig.subPath }}
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -47,12 +50,15 @@ spec:
         {{- toYaml .Values.dnsConfig | nindent 8 }}
 
       volumes:
-      - name: {{ .Values.volumes.name }}
+      - name: {{ .Values.volumes.workspace.name }}
         hostPath:
-          path: {{ .Values.global.hostDir }}{{ .Values.volumes.hostPath.path }}
-      - name: {{ .Values.volumes.entropyname }}
+          path: {{ .Values.global.hostDir }}{{ .Values.volumes.workspace.hostPath.path }}
+      - name: {{ .Values.volumes.entropy.name }}
         hostPath:
-          path: {{ .Values.volumes.entropyhostPath.path }}
+          path: {{ .Values.volumes.entropy.hostPath.path }}
+      - name: {{ .Values.volumes.patchConfig.name }}
+        configMap:
+          name: {{ .Values.volumes.patchConfig.configMapName }}
 
 
       {{- with .Values.nodeSelector }}

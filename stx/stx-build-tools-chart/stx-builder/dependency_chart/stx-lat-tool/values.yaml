@@ -12,18 +12,29 @@ image:
   tag: "v0.1.0"
 
 volumeMounts:
-  name: latd-shared-workspace
-  mountPath: /localdisk
-  entropyname: entropy-device
-  entropymountPath: /dev/random
+  workspace:
+    name: latd-shared-workspace
+    mountPath: /localdisk
+  entropy:
+    name: entropy-device
+    mountPath: /dev/random
+  patchConfig:
+    name: patch-env
+    mountPath: /etc/profile.d/stx-patch-env.sh
+    subPath: stx-patch-env.sh
 
 volumes:
-  name: latd-shared-workspace
-  hostPath:
-    path: /localdisk
-  entropyname: entropydevice
-  entropyhostPath:
-    path: /dev/urandom
+  workspace:
+    name: latd-shared-workspace
+    hostPath:
+      path: /localdisk
+  entropy:
+    name: entropy-device
+    hostPath:
+      path: /dev/urandom
+  patchConfig:
+    name: patch-env
+    configMapName: lat-patch
 
 imagePullSecrets: []
 nameOverride: ""
