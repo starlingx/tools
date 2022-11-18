@@ -329,8 +329,10 @@ iso-post-script: |
 
   # 3. ISO
   # 3.1 Edit grub.cfg and isolinux.cfg
-  # 3.1.1 Configure local kickstart url
+  # 3.1.1 Configure local kickstart url and LVM root and fluxdata device
   BOOT_PARAMS="ks=file:///kickstart/kickstart.cfg"
+  BOOT_PARAMS="${BOOT_PARAMS} inst_ostree_root=/dev/mapper/cgts--vg-root--lv"
+  BOOT_PARAMS="${BOOT_PARAMS} inst_ostree_var=/dev/mapper/cgts--vg-var--lv"
 
   # 3.1.2 Verbose installation
   #BOOT_PARAMS="${BOOT_PARAMS} instsh=2"
