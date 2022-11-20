@@ -77,6 +77,12 @@ rootfs-post-scripts:
 - |-
   # Only used for running build-image
   rm -f etc/dpkg/dpkg.cfg.d/unsafe-io
+- |-
+  # There is ${IMAGE_ROOTFS}/var/pxeboot/grubx64.efi from parent linux installed
+  # For secure boot feature, it should be replaced with the right one
+  if [ "$EFI_SECURE_BOOT" = enable ]; then
+    install -m 0644 ${OECORE_TARGET_SYSROOT}/boot/efi/EFI/BOOT/grubx64.efi ${IMAGE_ROOTFS}/var/pxeboot/grubx64.efi
+  fi
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
