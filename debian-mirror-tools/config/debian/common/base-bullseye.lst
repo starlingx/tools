@@ -1124,6 +1124,8 @@ sphinx-common  3.4.3-2
 sqlite3  3.34.1-3
 sshpass  1.09-1+b1
 ssl-cert  1.1.0+nmu1
+ssg-base 0.1.62-2 http://ftp.us.debian.org/debian/pool/main/s/scap-security-guide/ssg-base_0.1.62-2_all.deb
+ssg-debian 0.1.62-2 http://ftp.us.debian.org/debian/pool/main/s/scap-security-guide/ssg-debian_0.1.62-2_all.deb
 sssd  2.4.1-2
 sssd-ad  2.4.1-2
 sssd-ad-common  2.4.1-2
