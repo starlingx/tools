@@ -365,8 +365,8 @@ linux-headers-5.10.0-6-amd64
 linux-rt-headers-5.10.0-6-rt-amd64
 linux-headers-5.10.0-6-common
 linux-rt-headers-5.10.0-6-rt-common
-linux-image-5.10.0-6-amd64-dbg
-linux-rt-image-5.10.0-6-rt-amd64-dbg
+#linux-image-5.10.0-6-amd64-dbg # not used
+#linux-rt-image-5.10.0-6-rt-amd64-dbg # not used
 linux-image-5.10.0-6-amd64-unsigned
 linux-rt-image-5.10.0-6-rt-amd64-unsigned
 #linux-image-amd64-dbg  # not used
@@ -377,8 +377,8 @@ linux-libc-dev
 #linux-perf-5.10-dbgsym  # not used
 linux-perf-5.10
 #linux-perf  # not used
-linux-source-5.10
-linux-rt-source-5.10
+#linux-source-5.10 # not used
+#linux-rt-source-5.10 # not used
 #linux-source  # not used
 #linux-support-5.10.0-6  # not used
 #usbip  # not used
