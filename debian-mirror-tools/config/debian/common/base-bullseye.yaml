@@ -152,10 +152,11 @@ iso-grub-entry: |
 
 iso-syslinux-entry: |
   menu start
-  ontimeout LABEL
+  ontimeout 1
 
   menu begin
     menu title Debian Controller Install
+    menu default
 
     label 1
       menu label Serial Console
@@ -172,7 +173,6 @@ iso-syslinux-entry: |
 
   menu begin
     menu title Debian All-in-one Install
-    menu DEFAULT-STD
 
     label 3
       menu label Serial Console
@@ -189,7 +189,6 @@ iso-syslinux-entry: |
 
   menu begin
     menu title Debian All-in-one (lowlatency) Install
-    menu DEFAULT-RT
 
     label 5
       menu label Serial Console
@@ -353,22 +352,10 @@ iso-post-script: |
     # Boot rt kernel by default
     sed -i "s/ set default=.*/ set default=2/g" \
       EFI/BOOT/grub.cfg
-    sed -i "s/menu DEFAULT-STD//g" \
-      isolinux/isolinux.cfg
-    sed -i "s/menu DEFAULT-RT/menu default/g" \
-      isolinux/isolinux.cfg
-    sed -i "s/ontimeout LABEL/ontimeout 5/g" \
-      isolinux/isolinux.cfg
   else
     # Boot std kernel by default
-    sed -i "s/ set default=.*/ set default=1/g" \
+    sed -i "s/ set default=.*/ set default=0/g" \
       EFI/BOOT/grub.cfg
-    sed -i "s/menu DEFAULT-STD/menu default/g" \
-      isolinux/isolinux.cfg
-    sed -i "s/menu DEFAULT-RT//g" \
-      isolinux/isolinux.cfg
-    sed -i "s/ontimeout LABEL/ontimeout 3/g" \
-      isolinux/isolinux.cfg
   fi
 
   # 3.2 Resign grub.cfg if EFI secure boot enabled
