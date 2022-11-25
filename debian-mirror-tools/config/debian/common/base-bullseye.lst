@@ -627,7 +627,7 @@ libsss-idmap0  2.4.1-2
 libsss-nss-idmap0  2.4.1-2
 libstdc++6  10.2.1-6
 libstonith1  1.0.12-20
-libstrongswan  5.9.1-1+deb11u2 http://ftp.br.debian.org/debian/pool/main/s/strongswan/libstrongswan_5.9.1-1+deb11u2_amd64.deb
+libstrongswan  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/libstrongswan_5.9.1-1%2Bdeb11u3_amd64.deb
 libsub-override-perl  0.09-2
 libtalloc2  2.3.1-2+b1
 libtasn1-6  4.16.0-2
@@ -1138,10 +1138,10 @@ sssd-proxy  2.4.1-2
 sssd-tools  2.4.1-2
 startpar  0.64-3
 strace  5.10-1
-strongswan  5.9.1-1+deb11u2
-strongswan-charon  5.9.1-1+deb11u2
-strongswan-libcharon  5.9.1-1+deb11u2 http://ftp.br.debian.org/debian/pool/main/s/strongswan/strongswan-libcharon_5.9.1-1+deb11u2_amd64.deb
-strongswan-starter  5.9.1-1+deb11u2
+strongswan  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/strongswan_5.9.1-1%2Bdeb11u3_all.deb
+strongswan-charon  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/strongswan-charon_5.9.1-1%2Bdeb11u3_amd64.deb
+strongswan-libcharon  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/strongswan-libcharon_5.9.1-1%2Bdeb11u3_amd64.deb
+strongswan-starter  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/strongswan-starter_5.9.1-1%2Bdeb11u3_amd64.deb
 sudo-ldap  1.9.5p2-3
 sysstat  12.5.2-2
 syslog-ng  3.28.1-2
