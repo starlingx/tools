@@ -382,7 +382,6 @@ class Debbuilder:
     def refresh_chroots(self, request_form):
         '''
         Refresh all chroots with the backup 'clean' chroot
-        if all of them are free
         '''
         response = check_request(request_form, ['user', 'project'])
         if response:
@@ -392,10 +391,13 @@ class Debbuilder:
 
         dst_chroots = self.chroots_pool.get_idle()
         if not dst_chroots:
-            self.logger.error('Failed to refresh chroots for some chroots are busy')
-            response['status'] = 'fail'
-            response['msg'] = 'Some chroots are busy'
-            return response
+            self.logger.warning('Some chroots are busy')
+        self.logger.warning('Force to refresh chroots')
+        self.stop_task(request_form)
+        self.chroots_pool.release_all()
+
+        # Stop all schroot sessions
+        subprocess.call('schroot -a -e', shell=True)
 
         backup_chroot = None
         user_dir = os.path.join(STORE_ROOT, user, project)
