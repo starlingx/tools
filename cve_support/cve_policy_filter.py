@@ -18,6 +18,7 @@ cves_valid = []
 cves_to_fix = []
 cves_to_fix_lp = []
 cves_to_track = []
+cves_to_track_lp_fixed = []
 cves_w_errors = []
 cves_wont_fix = []
 cves_to_omit = []
@@ -54,6 +55,7 @@ def print_html_report(cves_report, title):
     template = template_env.get_template(template_file)
     output_text = template.render(cves_to_fix=cves_report["cves_to_fix"],\
         cves_to_fix_lp=cves_report["cves_to_fix_lp"],\
+        cves_to_track_lp_fixed=cves_report["cves_to_track_lp_fixed"],\
         cves_to_track=cves_report["cves_to_track"],\
         cves_wont_fix=cves_report["cves_wont_fix"],\
         cves_w_errors=cves_report["cves_w_errors"],\
@@ -97,6 +99,15 @@ def print_report(cves_report, title):
     print("\nCVEs to fix w/ a launchpad assigned: %d \n" \
         % (len(cves_report["cves_to_fix_lp"])))
     for cve in cves_report["cves_to_fix_lp"]:
+        cve_line = []
+        for key, value in cve.items():
+            if key != "summary":
+                cve_line.append(key + ":" + str(value))
+        print(cve_line)
+
+    print("\nCVEs to track for launchpad fixed: %d \n" \
+        % (len(cves_report["cves_to_track_lp_fixed"])))
+    for cve in cves_report["cves_to_track_lp_fixed"]:
         cve_line = []
         for key, value in cve.items():
             if key != "summary":
@@ -172,6 +183,7 @@ def update_report():
     cves_report["cves_to_fix"] = cves_to_fix
     cves_report["cves_to_fix_lp"] = cves_to_fix_lp
     cves_report["cves_to_track"] = cves_to_track
+    cves_report["cves_to_track_lp_fixed"] = cves_to_track_lp_fixed
     cves_report["cves_w_errors"] = cves_w_errors
     cves_report["cves_wont_fix"] = cves_wont_fix
     cves_report["cves_to_omit"] = cves_to_omit
@@ -193,6 +205,8 @@ def cvssv3_pb_alg():
                         print(bug["status"])
                         if (bug["status"] == "Invalid" or bug["status"] == "Won't Fix"):
                             cves_wont_fix.append(cve)
+                        elif (bug["status"] == "Fix Released"):
+                            cves_to_track_lp_fixed.append(cve)
                         else:
                             cves_to_fix_lp.append(cve)
                     else:
@@ -221,6 +235,8 @@ def cvssv2_pb_alg():
                     print(bug["status"])
                     if (bug["status"] == "Invalid" or bug["status"] == "Won't Fix"):
                         cves_wont_fix.append(cve)
+                    elif (bug["status"] == "Fix Released"):
+                        cves_to_track_lp_fixed.append(cve)
                     else:
                         cves_to_fix_lp.append(cve)
                 else:

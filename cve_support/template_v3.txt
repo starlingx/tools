@@ -47,6 +47,29 @@
 			{% endfor %}
 		{% endif %}
 		</table>
+	<h2> CVEs to track for launchpad fixed: {{cves_to_track_lp_fixed | length}}</h2>
+	<table>
+		{% if cves_to_track_lp_fixed|length >= 1 %}
+			<tr>
+			{% for head in heads %}
+				<th>{{head}}</th>
+			{% endfor %}
+			</tr>
+
+			{% for cve in cves_to_track_lp_fixed %}
+			<tr>
+				<td>{{cve["id"]}}</td>
+				<td>{{cve["status"]}}</td>
+				<td>{{cve["cvss3Score"]}}</td>
+				<td>{{cve["av"]}}</td>
+				<td>{{cve["ac"]}}</td>
+				<td>{{cve["pr"]}}</td>
+				<td>{{cve["ui"]}}</td>
+				<td>{{cve["ai"]}}</td>
+			</tr>
+			{% endfor %}
+		{% endif %}
+	</table>
 	<h2> CVEs to track for incoming fix: {{cves_to_track | length}}</h2>
 	<table>
 		{% if cves_to_track|length >= 1 %}
