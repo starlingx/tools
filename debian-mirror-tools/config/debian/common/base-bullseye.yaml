@@ -377,6 +377,15 @@ iso-post-script: |
   echo "See pxeboot_setup.sh --help for usage details" > pxeboot/samples/README
   install -m 0664 ${IMAGE_ROOTFS}/var/pxeboot/pxelinux.cfg.files/pxeboot.cfg.debian pxeboot/samples
   install -m 0664 ${IMAGE_ROOTFS}/var/pxeboot/pxelinux.cfg.files/efi-pxeboot.cfg.debian pxeboot/samples
+
+  # Added CERTS into efi.img
+  if [ "$EFI_SECURE_BOOT" = enable ]; then
+      mmd -i efi.img ::/CERTS
+      mcopy -i efi.img -s /localdisk/CERTS/* ::/CERTS/
+      mkdir images
+      ln -snf ../efi.img images/efiboot.img
+  fi
+
 multiple-kernels: vmlinuz-*[!t]-amd64 vmlinuz-*-rt-amd64
 default-kernel: vmlinuz-*[!t]-amd64
 system:
