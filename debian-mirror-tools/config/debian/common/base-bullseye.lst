@@ -36,6 +36,7 @@ busybox  1:1.30.1-6+b3
 bzip2  1.0.8-4
 ca-certificates  20210119
 cdebconf  0.260
+cgroup-tools  0.41-11
 cloud-init  20.4.1-2+deb11u1
 cloud-utils  0.31-2
 cloud-guest-utils  0.31-2
@@ -266,6 +267,7 @@ libcbor0  0.5.0+dfsg-2
 libcc1-0  10.2.1-6
 libc-dev-bin  2.31-13+deb11u3
 libc-l10n  2.31-13+deb11u3
+libcgroup1  0.41-11
 libcollection4  0.6.1-2
 libcom-err2  1.46.2-2
 libcomps0  0.1.15-4
