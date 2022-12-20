@@ -72,7 +72,7 @@ dh-autoreconf  20
 dh-strip-nondeterminism  1.12.0-1
 diffutils  1:3.7-5
 dirmngr  2.2.27-2+deb11u1
-distro-info-data  0.51+deb11u2
+distro-info-data  0.51+deb11u2  https://snapshot.debian.org/archive/debian/20221117T091002Z/pool/main/d/distro-info-data/distro-info-data_0.51%2Bdeb11u2_all.deb
 dmidecode  3.3-2
 dnf  4.5.2-6
 dnf-data  4.5.2-6
@@ -279,7 +279,7 @@ libcrypt-dev  1:4.4.18-4
 libcryptsetup12  2:2.3.7-1+deb11u1
 libctf0  2.35.2-2
 libctf-nobfd0  2.35.2-2
-libcups2  2.3.3op2-3+deb11u2
+libcups2  2.3.3op2-3+deb11u2  https://snapshot.debian.org/archive/debian/20221117T091002Z/pool/main/c/cups/libcups2_2.3.3op2-3%2Bdeb11u2_amd64.deb
 libcurl3-gnutls  7.74.0-1.3+deb11u3  https://snapshot.debian.org/archive/debian/20220913T152340Z/pool/main/c/curl/libcurl3-gnutls_7.74.0-1.3%2Bdeb11u3_amd64.deb
 libcurl4  7.74.0-1.3+deb11u3 https://snapshot.debian.org/archive/debian/20220913T152340Z/pool/main/c/curl/libcurl4_7.74.0-1.3%2Bdeb11u3_amd64.deb
 libcurl4-gnutls-dev  7.74.0-1.3+deb11u3  https://snapshot.debian.org/archive/debian/20220913T152340Z/pool/main/c/curl/libcurl4-gnutls-dev_7.74.0-1.3%2Bdeb11u3_amd64.deb
@@ -426,7 +426,7 @@ libkrb5support0  1.18.3-6+deb11u1
 libksba8  1.5.0-3
 liblapack3  3.9.0-3
 liblbfgsb0  3.0+dfsg.3-9
-libldb2  2:2.2.3-2~deb11u2
+libldb2  2:2.2.3-2~deb11u2  https://snapshot.debian.org/archive/debian/20221117T091002Z/pool/main/l/ldb/libldb2_2.2.3-2~deb11u2_amd64.deb
 libleatherman1.12.1  1.12.1+dfsg-1.1
 libleveldb1d  1.22-3
 libllvm11  1:11.0.1-2
@@ -893,7 +893,7 @@ python3-kubernetes  12.0.1-1
 python3-ldap  3.2.0-4+b3
 python3-ldap3  2.8.1-1
 python3-ldappool  2.3.1-1.1
-python3-ldb  2:2.2.3-2~deb11u2
+python3-ldb  2:2.2.3-2~deb11u2  https://snapshot.debian.org/archive/debian/20221117T091002Z/pool/main/l/ldb/python3-ldb_2.2.3-2~deb11u2_amd64.deb
 python3-lib2to3  3.9.2-1
 python3-libapparmor 2.13.6-10
 python3-libcomps  0.1.15-4
