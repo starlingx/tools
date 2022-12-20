@@ -685,9 +685,9 @@ libxcb-shm0  1.14-3
 libxdmcp6  1:1.1.2-3
 libxen-dev  4.14.3+32-g9de3671772-1~deb11u1
 libxext6  2:1.3.3-1.1
-libxml2-dev  2.9.10+dfsg-6.7+deb11u1
-libxml2-utils  2.9.10+dfsg-6.7+deb11u1
-libxml2  2.9.10+dfsg-6.7+deb11u1
+libxml2-dev  2.9.10+dfsg-6.7+deb11u3 https://snapshot.debian.org/archive/debian-security/20221105T194134Z/pool/updates/main/libx/libxml2/libxml2-dev_2.9.10%2Bdfsg-6.7%2Bdeb11u3_amd64.deb
+libxml2-utils  2.9.10+dfsg-6.7+deb11u3 https://snapshot.debian.org/archive/debian-security/20221105T194134Z/pool/updates/main/libx/libxml2/libxml2-utils_2.9.10%2Bdfsg-6.7%2Bdeb11u3_amd64.deb
+libxml2  2.9.10+dfsg-6.7+deb11u3 https://snapshot.debian.org/archive/debian-security/20221105T194134Z/pool/updates/main/libx/libxml2/libxml2_2.9.10%2Bdfsg-6.7%2Bdeb11u3_amd64.deb
 libxmlsec1  1.2.31-1
 libxmlsec1-openssl  1.2.31-1
 libxmu6  2:1.1.2-2+b3
