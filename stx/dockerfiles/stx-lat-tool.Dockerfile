@@ -20,6 +20,7 @@ ARG LAT_BINARY_RESOURCE_PATH=http://mirror.starlingx.cengn.ca/mirror/lat-sdk/lat
 
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \
+        openssh-client \
         python3 \
         python3-pip \
         xz-utils \

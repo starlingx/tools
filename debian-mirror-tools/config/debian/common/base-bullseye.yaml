@@ -24,13 +24,13 @@ gpg:
     BOOT_GPG_PASSPHRASE: SecureCore
     BOOT_KEYS_DIR: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys
     BOOT_GPG_KEY: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys/BOOT-GPG-PRIVKEY-SecureBootCore
-    BOOT_SINGED_SHIM: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64.efi
-    BOOT_SINGED_SHIMTOOL: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/mmx64.efi
-    BOOT_SINGED_GRUB: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/grubx64.efi
+    BOOT_SINGED_SHIM: $IMAGE_ROOTFS/usr/lib/shim/bootx64.efi
+    BOOT_SINGED_SHIMTOOL: $IMAGE_ROOTFS/usr/lib/shim/mmx64.efi
+    BOOT_SINGED_GRUB: $IMAGE_ROOTFS/boot/efi/EFI/BOOT/grubx64.efi
     BOOT_EFITOOL: $IMAGE_ROOTFS/usr/lib/efitools/x86_64-linux-gnu/LockDown.efi
-    BOOT_GRUB_CFG: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/grub.cfg
-    BOOT_NOSIG_GRUB: $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64-nosig.efi
-    EFI_SECURE_BOOT: enable
+    BOOT_GRUB_CFG: $IMAGE_ROOTFS/boot/efi/EFI/BOOT/grub.cfg
+    BOOT_NOSIG_GRUB: $IMAGE_ROOTFS/boot/efi/EFI/BOOT/bootx64-nosig.efi
+    EFI_SECURE_BOOT: disable
 packages: []
 external-packages: []
 include-default-packages: '0'
@@ -81,7 +81,7 @@ rootfs-post-scripts:
   # There is ${IMAGE_ROOTFS}/var/pxeboot/grubx64.efi from parent linux installed
   # For secure boot feature, it should be replaced with the right one
   if [ "$EFI_SECURE_BOOT" = enable ]; then
-    install -m 0644 ${OECORE_TARGET_SYSROOT}/boot/efi/EFI/BOOT/grubx64.efi ${IMAGE_ROOTFS}/var/pxeboot/grubx64.efi
+    install -m 0644 ${IMAGE_ROOTFS}/boot/efi/EFI/BOOT/grubx64.efi ${IMAGE_ROOTFS}/var/pxeboot/grubx64.efi
   fi
 environments:
 - NO_RECOMMENDATIONS="1"
@@ -261,8 +261,8 @@ iso-post-script: |
 
   # 2.2.2 EFI PXE
   cp -a EFI pxeboot
-  if [ -e $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64-nosig.efi ]; then
-    cp $OECORE_TARGET_SYSROOT/boot/efi/EFI/BOOT/bootx64-nosig.efi pxeboot/EFI/BOOT/
+  if [ -e ${IMAGE_ROOTFS}/boot/efi/EFI/BOOT/bootx64-nosig.efi ]; then
+    cp ${IMAGE_ROOTFS}/boot/efi/EFI/BOOT/bootx64-nosig.efi pxeboot/EFI/BOOT/
   fi
 
   # 2.3 Edit grub.cfg and pxelinux.cfg/default
@@ -385,6 +385,9 @@ iso-post-script: |
       mkdir images
       ln -snf ../efi.img images/efiboot.img
   fi
+
+initramfs-sign-script: |
+  echo "End of initramfs-sign-script!"
 
 multiple-kernels: vmlinuz-*[!t]-amd64 vmlinuz-*-rt-amd64
 default-kernel: vmlinuz-*[!t]-amd64
