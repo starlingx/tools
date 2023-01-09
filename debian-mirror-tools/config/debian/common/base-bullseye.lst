@@ -423,7 +423,7 @@ libklibc  2.0.8-6.1
 libkmod2  28-1
 libkrb5-3  1.18.3-6+deb11u3  https://snapshot.debian.org/archive/debian/20230108T032246Z/pool/main/k/krb5/libkrb5-3_1.18.3-6+deb11u3_amd64.deb
 libkrb5support0  1.18.3-6+deb11u3  https://snapshot.debian.org/archive/debian/20230108T032246Z/pool/main/k/krb5/libkrb5support0_1.18.3-6+deb11u3_amd64.deb
-libksba8  1.5.0-3
+libksba8  1.5.0-3+deb11u2  https://snapshot.debian.org/archive/debian/20230108T032246Z/pool/main/libk/libksba/libksba8_1.5.0-3+deb11u2_amd64.deb
 liblapack3  3.9.0-3
 liblbfgsb0  3.0+dfsg.3-9
 libldb2  2:2.2.3-2~deb11u2  https://snapshot.debian.org/archive/debian/20221117T091002Z/pool/main/l/ldb/libldb2_2.2.3-2~deb11u2_amd64.deb
