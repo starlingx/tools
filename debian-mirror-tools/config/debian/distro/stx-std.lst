@@ -347,6 +347,9 @@ k8s-pod-recovery
 #k8s-cni-cache-cleanup
 k8s-cni-cache-cleanup
 
+#kubectl-cert-manager
+kubectl-cert-manager
+
 # libbnxt_re - Broadcom Infiniband verbs library
 libbnxt-re
 
