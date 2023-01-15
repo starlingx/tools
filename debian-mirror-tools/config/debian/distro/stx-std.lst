@@ -511,10 +511,6 @@ mtce-compute
 #mtce-control
 mtce-control
 
-#mtce-guest
-mtce-guest-agent
-mtce-guest-server
-
 #mtce-storage
 mtce-storage
 
