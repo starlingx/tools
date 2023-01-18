@@ -727,6 +727,7 @@ memcached  1.6.9+dfsg-1
 meson  0.56.2-1
 mime-support  3.66
 mksh  59c-9+b2
+mokutil  0.6.0-2~deb11u1
 mount  2.36.1-8+deb11u1
 multipath-tools  0.8.5-2
 mysql-common  5.8+1.0.7
