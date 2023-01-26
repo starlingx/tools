@@ -447,6 +447,8 @@ liblz4-1  1.9.3-2
 liblzma5  5.2.5-2
 libmagic1  1:5.39-3
 libmagic-mgc  1:5.39-3
+libmariadb-dev 1:10.5.18-0+deb11u1  https://snapshot.debian.org/archive/debian/20221208T032103Z/pool/main/m/mariadb-10.5/libmariadb-dev_10.5.18-0%2Bdeb11u1_amd64.deb
+libmariadb-dev-compat 1:10.5.18-0+deb11u1  https://snapshot.debian.org/archive/debian/20221208T032103Z/pool/main/m/mariadb-10.5/libmariadb-dev-compat_10.5.18-0%2Bdeb11u1_amd64.deb
 libmariadb3  1:10.5.18-0+deb11u1  https://snapshot.debian.org/archive/debian/20221208T032103Z/pool/main/m/mariadb-10.5/libmariadb3_10.5.18-0%2Bdeb11u1_amd64.deb
 libmaxminddb0  1.5.2-1
 libmd0  1.0.3-3
