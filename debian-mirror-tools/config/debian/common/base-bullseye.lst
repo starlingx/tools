@@ -1178,6 +1178,7 @@ tuned  2.15.0-1
 tzdata  2022f-1 https://snapshot.debian.org/archive/debian/20221103T035229Z/pool/main/t/tzdata/tzdata_2022f-1_all.deb
 ucf  3.0043
 udhcpc  1:1.30.1-6+b3
+unzip  6.0-26+deb11u1
 util-linux  2.36.1-8+deb11u1
 uuid-dev  2.36.1-8+deb11u1
 uuid-runtime  2.36.1-8+deb11u1
@@ -1201,5 +1202,6 @@ xmlsec1  1.2.31-1
 xsltproc  1.1.34-4
 xxd  2:8.2.2434-3+deb11u1
 xz-utils  5.2.5-2.1~deb11u1 https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/x/xz-utils/xz-utils_5.2.5-2.1~deb11u1_amd64.deb
+zip  3.0-12
 zlib1g  1:1.2.11.dfsg-2+deb11u2 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/z/zlib/zlib1g_1.2.11.dfsg-2+deb11u2_amd64.deb
 zlib1g-dev  1:1.2.11.dfsg-2+deb11u2 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/z/zlib/zlib1g-dev_1.2.11.dfsg-2+deb11u2_amd64.deb
