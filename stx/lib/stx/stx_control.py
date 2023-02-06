@@ -267,6 +267,70 @@ stx-pkgbuilder/configmap/')
     def handleEnterTask(self, args):
         self.shell.cmd_control_enter(args)
 
+    def run_pod_cmd(self, podname, maincmd, remotecmd):
+        # Run command on pod in this format: kubectl+maincmd+podname+remotecmd
+        cmd = self.config.kubectl() + maincmd + podname + remotecmd
+        self.logger.info('run pod cmd: %s', cmd)
+        subprocess.call(cmd, shell=True)
+
+    def add_keys_for_signing_server(self, args):
+        self.logger.info('Prepare keys for accessing signing server!')
+        buildername = 'builder'
+        latname = 'lat'
+        username = getpass.getuser()
+        if not args.key:
+            args.key = '~/.ssh/id_rsa'
+        if not os.path.exists(os.path.expanduser(args.key)):
+            self.logger.error("The key file doesn't exist!")
+            sys.exit(1)
+
+        pod_name = self.k8s.get_pod_name(buildername)
+        if pod_name:
+            # Prepare and run commands:
+            #  kubectl exec -ti [pod_name_builder] -- mkdir /home/[user_name]/.ssh
+            #  kubectl exec -ti [pod_name_builder] -- mkdir /root/.ssh
+            #  kubectl cp [key] [pod_name_builder]:/home/[user_name]/.ssh
+            #  kubectl cp [key] [pod_name_builder]:/root/.ssh
+            main_cmd = ' exec -ti '
+            remote_cmd = ' -- mkdir /home/' + username + '/.ssh'
+            self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
+            remote_cmd = ' -- mkdir /root/.ssh'
+            self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
+            main_cmd = ' cp ' + args.key + ' '
+            remote_cmd = ':/home/' + username + '/.ssh'
+            self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
+            remote_cmd = ':/root/.ssh'
+            self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
+        else:
+            self.logger.error('Failed to prepare for signing builds because \
+no builder container is available!')
+            sys.exit(1)
+
+        pod_name = self.k8s.get_pod_name(latname)
+        if pod_name:
+            # Prepare and run commands:
+            #  kubectl exec -ti [pod_name_lat] -- mkdir /root/.ssh
+            #  kubectl cp [key] [pod_name_lat]:/root/.ssh
+            main_cmd = ' exec -ti '
+            remote_cmd = ' -- mkdir /root/.ssh'
+            self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
+            main_cmd = ' cp ' + args.key + ' '
+            remote_cmd = ':/root/.ssh'
+            self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
+        else:
+            self.logger.error('Failed to prepare for signing builds because \
+no lat container is available!')
+            sys.exit(1)
+
+    def handleKeysTask(self, args):
+        if not args.key_type:
+            args.key_type = 'signing-server'
+        if args.key_type == 'signing-server':
+            self.add_keys_for_signing_server(args)
+        else:
+            self.logger.error('Unsupported key-type!')
+            sys.exit(1)
+
     def handleControl(self, args):
 
         self.logger.setLevel(args.loglevel)
@@ -285,6 +349,9 @@ stx-pkgbuilder/configmap/')
 
         elif args.ctl_task == 'enter':
             self.handleEnterTask(args)
+
+        elif args.ctl_task == 'keys-add':
+            self.handleKeysTask(args)
 
         elif args.ctl_task == 'status':
             self.k8s.get_helm_info()

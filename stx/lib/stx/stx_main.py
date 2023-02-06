@@ -56,17 +56,27 @@ Use %(prog)s --help to get help for all of parameters\n\n''')
 
         control_subparser = subparsers.add_parser('control',
                                                   help='Execute the control \
-task.\t\teg: [start|enter|stop|status|upgrade]')
+task.\t\teg: [start|enter|stop|status|upgrade|keys-add]')
         control_subparser.add_argument('ctl_task',
                                        help='[ start|stop|enter|status|upgrade\
-                                       ]: Create or Stop or Enter or List or \
-                                       Upgrade the stx-builder/obs/lat/pulp \
+                                       |keys-add ]: Create or Stop or Enter or \
+                                       List or Upgrade or Add keys on \
+                                       the stx-builder/obs/lat/pulp \
                                        containers.\n\n')
         control_subparser.add_argument('--dockername',
                                        help='[ builder|pkgbuilder|repomgr|' +
                                        'lat|docker|builder-files-http ]: ' +
                                        'container name to enter, ' +
                                        'default: builder\n\n',
+                                       required=False)
+        control_subparser.add_argument('--key-type',
+                                       help='[ signing-server ]: ' +
+                                       'key-type name to enter, ' +
+                                       'default: signing-server\n\n',
+                                       required=False)
+        control_subparser.add_argument('--key',
+                                       help='key file to enter, ' +
+                                       'default: ~/.ssh/id_rsa\n\n',
                                        required=False)
         control_subparser.set_defaults(handle=self.handlecontrol.handleControl)
 
