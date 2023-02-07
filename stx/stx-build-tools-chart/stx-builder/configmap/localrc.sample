@@ -66,3 +66,5 @@ export DEBIAN_DISTRIBUTION="@DEBIAN_DISTRIBUTION@"
 export DEBIAN_VERSION="@DEBIAN_VERSION@"
 
 export MAX_CPUS=@MAX_CPUS@
+
+export BUILDER_FILES_URL="http://@PROJECT@-stx-builder-files-http:8088"

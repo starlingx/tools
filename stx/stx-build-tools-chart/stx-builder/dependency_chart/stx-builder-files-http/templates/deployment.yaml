@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "stx-builder-files-http.fullname" . }}
+  labels:
+    {{- include "stx-builder-files-http.labels" . | nindent 4 }}
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "stx-builder-files-http.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "stx-builder-files-http.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          tty: true
+          env:
+          command: [ "/configmap/entrypoint.sh" ]
+          args: [ "nginx", "-g", "daemon off;" ]
+          volumeMounts:
+          - name: localdisk-designer
+            mountPath: {{ .Values.volumes.localdiskDesigner.mountPath }}
+            readOnly: true
+          - name: localdisk-loadbuild
+            mountPath: {{ .Values.volumes.localdiskLoadbuild.mountPath }}
+            readOnly: true
+          - name: configmap
+            mountPath: /configmap
+            readOnly: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+      dnsConfig:
+        {{- toYaml .Values.dnsConfig | nindent 8 }}
+
+      volumes:
+      - name: localdisk-designer
+        hostPath:
+          path: {{ .Values.global.hostDir }}{{ .Values.volumes.localdiskDesigner.hostPath }}
+      - name: localdisk-loadbuild
+        hostPath:
+          path: {{ .Values.global.hostDir }}{{ .Values.volumes.localdiskLoadbuild.hostPath }}
+      - name: configmap
+        configMap:
+          name: configmap
+          defaultMode: 0700
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -54,8 +54,11 @@ class KubeHelper:
     def get_pod_name(self, dockername):
         '''get the detailed pod name from the four pods.'''
 
-        cmd = self.config.kubectl() + ' get pods | grep Running | ' + \
-            'grep stx-' + dockername + ' | awk \'{print $1}\' '
+        selector = 'app.kubernetes.io/instance=%s,app.kubernetes.io/name=%s' \
+            % (self.config.project_name, 'stx-' + dockername)
+        cmd = self.config.kubectl() + f" get pods --selector '{selector}'" + \
+            " | tail -n +2 | awk '{print $1}'"
+        logger.info('Running: %s', cmd)
         output = subprocess.check_output(cmd, shell=True)
         podname = str(output.decode('utf8').strip())
 

@@ -23,7 +23,7 @@ from stx import utils
 logger = logging.getLogger('STX-Config')
 utils.set_logger(logger)
 
-ALL_CONTAINER_NAMES = ['builder', 'pkgbuilder', 'lat', 'docker', 'repomgr']
+ALL_CONTAINER_NAMES = ['builder', 'builder-files-http', 'pkgbuilder', 'lat', 'docker', 'repomgr']
 
 
 def require_env(var):
@@ -124,6 +124,10 @@ class Config:
     def container_mtu(self):
         """Container network MTU value"""
         return self._container_mtu
+
+    @property
+    def project_name(self):
+        return self.get('project', 'name')
 
     def _init_kubectl_cmd(self):
         # helm

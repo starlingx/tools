@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
-name: stx-builder
-description: A Helm chart for Starlingx Building Kubernetes
+name: stx-builder-files-http
+description: A Helm chart for the HTTP server for acessing builder files
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -22,20 +22,3 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 appVersion: 1.16.0
-
-dependencies:
-  - name: stx-pkgbuilder
-    version: "0.1.0"
-    repository: "file://dependency_chart/stx-pkgbuilder"
-  - name: stx-lat-tool
-    version: "0.1.0"
-    repository: "file://dependency_chart/stx-lat-tool"
-  - name: stx-repomgr
-    version: "0.1.0"
-    repository: "file://dependency_chart/stx-aptly/stx-repomgr"
-  - name: stx-docker
-    version: "0.1.0"
-    repository: "file://dependency_chart/stx-docker"
-  - name: stx-builder-files-http
-    version: "0.1.0"
-    repository: "file://dependency_chart/stx-builder-files-http"

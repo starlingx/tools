@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "stx-builder-files-http.fullname" . }}
+  labels:
+    {{- include "stx-builder-files-http.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.services.builderFilesHttpService.type }}
+  ports:
+    - port: {{ .Values.services.builderFilesHttpService.port }}
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "stx-builder-files-http.selectorLabels" . | nindent 4 }}

@@ -64,8 +64,9 @@ task.\t\teg: [start|enter|stop|status|upgrade]')
                                        containers.\n\n')
         control_subparser.add_argument('--dockername',
                                        help='[ builder|pkgbuilder|repomgr|' +
-                                       'lat|docker ]: container name to ' +
-                                       'enter, default: builder\n\n',
+                                       'lat|docker|builder-files-http ]: ' +
+                                       'container name to enter, ' +
+                                       'default: builder\n\n',
                                        required=False)
         control_subparser.set_defaults(handle=self.handlecontrol.handleControl)
 
@@ -157,7 +158,7 @@ remove_repo|search_pkg|upload_pkg|delete_pkg ]')
             action='store_const', const=True)
         shell_subparser.add_argument(
             '--container',
-            metavar='builder|pkgbuilder|lat|repomgr|docker',
+            metavar='builder|pkgbuilder|lat|repomgr|docker|builder-files-http',
             help='Container name (default: builder)')
         shell_subparser.set_defaults(handle=self.handleshell.cmd_shell)
 
