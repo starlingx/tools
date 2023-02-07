@@ -123,7 +123,7 @@ else
     export DOCKER_TAG_LOCAL="${USER}-${PROJECT}-${DOCKER_TAG_VERSION}"
 fi
 if [[ -z "$STX_PREBUILT_BUILDER_IMAGE_TAG" ]] ; then
-    STX_PREBUILT_BUILDER_IMAGE_TAG="master-debian-latest"
+    STX_PREBUILT_BUILDER_IMAGE_TAG="rc-8.0-debian-latest"
 fi
 export STX_PREBUILT_BUILDER_IMAGE_TAG
 # Platform 'minikube' or 'kubernetes'
