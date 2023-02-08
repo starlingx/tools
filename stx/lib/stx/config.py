@@ -131,7 +131,10 @@ class Config:
 
     def _init_kubectl_cmd(self):
         # helm
-        self.helm_cmd = 'helm'
+        if self.use_minikube:
+            self.helm_cmd = f'helm --kube-context {self.minikube_profile}'
+        else:
+            self.helm_cmd = 'helm'
         # kubectl
         if self.use_minikube:
             self.kubectl_cmd = f'minikube -p {self.minikube_profile} kubectl --'

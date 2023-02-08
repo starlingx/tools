@@ -208,7 +208,7 @@ stx-pkgbuilder/configmap/')
         os.system(cmd)
 
         # Update the dependency charts
-        cmd = 'helm dependency update ' + self.abs_helmchartdir
+        cmd = self.config.helm() + ' dependency update ' + self.abs_helmchartdir
         self.logger.debug('Dependency build command: %s', cmd)
         subprocess.call(cmd, shell=True)
 
