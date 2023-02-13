@@ -54,6 +54,9 @@ class KubeHelper:
     def get_pod_name(self, dockername):
         '''get the detailed pod name from the four pods.'''
 
+        if dockername == "lat":
+            dockername = dockername + "-tool"
+
         selector = 'app.kubernetes.io/instance=%s,app.kubernetes.io/name=%s' \
             % (self.config.project_name, 'stx-' + dockername)
         cmd = self.config.kubectl() + f" get pods --selector '{selector}'" + \
