@@ -37,6 +37,8 @@ fi
 
 chown ${MYUNAME}:cgts /localdisk
 chown ${MYUNAME}:cgts /localdisk/channel
+chown ${MYUNAME}:cgts /localdisk/designer
+chown ${MYUNAME}:cgts /localdisk/loadbuild
 if [ ! -d "/localdisk/pkgbuilder" ]; then
     mkdir /localdisk/pkgbuilder
 fi
