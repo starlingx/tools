@@ -35,6 +35,7 @@ packages:
 - eject
 - fdisk
 - findutils
+- firmware-qlogic
 - gawk
 - glib-networking
 - gnupg
@@ -74,6 +75,10 @@ packages:
 - mlnx-ofed-kernel-modules-rt
 - mount
 - mttyexec
+- multipath-config
+- multipath-tools
+- multipath-tools-boot
+- open-iscsi
 - ostree-boot=2019.1-1
 - ostree=2019.1-1
 - parted
