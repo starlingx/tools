@@ -635,6 +635,7 @@ libssl-dev  1.1.1n-0+deb11u3 https://snapshot.debian.org/archive/debian-security
 libsss-certmap0  2.4.1-2
 libsss-idmap0  2.4.1-2
 libsss-nss-idmap0  2.4.1-2
+libsss-sudo  2.4.1-2
 libstdc++6  10.2.1-6
 libstonith1  1.0.12-20
 libstrongswan  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/libstrongswan_5.9.1-1%2Bdeb11u3_amd64.deb
