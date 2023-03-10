@@ -341,6 +341,7 @@ libfribidi0  1.0.8-2
 libfstrm0  0.6.0-1+b1
 libfuse-dev  2.9.9-5
 libfuse2  2.9.9-5
+libfuse3-3  3.10.3-2  https://snapshot.debian.org/archive/debian/20210620T210943Z/pool/main/f/fuse3/libfuse3-3_3.10.3-2_amd64.deb
 libgbm-dev  20.3.5-1
 libgbm1  20.3.5-1
 libgc1  1:8.0.4-3

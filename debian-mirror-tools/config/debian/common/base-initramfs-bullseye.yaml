@@ -67,7 +67,7 @@ packages:
 - isc-dhcp-common
 - kbd
 - kmod
-- libostree-1-1=2019.1-1
+- libostree-1-1
 - linux-image-5.10.0-6-amd64-unsigned
 - linux-rt-image-5.10.0-6-rt-amd64-unsigned
 - mdadm
@@ -79,8 +79,8 @@ packages:
 - multipath-tools
 - multipath-tools-boot
 - open-iscsi
-- ostree-boot=2019.1-1
-- ostree=2019.1-1
+- ostree-boot
+- ostree
 - parted
 - procps
 - psmisc
