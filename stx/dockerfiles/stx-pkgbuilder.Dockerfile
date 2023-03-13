@@ -57,8 +57,8 @@ COPY stx/toCOPY/pkgbuilder/schrootspool.py /opt/
 COPY stx/toCOPY/pkgbuilder/setup.sh /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.conf /etc/sbuild/sbuild.conf
 
-COPY stx/toCOPY/pkgbuilder/pubkey.rsa /root
-RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa
+COPY stx/toCOPY/pkgbuilder/pubkey.rsa /opt/
+RUN apt-key add /opt/pubkey.rsa
 
 # Add vimrc
 RUN mkdir -p /etc/vim
