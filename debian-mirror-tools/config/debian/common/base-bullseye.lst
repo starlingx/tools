@@ -146,7 +146,6 @@ gawk  1:5.1.0-1
 gcc-10  10.2.1-6
 gcc-10-base  10.2.1-6
 gcc  4:10.2.1-1
-gcc-9-base  9.3.0-22
 gcc-alpha-linux-gnu  4:10.2.1-1
 gdisk  1.0.6-1.1
 genisoimage  9:1.1.11-3.2
