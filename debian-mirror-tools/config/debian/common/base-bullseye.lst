@@ -206,9 +206,9 @@ libapache2-mod-wsgi-py3  4.7.1-3+b1
 libapparmor-dev  2.13.6-10
 libapparmor1  2.13.6-10
 libapr1  1.7.0-6+deb11u1
-libaprutil1  1.6.1-5
-libaprutil1-dbd-sqlite3  1.6.1-5
-libaprutil1-ldap  1.6.1-5
+libaprutil1  1.6.1-5+deb11u1  https://snapshot.debian.org/archive/debian-security/20230226T132716Z/pool/updates/main/a/apr-util/libaprutil1_1.6.1-5%2Bdeb11u1_amd64.deb
+libaprutil1-dbd-sqlite3  1.6.1-5+deb11u1  https://snapshot.debian.org/archive/debian-security/20230226T132716Z/pool/updates/main/a/apr-util/libaprutil1-dbd-sqlite3_1.6.1-5%2Bdeb11u1_amd64.deb
+libaprutil1-ldap  1.6.1-5+deb11u1  https://snapshot.debian.org/archive/debian-security/20230226T132716Z/pool/updates/main/a/apr-util/libaprutil1-ldap_1.6.1-5%2Bdeb11u1_amd64.deb
 libapt-pkg6.0  2.2.4
 libarchive13  3.4.3-2+deb11u1
 libarchive-zip-perl  1.68-1
