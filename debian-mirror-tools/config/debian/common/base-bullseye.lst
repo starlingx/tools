@@ -694,7 +694,17 @@ libxcb1  1.14-3
 libxcb-render0  1.14-3
 libxcb-shm0  1.14-3
 libxdmcp6  1:1.1.2-3
-libxen-dev  4.14.3+32-g9de3671772-1~deb11u1
+libxen-dev  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxen-dev_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxenmisc4.14  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxenmisc4.14_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxencall1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxencall1_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxendevicemodel1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxendevicemodel1_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxenevtchn1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxenevtchn1_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxenforeignmemory1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxenforeignmemory1_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxengnttab1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxengnttab1_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxenstore3.0  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxenstore3.0_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxentoolcore1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxentoolcore1_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxentoollog1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxentoollog1_4.14.5%2B94-ge49571868d-1_amd64.deb
+libxenhypfs1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxenhypfs1_4.14.5%2B94-ge49571868d-1_amd64.deb
 libxext6  2:1.3.3-1.1
 libxml2-dev  2.9.10+dfsg-6.7+deb11u3 https://snapshot.debian.org/archive/debian-security/20221105T194134Z/pool/updates/main/libx/libxml2/libxml2-dev_2.9.10%2Bdfsg-6.7%2Bdeb11u3_amd64.deb
 libxml2-utils  2.9.10+dfsg-6.7+deb11u3 https://snapshot.debian.org/archive/debian-security/20221105T194134Z/pool/updates/main/libx/libxml2/libxml2-utils_2.9.10%2Bdfsg-6.7%2Bdeb11u3_amd64.deb
