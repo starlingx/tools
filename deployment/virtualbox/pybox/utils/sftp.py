@@ -41,38 +41,31 @@ def sftp_send(source, remote_host, remote_port, destination, username, password)
     sftp_client.close()
     ssh_client.close()
 
+
 def send_dir(source, remote_host, remote_port, destination, username,
              password, follow_links=True, clear_known_hosts=True):
     # Only works from linux for now
     if not source.endswith('/') or not source.endswith('\\'):
         source = source + '/'
-    params = {
-        'source': source,
-        'remote_host': remote_host,
-        'destination': destination,
-        'port': remote_port,
-        'username': username,
-        'password': password,
-        'follow_links': "L" if follow_links else "",
-        }
+
+    follow_links = "L" if follow_links else ""
     if clear_known_hosts:
         if remote_host == '127.0.0.1':
             keygen_arg = "[127.0.0.1]:{}".format(remote_port)
         else:
             keygen_arg = remote_host
-        cmd = 'ssh-keygen -f "/home/%s/.ssh/known_hosts" -R' \
-              ' %s', getpass.getuser(), keygen_arg
+        cmd = f'ssh-keygen -f "/home/{getpass.getuser()}/.ssh/known_hosts" -R {keygen_arg}'
         LOG.info("CMD: %s", cmd)
         process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
         for line in iter(process.stdout.readline, b''):
             LOG.info("%s", line.decode("utf-8").strip())
         process.wait()
 
-    LOG.info("Running rsync of dir: {source} ->"  \
-             "{username}@{remote_host}:{destination}".format(**params))
-    cmd = ("rsync -av{follow_links} "
-           "--rsh=\"/usr/bin/sshpass -p {password} ssh -p {port} -o StrictHostKeyChecking=no -l {username}\" "
-           "{source}* {username}@{remote_host}:{destination}".format(**params))
+    LOG.info(f'Running rsync of dir: {source} -> {username}@{remote_host}'
+             f':{destination}')
+    cmd = (f'rsync -av{follow_links} --rsh="/usr/bin/sshpass -p {password} '
+           f'ssh -p {remote_port} -o StrictHostKeyChecking=no -l {username}" '
+           f'{source}* {username}@{remote_host}:{destination}')
     LOG.info("CMD: %s", cmd)
 
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
@@ -80,7 +73,7 @@ def send_dir(source, remote_host, remote_port, destination, username,
         LOG.info("%s", line.decode("utf-8").strip())
     process.wait()
     if process.returncode:
-        raise Exception("Error in rsync, return code:{}".format(process.returncode))
+        raise Exception(f'Error in rsync, return code: {process.returncode}')
 
 
 def send_dir_fallback(source, remote_host, destination, username, password):

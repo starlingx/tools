@@ -100,7 +100,7 @@ def handle_args():
                         Directory with config files, scripts, images (i.e.
                         lab_setup.sh, lab_setup.conf, ...) that are needed
                         for the install. All files at this location are
-                        transfered to controller-0 in /home/wrsroot. You
+                        transfered to controller-0 in /home/sysadmin. You
                         can add you own scripts that you need to be
                         present on the controller.  Caution: rsync will
                         follow links and will fail if links are broken!
@@ -117,11 +117,17 @@ def handle_args():
     parser.add_argument("--config-controller-ini", help=
                         """
                         Path to the local config_controller .ini. This
-                        file is transfered to the controller.  NOTE: OAM
+                        file is transferred to the controller.  NOTE: OAM
                         configuration in this ini is updated dynamically
                         based on networking related args.
                         (e.g. stx_config.ini_centos,
                         ~/stx_config.ini_centos, /home/myousaf ...).
+                        """,
+                        type=str)
+    parser.add_argument("--ansible-controller-config", help=
+                        """
+                        Path to a local YAML file to be copied as localhost.yml
+                        to the home directory of the controller-0. 
                         """,
                         type=str)
     parser.add_argument("--vbox-home-dir", help=
@@ -367,7 +373,7 @@ def handle_args():
                         type=str, choices=['serial', 'graphical'], default='serial')
     parser.add_argument("--username", help=
                         """
-                        Username. default is 'wrsroot'
+                        Username. default is 'sysadmin'
                         """,
                         type=str)
     parser.add_argument("--password", help=

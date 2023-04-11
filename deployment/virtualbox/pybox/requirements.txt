@@ -1,6 +1,6 @@
-# Install rsync, sshpass
-#
 configparser
 paramiko
 pytest
-streamexpect
+git+https://github.com/digidotcom/python-streamexpect#egg=streamexpect
+pexpect
+

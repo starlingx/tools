@@ -22,6 +22,6 @@ class Lab:
         'floating_ip': '10.10.10.7',
         'controller-0_ip': '10.10.10.8',
         'controller-1_ip': '10.10.10.9',
-        'username': 'wrsroot',
+        'username': 'sysadmin',
         'password': 'Li69nux*',
     }

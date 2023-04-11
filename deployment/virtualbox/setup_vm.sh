@@ -130,7 +130,7 @@ init_hostonly_net
 rm -f "$HOSTADD_SCRIPT"
 cat <<EOF > "$HOSTADD_SCRIPT"
 #!/usr/bin/env bash
-source /etc/nova/openrc
+source /etc/platform/openrc
 EOF
 chmod +x "$HOSTADD_SCRIPT"
 

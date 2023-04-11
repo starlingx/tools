@@ -1,11 +1,29 @@
-Pybox
-=====
+# Pybox
 
-The automated installer provides you with an easy tool to install
-StarlingX AIO-SX, AIO-DX, Standard, and Storage setups on Linux hosts on
-Virtualbox 5.1.x.
+This automated installer provides you with an easy way to install
+StarlingX in many different configuration options. The following 
+acronyms are important to understand:
 
-The main concepts of the autoinstaller is the stage and the chain. A stage
+- `AIO` stands for All-In-One, and it means that a single host might 
+be responsible for more than one role.
+- `SX` stands for Simplex, and it means there's only one controller node
+that the whole installation depends on.
+- `DX` stands for Duplex, and it means that 2 or more controllers will
+be arranged in a high-availability setup.
+
+The configurations available from this script, via the `--setup-type` 
+parameter, are:
+
+- `AIO-SX` or "All-In-One Simplex" will set up one single VM that will be both
+a controller and a worker nodes.
+- `AIO-DX` or "All-In-One Duplex" will set up two controller VMs with one of
+them also being a worker.
+- `Standard` and `Storage` setups are currently under review.
+
+Overall Design of the Code
+--------------------------
+
+The main concepts of the autoinstaller are stages and chains. A stage
 is an atomic set of actions taken by the autoinstaller. A chain is a set
 of stages executed in a specific order. Stages can be executed
 independently and repeated as many times the user needs. Chains can be
@@ -19,7 +37,7 @@ Example stages:
 - config-controller    # Run config controller using the
 - config-controller-ini updated based on --ini-* options.
 - rsync-config         # Rsync all files from --config-files-dir and
-                         --config-files-dir* to /home/wrsroot.
+                         --config-files-dir* to /home/sysadmin.
 - lab-setup1           # Run lab_setup with one or more --lab-setup-conf
                          files from controller-0.
 - unlock-controller-0  # Unlock controller-0 and wait for it to reboot.
@@ -47,8 +65,7 @@ the user does not need to reinstall from scratch. The user can restore the
 snapshot of the previous stage, whether to retry or fix the issue
 manually, then continue the process.
 
-List of Features
-----------------
+## List of Features
 
 Basic:
 - Multi-user, and multiple lab installs can run at the same time.
@@ -93,23 +110,66 @@ Other features
   chain)
 - Support to install lowlatency and securityprofile
 
-Installation
-------------
+## Installation and Usage
 
-Prerequisites:
+This section covers a basic functioning example of the **All-In-One Simplex
+(AIO-SX) installation**, which creates one VM that will work as both a 
+Controller and a Worker. A NAT Network between the host and the Virtual Machine
+will be configured and used.
 
-- Install Virtualbox.  It is recommend v5.1.x.  Use v5.2 at your own risk
-- Configure at least a vbox hostonly adapter network. If you want to
-  use NAT, you must also configue a NAT Network.
-- Make sure you have rsync, ssh-keygen, and sshpass commands installed.
-- Install python3 and pip3 if not already done.
+>_NOTE_: the following steps assume you're on a Debian-based Linux box.
 
-Sample Usage
-------------
+1. Install dependencies:
 
-./install_vbox.py --setup-type AIO-SX --iso-location
-"/home/myousaf/bootimage.iso" --labname test --install-mode serial
---config-files-dir /home/myousaf/pybox/configs/aio-sx/
---config-controller-ini
-/home/myousaf/pybox/configs/aio-sx/stx_config.ini_centos --vboxnet-name
-vboxnet0 --controller0-ip 10.10.10.8 --ini-oam-cidr '10.10.10.0/24'
+    ```shell
+    sudo apt install virtualbox socat git rsync sshpass openssh-client python3-pip python3-venv
+    ```
+
+2. Create a NAT Network with the `VBoxManage` CLI that is installed with VirtualBox:
+
+    ```shell
+    VBoxManage natnetwork add --netname NatNetwork --network 10.10.10.0/24 --dhcp off --ipv6 on
+    VBoxManage natnetwork modify --netname NatNetwork --port-forward-4 http-8080:tcp:[]:8080:[10.10.10.3]:8080
+    ```
+
+3. Checkout the repository, and set up Python's Virtual Environment with:
+
+    ```shell
+    git clone https://opendev.org/starlingx/tools.git
+    cd tools/deployment/virtualbox/pybox
+    python3 -m venv venv
+    source ./venv/bin/activate
+    pip install --upgrade pip
+    pip install -r requirements.txt
+    ```
+
+4. Grab the latest ISO (this script was last tested with version 8.0.0):
+
+    ```shell
+    wget https://mirror.starlingx.cengn.ca/mirror/starlingx/release/latest_release/debian/monolithic/outputs/iso/starlingx-intel-x86-64-cd.iso \
+      -O $HOME/Downloads/stx-8.iso
+    ```
+
+5. Now you're ready to run the script. From the `/deployment/virtualbox/pybox`
+folder, do:
+
+    ```shell
+    python3 ./install_vbox.py --setup-type AIO-SX \
+      --iso-location "$HOME/Downloads/stx-8.iso" \
+      --labname StarlingX --install-mode serial \
+      --config-files-dir ./configs/aio-sx/ \
+      --config-controller-ini ./configs/aio-sx/stx_config.ini_centos \
+      --ansible-controller-config ./configs/aio-sx/localhost.yml \
+      --vboxnet-type nat \
+      --vboxnet-name NatNetwork \
+      --nat-controller0-local-ssh-port 3122 \
+      --controller0-ip 10.10.10.3 \
+      --ini-oam-cidr '10.10.10.0/24' \
+      --snapshot
+    ```
+
+The script takes a while to do all the things (from creating a VM and 
+installing an OS in it to configuring StarlingX). Several restarts might
+occur, and you might see a VirtualBox with a prompt. You don't need to type 
+anything. While the installation script is running it will take care of 
+everything for you.
