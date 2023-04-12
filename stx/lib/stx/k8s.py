@@ -60,7 +60,7 @@ class KubeHelper:
         selector = 'app.kubernetes.io/instance=%s,app.kubernetes.io/name=%s' \
             % (self.config.project_name, 'stx-' + dockername)
         cmd = self.config.kubectl() + f" get pods --selector '{selector}'" + \
-            " | tail -n +2 | awk '{print $1}'"
+            " | awk '$3 == \"Running\" {print $1}' | tail -n 1"
         logger.info('Running: %s', cmd)
         output = subprocess.check_output(cmd, shell=True)
         podname = str(output.decode('utf8').strip())
