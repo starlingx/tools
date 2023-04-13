@@ -445,7 +445,7 @@ libltdl7  2.4.6-15
 liblua5.2-0  5.2.4-1.1+b3
 liblua5.3-0  5.3.3-1.1+b1
 liblz4-1  1.9.3-2
-liblzma5  5.2.5-2
+liblzma5  5.2.5-2.1~deb11u1  https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/x/xz-utils/liblzma5_5.2.5-2.1~deb11u1_amd64.deb
 libmagic1  1:5.39-3
 libmagic-mgc  1:5.39-3
 libmariadb-dev 1:10.5.18-0+deb11u1  https://snapshot.debian.org/archive/debian/20221208T032103Z/pool/main/m/mariadb-10.5/libmariadb-dev_10.5.18-0%2Bdeb11u1_amd64.deb
