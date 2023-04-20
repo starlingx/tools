@@ -47,8 +47,8 @@ spec:
           volumeMounts:
           - name: shared-workspace
             mountPath: {{ .Values.volumes.sharedWorkspace.mountPath }}
-          - name: docker-run
-            mountPath: {{ .Values.volumes.dockerRun.mountPath }}
+          - name: docker-var
+            mountPath: {{ .Values.volumes.dockerVar.mountPath }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 
@@ -59,9 +59,9 @@ spec:
       - name: shared-workspace
         hostPath:
           path: {{ .Values.global.hostDir }}{{ .Values.volumes.sharedWorkspace.hostPath }}
-      - name: docker-run
+      - name: docker-var
         hostPath:
-          path: {{ .Values.global.hostDir }}{{ .Values.volumes.dockerRun.hostPath }}
+          path: {{ .Values.global.hostDir }}{{ .Values.volumes.dockerVar.hostPath }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

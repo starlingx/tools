@@ -15,9 +15,9 @@ volumes:
   sharedWorkspace:
     mountPath: /localdisk
     hostPath: /localdisk
-  dockerRun:
-    mountPath: /var/run/docker
-    hostPath: /docker/run
+  dockerVar:
+    mountPath: /var/lib/docker
+    hostPath: /docker/var
 
 services:
   dockerDaemon:
