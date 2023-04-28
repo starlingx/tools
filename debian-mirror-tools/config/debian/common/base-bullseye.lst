@@ -174,7 +174,7 @@ hdparm  9.60+ds-1
 hiera  3.2.0-2.1
 hostname  3.23
 ieee-data  20210605.1
-ifenslave  2.12
+ifenslave  2.13~deb11u1
 ifupdown  0.8.36
 init  1.60
 initramfs-tools  0.140
