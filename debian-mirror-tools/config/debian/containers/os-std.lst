@@ -53,4 +53,4 @@ sphinx-doc 3.4.3-2
 trace-cmd 2.9.1-1
 tree 1.8.0-1+b1
 unzip 6.0-26+deb11u1
-usb.ids 2022.05.20-0+deb11u1
+usb.ids 2022.05.20-0+deb11u1 https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/u/usb.ids/usb.ids_2022.05.20-0+deb11u1_all.deb
