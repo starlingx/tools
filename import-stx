@@ -69,6 +69,11 @@
 #     without the "--rebuild" flag.
 #     Default: master-debian-latest
 
+#   STX_PREBUILT_BUILDER_IMAGE_PREFIX
+#     Download pre-built images from this registry/prefix. This is used by "stx-init-env"
+#     without the "--rebuild" flag. If not empty, this must end with "/".
+#     Default:starlingx/
+
 notice_warn () {
     local tty_on tty_off
     if [[ -t 2 ]] ; then
