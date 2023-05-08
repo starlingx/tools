@@ -262,7 +262,7 @@ libcapstone-dev  4.0.2-3
 libcapstone4  4.0.2-3
 libcacard-dev  1:2.8.0-3
 libcacard0  1:2.8.0-3
-libc-ares2  1.17.1-1+deb11u1
+libc-ares2  1.17.1-1+deb11u2  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/c/c-ares/libc-ares2_1.17.1-1+deb11u2_amd64.deb
 libc-bin  2.31-13+deb11u3
 libcbor0  0.5.0+dfsg-2
 libcc1-0  10.2.1-6
