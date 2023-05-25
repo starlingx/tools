@@ -203,7 +203,7 @@ kernel-wedge  2.104
 keyutils  1.6.1-2
 klibc-utils  2.0.8-6.1
 kmod  28-1
-kpartx  0.8.5-2
+kpartx  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/kpartx_0.8.5-2+deb11u1_amd64.deb
 krb5-multidev  1.18.3-6+deb11u3  https://snapshot.debian.org/archive/debian/20230108T032246Z/pool/main/k/krb5/krb5-multidev_1.18.3-6+deb11u3_amd64.deb
 less  551-2
 libacl1  2.2.53-10
@@ -756,8 +756,8 @@ mime-support  3.66
 mksh  59c-9+b2
 mokutil  0.6.0-2~deb11u1
 mount  2.36.1-8+deb11u1
-multipath-tools  0.8.5-2
-multipath-tools-boot  0.8.5-2
+multipath-tools  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools_0.8.5-2+deb11u1_amd64.deb
+multipath-tools-boot  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools-boot_0.8.5-2+deb11u1_all.deb
 mysql-common  5.8+1.0.7
 nano  5.4-2
 ncat  7.91+dfsg1+really7.80+dfsg1-2
