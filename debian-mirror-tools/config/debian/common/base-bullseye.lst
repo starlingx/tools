@@ -918,7 +918,7 @@ python3-jwt  1.7.1-2
 python3-keystoneauth1  4.2.1-2
 python3-keystonemiddleware  9.1.0-2
 python3-kombu  5.0.2-3
-python3-kubernetes  12.0.1-1
+python3-kubernetes  22.6.0-2 https://snapshot.debian.org/archive/debian/20230115T211934Z/pool/main/p/python-kubernetes/python3-kubernetes_22.6.0-2_all.deb
 python3-ldap  3.2.0-4+b3
 python3-ldap3  2.8.1-1
 python3-ldappool  2.3.1-1.1
@@ -1107,7 +1107,7 @@ python3-xstatic-smart-table  1.4.13.2-4
 python3-xstatic-spin  1.2.8.0+dfsg1-3
 python3-xstatic-term.js  0.0.7.0-4
 python3-xstatic-tv4  1.2.7.0-4
-python3-yaml  5.3.1-5
+python3-yaml  6.0-1 https://snapshot.debian.org/archive/debian/20221001T092433Z/pool/main/p/pyyaml/python3-yaml_6.0-1_amd64.deb
 python3-yappi  1.0-1+b5
 python3-zipp  1.0.0-3
 python3-zmq  20.0.0-1+b1
