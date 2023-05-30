@@ -367,8 +367,11 @@ libglib2.0-0  2.66.8-1
 libglusterfs-dev  9.2-1
 libglusterfs0  9.2-1
 libgmp10  2:6.2.1+dfsg-1+deb11u1
-libgnutls28-dev  3.7.1-5
-libgnutls30  3.7.1-5+deb11u2  https://snapshot.debian.org/archive/debian-security/20220808T192640Z/pool/updates/main/g/gnutls28/libgnutls30_3.7.1-5%2Bdeb11u2_amd64.deb
+libgnutls28-dev  3.7.1-5+deb11u3  https://snapshot.debian.org/archive/debian/20230219T210957Z/pool/main/g/gnutls28/libgnutls28-dev_3.7.1-5%2Bdeb11u3_amd64.deb
+libgnutls30  3.7.1-5+deb11u3  https://snapshot.debian.org/archive/debian/20230219T210957Z/pool/main/g/gnutls28/libgnutls30_3.7.1-5%2Bdeb11u3_amd64.deb
+libgnutls-dane0 3.7.1-5+deb11u3 https://snapshot.debian.org/archive/debian/20230219T210957Z/pool/main/g/gnutls28/libgnutls-dane0_3.7.1-5%2Bdeb11u3_amd64.deb
+libgnutls-openssl27 3.7.1-5+deb11u3 https://snapshot.debian.org/archive/debian/20230219T210957Z/pool/main/g/gnutls28/libgnutls-openssl27_3.7.1-5%2Bdeb11u3_amd64.deb
+libgnutlsxx28 3.7.1-5+deb11u3 https://snapshot.debian.org/archive/debian/20230219T210957Z/pool/main/g/gnutls28/libgnutlsxx28_3.7.1-5%2Bdeb11u3_amd64.deb
 libgomp1  10.2.1-6
 libgoogle-perftools4  2.8.1-1
 libgpg-error0  1.38-2
