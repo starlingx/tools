@@ -1183,7 +1183,7 @@ strongswan  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security
 strongswan-charon  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/strongswan-charon_5.9.1-1%2Bdeb11u3_amd64.deb
 strongswan-libcharon  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/strongswan-libcharon_5.9.1-1%2Bdeb11u3_amd64.deb
 strongswan-starter  5.9.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20221006T161039Z/pool/updates/main/s/strongswan/strongswan-starter_5.9.1-1%2Bdeb11u3_amd64.deb
-sudo-ldap  1.9.5p2-3
+sudo-ldap  1.9.5p2-3+deb11u1  https://snapshot.debian.org/archive/debian/20230123T040022Z/pool/main/s/sudo/sudo-ldap_1.9.5p2-3%2Bdeb11u1_amd64.deb
 sysstat  12.5.2-2
 syslog-ng  3.28.1-2+deb11u1 https://snapshot.debian.org/archive/debian/20230324T031555Z/pool/main/s/syslog-ng/syslog-ng_3.28.1-2%2Bdeb11u1_all.deb
 syslog-ng-core  3.28.1-2+deb11u1 https://snapshot.debian.org/archive/debian/20230324T031555Z/pool/main/s/syslog-ng/syslog-ng-core_3.28.1-2%2Bdeb11u1_amd64.deb
