@@ -144,6 +144,70 @@ is_tarball() {
     return $FOUND
 }
 
+download_file_wrapper() {
+    local _opts=""
+    local tarball_name=""
+    local upstream_url=""
+    local stx_url=""
+    local url=""
+    local rc=1
+
+    while true ; do
+        case "$1" in
+            --quiet)      _opts+="$1 " ;;
+            --timestamps) _opts+="$1 " ;;
+            -*)
+                echo >&2 "Unknown option $1"
+                return 1
+                ;;
+            *)
+                break
+        esac
+        shift
+    done
+
+    upstream_url="$1"
+    tarball_name="$2"
+
+    stx_url="$(url_to_stx_mirror_url "$upstream_url" "$distro")"
+
+    for dl_src in $dl_source; do
+        case $dl_src in
+            $dl_from_stx_mirror)
+                url="$stx_url"
+                ;;
+            $dl_from_upstream)
+                url="$upstream_url"
+                ;;
+            *)
+                echo "Error: Unknown dl_source '$dl_src'"
+                continue
+                ;;
+        esac
+
+        url_exists "$url"
+        if [ $? != 0 ]; then
+            echo "Warning: '$url' is broken"
+        else
+            download_file $_opts "$url" "$tarball_name"
+            if [ $? -eq 0 ]; then
+                rc=0
+                break
+            else
+                echo "Warning: failed to download '$url'"
+                continue
+            fi
+        fi
+    done
+
+    if [ $rc != 0 ]; then
+        echo "Error: failed to download '$upstream_url'"
+        echo "$upstream_url" > "$output_log"
+    fi
+
+    return $rc
+}
+
 # Download function using curl or similar command
 
 download_package() {
@@ -293,7 +357,7 @@ for line in $(cat $tarball_file); do
             rm -rf $directory_name
             popd > /dev/null   # pushd $directory_name
         elif [[ "$tarball_name" = 'chartmuseum-v0.12.0-amd64' ]]; then
-            download_file --quiet "$tarball_url" "$tarball_name"
+            download_file_wrapper --quiet "$tarball_url" "$tarball_name"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
                 popd > /dev/null   # pushd $output_tarball
@@ -301,7 +365,7 @@ for line in $(cat $tarball_file); do
             fi
         elif [[ "$tarball_name" = 'OPAE_1.3.7-5_el7.zip' ]]; then
             srpm_path="${directory_name}/source_code/"
-            download_file --quiet "$tarball_url" "$tarball_name"
+            download_file_wrapper --quiet "$tarball_url" "$tarball_name"
             if [ $? -ne 0 ]; then
                 error_count=$((error_count + 1))
                 popd > /dev/null   # pushd $output_tarball
@@ -450,7 +514,7 @@ for line in $(cat $tarball_file); do
 
             src_rpm_name="$(echo "$tarball_url" | rev | cut -d/ -f1 | rev)"
 
-            download_file --quiet "$tarball_url" "$src_rpm_name"
+            download_file_wrapper --quiet "$tarball_url" "$src_rpm_name"
             if [ $? -eq 0 ]; then
                 rpm2cpio "$src_rpm_name" | cpio --quiet -i "$tarball_name"
                 mv "$tarball_name" ..
