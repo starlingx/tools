@@ -19,7 +19,7 @@ autoconf  2.69-14
 automake  1:1.16.3-2
 autopoint  0.21-4
 autotools-dev  20180224.1+nmu1
-avahi-daemon  0.8-5
+avahi-daemon  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/avahi-daemon_0.8-5%2Bdeb11u2_amd64.deb
 base-files  11.1+deb11u3
 bash-completion  1:2.11-2
 bc  1.07.1-2+b2
@@ -231,11 +231,14 @@ libaudit1  1:3.0-2
 libaudit-common  1:3.0-2
 libaugeas0  1.12.0-2
 libauparse0  1:3.0-2
-libavahi-client3  0.8-5
-libavahi-common3  0.8-5
-libavahi-common-data  0.8-5
-libavahi-core7  0.8-5
-libavahi-glib1  0.8-5
+libavahi-client3  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-client3_0.8-5%2Bdeb11u2_amd64.deb
+libavahi-common3  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-common3_0.8-5%2Bdeb11u2_amd64.deb
+libavahi-common-data  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-common-data_0.8-5%2Bdeb11u2_amd64.deb
+libavahi-common-dev 0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-common-dev_0.8-5%2Bdeb11u2_amd64.deb
+libavahi-core7  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-core7_0.8-5%2Bdeb11u2_amd64.deb
+libavahi-glib1  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-glib1_0.8-5%2Bdeb11u2_amd64.deb
+libavahi-client-dev 0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-client-dev_0.8-5%2Bdeb11u2_amd64.deb
+libavahi-glib-dev 0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-glib-dev_0.8-5%2Bdeb11u2_amd64.deb
 libbabeltrace1  1.5.8-1+b3
 libbasicobjects0  0.6.1-2
 libbinutils  2.35.2-2
