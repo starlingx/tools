@@ -750,7 +750,7 @@ linux-cpupower  5.10.106-1
 locales  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/locales_2.31-13%2Bdeb11u6_all.deb
 locales-all  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/locales-all_2.31-13%2Bdeb11u6_amd64.deb
 login  1:4.8.1-1
-logrotate  3.18.0-2
+logrotate  3.18.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/l/logrotate/logrotate_3.18.0-2%2Bdeb11u1_amd64.deb
 logsave  1.46.2-2
 lsb-base  11.1.0
 lsb-release  11.1.0
