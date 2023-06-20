@@ -244,6 +244,10 @@ iso-post-script: |
     cp $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart/miniboot.cfg kickstart/
   fi
 
+  if [ -d $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart/centos ]; then
+    cp -r $IMAGE_ROOTFS/var/www/pages/feed/rel-*/kickstart/centos kickstart/
+  fi
+
   # 2. PXE
   mkdir -p pxeboot/pxelinux.cfg
 
