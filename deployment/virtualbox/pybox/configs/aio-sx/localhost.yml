@@ -1,0 +1,13 @@
+system_mode: simplex
+
+dns_servers:
+- 1.1.1.1
+- 8.8.8.8
+
+external_oam_subnet: 10.10.10.0/24
+external_oam_gateway_address: 10.10.10.1
+external_oam_floating_address: 10.10.10.3
+
+admin_username: admin
+admin_password: Li69nux*
+ansible_become_pass: Li69nux*

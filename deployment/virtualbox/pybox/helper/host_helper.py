@@ -103,7 +103,7 @@ def disable_logout(stream):
     serial.send_bytes(stream, "export TMOUT=0")
 
 
-def change_password(stream, username="wrsroot", password="Li69nux*"):
+def change_password(stream, username="sysadmin", password="Li69nux*"):
     """
     changes the default password on initial login.
     Args:
@@ -114,15 +114,15 @@ def change_password(stream, username="wrsroot", password="Li69nux*"):
     serial.send_bytes(stream, username, expect_prompt=False)
     serial.expect_bytes(stream, "Password:")
     serial.send_bytes(stream, username, expect_prompt=False)
-    serial.expect_bytes(stream, "UNIX password:")
+    serial.expect_bytes(stream, "Current password:")
     serial.send_bytes(stream, username, expect_prompt=False)
     serial.expect_bytes(stream, "New password:")
     serial.send_bytes(stream, password, expect_prompt=False)
-    serial.expect_bytes(stream, "Retype new")
+    serial.expect_bytes(stream, "Retype new password")
     serial.send_bytes(stream, password)
 
 
-def login(stream, timeout=600, username="wrsroot", password="Li69nux*"):
+def login(stream, timeout=600, username="sysadmin", password="Li69nux*"):
     """
     Logs into controller-0.
     Args:

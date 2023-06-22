@@ -30,7 +30,7 @@ def set_dns(stream, dns_ip):
     """
 
     LOG.info("Configuring DNS to %s.", dns_ip)
-    serial.send_bytes(stream, "source /etc/nova/openrc; system dns-modify "
+    serial.send_bytes(stream, "source /etc/platform/openrc; system dns-modify "
                       "nameservers={}".format(dns_ip), prompt='keystone')
 
 
@@ -43,9 +43,10 @@ def config_controller(stream, config_file=None, password='Li69nux*'):
     if config_file:
         args += '--config-file ' + config_file + ' '
 
-    serial.send_bytes(stream, "sudo config_controller {}".format(args), expect_prompt=False)
+    # serial.send_bytes(stream, f'sudo config_controller {args}', expect_prompt=False)
+    serial.send_bytes(stream, 'ansible-playbook /usr/share/ansible/stx-ansible/playbooks/bootstrap.yml', expect_prompt=False)
     host_helper.check_password(stream, password=password)
-    ret = serial.expect_bytes(stream, "unlock controller to proceed.",
+    ret = serial.expect_bytes(stream, "~$",
                               timeout=HostTimeout.LAB_CONFIG)
     if ret != 0:
         LOG.info("Configuration failed. Exiting installer.")

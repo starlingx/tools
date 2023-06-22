@@ -628,19 +628,19 @@ MGMTQOSWEIGHT=8
 ##
 ##       local_lvm   - nova-local volume group is created and physical volumes are
 ##                     added. The instances logical volume is created and
-##                     mounted at /etc/nova/instances. The instances logical
+##                     mounted at /etc/platform/instances. The instances logical
 ##                     volume uses a subset of the available space within the
 ##                     volume group. Instance disks are logical volumes created
 ##                     out of the available space in the nova-local volume group
 ##       local_image - nova-local volume group is created and physical volumes
 ##                     are added. The instances logical volume is created and
-##                     mounted at /etc/nova/instances. The instances logical is
+##                     mounted at /etc/platform/instances. The instances logical is
 ##                     sized to use 100% of the volume group. Instance disks are
 ##                     file based CoW images contained within
-##                     /etc/nova/instances.
+##                     /etc/platform/instances.
 ##       remote      - nova-local volume group is created and physical volumes are
 ##                     added. The instances logical volume is created and
-##                     mounted at /etc/nova/instances. The instances logical is
+##                     mounted at /etc/platform/instances. The instances logical is
 ##                     sized to use 100% of the volume group. Instance disks are
 ##                     RBD based from the ceph ephemeral pool.
 ##

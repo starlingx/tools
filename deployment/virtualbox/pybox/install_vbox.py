@@ -48,15 +48,19 @@ def menu_selector(stream, setup_type,
 
     # Wait for menu to load (add sleep so we can see what is picked)
     serial.expect_bytes(stream, "Press")
+
     # Pick install type
     if setup_type in [AIO_SX, AIO_DX]:
-        LOG.info("Selecting AIO controller")
+        LOG.info("Selecting All-in-one Install")
         serial.send_bytes(stream, "\033[B", expect_prompt=False, send=False)
-    if lowlatency is True:
-        LOG.info("Selecting low latency controller")
-        serial.send_bytes(stream, "\033[B", expect_prompt=False, send=False)
+        if lowlatency is True:
+            LOG.info("Selecting All-in-one (lowlatency) Install")
+            serial.send_bytes(stream, "\033[B", expect_prompt=False, send=False)
+    else:
+        LOG.info("Selecting Controller Install")
     serial.send_bytes(stream, "\n", expect_prompt=False, send=False)
     time.sleep(4)
+
     # Serial or Graphical menu (picking Serial by default)
     if install_mode == "graphical":
         LOG.info("Selecting Graphical menu")
@@ -65,6 +69,7 @@ def menu_selector(stream, setup_type,
         LOG.info("Selecting Serial menu")
     serial.send_bytes(stream, "\n", expect_prompt=False, send=False)
     time.sleep(6)
+
     # Security profile menu
     if securityprofile == "extended":
         LOG.info("Selecting extended security profile")
@@ -531,7 +536,7 @@ def wait_for_hosts(ssh_client, hostnames, status,
             raise Exception("VMs failed to go %s!", status)
         # Get host list
         host_statuses, _, _ = run_ssh_cmd(
-            ssh_client, 'source /etc/nova/openrc; system host-list', timeout=30)
+            ssh_client, 'source /etc/platform/openrc; system host-list', timeout=30)
         host_statuses = host_statuses[1:-1]
         for host_status in host_statuses:
             for host in hostnames:
@@ -610,7 +615,7 @@ def set_serial_prompt_mode(stream, mode):
         if serial.send_bytes(stream, vboxoptions.password, prompt="~$", fail_ok=True, timeout=30):
             raise Exception("Login failure, invalid password?")
         if mode == CONSOLE_USER_MODE:
-            serial.send_bytes(stream, "source /etc/nova/openrc\n",
+            serial.send_bytes(stream, "source /etc/platform/openrc\n",
                               timeout=30, prompt='keystone')
         serial_console_mode = CONSOLE_USER_MODE
     if mode == 'root' and serial_console_mode != 'root':
@@ -621,7 +626,7 @@ def set_serial_prompt_mode(stream, mode):
             "cd /home/wrsroot",
             prompt="/home/wrsroot# ",
             timeout=30)
-        serial.send_bytes(stream, "source /etc/nova/openrc\n",
+        serial.send_bytes(stream, "source /etc/platform/openrc\n",
                           timeout=30, prompt='keystone')
         serial_console_mode = CONSOLE_ROOT_MODE
     serial.send_bytes(stream, "export TMOUT=0", timeout=10, prompt='keystone')
@@ -742,56 +747,55 @@ def stage_install_controller0():
 def stage_config_controller(stream):
     ip, port = get_ssh_ip_and_port(
         'controller-0')  # Floating ip is not yet configured
-    if True:
-        # Updated config file
-        LOG.info("#### Updating config_controller ini file networking" \
-                 "settings and uploading it to controller.")
-        destination = "/home/" + \
-            vboxoptions.username + "/stx_config.ini_centos"
-        configini = configparser.ConfigParser()
-        configini.optionxform = str
-        configini.read(vboxoptions.config_controller_ini)
-        old_cidr = configini['OAM_NETWORK']['CIDR']
-        new_cidr = vboxoptions.ini_oam_cidr
-        LOG.info("Replacing OAM_NETWORK/CIDR from %s to %s", old_cidr, new_cidr)
-        configini['OAM_NETWORK']['CIDR'] = new_cidr
-        old_gateway = configini['OAM_NETWORK']['GATEWAY']
-        new_gateway = vboxoptions.vboxnet_ip
-        LOG.info("Replacing OAM_NETWORK/GATEWAY from %s to %s", old_gateway, new_gateway)
-        configini['OAM_NETWORK']['GATEWAY'] = new_gateway
-        if vboxoptions.setup_type == AIO_SX:
-            old_ip_address = configini['OAM_NETWORK']['IP_ADDRESS']
-            new_ip_address = vboxoptions.controller0_ip
-            LOG.info("Replacing OAM_NETWORK/IP_ADDRESS from %s to %s",
-                     old_ip_address, new_ip_address)
-            configini['OAM_NETWORK']['IP_ADDRESS'] = new_ip_address
-        else:
-            old_start_addr = configini['OAM_NETWORK']['IP_START_ADDRESS']
-            new_start_addr = vboxoptions.ini_oam_ip_start_address
-            LOG.info("Replacing OAM_NETWORK/IP_START_ADDRESS from %s to %s",
-                     old_start_addr, new_start_addr)
-            configini['OAM_NETWORK']['IP_START_ADDRESS'] = new_start_addr
-            old_end_addr = configini['OAM_NETWORK']['IP_END_ADDRESS']
-            new_end_addr = vboxoptions.ini_oam_ip_end_address
-            LOG.info("Replacing OAM_NETWORK/IP_END_ADDRESS from %s to %s",
-                     old_end_addr, new_end_addr)
-            configini['OAM_NETWORK']['IP_END_ADDRESS'] = new_end_addr
 
-        # Take updated config file and copy it to controller
-        with tempfile.NamedTemporaryFile(mode='w') as fp:
-            configini.write(fp, space_around_delimiters=False)
-            fp.flush()
-
-            sftp_send(
-                fp.name, remote_host=ip, remote_port=port, destination=destination,
-                username=vboxoptions.username, password=vboxoptions.password)
+    # Updated config file
+    LOG.info("#### Updating config_controller ini file networking" \
+             "settings and uploading it to controller.")
+    destination = "/home/" + \
+        vboxoptions.username + "/stx_config.ini_centos"
+    configini = configparser.ConfigParser()
+    configini.optionxform = str
+    configini.read(vboxoptions.config_controller_ini)
+    old_cidr = configini['OAM_NETWORK']['CIDR']
+    new_cidr = vboxoptions.ini_oam_cidr
+    LOG.info("Replacing OAM_NETWORK/CIDR from %s to %s", old_cidr, new_cidr)
+    configini['OAM_NETWORK']['CIDR'] = new_cidr
+    old_gateway = configini['OAM_NETWORK']['GATEWAY']
+    new_gateway = vboxoptions.vboxnet_ip
+    LOG.info("Replacing OAM_NETWORK/GATEWAY from %s to %s", old_gateway, new_gateway)
+    configini['OAM_NETWORK']['GATEWAY'] = new_gateway
+    if vboxoptions.setup_type == AIO_SX:
+        old_ip_address = configini['OAM_NETWORK']['IP_ADDRESS']
+        new_ip_address = vboxoptions.controller0_ip
+        LOG.info("Replacing OAM_NETWORK/IP_ADDRESS from %s to %s",
+                 old_ip_address, new_ip_address)
+        configini['OAM_NETWORK']['IP_ADDRESS'] = new_ip_address
     else:
-        destination = "/home/" + \
-            vboxoptions.username + "/stx_config.ini_centos"
+        old_start_addr = configini['OAM_NETWORK']['IP_START_ADDRESS']
+        new_start_addr = vboxoptions.ini_oam_ip_start_address
+        LOG.info("Replacing OAM_NETWORK/IP_START_ADDRESS from %s to %s",
+                 old_start_addr, new_start_addr)
+        configini['OAM_NETWORK']['IP_START_ADDRESS'] = new_start_addr
+        old_end_addr = configini['OAM_NETWORK']['IP_END_ADDRESS']
+        new_end_addr = vboxoptions.ini_oam_ip_end_address
+        LOG.info("Replacing OAM_NETWORK/IP_END_ADDRESS from %s to %s",
+                 old_end_addr, new_end_addr)
+        configini['OAM_NETWORK']['IP_END_ADDRESS'] = new_end_addr
+
+    # Take updated config file and copy it to controller
+    with tempfile.NamedTemporaryFile(mode='w') as fp:
+        configini.write(fp, space_around_delimiters=False)
+        fp.flush()
+
         sftp_send(
-            vboxoptions.config_controller_ini, remote_host=ip, remote_port=port,
-            destination=destination,
+            fp.name, remote_host=ip, remote_port=port, destination=destination,
             username=vboxoptions.username, password=vboxoptions.password)
+
+    LOG.info("Copying Ansible configuration file")
+    destination_ansible = f'/home/{vboxoptions.username}/localhost.yml'
+    sftp_send(
+        vboxoptions.ansible_controller_config, remote_host=ip, remote_port=port, destination=destination_ansible,
+        username=vboxoptions.username, password=vboxoptions.password)
 
     # Run config_controller
     LOG.info("#### Running config_controller")
@@ -840,22 +844,30 @@ def get_ssh_ip_and_port(node='floating'):
 
 
 def stage_rsync_config():
+    if not vboxoptions.config_files_dir and not vboxoptions.config_files_dir_dont_follow_links:
+        LOG.info("No rsync done! Please set config-files-dir "
+                 "and/or config-files-dir-dont-follow-links")
+        return
+
     # Get ip and port for ssh on floating ip
     ip, port = get_ssh_ip_and_port()
+
     # Copy config files to controller
     if vboxoptions.config_files_dir:
         local_path = vboxoptions.config_files_dir
+        follow_links = True
         send_dir(source=local_path, remote_host=ip, remote_port=port,
                  destination='/home/' + vboxoptions.username + '/',
-                 username=vboxoptions.username, password=vboxoptions.password)
+                 username=vboxoptions.username, password=vboxoptions.password,
+                 follow_links=follow_links)
+
     if vboxoptions.config_files_dir_dont_follow_links:
         local_path = vboxoptions.config_files_dir_dont_follow_links
+        follow_links = False
         send_dir(source=local_path, remote_host=ip, remote_port=port,
                  destination='/home/' + vboxoptions.username + '/',
-                 username=vboxoptions.username, password=vboxoptions.password)
-    if not vboxoptions.config_files_dir and not vboxoptions.config_files_dir_dont_follow_links:
-        LOG.info("No rsync done! Please set config-files-dir" \
-                 "and/or config-files-dir-dont-follow-links")
+                 username=vboxoptions.username, password=vboxoptions.password,
+                 follow_links=follow_links)
 
 
 @connect_to_serial
@@ -873,19 +885,18 @@ def _run_lab_setup_serial(stream):
 
 
 @connect_to_ssh
-def _run_lab_setup(ssh_client):
+def _run_lab_setup(stage, ssh_client):
     conf_str = ""
     for cfg_file in vboxoptions.lab_setup_conf:
         conf_str = conf_str + " -f {}".format(cfg_file)
 
-    _, _, exitcode = run_ssh_cmd(ssh_client,
-                                 'source /etc/platform/openrc; '
-                                 'export PATH="$PATH:/usr/local/bin; '
-                                 'export PATH="$PATH:/usr/bin; '
-                                 'export PATH="$PATH:/usr/local/sbin; '
-                                 'export PATH="$PATH:/usr/sbin"; '
-                                 'sh lab_setup.sh {}'.format(conf_str),
-                                 timeout=HostTimeout.LAB_INSTALL)
+    command = f'source /etc/platform/openrc; export ' \
+              f'PATH="$PATH:/usr/local/bin"; export PATH="$PATH:/usr/bin"; ' \
+              f'export PATH="$PATH:/usr/local/sbin"; export ' \
+              f'PATH="$PATH:/usr/sbin"; sh lab_setup{stage}.sh'
+
+    _, _, exitcode = run_ssh_cmd(ssh_client, command, timeout=HostTimeout.LAB_INSTALL)
+
     if exitcode != 0:
         msg = "Lab setup failed, expecting exit code of 0 but got {}.".format(
             exitcode)
@@ -894,23 +905,23 @@ def _run_lab_setup(ssh_client):
 
 
 def stage_lab_setup1():
-    _run_lab_setup()
+    _run_lab_setup(1)
 
 
 def stage_lab_setup2():
-    _run_lab_setup()
+    _run_lab_setup(2)
 
 
 def stage_lab_setup3():
-    _run_lab_setup()
+    _run_lab_setup(3)
 
 
 def stage_lab_setup4():
-    _run_lab_setup()
+    _run_lab_setup(4)
 
 
 def stage_lab_setup5():
-    _run_lab_setup()
+    _run_lab_setup(5)
 
 
 @connect_to_ssh
@@ -918,7 +929,7 @@ def stage_lab_setup5():
 def stage_unlock_controller0(stream, ssh_client):
     LOG.info("#### Unlocking controller-0")
     _, _, _ = run_ssh_cmd(ssh_client,
-                          'source /etc/nova/openrc; system host-unlock controller-0',
+                          'source /etc/platform/openrc; system host-unlock controller-0',
                           timeout=HostTimeout.CONTROLLER_UNLOCK)
 
     LOG.info("#### Waiting for controller-0 to reboot")
@@ -978,7 +989,7 @@ def stage_install_nodes(ssh_client):
                   username=vboxoptions.username, password=vboxoptions.password)
     # Apply host-bulk-add
     _, _, exitcode = run_ssh_cmd(ssh_client,
-                                 'source /etc/nova/openrc; ',
+                                 'source /etc/platform/openrc; ',
                                  'system host-bulk-add {}'.format(destination),
                                  timeout=60)
     if exitcode != 0:
@@ -1015,7 +1026,7 @@ def stage_unlock_controller1(ssh_client):
 
     LOG.info("#### Unlocking controller-1")
     run_ssh_cmd(ssh_client,
-                'source /etc/nova/openrc; system host-unlock controller-1',
+                'source /etc/platform/openrc; system host-unlock controller-1',
                 timeout=60)
 
     LOG.info("#### waiting for controller-1 to be available.")
@@ -1029,7 +1040,7 @@ def stage_unlock_storages(ssh_client):
 
     for storage in storages:
         run_ssh_cmd(ssh_client,
-                    'source /etc/nova/openrc; system host-unlock {}'.format(storage),
+                    'source /etc/platform/openrc; system host-unlock {}'.format(storage),
                     timeout=60)
         LOG.info("Waiting 15s before next unlock")
         time.sleep(15)
@@ -1047,7 +1058,7 @@ def stage_unlock_workers(ssh_client):
     for worker in workers:
         run_ssh_cmd(
             ssh_client,
-            'source /etc/nova/openrc; system host-unlock {}'.format(worker),
+            'source /etc/platform/openrc; system host-unlock {}'.format(worker),
             timeout=60)
         LOG.info("Waiting 15s before next unlock")
         time.sleep(15)
@@ -1316,7 +1327,6 @@ AIO_SX_STAGES = [
     STG_RSYNC_CONFIG,
     STG_LAB_SETUP1,
     STG_UNLOCK_CONTROLLER0,
-    STG_LAB_SETUP2,
 ]
 
 AIO_DX_STAGES = [
