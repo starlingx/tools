@@ -348,7 +348,8 @@ libfreeipmi17  1.6.6-4+deb11u1
 libfreetype6  2.10.4+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/freetype/libfreetype6_2.10.4%2Bdfsg-1%2Bdeb11u1_amd64.deb
 libfreetype6-dev  2.10.4+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/freetype/libfreetype6-dev_2.10.4%2Bdfsg-1%2Bdeb11u1_amd64.deb
 libfreetype-dev  2.10.4+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/freetype/libfreetype-dev_2.10.4%2Bdfsg-1%2Bdeb11u1_amd64.deb
-libfribidi0  1.0.8-2
+libfribidi0  1.0.8-2+deb11u1 https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/fribidi/libfribidi0_1.0.8-2%2Bdeb11u1_amd64.deb
+libfribidi-dev 1.0.8-2+deb11u1 https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/fribidi/libfribidi-dev_1.0.8-2%2Bdeb11u1_amd64.deb
 libfstrm0  0.6.0-1+b1
 libfuse-dev  2.9.9-5
 libfuse2  2.9.9-5
