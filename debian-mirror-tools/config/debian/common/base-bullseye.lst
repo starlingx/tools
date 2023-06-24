@@ -699,8 +699,8 @@ libutempter0 1.2.1-2
 libuuid1  2.36.1-8+deb11u1
 libuv1  1.40.0-2
 libibverbs1  33.2-1
-libvirglrenderer-dev  0.8.2-5
-libvirglrenderer1  0.8.2-5
+libvirglrenderer-dev  0.8.2-5+deb11u1 https://snapshot.debian.org/archive/debian/20221210T034654Z/pool/main/v/virglrenderer/libvirglrenderer-dev_0.8.2-5%2Bdeb11u1_amd64.deb
+libvirglrenderer1  0.8.2-5+deb11u1 https://snapshot.debian.org/archive/debian/20221210T034654Z/pool/main/v/virglrenderer/libvirglrenderer1_0.8.2-5%2Bdeb11u1_amd64.deb
 libvte-2.91-dev  0.62.3-1
 libwayland-server0  1.18.0-2~exp1.1
 libwbclient0  2:4.13.13+dfsg-1~deb11u5 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/s/samba/libwbclient0_4.13.13+dfsg-1~deb11u5_amd64.deb
