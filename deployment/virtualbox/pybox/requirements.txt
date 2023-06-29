@@ -1,6 +1,0 @@
-configparser
-paramiko
-pytest
-git+https://github.com/digidotcom/python-streamexpect#egg=streamexpect
-pexpect
-
