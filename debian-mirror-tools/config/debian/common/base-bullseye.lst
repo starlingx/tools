@@ -398,6 +398,8 @@ libip4tc2  1.8.7-1
 libip6tc2  1.8.7-1
 libipa-hbac0  2.4.1-2
 libiperf0  3.9-1
+libipsec-mb0  0.55-1
+libisal2  2.30.0-2
 libisc-export1105  1:9.11.19+dfsg-2.1
 libiscsi-dev  1.19.0-3
 libisl23  0.23-1
