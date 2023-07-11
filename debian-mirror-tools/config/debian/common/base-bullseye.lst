@@ -23,9 +23,9 @@ avahi-daemon  0.8-5
 base-files  11.1+deb11u3
 bash-completion  1:2.11-2
 bc  1.07.1-2+b2
-bind9-dnsutils 1:9.16.37-1~deb11u1  https://snapshot.debian.org/archive/debian/20230212T084519Z/pool/main/b/bind9/bind9-dnsutils_9.16.37-1~deb11u1_amd64.deb
-bind9-host  1:9.16.37-1~deb11u1  https://snapshot.debian.org/archive/debian/20230212T084519Z/pool/main/b/bind9/bind9-host_9.16.37-1~deb11u1_amd64.deb
-bind9-libs  1:9.16.37-1~deb11u1  https://snapshot.debian.org/archive/debian/20230212T084519Z/pool/main/b/bind9/bind9-libs_9.16.37-1~deb11u1_amd64.deb
+bind9-dnsutils 1:9.16.42-1~deb11u1  https://snapshot.debian.org/archive/debian-security/20230625T200959Z/pool/updates/main/b/bind9/bind9-dnsutils_9.16.42-1~deb11u1_amd64.deb
+bind9-host  1:9.16.42-1~deb11u1  https://snapshot.debian.org/archive/debian-security/20230625T200959Z/pool/updates/main/b/bind9/bind9-host_9.16.42-1~deb11u1_amd64.deb
+bind9-libs  1:9.16.42-1~deb11u1  https://snapshot.debian.org/archive/debian-security/20230625T200959Z/pool/updates/main/b/bind9/bind9-libs_9.16.42-1~deb11u1_amd64.deb
 binutils  2.35.2-2
 binutils-common  2.35.2-2
 binutils-x86-64-linux-gnu  2.35.2-2
