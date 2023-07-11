@@ -900,7 +900,7 @@ python3-falcon  2.0.0-2+b1
 python3-fasteners  0.14.1-2
 python3-fixtures  3.0.0-4
 python3-flake8  3.8.4-1
-python3-flask  1.1.2-2
+python3-flask  1.1.2-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20230629T181857Z/pool/updates/main/f/flask/python3-flask_1.1.2-2%2Bdeb11u1_all.deb
 python3-flask-restful  0.3.8-5
 python3-future  0.18.2-5
 python3-futurist  2.3.0-2
