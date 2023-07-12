@@ -712,6 +712,8 @@ libwiretap-dev  3.4.10-0+deb11u1
 libwrap0  7.6.q-31
 libx11-6  2:1.7.2-1+deb11u1 https://snapshot.debian.org/archive/debian-security/20230621T092836Z/pool/updates/main/libx/libx11/libx11-6_1.7.2-1%2Bdeb11u1_amd64.deb
 libx11-data  2:1.7.2-1+deb11u1 https://snapshot.debian.org/archive/debian-security/20230621T092836Z/pool/updates/main/libx/libx11/libx11-data_1.7.2-1%2Bdeb11u1_all.deb
+libx11-dev  2:1.7.2-1+deb11u1 https://snapshot.debian.org/archive/debian-security/20230621T092836Z/pool/updates/main/libx/libx11/libx11-dev_1.7.2-1%2Bdeb11u1_amd64.deb
+libx11-xcb1  2:1.7.2-1+deb11u1 https://snapshot.debian.org/archive/debian-security/20230621T092836Z/pool/updates/main/libx/libx11/libx11-xcb1_1.7.2-1%2Bdeb11u1_amd64.deb
 libxau6  1:1.0.9-1
 libxcb1  1.14-3
 libxcb-render0  1.14-3
