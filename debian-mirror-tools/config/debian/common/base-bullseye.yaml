@@ -374,6 +374,12 @@ iso-post-script: |
                              EFI/BOOT/grub.cfg
   fi
 
+  # Update the grub.cfg in efi.img according to above setting.
+  # Don't update grub.cfg.sig because the grub.cfg signature checking
+  # has been omitted.
+  mdel -i efi.img ::/EFI/BOOT/grub.cfg
+  mcopy -i efi.img EFI/BOOT/grub.cfg ::/EFI/BOOT/
+
   # Put the controller-0 pxeboot install grub menu samples and
   # setup script into a new the ISO's pxeboot/samples directory.
   install -v -d -m 0755 pxeboot/samples
