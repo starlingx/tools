@@ -25,6 +25,10 @@ Initialize StarlingX build environment & (re-)start builder pods
                            docker source files and is meant for debugging
                            the build scripts.
 
+  -L,--dockerhub-login
+                  execute "docker login" prior to building or pulling builder
+                  images
+
 END
 }
 
@@ -57,6 +61,7 @@ KUBECTL=kubectl
 DOCKER_PREFIX=${STX_PREBUILT_BUILDER_IMAGE_PREFIX:-'starlingx/'}
 DOCKER_IMAGES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
 DOCKER_TAG="$STX_PREBUILT_BUILDER_IMAGE_TAG"
+DOCKERHUB_LOGIN=0
 
 BUILD_DOCKER=0
 DELETE_ENV=0
@@ -96,7 +101,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild::,cache,nuke -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hRL --long help,clean,restart-minikube,rebuild::,cache,nuke,dockerhub-login -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -138,6 +143,10 @@ while true ; do
             ;;
         --nuke)
             DELETE_ENV=1
+            shift
+            ;;
+        -L|--dockerhub-login)
+            DOCKERHUB_LOGIN=1
             shift
             ;;
         --)
@@ -220,6 +229,17 @@ if [[ ! -d "$STX_BUILD_HOME/mirrors/starlingx" ]] ; then
     mkdir -p $STX_BUILD_HOME/mirrors/starlingx || exit 1
 fi
 
+# Login to docker hub if necessary
+if [[ "$DOCKERHUB_LOGIN" -eq 1 ]] ; then
+    # This will save docker hub credentials in $HOME/.docker/config.json. If docker hub
+    # credentials in that file are missing or invalid, this will ask for the username
+    # and password on the current TTY and save them in the json file. If credentials
+    # are already in the file, it will reuse them. In any case this will instruct
+    # host's docker daemon to obtain an authentication token for all subsequent
+    # interactions with docker hub.
+    info "authenticating host docker daemon with docker hub"
+    docker login || exit 1
+fi
 
 if [ "$STX_PLATFORM" = "minikube" ]; then
     # MINIKUBE
@@ -258,6 +278,7 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
 
     # Start minikube
     if [[ $WANT_START_MINIKUBE -eq 1 ]] ; then
+        # FIXME: inject docker hub credentials into minikube's embedded docker daemon
         notice "Starting minikube cluster \`$MINIKUBENAME'"
         $MINIKUBE start --driver=docker -p $MINIKUBENAME \
             --cpus=$STX_BUILD_CPUS \
@@ -273,8 +294,15 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
     echo "MINIKUBENAME: $MINIKUBENAME" >> minikube_history.log
     echo "STX_BUILD_HOME: $STX_BUILD_HOME" >> minikube_history.log
 
-    # Import minikube's docker environment
+    # Import minikube's docker environment. This points docker CLI to minikube's
+    # embedded docker daemon.
     eval $(minikube -p $MINIKUBENAME docker-env)
+
+    # Ask minikube's docker daemon to obtain docker hub's access token
+    if [[ "$DOCKERHUB_LOGIN" -eq 1 ]] ; then
+        info "authenticating minikube's docker daemon with docker hub"
+        docker login || exit 1
+    fi
 
 elif [ "$STX_PLATFORM" = "kubernetes" ]; then
     if [[ $DELETE_ENV -eq 1 ]] ; then
@@ -324,6 +352,8 @@ fi
 notice "Restarting pods"
 stx control stop || exit 1
 stx config --upgrade || exit 1
+# FIXME: inject docker hub credentials into k8s
+# FIXME: inject docker hub credentials into builder pod
 stx control start || exit 1
 
 notice "Run 'stx control status' to check the pod startup status"
