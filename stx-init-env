@@ -25,7 +25,7 @@ Initialize StarlingX build environment & (re-)start builder pods
                            docker source files and is meant for debugging
                            the build scripts.
 
-  -L,--dockerhub-login
+     --dockerhub-login
                   execute "docker login" prior to building or pulling builder
                   images
 
@@ -101,7 +101,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hRL --long help,clean,restart-minikube,rebuild::,cache,nuke,dockerhub-login -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild::,cache,nuke,dockerhub-login -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -145,7 +145,7 @@ while true ; do
             DELETE_ENV=1
             shift
             ;;
-        -L|--dockerhub-login)
+        --dockerhub-login)
             DOCKERHUB_LOGIN=1
             shift
             ;;
