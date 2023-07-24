@@ -18,6 +18,9 @@ MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
 ARG LAT_BINARY_RESOURCE_PATH=http://mirror.starlingx.cengn.ca/mirror/lat-sdk/lat-sdk-20230510
 
+# Update certificates
+RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \
         openssh-client \
