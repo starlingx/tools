@@ -15,8 +15,12 @@
 FROM debian:bullseye
 
 RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
-# Download required dependencies by mirror/build processes.
 ARG DEBIAN_FRONTEND=noninteractive
+
+# Update certificates
+RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
+# Download required dependencies by mirror/build processes.
 RUN     apt-get update && apt-get install --no-install-recommends -y \
         build-essential \
         live-build \

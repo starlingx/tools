@@ -33,6 +33,9 @@ MAINTAINER mark.asselstine@windriver.com
 
 COPY --from=builder /go/nginx_signing.key nginx_signing.key
 
+# Update certificates
+RUN apt-get -q -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
 # Add Nginx repository and install required packages
 RUN apt-get -q update && apt-get -y install gnupg2 && \
     echo "deb http://nginx.org/packages/debian/ bullseye nginx" > /etc/apt/sources.list.d/nginx.list && \

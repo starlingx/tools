@@ -21,6 +21,9 @@ RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/source
     echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
 
+# Update certificates
+RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
 # Download required dependencies by mirror/build processes.
 RUN apt-get update && apt-get install --no-install-recommends -y \
         bzip2 \
