@@ -181,7 +181,8 @@ class Debbuilder:
         else:
             chroot_suffix = '--chroot-suffix=-' + user
             chroot_cmd = ' '.join(['sbuild-createchroot', chroot_suffix,
-                                   '--include=eatmydata', '--command-prefix=eatmydata',
+                                   '--include=apt-transport-https,ca-certificates,eatmydata',
+                                   '--command-prefix=eatmydata',
                                    self.attrs['dist'], user_chroot])
             if 'mirror' in request_form:
                 chroot_cmd = ' '.join([chroot_cmd, request_form['mirror']])
