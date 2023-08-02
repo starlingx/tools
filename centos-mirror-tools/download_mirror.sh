@@ -315,7 +315,7 @@ for key in "${!layer_pkg_urls[@]}"; do
     url="${layer_pkg_urls[${key}]}"
     name_from_url=$(url_to_file_name $url)
     list="${rpms_from_layer_build_dir}/${name_from_url}"
-    curl --silent --fail ${url} > ${list} ||
+    curl -L --silent --fail ${url} > ${list} ||
     if [ $? -ne 0 ]; then
         echo "ERROR: Failed to download from url: ${url}"
         exit 1

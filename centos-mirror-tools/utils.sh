@@ -53,9 +53,9 @@ get_download_file_command() {
         _opts+=" -O"
     fi
     if [[ "$_name" == http?(s)://* ]]; then
-        _ret="curl $_opts $_name"
+        _ret="curl -L $_opts $_name"
     else
-        _ret="curl $_opts $(koji_url $_name)"
+        _ret="curl -L $_opts $(koji_url $_name)"
     fi
     echo "$_ret"
 }
@@ -82,7 +82,7 @@ download_file() {
     else
         _dest_file="$(basename "$1")"
     fi
-    if curl $_opts -o "${_dest_file}.dl_part" "$1" ; then
+    if curl -L $_opts -o "${_dest_file}.dl_part" "$1" ; then
         \mv -fT "${_dest_file}.dl_part" "${_dest_file}"
         return 0
     fi

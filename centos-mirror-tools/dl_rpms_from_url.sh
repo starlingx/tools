@@ -138,7 +138,7 @@ download () {
             dl_result=1
 
             download_url="$_url/$rpm_name"
-            download_cmd="curl --silent --output $rpm_name ${download_url}"
+            download_cmd="curl -L --silent --output $rpm_name ${download_url}"
 
             echo "Looking for $rpm_name"
             echo "--> run: $download_cmd"
