@@ -221,7 +221,7 @@ for key in "${!layer_image_inc_urls[@]}"; do
     done
 
     if [ ! -f ${inc_file_dir}/${list} ]; then
-        curl --silent --fail ${url} > ${inc_file_dir}/${list}
+        curl -L --silent --fail ${url} > ${inc_file_dir}/${list}
         if [ $? -ne 0 ]; then
             echo "ERROR: Failed to download from url '${url}'"
             exit 1
@@ -252,7 +252,7 @@ for key in "${!layer_wheels_inc_urls[@]}"; do
     done
 
     if [ ! -f ${wheels_file_dir}/${list} ]; then
-        curl --silent --fail ${url} > ${wheels_file_dir}/${list}
+        curl -L --silent --fail ${url} > ${wheels_file_dir}/${list}
         if [ $? -ne 0 ]; then
             echo "ERROR: Failed to download from url '${url}'"
             exit 1
@@ -292,7 +292,7 @@ for key in "${!layer_image_inc_urls[@]}"; do
     done
 
     if [ ! -f ${build_info_file_dir}/${list} ]; then
-        curl --silent --fail ${url} > ${build_info_file_dir}/${list}
+        curl -L --silent --fail ${url} > ${build_info_file_dir}/${list}
         if [ $? -ne 0 ]; then
             echo "WARNING: Failed to download from url '${url}'"
         fi
@@ -319,7 +319,7 @@ for key in "${!layer_pkg_urls[@]}"; do
     done
 
     if [ ! -f ${lst_file_dir}/${list} ]; then
-        curl --silent --fail ${url} > ${lst_file_dir}/${list}
+        curl -L --silent --fail ${url} > ${lst_file_dir}/${list}
         if [ $? -ne 0 ]; then
             echo "ERROR: Failed to download from url '${url}'"
             exit 1
@@ -360,6 +360,7 @@ process_lst_file () {
     local lst_file="${1}"
     local dest_dir="${2}"
 
+    echo "process_lst_file: ${1} ${2}"
     grep -v "^#" ${lst_file_dir}/${lst_file} | while IFS="#" read rpmname extrafields; do
         if [ -z "${rpmname}" ]; then
             continue
