@@ -239,6 +239,12 @@ CENGN_HOST="mirror.starlingx.cengn.ca"
 CENGN_PORT="80"
 CENGN_URL_ROOT="mirror"
 
+to_regex () {
+    # Currently only care about one case
+    # convert '.' to '[.]'
+    echo $1 | sed 's#[.]#[.]#g'
+}
+
 url_to_stx_mirror_url () {
     local URL="$1"
     local DISTRO="$2"
@@ -248,6 +254,11 @@ url_to_stx_mirror_url () {
     if [ "$URL" == "" ] || [ "$DISTRO" == "" ]; then
         >&2 echo "Error: $FUNCNAME (${LINENO}): empty argument"
         return 1
+    fi
+
+    if [[ ${URL} =~ $(to_regex ${CENGN_HOST}) ]]; then
+        echo "${URL}"
+        return 0
     fi
 
     FS_PATH="$(repo_url_to_sub_path "$URL")"
