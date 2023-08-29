@@ -3,7 +3,7 @@ python3-keystonemiddleware 10.2.0-2 https://snapshot.debian.org/archive/debian-p
 python3-osc-lib 2.7.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-osc-lib/python3-osc-lib_2.7.0-2_all.deb
 python3-oslo.cache 3.3.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.cache/python3-oslo.cache_3.3.1-2_all.deb
 python3-oslo.concurrency 5.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.concurrency/python3-oslo.concurrency_5.1.1-2_all.deb
-python3-oslo.config 9.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.config/python3-oslo.config_9.1.1-2_all.deb
+python3-oslo.config 1:9.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.config/python3-oslo.config_9.1.1-2_all.deb
 python3-oslo.context 5.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.context/python3-oslo.context_5.1.1-2_all.deb
 python3-oslo.db 12.3.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.db/python3-oslo.db_12.3.1-2_all.deb
 python3-oslo.i18n 6.0.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.i18n/python3-oslo.i18n_6.0.0-2_all.deb

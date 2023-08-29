@@ -20,7 +20,7 @@ automake  1:1.16.3-2
 autopoint  0.21-4
 autotools-dev  20180224.1+nmu1
 avahi-daemon  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/avahi-daemon_0.8-5%2Bdeb11u2_amd64.deb
-base-files  11.1+deb11u3
+base-files  11.1+deb11u3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/b/base-files/base-files_11.1%2Bdeb11u3_amd64.deb
 bash-completion  1:2.11-2
 bc  1.07.1-2+b2
 bind9-dnsutils 1:9.16.42-1~deb11u1  https://snapshot.debian.org/archive/debian-security/20230625T200959Z/pool/updates/main/b/bind9/bind9-dnsutils_9.16.42-1~deb11u1_amd64.deb
@@ -63,7 +63,7 @@ dconf-service  0.38.0-2
 debconf  1.5.77
 debconf-i18n  1.5.77
 debhelper  13.3.4
-debian-archive-keyring  2021.1.1
+debian-archive-keyring  2021.1.1  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/d/debian-archive-keyring/debian-archive-keyring_2021.1.1_all.deb
 debianutils  4.11.2
 debugedit  4.16.1.2+dfsg1-3
 device-tree-compiler  1.6.0-1
@@ -76,7 +76,7 @@ distro-info-data  0.51+deb11u2  https://snapshot.debian.org/archive/debian/20221
 dmidecode  3.3-2
 dnf  4.5.2-6
 dnf-data  4.5.2-6
-docker.io  20.10.5+dfsg1-1+deb11u1
+docker.io  20.10.5+dfsg1-1+deb11u1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/d/docker.io/docker.io_20.10.5%2Bdfsg1-1%2Bdeb11u1_amd64.deb
 docutils-common  0.16+dfsg-4
 dosfstools  4.2-1
 dpkg  1.20.10 https://snapshot.debian.org/archive/debian-security/20220525T153250Z/pool/updates/main/d/dpkg/dpkg_1.20.10_amd64.deb
@@ -117,7 +117,7 @@ fdisk  2.36.1-8+deb11u1
 file  1:5.39-3
 findutils  4.8.0-1
 firmware-amd-graphics 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-amd-graphics_20210315-3_all.deb
-firmware-ath9k-htc 1.4.0-106-gc583009+dfsg1 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/main/o/open-ath9k-htc-firmware/firmware-ath9k-htc_1.4.0-106-gc583009%2Bdfsg1-1_all.deb
+firmware-ath9k-htc 1.4.0-106-gc583009+dfsg1-1 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/main/o/open-ath9k-htc-firmware/firmware-ath9k-htc_1.4.0-106-gc583009%2Bdfsg1-1_all.deb
 firmware-atheros 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-atheros_20210315-3_all.deb
 firmware-bnx2   20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-bnx2_20210315-3_all.deb
 firmware-bnx2x   20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-bnx2x_20210315-3_all.deb
@@ -172,7 +172,7 @@ gpgsm  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093
 gpgv  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gpgv_2.2.27-2%2Bdeb11u2_amd64.deb
 gpg-wks-client  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gpg-wks-client_2.2.27-2%2Bdeb11u2_amd64.deb
 gpg-wks-server  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gpg-wks-server_2.2.27-2%2Bdeb11u2_amd64.deb
-grep  3.6-1
+grep  3.6-1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/g/grep/grep_3.6-1_amd64.deb
 groff-base  1.22.4-6
 gsettings-desktop-schemas  3.38.0-2
 gunicorn  20.1.0-1
@@ -283,7 +283,7 @@ libcollection4  0.6.1-2
 libcom-err2  1.46.2-2
 libcomps0  0.1.15-4
 libcpp-hocon0.3.0  0.3.0-1+b2
-libcpupower1  5.10.106-1
+libcpupower1  5.10.106-1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/l/linux/libcpupower1_5.10.106-1_amd64.deb
 libcrack2  2.9.6-3.4
 libcrypt1  1:4.4.18-4
 libcrypt-dev  1:4.4.18-4
@@ -389,7 +389,7 @@ libgssapi-krb5-2  1.18.3-6+deb11u3  https://snapshot.debian.org/archive/debian/2
 libgssrpc4  1.18.3-6+deb11u3  https://snapshot.debian.org/archive/debian/20230108T032246Z/pool/main/k/krb5/libgssrpc4_1.18.3-6+deb11u3_amd64.deb
 libgstreamer1.0-0  1.18.4-2.1
 libgstreamer-plugins-base1.0-0  1.18.4-2
-libgtk-3-dev  3.24.24-4+deb11u2
+libgtk-3-dev  3.24.24-4+deb11u2 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/g/gtk%2B3.0/libgtk-3-dev_3.24.24-4%2Bdeb11u2_amd64.deb
 libharfbuzz0b  2.7.4-1
 libhogweed6  3.7.3-1
 libibverbs1  33.2-1
@@ -499,7 +499,7 @@ libnfnetlink0  1.0.1-3+b1
 libnfs13  4.0.0-1
 libnfs-dev  4.0.0-1
 libnfsidmap2  0.25-6
-libnftables1  0.9.8-3.1
+libnftables1  0.9.8-3.1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/nftables/libnftables1_0.9.8-3.1_amd64.deb
 libnftnl11  1.1.9-1
 libnghttp2-14  1.43.0-1
 libnl-3-200  3.4.0-1+b1
@@ -509,7 +509,7 @@ libnl-genl-3-200  3.4.0-1+b1
 libnl-nf-3-200  3.4.0-1+b1
 libnl-route-3-dev  3.4.0-1+b1
 libnl-route-3-200  3.4.0-1+b1
-libnm0  1.30.0-2
+libnm0  1.30.0-2  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/network-manager/libnm0_1.30.0-2_amd64.deb
 libnorm1  1.5.9+dfsg-2
 libnpth0  1.6-3
 libnsl2  1.3.0-2
@@ -751,7 +751,7 @@ libz3-4  4.8.10-1
 libzmq5  4.3.4-1
 libzstd1  1.4.8+dfsg-2.1
 linux-base  4.6
-linux-cpupower  5.10.106-1
+linux-cpupower  5.10.106-1  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/l/linux/linux-cpupower_5.10.106-1_amd64.deb
 locales  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/locales_2.31-13%2Bdeb11u6_all.deb
 locales-all  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/locales-all_2.31-13%2Bdeb11u6_amd64.deb
 login  1:4.8.1-1
@@ -777,7 +777,7 @@ mount  2.36.1-8+deb11u1
 multipath-tools  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools_0.8.5-2+deb11u1_amd64.deb
 multipath-tools-boot  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools-boot_0.8.5-2+deb11u1_all.deb
 mysql-common  5.8+1.0.7
-nano  5.4-2
+nano  5.4-2  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/nano/nano_5.4-2_amd64.deb
 ncat  7.91+dfsg1+really7.80+dfsg1-2
 ncurses-base  6.2+20201114-2+deb11u1 https://snapshot.debian.org/archive/debian/20230224T090343Z/pool/main/n/ncurses/ncurses-base_6.2%2B20201114-2%2Bdeb11u1_all.deb
 ncurses-bin  6.2+20201114-2+deb11u1 https://snapshot.debian.org/archive/debian/20230224T090343Z/pool/main/n/ncurses/ncurses-bin_6.2%2B20201114-2%2Bdeb11u1_amd64.deb
@@ -788,16 +788,16 @@ netfilter-persistent  1.0.15
 nettle-dev  3.7.3-1
 nfs-common  1:1.3.4-6
 nfs-kernel-server  1:1.3.4-6
-nftables  0.9.8-3.1
+nftables  0.9.8-3.1  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/nftables/nftables_0.9.8-3.1_amd64.deb
 ninja-build  1.10.1-1
 numad  0.5+20150602-7
 ntp  1:4.2.8p15+dfsg-1
 ntpdate  1:4.2.8p15+dfsg-1
 nvme-cli  1.12-5
 open-iscsi  2.1.3-5
-openssh-client  1:8.4p1-5
-openssh-server  1:8.4p1-5
-openssh-sftp-server  1:8.4p1-5
+openssh-client  1:8.4p1-5  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/o/openssh/openssh-client_8.4p1-5_amd64.deb
+openssh-server  1:8.4p1-5  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/o/openssh/openssh-server_8.4p1-5_amd64.deb
+openssh-sftp-server  1:8.4p1-5  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/o/openssh/openssh-sftp-server_8.4p1-5_amd64.deb
 openssl  1.1.1n-0+deb11u5 https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/o/openssl/openssl_1.1.1n-0%2Bdeb11u5_amd64.deb
 original-awk  2018-08-27-1
 ovmf  2020.11-2+deb11u1
@@ -1216,11 +1216,11 @@ tasksel  3.68+deb11u1
 tasksel-data  3.68+deb11u1
 tcl8.6  8.6.11+dfsg-1
 tcl-expect  5.45.4-2+b1
-tcpdump 4.99.0-2
+tcpdump 4.99.0-2  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/t/tcpdump/tcpdump_4.99.0-2_amd64.deb
 texinfo  6.7.0.dfsg.2-6
 time  1.9-0.1
 tini  0.19.0-1
-traceroute 1:2.1.0-2+b1
+traceroute 1:2.1.0-2+b1  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/t/traceroute/traceroute_2.1.0-2%2Bb1_amd64.deb
 tuned  2.15.0-1
 tzdata  2023c-2 https://snapshot.debian.org/archive/debian/20230404T084756Z/pool/main/t/tzdata/tzdata_2023c-2_all.deb
 ucf  3.0043
@@ -1246,7 +1246,7 @@ xclip  0.13-2
 xfsprogs  5.10.0-4
 xml-core  0.18+nmu1
 xmlsec1  1.2.31-1
-xsltproc  1.1.34-4
+xsltproc  1.1.34-4  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/libx/libxslt/xsltproc_1.1.34-4_amd64.deb
 xxd  2:8.2.2434-3+deb11u1
 xz-utils  5.2.5-2.1~deb11u1 https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/x/xz-utils/xz-utils_5.2.5-2.1~deb11u1_amd64.deb
 zip  3.0-12
