@@ -9,8 +9,8 @@ doxygen 1.9.1-1
 dwarves 1.20-1
 fonts-mathjax 2.7.9+dfsg-1
 g++-10 10.2.1-6
-git 1:2.30.2-1
-git-man 1:2.30.2-1
+git 1:2.30.2-1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/g/git/git_2.30.2-1_amd64.deb
+git-man 1:2.30.2-1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/g/git/git-man_2.30.2-1_all.deb
 git-review 1.28.0-2
 guile-2.2-libs 2.2.7+1-6
 hwdata 0.345-1
@@ -24,7 +24,8 @@ libjs-mathjax 2.7.9+dfsg-1
 libjson-c-dev 0.15-2
 libjsoncpp24 1.9.4-4
 libltdl-dev 2.4.6-15
-libncurses-dev 6.2+20201114-2
+libncurses-dev 6.2+20201114-2 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/ncurses/libncurses-dev_6.2%2B20201114-2_amd64.deb
+libnuma-dev 2.0.12-1+b1
 libopts25-dev 1:5.18.16-4
 libpython2-stdlib 2.7.18-3
 libpython2.7-minimal 2.7.18-8
@@ -32,7 +33,7 @@ libpython2.7-stdlib 2.7.18-8
 librhash0 1.4.1-2
 libsimdjson5 0.7.1-1
 libstdc++-10-dev 10.2.1-6
-libxapian30 1.4.18-3
+libxapian30 1.4.18-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/x/xapian-core/libxapian30_1.4.18-3_amd64.deb
 pandoc 2.9.2.1-1+b1
 pkg-config 0.29.2-1
 pybind11-dev 2.6.2-1
