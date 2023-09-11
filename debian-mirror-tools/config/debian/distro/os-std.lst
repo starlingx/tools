@@ -6,3 +6,4 @@ kexec-tools 1:2.0.20-2.1
 crash 7.2.9-2
 liblzo2-2 2.10-2
 pigz 2.6-1
+yajl-tools 2.1.0-3
