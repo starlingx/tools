@@ -15,9 +15,9 @@ debian_version = 11.3
 # We will append debian_snapshot_timestamp to each of them when creating
 # apt.sources lists
 #debian_snapshot_base = http://snapshot.debian.org/archive/debian
-debian_snapshot_base = http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian
+debian_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian
 #debian_security_snapshot_base = http://snapshot.debian.org/archive/debian-security
-debian_security_snapshot_base = http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian-security
+debian_security_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian-security
 debian_snapshot_timestamp = 20220331T000000Z
 
 [builder]
@@ -34,8 +34,8 @@ mode = local
 
 [repomgr]
 type = aptly
-cengnurl = http://mirror.starlingx.cengn.ca:80/mirror
-cengnstrategy = cengn_first
+stx_mirror_url = https://mirror.starlingx.windriver.com:80/mirror
+stx_mirror_strategy = stx_mirror_first
 sourceslist =
 deblist =
 dsclist =

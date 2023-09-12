@@ -1,4 +1,4 @@
-deb [trusted=yes] http://mirror.starlingx.cengn.ca/mirror/debian/debian/ftp.ca.debian.org/debian/ bullseye main
-deb-src [trusted=yes] http://mirror.starlingx.cengn.ca/mirror/debian/debian/ftp.ca.debian.org/debian/ bullseye main
-deb [trusted=yes] http://mirror.starlingx.cengn.ca/mirror/debian/debian/ftp.ca.debian.org/debian/ buster main
-deb-src [trusted=yes] http://mirror.starlingx.cengn.ca/mirror/debian/debian/ftp.ca.debian.org/debian/ buster main
+deb [trusted=yes] https://mirror.starlingx.windriver.com/mirror/debian/debian/ftp.ca.debian.org/debian/ bullseye main
+deb-src [trusted=yes] https://mirror.starlingx.windriver.com/mirror/debian/debian/ftp.ca.debian.org/debian/ bullseye main
+deb [trusted=yes] https://mirror.starlingx.windriver.com/mirror/debian/debian/ftp.ca.debian.org/debian/ buster main
+deb-src [trusted=yes] https://mirror.starlingx.windriver.com/mirror/debian/debian/ftp.ca.debian.org/debian/ buster main

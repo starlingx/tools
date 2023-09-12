@@ -214,33 +214,54 @@ class STXConfigParser:
             # delete old key
             self.__delete_key('project', 'debian_security_snapshot')
 
-        # Change debian_snapshot_* to CENGN
-        if not self.__upgrade_id_exists('debian_snapshot_cengn'):
-            debian_snapshot_cengn_upgraded = False
+        # Change debian_snapshot_* to STX_MIRROR
+        if not self.__upgrade_id_exists('debian_snapshot_stx_mirror'):
+            debian_snapshot_stx_mirror_upgraded = False
             # debian_snapshot_base
             old_value = 'http://snapshot.debian.org/archive/debian'
-            new_value = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian'
+            old_value2 = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian'
+            new_value = 'https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian'
             current_value = self.__get('project', 'debian_snapshot_base')
-            if current_value == old_value:
+            if current_value == old_value or current_value == old_value2:
                 self.__upgrade_nonempty_key('project', 'debian_snapshot_base', new_value)
-                debian_snapshot_cengn_upgraded = True
+                debian_snapshot_stx_mirror_upgraded = True
             # debian_security_snapshot_base
             old_value = 'http://snapshot.debian.org/archive/debian-security'
-            new_value = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
+            old_value2 = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
+            new_value = 'https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
             current_value = self.__get('project', 'debian_security_snapshot_base')
             if current_value == old_value:
                 self.__upgrade_nonempty_key('project', 'debian_security_snapshot_base', new_value)
-                debian_snapshot_cengn_upgraded = True
+                debian_snapshot_stx_mirror_upgraded = True
 
-            if debian_snapshot_cengn_upgraded:
-                self.__save_upgrade_id('debian_snapshot_cengn')
+            if debian_snapshot_stx_mirror_upgraded:
+                self.__save_upgrade_id('debian_snapshot_stx_mirror')
                 need_restart = True
+
+        # Convert cengnurl => stx_mirror_url
+        if self.cf.has_option('repomgr', 'cengnurl'):
+            oldstring = self.cf.get('repomgr', 'cengnurl')
+            newstring = re.sub('http://mirror.starlingx.cengn.ca',
+                               r'https://mirror.starlingx.windriver.com',
+                               oldstring)
+            self.__upgrade_nonempty_key('repomgr', 'stx_mirror_url', newstring)
+            # delete old key
+            self.__delete_key('repomgr', 'cengnurl')
+            need_restart = True
+
+        # Convert cengnstrategy => stx_mirror_strategy
+        if self.cf.has_option('repomgr', 'cengnstrategy'):
+            oldstring = self.cf.get('repomgr', 'cengnstrategy')
+            newstring = re.sub('cengn', 'stx_mirror', oldstring)
+            self.__upgrade_nonempty_key('repomgr', 'stx_mirror_strategy', newstring)
+            # delete old key
+            self.__delete_key('repomgr', 'cengnstrategy')
 
         # Save changes
         self.syncConfigFile()
 
         if need_restart:
-            logger.warning("One or more configuration keeys have been upgraded")
+            logger.warning("One or more configuration keys have been upgraded")
             logger.warning("These changes will take effect after you restart your builder containers")
 
 

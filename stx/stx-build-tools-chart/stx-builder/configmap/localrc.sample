@@ -36,10 +36,10 @@ export MANIFEST=@MANIFEST@
 
 export HOSTUSERNAME=@HOSTUSERNAME@
 
-export CENGNURL=@CENGNURL@
+export STX_MIRROR_URL=@STX_MIRROR_URL@
 
-# CENGN_STRATEGY value: [ cengn|cengn_first|upstream|upstream_first ]
-export CENGN_STRATEGY=@CENGNSTRATEGY@
+# STX_MIRROR_STRATEGY value: [ stx_mirror|stx_mirror_first|upstream|upstream_first ]
+export STX_MIRROR_STRATEGY=@STX_MIRROR_STRATEGY@
 
 if [[ x"@fetch@" == x"true" ]];then
     export SOURCESLIST=/usr/local/bin/stx/@SOURCESLIST@

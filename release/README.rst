@@ -25,7 +25,7 @@ the lastest green build context at the time:
 
     release/build-context.py \
         --remote starlingx \
-        --context http://mirror.starlingx.cengn.ca/mirror/starlingx/master/centos/latest_green_build/outputs/CONTEXT.sh \
+        --context https://mirror.starlingx.windriver.com/mirror/starlingx/master/centos/latest_green_build/outputs/CONTEXT.sh \
         https://opendev.org/starlingx/manifest/raw/branch/master/default.xml | \
     release/branch-repo.sh -b r/stx.2.0 -t v2.0.0.rc0
 
