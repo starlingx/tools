@@ -4,7 +4,7 @@
 # Builds a summary of git repos and SHAs for a particular build based on
 # manifest/default.xml and the build output script CONTEXT.sh
 #
-# Loads the CONTEXT.sh script from a StarlingX CenGN build and merge it with
+# Loads the CONTEXT.sh script from a StarlingX build and merge it with
 # a default.xml manifest to build a YAML file that describes a set of
 # git repositories and their specific configuration for a build.
 #

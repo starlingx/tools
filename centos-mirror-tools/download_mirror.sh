@@ -572,11 +572,17 @@ fi
 
 if [ ${use_system_yum_conf} -eq 1 ]; then
     # deleting the StarlingX_3rd to avoid pull centos packages from the 3rd Repo.
+
+    # cengn references for backward compatibility if transitioning
+    # a pre-existing build environment.
+
     ${SUDO} \rm -f $REPO_DIR/StarlingX_3rd*.repo
     ${SUDO} \rm -f $REPO_DIR/StarlingX_cengn*.repo
+    ${SUDO} \rm -f $REPO_DIR/StarlingX_mirror*.repo
     if [ "$TEMP_DIR" != "" ]; then
         ${SUDO} \rm -f $TEMP_DIR/yum.repos.d/StarlingX_3rd*.repo
         ${SUDO} \rm -f $TEMP_DIR/yum.repos.d/StarlingX_cengn*.repo
+        ${SUDO} \rm -f $TEMP_DIR/yum.repos.d/StarlingX_mirror*.repo
     fi
 fi
 
