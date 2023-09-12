@@ -83,17 +83,18 @@ class Debbuilder:
             return
         self.logger.debug("%s does exist", STX_LOCALRC)
 
-        # backward compatability with CENGNURL
-        self.logger.debug("Fixing CENGNURL references in stx-localrc")
-        cmd = "sed -i 's#CENGNURL#STX_MIRROR_URL#' %s" % (STX_LOCALRC)
-        self.logger.debug('The substitution command is %s', cmd)
-        try:
-            outs = subprocess.check_output(cmd, shell=True).decode()
-        except Exception as e:
-            self.logger.error(str(e))
-            self.logger.error("Failed to substitute %s in %s", "CENGNURL", STX_LOCALRC)
-            return
-        # end of backward compatibility
+        # dpanech: this doesn't work becauise STX_LOCALRC is mounted read-only from the host
+        ## backward compatability with CENGNURL
+        #self.logger.debug("Fixing CENGNURL references in stx-localrc")
+        #cmd = "sed -i 's#CENGNURL#STX_MIRROR_URL#' %s" % (STX_LOCALRC)
+        #self.logger.debug('The substitution command is %s', cmd)
+        #try:
+        #    outs = subprocess.check_output(cmd, shell=True).decode()
+        #except Exception as e:
+        #    self.logger.error(str(e))
+        #    self.logger.error("Failed to substitute %s in %s", "CENGNURL", STX_LOCALRC)
+        #    return
+        ## end of backward compatibility
 
         for var in ENVIRON_VARS:
             self.logger.debug("Fetching %s from stx-localrc", var)

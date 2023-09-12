@@ -36,6 +36,10 @@ export MANIFEST=@MANIFEST@
 
 export HOSTUSERNAME=@HOSTUSERNAME@
 
+export CENGNURL=@CENGNURL@
+# CENGN_STRATEGY value: [ cengn|cengn_first|upstream|upstream_first ]
+export CENGN_STRATEGY=@CENGNSTRATEGY@
+
 export STX_MIRROR_URL=@STX_MIRROR_URL@
 
 # STX_MIRROR_STRATEGY value: [ stx_mirror|stx_mirror_first|upstream|upstream_first ]
