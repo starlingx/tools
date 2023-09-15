@@ -1,3 +1,4 @@
+acpica-tools 20200925-1.2
 autoconf-archive 20190106-2.1
 autogen 1:5.18.16-4
 autogen-doc 1:5.18.16-4
@@ -17,12 +18,13 @@ libcap-dev 1:2.44-1
 libclang-cpp11 1:11.0.1-2
 libclang1-11 1:11.0.1-2
 liberror-perl 0.17029-1
+libhwloc-dev 1.11.12-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/h/hwloc/libhwloc-dev_1.11.12-3_amd64.deb
+libhwloc5 1.11.12-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb
 libjs-mathjax 2.7.9+dfsg-1
 libjson-c-dev 0.15-2
 libjsoncpp24 1.9.4-4
 libltdl-dev 2.4.6-15
 libncurses-dev 6.2+20201114-2 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/ncurses/libncurses-dev_6.2%2B20201114-2_amd64.deb
-libnuma-dev 2.0.12-1+b1
 libopts25-dev 1:5.18.16-4
 libpython2-stdlib 2.7.18-3
 libpython2.7-minimal 2.7.18-8
@@ -41,9 +43,12 @@ python2-minimal 2.7.18-3
 python2.7 2.7.18-8
 python2.7-minimal 2.7.18-8
 python3-doc 3.9.2-3
+python3-intelhex 2.1-2.2
+python3-pybind11 2.6.2-1
 python3-thriftpy 0.3.9+ds1-1+b5
 python3.9-doc 3.9.2-1
 sphinx-doc 3.4.3-2
+trace-cmd 2.9.1-1
 tree 1.8.0-1+b1
 unzip 6.0-26+deb11u1
 usb.ids 2022.05.20-0+deb11u1 https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/u/usb.ids/usb.ids_2022.05.20-0+deb11u1_all.deb
