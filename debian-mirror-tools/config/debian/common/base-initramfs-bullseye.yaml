@@ -68,8 +68,8 @@ packages:
 - kbd
 - kmod
 - libostree-1-1
-- linux-image-5.10.0-6-amd64-unsigned
-- linux-rt-image-5.10.0-6-rt-amd64-unsigned
+- linux-image-stx-amd64
+- linux-rt-image-stx-amd64
 - mdadm
 - mlnx-ofed-kernel-modules
 - mlnx-ofed-kernel-modules-rt
