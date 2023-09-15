@@ -115,7 +115,7 @@ erlang-xmerl 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian
 ethtool  1:5.9-1
 expect  5.45.4-2+b1
 fdisk  2.36.1-8+deb11u1
-file  1:5.39-3
+file  1:5.39-3+deb11u1  https://snapshot.debian.org/archive/debian-security/20230904T194428Z/pool/updates/main/f/file/file_5.39-3%2Bdeb11u1_amd64.deb
 findutils  4.8.0-1
 firmware-amd-graphics 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-amd-graphics_20210315-3_all.deb
 firmware-ath9k-htc 1.4.0-106-gc583009+dfsg1 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/main/o/open-ath9k-htc-firmware/firmware-ath9k-htc_1.4.0-106-gc583009%2Bdfsg1-1_all.deb
@@ -475,8 +475,8 @@ liblua5.2-0  5.2.4-1.1+b3
 liblua5.3-0  5.3.3-1.1+b1
 liblz4-1  1.9.3-2
 liblzma5  5.2.5-2.1~deb11u1  https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/x/xz-utils/liblzma5_5.2.5-2.1~deb11u1_amd64.deb
-libmagic1  1:5.39-3
-libmagic-mgc  1:5.39-3
+libmagic1  1:5.39-3+deb11u1  https://snapshot.debian.org/archive/debian-security/20230904T194428Z/pool/updates/main/f/file/libmagic1_5.39-3%2Bdeb11u1_amd64.deb
+libmagic-mgc  1:5.39-3+deb11u1  https://snapshot.debian.org/archive/debian-security/20230904T194428Z/pool/updates/main/f/file/libmagic-mgc_5.39-3%2Bdeb11u1_amd64.deb
 libmariadb-dev 1:10.5.18-0+deb11u1  https://snapshot.debian.org/archive/debian/20221208T032103Z/pool/main/m/mariadb-10.5/libmariadb-dev_10.5.18-0%2Bdeb11u1_amd64.deb
 libmariadb-dev-compat 1:10.5.18-0+deb11u1  https://snapshot.debian.org/archive/debian/20221208T032103Z/pool/main/m/mariadb-10.5/libmariadb-dev-compat_10.5.18-0%2Bdeb11u1_amd64.deb
 libmariadb3  1:10.5.18-0+deb11u1  https://snapshot.debian.org/archive/debian/20221208T032103Z/pool/main/m/mariadb-10.5/libmariadb3_10.5.18-0%2Bdeb11u1_amd64.deb
