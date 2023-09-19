@@ -64,7 +64,7 @@ class Config:
         """Construct an empty instance; must call "load" explicitly before using"""
         self.prjdir = require_env('PRJDIR')
         self.config_filename = os.path.join(self.prjdir, 'stx.conf')
-        self.use_minikube = os.getenv('STX_PLATFORM', 'minikube') == 'minikube'
+        self._use_minikube = os.getenv('STX_PLATFORM', 'minikube') == 'minikube'
         if self.use_minikube:
             self.minikube_profile = require_env('MINIKUBENAME')
         else:
@@ -74,6 +74,7 @@ class Config:
         self.docker_tag = require_env('DOCKER_TAG_LOCAL')
         self.kubectl_cmd = None
         self.helm_cmd = None
+        self.minikube_docker_cmd = None
 
         reg_list_str = os.getenv('STX_INSECURE_DOCKER_REGISTRIES')
         if reg_list_str:
@@ -115,6 +116,15 @@ class Config:
     def all_container_names(self):
         return ALL_CONTAINER_NAMES + []
 
+    def require_minikube(self):
+        if not self.use_minikube:
+            raise RuntimeError("minikube not in use")
+
+    def minikube_docker(self):
+        """Returns the command for docker cli connected to minikube's built-in docker demon"""
+        self.require_minikube()
+        return self.minikube_docker_cmd
+
     @property
     def insecure_docker_reg_list(self):
         """List of insecure docker registries we are allowed to access"""
@@ -128,6 +138,10 @@ class Config:
     @property
     def project_name(self):
         return self.get('project', 'name')
+
+    @property
+    def use_minikube(self):
+        return self._use_minikube
 
     def _init_kubectl_cmd(self):
         # helm
@@ -144,3 +158,6 @@ class Config:
             if self.k8s_namespace:
                 self.kubectl_cmd += f' -n {self.k8s_namespace}'
                 self.helm_cmd += f' -n {self.k8s_namespace}'
+        # minikube_docker
+        if self.use_minikube:
+            self.minikube_docker_cmd = f'eval `minikube -p {self.minikube_profile} docker-env` && docker'

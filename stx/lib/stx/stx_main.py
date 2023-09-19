@@ -17,6 +17,7 @@ import logging
 
 from stx import config
 from stx import stx_build  # pylint: disable=E0611
+from stx import stx_cleanup  # pylint: disable=E0611
 from stx import stx_configparser  # pylint: disable=E0611
 from stx import stx_control  # pylint: disable=E0611
 from stx import stx_repomgr  # pylint: disable=E0611
@@ -41,6 +42,7 @@ class CommandLine:
         self.handlebuild = stx_build.HandleBuildTask(self.config)
         self.handlerepomgr = stx_repomgr.HandleRepomgrTask(self.config)
         self.handleshell = stx_shell.HandleShellTask(self.config)
+        self.handlecleanup = stx_cleanup.HandleCleanupTask(self.config, self.handleshell)
         self.parser = self.parseCommandLine()
 
     def parseCommandLine(self):
@@ -171,6 +173,9 @@ remove_repo|search_pkg|upload_pkg|delete_pkg ]')
             metavar='builder|pkgbuilder|lat|repomgr|docker|builder-files-http',
             help='Container name (default: builder)')
         shell_subparser.set_defaults(handle=self.handleshell.cmd_shell)
+
+        # stx cleanup
+        self.handlecleanup.add_parser(subparsers)
 
         # common args
         parser.add_argument('-d', '--debug',
