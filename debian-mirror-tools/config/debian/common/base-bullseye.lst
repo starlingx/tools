@@ -440,7 +440,8 @@ libjs-jsencrypt  2.3.0+dfsg2-2
 libjs-lrdragndrop  1.0.2-2.1
 libjs-magic-search  0.2.5-1.1
 libjs-objectpath  1.2.1-2.1
-libjson-c5  0.15-2
+libjson-c5  0.15-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20230830T175137Z/pool/updates/main/j/json-c/libjson-c5_0.15-2%2Bdeb11u1_amd64.deb
+libjson-c-dev  0.15-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20230830T175137Z/pool/updates/main/j/json-c/libjson-c-dev_0.15-2%2Bdeb11u1_amd64.deb
 libjs-rickshaw  1.5.1.dfsg-4
 libjs-sphinxdoc  3.4.3-2
 libjs-spin.js  1.2.8+dfsg2-1.1
