@@ -70,8 +70,15 @@ CLEAN_CONFIG=0
 USE_DOCKER_CACHE=0
 
 minikube_started() {
-    docker ps | grep kicbase | grep -q $MINIKUBENAME
+    local result
+    result=$(
+        minikube profile list \
+            | tr -d '|' \
+            | awk -v profile="$MINIKUBENAME" '{ if ($1 == profile && $7 == "Running") print $1 }'
+    )
+    [[ -n "$result" ]]
 }
+
 
 minikube_exists() {
     local script=$(cat <<'END'
@@ -89,7 +96,15 @@ END
 }
 
 helm_started() {
-    helm ls | grep -q stx
+    local result
+    result=$(
+        if [ "$STX_PLATFORM" == "minikube" ]; then
+           helm --kube-context "$MINIKUBENAME" ls --short --filter '^stx$'
+        else
+           helm --namespace "$STX_K8S_NAMESPACE" ls --short --filter '^stx$'
+        fi 2>/dev/null
+    ) || true
+    [[ -n "$result" ]]
 }
 
 cmdline_error() {
