@@ -397,6 +397,13 @@ iso-post-script: |
       ln -snf ../efi.img images/efiboot.img
   fi
 
+  # Generate package list file in the iso root
+  echo "Verifying package list for ${IMAGE_NAME}"
+  if [ -f "/localdisk/workdir/${IMAGE_NAME}/packages.yaml" ]; then
+      echo "Copying ISO package list"
+      cp /localdisk/workdir/${IMAGE_NAME}/packages.yaml sw_package_list.yaml
+  fi
+
 initramfs-sign-script: |
   echo "End of initramfs-sign-script!"
 
