@@ -404,9 +404,9 @@ dl_repo () {
     fi
 
     # Sync the repo's rpms
-    CMD="reposync --tempcache --norepopath -l --config='${YUM_CONF_TMP}' --repoid=$REPOID --download_path='${DOWNLOAD_PATH_NEW}'"
+    CMD="reposync --tempcache --norepopath -l --config=${YUM_CONF_TMP} --repoid=$REPOID --download_path=${DOWNLOAD_PATH_NEW}"
     echo "$CMD"
-    eval $CMD
+    with_retries --delay 60 3 $CMD
     if [ $? -ne 0 ]; then
         echo "Error: $CMD"
         return 1
