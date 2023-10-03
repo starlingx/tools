@@ -168,10 +168,10 @@ glib-networking-services  2.66.0-2
 gnupg  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gnupg_2.2.27-2%2Bdeb11u2_all.deb
 gnupg-l10n  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gnupg-l10n_2.2.27-2%2Bdeb11u2_all.deb
 gnupg-utils  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gnupg-utils_2.2.27-2%2Bdeb11u2_amd64.deb
-golang-1.19 1.19.8-2~bpo11+1 http://ftp.debian.org/debian/pool/main/g/golang-1.19/golang-1.19_1.19.8-2~bpo11+1_all.deb
-golang-1.19-doc 1.19.8-2~bpo11+1 http://ftp.debian.org/debian/pool/main/g/golang-1.19/golang-1.19-doc_1.19.8-2~bpo11+1_all.deb
-golang-1.19-go 1.19.8-2~bpo11+1 http://ftp.debian.org/debian/pool/main/g/golang-1.19/golang-1.19-go_1.19.8-2~bpo11+1_amd64.deb
-golang-1.19-src 1.19.8-2~bpo11+1 http://ftp.debian.org/debian/pool/main/g/golang-1.19/golang-1.19-src_1.19.8-2~bpo11+1_all.deb
+golang-1.19 1.19.12-2~bpo11+1 https://deb.debian.org/debian/pool/main/g/golang-1.19/golang-1.19_1.19.12-2~bpo11+1_all.deb
+golang-1.19-doc 1.19.12-2~bpo11+1 https://deb.debian.org/debian/pool/main/g/golang-1.19/golang-1.19-doc_1.19.12-2~bpo11+1_all.deb
+golang-1.19-go 1.19.12-2~bpo11+1 https://snapshot.debian.org/archive/debian/20230907T025858Z/pool/main/g/golang-1.19/golang-1.19-go_1.19.12-2~bpo11+1_amd64.deb
+golang-1.19-src 1.19.12-2~bpo11+1 https://deb.debian.org/debian/pool/main/g/golang-1.19/golang-1.19-src_1.19.12-2~bpo11+1_all.deb
 golang-any 1.19~1~bpo11+1 http://ftp.debian.org/debian/pool/main/g/golang-defaults/golang-any_1.19~1~bpo11+1_amd64.deb
 golang-go 1.19~1~bpo11+1 http://ftp.debian.org/debian/pool/main/g/golang-defaults/golang-go_1.19~1~bpo11+1_amd64.deb
 golang-src 1.19~1~bpo11+1 http://ftp.debian.org/debian/pool/main/g/golang-defaults/golang-src_1.19~1~bpo11+1_all.deb
