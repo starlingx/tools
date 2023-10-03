@@ -5,4 +5,5 @@ metadata:
   name: $NAME$
 data:
   release_prefix: $RELEASE_PREFIX$
-  @CHART_GROUPS|2@
+  chart_groups:
+  @CHART_GROUPS|4@

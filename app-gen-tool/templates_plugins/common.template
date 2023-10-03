@@ -1,0 +1,7 @@
+HELM_NS = "{namespace}"
+
+HELM_APP = "{name}"
+
+HELM_CHART = "{name}"
+
+FLUXCD_HELMRELEASE = "{name}"
