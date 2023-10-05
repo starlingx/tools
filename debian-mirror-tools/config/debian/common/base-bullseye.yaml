@@ -327,7 +327,8 @@ iso-post-script: |
   RELEASE_VER=$(cat ${IMAGE_ROOTFS}/etc/build.info | grep SW_VERSION | cut -f2 -d'=' | tr -d '"')
   mkdir -p upgrades
   cp ${IMAGE_ROOTFS}/etc/pxeboot-update-${RELEASE_VER}.sh upgrades/
-  cp ${IMAGE_ROOTFS}/usr/sbin/platform-upgrade-precheck upgrades/
+  cp ${IMAGE_ROOTFS}/usr/sbin/deploy-precheck upgrades/
+  cp ${IMAGE_ROOTFS}/usr/sbin/upgrade_utils.py upgrades/
   cp ${IMAGE_ROOTFS}/opt/upgrades/import.sh upgrades/
   cp ${IMAGE_ROOTFS}/opt/upgrades/metadata.xml upgrades/
   sed -i "s/xxxSW_VERSIONxxx/${RELEASE_VER}/g" upgrades/metadata.xml
