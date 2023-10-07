@@ -269,8 +269,8 @@ libbrotli1  1.0.9-2+b2
 libbsd0  0.11.3-1
 libbson-1.0-0  1.17.6-1
 libbz2-1.0  1.0.8-4
-libc6  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/libc6_2.31-13%2Bdeb11u6_amd64.deb
-libc6-dev  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/libc6-dev_2.31-13%2Bdeb11u6_amd64.deb
+libc6  2.31-13+deb11u7 https://snapshot.debian.org/archive/debian-security/20231003T172636Z/pool/updates/main/g/glibc/libc6_2.31-13%2Bdeb11u7_amd64.deb
+libc6-dev  2.31-13+deb11u7 https://snapshot.debian.org/archive/debian-security/20231003T172636Z/pool/updates/main/g/glibc/libc6-dev_2.31-13%2Bdeb11u7_amd64.deb
 libc6.1-dev-alpha-cross  2.31-9cross4
 libcairo2  1.16.0-5
 libcap2  1:2.44-1
@@ -282,11 +282,11 @@ libcapstone4  4.0.2-3
 libcacard-dev  1:2.8.0-3
 libcacard0  1:2.8.0-3
 libc-ares2  1.17.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20230607T043432Z/pool/updates/main/c/c-ares/libc-ares2_1.17.1-1%2Bdeb11u3_amd64.deb
-libc-bin  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/libc-bin_2.31-13%2Bdeb11u6_amd64.deb
+libc-bin  2.31-13+deb11u7 https://snapshot.debian.org/archive/debian-security/20231003T172636Z/pool/updates/main/g/glibc/libc-bin_2.31-13%2Bdeb11u7_amd64.deb
 libcbor0  0.5.0+dfsg-2
 libcc1-0  10.2.1-6
-libc-dev-bin  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/libc-dev-bin_2.31-13%2Bdeb11u6_amd64.deb
-libc-l10n  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/libc-l10n_2.31-13%2Bdeb11u6_all.deb
+libc-dev-bin  2.31-13+deb11u7 https://snapshot.debian.org/archive/debian-security/20231003T172636Z/pool/updates/main/g/glibc/libc-dev-bin_2.31-13%2Bdeb11u7_amd64.deb
+libc-l10n  2.31-13+deb11u7 https://snapshot.debian.org/archive/debian-security/20231003T172636Z/pool/updates/main/g/glibc/libc-l10n_2.31-13%2Bdeb11u7_all.deb
 libcgroup1  0.41-11
 libcollection4  0.6.1-2
 libcom-err2  1.46.2-2
@@ -762,8 +762,8 @@ libzmq5  4.3.4-1
 libzstd1  1.4.8+dfsg-2.1
 linux-base  4.6
 linux-cpupower  5.10.106-1
-locales  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/locales_2.31-13%2Bdeb11u6_all.deb
-locales-all  2.31-13+deb11u6  https://snapshot.debian.org/archive/debian/20230611T210420Z/pool/main/g/glibc/locales-all_2.31-13%2Bdeb11u6_amd64.deb
+locales  2.31-13+deb11u7 https://snapshot.debian.org/archive/debian-security/20231003T172636Z/pool/updates/main/g/glibc/locales_2.31-13%2Bdeb11u7_all.deb
+locales-all  2.31-13+deb11u7 https://snapshot.debian.org/archive/debian-security/20231003T172636Z/pool/updates/main/g/glibc/locales-all_2.31-13%2Bdeb11u7_amd64.deb
 login  1:4.8.1-1
 logrotate  3.18.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/l/logrotate/logrotate_3.18.0-2%2Bdeb11u1_amd64.deb
 logsave  1.46.2-2
