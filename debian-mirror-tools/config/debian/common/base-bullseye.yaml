@@ -44,7 +44,7 @@ rootfs-pre-scripts:
   # Speed up apt/dpkg used for running build-image
   echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/unsafe-io
   apt update
-  apt install -y --no-install-recommends linux-image-5.10.0-6-amd64-unsigned linux-rt-image-5.10.0-6-rt-amd64-unsigned grub-common
+  apt install -y --no-install-recommends linux-image-stx-amd64 linux-rt-image-stx-amd64 grub-common
   apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
   apt install --no-install-recommends -y ifupdown
   apt install -y bc vim uuid-runtime iputils-ping
