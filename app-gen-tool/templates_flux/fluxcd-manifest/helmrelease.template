@@ -1,0 +1,30 @@
+apiVersion: "helm.toolkit.fluxcd.io/v2beta1"
+kind: HelmRelease
+metadata:
+  name: $NAME$
+  labels:
+    chart_group: $CHART_GROUP$
+spec:
+  releaseName: $NAME$
+  chart:
+    spec:
+      chart: $NAME$
+      version: $VERSION$
+      sourceRef:
+        kind: HelmRepository
+        name: stx-platform
+  interval: 5m
+  timeout: 30m
+  test:
+    enable: false
+  install:
+    disableHooks: false
+  upgrade:
+    disableHooks: false
+  valuesFrom:
+    - kind: Secret
+      name: $NAME$-static-overrides
+      valuesKey: $NAME$-static-overrides.yaml
+    - kind: Secret
+      name: $NAME$-system-overrides
+      valuesKey: $NAME$-system-overrides.yaml

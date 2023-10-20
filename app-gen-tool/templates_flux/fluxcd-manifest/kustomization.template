@@ -1,0 +1,12 @@
+namespace: $NAMESPACE$
+resources:
+- helmrelease.yaml
+secretGenerator:
+  - name: $NAME$-static-overrides
+    files:
+      - $NAME$-static-overrides.yaml
+  - name: $NAME$-system-overrides
+    files:
+      - $NAME$-system-overrides.yaml
+generatorOptions:
+  disableNameSuffixHash: true

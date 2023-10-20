@@ -6,5 +6,6 @@ metadata:
 data:
   description: $DESCRIPTION%This is a chartgroup$
   sequenced: $SEQUENCED%false$
-  @CHART_GROUP|2@
+  chart_group:
+  @CHART_NAMES|4@
 
