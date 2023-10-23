@@ -442,7 +442,7 @@ class Debbuilder:
         response['msg'] = 'All idle chroots are refreshed'
         return response
 
-    def assemble_extra_repo(self, snapshot_idx):
+    def assemble_extra_repo(self, snapshot_idx, repo=""):
         repomgr_url = None
         if not os.path.exists(STX_LOCALRC):
             self.logger.warning('stx-localrc does not exist')
@@ -459,17 +459,21 @@ class Debbuilder:
                     break
 
         if repomgr_url:
-            repomgr_url = ' '.join(['deb [trusted=yes]', repomgr_url + REPO_BUILD + '-' + snapshot_idx, self.attrs['dist'], 'main'])
+            if repo:
+                repomgr_url = f"deb [trusted=yes] {repomgr_url}{repo} {self.attrs['dist']} main"
+            else:
+                repomgr_url = ' '.join(['deb [trusted=yes]', repomgr_url + REPO_BUILD + '-' + snapshot_idx, self.attrs['dist'], 'main'])
         self.logger.warning("The extra repository URL is %s", repomgr_url)
         return repomgr_url
 
     def add_task(self, request_form):
         response = check_request(request_form,
-                                 ['user', 'project', 'type', 'dsc', 'snapshot_idx'])
+                                 ['user', 'project', 'type', 'dsc', 'snapshot_idx', 'layer'])
         if response:
             return response
         user = request_form['user']
         snapshot_index = request_form['snapshot_idx']
+        layer = request_form['layer']
 
         chroot = '-'.join([self.attrs['dist'], self.attrs['arch'], user])
         if not self.has_chroot(chroot):
@@ -506,7 +510,12 @@ class Debbuilder:
         repo_url = self.assemble_extra_repo(snapshot_index)
         extra_repo = '--extra-repository=\'%s\'' % (repo_url)
 
-        bcommand = ' '.join([bcommand, jobs, '-c', chroot, extra_repo,
+        layer_url = self.assemble_extra_repo(
+            snapshot_index, repo=f"deb-local-binary-{layer}"
+        )
+        layer_repo = '--extra-repository=\'%s\'' % (layer_url)
+
+        bcommand = ' '.join([bcommand, jobs, '-c', chroot, layer_repo, extra_repo,
                             '--build-dir', dsc_build_dir, dsc])
         self.logger.debug("Build command: %s" % (bcommand))
         self.attrs['state'] = 'works'
