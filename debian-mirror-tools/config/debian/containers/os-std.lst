@@ -36,6 +36,7 @@ libxapian30 1.4.18-3
 pandoc 2.9.2.1-1+b1
 pkg-config 0.29.2-1
 pybind11-dev 2.6.2-1
+python-prometheus-client 0.7.1-1.1 https://snapshot.debian.org/archive/debian/20191124T025632Z/pool/main/p/python-prometheus-client/python3-prometheus-client_0.7.1-1.1_all.deb
 python-requests-doc 2.25.1+dfsg-2
 python2 2.7.18-3
 python2-minimal 2.7.18-3
