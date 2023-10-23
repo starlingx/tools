@@ -1,0 +1,13 @@
+acpica-tools 20200925-1.2
+libhwloc-dev 1.11.12-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/h/hwloc/libhwloc-dev_1.11.12-3_amd64.deb
+libhwloc5 1.11.12-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb
+libltdl-dev 2.4.6-15
+libnuma-dev 2.0.12-1+b1
+pandoc 2.9.2.1-1+b1
+pkg-config 0.29.2-1
+pybind11-dev 2.6.2-1
+python3-all 3.9.2-3
+python3-dev 3.9.2-3
+python3-intelhex 2.1-2.2
+python3-pybind11 2.6.2-1
+trace-cmd 2.9.1-1
