@@ -48,7 +48,7 @@ collectd-core  5.12.0-7
 conntrack  1:1.4.6-2
 conntrackd  1:1.4.6-2
 coreutils  8.32-4+b1
-cpio  2.13+dfsg-4
+cpio  2.13+dfsg-7.1~deb11u1 https://snapshot.debian.org/archive/debian/20231002T025920Z/pool/main/c/cpio/cpio_2.13%2Bdfsg-7.1~deb11u1_amd64.deb
 cpp-10  10.2.1-6
 cpp  4:10.2.1-1
 cracklib-runtime  2.9.6-3.4
