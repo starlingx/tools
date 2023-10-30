@@ -642,6 +642,7 @@ libsasl2-dev  2.1.27+dfsg-2.1+deb11u1
 libsasl2-modules-db  2.1.27+dfsg-2.1+deb11u1
 libiscsi7  1.19.0-3
 libsctp1  1.0.18+dfsg-1
+libsctp-dev  1.0.18+dfsg-1
 libseccomp-dev  2.5.1-1+deb11u1
 libseccomp2  2.5.1-1+deb11u1
 libsecret-1-0  0.20.4-2
@@ -677,8 +678,6 @@ libssh-dev  0.9.8-0+deb11u1  https://snapshot.debian.org/archive/debian-security
 libssh2-1-dev  1.9.0-2
 libssh2-1  1.9.0-2
 libssh-4  0.9.8-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20231228T223536Z/pool/updates/main/libs/libssh/libssh-4_0.9.8-0%2Bdeb11u1_amd64.deb
-libssl1.1  1.1.1w-0+deb11u1 https://snapshot.debian.org/archive/debian/20231003T205808Z/pool/main/o/openssl/libssl1.1_1.1.1w-0%2Bdeb11u1_amd64.deb
-libssl-dev  1.1.1w-0+deb11u1 https://snapshot.debian.org/archive/debian/20231003T205808Z/pool/main/o/openssl/libssl-dev_1.1.1w-0%2Bdeb11u1_amd64.deb
 libsss-certmap0  2.4.1-2
 libsss-idmap0  2.4.1-2
 libsss-nss-idmap0  2.4.1-2
@@ -824,7 +823,6 @@ open-iscsi  2.1.3-5
 openssh-client  1:8.4p1-5+deb11u3 https://snapshot.debian.org/archive/debian/20231224T085540Z/pool/main/o/openssh/openssh-client_8.4p1-5%2Bdeb11u3_amd64.deb
 openssh-server 1:8.4p1-5+deb11u3 https://snapshot.debian.org/archive/debian/20231224T085540Z/pool/main/o/openssh/openssh-server_8.4p1-5%2Bdeb11u3_amd64.deb
 openssh-sftp-server 1:8.4p1-5+deb11u3 https://snapshot.debian.org/archive/debian/20231224T085540Z/pool/main/o/openssh/openssh-sftp-server_8.4p1-5%2Bdeb11u3_amd64.deb
-openssl  1.1.1w-0+deb11u1 https://snapshot.debian.org/archive/debian/20231003T205808Z/pool/main/o/openssl/openssl_1.1.1w-0%2Bdeb11u1_amd64.deb
 original-awk  2018-08-27-1
 ovmf  2020.11-2+deb11u2 https://snapshot.debian.org/archive/debian-security/20240214T195659Z/pool/updates/main/e/edk2/ovmf_2020.11-2%2Bdeb11u2_all.deb
 passwd  1:4.8.1-1
