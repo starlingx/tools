@@ -1,9 +1,0 @@
----
-schema: armada/Manifest/v1
-metadata:
-  schema: metadata/Document/v1
-  name: $NAME$
-data:
-  release_prefix: $RELEASE_PREFIX$
-  chart_groups:
-  @CHART_GROUPS|4@
