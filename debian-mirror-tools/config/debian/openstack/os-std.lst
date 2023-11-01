@@ -1,6 +1,7 @@
 python3-keystoneauth1 5.1.2-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-keystoneauth1/python3-keystoneauth1_5.1.2-2_all.deb
 python3-keystonemiddleware 10.2.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-keystonemiddleware/python3-keystonemiddleware_10.2.0-2_all.deb
 python3-osc-lib 2.7.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-osc-lib/python3-osc-lib_2.7.0-2_all.deb
+python3-osc-placement 4.1.0-3 https://snapshot.debian.org/archive/debian/20230821T205629Z/pool/main/p/python-osc-placement/python3-osc-placement_4.1.0-3_all.deb
 python3-oslo.cache 3.3.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.cache/python3-oslo.cache_3.3.1-2_all.deb
 python3-oslo.concurrency 5.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.concurrency/python3-oslo.concurrency_5.1.1-2_all.deb
 python3-oslo.config 1:9.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.config/python3-oslo.config_9.1.1-2_all.deb
