@@ -473,7 +473,8 @@ liblrm2  1.0.12-20
 liblsan0  10.2.1-6
 libltdl7  2.4.6-15
 liblua5.2-0  5.2.4-1.1+b3
-liblua5.3-0  5.3.3-1.1+b1
+liblua5.3-0  5.3.3-1.1+deb11u1  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/l/lua5.3/liblua5.3-0_5.3.3-1.1%2Bdeb11u1_amd64.deb
+liblua5.3-dev  5.3.3-1.1+deb11u1  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/l/lua5.3/liblua5.3-dev_5.3.3-1.1%2Bdeb11u1_amd64.deb
 liblz4-1  1.9.3-2
 liblzma5  5.2.5-2.1~deb11u1  https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/x/xz-utils/liblzma5_5.2.5-2.1~deb11u1_amd64.deb
 libmagic1  1:5.39-3+deb11u1  https://snapshot.debian.org/archive/debian-security/20230904T194428Z/pool/updates/main/f/file/libmagic1_5.39-3%2Bdeb11u1_amd64.deb
