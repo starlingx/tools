@@ -34,7 +34,7 @@ librhash0 1.4.1-2
 libsimdjson5 0.7.1-1
 libstdc++-10-dev 10.2.1-6
 libxapian30 1.4.18-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/x/xapian-core/libxapian30_1.4.18-3_amd64.deb
-pandoc 2.9.2.1-1+b1
+pandoc 2.9.2.1-1+deb11u1 https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/p/pandoc/pandoc_2.9.2.1-1%2Bdeb11u1_amd64.deb
 pkg-config 0.29.2-1
 pybind11-dev 2.6.2-1
 python3-oslo.messaging 12.5.2-1 https://snapshot.debian.org/archive/debian/20210331T144200Z/pool/main/p/python-oslo.messaging/python3-oslo.messaging_12.5.2-1_all.deb
