@@ -218,16 +218,14 @@ class STXConfigParser:
         if not self.__upgrade_id_exists('debian_snapshot_stx_mirror'):
             debian_snapshot_stx_mirror_upgraded = False
             # debian_snapshot_base
-            old_value = 'http://snapshot.debian.org/archive/debian'
-            old_value2 = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian'
+            old_value = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian'
             new_value = 'https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian'
             current_value = self.__get('project', 'debian_snapshot_base')
-            if current_value == old_value or current_value == old_value2:
+            if current_value == old_value:
                 self.__upgrade_nonempty_key('project', 'debian_snapshot_base', new_value)
                 debian_snapshot_stx_mirror_upgraded = True
             # debian_security_snapshot_base
-            old_value = 'http://snapshot.debian.org/archive/debian-security'
-            old_value2 = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
+            old_value = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
             new_value = 'https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
             current_value = self.__get('project', 'debian_security_snapshot_base')
             if current_value == old_value:
