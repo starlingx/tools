@@ -23,7 +23,7 @@ STORE_ROOT = '/localdisk/pkgbuilder'
 BUILD_ENGINE = 'sbuild'
 STX_LOCALRC = '/usr/local/bin/stx/stx-localrc'
 SBUILD_CONF = '/etc/sbuild/sbuild.conf'
-ENVIRON_VARS = ['OSTREE_OSNAME', 'CENGNURL', 'DEBIAN_DISTRIBUTION', 'DEBIAN_VERSION']
+ENVIRON_VARS = ['OSTREE_OSNAME', 'STX_MIRROR_URL', 'DEBIAN_DISTRIBUTION', 'DEBIAN_VERSION']
 REPO_BUILD = 'deb-local-build'
 
 
@@ -82,6 +82,18 @@ class Debbuilder:
             self.logger.error("%s does not exist", STX_LOCALRC)
             return
         self.logger.debug("%s does exist", STX_LOCALRC)
+
+        # backward compatability with CENGNURL
+        self.logger.debug("Fixing CENGNURL references in stx-localrc")
+        cmd = "sed -i 's#CENGNURL#STX_MIRROR_URL#' %s" % (STX_LOCALRC)
+        self.logger.debug('The substitution command is %s', cmd)
+        try:
+            outs = subprocess.check_output(cmd, shell=True).decode()
+        except Exception as e:
+            self.logger.error(str(e))
+            self.logger.error("Failed to substitute %s in %s", "CENGNURL", STX_LOCALRC)
+            return
+        # end of backward compatibility
 
         for var in ENVIRON_VARS:
             self.logger.debug("Fetching %s from stx-localrc", var)

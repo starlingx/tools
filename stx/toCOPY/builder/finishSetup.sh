@@ -4,7 +4,7 @@
 
 REPOMGR=aptly
 if [ "$REPOMGR" == "aptly" ]; then
-    CENGN_MIRROR="${CENGNURL}/debian/debian/deb.debian.org/debian/${DEBIAN_DISTRIBUTION}-${DEBIAN_VERSION} ${DEBIAN_DISTRIBUTION} main"
+    STX_MIRROR="${STX_MIRROR_URL}/debian/debian/deb.debian.org/debian/${DEBIAN_DISTRIBUTION}-${DEBIAN_VERSION} ${DEBIAN_DISTRIBUTION} main"
     REPO_SNAPSHOT="[check-valid-until=no] ${DEBIAN_SNAPSHOT} ${DEBIAN_DISTRIBUTION} main"
     REPO_BIN="deb [trusted=yes] ${REPOMGR_DEPLOY_URL}deb-local-binary ${DEBIAN_DISTRIBUTION} main"
     REPO_SRC="deb-src [trusted=yes] ${REPOMGR_DEPLOY_URL}deb-local-source ${DEBIAN_DISTRIBUTION} main"
@@ -21,10 +21,10 @@ if [ "$REPOMGR" == "aptly" ]; then
         sed -i "1i\\deb ${REPO_SNAPSHOT}" /etc/apt/sources.list
         sed -i "1i\\deb-src ${REPO_SNAPSHOT}" /etc/apt/sources.list
     fi
-    ret=`grep ${CENGNURL} /etc/apt/sources.list`
+    ret=`grep ${STX_MIRROR_URL} /etc/apt/sources.list`
     if [ "x$ret" == "x" ]; then
-        sed -i "1i\\deb ${CENGN_MIRROR}" /etc/apt/sources.list
-        sed -i "1i\\deb-src ${CENGN_MIRROR}" /etc/apt/sources.list
+        sed -i "1i\\deb ${STX_MIRROR}" /etc/apt/sources.list
+        sed -i "1i\\deb-src ${STX_MIRROR}" /etc/apt/sources.list
     fi
 fi
 
