@@ -131,8 +131,8 @@ RUN groupadd -g 751 cgts && \
     echo "mock:x:751:root" >> /etc/group && \
     echo "mockbuild:x:9001:" >> /etc/group && \
     yum install -y \
-        http://mirror.starlingx.cengn.ca/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-1.4.16-1.el7.noarch.rpm \
-        http://mirror.starlingx.cengn.ca/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-core-configs-31.6-1.el7.noarch.rpm
+        https://mirror.starlingx.windriver.com/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-1.4.16-1.el7.noarch.rpm \
+        https://mirror.starlingx.windriver.com/mirror/centos/epel/dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mock-core-configs-31.6-1.el7.noarch.rpm
 
 # mock custumizations
 # forcing chroots since a couple of packages naughtily insist on network access and

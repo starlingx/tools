@@ -3,19 +3,19 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-# Update script for mirror.starlingx.cengn.ca covering
+# Update script for mirror.starlingx.windriver.com covering
 # yum.repos.d.
 #
 # IMPORTANT: This script is only to be run on the StarlingX mirror.
 #            It is not for use by the general StarlinX developer.
 #
 # Configuration files for repositories to be downloaded are currently
-# stored at mirror.starlingx.cengn.ca:/export/config/yum.repos.d/
+# stored at mirror.starlingx.windriver.com:/export/config/yum.repos.d/
 # and /export/config/rpm-gpg-keys.  These configuration files need
 # to be updated periodically to reflect changes made to
 #     stx-tools/centos-mirror-tools/yum.repos.d/ and
 #     stx-tools/centos-mirror-tools/rpm-gpg-keys/.
-# The update are additive in nature, mirror.starlingx.cengn.ca
+# The update are additive in nature, mirror.starlingx.windriver.com
 # does not delete keys or repos.  At worst we will rename a
 # repo if it's url has changed.
 #

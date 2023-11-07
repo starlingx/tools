@@ -234,10 +234,10 @@ repo_url_to_sub_path () {
     return 0
 }
 
-CENGN_PROTOCOL="http"
-CENGN_HOST="mirror.starlingx.cengn.ca"
-CENGN_PORT="80"
-CENGN_URL_ROOT="mirror"
+STX_MIRROR_PROTOCOL="https"
+STX_MIRROR_HOST="mirror.starlingx.windriver.com"
+STX_MIRROR_PORT="80"
+STX_MIRROR_URL_ROOT="mirror"
 
 url_to_stx_mirror_url () {
     local URL="$1"
@@ -262,6 +262,6 @@ url_to_stx_mirror_url () {
         return 1
     fi
 
-    echo "$CENGN_PROTOCOL://$CENGN_HOST:$CENGN_PORT/$CENGN_URL_ROOT/$DISTRO/$URL_PATH"
+    echo "$STX_MIRROR_PROTOCOL://$STX_MIRROR_HOST:$STX_MIRROR_PORT/$STX_MIRROR_URL_ROOT/$DISTRO/$URL_PATH"
     return 0
 }

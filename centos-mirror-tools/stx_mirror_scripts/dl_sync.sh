@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-# Update script for mirror.starlingx.cengn.ca covering
+# Update script for mirror.starlingx.windriver.com covering
 # tarballs and other files not downloaded from a yum repository.
 # The list of files to download are pulled from the .lst files
 # found in the stx-tools repo.
