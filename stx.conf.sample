@@ -34,7 +34,7 @@ mode = local
 
 [repomgr]
 type = aptly
-stx_mirror_url = https://mirror.starlingx.windriver.com:80/mirror
+stx_mirror_url = https://mirror.starlingx.windriver.com/mirror
 stx_mirror_strategy = stx_mirror_first
 sourceslist =
 deblist =
