@@ -333,8 +333,8 @@ iso-post-script: |
   cp ${IMAGE_ROOTFS}/opt/upgrades/metadata.xml upgrades/
   sed -i "s/xxxSW_VERSIONxxx/${RELEASE_VER}/g" upgrades/metadata.xml
   mkdir -p patches
-  cp ${IMAGE_ROOTFS}/etc/software/STX_*_GA-metadata.xml upgrades/
-  cp ${IMAGE_ROOTFS}/etc/software/STX_*_GA-metadata.xml patches/
+  cp ${IMAGE_ROOTFS}/etc/software/*-metadata.xml upgrades/
+  cp ${IMAGE_ROOTFS}/etc/software/*-metadata.xml patches/
   echo -n "VERSION=${RELEASE_VER}" > upgrades/version
 
   # 3. ISO
