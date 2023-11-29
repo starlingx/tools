@@ -331,6 +331,7 @@ iso-post-script: |
   cp ${IMAGE_ROOTFS}/usr/sbin/upgrade_utils.py upgrades/
   cp ${IMAGE_ROOTFS}/opt/upgrades/import.sh upgrades/
   cp ${IMAGE_ROOTFS}/opt/upgrades/metadata.xml upgrades/
+  cp ${IMAGE_ROOTFS}/usr/sbin/usm_load_import upgrades/
   sed -i "s/xxxSW_VERSIONxxx/${RELEASE_VER}/g" upgrades/metadata.xml
   mkdir -p patches
   cp ${IMAGE_ROOTFS}/etc/software/STX_*_GA-metadata.xml upgrades/
