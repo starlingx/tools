@@ -75,6 +75,8 @@ rootfs-post-scripts:
 - |-
   cat /dev/null > $IMAGE_ROOTFS/etc/resolv.conf
 - |-
+  cat /dev/null > $IMAGE_ROOTFS/etc/apt/sources.list
+- |-
   # Only used for running build-image
   rm -f etc/dpkg/dpkg.cfg.d/unsafe-io
 - |-
