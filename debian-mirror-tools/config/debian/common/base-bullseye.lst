@@ -234,8 +234,6 @@ libargon2-1  0~20171227-0.2
 libasan6  10.2.1-6
 libasm1  0.183-1
 libassuan0  2.5.3-7.1
-libasound2  1.2.4-1.1
-libasound2-data  1.2.4-1.1
 libatomic1  10.2.1-6
 libattr1-dev  1:2.4.48-6
 libattr1  1:2.4.48-6
@@ -785,7 +783,7 @@ mawk  1.3.4.20200120-2
 mdadm  4.1-11
 media-types  4.0.0
 memcached  1.6.9+dfsg-1
-meson  1.0.1-5 http://ftp.de.debian.org/debian/pool/main/m/meson/meson_1.0.1-5_all.deb
+meson  0.56.2-1
 mime-support  3.66
 mksh  59c-9+b2
 mokutil  0.6.0-2~deb11u1
@@ -1164,6 +1162,8 @@ python-babel-localedata  2.8.0+dfsg.1-7
 python-is-python3  3.9.2-1
 python-pastedeploy-tpl  2.1.1-1
 python-pip-whl  20.3.4-4+deb11u1
+qemu  1:5.2+dfsg-11+deb11u3  https://snapshot.debian.org/archive/debian/20231021T030056Z/pool/main/q/qemu/qemu_5.2%2Bdfsg-11%2Bdeb11u3_amd64.deb
+qemu-utils  1:5.2+dfsg-11+deb11u3  https://snapshot.debian.org/archive/debian/20231021T030056Z/pool/main/q/qemu/qemu-utils_5.2%2Bdfsg-11%2Bdeb11u3_amd64.deb
 radvd  1:2.18-3
 rake  13.0.3-1
 readline-common  8.1-1
