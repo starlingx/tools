@@ -236,7 +236,7 @@ repo_url_to_sub_path () {
 
 STX_MIRROR_PROTOCOL="https"
 STX_MIRROR_HOST="mirror.starlingx.windriver.com"
-STX_MIRROR_PORT="80"
+STX_MIRROR_PORT="443"
 STX_MIRROR_URL_ROOT="mirror"
 
 url_to_stx_mirror_url () {
