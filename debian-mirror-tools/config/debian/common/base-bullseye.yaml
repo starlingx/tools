@@ -110,13 +110,13 @@ iso-grub-entry: |
   submenu 'UEFI Debian Controller Install' --unrestricted --id=standard {
     menuentry 'Serial Console' --unrestricted --id=serial {
       set fallback=1
-      efi-watchdog enable 0 180
+      efi-watchdog enable 0 1200
       linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
       initrd @INITRD@
     }
     menuentry 'Graphical Console' --unrestricted --id=graphical {
       set fallback=1
-      efi-watchdog enable 0 180
+      efi-watchdog enable 0 1200
       linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
       initrd @INITRD@
     }
@@ -125,13 +125,13 @@ iso-grub-entry: |
   submenu 'UEFI Debian All-in-one Install' --unrestricted --id=aio {
     menuentry 'Serial Console' --unrestricted --id=serial {
       set fallback=1
-      efi-watchdog enable 0 180
+      efi-watchdog enable 0 1200
       linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
       initrd @INITRD@
     }
     menuentry 'Graphical Console' --unrestricted --id=graphical {
       set fallback=1
-      efi-watchdog enable 0 180
+      efi-watchdog enable 0 1200
       linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
       initrd @INITRD@
     }
@@ -140,13 +140,13 @@ iso-grub-entry: |
   submenu 'UEFI Debian All-in-one (lowlatency) Install' --unrestricted --id=aio-lowlat {
     menuentry 'Serial Console' --unrestricted --id=serial {
       set fallback=1
-      efi-watchdog enable 0 180
+      efi-watchdog enable 0 1200
       linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime
       initrd @INITRD@
     }
     menuentry 'Graphical Console' --unrestricted --id=graphical {
       set fallback=1
-      efi-watchdog enable 0 180
+      efi-watchdog enable 0 1200
       linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime console=tty1
       initrd @INITRD@
     }
