@@ -29,6 +29,8 @@ Initialize StarlingX build environment & (re-)start builder pods
                   execute "docker login" prior to building or pulling builder
                   images
 
+     --no-start   Refresh builder images, but don't (re-)start pods
+
 END
 }
 
@@ -68,6 +70,7 @@ DELETE_ENV=0
 RESTART_MINIKUBE=0
 CLEAN_CONFIG=0
 USE_DOCKER_CACHE=0
+START_PODS=1
 
 minikube_started() {
     local result
@@ -116,7 +119,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild::,cache,nuke,dockerhub-login -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild::,cache,nuke,dockerhub-login,no-start -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -162,6 +165,10 @@ while true ; do
             ;;
         --dockerhub-login)
             DOCKERHUB_LOGIN=1
+            shift
+            ;;
+        --no-start)
+            START_PODS=0
             shift
             ;;
         --)
@@ -364,11 +371,14 @@ if [[ -n "$PULL_DOCKER_IMAGES" ]] ; then
 fi
 
 # Restart pods
-notice "Restarting pods"
-stx control stop || exit 1
-stx config --upgrade || exit 1
-# FIXME: inject docker hub credentials into k8s
-# FIXME: inject docker hub credentials into builder pod
-stx control start || exit 1
+if [[ $START_PODS -eq 1 ]] ; then
+    notice "Restarting pods"
+    stx control stop || exit 1
+    stx config --upgrade || exit 1
+    # FIXME: inject docker hub credentials into k8s
+    # FIXME: inject docker hub credentials into builder pod
+    stx control start || exit 1
 
-notice "Run 'stx control status' to check the pod startup status"
+    notice "Run 'stx control status' to check the pod startup status"
+fi
+
