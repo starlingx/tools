@@ -338,6 +338,9 @@ iso-post-script: |
   cp ${IMAGE_ROOTFS}/etc/software/*-metadata.xml upgrades/
   cp ${IMAGE_ROOTFS}/etc/software/*-metadata.xml patches/
   echo -n "VERSION=${RELEASE_VER}" > upgrades/version
+  mkdir -p upgrades/software-deploy
+  # Copy all software-deploy scripts to upgrades/software-deploy in ISO
+  cp ${IMAGE_ROOTFS}/usr/sbin/software-deploy/* upgrades/software-deploy/
 
   # 3. ISO
   # 3.1 Edit grub.cfg and isolinux.cfg
