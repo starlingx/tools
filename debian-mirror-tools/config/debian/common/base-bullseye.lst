@@ -255,7 +255,8 @@ libbasicobjects0  0.6.1-2
 libbinutils  2.35.2-2
 libblas3  3.9.0-3
 libblkid1  2.36.1-8+deb11u1
-libbluetooth3  5.55-3.1
+libbluetooth3  5.55-3.1+deb11u1 https://snapshot.debian.org/archive/debian-security/20231222T044531Z/pool/updates/main/b/bluez/libbluetooth3_5.55-3.1+deb11u1_amd64.deb
+libbluetooth-dev  5.55-3.1+deb11u1 https://snapshot.debian.org/archive/debian-security/20231222T044531Z/pool/updates/main/b/bluez/libbluetooth-dev_5.55-3.1+deb11u1_amd64.deb
 libboost-context1.74.0  1.74.0-9
 libboost-filesystem1.74.0  1.74.0-9
 libboost-iostreams1.74.0  1.74.0-9
