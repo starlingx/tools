@@ -54,7 +54,7 @@ cpp  4:10.2.1-1
 cracklib-runtime  2.9.6-3.4
 cron  3.0pl1-137
 cryptsetup-bin  2:2.3.7-1+deb11u1
-curl  7.74.0-1.3+deb11u10  https://snapshot.debian.org/archive/debian-security/20231011T065856Z/pool/updates/main/c/curl/curl_7.74.0-1.3%2Bdeb11u10_amd64.deb
+curl  7.74.0-1.3+deb11u11  https://snapshot.debian.org/archive/debian-security/20231224T011632Z/pool/updates/main/c/curl/curl_7.74.0-1.3%2Bdeb11u11_amd64.deb
 dash  0.5.11+git20200708+dd9ef66-5
 dbconfig-common  2.0.19
 dbus 1.12.28-0+deb11u1 https://snapshot.debian.org/archive/debian/20230625T033524Z/pool/main/d/dbus/dbus_1.12.28-0%2Bdeb11u1_amd64.deb
@@ -306,10 +306,10 @@ libcryptsetup12  2:2.3.7-1+deb11u1
 libctf0  2.35.2-2
 libctf-nobfd0  2.35.2-2
 libcups2  2.3.3op2-3+deb11u6  https://snapshot.debian.org/archive/debian/20231006T090846Z/pool/main/c/cups/libcups2_2.3.3op2-3%2Bdeb11u6_amd64.deb
-libcurl3-gnutls 7.74.0-1.3+deb11u10 https://snapshot.debian.org/archive/debian-security/20231011T065856Z/pool/updates/main/c/curl/libcurl3-gnutls_7.74.0-1.3%2Bdeb11u10_amd64.deb
-libcurl4 7.74.0-1.3+deb11u10 https://snapshot.debian.org/archive/debian-security/20231011T065856Z/pool/updates/main/c/curl/libcurl4_7.74.0-1.3%2Bdeb11u10_amd64.deb
-libcurl4-gnutls-dev 7.74.0-1.3+deb11u10 https://snapshot.debian.org/archive/debian-security/20231011T065856Z/pool/updates/main/c/curl/libcurl4-gnutls-dev_7.74.0-1.3%2Bdeb11u10_amd64.deb
-libcurl4-openssl-dev 7.74.0-1.3+deb11u10 https://snapshot.debian.org/archive/debian-security/20231011T065856Z/pool/updates/main/c/curl/libcurl4-openssl-dev_7.74.0-1.3%2Bdeb11u10_amd64.deb
+libcurl3-gnutls 7.74.0-1.3+deb11u11 https://snapshot.debian.org/archive/debian-security/20231224T011632Z/pool/updates/main/c/curl/libcurl3-gnutls_7.74.0-1.3%2Bdeb11u11_amd64.deb
+libcurl4 7.74.0-1.3+deb11u11 https://snapshot.debian.org/archive/debian-security/20231224T011632Z/pool/updates/main/c/curl/libcurl4_7.74.0-1.3%2Bdeb11u11_amd64.deb
+libcurl4-gnutls-dev 7.74.0-1.3+deb11u11 https://snapshot.debian.org/archive/debian-security/20231224T011632Z/pool/updates/main/c/curl/libcurl4-gnutls-dev_7.74.0-1.3%2Bdeb11u11_amd64.deb
+libcurl4-openssl-dev 7.74.0-1.3+deb11u11 https://snapshot.debian.org/archive/debian-security/20231224T011632Z/pool/updates/main/c/curl/libcurl4-openssl-dev_7.74.0-1.3%2Bdeb11u11_amd64.deb
 libncursesw5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
 libncurses5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 libncurses-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
