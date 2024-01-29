@@ -59,10 +59,6 @@ rootfs-post-scripts:
   # Set bash as default shell
   ln -snf --relative $IMAGE_ROOTFS/bin/bash $IMAGE_ROOTFS/bin/sh
 - |-
-  # Allow root ssh login
-  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-  chroot $IMAGE_ROOTFS sed -i 's/^[#[:space:]]*PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-- |-
   # FIXME: OSTree will not set up a link to scratch automagically. Need to
   # relocate scratch to a more ostree friendly locale
   mkdir $IMAGE_ROOTFS/var/rootdirs/scratch
