@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022 Wind River Systems, Inc.
+# Copyright (c) 2024 Wind River Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 import logging
 from stx import utils  # pylint: disable=E0611
 import subprocess
+import tempfile
 
 logger = logging.getLogger('STX-k8s')
 utils.set_logger(logger)
@@ -50,6 +51,53 @@ class KubeHelper:
         cmd = self.config.helm() + ' ls'
         logger.info('helm list:\n')
         subprocess.check_call(cmd, shell=True)
+
+    def get_helm_pods(self):
+        '''Get currently-running pods associated with our helm project.
+
+        Returns a dict of dicts:
+            {
+                "NAME": { "status": "...", ...},
+                "..."
+            }
+        where NAME is the name of the pod, and status is its k8s status, such
+        as "Running"
+
+        Search for pods in the correct namespace:
+        - minikube: always "default" in minikube, ie each project uses its own
+          isolated minikube profile/instance
+        - vanilla k8s: namespace is required and is defined by the env var
+          STX_K8S_NAMESPACE
+
+        All such pods have a label, app.kubernetes.io/instance=<project>
+        where project is the value of project.name from stx.conf, and is
+        set by "helm install" in a roundabout way.
+
+        '''
+
+        project_name = self.config.get('project', 'name')
+        with tempfile.NamedTemporaryFile(mode='w+', encoding='utf-8', prefix='stx-get_helm_pods',
+                                         suffix='.stderr') as stderr_file:
+            cmd = f'{self.config.kubectl()} get pods --no-headers'
+            cmd += f' --selector=app.kubernetes.io/instance={project_name} 2>{stderr_file.name}'
+            process_result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE)
+            if process_result.returncode != 0:
+                logger.error('Command failed: %s\n%s', cmd, stderr_file.fread())
+                raise RuntimeError("Failed to list pods")
+
+            # command prints multiple lines "NAME READY STATUS RESTART AGE"
+            # Example:
+            #   stx-stx-builder-7f8bfc79cd-qtgcw 1/1 Running 0 36s
+            result = {}
+            for line in process_result.stdout.splitlines():
+                words = line.split()
+                if len(words) < 5:
+                    raise RuntimeError("Unexpected output from command <%s>" % cmd)
+                rec = {
+                    'status': words[2]
+                }
+                result[words[0]] = rec
+            return result
 
     def get_pod_name(self, dockername):
         '''get the detailed pod name from the four pods.'''

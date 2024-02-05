@@ -10,10 +10,8 @@ usage() {
 Usage: $0 OPTIONS
 Initialize StarlingX build environment & (re-)start builder pods
 
-     --nuke       delete minikube cluster and exit
-
   -R,--restart-minikube
-                  restart minikube cluster before starting pods
+                  restart minikube profile before starting pods
 
      --rebuild[=IMG,...]
                   build specified pod images instead of downloading them
@@ -31,30 +29,41 @@ Initialize StarlingX build environment & (re-)start builder pods
 
      --no-start   Refresh builder images, but don't (re-)start pods
 
+ENVIRONMENT RESET OPTIONS
+=========================
+
+  -y,--assumeyes
+                  Assume "yes" for all questions
+
+  -D,--delete-minikube-profile
+                  Delete minikube profile and exit
+                  This will also delete any builder images.
+                  Following this command you have to re-run this script
+                  (possibly with --rebuild).
+
+     --nuke       DEPRECATED: same as --delete-minikube-profile
+
+     --reset      delete chroots and restart the environment
+
+     --reset-hard Delete env containers, minikube profile and all generated
+                  content, including the workspace directory, compiled DEBs,
+                  ISO, OSTree, chroots, aptly repositories, docker FS layers
+                  and build logs.
+
+                  Keep the "downloads" directory and stx.conf.
+
+                  Following this action you must re-run this script
+                  (possibly with --rebuild) to start minikube and the pods
+                  again, followed by 'downloader', 'build-pkgs' etc.
+
+
 END
 }
 
-notice() {
-    local tty_on tty_off
-    if [[ -t 2 ]] ; then
-        tty_on=$'\033[1;36m'
-        tty_off=$'\033[0m'
-    fi
-    echo >&2 "${tty_on}$*${tty_off}"
-}
+source "$(dirname "$0")"/import-stx  || exit 1
 
-info() {
-    local tty_on tty_off
-    if [[ -t 2 ]] ; then
-        tty_on=$'\033[0;36m'
-        tty_off=$'\033[0m'
-    fi
-    echo >&2 "${tty_on}$*${tty_off}"
-}
-
-source "$(dirname "$0")"/import-stx  || return 1
-
-PROGNAME=$(basename "$0")
+PROGNAME=$(basename "$0") || exit 1
+STX_TOOLS_DIR="$(readlink -v -e "$(dirname "$0")")" || exit 1
 MINIKUBE=minikube
 HELM=helm
 DOCKER=docker
@@ -66,13 +75,116 @@ DOCKER_TAG="$STX_PREBUILT_BUILDER_IMAGE_TAG"
 DOCKERHUB_LOGIN=0
 
 BUILD_DOCKER=0
-DELETE_ENV=0
+DELETE_MINIKUBE_PROFILE=0
 RESTART_MINIKUBE=0
 CLEAN_CONFIG=0
 USE_DOCKER_CACHE=0
 START_PODS=1
+RESET_SOFT=0
+RESET_HARD=0
+ASSUME_YES=0
 
-minikube_started() {
+COREUTILS_DOCKER_IMAGE="debian:bookworm-20240130-slim"
+
+info() {
+    local tty_on tty_off
+    if [[ -t 2 ]] ; then
+        tty_on=$'\033[0;36m'
+        tty_off=$'\033[0m'
+    fi
+    echo >&2 "${tty_on}$*${tty_off}"
+}
+
+notice() {
+    local tty_on tty_off
+    if [[ -t 2 ]] ; then
+        tty_on=$'\033[1;36m'
+        tty_off=$'\033[0m'
+    fi
+    echo >&2 "${tty_on}$*${tty_off}"
+}
+
+warn() {
+    local tty_on tty_off
+    if [[ -t 2 ]] ; then
+        tty_on=$'\033[33m'
+        tty_off=$'\033[0m'
+    fi
+    echo >&2 "${tty_on}WARNING: $*${tty_off}"
+}
+
+error() {
+    local tty_on tty_off
+    if [[ -t 2 ]] ; then
+        tty_on=$'\033[31m'
+        tty_off=$'\033[0m'
+    fi
+    echo >&2 "${tty_on}ERROR: $*${tty_off}"
+}
+
+die() {
+    error "$@"
+    exit 1
+}
+
+# Usage: confirm "ACTION DESCRIPTION"
+confirm() {
+    local continue_yn="Continue (yes/no)? "
+    if [[ "$ASSUME_YES" -eq 1 ]] ; then
+        echo "$1"
+        echo "${continue_yn}yes"
+        return 0
+    fi
+    if [[ ! -t 0 ]] ; then
+        echo "$1"
+        die "Won't read from non-terminal"
+    fi
+    local answer
+    echo "$1"
+    while true ; do
+        read -e -r -p "$continue_yn" answer || exit 1
+        if [[ "$answer" == "yes" ]] ; then
+            return 0
+        elif [[ "$answer" == "no" ]] ; then
+            return 1
+        else
+            echo >&2 "Please type \`yes' or \`no'"
+            echo >&2
+        fi
+    done
+}
+
+# Usage: regex_quote "STR"
+regex_quote() {
+    echo "$1" | sed -r 's/([$.(){}+*^[\])/\\\1/g'
+}
+
+# Usage: regex_match "STR" "PYTHON_STYLE_REGEX"...
+regex_match() {
+    local str="$1" ; shift || :
+    python3 -c "\
+import re,sys;
+str = sys.argv[1]
+exprlist = sys.argv[2:]
+for expr in exprlist:
+    #print (\"========= [%s] [%s]\" % (str, expr))
+    if re.match(expr, str):
+        sys.exit(0)
+sys.exit(1)
+" "$str" "$@"
+}
+
+# Usage: starts_with "STR" "PREFIX"
+starts_with() {
+    local str="$1"
+    local prefix="$2"
+    if [[ "${str#$prefix}" == "$str" ]] ; then
+        return 1
+    fi
+    return 0
+}
+
+minikube_profile_is_started() {
     local result
     result=$(
         minikube profile list \
@@ -83,7 +195,7 @@ minikube_started() {
 }
 
 
-minikube_exists() {
+minikube_profile_exists() {
     local script=$(cat <<'END'
 import json,sys
 data = json.load (sys.stdin)
@@ -98,16 +210,196 @@ END
     $MINIKUBE profile list -l -o json | $PYTHON3 -c "$script" "$MINIKUBENAME"
 }
 
-helm_started() {
-    local result
-    result=$(
-        if [ "$STX_PLATFORM" == "minikube" ]; then
-           helm --kube-context "$MINIKUBENAME" ls --short --filter '^stx$'
+minikube_profile_start() {
+    notice "Starting minikube profile \`$MINIKUBENAME'"
+    $MINIKUBE start --driver=docker -p $MINIKUBENAME \
+        --cpus=$STX_BUILD_CPUS \
+        --memory=$MINIKUBEMEMORY \
+        --mount=true \
+        --mount-string="$STX_BUILD_HOME:/workspace" \
+        || exit 1
+}
+
+minikube_profile_stop() {
+    if minikube_profile_is_started ; then
+        notice "Stopping minikube profile \`$MINIKUBENAME'"
+        $MINIKUBE stop -p $MINIKUBENAME
+        if minikube_profile_is_started ; then
+            echo >&2 "minikube container $MINIKUBENAME exist!"
+            echo >&2 "And the command 'minikube -p $MINIKUBENAME stop' failed. The reason may be"
+            echo >&2 "the current MINIKUBE_HOME/HOME is not the same as the $MINIKUBENAME"
+            echo >&2 "Please change the MINIKUBE_HOME/HOME directory to the previous value"
+            echo >&2 "then re-execute this script"
+            exit 1
+        fi
+    fi
+}
+
+stx_is_started() {
+    stx control is-started >/dev/null 2>&1
+}
+
+stx_stop() {
+    stx control stop --wait || exit 1
+}
+
+stx_start() {
+    stx config --upgrade || exit 1
+    stx control start --wait || exit 1
+}
+
+#
+# Blacklist for root-owned deletions.
+# A multi-line string, one Python regex per line, leading/trailing
+# spaces and comments will be stripped.
+#
+if [[ -z "$STX_RM_BLACKLIST" ]] ; then
+    USER_REGEX="$(regex_quote "$USER")" || exit 1
+    HOME_REGEX="$(regex_quote "$HOME")" || exit 1
+    STX_RM_BLACKLIST='
+        ^/$
+        ^/bin(/.*)?$
+        ^/boot(/.*)?$
+        ^/dev(/.*)?$
+        ^/etc(/.*)?$
+        ^/export(/.*)?$
+        ^/home$                                   # deny "/home"
+        ^/home/'"$USER_REGEX"'$                   # deny "/home/$USER"
+        ^/home/(?!'"$USER_REGEX"'(/.*)?$)         # deny "/home/SOME_USER_OTHER_THAN_CURRENT"
+        ^'"$HOME_REGEX"'$
+        ^/import(/.*)?$
+        ^/localdisk$
+        ^/localdisk/designer$
+        ^/localdisk/designer/'"$USER_REGEX"'$
+        ^/localdisk/designer/(?!'"$USER_REGEX"'(/.*)?$)
+        ^/localdisk/loadbuild$
+        ^/localdisk/loadbuild/'"$USER_REGEX"'$
+        ^/localdisk/loadbuild/(?!'"$USER_REGEX"'(/.*)?$)
+        ^/folk(/.*)?$
+        ^/lib[^/]*(/.*)?$
+        ^/media(/.*)?$
+        ^/mnt(/.*)?$
+        ^/opt(/.*)?$
+        ^/proc(/.*)?$
+        ^/root(/.*)?$
+        ^/run(/.*)?$
+        ^/sbin(/.*)?$
+        ^/snap(/.*)?$
+        ^/srv(/.*)?$
+        ^/starlingx(/.*)?$
+        ^/sys(/.*)?$
+        ^/tmp(/.*)?$
+        ^/usr(/.*)?$
+        ^/var(/.*)?$
+    '
+fi
+
+# Usage: safe_rm PATHs...
+#
+# Delete PATHs as root user, by default via "sudo"; or else
+# via "docker run [...]". Bail out on blacklisted paths.
+#
+safe_rm() {
+    local build_home
+    build_home="$(readlink -v -e "$STX_BUILD_HOME")" || exit 1
+    local build_home_quoted
+    build_home_quoted="$(regex_quote "$build_home")"
+
+    # Compile blacklist from $STX_RM_BLACKLIST + current $STX_BUILD_HOME
+    local -a re_list
+    readarray -t re_list < <(echo "$STX_RM_BLACKLIST" | sed -r -e 's/\s#.*//g' -e 's/^\s+//' -e 's/\s+$//' -e '/^\s*$/d') || exit 1
+    re_list+=("^$build_home_quoted$")
+
+    # Validate inputs
+    local -a paths_to_delete
+    local path basename dirname
+    local canon_dirname canon_path canon_path_expr
+    for path in "$@" ; do
+
+        # Resolve paths before checking against blacklist. We want to resolve
+        # them similarly to how "rm -rf" would, ie:
+        #
+        # - recursively resolve symlinks leading up to the leaf (basename) of
+        #   the target path
+        # - do not resolve the leaf; if it happens to be a symlink, just delete
+        #   the symlink
+        #
+        # special case 1: never remove anything that ends with "." or ".."
+        #
+        # special case 2: if path ends with a slash, the leaf must exist and be a
+        # directory or a symlink to one; otherwise we skip it:
+        # - real dir: remove recursively
+        # - symlink to a dir: remove target's children only
+        # - anything else: skip
+        #
+
+        # don't remove "." or ".."
+        if [[ "$path" =~ (^|/)[.][.]?$ ]] ; then
+            error "refusing to remove \".\" or \"..\" directory"
+            exit 1
+        fi
+
+        # path doesn't end with "/": resolve parents, but not the leaf
+        if [[ ! "$path" =~ /$ ]] ; then
+            basename="$(basename "$path")"
+            [[ -n "$basename" ]] || continue
+
+            dirname="$(dirname "$path")"
+            [[ -n "$dirname" ]] || continue
+
+            canon_dirname="$(realpath -q -e "$dirname" || true)"
+            [[ -n "$canon_dirname" ]] || continue
+
+            canon_path="$canon_dirname/$basename"
+
+            # ie path exists or is a broken symlink
+            [[ -e "$canon_path" || -L "$canon_path" ]] || continue
+
+            canon_path_expr="$canon_path"      # argument to "rm"
+
+        # path ends with "/": only makes sense for dirs or symlinks to dirs
         else
-           helm --namespace "$STX_K8S_NAMESPACE" ls --short --filter '^stx$'
-        fi 2>/dev/null
-    ) || true
-    [[ -n "$result" ]]
+            # Try to resolve the entire path, including the leaf.
+            # If leaf is a legit symlink, "rm" would follow it, so we do the same
+            canon_path="$(realpath -q -m "$path" || true)"
+            [[ -d "$canon_path" ]] || continue
+
+            canon_path_expr="$canon_path/" # argument to "rm" must preserve trailing /
+        fi
+
+        # Make sure it's a subdirectory of $STX_BUILD_HOME
+        if ! starts_with "$canon_path" "$build_home/" ; then
+            error "Attempted to delete unsafe path \`$canon_path', expecting a subdirectory of \`$STX_BUILD_HOME'"
+            exit 1
+        fi
+
+        # Check it against black list
+        if regex_match "$canon_path" "${re_list[@]}" ; then
+            die "Attempted to delete blacklisted path \`$canon_path'"
+        fi
+
+        # ok to delete
+        paths_to_delete+=("$canon_path_expr")
+    done
+
+    # Delete them
+    local -a rm_cmd
+    for path in "${paths_to_delete[@]}" ; do
+        #confirm "Deleting \`$path'"$'' || continue
+
+        # Delete via docker or sudo
+        if [[ "$STX_RM_METHOD" == "docker" ]] ; then
+            local tty_opt=
+            if [[ -t 0 ]] ; then
+                tty_opt="-t"
+            fi
+            rm_cmd=(docker run -i $tty_opt --rm --mount "type=bind,src=$build_home,dst=$build_home" $COREUTILS_DOCKER_IMAGE rm -rf --one-file-system "$path")
+        else
+            rm_cmd=(sudo rm -rf --one-file-system "$path")
+        fi
+        echo "running: ${rm_cmd[*]}" >&2
+        "${rm_cmd[@]}" || exit 1
+    done
 }
 
 cmdline_error() {
@@ -119,7 +411,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hR --long help,clean,restart-minikube,rebuild::,cache,nuke,dockerhub-login,no-start -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hRyD --long help,clean,restart-minikube,rebuild::,cache,delete-minikube-profile,nuke,reset,reset-hard,assumeyes,dockerhub-login,no-start -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -159,8 +451,25 @@ while true ; do
             USE_DOCKER_CACHE=1
             shift
             ;;
+        -y|--assumeyes)
+            ASSUME_YES=1
+            shift
+            ;;
         --nuke)
-            DELETE_ENV=1
+            warn "--nuke is deprecated, use --delete-minikube-profile instead"
+            DELETE_MINIKUBE_PROFILE=1
+            shift
+            ;;
+        -D|--delete-minikube-profile)
+            DELETE_MINIKUBE_PROFILE=1
+            shift
+            ;;
+        --reset)
+            RESET_SOFT=1
+            shift
+            ;;
+        --reset-hard)
+            RESET_HARD=1
             shift
             ;;
         --dockerhub-login)
@@ -215,23 +524,126 @@ if ! command -v "$DOCKER" &> /dev/null; then
     exit 1
 fi
 
+# Delete minikube profile/cluster. This will also delete the locally-built
+# or downloaded builder pods.
+if [[ $DELETE_MINIKUBE_PROFILE -eq 1 ]] ; then
+    if [[ "$STX_PLATFORM" != "minikube" ]] ; then
+        notice "--delete-minikube-profile is not supported for Kubernetes platform"
+    elif minikube_profile_exists ; then
+        notice "Deleting minikube profile \`$MINIKUBENAME'"
+        $MINIKUBE delete -p "$MINIKUBENAME" || exit 1
+    else
+        notice "Please check your minikube profile MINIKUBENAME: \`$MINIKUBENAME'."
+        notice "It doesn't exist or it existed but not for your MINIKUBE_HOME: \`$MINIKUBE_HOME'."
+        notice "Please re-export the correct project variable pairs!!!"
+    fi
+    exit 0
+fi
+
 # clean the configuration and configmap data
 if [[ $CLEAN_CONFIG -eq 1 ]] ; then
-    if helm_started ; then
+    if stx_is_started ; then
         notice "Please firstly stop the helm project with 'stx control stop' command."
         notice "Then execute this cleanup operation again."
         exit 1
     fi
     notice "Clean the config file and configmap data for builder|pkgbuilder container."
     # copy a fresh config file
-    rm -f stx.conf
-    cp stx.conf.sample stx.conf
+    rm -f "$STX_TOOLS_DIR/stx.conf"
+    cp "$STX_TOOLS_DIR/stx.conf.sample" "$STX_TOOLS_DIR/stx.conf"
 
-    rm -f stx/lib/stx/__pycache__/*
-    rm -f stx/stx-build-tools-chart/stx-builder/Chart.lock
-    rm -f stx/stx-build-tools-chart/stx-builder/charts/*
-    rm -f stx/stx-build-tools-chart/stx-builder/configmap/stx-localrc
-    rm -f stx/stx-build-tools-chart/stx-builder/dependency_chart/stx-pkgbuilder/configmap/stx-localrc
+    rm -f "$STX_TOOLS_DIR"/stx/lib/stx/__pycache__/*
+    rm -f "$STX_TOOLS_DIR"/stx/stx-build-tools-chart/stx-builder/Chart.lock
+    rm -f "$STX_TOOLS_DIR"/stx/stx-build-tools-chart/stx-builder/charts/*
+    rm -f "$STX_TOOLS_DIR"/stx/stx-build-tools-chart/stx-builder/configmap/stx-localrc
+    rm -f "$STX_TOOLS_DIR"/stx/stx-build-tools-chart/stx-builder/dependency_chart/stx-pkgbuilder/configmap/stx-localrc
+    exit 0
+fi
+
+# --reset-hard: stop pods, delete pod state and minikube profile
+if [[ $RESET_HARD -eq 1 ]] ; then
+    # "stx" tool can't work without stx.conf
+    if [[ ! -f "$STX_TOOLS_DIR/stx.conf" ]] ; then
+        error "$STX_TOOLS_DIR/stx.conf: file not found"
+        exit 1
+    fi
+
+    confirm "\
+This will delete env containers, minikube profile and all generated
+content, including the workspace directory, generated DEBs, ISO,
+OSTree, chroots, aptly repositories, docker FS layers and build logs.
+
+Keep the 'downloads' directory and stx.conf.
+
+Following this action you must re-run this script (possibly with
+--rebuild) to start minikube and the pods again, followed by
+'downloader', 'build-pkgs' etc.
+" || exit 1
+
+    # Deleting minikube profile also deletes env pods within it
+    if [[ "$STX_PLATFORM" = "minikube" ]] ; then
+        if minikube_profile_exists ; then
+            notice "Deleting minikube profile \`$MINIKUBENAME'"
+            $MINIKUBE delete -p "$MINIKUBENAME" || exit 1
+        fi
+    else
+        # stop & delete env pods
+        if stx_is_started ; then
+            info "stopping env pods"
+            stx_stop || exit 1
+        fi
+    fi
+    notice "deleting generated files"
+    safe_rm "$STX_BUILD_HOME/localdisk/pkgbuilder" \
+            "$STX_BUILD_HOME/docker" \
+            "$STX_BUILD_HOME/aptly" \
+            "$STX_BUILD_HOME/localdisk/loadbuild"/*/*/* \
+            "$STX_BUILD_HOME/localdisk"/*.log \
+            "$STX_BUILD_HOME/localdisk"/*.yaml \
+            "$STX_BUILD_HOME/localdisk"/log \
+            "$STX_BUILD_HOME/localdisk"/CERTS \
+            "$STX_BUILD_HOME/localdisk"/channel \
+            "$STX_BUILD_HOME/localdisk"/deploy \
+            "$STX_BUILD_HOME/localdisk"/workdir \
+            "$STX_BUILD_HOME/localdisk"/sub_workdir \
+            || exit 1
+    notice "please use \`$0' to start the environment again"
+    exit 0
+fi
+
+# --reset: delete chroots + restart pods
+if [[ $RESET_SOFT -eq 1 ]] ; then
+    # "stx" tool can't work without stx.conf
+    if [[ ! -f "$STX_TOOLS_DIR/stx.conf" ]] ; then
+        error "$STX_TOOLS_DIR/stx.conf: file not found"
+        exit 1
+    fi
+    # Caveat: we have to have minikube started in order to re-start
+    # env pods (below), otherwise the old/dormant instances
+    # of the pods may get re-activated later when the user starts
+    # minikube manually. In this case those may be outdated due
+    # to changes in stx.conf.
+    if [[ "$STX_PLATFORM" = "minikube" ]] && ! minikube_profile_is_started ; then
+        error "minikube profile \`$MINIKUBENAME' is not running, please start it first"
+        exit 1
+    fi
+
+    # stop env pods
+    want_stx_start=0
+    if stx_is_started ; then
+        want_stx_start=1
+        notice "stopping env pods"
+        stx_stop || exit 1
+    fi
+    # clean up
+    notice "deleting chroots"
+    safe_rm "$STX_BUILD_HOME/localdisk/pkgbuilder"
+    # start the pods again
+    if [[ $want_stx_start -eq 1 ]] ; then
+        notice "starting env pods"
+        stx_start || exit 1
+    fi
+
     exit 0
 fi
 
@@ -264,57 +676,26 @@ if [[ "$DOCKERHUB_LOGIN" -eq 1 ]] ; then
 fi
 
 if [ "$STX_PLATFORM" = "minikube" ]; then
-    # MINIKUBE
-    # --nuke: just delete the cluster and exit
-    if [[ $DELETE_ENV -eq 1 ]] ; then
-        if minikube_exists ; then
-            notice "Deleting minikube cluster \`$MINIKUBENAME'"
-            $MINIKUBE delete -p "$MINIKUBENAME" || exit 1
-        else
-            notice "Please check your minikube cluster MINIKUBENAME: \`$MINIKUBENAME'."
-            notice "It doesn't exist or it existed but not for your MINIKUBE_HOME: \`$MINIKUBE_HOME'."
-            notice "Please re-export the correct project variable pairs!!!"
-        fi
-        exit 0
-    fi
 
     # Stop minikube if necessary
     WANT_START_MINIKUBE=0
     if [[ $RESTART_MINIKUBE -eq 1 ]] ; then
-        if minikube_started ; then
-            notice "Stopping minikube cluster \`$MINIKUBENAME'"
-            $MINIKUBE stop -p $MINIKUBENAME
-            if minikube_started ; then
-                echo >&2 "minikube container $MINIKUBENAME exist!"
-                echo >&2 "And the command 'minikube -p $MINIKUBENAME stop' failed. The reason may be"
-                echo >&2 "the current MINIKUBE_HOME/HOME is not the same as the $MINIKUBENAME"
-                echo >&2 "Please change the MINIKUBE_HOME/HOME directory to the previous value"
-                echo >&2 "then re-execute this script"
-                exit 1
-            fi
-        fi
+        minikube_profile_stop
         WANT_START_MINIKUBE=1
-    elif ! minikube_started ; then
+    elif ! minikube_profile_is_started ; then
         WANT_START_MINIKUBE=1
     fi
 
     # Start minikube
     if [[ $WANT_START_MINIKUBE -eq 1 ]] ; then
-        # FIXME: inject docker hub credentials into minikube's embedded docker daemon
-        notice "Starting minikube cluster \`$MINIKUBENAME'"
-        $MINIKUBE start --driver=docker -p $MINIKUBENAME \
-            --cpus=$STX_BUILD_CPUS \
-            --memory=$MINIKUBEMEMORY \
-            --mount=true \
-            --mount-string="$STX_BUILD_HOME:/workspace" \
-            || exit 1
+        minikube_profile_start
     fi
 
     # Record the project environment variables
-    echo "The last minikube cluster startup date: `date`" > minikube_history.log
-    echo "MINIKUBE_HOME: $MINIKUBE_HOME" >> minikube_history.log
-    echo "MINIKUBENAME: $MINIKUBENAME" >> minikube_history.log
-    echo "STX_BUILD_HOME: $STX_BUILD_HOME" >> minikube_history.log
+    echo "The last minikube profile startup date: `date`" > "$STX_TOOLS_DIR"/minikube_history.log
+    echo "MINIKUBE_HOME: $MINIKUBE_HOME" >> "$STX_TOOLS_DIR"/minikube_history.log
+    echo "MINIKUBENAME: $MINIKUBENAME" >> "$STX_TOOLS_DIR"/minikube_history.log
+    echo "STX_BUILD_HOME: $STX_BUILD_HOME" >> "$STX_TOOLS_DIR"/minikube_history.log
 
     # Import minikube's docker environment. This points docker CLI to minikube's
     # embedded docker daemon.
@@ -326,13 +707,11 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
         docker login || exit 1
     fi
 
-elif [ "$STX_PLATFORM" = "kubernetes" ]; then
-    if [[ $DELETE_ENV -eq 1 ]] ; then
-        notice "--nuke not supported for Kubernetes platform"
-    fi
+elif [[ $RESTART_MINIKUBE -eq 1 ]] ; then
+    warn "--restart-minikube is only supported on minikube platform -- ignoring"
 fi
 
-# Build docker images
+
 if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     notice "Building docker images"
     declare -a docker_build_args
@@ -340,7 +719,7 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
         docker_build_args+=("--no-cache")
     fi
     for img in $BUILD_DOCKER_IMAGES; do
-        docker build "${docker_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f stx/dockerfiles/$img.Dockerfile . || exit 1
+        docker build "${docker_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile "$STX_TOOLS_DIR" || exit 1
         info "built image $img:$DOCKER_TAG_LOCAL"
     done
 fi
@@ -372,13 +751,9 @@ fi
 
 # Restart pods
 if [[ $START_PODS -eq 1 ]] ; then
-    notice "Restarting pods"
-    stx control stop || exit 1
-    stx config --upgrade || exit 1
-    # FIXME: inject docker hub credentials into k8s
-    # FIXME: inject docker hub credentials into builder pod
-    stx control start || exit 1
-
-    notice "Run 'stx control status' to check the pod startup status"
+    if stx_is_started ; then
+        stx_stop || exit 1
+    fi
+    notice "starting env pods"
+    stx_start || exit 1
 fi
-

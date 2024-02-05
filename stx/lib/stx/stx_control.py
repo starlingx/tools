@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (c) 2021 Wind River Systems, Inc.
+# Copyright (c) 2024 Wind River Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -247,8 +247,9 @@ stx-pkgbuilder/configmap/')
 
         return repomgr_type
 
-    def handleStartTask(self, projectname):
-        cmd = self.config.helm() + ' install ' + projectname + ' ' \
+    def handleStartTask(self, projectname, wait):
+        wait_arg = '--wait ' if wait else ''
+        cmd = self.config.helm() + ' install ' + wait_arg + projectname + ' ' \
             + self.abs_helmchartdir \
             + ' --set global.image.tag=' + self.config.docker_tag
 
@@ -274,15 +275,46 @@ stx-pkgbuilder/configmap/')
             if repomgr_type == 'pulp':
                 self.configurePulp()
 
-    def handleStopTask(self, projectname):
+    def handleStopTask(self, projectname, wait):
+        # "helm uninstall --wait" doesn't work, except in very recent helm versions
+        # see https://github.com/helm/helm/issues/10586
+        #     https://github.com/helm/helm/pull/11479
+        #
+        # In case helm returned too early, we will loop until there are no pods left,
+        # after "helm uninstall".
+
+        # Use Helm's own default timeout of 5 minutes
+        timeout = 5 * 60
+        deadline = time.time() + timeout
+
         helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
-            cmd = self.config.helm() + ' uninstall ' + projectname
+            cmd = f'{self.config.helm()} uninstall {projectname} --wait'
             self.logger.debug('Execute the helm stop command: %s', cmd)
             subprocess.check_call(cmd, shell=True)
         else:
-            self.logger.warning('The helm release %s does not exist - nothing to do',
+            self.logger.warning('The helm release %s does not exist',
                                 projectname)
+
+        if wait:
+            while True:
+                pod_count = len(self.k8s.get_helm_pods())
+                if pod_count == 0:
+                    break
+                if time.time() > deadline:
+                    self.logger.warning("maximum wait time of %d second(s) exceeded", timeout)
+                    self.logger.warning("gave up while pods are still running")
+                    break
+                self.logger.info("waiting for %d pod(s) to exit", pod_count)
+                time.sleep(3)
+
+    def handleIsStartedTask(self, projectname):
+        if self.k8s.helm_release_exists(projectname):
+            self.logger.info('Helm release %s is installed' % projectname)
+            sys.exit(0)
+        else:
+            self.logger.info('Helm release %s is not installed' % projectname)
+            sys.exit(1)
 
     def handleUpgradeTask(self, projectname):
         self.finish_configure()
@@ -372,10 +404,13 @@ no lat container is available!')
             projectname = 'stx'
 
         if args.ctl_task == 'start':
-            self.handleStartTask(projectname)
+            self.handleStartTask(projectname, args.wait)
 
         elif args.ctl_task == 'stop':
-            self.handleStopTask(projectname)
+            self.handleStopTask(projectname, args.wait)
+
+        elif args.ctl_task == 'is-started':
+            self.handleIsStartedTask(projectname)
 
         elif args.ctl_task == 'upgrade':
             self.handleUpgradeTask(projectname)

@@ -68,11 +68,17 @@
 #     Download pre-built images with this tag. This is used by "stx-init-env"
 #     without the "--rebuild" flag.
 #     Default: master-debian-latest
-
+#
 #   STX_PREBUILT_BUILDER_IMAGE_PREFIX
 #     Download pre-built images from this registry/prefix. This is used by "stx-init-env"
 #     without the "--rebuild" flag. If not empty, this must end with "/".
 #     Default:starlingx/
+#
+#   STX_RM_METHOD
+#     stx-init-env --reset* may need to delete root-owned files. By default
+#     we delete them via sudo. If you set STX_RM_METHOD to "docker", we will
+#     delete such files via a docker container with STX_BUILD_HOME mounted inside.
+#
 
 notice_warn () {
     local tty_on tty_off

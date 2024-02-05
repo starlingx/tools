@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Wind River Systems, Inc.
+# Copyright (c) 2024 Wind River Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ Use %(prog)s --help to get help for all of parameters\n\n''')
 
         control_subparser = subparsers.add_parser('control',
                                                   help='Execute the control \
-task.\t\teg: [start|enter|stop|status|upgrade|keys-add]')
+task.\t\teg: [start|enter|stop|is-started|status|upgrade|keys-add]')
         control_subparser.add_argument('ctl_task',
                                        help='[ start|stop|enter|status|upgrade\
                                        |keys-add ]: Create or Stop or Enter or \
@@ -80,6 +80,10 @@ task.\t\teg: [start|enter|stop|status|upgrade|keys-add]')
                                        help='key file to enter, ' +
                                        'default: ~/.ssh/id_rsa\n\n',
                                        required=False)
+        control_subparser.add_argument('--wait',
+                                       help='wait for operation to finish, ' +
+                                       'for start, stop\n\n',
+                                       action='store_true')
         control_subparser.set_defaults(handle=self.handlecontrol.handleControl)
 
         config_subparser = subparsers.add_parser('config',
