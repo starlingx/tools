@@ -185,15 +185,8 @@ starts_with() {
 }
 
 minikube_profile_is_started() {
-    local result
-    result=$(
-        minikube profile list \
-            | tr -d '|' \
-            | awk -v profile="$MINIKUBENAME" '{ if ($1 == profile && $7 == "Running") print $1 }'
-    )
-    [[ -n "$result" ]]
+    minikube status -p "$MINIKUBENAME" >/dev/null 2>&1
 }
-
 
 minikube_profile_exists() {
     local script=$(cat <<'END'
