@@ -80,7 +80,7 @@ class KubeHelper:
                                          suffix='.stderr') as stderr_file:
             cmd = f'{self.config.kubectl()} get pods --no-headers'
             cmd += f' --selector=app.kubernetes.io/instance={project_name} 2>{stderr_file.name}'
-            process_result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE)
+            process_result = subprocess.run(cmd, encoding='utf-8', shell=True, stdout=subprocess.PIPE)
             if process_result.returncode != 0:
                 logger.error('Command failed: %s\n%s', cmd, stderr_file.fread())
                 raise RuntimeError("Failed to list pods")

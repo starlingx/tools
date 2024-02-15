@@ -306,7 +306,7 @@ stx-pkgbuilder/configmap/')
                     self.logger.warning("gave up while pods are still running")
                     break
                 self.logger.info("waiting for %d pod(s) to exit", pod_count)
-                time.sleep(3)
+                time.sleep(2)
 
     def handleIsStartedTask(self, projectname):
         if self.k8s.helm_release_exists(projectname):

@@ -51,6 +51,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         rpm2cpio \
         ssh \
         sudo \
+        tini \
         unzip \
         vim \
         wget \
@@ -97,3 +98,6 @@ RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa
 RUN mkdir -p /etc/vim
 COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
+
+ENTRYPOINT ["/usr/bin/tini", "-g", "--"]
+CMD ["/bin/bash", "-i", "-c", "exec /bin/sleep infinity" ]
