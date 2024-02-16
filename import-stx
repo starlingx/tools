@@ -172,7 +172,7 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
     fi
 
     FSTYPE=$(stat -f -L -c %T $MINIKUBE_HOME)
-    if [ x"$FSTYPE" == x"nfs" ]; then
+    if [ x"$FSTYPE" = x"nfs" ]; then
         echo ""
         echo "Warning: stx minikube doesn't allow \$MINIKUBE_HOME or \$HOME directory as nfs mount point!!!"
         echo "         Please set non-nfs MINIKUBE_HOME with the command 'export MINIKUBE_HOME=XXX/YYY'"
@@ -189,7 +189,7 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
     NUM_USERS=$(sqrt $(number_of_users))
     ABSOLUTE_MAX_CPUS=$(($(number_of_cpus)/$NUM_USERS))
     MAX_CPUS=$(number_of_cpus)
-    if [ "$MAX_CPUS" == "" ] || [ "$MAX_CPUS" == "0" ]; then
+    if [ "$MAX_CPUS" = "" ] || [ "$MAX_CPUS" = "0" ]; then
         MAX_CPUS=1
     fi
 
@@ -205,7 +205,7 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
     fi
 
     MAX_MEMORY=`expr $(cat /proc/meminfo |grep MemTotal | awk '{print $2}') / 1024`
-    if [ "$MAX_MEMORY" == "" ] || [ "$MAX_MEMORY" == "0" ]; then
+    if [ "$MAX_MEMORY" = "" ] || [ "$MAX_MEMORY" = "0" ]; then
         MAX_MEMORY=2048
     fi
 
