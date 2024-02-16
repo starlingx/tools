@@ -276,12 +276,12 @@ stx-pkgbuilder/configmap/')
                 self.configurePulp()
 
     def handleStopTask(self, projectname, wait):
-        # "helm uninstall --wait" doesn't work, except in very recent helm versions
-        # see https://github.com/helm/helm/issues/10586
+        # "helm uninstall --wait" requires version >= 3.7, and is broken
+        # in some versions:
+        #     https://github.com/helm/helm/issues/10586
         #     https://github.com/helm/helm/pull/11479
         #
-        # In case helm returned too early, we will loop until there are no pods left,
-        # after "helm uninstall".
+        # Workaround: loop until there are no pods left, after "helm uninstall".
 
         # Use Helm's own default timeout of 5 minutes
         timeout = 5 * 60
@@ -289,7 +289,7 @@ stx-pkgbuilder/configmap/')
 
         helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
-            cmd = f'{self.config.helm()} uninstall {projectname} --wait'
+            cmd = f'{self.config.helm()} uninstall {projectname}'
             self.logger.debug('Execute the helm stop command: %s', cmd)
             subprocess.check_call(cmd, shell=True)
         else:
