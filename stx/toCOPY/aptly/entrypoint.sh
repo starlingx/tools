@@ -39,4 +39,4 @@ else
 fi
 
 # Start Supervisor
-/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+exec /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
