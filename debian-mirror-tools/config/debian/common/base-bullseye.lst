@@ -192,7 +192,6 @@ hiera  3.2.0-2.1
 hostname  3.23
 ieee-data  20210605.1
 ifenslave  2.13~deb11u1
-ifupdown  0.8.36
 init  1.60
 initramfs-tools  0.140
 initramfs-tools-core  0.140
@@ -799,6 +798,7 @@ nano  5.4-2  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/ma
 ncat  7.91+dfsg1+really7.80+dfsg1-2
 ncurses-base  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-base_6.2%2B20201114-2%2Bdeb11u2_all.deb 
 ncurses-bin  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-bin_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
+ndisc6 1.0.4-2
 netbase  6.3
 netcat-openbsd  1.217-3
 net-tools  1.60+git20181103.0eebece-1
