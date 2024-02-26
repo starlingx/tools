@@ -58,7 +58,7 @@ class SchrootsPool:
             self.logger.error('There are no schroots found, exit')
             return False
         for sname in schroots:
-            # Filter 'chroot:bullseye-amd64-<user>' as the backup chroot
+            # Filter 'chroot:${DEBIAN_DISTRIBUTION}-amd64-<user>' as the backup chroot
             if len(sname.split('-')) >= 4 and not self.exists(sname):
                 self.schroots.append(Schroot(sname.strip(), 'idle'))
         return True

@@ -18,10 +18,13 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 import logging
+import subprocess
 
-STX_DISTRO = 'bullseye'
 STX_ARCH = 'amd64'
 PKG_BUILDER_LOG = '/localdisk/pkgbuilder.log'
+STX_LOCALRC = '/usr/local/bin/stx/stx-localrc'
+CMD = 'grep "^export DEBIAN_DISTRIBUTION=.*" %s | cut -d \\= -f 2' % STX_LOCALRC
+STX_DISTRO = subprocess.check_output(CMD, shell=True).decode().split("\n")[0].strip('"')
 
 app = Flask(__name__)
 app.debug = True

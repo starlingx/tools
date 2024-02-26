@@ -12,9 +12,15 @@
 #
 # Copyright (C) 2021-2022 Wind River Systems,Inc.
 #
-FROM debian:bullseye
+FROM debian:bookworm
 
-RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
+RUN echo "deb-src http://deb.debian.org/debian bookworm main" >> /etc/apt/sources.list
+
+# pass --break-system-packages to pip
+# https://salsa.debian.org/cpython-team/python3/-/blob/python3.11/debian/README.venv#L58
+RUN echo "[global]" >> /etc/pip.conf && \
+    echo "break-system-packages = true" >> /etc/pip.conf
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update certificates

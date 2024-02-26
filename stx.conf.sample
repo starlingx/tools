@@ -8,23 +8,23 @@ proxyport = 8080
 buildbranch = master
 manifest = default.xml
 ostree_osname = debian
-debian_distribution = bullseye
-debian_version = 11.3
+debian_distribution = bookworm
+debian_version = 12.5
 
 # These URLs must contain snapshots of debian & debian-security repos.
 # We will append debian_snapshot_timestamp to each of them when creating
 # apt.sources lists
 #debian_snapshot_base = http://snapshot.debian.org/archive/debian
-debian_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian
+debian_snapshot_base = http://snapshot.debian.org/archive/debian
 #debian_security_snapshot_base = http://snapshot.debian.org/archive/debian-security
-debian_security_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian-security
-debian_snapshot_timestamp = 20220331T000000Z
+debian_security_snapshot_base = http://snapshot.debian.org/archive/debian-security
+debian_snapshot_timestamp = 20240302T211138Z
 
 [builder]
 uid = 1000
 myuname = builder
-release = 6.0
-dist = bullseye
+release = 9.0
+dist = bookworm
 stx_dist = .stx
 debfullname = STX Builder
 debemail = stx.builder@opendev.org

@@ -1,0 +1,9 @@
+#The OS binary packages that depended by StarlingX patched packages,
+#but they are not in the base packages list
+# This installs kdump and its dependency on Debian
+makedumpfile 1:1.7.2-1
+kexec-tools 1:2.0.25-3+b1
+crash 8.0.2-1
+liblzo2-2 2.10-2
+pigz 2.6-1
+yajl-tools 2.1.0-3+deb12u2

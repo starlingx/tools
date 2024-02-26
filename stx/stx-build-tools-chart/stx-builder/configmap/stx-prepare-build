@@ -34,8 +34,8 @@ sudo apt-get update
 
 # create deb-local-binary empty repo for building first package, certainly the developer
 # also could select to download the other binary list in deb-mirror-tools directory with
-# debdownloader command, for example we download the base-bullseye.lst before building
-# image.
+# debdownloader command, for example we download the base-${DEBIAN_DISTRIBUTION}.lst 
+# before building image.
 TMPLIST=`mktemp /tmp/XXXXXX.lst`
 debdownloader $TMPLIST
 rm $TMPLIST

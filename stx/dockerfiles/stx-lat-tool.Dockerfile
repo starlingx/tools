@@ -12,11 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM debian:bullseye
+FROM debian:bookworm
 
 MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
 ARG LAT_BINARY_RESOURCE_PATH=https://mirror.starlingx.windriver.com/mirror/lat-sdk/lat-sdk-20231206
+
+# pass --break-system-packages to pip
+# https://salsa.debian.org/cpython-team/python3/-/blob/python3.11/debian/README.venv#L58
+RUN echo "[global]" >> /etc/pip.conf && \
+    echo "break-system-packages = true" >> /etc/pip.conf
 
 # Update certificates
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates

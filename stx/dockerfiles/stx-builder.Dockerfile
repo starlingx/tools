@@ -12,14 +12,18 @@
 #
 # Copyright (C) 2021-2022 Wind River Systems,Inc.
 #
-FROM debian:bullseye
+FROM debian:bookworm
 
 ENV container=docker \
     PATH=/opt/LAT/lat:$PATH
 
-RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
-    echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
-    echo "deb http://deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
+RUN echo "deb-src http://deb.debian.org/debian bookworm main" >> /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian bookworm contrib" >> /etc/apt/sources.list
+
+# pass --break-system-packages to pip
+# https://salsa.debian.org/cpython-team/python3/-/blob/python3.11/debian/README.venv#L58
+RUN echo "[global]" >> /etc/pip.conf && \
+    echo "break-system-packages = true" >> /etc/pip.conf
 
 # Update certificates
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates

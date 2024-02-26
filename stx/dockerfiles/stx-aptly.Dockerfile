@@ -12,7 +12,7 @@
 #
 # Copyright (C) 2021-2022 Wind River Systems,Inc.
 #
-FROM golang:1.17.5-bullseye AS builder
+FROM golang:1.21.1-bookworm AS builder
 LABEL stage=builder
 
 
@@ -20,14 +20,16 @@ LABEL stage=builder
 RUN mkdir -p $GOPATH/src/github.com/aptly-dev/aptly && \
     git clone https://github.com/masselstine/aptly $GOPATH/src/github.com/aptly-dev/aptly && \
     cd $GOPATH/src/github.com/aptly-dev/aptly && \
-    go mod init && go mod download && go mod vendor && go mod verify && \
+    go mod init && go get && \
+    go get -t github.com/aptly-dev/aptly/context && \
+    go mod vendor && go mod verify && \
     export TRAVIS_TAG="StarlingX_Master_v1.0.0" && \
     make install && \
     cd $GOPATH && \
     curl -O https://nginx.org/keys/nginx_signing.key && apt-key add ./nginx_signing.key
 
 # Build our actual container
-FROM debian:bullseye
+FROM debian:bookworm
 
 MAINTAINER mark.asselstine@windriver.com
 
@@ -38,7 +40,7 @@ RUN apt-get -q -y update && apt-get -y install --no-install-recommends ca-certif
 
 # Add Nginx repository and install required packages
 RUN apt-get -q update && apt-get -y install gnupg2 && \
-    echo "deb http://nginx.org/packages/debian/ bullseye nginx" > /etc/apt/sources.list.d/nginx.list && \
+    echo "deb http://nginx.org/packages/debian/ bookworm nginx" > /etc/apt/sources.list.d/nginx.list && \
     apt-key add ./nginx_signing.key && \
     apt-get -q update && apt-get -y install \
                                             aptly \

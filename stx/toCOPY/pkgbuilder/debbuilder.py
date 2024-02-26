@@ -225,10 +225,10 @@ class Debbuilder:
     def is_parent_config(self, parent_chroot_name, target_config):
         # The name of config file for the parent schroot has two parts:
         # chroot_name + '-' + random number
-        # e.g. bullseye-amd64-user-yWJpyF
+        # e.g. ${DEBIAN_DISTRIBUTION}-amd64-user-yWJpyF
         # The name of config file for the cloned schroot has three parts:
         # chroot_name + '-' + random number + '-' + sequence
-        # e.g. bullseye-amd64-user-yWJpyF-1
+        # e.g. ${DEBIAN_DISTRIBUTION}-amd64-user-yWJpyF-1
         conf_file_suffix = target_config.replace(parent_chroot_name + '-', '')
         if '-' not in conf_file_suffix:
             return True
@@ -253,9 +253,9 @@ class Debbuilder:
 
         # Try to find the parent chroot
         user_dir = os.path.join(STORE_ROOT, user, project)
-        # e.g bullseye-amd64-user
+        # e.g ${DEBIAN_DISTRIBUTION}-amd64-user
         parent_chroot_name = '-'.join([self.attrs['dist'], self.attrs['arch'], user])
-        # e.g /localdisk/pkgbuilder/user/stx/chroots/bullseye-amd64-user
+        # e.g /localdisk/pkgbuilder/user/stx/chroots/${DEBIAN_DISTRIBUTION}-amd64-user
         parent_chroot_path = os.path.join(user_dir, 'chroots', parent_chroot_name)
         if not os.path.exists(parent_chroot_path):
             self.logger.error("Failed to find the parent chroot %s", parent_chroot_path)
@@ -289,7 +289,7 @@ class Debbuilder:
             self.logger.info("Target cloned chroot %s is ready, updated config", cloned_chroot_path)
             # For the cloned chroot, the schroot config file also need to be created
             # Try to find the config file of parent schroot and take it as template
-            # e.g. it is /etc/chroots/chroot.d/bullseye-amd64-user-yWJpyF
+            # e.g. it is /etc/chroots/chroot.d/${DEBIAN_DISTRIBUTION}-amd64-user-yWJpyF
             schroot_conf_dir = os.listdir(os.path.join('/etc/schroot/chroot.d'))
             for conf in schroot_conf_dir:
                 if self.is_parent_config(parent_chroot_name, conf):
@@ -417,7 +417,7 @@ class Debbuilder:
         user_dir = os.path.join(STORE_ROOT, user, project)
         user_chroots_dir = os.path.join(user_dir, 'chroots')
         for chroot in dst_chroots:
-            # e.g. the chroot name is 'chroot:bullseye-amd64-<user>-1'
+            # e.g. the chroot name is 'chroot:${DEBIAN_DISTRIBUTION}-amd64-<user>-1'
             self.logger.debug('The current chroot is %s', chroot)
             chroot = chroot.split(':')[1]
             self.logger.debug('The name of chroot: %s', chroot)
