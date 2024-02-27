@@ -443,7 +443,7 @@ libjs-jquery-cookie  12-3
 libjs-jquery-metadata  12-3
 libjs-jquery.quicksearch  2.0.4-1.1
 libjs-jquery-tablesorter  1:2.31.3+dfsg1-1
-libjs-jquery-ui  1.12.1+dfsg-8+deb11u1
+libjs-jquery-ui  1.12.1+dfsg-8+deb11u2  https://snapshot.debian.org/archive/debian/20231113T085432Z/pool/main/j/jqueryui/libjs-jquery-ui_1.12.1%2Bdfsg-8%2Bdeb11u2_all.deb
 libjs-jsencrypt  2.3.0+dfsg2-2
 libjs-lrdragndrop  1.0.2-2.1
 libjs-magic-search  0.2.5-1.1
