@@ -614,20 +614,20 @@ librpmbuild9  4.16.1.2+dfsg1-3
 librpmio9  4.16.1.2+dfsg1-3
 librpmsign9  4.16.1.2+dfsg1-3
 librrd8  1.7.2-3+b7
-librte-eal21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-eal21_20.11.6-1~deb11u1_amd64.deb
-librte-ethdev21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-ethdev21_20.11.6-1~deb11u1_amd64.deb
-librte-kvargs21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-kvargs21_20.11.6-1~deb11u1_amd64.deb
-librte-mbuf21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-mbuf21_20.11.6-1~deb11u1_amd64.deb
-librte-mempool21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-mempool21_20.11.6-1~deb11u1_amd64.deb
-librte-meter21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-meter21_20.11.6-1~deb11u1_amd64.deb
-librte-vhost21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-vhost21_20.11.6-1~deb11u1_amd64.deb
-librte-telemetry21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-telemetry21_20.11.6-1~deb11u1_amd64.deb
-librte-net21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-net21_20.11.6-1~deb11u1_amd64.deb
-librte-ring21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-ring21_20.11.6-1~deb11u1_amd64.deb
-librte-cryptodev21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-cryptodev21_20.11.6-1~deb11u1_amd64.deb
-librte-hash21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-hash21_20.11.6-1~deb11u1_amd64.deb
-librte-pci21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-pci21_20.11.6-1~deb11u1_amd64.deb
-librte-rcu21  20.11.6-1~deb11u1 http://ftp.br.debian.org/debian/pool/main/d/dpdk/librte-rcu21_20.11.6-1~deb11u1_amd64.deb
+librte-eal21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-eal21_20.11.6-1~deb11u1_amd64.deb
+librte-ethdev21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-ethdev21_20.11.6-1~deb11u1_amd64.deb
+librte-kvargs21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-kvargs21_20.11.6-1~deb11u1_amd64.deb
+librte-mbuf21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-mbuf21_20.11.6-1~deb11u1_amd64.deb
+librte-mempool21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-mempool21_20.11.6-1~deb11u1_amd64.deb
+librte-meter21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-meter21_20.11.6-1~deb11u1_amd64.deb
+librte-vhost21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-vhost21_20.11.6-1~deb11u1_amd64.deb
+librte-telemetry21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-telemetry21_20.11.6-1~deb11u1_amd64.deb
+librte-net21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-net21_20.11.6-1~deb11u1_amd64.deb
+librte-ring21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-ring21_20.11.6-1~deb11u1_amd64.deb
+librte-cryptodev21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-cryptodev21_20.11.6-1~deb11u1_amd64.deb
+librte-hash21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-hash21_20.11.6-1~deb11u1_amd64.deb
+librte-pci21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-pci21_20.11.6-1~deb11u1_amd64.deb
+librte-rcu21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-rcu21_20.11.6-1~deb11u1_amd64.deb
 librtmp1  2.4+20151223.gitfa8646d.1-2+b2
 libruby2.7  2.7.4-1+deb11u1
 libsanlock-client1  3.8.2-2
@@ -1253,7 +1253,7 @@ time  1.9-0.1
 tini  0.19.0-1
 traceroute 1:2.1.0-2+b1  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/t/traceroute/traceroute_2.1.0-2%2Bb1_amd64.deb
 tuned  2.15.0-1
-tzdata  tzdata_2024a-0+deb11u1
+tzdata  tzdata_2024a-1   https://snapshot.debian.org/archive/debian/20240204T221334Z/pool/main/t/tzdata/tzdata_2024a-1_all.deb
 ucf  3.0043
 udhcpc  1:1.30.1-6+b3
 unzip  6.0-26+deb11u1
