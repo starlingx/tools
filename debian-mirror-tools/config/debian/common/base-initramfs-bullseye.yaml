@@ -40,8 +40,12 @@ packages:
 - grep
 - grub2
 - gzip
+- iavf
+- iavf-rt
 - ice
 - ice-rt
+- i40e
+- i40e-rt
 - ifupdown
 - initramfs-ostree
 - iproute2
