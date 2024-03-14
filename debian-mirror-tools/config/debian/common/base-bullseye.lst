@@ -720,7 +720,7 @@ libusbredirparser-dev  0.8.0-1+b1
 libusbredirparser1  0.8.0-1+b1
 libutempter0 1.2.1-2
 libuuid1  2.36.1-8+deb11u1
-libuv1  1.40.0-2
+libuv1  1.40.0-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20240310T130025Z/pool/updates/main/libu/libuv1/libuv1_1.40.0-2%2Bdeb11u1_amd64.deb
 libibverbs1  33.2-1
 libvirglrenderer-dev  0.8.2-5+deb11u1 https://snapshot.debian.org/archive/debian/20221210T034654Z/pool/main/v/virglrenderer/libvirglrenderer-dev_0.8.2-5%2Bdeb11u1_amd64.deb
 libvirglrenderer1  0.8.2-5+deb11u1 https://snapshot.debian.org/archive/debian/20221210T034654Z/pool/main/v/virglrenderer/libvirglrenderer1_0.8.2-5%2Bdeb11u1_amd64.deb
