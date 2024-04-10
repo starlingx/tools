@@ -1163,7 +1163,6 @@ python3-xstatic-tv4  1.2.7.0-4
 python3-yaml  6.0-1 https://snapshot.debian.org/archive/debian/20221001T092433Z/pool/main/p/pyyaml/python3-yaml_6.0-1_amd64.deb
 python3-yappi  1.0-1+b5
 python3-zipp  1.0.0-3
-python3-zmq  20.0.0-1+b1
 python3-zope.interface  5.2.0-1
 python-babel-localedata  2.8.0+dfsg.1-7
 python-is-python3  3.9.2-1
