@@ -395,6 +395,12 @@ safe_rm() {
     done
 }
 
+init_stx_mirror_url() {
+    if [[ -z "$STX_MIRROR_URL" && -f "$STX_TOOLS_DIR/stx.conf" ]] ; then
+        STX_MIRROR_URL=$(sed -n -r 's/^\s*stx_mirror_url\s*=\s*//gp'  "$STX_TOOLS_DIR/stx.conf" | sed "s/[\"']//g")
+    fi
+}
+
 cmdline_error() {
     if [[ -n "$1" ]] ; then
         echo "error: $1" >&2
@@ -712,7 +718,14 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
         docker_build_args+=("--no-cache")
     fi
     for img in $BUILD_DOCKER_IMAGES; do
-        docker build "${docker_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile "$STX_TOOLS_DIR" || exit 1
+        extra_build_args=()
+        if grep -q -E '^\s*ARG\s+STX_MIRROR_URL\s*=' "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile ; then
+            init_stx_mirror_url
+            if [[ -n "$STX_MIRROR_URL" ]] ; then
+                extra_build_args+=("--build-arg" "STX_MIRROR_URL=$STX_MIRROR_URL")
+            fi
+        fi
+        docker build "${docker_build_args[@]}" "${extra_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile "$STX_TOOLS_DIR" || exit 1
         info "built image $img:$DOCKER_TAG_LOCAL"
     done
 fi

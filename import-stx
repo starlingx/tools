@@ -79,6 +79,11 @@
 #     we delete them via sudo. If you set STX_RM_METHOD to "docker", we will
 #     delete such files via a docker container with STX_BUILD_HOME mounted inside.
 #
+#   STX_MIRROR_URL
+#     StarlingX mirror URL; defaults to the value of "[repomgr]stx_mirror_url" from
+#     stx.conf; or https://mirror.starlingx.windriver.com/mirror. This is currently
+#     used when building stx-lat-sdk container.
+#
 
 notice_warn () {
     local tty_on tty_off
