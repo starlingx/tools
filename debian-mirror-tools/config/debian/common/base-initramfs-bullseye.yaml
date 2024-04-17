@@ -57,6 +57,8 @@ packages:
 - linux-image-stx-amd64
 - linux-rt-image-stx-amd64
 - mdadm
+- mlnx-ofed-kernel-modules
+- mlnx-ofed-kernel-modules-rt
 - mount
 - mttyexec
 - multipath-config
