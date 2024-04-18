@@ -9,6 +9,7 @@ Implement system to detect if CVEs has launchpad assigned
 """
 import json
 import os
+import re
 from os import path
 from launchpadlib.launchpad import Launchpad
 
@@ -27,6 +28,7 @@ STATUSES = [
 
 CACHEDIR = path.join('/tmp', os.environ['USER'], '.launchpadlib/cache')
 CVES_FILE = path.join(CACHEDIR, 'cves_open.json')
+NVD_URL = 'https://nvd.nist.gov/vuln/detail'
 DATA = []
 
 
@@ -47,6 +49,7 @@ def search_upstrem_lps():
             bug_dic['status'] = task.status
             bug_dic['title'] = bug.title
             bug_dic['link'] = bug.self_link
+            bug_dic['description'] = bug.description
             DATA.append(bug_dic)
 
     with open(CVES_FILE, 'w') as outfile:
@@ -66,7 +69,8 @@ def find_lp_assigned(cve_id):
             search_upstrem_lps()
 
     for bug in DATA:
-        if cve_id in bug["title"]:
+        pattern = cve_id + ": " + path.join(NVD_URL, cve_id)
+        if re.search(cve_id, bug["title"]) or re.search(pattern, bug["description"]):
             return bug
 
     return None
