@@ -30,8 +30,8 @@ binutils  2.35.2-2
 binutils-common  2.35.2-2
 binutils-x86-64-linux-gnu  2.35.2-2
 bison  2:3.7.5+dfsg-1
-bsdextrautils  2.36.1-8+deb11u1
-bsdutils  1:2.36.1-8+deb11u1
+bsdextrautils  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/bsdextrautils_2.36.1-8%2Bdeb11u2_amd64.deb
+bsdutils  1:2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/bsdutils_2.36.1-8%2Bdeb11u2_amd64.deb
 bubblewrap 0.4.1-3
 busybox  1:1.30.1-6+b3
 bzip2  1.0.8-4
@@ -87,7 +87,7 @@ dwz  0.13+20210201-1
 eatmydata   105-9
 e2fsprogs  1.46.2-2
 efibootmgr  17-1
-eject  2.36.1-8+deb11u1
+eject  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/eject_2.36.1-8%2Bdeb11u2_amd64.deb
 elfutils  0.183-1
 erlang-asn1 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-asn1_23.2.6+dfsg-1+deb11u1_amd64.deb
 erlang-base 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-base_23.2.6+dfsg-1+deb11u1_amd64.deb
@@ -115,7 +115,7 @@ erlang-tools 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian
 erlang-xmerl 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-xmerl_23.2.6+dfsg-1+deb11u1_amd64.deb
 ethtool  1:5.9-1
 expect  5.45.4-2+b1
-fdisk  2.36.1-8+deb11u1
+fdisk  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/fdisk_2.36.1-8%2Bdeb11u2_amd64.deb
 file  1:5.39-3+deb11u1  https://snapshot.debian.org/archive/debian-security/20230904T194428Z/pool/updates/main/f/file/file_5.39-3%2Bdeb11u1_amd64.deb
 findutils  4.8.0-1
 firmware-amd-graphics 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-amd-graphics_20210315-3_all.deb
@@ -256,7 +256,7 @@ libbabeltrace1  1.5.8-1+b3
 libbasicobjects0  0.6.1-2
 libbinutils  2.35.2-2
 libblas3  3.9.0-3
-libblkid1  2.36.1-8+deb11u1
+libblkid1  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/libblkid1_2.36.1-8%2Bdeb11u2_amd64.deb
 libbluetooth3  5.55-3.1+deb11u1 https://snapshot.debian.org/archive/debian-security/20231222T044531Z/pool/updates/main/b/bluez/libbluetooth3_5.55-3.1+deb11u1_amd64.deb
 libbluetooth-dev  5.55-3.1+deb11u1 https://snapshot.debian.org/archive/debian-security/20231222T044531Z/pool/updates/main/b/bluez/libbluetooth-dev_5.55-3.1+deb11u1_amd64.deb
 libboost-context1.74.0  1.74.0-9
@@ -352,7 +352,7 @@ libexpat1-dev  2.2.10-2+deb11u5 https://snapshot.debian.org/archive/debian-secur
 libext2fs2  1.46.2-2
 libfam0  2.7.0-17.3
 libfastjson4  0.99.9-1
-libfdisk1  2.36.1-8+deb11u1
+libfdisk1  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/libfdisk1_2.36.1-8%2Bdeb11u2_amd64.deb
 libfdt1  1.6.0-1
 libfdt-dev  1.6.0-1
 libffi7  3.3-6
@@ -496,7 +496,7 @@ libmnl0  1.0.4-3
 libmodulemd2  2.12.0-1
 libmongoc-1.0-0  1.17.6-1
 libmongocrypt0  1.1.0-1
-libmount1  2.36.1-8+deb11u1
+libmount1  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/libmount1_2.36.1-8%2Bdeb11u2_amd64.deb
 libmpc3  1.2.0-1
 libmpdec3  2.5.1-1
 libmpfr6  4.1.0-3
@@ -654,7 +654,7 @@ libslang2  2.3.2-5
 libslirp-dev  4.4.0-1+deb11u2
 libslirp0  4.4.0-1+deb11u2
 libsm6  2:1.2.3-1
-libsmartcols1  2.36.1-8+deb11u1
+libsmartcols1  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/libsmartcols1_2.36.1-8%2Bdeb11u2_amd64.deb
 libsmbclient  2:4.13.13+dfsg-1~deb11u6 https://snapshot.debian.org/archive/debian-security/20240324T202754Z/pool/updates/main/s/samba/libsmbclient_4.13.13%2Bdfsg-1~deb11u6_amd64.deb
 libsnappy1v5  1.1.8-1
 libsnmp40  5.9+dfsg-4+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/n/net-snmp/libsnmp40_5.9+dfsg-4+deb11u1_amd64.deb
@@ -719,7 +719,7 @@ libusb-1.0-0-dev  2:1.0.24-3
 libusbredirparser-dev  0.8.0-1+b1
 libusbredirparser1  0.8.0-1+b1
 libutempter0 1.2.1-2
-libuuid1  2.36.1-8+deb11u1
+libuuid1  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/libuuid1_2.36.1-8%2Bdeb11u2_amd64.deb
 libuv1  1.40.0-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20240310T130025Z/pool/updates/main/libu/libuv1/libuv1_1.40.0-2%2Bdeb11u1_amd64.deb
 libibverbs1  33.2-1
 libvirglrenderer-dev  0.8.2-5+deb11u1 https://snapshot.debian.org/archive/debian/20221210T034654Z/pool/main/v/virglrenderer/libvirglrenderer-dev_0.8.2-5%2Bdeb11u1_amd64.deb
@@ -793,7 +793,7 @@ meson  1.0.1-5 http://ftp.de.debian.org/debian/pool/main/m/meson/meson_1.0.1-5_a
 mime-support  3.66
 mksh  59c-9+b2
 mokutil  0.6.0-2~deb11u1
-mount  2.36.1-8+deb11u1
+mount  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/mount_2.36.1-8%2Bdeb11u2_amd64.deb
 multipath-tools  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools_0.8.5-2+deb11u1_amd64.deb
 multipath-tools-boot  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools-boot_0.8.5-2+deb11u1_all.deb
 mysql-common  5.8+1.0.7
@@ -1257,9 +1257,9 @@ tzdata  tzdata_2024a-1   https://snapshot.debian.org/archive/debian/20240204T221
 ucf  3.0043
 udhcpc  1:1.30.1-6+b3
 unzip  6.0-26+deb11u1
-util-linux  2.36.1-8+deb11u1
-uuid-dev  2.36.1-8+deb11u1
-uuid-runtime  2.36.1-8+deb11u1
+util-linux  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/util-linux_2.36.1-8%2Bdeb11u2_amd64.deb
+uuid-dev  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/uuid-dev_2.36.1-8%2Bdeb11u2_amd64.deb
+uuid-runtime  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/uuid-runtime_2.36.1-8%2Bdeb11u2_amd64.deb
 uwsgi-core  2.0.19.1-7.1
 uwsgi-plugin-apparmor  0.0.0+git.2014.09.15.7d6d7bd7eb-3
 uwsgi-plugin-python3  2.0.19.1-7.1
