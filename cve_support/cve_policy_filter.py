@@ -25,18 +25,6 @@ cves_to_omit = []
 cves_report = {}
 
 
-class NVDLengthException(Exception):
-    """
-    Throw the exception when the length of NVD list != 1
-    """
-    def __init__(self, length):
-        self.length = length
-
-    def __str__(self):
-        print("Warning: NVD length: %d, not 1, Please check again!" \
-            % self.length)
-
-
 def print_html_report(cves_report, title):
     """
     Print the html report
@@ -256,13 +244,29 @@ def cvssv3_parse_n_report(cves,title,data):
         cve_id = cve["id"]
         affectedpackages_list = []
         allfixed = "fixed"
-        try:
-            nvdlength = len(data["scannedCves"][cve_id]["cveContents"]["nvd"])
-            if nvdlength != 1:
-                raise NVDLengthException(nvdlength)
 
-            nvd3_score = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss3Score"]
-            cvss3vector = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss3Vector"]
+        if 'nvd' not in data['scannedCves'][cve_id]['cveContents'].keys():
+            continue
+
+        missing = False
+        use_l = {}
+        for l in data['scannedCves'][cve_id]['cveContents']['nvd']:
+            try:
+                if l["optional"]["source"] == "nvd@nist.gov":
+                    if not use_l:
+                        use_l = l
+                    else:
+                        print("Oops: two entries for nvd@nist.gov: %s" % k)
+            except KeyError:
+                # ignore missing ["optional"]["source"]
+                missing = True
+                pass
+        if missing and use_l:
+            print("CVE %s is example" % cve_id)
+
+        try:
+            nvd3_score = l["cvss3Score"]
+            cvss3vector = l["cvss3Vector"]
             if cvss3vector == "":
                 raise KeyError
         except KeyError:
@@ -304,13 +308,31 @@ def cvssv2_parse_n_report(cves,title,data):
         cve_id = cve["id"]
         affectedpackages_list = []
         allfixed = "fixed"
-        try:
-            nvdlength = len(data["scannedCves"][cve_id]["cveContents"]["nvd"])
-            if nvdlength != 1:
-                raise NVDLengthException(nvdlength)
 
-            nvd2_score = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss2Score"]
-            cvss2vector = data["scannedCves"][cve_id]["cveContents"]["nvd"][0]["cvss2Vector"]
+        if 'nvd' not in data['scannedCves'][cve_id]['cveContents'].keys():
+            continue
+
+        missing = False
+        use_l = {}
+        for l in data['scannedCves'][cve_id]['cveContents']['nvd']:
+            try:
+                if l["optional"]["source"] == "nvd@nist.gov":
+                    if not use_l:
+                        use_l = l
+                    else:
+                        print("Oops: two entries for nvd@nist.gov: %s" % k)
+            except KeyError:
+                # ignore missing ["optional"]["source"]
+                missing = True
+                pass
+        if missing and use_l:
+            print("CVE %s is example" % cve_id)
+
+        try:
+            nvd2_score = l["cvss2Score"]
+            cvss2vector = l["cvss2Vector"]
+            if cvss2vector == "":
+                raise KeyError
         except KeyError:
             cves_w_errors.append(cve)
         else:
