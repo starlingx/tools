@@ -274,7 +274,7 @@ libcollection4  0.6.2-1
 libcom-err2  1.47.0-2
 libcomps0  0.1.19-2
 libcpp-hocon0.3.0  0.3.0-1+b4
-libcpupower1  6.1.69-1
+libcpupower1  6.1.69-1  https://snapshot.debian.org/archive/debian/20240115T092401Z/pool/main/l/linux/libcpupower1_6.1.69-1_amd64.deb
 libcrack2  2.9.6-5+b1
 libcrypt1  1:4.4.33-2
 libcrypt-dev  1:4.4.33-2
@@ -738,7 +738,7 @@ libz3-4  4.8.12-3.1
 libzmq5  4.3.4-6
 libzstd1  1.5.4+dfsg2-5
 linux-base  4.9
-linux-cpupower  6.1.69-1
+linux-cpupower  6.1.69-1  https://snapshot.debian.org/archive/debian/20240115T092401Z/pool/main/l/linux/linux-cpupower_6.1.69-1_amd64.deb
 locales  2.36-9+deb12u4
 locales-all  2.36-9+deb12u4
 login  1:4.13+dfsg1-1+b1
