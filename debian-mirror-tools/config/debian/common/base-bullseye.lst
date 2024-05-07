@@ -216,7 +216,7 @@ klibc-utils  2.0.8-6.1
 kmod  28-1
 kpartx  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/kpartx_0.8.5-2+deb11u1_amd64.deb
 krb5-multidev  1.18.3-6+deb11u4  https://snapshot.debian.org/archive/debian/20230819T093249Z/pool/main/k/krb5/krb5-multidev_1.18.3-6%2Bdeb11u4_amd64.deb
-less  551-2
+less  551-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20240503T211102Z/pool/updates/main/l/less/less_551-2%2Bdeb11u2_amd64.deb
 libacl1  2.2.53-10
 libaio1  0.3.112-9
 libaio-dev  0.3.112-9
