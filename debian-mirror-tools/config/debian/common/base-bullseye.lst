@@ -1171,7 +1171,6 @@ python-pip-whl  20.3.4-4+deb11u1
 radvd  1:2.18-3
 rake  13.0.3-1
 readline-common  8.1-1
-redfishtool  1.1.5-1  http://ftp.debian.org/debian/pool/main/r/redfishtool/redfishtool_1.1.5-1_all.deb
 reprepro 5.3.0-1.2
 rng-tools  5migrate1
 rng-tools-debian  2.3
