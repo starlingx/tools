@@ -23,6 +23,8 @@ packages:
 - bash
 - bc
 - bind9-dnsutils
+- bnxt-en
+- bnxt-en-rt
 - busybox
 - bzip2
 - ca-certificates
