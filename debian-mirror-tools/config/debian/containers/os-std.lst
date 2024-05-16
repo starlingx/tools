@@ -14,12 +14,6 @@ git-man 1:2.30.2-1 https://snapshot.debian.org/archive/debian/20220703T032011Z/p
 git-review 1.28.0-2
 guile-2.2-libs 2.2.7+1-6
 hwdata 0.345-1
-lib32ncurses-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/lib32ncurses-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
-lib32ncurses6 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/lib32ncurses6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
-lib32ncursesw6 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/lib32ncursesw6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
-lib32tinfo6 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/lib32tinfo6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
-libc6-i386  2.31-13+deb11u9 https://snapshot.debian.org/archive/debian-security/20240423T070953Z/pool/updates/main/g/glibc/libc6-i386_2.31-13%2Bdeb11u9_amd64.deb
-libc6-dev-i386  2.31-13+deb11u9 https://snapshot.debian.org/archive/debian-security/20240423T070953Z/pool/updates/main/g/glibc/libc6-dev-i386_2.31-13%2Bdeb11u9_amd64.deb
 libcap-dev 1:2.44-1
 libclang-cpp11 1:11.0.1-2
 libclang1-11 1:11.0.1-2
