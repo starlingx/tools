@@ -101,7 +101,7 @@ number_of_users () {
 
     # Add in non-login users that might trigger a parallel build
     # based on a timer, or other trigger.
-    if getent passwd jenkins; then
+    if getent passwd jenkins >/dev/null 2>&1; then
         count=$((count+1))
     fi
 
