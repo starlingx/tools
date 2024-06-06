@@ -331,6 +331,16 @@ iso-post-script: |
   cp ${IMAGE_ROOTFS}/opt/upgrades/metadata.xml upgrades/
   cp ${IMAGE_ROOTFS}/usr/sbin/usm_load_import upgrades/
   sed -i "s/xxxSW_VERSIONxxx/${RELEASE_VER}/g" upgrades/metadata.xml
+  if [ -f "/localdisk/workdir/${IMAGE_NAME}/packages.yaml" ]; then
+    # Here we collect all the packages file names
+    PKGS_FILENAMES=$(cat /localdisk/workdir/${IMAGE_NAME}/packages.yaml | \
+      grep filename: | awk '{ print $2; }' | sed -e 's/^/<deb>/' -e 's/$/<\/deb>/' | tr -d '\n')
+    # now we overwrite the placeholder
+    sed -i "s,xxxPACKAGESxxx,$PKGS_FILENAMES,g" ${IMAGE_ROOTFS}/etc/software/*-metadata.xml
+  else
+    # If we don't find the packages file we need to remove the placeholder
+    sed -i "s,xxxPACKAGESxxx,,g" ${IMAGE_ROOTFS}/etc/software/*-metadata.xml
+  fi
   mkdir -p patches
   cp ${IMAGE_ROOTFS}/etc/software/*-metadata.xml upgrades/
   cp ${IMAGE_ROOTFS}/etc/software/*-metadata.xml patches/
@@ -401,13 +411,6 @@ iso-post-script: |
       mcopy -i efi.img -s /localdisk/CERTS/* ::/CERTS/
       mkdir images
       ln -snf ../efi.img images/efiboot.img
-  fi
-
-  # Generate package list file in the iso root
-  echo "Verifying package list for ${IMAGE_NAME}"
-  if [ -f "/localdisk/workdir/${IMAGE_NAME}/packages.yaml" ]; then
-      echo "Copying ISO package list"
-      cp /localdisk/workdir/${IMAGE_NAME}/packages.yaml sw_package_list.yaml
   fi
 
 initramfs-sign-script: |
