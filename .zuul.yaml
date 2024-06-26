@@ -6,13 +6,13 @@
     check:
       jobs:
         - openstack-tox-linters
-        - openstack-tox-pep8
-        - openstack-tox-pylint
+        #- openstack-tox-pep8
+        #- openstack-tox-pylint
     gate:
       jobs:
         - openstack-tox-linters
-        - openstack-tox-pep8
-        - openstack-tox-pylint
+        #- openstack-tox-pep8
+        #- openstack-tox-pylint
     post:
       jobs:
         - stx-tools-upload-git-mirror

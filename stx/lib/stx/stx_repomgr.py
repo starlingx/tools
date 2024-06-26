@@ -22,7 +22,7 @@ logger = logging.getLogger('STX-Repomgr')
 utils.set_logger(logger)
 
 
-class HandleRepomgrTask:
+class HandleRepomgrTask(object):
 
     def __init__(self, config):
         self.config = config
