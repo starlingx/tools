@@ -25,7 +25,7 @@ STX_BUILD_TYPES = ['rt', 'std']
 STX_LAYERS = ['distro', 'flock']
 
 
-class HandleBuildTask:
+class HandleBuildTask(object):
     '''Handle the task for the build sub-command'''
 
     def __init__(self, config):

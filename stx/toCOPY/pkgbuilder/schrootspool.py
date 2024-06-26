@@ -18,7 +18,7 @@ import subprocess
 SCHROOTS_CONFIG = '/etc/schroot/chroot.d/'
 
 
-class Schroot:
+class Schroot(object):
     def __init__(self, name, state='idle'):
         self.name = name
         self.state = state
@@ -35,7 +35,7 @@ class Schroot:
         return self.name
 
 
-class SchrootsPool:
+class SchrootsPool(object):
     """
     schrootsPool manages all the schroots in current container
     The schroots listed by schroot -l will be registered

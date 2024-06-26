@@ -38,7 +38,7 @@ def require_env(var):
     return value
 
 
-class Config:
+class Config(object):
     """Configuration interface.
 
     This class provides a read-only interface to project

@@ -30,7 +30,7 @@ from stx import utils  # pylint: disable=E0611
 helmchartdir = 'stx/stx-build-tools-chart/stx-builder'
 
 
-class HandleControlTask:
+class HandleControlTask(object):
     '''Handle the task for the control sub-command'''
 
     def __init__(self, config):

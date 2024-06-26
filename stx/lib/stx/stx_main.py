@@ -32,7 +32,7 @@ class STXMainException(Exception):
     pass
 
 
-class CommandLine:
+class CommandLine(object):
     '''Handles parsing the commandline parameters for stx tool'''
 
     def __init__(self):
