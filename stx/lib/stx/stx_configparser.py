@@ -27,7 +27,7 @@ logger = logging.getLogger('STX-Config-Parser')
 utils.set_logger(logger)
 
 
-class STXConfigParser:
+class STXConfigParser(object):
 
     def __init__(self, filepath=None):
         if filepath:
@@ -263,7 +263,7 @@ class STXConfigParser:
             logger.warning("These changes will take effect after you restart your builder containers")
 
 
-class HandleConfigTask:
+class HandleConfigTask(object):
     '''Handle the task for the config sub-command'''
 
     def __init__(self, config):
