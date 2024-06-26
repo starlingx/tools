@@ -36,7 +36,7 @@ def check_request(request_form, needed_form):
     return response
 
 
-class Debbuilder:
+class Debbuilder(object):
     """
     Debbuilder querys/creates/saves/restores the schroot for sbuild
     The default name of schroot is '<Debian DIST>-amd64-<USER>'

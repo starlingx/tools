@@ -21,7 +21,7 @@ logger = logging.getLogger('STX-k8s')
 utils.set_logger(logger)
 
 
-class KubeHelper:
+class KubeHelper(object):
     """Common k8s commands"""
 
     """Constructor:

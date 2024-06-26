@@ -22,7 +22,7 @@ logger = logging.getLogger('STX-Cleanup')
 utils.set_logger(logger)
 
 
-class HandleCleanupTask:
+class HandleCleanupTask(object):
 
     def __init__(self, config, shell):
         self.config = config

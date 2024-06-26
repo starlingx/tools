@@ -32,7 +32,7 @@ def quote(wordlist):
     return shlex.quote(wordlist)
 
 
-class HandleShellTask:
+class HandleShellTask(object):
 
     def __init__(self, config):
         self.config = config
