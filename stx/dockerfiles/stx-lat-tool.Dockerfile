@@ -40,9 +40,29 @@ RUN apt-get -y update && apt-get --no-install-recommends -y install \
         vim \
         && \
         apt-get clean && \
-        rm -rf /var/lib/apt/lists/* && \
         mkdir -p /opt/LAT/SDK && \
         pip3 install pycryptodomex requests_toolbelt
+
+# Packages for pre-patched iso creation support
+RUN apt-get -y install \
+        isomd5sum \
+        syslinux-utils \
+        bubblewrap \
+        git \
+        python3-apt \
+        python3-gi \
+        python3-gi-cairo \
+        python3-systemd \
+        gir1.2-ostree-1.0 \
+        reprepro \
+        dosfstools \
+        xfsprogs \
+        debos \
+        mmdebstrap \
+        && \
+        apt-get clean && \
+        rm -rf /var/lib/apt/lists/* && \
+        pip3 install git+https://opendev.org/starlingx/apt-ostree@master
 
 # Insert pubkey of the package repository
 COPY stx/toCOPY/builder/pubkey.rsa /opt/LAT/
