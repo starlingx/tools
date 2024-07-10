@@ -509,7 +509,7 @@ libncurses6  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/
 libncursesw5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
 libncursesw6  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 libndctl6  71.1-1
-libndp0  1.6-1+b1
+libndp0  1.6-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20240616T175437Z/pool/updates/main/libn/libndp/libndp0_1.6-1%2Bdeb11u1_amd64.deb
 libnet1  1.1.6+dfsg-3.1
 libnetcf1  1:0.2.8-1.1
 libnetcf-dev  1:0.2.8-1.1
