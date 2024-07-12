@@ -806,7 +806,7 @@ mount  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/2024
 multipath-tools  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools_0.8.5-2+deb11u1_amd64.deb
 multipath-tools-boot  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools-boot_0.8.5-2+deb11u1_all.deb
 mysql-common  5.8+1.0.7
-nano  5.4-2  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/nano/nano_5.4-2_amd64.deb
+nano  5.4-2+deb11u3  https://snapshot.debian.org/archive/debian/20240620T025456Z/pool/main/n/nano/nano_5.4-2%2Bdeb11u3_amd64.deb
 ncat  7.91+dfsg1+really7.80+dfsg1-2
 ncurses-base  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-base_6.2%2B20201114-2%2Bdeb11u2_all.deb 
 ncurses-bin  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-bin_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
