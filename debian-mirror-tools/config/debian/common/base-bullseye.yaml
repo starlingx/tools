@@ -133,21 +133,6 @@ iso-grub-entry: |
     }
   }
 
-  submenu 'UEFI Debian All-in-one (lowlatency) Install' --unrestricted --id=aio-lowlat {
-    menuentry 'Serial Console' --unrestricted --id=serial {
-      set fallback=1
-      efi-watchdog enable 0 1200
-      linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime
-      initrd @INITRD@
-    }
-    menuentry 'Graphical Console' --unrestricted --id=graphical {
-      set fallback=1
-      efi-watchdog enable 0 1200
-      linux /bzImage-rt %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 efi=runtime console=tty1
-      initrd @INITRD@
-    }
-  }
-
 iso-syslinux-entry: |
   menu start
   ontimeout 1
@@ -183,22 +168,6 @@ iso-syslinux-entry: |
       kernel /bzImage-std
       ipappend 2
       append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
-  menu end
-
-  menu begin
-    menu title Debian All-in-one (lowlatency) Install
-
-    label 5
-      menu label Serial Console
-      kernel /bzImage-rt
-      ipappend 2
-      append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64
-
-    label 6
-      menu label Graphical Console
-      kernel /bzImage-rt
-      ipappend 2
-      append initrd=@INITRD@ %BOOT_PARAMS% traits=controller,worker,lowlatency defaultkernel=vmlinuz-*-rt-amd64 console=tty1
   menu end
 
 iso-post-script: |
