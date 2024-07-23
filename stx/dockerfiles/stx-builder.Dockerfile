@@ -81,7 +81,10 @@ RUN pip3 --no-cache-dir install \
         pulp_deb_client \
         pulp_file_client \
         progressbar \
-        git+https://github.com/masselstine/aptly-api-client.git
+        git+https://github.com/masselstine/aptly-api-client.git \
+        click \
+        lxml \
+        pycryptodomex
 
 # Misc files
 RUN sed -i '/^proxy_dns*/d' /etc/proxychains.conf && \

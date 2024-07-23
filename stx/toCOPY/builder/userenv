@@ -50,6 +50,8 @@ To clean and re-build all packages:
 To make image (std and rt kernels are included):
     build-image
 
+To build patches:
+    patch-builder --recipe <path to recipe>
 EOF
 fi
 cd ${MY_WORKSPACE}

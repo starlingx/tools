@@ -33,8 +33,9 @@ export STX_CONFIG_DIR=$MY_REPO_ROOT_DIR/stx-tools
 export PREFIX_BINARYLIST_DIR=debian-mirror-tools/config/debian/
 export STX_BINARYLIST_DIR=$STX_CONFIG_DIR/$PREFIX_BINARYLIST_DIR
 export STX_GIT_SRC_DIR=$MY_REPO/stx/git
+export PATCH_BUILDER_PATH=$MY_REPO/build-tools/stx/patch
 
-export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx:/opt/LAT/lat
+export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx:/opt/LAT/lat:$PATCH_BUILDER_PATH
 export PYTHONPATH=$PYTHONPATH:$MY_BUILD_TOOLS_DIR/stx
 
 export STX_MIRROR=/import/mirrors/starlingx
