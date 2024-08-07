@@ -242,7 +242,7 @@ elif [ "$STX_PLATFORM" = "kubernetes" ]; then
         return 1
     fi
 
-    if ! kubectl get namespace 2>/dev/null | grep -q $STX_K8S_NAMESPACE; then
+    if ! kubectl get namespace "$STX_K8S_NAMESPACE" >/dev/null ; then
         notice_warn "namespace $STX_K8S_NAMESPACE not found"
         return 1
     fi
