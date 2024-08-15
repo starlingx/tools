@@ -59,6 +59,7 @@ RUN apt-get -y install \
         xfsprogs \
         debos \
         mmdebstrap \
+        p7zip-full \
         && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \
