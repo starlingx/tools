@@ -54,7 +54,7 @@ cpp  4:10.2.1-1
 cracklib-runtime  2.9.6-3.4
 cron  3.0pl1-137
 cryptsetup-bin  2:2.3.7-1+deb11u1
-curl  7.74.0-1.3+deb11u12  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/c/curl/curl_7.74.0-1.3%2Bdeb11u12_amd64.deb
+curl  7.74.0-1.3+deb11u13  https://snapshot.debian.org/archive/debian/20240824T204406Z/pool/main/c/curl/curl_7.74.0-1.3%2Bdeb11u13_amd64.deb
 dash  0.5.11+git20200708+dd9ef66-5
 dbconfig-common  2.0.19
 dbus 1.12.28-0+deb11u1 https://snapshot.debian.org/archive/debian/20230625T033524Z/pool/main/d/dbus/dbus_1.12.28-0%2Bdeb11u1_amd64.deb
@@ -312,10 +312,10 @@ libcryptsetup12  2:2.3.7-1+deb11u1
 libctf0  2.35.2-2
 libctf-nobfd0  2.35.2-2
 libcups2  2.3.3op2-3+deb11u7  https://snapshot.debian.org/archive/debian/20240622T144333Z/pool/main/c/cups/libcups2_2.3.3op2-3%2Bdeb11u7_amd64.deb
-libcurl3-gnutls  7.74.0-1.3+deb11u12  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/c/curl/libcurl3-gnutls_7.74.0-1.3%2Bdeb11u12_amd64.deb
-libcurl4  7.74.0-1.3+deb11u12  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/c/curl/libcurl4_7.74.0-1.3%2Bdeb11u12_amd64.deb
-libcurl4-gnutls-dev  7.74.0-1.3+deb11u12  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/c/curl/libcurl4-gnutls-dev_7.74.0-1.3%2Bdeb11u12_amd64.deb
-libcurl4-openssl-dev  7.74.0-1.3+deb11u12  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/c/curl/libcurl4-openssl-dev_7.74.0-1.3%2Bdeb11u12_amd64.deb
+libcurl3-gnutls  7.74.0-1.3+deb11u13  https://snapshot.debian.org/archive/debian/20240824T204406Z/pool/main/c/curl/libcurl3-gnutls_7.74.0-1.3%2Bdeb11u13_amd64.deb
+libcurl4  7.74.0-1.3+deb11u13  https://snapshot.debian.org/archive/debian/20240824T204406Z/pool/main/c/curl/libcurl4_7.74.0-1.3%2Bdeb11u13_amd64.deb
+libcurl4-gnutls-dev  7.74.0-1.3+deb11u13  https://snapshot.debian.org/archive/debian/20240824T204406Z/pool/main/c/curl/libcurl4-gnutls-dev_7.74.0-1.3%2Bdeb11u13_amd64.deb
+libcurl4-openssl-dev  7.74.0-1.3+deb11u13  https://snapshot.debian.org/archive/debian/20240824T204406Z/pool/main/c/curl/libcurl4-openssl-dev_7.74.0-1.3%2Bdeb11u13_amd64.deb
 libdaemon0  0.14-7.1
 libdatrie1  0.2.13-1
 libdaxctl1  71.1-1
