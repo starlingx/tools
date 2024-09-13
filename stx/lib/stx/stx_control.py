@@ -17,13 +17,16 @@
 import getpass
 import logging
 import os
-import shutil
 import subprocess
 import sys
 import time
 
-from stx import helper  # pylint: disable=E0611
 from stx.k8s import KubeHelper
+from stx.minikube import MinikubeCtl
+from stx.minikube import MinikubeProfileNotFoundError
+from stx.minikube import MinikubeProfileNotRunning
+
+from stx import helper  # pylint: disable=E0611
 from stx import stx_shell
 from stx import utils  # pylint: disable=E0611
 
@@ -42,6 +45,8 @@ class HandleControlTask(object):
                                              helmchartdir)
         self.shell = stx_shell.HandleShellTask(config)
         utils.set_logger(self.logger)
+        if self.config.use_minikube:
+            self.minikube_ctl = MinikubeCtl(profile_name=self.config.minikube_profile)
 
     def configurePulp(self):
         '''Initial the password of the pulp service.'''
@@ -248,6 +253,9 @@ stx-pkgbuilder/configmap/')
         return repomgr_type
 
     def handleStartTask(self, projectname, wait):
+        if self.config.use_minikube:
+            self.minikube_ctl.start()
+
         wait_arg = '--wait ' if wait else ''
         cmd = self.config.helm() + ' install ' + wait_arg + projectname + ' ' \
             + self.abs_helmchartdir \
@@ -286,6 +294,8 @@ stx-pkgbuilder/configmap/')
         # Use Helm's own default timeout of 5 minutes
         timeout = 5 * 60
         deadline = time.time() + timeout
+        if self.config.use_minikube:
+            self.minikube_ctl.start()
 
         helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
@@ -331,6 +341,21 @@ stx-pkgbuilder/configmap/')
 
     def handleEnterTask(self, args):
         self.shell.cmd_control_enter(args)
+
+    def handleStatusTask(self):
+        try:
+            if self.config.use_minikube:
+                if not self.minikube_ctl.is_started():
+                    raise MinikubeProfileNotRunning(self.config.minikube_profile)
+
+            self.k8s.get_helm_info()
+            self.k8s.get_deployment_info()
+            self.k8s.get_pods_info()
+
+        except Exception as e:
+            self.logger.error(
+                "Error starting minikube_ctl: %s", str(e),
+            )
 
     def run_pod_cmd(self, podname, maincmd, remotecmd):
         # Run command on pod in this format: kubectl+maincmd+podname+remotecmd
@@ -397,36 +422,41 @@ no lat container is available!')
             sys.exit(1)
 
     def handleControl(self, args):
+        try:
+            self.logger.setLevel(args.loglevel)
+            projectname = self.config.get('project', 'name')
+            if not projectname:
+                projectname = 'stx'
 
-        self.logger.setLevel(args.loglevel)
-        projectname = self.config.get('project', 'name')
-        if not projectname:
-            projectname = 'stx'
+            if args.ctl_task == 'start':
+                self.handleStartTask(projectname, args.wait)
 
-        if args.ctl_task == 'start':
-            self.handleStartTask(projectname, args.wait)
+            elif args.ctl_task == 'stop':
+                self.handleStopTask(projectname, args.wait)
 
-        elif args.ctl_task == 'stop':
-            self.handleStopTask(projectname, args.wait)
+            elif args.ctl_task == 'is-started':
+                self.handleIsStartedTask(projectname)
 
-        elif args.ctl_task == 'is-started':
-            self.handleIsStartedTask(projectname)
+            elif args.ctl_task == 'upgrade':
+                self.handleUpgradeTask(projectname)
 
-        elif args.ctl_task == 'upgrade':
-            self.handleUpgradeTask(projectname)
+            elif args.ctl_task == 'enter':
+                self.handleEnterTask(args)
 
-        elif args.ctl_task == 'enter':
-            self.handleEnterTask(args)
+            elif args.ctl_task == 'keys-add':
+                self.handleKeysTask(args)
 
-        elif args.ctl_task == 'keys-add':
-            self.handleKeysTask(args)
+            elif args.ctl_task == 'status':
+                self.handleStatusTask()
 
-        elif args.ctl_task == 'status':
-            self.k8s.get_helm_info()
-            self.k8s.get_deployment_info()
-            self.k8s.get_pods_info()
-
-        else:
-            self.logger.error('Control module doesn\'t support your \
-subcommand: [%s].\n', args.ctl_task)
-            print(helper.help_control())
+            else:
+                self.logger.error(
+                    'Control module does not support the subcommand: [%s].', args.ctl_task
+                )
+                self.logger.error(helper.help_control())
+        except MinikubeProfileNotFoundError as e:
+            self.logger.error(str(e), exc_info=True)
+        except Exception as e:
+            self.logger.error(
+                'Error executing control task: %s', str(e), exc_info=True
+            )
