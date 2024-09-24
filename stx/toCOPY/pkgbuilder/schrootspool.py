@@ -13,15 +13,88 @@
 # Copyright (C) 2022 Wind River Systems,Inc
 #
 import logging
+import os
+import re
 import subprocess
+import utils
 
 SCHROOTS_CONFIG = '/etc/schroot/chroot.d/'
+
+
+def bytes_to_human_readable(size):
+    if size < 1024:
+        return f'{size}B'
+    if size < 1024 * 1024:
+        x = int(size / 102.4) / 10
+        return f'{x}KB'
+    if size < 1024 * 1024 * 1024:
+        x = int(size / (1024 * 102.4)) / 10
+        return f'{x}MB'
+    if size < 1024 * 1024 * 1024 * 1024:
+        x = int(size / (1024 * 1024 * 102.4)) / 10
+        return f'{x}GB'
+    x = int(size / (1024 * 1024 * 1024 * 102.4)) / 10
+    return f'{x}TB'
+
+
+# Define unit multipliers
+unit_multipliers = {
+    '': 1,          # No unit
+    'B': 1,         # No unit
+    'K': 1024,      # Kilobytes
+    'KB': 1024,     # Kilobytes
+    'M': 1024**2,   # Megabytes
+    'MB': 1024**2,  # Megabytes
+    'G': 1024**3,   # Gigabytes
+    'GB': 1024**3,  # Gigabytes
+    'T': 1024**4,   # Terabytes
+    'TB': 1024**4,  # Terabytes
+}
+
+
+def human_readable_to_bytes(human_size):
+    # Define a regular expression pattern to match size strings
+    pattern = re.compile(r'(?P<value>[.\d]+)(?P<unit>[KMGTB]+?)', re.IGNORECASE)
+    # Match the input string
+    match = pattern.match(str(human_size).strip())
+    if match:
+        # Extract the value and unit
+        value = match.group('value')
+        unit = match.group('unit').upper()
+    else:
+        pattern = re.compile(r'(?P<value>[.\d]+)')
+        match = pattern.match(str(human_size).strip())
+        if not match:
+            raise ValueError(f"Invalid size string: '{human_size}'")
+        value = match.group('value')
+        unit = "B"
+
+    if unit not in unit_multipliers:
+        raise ValueError(f"Unknown unit: '{unit}'")
+    multiplier = int(unit_multipliers[unit])
+    value = int(float(value) * multiplier)
+    return value
 
 
 class Schroot(object):
     def __init__(self, name, state='idle'):
         self.name = name
         self.state = state
+        self.path = ""
+        self.size = 0
+        self.tmpfs = False
+
+        # Get path to schroot
+        schroot_config_lines = subprocess.run(['schroot', '--config', '--chroot', name],
+                                              stdout=subprocess.PIPE,
+                                              universal_newlines=True).stdout.splitlines()
+        for line in schroot_config_lines:
+            if line.startswith('directory='):
+                self.path = line.split('=')[1].strip()
+                statvfs = os.statvfs(self.path)
+                self.size = statvfs.f_frsize * statvfs.f_bavail
+                self.tmpfs = utils.is_tmpfs(self.path)
+                break
 
     def is_idle(self):
         if self.state == 'idle':
@@ -34,11 +107,23 @@ class Schroot(object):
     def get_name(self):
         return self.name
 
+    def get_size(self):
+        return self.size
+
+    def get_path(self):
+        return self.path
+
+    def get_state(self):
+        return self.state
+
+    def is_tmpfs(self):
+        return self.tmpfs
+
 
 class SchrootsPool(object):
     """
     schrootsPool manages all the schroots in current container
-    The schroots listed by schroot -l will be registered
+    The schroots listed by schroot --list will be registered
     and assigned the build task
     """
     def __init__(self, logger):
@@ -52,25 +137,38 @@ class SchrootsPool(object):
         return False
 
     def load(self):
-        schroots = subprocess.run(['schroot', '-l'], stdout=subprocess.PIPE,
+        self.schroots = []
+        schroots = subprocess.run(['schroot', '--list'], stdout=subprocess.PIPE,
                                   universal_newlines=True).stdout.splitlines()
         if len(schroots) < 1:
             self.logger.error('There are no schroots found, exit')
             return False
         for sname in schroots:
             # Filter 'chroot:bullseye-amd64-<user>' as the backup chroot
-            if len(sname.split('-')) >= 4 and not self.exists(sname):
-                self.schroots.append(Schroot(sname.strip(), 'idle'))
+            name = sname.split(':')[1]
+            if len(name.split('-')) >= 4 and not self.exists(sname):
+                self.schroots.append(Schroot(name.strip(), 'idle'))
         return True
 
-    def apply(self):
+    def acquire(self, needed_size=1, allow_tmpfs=True):
         self.logger.debug("schroot pool status:")
         self.show()
+        needed_size_bytes = human_readable_to_bytes(needed_size)
+        if allow_tmpfs:
+            # tmpfs is allowed. Try to find an idle tmpfs build environment.
+            for schroot in self.schroots:
+                if schroot.is_idle() and schroot.is_tmpfs() and (needed_size_bytes <= schroot.get_size()):
+                    schroot.set_busy()
+                    self.logger.debug('%s has been assigned', schroot.name)
+                    return schroot.name
+
+        # Find any suitable build environment that is idle
         for schroot in self.schroots:
-            if schroot.is_idle():
-                schroot.set_busy()
-                self.logger.debug('%s has been assigned', schroot.name)
-                return schroot.name
+            if schroot.is_idle() and (needed_size_bytes <= schroot.get_size()):
+                if allow_tmpfs or not schroot.is_tmpfs():
+                    schroot.set_busy()
+                    self.logger.debug('%s has been assigned', schroot.name)
+                    return schroot.name
         self.logger.debug("No idle schroot can be used")
         return None
 
@@ -81,12 +179,28 @@ class SchrootsPool(object):
                 schroot.state = 'idle'
                 self.logger.debug('%s has been released', name)
 
+    def is_tmpfs(self, name):
+        for schroot in self.schroots:
+            if schroot.name == name.strip():
+                # Fixme, whether need to end session here
+                return schroot.is_tmpfs()
+        return False
+
+    def get_busy(self):
+        busy_schroots = []
+        for schroot in self.schroots:
+            schroot_name = schroot.get_name()
+            if schroot.is_idle():
+                continue
+            busy_schroots.append(schroot_name)
+            self.logger.warning('schroot %s is busy and can not be refreshed', schroot_name)
+        return busy_schroots
+
     def get_idle(self):
         idle_schroots = []
         for schroot in self.schroots:
             schroot_name = schroot.get_name()
             if not schroot.is_idle():
-                self.logger.error('schroot %s is busy and can not be refreshed', schroot_name)
                 continue
             idle_schroots.append(schroot_name)
             self.logger.debug('schroot %s is idle and can be refreshed', schroot_name)
@@ -96,11 +210,14 @@ class SchrootsPool(object):
         for schroot in self.schroots:
             # Fixme, whether need to end session here
             schroot.state = 'idle'
-        self.logger.debug('All chroots has been released')
+        self.logger.debug('All chroots have been released')
 
     def show(self):
         for schroot in self.schroots:
-            self.logger.info("schroot name:%s state:%s", schroot.name, schroot.state)
+            self.logger.info("schroot name:%s state:%s tmpfs:%s size:%s path=%s",
+                             schroot.get_name(), schroot.get_state(),
+                             schroot.is_tmpfs(), bytes_to_human_readable(schroot.get_size()),
+                             schroot.get_path())
 
 
 if __name__ == "__main__":
@@ -112,9 +229,9 @@ if __name__ == "__main__":
 
     schroots_pool = SchrootsPool(logger)
     schroots_pool.load()
-    s0 = schroots_pool.apply()
-    s1 = schroots_pool.apply()
-    s2 = schroots_pool.apply()
+    s0 = schroots_pool.acquire()
+    s1 = schroots_pool.acquire()
+    s2 = schroots_pool.acquire()
     schroots_pool.show()
     schroots_pool.release(s0)
     schroots_pool.release(s1)

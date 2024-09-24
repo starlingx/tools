@@ -18,6 +18,7 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 import logging
+import utils
 
 STX_DISTRO = 'bullseye'
 STX_ARCH = 'amd64'
@@ -33,6 +34,7 @@ log_format = logging.Formatter("%(asctime)s - %(levelname)s: %(message)s")
 handler.setFormatter(log_format)
 log.addHandler(handler)
 
+utils.set_logger(log)
 dbuilder = Debbuilder('private', STX_DISTRO, STX_ARCH, log)
 response = {}
 

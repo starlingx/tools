@@ -12,11 +12,14 @@
 #
 # Copyright (C) 2021-2022 Wind River Systems,Inc
 #
+import fs
 import os
+import psutil
 import schrootspool
 import shutil
 import signal
 import subprocess
+import utils
 
 BUILD_ROOT = '/localdisk/loadbuild/'
 STORE_ROOT = '/localdisk/pkgbuilder'
@@ -149,7 +152,7 @@ class Debbuilder(object):
                 self.logger.error(str(e))
 
     def has_chroot(self, chroot):
-        chroots = os.popen('schroot -l')
+        chroots = os.popen('schroot --list')
         target_line = "chroot:" + chroot
         for line in chroots:
             if line.strip() == target_line:
@@ -199,7 +202,7 @@ class Debbuilder(object):
                                    self.attrs['dist'], user_chroot])
             if 'mirror' in request_form:
                 chroot_cmd = ' '.join([chroot_cmd, request_form['mirror']])
-            self.logger.debug("Command to creat chroot:%s" % chroot_cmd)
+            self.logger.debug("Command to create chroot:%s" % chroot_cmd)
 
             p = subprocess.Popen(chroot_cmd, shell=True, stdout=self.ctlog,
                                  stderr=self.ctlog)
@@ -249,6 +252,8 @@ class Debbuilder(object):
         user = request_form['user']
         project = request_form['project']
         required_instances = int(request_form['instances'])
+        tmpfs_instances = 0
+        tmpfs_percentage = int(request_form['tmpfs_percentage'])
         chroot_sequence = 1
 
         # Try to find the parent chroot
@@ -263,12 +268,52 @@ class Debbuilder(object):
             response['msg'] = 'The parent chroot %s does not exist' % parent_chroot_path
             return response
 
+        # tmpfs calculations
+        if required_instances > 1:
+            GB = 1024 * 1024 * 1024
+            min_tmpfs_size_gb = 10
+            mem = psutil.virtual_memory()
+            avail_mem_gb = int(mem.available * tmpfs_percentage / (100 * GB))
+            for tmpfs_instances in range(required_instances - 1, -1, -1):
+                if tmpfs_instances <= 0:
+                    mem_per_instance_gb = 0
+                    break
+                mem_per_instance_gb = int(avail_mem_gb / tmpfs_instances)
+                if mem_per_instance_gb >= min_tmpfs_size_gb:
+                    break
+
         self.logger.debug("The parent chroot %s exists, start to clone chroot with it", parent_chroot_path)
+        self.logger.debug("creating %s instances, including %s instances using %s gb of tmpfs", required_instances, tmpfs_instances, mem_per_instance_gb)
         for instance in range(required_instances):
             cloned_chroot_name = parent_chroot_name + '-' + str(chroot_sequence)
             cloned_chroot_path = parent_chroot_path + '-' + str(chroot_sequence)
-            if not os.path.exists(cloned_chroot_path):
+            use_tmpfs = (instance >= (required_instances - tmpfs_instances))
+
+            # Delete old chroot
+            if os.path.exists(cloned_chroot_path):
                 try:
+                    if utils.is_tmpfs(cloned_chroot_path):
+                        utils.unmount_tmpfs(cloned_chroot_path)
+                    shell_cmd = 'rm -rf --one-file-system %s' % cloned_chroot_path
+                    subprocess.check_call(shell_cmd, shell=True)
+                except Exception as e:
+                    self.logger.error(str(e))
+                    response['status'] = 'fail'
+                    if not response['msg']:
+                        response['msg'] = 'Failed to delete old chroot instances:'
+                    response['msg'].append(str(instance) + ' ')
+                    continue
+
+            # Create new chroot
+            self.logger.info("Cloning chroot %s from the parent %s", cloned_chroot_path, parent_chroot_path)
+            try:
+                if use_tmpfs:
+                    os.makedirs(cloned_chroot_path)
+                    shell_cmd = 'mount -t tmpfs -o size=%sG tmpfs %s' % (mem_per_instance_gb, cloned_chroot_path)
+                    subprocess.check_call(shell_cmd, shell=True)
+                    shell_cmd = 'cp -ar %s/. %s/' % (parent_chroot_path, cloned_chroot_path)
+                    subprocess.check_call(shell_cmd, shell=True)
+                else:
                     self.logger.info("Cloning chroot %s from the parent %s", cloned_chroot_path, parent_chroot_path)
                     shell_cmd = 'rm -rf %s.tmp' % cloned_chroot_path
                     subprocess.check_call(shell_cmd, shell=True)
@@ -276,15 +321,15 @@ class Debbuilder(object):
                     subprocess.check_call(shell_cmd, shell=True)
                     shell_cmd = 'mv %s.tmp %s' % (cloned_chroot_path, cloned_chroot_path)
                     subprocess.check_call(shell_cmd, shell=True)
-                except Exception as e:
-                    self.logger.error(str(e))
-                    response['status'] = 'fail'
-                    if not response['msg']:
-                        response['msg'] = 'The failed chroot instances:'
-                    response['msg'].append(str(instance) + ' ')
-                    continue
-                else:
-                    self.logger.info("Successfully cloned chroot %s", cloned_chroot_path)
+            except Exception as e:
+                self.logger.error(str(e))
+                response['status'] = 'fail'
+                if not response['msg']:
+                    response['msg'] = 'Failed to create chroot instances:'
+                response['msg'].append(str(instance) + ' ')
+                continue
+            else:
+                self.logger.info("Successfully cloned chroot %s", cloned_chroot_path)
 
             self.logger.info("Target cloned chroot %s is ready, updated config", cloned_chroot_path)
             # For the cloned chroot, the schroot config file also need to be created
@@ -403,23 +448,25 @@ class Debbuilder(object):
         user = request_form['user']
         project = request_form['project']
 
-        dst_chroots = self.chroots_pool.get_idle()
-        if not dst_chroots:
+        dst_chroots = self.chroots_pool.get_busy()
+        if dst_chroots:
             self.logger.warning('Some chroots are busy')
-        self.logger.warning('Force to refresh chroots')
+
+        self.logger.warning('Force the termination of busy chroots prior to refresh')
         self.stop_task(request_form)
         self.chroots_pool.release_all()
 
         # Stop all schroot sessions
-        subprocess.call('schroot -a -e', shell=True)
+        subprocess.call('schroot --all --end-session', shell=True)
 
+        dst_chroots = self.chroots_pool.get_idle()
         backup_chroot = None
         user_dir = os.path.join(STORE_ROOT, user, project)
         user_chroots_dir = os.path.join(user_dir, 'chroots')
         for chroot in dst_chroots:
             # e.g. the chroot name is 'chroot:bullseye-amd64-<user>-1'
             self.logger.debug('The current chroot is %s', chroot)
-            chroot = chroot.split(':')[1]
+            # chroot = chroot.split(':')[1]
             self.logger.debug('The name of chroot: %s', chroot)
             if not backup_chroot:
                 backup_chroot = chroot[0:chroot.rindex('-')]
@@ -433,14 +480,26 @@ class Debbuilder(object):
                 continue
 
             backup_chroot_path = os.path.join(user_chroots_dir, backup_chroot)
+            self.logger.debug('The backup chroot path: %s', backup_chroot_path)
             chroot_path = os.path.join(user_chroots_dir, chroot)
+            self.logger.debug('The chroot path: %s', chroot_path)
+            is_tmpfs = self.chroots_pool.is_tmpfs(chroot)
+            self.logger.debug('is_tmpfs: %s', is_tmpfs)
             try:
-                cp_cmd = 'cp -ra %s %s' % (backup_chroot_path, chroot_path + '.tmp')
-                subprocess.check_call(cp_cmd, shell=True)
-                rm_cmd = 'rm -rf ' + chroot_path
-                subprocess.check_call(rm_cmd, shell=True)
-                mv_cmd = 'mv -f %s %s' % (chroot_path + '.tmp', chroot_path)
-                subprocess.check_call(mv_cmd, shell=True)
+                if is_tmpfs:
+                    self.logger.debug('clean directory: %s', chroot_path)
+                    utils.clear_directory(chroot_path)
+                    shell_cmd = 'cp -ar %s/. %s/' % (backup_chroot_path, chroot_path)
+                    self.logger.debug('shell_cmd: %s', shell_cmd)
+                    subprocess.check_call(shell_cmd, shell=True)
+                    self.logger.debug('cmd exits: %s', shell_cmd)
+                else:
+                    cp_cmd = 'cp -ra %s %s' % (backup_chroot_path, chroot_path + '.tmp')
+                    subprocess.check_call(cp_cmd, shell=True)
+                    rm_cmd = 'rm -rf --one-file-system ' + chroot_path
+                    subprocess.check_call(rm_cmd, shell=True)
+                    mv_cmd = 'mv -f %s %s' % (chroot_path + '.tmp', chroot_path)
+                    subprocess.check_call(mv_cmd, shell=True)
             except subprocess.CalledProcessError as e:
                 self.logger.error(str(e))
                 self.logger.error('Failed to refresh the chroot %s', chroot)
@@ -481,12 +540,14 @@ class Debbuilder(object):
 
     def add_task(self, request_form):
         response = check_request(request_form,
-                                 ['user', 'project', 'type', 'dsc', 'snapshot_idx', 'layer'])
+                                 ['user', 'project', 'type', 'dsc', 'snapshot_idx', 'layer', 'size', 'allow_tmpfs'])
         if response:
             return response
         user = request_form['user']
         snapshot_index = request_form['snapshot_idx']
         layer = request_form['layer']
+        size = request_form['size']
+        allow_tmpfs = request_form['allow_tmpfs']
 
         chroot = '-'.join([self.attrs['dist'], self.attrs['arch'], user])
         if not self.has_chroot(chroot):
@@ -505,7 +566,7 @@ class Debbuilder(object):
 
         bcommand = ' '.join([BUILD_ENGINE, '-d', self.attrs['dist']])
         dsc_build_dir = os.path.dirname(dsc)
-        chroot = self.chroots_pool.apply()
+        chroot = self.chroots_pool.acquire(needed_size=size, allow_tmpfs=allow_tmpfs)
         self.chroots_pool.show()
         if not chroot:
             self.logger.error("There is not idle chroot for %s", dsc)
