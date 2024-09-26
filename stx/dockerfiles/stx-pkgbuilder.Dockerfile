@@ -33,7 +33,9 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
         apt-utils \
         sbuild \
         osc \
+        python3-fs \
         python3-pip \
+        python3-psutil \
         git \
         wget \
         curl \
@@ -58,6 +60,7 @@ RUN groupadd crontab
 COPY stx/toCOPY/pkgbuilder/app.py /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.py /opt/
 COPY stx/toCOPY/pkgbuilder/schrootspool.py /opt/
+COPY stx/toCOPY/pkgbuilder/utils.py /opt/
 COPY stx/toCOPY/pkgbuilder/setup.sh /opt/
 COPY stx/toCOPY/pkgbuilder/debbuilder.conf /etc/sbuild/sbuild.conf
 
