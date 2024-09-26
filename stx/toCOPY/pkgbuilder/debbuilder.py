@@ -179,7 +179,7 @@ class Debbuilder(object):
         user_chroot = os.path.join(user_chroots_dir, chroot)
         self.logger.debug("Found disused chroot %s, remove it" % user_chroot)
         try:
-            shutil.rmtree(user_chroot, ignore_errors=True)
+            shutil.rmtree(user_chroot)
         except Exception as e:
             self.logger.error(str(e))
             # New chroot will be created below, we just reports this
@@ -214,7 +214,7 @@ class Debbuilder(object):
         user_conf_store_dir = os.path.join(STORE_ROOT, user, project, 'chroots/chroot.d')
         system_conf_dir = '/etc/schroot/chroot.d'
         try:
-            shutil.rmtree(user_conf_store_dir, ignore_errors=True)
+            shutil.rmtree(user_conf_store_dir)
             shutil.copytree(system_conf_dir, user_conf_store_dir)
         except Exception as e:
             self.logger.error(str(e))
@@ -349,7 +349,7 @@ class Debbuilder(object):
         else:
             target_dir = '/etc/schroot/chroot.d'
             try:
-                shutil.rmtree(target_dir, ignore_errors=True)
+                shutil.rmtree(target_dir)
                 shutil.copytree(user_chroots, target_dir)
             except Exception as e:
                 self.logger.error(str(e))
@@ -373,7 +373,7 @@ class Debbuilder(object):
         user_dir = os.path.join(STORE_ROOT, user, project)
         user_chroots = os.path.join(user_dir, 'chroots/chroot.d')
         try:
-            shutil.rmtree(user_chroots, ignore_errors=True)
+            shutil.rmtree(user_chroots)
         except Exception as e:
             self.logger.error(str(e))
             # Just report this but not quit
@@ -555,7 +555,7 @@ class Debbuilder(object):
         build_type = request_form['type']
         stamp_dir = os.path.join(STORE_ROOT, user, project, build_type, 'stamp')
         try:
-            shutil.rmtree(stamp_dir, ignore_errors=True)
+            shutil.rmtree(stamp_dir)
         except Exception as e:
             self.logger.error(str(e))
             # New chroot will be created below, we just reports this
