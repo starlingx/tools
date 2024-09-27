@@ -253,7 +253,10 @@ class Debbuilder(object):
         project = request_form['project']
         required_instances = int(request_form['instances'])
         tmpfs_instances = 0
-        tmpfs_percentage = int(request_form['tmpfs_percentage'])
+        if 'tmpfs_percentage' in request_form.keys():
+            tmpfs_percentage = int(request_form['tmpfs_percentage'])
+        else:
+            tmpfs_percentage = 0
         chroot_sequence = 1
 
         # Try to find the parent chroot
