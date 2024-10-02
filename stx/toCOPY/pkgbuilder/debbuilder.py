@@ -70,9 +70,107 @@ class Debbuilder(object):
         self.attrs['mode'] = mode
         self.attrs['dist'] = dist
         self.attrs['arch'] = arch
+        self.attrs['unique_id'] = None
         self.set_extra_repos()
         self.set_environ_vars()
         os.system('/opt/setup.sh')
+        self.schroot_config_dir = '/etc/schroot/chroot.d'
+
+    def get_parent_chroot_name(self, user):
+        return '-'.join([self.attrs['dist'], self.attrs['arch'], user])
+
+    def get_cloned_chroot_name(self, user, chroot_sequence):
+        return '-'.join([self.get_parent_chroot_name(user), str(chroot_sequence)])
+
+    def get_user_dir(self, user, project):
+        return os.path.join(STORE_ROOT, user, project)
+
+    def get_user_schroot_config_dir(self, user, project):
+        user_dir = self.get_user_dir(user, project)
+        return os.path.join(user_dir, 'chroots/chroot.d')
+
+    def get_user_chroots_dir(self, user, project):
+        user_dir = self.get_user_dir(user, project)
+        return os.path.join(user_dir, 'chroots')
+
+    def get_user_schroot_log_path(self, user, project):
+        user_dir = self.get_user_dir(user, project)
+        return os.path.join(user_dir, 'chroot.log')
+
+    def get_parent_chroot_dir(self, user, project):
+        user_chroots_dir = self.get_user_chroots_dir(user, project)
+        parent_chroot_name = self.get_parent_chroot_name(user)
+        return os.path.join(user_chroots_dir, parent_chroot_name)
+
+    def get_cloned_chroot_dir(self, user, project, chroot_sequence):
+        user_chroots_dir = self.get_user_chroots_dir(user, project)
+        cloned_chroot_name = self.get_cloned_chroot_name(user, chroot_sequence)
+        return os.path.join(user_chroots_dir, cloned_chroot_name)
+
+    def get_user_stamp_dir(self, user, project, build_type):
+        user_dir = self.get_user_dir(user, project)
+        return os.path.join(user_dir, build_type, 'stamp')
+
+    def compose_chroot_name(self, user, index=None):
+        chroot_name = '-'.join([self.attrs['dist'], self.attrs['arch'], user])
+        if index is not None:
+            chroot_name = '-'.join([chroot_name, str(index)])
+        return chroot_name
+
+    def decompose_chroot_name(self, chroot_name):
+        components = {}
+        parts = chroot_name.split('-')
+        if len(parts) < 3:
+            return components
+        components['dist'] = parts[0]
+        components['arch'] = parts[1]
+        components['user'] = parts[2]
+        if len(parts) >= 4:
+            components['index'] = parts[3]
+        return components
+
+    def index_from_chroot_name(self, chroot_name):
+        components = self.decompose_chroot_name(chroot_name)
+        if 'index' in components:
+            return int(components['index'])
+        return None
+
+    def get_schroot_conf_path(self, user, index=None):
+        parent_chroot_name = self.get_parent_chroot_name(user)
+        conf_file_path = schrootspool.get_schroot_conf_path(parent_chroot_name)
+        if conf_file_path is None:
+            return None
+        if index is not None:
+            conf_file_path = '-'.join([conf_file_path, str(index)])
+        return conf_file_path
+
+    def compose_schroot_name(self, user, index=None):
+        if self.attrs['unique_id'] is None:
+            self.logger.error("compose_schroot_name: attribute 'unique_id' has noty been set.")
+            return None
+        schroot_name = '-'.join([self.attrs['dist'], self.attrs['arch'], self.attrs['unique_id'], user])
+        if index is not None:
+            schroot_name = '-'.join([schroot_name, str(index)])
+        return schroot_name
+
+    def decompose_schroot_config_name(self, schroot_config_name):
+        components = {}
+        parts = schroot_config_name.split('-')
+        if len(parts) < 4:
+            return components
+        components['dist'] = parts[0]
+        components['arch'] = parts[1]
+        components['user'] = parts[2]
+        components['unique_id'] = parts[3]
+        if len(parts) >= 5:
+            components['index'] = parts[4]
+        return components
+
+    def index_from_schroot_config_name(self, schroot_config_name):
+        components = self.decompose_schroot_config_name(schroot_config_name)
+        if 'index' in components:
+            return int(components['index'])
+        return None
 
     def get_state(self):
         response = {}
@@ -160,6 +258,30 @@ class Debbuilder(object):
                 return True
         return False
 
+    def is_parent_config(self, schroot_config_name):
+        index = self.index_from_schroot_config_name(schroot_config_name)
+        if index is None:
+            return True
+        else:
+            return False
+
+    def get_parent_schroot_config(self):
+        schroot_conf_list = os.listdir(self.schroot_config_dir)
+        for schroot_conf_name in schroot_conf_list:
+            if self.is_parent_config(schroot_conf_name):
+                return schroot_conf_name
+        return None
+
+    def set_unique_id(self):
+        parent_schroot_config_name = self.get_parent_schroot_config()
+        self.logger.debug("parent_schroot_config_name: %s" % parent_schroot_config_name)
+        parent_schroot_components = self.decompose_schroot_config_name(parent_schroot_config_name)
+        if parent_schroot_components and 'unique_id' in parent_schroot_components:
+            self.attrs['unique_id'] = parent_schroot_components['unique_id']
+            self.logger.debug("unique_id: %s" % self.attrs['unique_id'])
+        else:
+            self.logger.error("failed to determine schroot unique_id from parent schroot name")
+
     def add_chroot(self, request_form):
         response = check_request(request_form, ['user', 'project'])
         if response:
@@ -167,29 +289,31 @@ class Debbuilder(object):
         user = request_form['user']
         project = request_form['project']
 
-        chroot = '-'.join([self.attrs['dist'], self.attrs['arch'], user])
-        if self.has_chroot(chroot):
-            self.logger.warn("chroot %s already exists" % chroot)
+        parent_chroot_name = self.get_parent_chroot_name(user)
+        if self.has_chroot(parent_chroot_name):
+            self.logger.warn("chroot %s already exists" % parent_chroot_name)
+            self.set_unique_id()
             response['status'] = 'exists'
             response['msg'] = 'chroot exists'
             return response
 
-        user_dir = os.path.join(STORE_ROOT, user, project)
-        user_chroots_dir = os.path.join(user_dir, 'chroots')
+        user_chroots_dir = self.get_user_chroots_dir(user, project)
+        parent_chroot_dir = self.get_parent_chroot_dir(user, project)
+        user_schroot_log_path = self.get_user_schroot_log_path(user, project)
+
         os.makedirs(user_chroots_dir, exist_ok=True)
         self.logger.debug("Directory of chroots: %s" % user_chroots_dir)
 
-        user_chroot = os.path.join(user_chroots_dir, chroot)
-        self.logger.debug("Found disused chroot %s, remove it" % user_chroot)
+        self.logger.debug("Found disused chroot %s, remove it" % parent_chroot_dir)
         try:
-            shutil.rmtree(user_chroot)
+            shutil.rmtree(parent_chroot_dir)
         except Exception as e:
             self.logger.error(str(e))
             # New chroot will be created below, we just reports this
-            self.logger.warning("Failed to remove %s" % user_chroot)
+            self.logger.warning("Failed to remove %s" % parent_chroot_dir)
 
         try:
-            self.ctlog = open(os.path.join(user_dir, 'chroot.log'), 'w')
+            self.ctlog = open(user_schroot_log_path, 'w')
         except IOError as e:
             self.logger.error(str(e))
             response['status'] = 'fail'
@@ -199,7 +323,7 @@ class Debbuilder(object):
             chroot_cmd = ' '.join(['sbuild-createchroot', chroot_suffix,
                                    '--include=apt-transport-https,ca-certificates,eatmydata',
                                    '--command-prefix=eatmydata',
-                                   self.attrs['dist'], user_chroot])
+                                   self.attrs['dist'], parent_chroot_dir])
             if 'mirror' in request_form:
                 chroot_cmd = ' '.join([chroot_cmd, request_form['mirror']])
             self.logger.debug("Command to create chroot:%s" % chroot_cmd)
@@ -208,35 +332,149 @@ class Debbuilder(object):
                                  stderr=self.ctlog)
             self.chroot_processes.setdefault(user, []).append(p)
 
+            self.set_unique_id()
             response['status'] = 'creating'
-            response['msg'] = 'Chroot creating, please check %s/chroot.log' % user_dir
+            response['msg'] = 'Chroot created, please check logs at: %s' % user_schroot_log_path
         return response
 
     def save_chroots_config(self, user, project):
         self.logger.debug("Save the config file of chroot to persistent store")
-        user_conf_store_dir = os.path.join(STORE_ROOT, user, project, 'chroots/chroot.d')
-        system_conf_dir = '/etc/schroot/chroot.d'
+        user_schroot_config_dir = self.get_user_schroot_config_dir(user, project)
         try:
-            shutil.rmtree(user_conf_store_dir)
-            shutil.copytree(system_conf_dir, user_conf_store_dir)
+            shutil.rmtree(user_schroot_config_dir)
+            shutil.copytree(self.schroot_config_dir, user_schroot_config_dir)
         except Exception as e:
             self.logger.error(str(e))
             self.logger.error("Failed to save the config file of chroot")
         else:
             self.logger.info("Successfully saved the config file of chroot")
 
-    def is_parent_config(self, parent_chroot_name, target_config):
-        # The name of config file for the parent schroot has two parts:
-        # chroot_name + '-' + random number
-        # e.g. bullseye-amd64-user-yWJpyF
-        # The name of config file for the cloned schroot has three parts:
-        # chroot_name + '-' + random number + '-' + sequence
-        # e.g. bullseye-amd64-user-yWJpyF-1
-        conf_file_suffix = target_config.replace(parent_chroot_name + '-', '')
-        if '-' not in conf_file_suffix:
-            return True
+    def delete_cloned_chroot(self, user, project, index):
+        """
+        Delete a clone chroot
+        """
+        rc = True
+        delete_chroot_dir = self.get_cloned_chroot_dir(user, project, index)
+
+        # Delete old chroot
+        if delete_chroot_dir is not None and os.path.exists(delete_chroot_dir):
+            self.logger.debug('Delete chroot at path: %s', delete_chroot_dir)
+            try:
+                if utils.is_tmpfs(delete_chroot_dir):
+                    utils.unmount_tmpfs(delete_chroot_dir)
+                shell_cmd = 'rm -rf --one-file-system %s' % delete_chroot_dir
+                self.logger.debug('shell_cmd=%s', shell_cmd)
+                subprocess.check_call(shell_cmd, shell=True)
+            except Exception as e:
+                self.logger.error(str(e))
+                self.logger.error("Failed to delete unwanted chroot: %s", delete_chroot_dir)
+                rc = False
+
+        return rc
+
+    def delete_cloned_schroot_config(self, user, project, index):
+        """
+        Delete a clone's schroot config
+        """
+        rc = True
+        delete_conf_path = self.get_schroot_conf_path(user, index)
+
+        if delete_conf_path is not None and os.path.exists(delete_conf_path):
+            self.logger.debug('Delete schroot config at path: %s', delete_conf_path)
+            try:
+                shell_cmd = 'rm -f %s' % delete_conf_path
+                self.logger.debug('shell_cmd=%s', shell_cmd)
+                subprocess.check_call(shell_cmd, shell=True)
+            except Exception as e:
+                self.logger.error(str(e))
+                self.logger.error("Failed to remove unwanted config file: %s", delete_conf_path)
+                rc = False
+
+        # self.chroots_pool.load()
+        return rc
+
+    def delete_clones_by_max_index(self, user, project, max_index):
+        """
+        Delete a clone's chroot dir and schroot config file if it's index exceeds the maximum.
+        i.e. the number of parallel instances is being reduced
+        """
+        rc = True
+
+        schroot_conf_list = os.listdir(self.schroot_config_dir)
+        for schroot_conf_name in schroot_conf_list:
+            index = self.index_from_schroot_config_name(schroot_conf_name)
+            if index is None or index <= max_index:
+                continue
+            if not self.delete_cloned_schroot_config(user, project, index):
+                rc = False
+
+        user_chroots_dir = self.get_user_chroots_dir(user, project)
+        chroot_list = os.listdir(user_chroots_dir)
+        for chroot_name in chroot_list:
+            if chroot_name == 'chroot.d':
+                continue
+            index = self.index_from_chroot_name(chroot_name)
+            if index is None or index <= max_index:
+                continue
+            if not self.delete_cloned_chroot(user, project, index):
+                rc = False
+
+        # self.chroots_pool.load()
+        return rc
+
+    def delete_all_clone_chroots(self, user, project):
+        rc = True
+
+        user_chroots_dir = self.get_user_chroots_dir(user, project)
+        chroot_list = os.listdir(user_chroots_dir)
+        for chroot_name in chroot_list:
+            if chroot_name == 'chroot.d':
+                continue
+            index = self.index_from_chroot_name(chroot_name)
+            if index is None:
+                continue
+            if not self.delete_cloned_chroot(user, project, index):
+                rc = False
+
+        return rc
+
+    def delete_tmpfs_clones(self, user, project):
+        rc = True
+
+        user_chroots_dir = self.get_user_chroots_dir(user, project)
+        chroot_list = os.listdir(user_chroots_dir)
+        for chroot_name in chroot_list:
+            if chroot_name == 'chroot.d':
+                continue
+            if not utils.is_tmpfs(os.path.join(user_chroots_dir, chroot_name)):
+                continue
+            index = self.index_from_chroot_name(chroot_name)
+            if index is None:
+                continue
+            if not self.delete_cloned_chroot(user, project, index):
+                rc = False
+            if not self.delete_cloned_schroot_config(user, project, index):
+                rc = False
+
+        return rc
+
+    def free_tmpfs_chroots(self, request_form):
+        response = check_request(request_form, ['user', 'project'])
+        if response:
+            return response
+
+        user = request_form['user']
+        project = request_form['project']
+        if not self.delete_tmpfs_clones(user, project):
+            msg = 'Failed to delete some tmpfs chroots.'
+            self.logger.error(msg)
+            response['status'] = 'fail'
+            response['msg'] = msg
         else:
-            return False
+            response['status'] = 'success'
+            response['msg'] = 'tmpfs chroots have been freed'
+        self.chroots_pool.load()
+        return response
 
     def clone_chroot(self, request_form):
         """
@@ -260,15 +498,32 @@ class Debbuilder(object):
         chroot_sequence = 1
 
         # Try to find the parent chroot
-        user_dir = os.path.join(STORE_ROOT, user, project)
         # e.g bullseye-amd64-user
-        parent_chroot_name = '-'.join([self.attrs['dist'], self.attrs['arch'], user])
+        parent_chroot_name = self.get_parent_chroot_name(user)
         # e.g /localdisk/pkgbuilder/user/stx/chroots/bullseye-amd64-user
-        parent_chroot_path = os.path.join(user_dir, 'chroots', parent_chroot_name)
-        if not os.path.exists(parent_chroot_path):
-            self.logger.error("Failed to find the parent chroot %s", parent_chroot_path)
+        parent_chroot_dir = self.get_parent_chroot_dir(user, project)
+
+        if not os.path.exists(parent_chroot_dir):
+            self.logger.error("Failed to find the parent chroot %s", parent_chroot_dir)
             response['status'] = 'fail'
-            response['msg'] = 'The parent chroot %s does not exist' % parent_chroot_path
+            response['msg'] = 'The parent chroot %s does not exist' % parent_chroot_dir
+            return response
+
+        parent_conf_path = self.get_schroot_conf_path(user)
+        if parent_conf_path is None or not os.path.exists(parent_conf_path):
+            self.logger.error("Failed to find the parent schroot config file for %s", parent_chroot_name)
+            response['status'] = 'fail'
+            response['msg'] = 'The parent schroot config file for %s does not exist' % parent_chroot_name
+            return response
+
+        if not self.delete_clones_by_max_index(user, project, required_instances):
+            response['status'] = 'fail'
+            response['msg'] = 'Failed to delete old schroot instances'
+            return response
+
+        if not self.delete_all_clone_chroots(user, project):
+            response['status'] = 'fail'
+            response['msg'] = 'Failed to delete old chroot instances'
             return response
 
         # tmpfs calculations
@@ -285,44 +540,38 @@ class Debbuilder(object):
                 if mem_per_instance_gb >= min_tmpfs_size_gb:
                     break
 
-        self.logger.debug("The parent chroot %s exists, start to clone chroot with it", parent_chroot_path)
+        self.logger.debug("The parent chroot %s exists, start to clone chroot from it", parent_chroot_dir)
         self.logger.debug("creating %s instances, including %s instances using %s gb of tmpfs", required_instances, tmpfs_instances, mem_per_instance_gb)
         for instance in range(required_instances):
-            cloned_chroot_name = parent_chroot_name + '-' + str(chroot_sequence)
-            cloned_chroot_path = parent_chroot_path + '-' + str(chroot_sequence)
+            cloned_chroot_name = self.get_cloned_chroot_name(user, chroot_sequence)
+            cloned_chroot_dir = self.get_cloned_chroot_dir(user, project, chroot_sequence)
+            clone_conf_path = self.get_schroot_conf_path(user, chroot_sequence)
+
+            if clone_conf_path is None:
+                err_msg = "Failed to determine the schroot config file for %s" % cloned_chroot_name
+                self.logger.error(err_msg)
+                response['status'] = 'fail'
+                response['msg'] = err_msg
+                return response
+
             use_tmpfs = (instance >= (required_instances - tmpfs_instances))
 
-            # Delete old chroot
-            if os.path.exists(cloned_chroot_path):
-                try:
-                    if utils.is_tmpfs(cloned_chroot_path):
-                        utils.unmount_tmpfs(cloned_chroot_path)
-                    shell_cmd = 'rm -rf --one-file-system %s' % cloned_chroot_path
-                    subprocess.check_call(shell_cmd, shell=True)
-                except Exception as e:
-                    self.logger.error(str(e))
-                    response['status'] = 'fail'
-                    if not response['msg']:
-                        response['msg'] = 'Failed to delete old chroot instances:'
-                    response['msg'].append(str(instance) + ' ')
-                    continue
-
             # Create new chroot
-            self.logger.info("Cloning chroot %s from the parent %s", cloned_chroot_path, parent_chroot_path)
+            self.logger.info("Cloning chroot %s from the parent %s", cloned_chroot_dir, parent_chroot_dir)
             try:
                 if use_tmpfs:
-                    os.makedirs(cloned_chroot_path)
-                    shell_cmd = 'mount -t tmpfs -o size=%sG tmpfs %s' % (mem_per_instance_gb, cloned_chroot_path)
+                    os.makedirs(cloned_chroot_dir)
+                    shell_cmd = 'mount -t tmpfs -o size=%sG tmpfs %s' % (mem_per_instance_gb, cloned_chroot_dir)
                     subprocess.check_call(shell_cmd, shell=True)
-                    shell_cmd = 'cp -ar %s/. %s/' % (parent_chroot_path, cloned_chroot_path)
+                    shell_cmd = 'cp -ar %s/. %s/' % (parent_chroot_dir, cloned_chroot_dir)
                     subprocess.check_call(shell_cmd, shell=True)
                 else:
-                    self.logger.info("Cloning chroot %s from the parent %s", cloned_chroot_path, parent_chroot_path)
-                    shell_cmd = 'rm -rf %s.tmp' % cloned_chroot_path
+                    self.logger.info("Cloning chroot %s from the parent %s", cloned_chroot_dir, parent_chroot_dir)
+                    shell_cmd = 'rm -rf %s.tmp' % cloned_chroot_dir
                     subprocess.check_call(shell_cmd, shell=True)
-                    shell_cmd = 'cp -ar %s %s.tmp' % (parent_chroot_path, cloned_chroot_path)
+                    shell_cmd = 'cp -ar %s %s.tmp' % (parent_chroot_dir, cloned_chroot_dir)
                     subprocess.check_call(shell_cmd, shell=True)
-                    shell_cmd = 'mv %s.tmp %s' % (cloned_chroot_path, cloned_chroot_path)
+                    shell_cmd = 'mv %s.tmp %s' % (cloned_chroot_dir, cloned_chroot_dir)
                     subprocess.check_call(shell_cmd, shell=True)
             except Exception as e:
                 self.logger.error(str(e))
@@ -332,41 +581,34 @@ class Debbuilder(object):
                 response['msg'].append(str(instance) + ' ')
                 continue
             else:
-                self.logger.info("Successfully cloned chroot %s", cloned_chroot_path)
+                self.logger.info("Successfully cloned chroot %s", cloned_chroot_dir)
 
-            self.logger.info("Target cloned chroot %s is ready, updated config", cloned_chroot_path)
-            # For the cloned chroot, the schroot config file also need to be created
-            # Try to find the config file of parent schroot and take it as template
-            # e.g. it is /etc/chroots/chroot.d/bullseye-amd64-user-yWJpyF
-            schroot_conf_dir = os.listdir(os.path.join('/etc/schroot/chroot.d'))
-            for conf in schroot_conf_dir:
-                if self.is_parent_config(parent_chroot_name, conf):
-                    parent_conf_name = conf
-                    parent_conf_path = os.path.join('/etc/schroot/chroot.d', parent_conf_name)
-                    self.logger.info("Found the config of the parent chroot: %s", parent_conf_name)
-                    new_conf_name = parent_conf_name + '-' + str(chroot_sequence)
-                    new_conf_path = os.path.join('/etc/schroot/chroot.d', new_conf_name)
-                    if os.path.exists(new_conf_path):
-                        self.logger.debug("Cloned chroot config %s already exists", new_conf_path)
-                        chroot_sequence = chroot_sequence + 1
-                        continue
-                    try:
-                        self.logger.debug("Creating config file %s from %s", new_conf_name, parent_conf_name)
-                        shutil.copyfile(parent_conf_path, new_conf_path)
-                        self.logger.debug("Successfully cloned chroot config, try to update %s", new_conf_name)
-                        shell_cmd = 'sed -i \'s/%s/%s/g\' %s' % (parent_chroot_name, cloned_chroot_name, new_conf_path)
-                        subprocess.check_call(shell_cmd, shell=True)
-                    except Exception as e:
-                        self.logger.error(str(e))
-                        self.logger.error("Failed to clone and update config file %s", new_conf_path)
-                        break
-                    else:
-                        self.logger.debug("Successfully cloned and updated chroot's config %s", new_conf_path)
-                        chroot_sequence = chroot_sequence + 1
-                        break
+            self.logger.info("Target cloned chroot %s is ready, updating config", cloned_chroot_dir)
+
+            # For the cloned chroot, the schroot config file also need to be created.
+            # Start with the parent schroot as a template and modify it
+            if os.path.exists(clone_conf_path):
+                self.logger.debug("Cloned chroot config %s already exists", clone_conf_path)
+                chroot_sequence = chroot_sequence + 1
+                continue
+            try:
+                self.logger.debug("Creating config file %s from %s", clone_conf_path, parent_conf_path)
+                shutil.copyfile(parent_conf_path, clone_conf_path)
+                self.logger.debug("Successfully cloned chroot config, try to update %s", clone_conf_path)
+                shell_cmd = 'sed -i \'s/%s/%s/g\' %s' % (parent_chroot_name, cloned_chroot_name, clone_conf_path)
+                subprocess.check_call(shell_cmd, shell=True)
+            except Exception as e:
+                self.logger.error(str(e))
+                self.logger.error("Failed to clone and update config file %s", clone_conf_path)
+                break
+            else:
+                self.logger.debug("Successfully cloned and updated chroot's config %s", clone_conf_path)
+                chroot_sequence = chroot_sequence + 1
+                break
 
         # Save the above chroot config files to the external persistent storage
         self.save_chroots_config(user, project)
+
         if chroot_sequence == required_instances + 1:
             self.logger.info("All required %s chroots are created", str(required_instances))
             response['status'] = 'success'
@@ -376,6 +618,7 @@ class Debbuilder(object):
                              required_instances, chroot_sequence - 1)
             response['status'] = 'fail'
             response['msg'] = 'Available chroots=%d' % (chroot_sequence - 1)
+
         # Reload all chroots into the chroots pool
         self.chroots_pool.load()
         return response
@@ -387,18 +630,16 @@ class Debbuilder(object):
         user = request_form['user']
         project = request_form['project']
 
-        user_dir = os.path.join(STORE_ROOT, user, project)
-        user_chroots = os.path.join(user_dir, 'chroots/chroot.d')
-        if not os.path.exists(user_chroots):
-            self.logger.warn("Failed to find directory of chroots %s" % user_chroots)
+        user_schroot_config_dir = self.get_user_schroot_config_dir(user, project)
+        if not os.path.exists(user_schroot_config_dir):
+            self.logger.warn("Failed to find directory of chroots %s" % user_schroot_config_dir)
             response['status'] = 'success'
-            response['msg'] = ' '.join(['External chroot', user_chroots,
+            response['msg'] = ' '.join(['External chroot', user_schroot_config_dir,
                                         'does not exist'])
         else:
-            target_dir = '/etc/schroot/chroot.d'
             try:
-                shutil.rmtree(target_dir)
-                shutil.copytree(user_chroots, target_dir)
+                shutil.rmtree(self.schroot_config_dir)
+                shutil.copytree(user_schroot_config_dir, self.schroot_config_dir)
             except Exception as e:
                 self.logger.error(str(e))
                 self.logger.error("Failed to load external config file of chroot")
@@ -418,21 +659,19 @@ class Debbuilder(object):
         user = request_form['user']
         project = request_form['project']
 
-        user_dir = os.path.join(STORE_ROOT, user, project)
-        user_chroots = os.path.join(user_dir, 'chroots/chroot.d')
+        user_schroot_config_dir = self.get_user_schroot_config_dir(user, project)
         try:
-            shutil.rmtree(user_chroots)
+            shutil.rmtree(user_schroot_config_dir)
         except Exception as e:
             self.logger.error(str(e))
             # Just report this but not quit
-            self.logger.error("Failed to remove %s", user_chroots)
+            self.logger.error("Failed to remove %s", user_schroot_config_dir)
 
-        sys_schroots = '/etc/schroot/chroot.d'
         try:
-            shutil.copytree(sys_schroots, user_chroots)
+            shutil.copytree(self.schroot_config_dir, user_schroot_config_dir)
         except Exception as e:
             self.logger.error(str(e))
-            self.logger.error("Failed to save %s with %s", sys_schroots, user_chroots)
+            self.logger.error("Failed to save %s with %s", self.schroot_config_dir, user_schroot_config_dir)
             response['status'] = 'fail'
             response['msg'] = 'Failed to save the config files of chroots to persistent storage'
         else:
@@ -443,7 +682,7 @@ class Debbuilder(object):
 
     def refresh_chroots(self, request_form):
         '''
-        Refresh all chroots with the backup 'clean' chroot
+        Refresh all chroots with the 'clean' parent chroot
         '''
         response = check_request(request_form, ['user', 'project'])
         if response:
@@ -463,54 +702,48 @@ class Debbuilder(object):
         subprocess.call('schroot --all --end-session', shell=True)
 
         dst_chroots = self.chroots_pool.get_idle()
-        backup_chroot = None
-        user_dir = os.path.join(STORE_ROOT, user, project)
-        user_chroots_dir = os.path.join(user_dir, 'chroots')
-        for chroot in dst_chroots:
+        user_chroots_dir = self.get_user_chroots_dir(user, project)
+        parent_chroot_name = self.get_parent_chroot_dir(user, project)
+        if not os.path.exists(os.path.join(user_chroots_dir, parent_chroot_name)):
+            self.logger.error("The parent chroot %s does not exist", parent_chroot_name)
+            response['status'] = 'fail'
+            response['msg'] = 'The parent chroot does not exist'
+            return response
+        for clone_chroot_name in dst_chroots:
             # e.g. the chroot name is 'chroot:bullseye-amd64-<user>-1'
-            self.logger.debug('The current chroot is %s', chroot)
-            # chroot = chroot.split(':')[1]
-            self.logger.debug('The name of chroot: %s', chroot)
-            if not backup_chroot:
-                backup_chroot = chroot[0:chroot.rindex('-')]
-                self.logger.debug('The name of backup chroot: %s', backup_chroot)
-                if not os.path.exists(os.path.join(user_chroots_dir, backup_chroot)):
-                    self.logger.error("The backup chroot %s does not exist", backup_chroot)
-                    response['status'] = 'fail'
-                    response['msg'] = 'The backup chroot does not exist'
-                    return response
-            if backup_chroot == chroot:
+            self.logger.debug('The current chroot is %s', clone_chroot_name)
+            if parent_chroot_name == clone_chroot_name:
                 continue
 
-            backup_chroot_path = os.path.join(user_chroots_dir, backup_chroot)
-            self.logger.debug('The backup chroot path: %s', backup_chroot_path)
-            chroot_path = os.path.join(user_chroots_dir, chroot)
-            self.logger.debug('The chroot path: %s', chroot_path)
-            is_tmpfs = self.chroots_pool.is_tmpfs(chroot)
+            parent_chroot_path = os.path.join(user_chroots_dir, parent_chroot_name)
+            self.logger.debug('The parent chroot path: %s', parent_chroot_path)
+            clone_chroot_path = os.path.join(user_chroots_dir, clone_chroot_name)
+            self.logger.debug('The chroot path: %s', clone_chroot_path)
+            is_tmpfs = self.chroots_pool.is_tmpfs(clone_chroot_name)
             self.logger.debug('is_tmpfs: %s', is_tmpfs)
             try:
                 if is_tmpfs:
-                    self.logger.debug('clean directory: %s', chroot_path)
-                    utils.clear_directory(chroot_path)
-                    shell_cmd = 'cp -ar %s/. %s/' % (backup_chroot_path, chroot_path)
+                    self.logger.debug('clean directory: %s', clone_chroot_path)
+                    utils.clear_directory(clone_chroot_path)
+                    shell_cmd = 'cp -ar %s/. %s/' % (parent_chroot_path, clone_chroot_path)
                     self.logger.debug('shell_cmd: %s', shell_cmd)
                     subprocess.check_call(shell_cmd, shell=True)
                     self.logger.debug('cmd exits: %s', shell_cmd)
                 else:
-                    cp_cmd = 'cp -ra %s %s' % (backup_chroot_path, chroot_path + '.tmp')
+                    cp_cmd = 'cp -ra %s %s' % (parent_chroot_path, clone_chroot_path + '.tmp')
                     subprocess.check_call(cp_cmd, shell=True)
-                    rm_cmd = 'rm -rf --one-file-system ' + chroot_path
+                    rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path
                     subprocess.check_call(rm_cmd, shell=True)
-                    mv_cmd = 'mv -f %s %s' % (chroot_path + '.tmp', chroot_path)
+                    mv_cmd = 'mv -f %s %s' % (clone_chroot_path + '.tmp', clone_chroot_path)
                     subprocess.check_call(mv_cmd, shell=True)
             except subprocess.CalledProcessError as e:
                 self.logger.error(str(e))
-                self.logger.error('Failed to refresh the chroot %s', chroot)
+                self.logger.error('Failed to refresh the chroot %s', clone_chroot_name)
                 response['status'] = 'fail'
                 response['msg'] = 'Error during refreshing the chroots'
                 return response
             else:
-                self.logger.info('Successfully refreshed the chroot %s', chroot)
+                self.logger.info('Successfully refreshed the chroot %s', clone_chroot_name)
 
         self.logger.info('Successfully refreshed all idle chroots')
         response['status'] = 'success'
@@ -552,11 +785,11 @@ class Debbuilder(object):
         size = request_form['size']
         allow_tmpfs = request_form['allow_tmpfs']
 
-        chroot = '-'.join([self.attrs['dist'], self.attrs['arch'], user])
-        if not self.has_chroot(chroot):
-            self.logger.critical("The basic chroot %s does not exist" % chroot)
+        chroot_name = self.compose_chroot_name(user)
+        if not self.has_chroot(chroot_name):
+            self.logger.critical("The basic chroot %s does not exist" % chroot_name)
             response['status'] = 'fail'
-            response['msg'] = ' '.join(['chroot', chroot, 'does not exist'])
+            response['msg'] = ' '.join(['chroot', chroot_name, 'does not exist'])
             return response
 
         # for example: dsc = '/path/to/tsconfig_1.0-1.stx.3.dsc'
@@ -617,7 +850,7 @@ class Debbuilder(object):
         user = request_form['user']
         project = request_form['project']
         build_type = request_form['type']
-        stamp_dir = os.path.join(STORE_ROOT, user, project, build_type, 'stamp')
+        stamp_dir = self.get_user_stamp_dir(user, project, build_type)
         try:
             shutil.rmtree(stamp_dir)
         except Exception as e:
@@ -691,9 +924,9 @@ class Debbuilder(object):
         user = request_form['user']
 
         # check whether the need schroot exists
-        chroot = '-'.join([self.attrs['dist'], self.attrs['arch'], user])
-        if not self.has_chroot(chroot):
-            self.logger.critical("No required chroot %s" % chroot)
+        chroot_name = self.compose_chroot_name(user)
+        if not self.has_chroot(chroot_name):
+            self.logger.critical("Can't find required chroot: %s" % chroot_name)
 
         req['user'] = user
         req['owner'] = 'all'

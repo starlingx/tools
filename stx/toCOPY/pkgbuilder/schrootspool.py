@@ -76,25 +76,38 @@ def human_readable_to_bytes(human_size):
     return value
 
 
+def get_schroot_conf_path(name):
+    # Get path to schroot config file
+    schroot_config_lines = subprocess.run(['grep', '-r', '-l', '^[[]' + name + '[]]$', SCHROOTS_CONFIG],
+                                          stdout=subprocess.PIPE,
+                                          universal_newlines=True).stdout.splitlines()
+    for line in schroot_config_lines:
+        return line.strip()
+    return None
+
+
 class Schroot(object):
     def __init__(self, name, state='idle'):
         self.name = name
         self.state = state
-        self.path = ""
         self.size = 0
         self.tmpfs = False
 
-        # Get path to schroot
-        schroot_config_lines = subprocess.run(['schroot', '--config', '--chroot', name],
+        self.path = self.get_chroot_dir()
+        if self.path:
+            statvfs = os.statvfs(self.path)
+            self.size = statvfs.f_frsize * statvfs.f_bavail
+            self.tmpfs = utils.is_tmpfs(self.path)
+
+    def get_chroot_dir(self):
+        # Get path to chroot
+        schroot_config_lines = subprocess.run(['schroot', '--config', '--chroot', self.name],
                                               stdout=subprocess.PIPE,
                                               universal_newlines=True).stdout.splitlines()
         for line in schroot_config_lines:
             if line.startswith('directory='):
-                self.path = line.split('=')[1].strip()
-                statvfs = os.statvfs(self.path)
-                self.size = statvfs.f_frsize * statvfs.f_bavail
-                self.tmpfs = utils.is_tmpfs(self.path)
-                break
+                return line.split('=')[1].strip()
+        return ''
 
     def is_idle(self):
         if self.state == 'idle':
@@ -136,18 +149,36 @@ class SchrootsPool(object):
                 return True
         return False
 
+    def get_schroot_list(self):
+        schroot_list = []
+        for line in subprocess.run(['schroot', '--list'], stdout=subprocess.PIPE,
+                                   universal_newlines=True).stdout.splitlines():
+            schroot_list.append(line.split(':')[1].strip())
+        return schroot_list
+
+    def get_schroot_clone_list(self):
+        schroot_clone_list = []
+        for schroot_name in self.get_schroot_list():
+            if len(schroot_name.split('-')) >= 4:
+                schroot_clone_list.append(schroot_name)
+        return schroot_clone_list
+
+    def get_schroot_parent(self):
+        for schroot_name in self.get_schroot_list():
+            if len(schroot_name.split('-')) < 4:
+                return schroot_name
+        self.logger.error('parent schroot not found')
+        raise ValueError('parent schroot not found')
+
     def load(self):
         self.schroots = []
-        schroots = subprocess.run(['schroot', '--list'], stdout=subprocess.PIPE,
-                                  universal_newlines=True).stdout.splitlines()
+        schroots = self.get_schroot_clone_list()
         if len(schroots) < 1:
             self.logger.error('There are no schroots found, exit')
             return False
-        for sname in schroots:
-            # Filter 'chroot:bullseye-amd64-<user>' as the backup chroot
-            name = sname.split(':')[1]
-            if len(name.split('-')) >= 4 and not self.exists(sname):
-                self.schroots.append(Schroot(name.strip(), 'idle'))
+        for name in schroots:
+            if not self.exists(name):
+                self.schroots.append(Schroot(name, 'idle'))
         return True
 
     def acquire(self, needed_size=1, allow_tmpfs=True):
@@ -170,6 +201,7 @@ class SchrootsPool(object):
                     self.logger.debug('%s has been assigned', schroot.name)
                     return schroot.name
         self.logger.debug("No idle schroot can be used")
+        self.show()
         return None
 
     def release(self, name):

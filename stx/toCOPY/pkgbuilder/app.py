@@ -140,5 +140,13 @@ def clean_stamp():
     return jsonify(response)
 
 
+@app.route('/pkgbuilder/freetmpfschroots', methods=['GET'])
+def free_tmpfs_chroots():
+    log_request('freetmpfschroots', request.form)
+    if dbuider_initialized():
+        response = dbuilder.free_tmpfs_chroots(request.form)
+    return jsonify(response)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
