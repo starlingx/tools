@@ -167,6 +167,13 @@ class MinikubeCtl(object):
             )
             return False
 
+    def require_started(self):
+        """
+        Throw an exception if profile is not started
+        """
+        if not self.is_started():
+            raise MinikubeProfileNotRunning(self.minikube_profile)
+
     def start(self):
         """
         Starts the Minikube profile if it's not already started.

@@ -19,7 +19,6 @@ import sys
 
 from stx.k8s import KubeHelper
 from stx.minikube import MinikubeCtl
-from stx.minikube import MinikubeProfileNotRunning
 
 from stx import utils  # pylint: disable=E0611
 
@@ -109,23 +108,23 @@ class HandleShellTask(object):
         if container not in self.all_container_names:
             self.logger.error("--%s must be one of: %s",
                               container_arg, self.all_container_names)
-            sys.exit(1)
+            sys.exit(125)
         try:
             if self.config.use_minikube:
-                if not self.minikube_ctl.is_started():
-                    raise MinikubeProfileNotRunning(self.config.minikube_profile)
+                self.minikube_ctl.require_started()
 
             shell_command = self.create_shell_command(container, command, no_tty)
             self.logger.debug('Running command: %s', shell_command)
             shell_status = subprocess.call(shell_command, shell=True)
-            print(shell_status)
             sys.exit(shell_status)
         except RuntimeError as e:
             self.logger.error(str(e))
             self.logger.error("To check the status of the pods, run: 'stx control status'.")
             self.logger.error("To start the build pod, run: 'stx control start --wait'.")
+            sys.exit(125)
         except Exception as e:
             self.logger.error(str(e), exc_info=True)
+            sys.exit(125)
 
     def cmd_shell(self, args):
         self.logger.setLevel(args.loglevel)

@@ -24,7 +24,6 @@ import time
 from stx.k8s import KubeHelper
 from stx.minikube import MinikubeCtl
 from stx.minikube import MinikubeProfileNotFoundError
-from stx.minikube import MinikubeProfileNotRunning
 
 from stx import helper  # pylint: disable=E0611
 from stx import stx_shell
@@ -295,7 +294,7 @@ stx-pkgbuilder/configmap/')
         timeout = 5 * 60
         deadline = time.time() + timeout
         if self.config.use_minikube:
-            self.minikube_ctl.start()
+            self.minikube_ctl.require_started()
 
         helm_status = self.k8s.helm_release_exists(self.projectname)
         if helm_status:
@@ -343,19 +342,11 @@ stx-pkgbuilder/configmap/')
         self.shell.cmd_control_enter(args)
 
     def handleStatusTask(self):
-        try:
-            if self.config.use_minikube:
-                if not self.minikube_ctl.is_started():
-                    raise MinikubeProfileNotRunning(self.config.minikube_profile)
-
-            self.k8s.get_helm_info()
-            self.k8s.get_deployment_info()
-            self.k8s.get_pods_info()
-
-        except Exception as e:
-            self.logger.error(
-                "Error starting minikube_ctl: %s", str(e),
-            )
+        if self.config.use_minikube:
+            self.minikube_ctl.require_started()
+        self.k8s.get_helm_info()
+        self.k8s.get_deployment_info()
+        self.k8s.get_pods_info()
 
     def run_pod_cmd(self, podname, maincmd, remotecmd):
         # Run command on pod in this format: kubectl+maincmd+podname+remotecmd
@@ -456,7 +447,9 @@ no lat container is available!')
                 self.logger.error(helper.help_control())
         except MinikubeProfileNotFoundError as e:
             self.logger.error(str(e), exc_info=True)
+            sys.exit(1)
         except Exception as e:
             self.logger.error(
                 'Error executing control task: %s', str(e), exc_info=True
             )
+            sys.exit(1)
