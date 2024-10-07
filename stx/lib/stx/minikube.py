@@ -181,7 +181,7 @@ class MinikubeCtl(object):
         logger.info(f"Starting Minikube profile '{self.minikube_profile}'")
         cmd = [self.bin_path, "start", "-p", self.minikube_profile]
 
-        output = run_command(cmd)
+        output = run_command(cmd, 120)
         if output:
             logger.info(f"Minikube profile '{self.minikube_profile}' started successfully.")
         else:
