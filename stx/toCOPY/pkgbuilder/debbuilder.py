@@ -304,13 +304,14 @@ class Debbuilder(object):
         os.makedirs(user_chroots_dir, exist_ok=True)
         self.logger.debug("Directory of chroots: %s" % user_chroots_dir)
 
-        self.logger.debug("Found disused chroot %s, remove it" % parent_chroot_dir)
-        try:
-            shutil.rmtree(parent_chroot_dir)
-        except Exception as e:
-            self.logger.error(str(e))
-            # New chroot will be created below, we just reports this
-            self.logger.warning("Failed to remove %s" % parent_chroot_dir)
+        if os.path.exists(parent_chroot_dir):
+            self.logger.debug("Found disused chroot %s, remove it" % parent_chroot_dir)
+            try:
+                shutil.rmtree(parent_chroot_dir)
+            except Exception as e:
+                self.logger.error(str(e))
+                # New chroot will be created below, we just reports this
+                self.logger.warning("Failed to remove %s" % parent_chroot_dir)
 
         try:
             self.ctlog = open(user_schroot_log_path, 'w')
@@ -332,7 +333,6 @@ class Debbuilder(object):
                                  stderr=self.ctlog)
             self.chroot_processes.setdefault(user, []).append(p)
 
-            self.set_unique_id()
             response['status'] = 'creating'
             response['msg'] = 'Chroot created, please check logs at: %s' % user_schroot_log_path
         return response
@@ -515,6 +515,8 @@ class Debbuilder(object):
             response['status'] = 'fail'
             response['msg'] = 'The parent schroot config file for %s does not exist' % parent_chroot_name
             return response
+
+        self.set_unique_id()
 
         if not self.delete_clones_by_max_index(user, project, required_instances):
             response['status'] = 'fail'
