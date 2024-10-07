@@ -602,11 +602,11 @@ class Debbuilder(object):
             except Exception as e:
                 self.logger.error(str(e))
                 self.logger.error("Failed to clone and update config file %s", clone_conf_path)
-                break
+                continue
             else:
                 self.logger.debug("Successfully cloned and updated chroot's config %s", clone_conf_path)
                 chroot_sequence = chroot_sequence + 1
-                break
+                continue
 
         # Save the above chroot config files to the external persistent storage
         self.save_chroots_config(user, project)
