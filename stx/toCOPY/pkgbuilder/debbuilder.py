@@ -529,6 +529,7 @@ class Debbuilder(object):
             return response
 
         # tmpfs calculations
+        mem_per_instance_gb = 0
         if required_instances > 1:
             GB = 1024 * 1024 * 1024
             min_tmpfs_size_gb = 10
@@ -543,7 +544,7 @@ class Debbuilder(object):
                     break
 
         self.logger.debug("The parent chroot %s exists, start to clone chroot from it", parent_chroot_dir)
-        self.logger.debug("creating %s instances, including %s instances using %s gb of tmpfs", required_instances, tmpfs_instances, mem_per_instance_gb)
+        self.logger.debug("Creating %s instances, including %s instances using %s gb of tmpfs", required_instances, tmpfs_instances, mem_per_instance_gb)
         for instance in range(required_instances):
             cloned_chroot_name = self.get_cloned_chroot_name(user, chroot_sequence)
             cloned_chroot_dir = self.get_cloned_chroot_dir(user, project, chroot_sequence)
