@@ -117,20 +117,27 @@ class Debbuilder(object):
             chroot_name = '-'.join([chroot_name, str(index)])
         return chroot_name
 
-    def decompose_chroot_name(self, chroot_name):
+    def decompose_chroot_name(self, chroot_name, user):
+        self.logger.debug("Starting decompose_chroot_name...")
+        self.logger.debug("chroot_name: %s", chroot_name)
         components = {}
-        parts = chroot_name.split('-')
-        if len(parts) < 3:
+        # the username may contain '-' so we remove it before splitting
+        value_to_remove = f'-{user}'
+        parts = chroot_name.replace(value_to_remove, '').split('-')
+        self.logger.debug("parts: %s", parts)
+        if len(parts) < 2:
+            self.logger.debug("components: %s", components)
             return components
         components['dist'] = parts[0]
         components['arch'] = parts[1]
-        components['user'] = parts[2]
-        if len(parts) >= 4:
-            components['index'] = parts[3]
+        components['user'] = user
+        if len(parts) >= 3:
+            components['index'] = parts[2]
+        self.logger.debug("components: %s", components)
         return components
 
-    def index_from_chroot_name(self, chroot_name):
-        components = self.decompose_chroot_name(chroot_name)
+    def index_from_chroot_name(self, chroot_name, user):
+        components = self.decompose_chroot_name(chroot_name, user)
         if 'index' in components:
             return int(components['index'])
         return None
@@ -153,21 +160,28 @@ class Debbuilder(object):
             schroot_name = '-'.join([schroot_name, str(index)])
         return schroot_name
 
-    def decompose_schroot_config_name(self, schroot_config_name):
+    def decompose_schroot_config_name(self, schroot_config_name, user):
+        self.logger.debug("Starting decompose_schroot_config_name...")
+        self.logger.debug("schroot_config_name: %s", schroot_config_name)
         components = {}
-        parts = schroot_config_name.split('-')
-        if len(parts) < 4:
+        # the username may contain '-' so we remove it before splitting
+        value_to_remove = f'-{user}'
+        parts = schroot_config_name.replace(value_to_remove, '').split('-')
+        self.logger.debug("parts: %s", parts)
+        if len(parts) < 3:
+            self.logger.debug("components: %s", components)
             return components
         components['dist'] = parts[0]
         components['arch'] = parts[1]
-        components['user'] = parts[2]
-        components['unique_id'] = parts[3]
-        if len(parts) >= 5:
-            components['index'] = parts[4]
+        components['user'] = user
+        components['unique_id'] = parts[2]
+        if len(parts) >= 4:
+            components['index'] = parts[3]
+        self.logger.debug("components: %s", components)
         return components
 
-    def index_from_schroot_config_name(self, schroot_config_name):
-        components = self.decompose_schroot_config_name(schroot_config_name)
+    def index_from_schroot_config_name(self, schroot_config_name, user):
+        components = self.decompose_schroot_config_name(schroot_config_name, user)
         if 'index' in components:
             return int(components['index'])
         return None
@@ -258,24 +272,24 @@ class Debbuilder(object):
                 return True
         return False
 
-    def is_parent_config(self, schroot_config_name):
-        index = self.index_from_schroot_config_name(schroot_config_name)
+    def is_parent_config(self, schroot_config_name, user):
+        index = self.index_from_schroot_config_name(schroot_config_name, user)
         if index is None:
             return True
         else:
             return False
 
-    def get_parent_schroot_config(self):
+    def get_parent_schroot_config(self, user):
         schroot_conf_list = os.listdir(self.schroot_config_dir)
         for schroot_conf_name in schroot_conf_list:
-            if self.is_parent_config(schroot_conf_name):
+            if self.is_parent_config(schroot_conf_name, user):
                 return schroot_conf_name
         return None
 
-    def set_unique_id(self):
-        parent_schroot_config_name = self.get_parent_schroot_config()
+    def set_unique_id(self, user):
+        parent_schroot_config_name = self.get_parent_schroot_config(user)
         self.logger.debug("parent_schroot_config_name: %s" % parent_schroot_config_name)
-        parent_schroot_components = self.decompose_schroot_config_name(parent_schroot_config_name)
+        parent_schroot_components = self.decompose_schroot_config_name(parent_schroot_config_name, user)
         if parent_schroot_components and 'unique_id' in parent_schroot_components:
             self.attrs['unique_id'] = parent_schroot_components['unique_id']
             self.logger.debug("unique_id: %s" % self.attrs['unique_id'])
@@ -292,7 +306,7 @@ class Debbuilder(object):
         parent_chroot_name = self.get_parent_chroot_name(user)
         if self.has_chroot(parent_chroot_name):
             self.logger.warn("chroot %s already exists" % parent_chroot_name)
-            self.set_unique_id()
+            self.set_unique_id(user)
             response['status'] = 'exists'
             response['msg'] = 'chroot exists'
             return response
@@ -402,7 +416,7 @@ class Debbuilder(object):
 
         schroot_conf_list = os.listdir(self.schroot_config_dir)
         for schroot_conf_name in schroot_conf_list:
-            index = self.index_from_schroot_config_name(schroot_conf_name)
+            index = self.index_from_schroot_config_name(schroot_conf_name, user)
             if index is None or index <= max_index:
                 continue
             if not self.delete_cloned_schroot_config(user, project, index):
@@ -413,7 +427,7 @@ class Debbuilder(object):
         for chroot_name in chroot_list:
             if chroot_name == 'chroot.d':
                 continue
-            index = self.index_from_chroot_name(chroot_name)
+            index = self.index_from_chroot_name(chroot_name, user)
             if index is None or index <= max_index:
                 continue
             if not self.delete_cloned_chroot(user, project, index):
@@ -430,7 +444,7 @@ class Debbuilder(object):
         for chroot_name in chroot_list:
             if chroot_name == 'chroot.d':
                 continue
-            index = self.index_from_chroot_name(chroot_name)
+            index = self.index_from_chroot_name(chroot_name, user)
             if index is None:
                 continue
             if not self.delete_cloned_chroot(user, project, index):
@@ -448,7 +462,7 @@ class Debbuilder(object):
                 continue
             if not utils.is_tmpfs(os.path.join(user_chroots_dir, chroot_name)):
                 continue
-            index = self.index_from_chroot_name(chroot_name)
+            index = self.index_from_chroot_name(chroot_name, user)
             if index is None:
                 continue
             if not self.delete_cloned_chroot(user, project, index):
@@ -516,7 +530,7 @@ class Debbuilder(object):
             response['msg'] = 'The parent schroot config file for %s does not exist' % parent_chroot_name
             return response
 
-        self.set_unique_id()
+        self.set_unique_id(user)
 
         if not self.delete_clones_by_max_index(user, project, required_instances):
             response['status'] = 'fail'
