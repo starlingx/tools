@@ -294,11 +294,10 @@ iso-post-script: |
   RELEASE_VER=$(cat ${IMAGE_ROOTFS}/etc/build.info | grep SW_VERSION | cut -f2 -d'=' | tr -d '"')
   mkdir -p upgrades
   cp ${IMAGE_ROOTFS}/etc/pxeboot-update-${RELEASE_VER}.sh upgrades/
-  cp ${IMAGE_ROOTFS}/usr/sbin/deploy-precheck upgrades/
-  cp ${IMAGE_ROOTFS}/usr/sbin/upgrade_utils.py upgrades/
-  cp ${IMAGE_ROOTFS}/opt/upgrades/import.sh upgrades/
+  cp ${IMAGE_ROOTFS}/usr/sbin/software-deploy/deploy-precheck upgrades/
+  cp ${IMAGE_ROOTFS}/usr/sbin/software-deploy/upgrade_utils.py upgrades/
   cp ${IMAGE_ROOTFS}/opt/upgrades/metadata.xml upgrades/
-  cp ${IMAGE_ROOTFS}/usr/sbin/usm_load_import upgrades/
+  cp ${IMAGE_ROOTFS}/usr/sbin/software-deploy/usm_load_import upgrades/
   sed -i "s/xxxSW_VERSIONxxx/${RELEASE_VER}/g" upgrades/metadata.xml
   if [ -f "/localdisk/workdir/${IMAGE_NAME}/packages.yaml" ]; then
     # Here we collect all the packages file names
