@@ -4,6 +4,7 @@ autogen 1:5.18.16-4
 autogen-doc 1:5.18.16-4
 cmake 3.18.4-2+deb11u1
 cmake-data 3.18.4-2+deb11u1
+comerr-dev 2.1-1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/20241004T132419Z/pool/updates/main/e/e2fsprogs/comerr-dev_2.1-1.46.2-2%2Bdeb11u1_amd64.deb
 docutils-doc 0.16+dfsg-4
 doxygen 1.9.1-1
 dwarves 1.20-1
