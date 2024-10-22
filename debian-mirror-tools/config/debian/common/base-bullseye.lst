@@ -1264,7 +1264,7 @@ time  1.9-0.1
 tini  0.19.0-1
 traceroute 1:2.1.0-2+b1  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/t/traceroute/traceroute_2.1.0-2%2Bb1_amd64.deb
 tuned  2.15.0-1
-tzdata  2024a-1   https://snapshot.debian.org/archive/debian/20240204T221334Z/pool/main/t/tzdata/tzdata_2024a-1_all.deb
+tzdata  2024b-3   https://snapshot.debian.org/archive/debian/20241021T143748Z/pool/main/t/tzdata/tzdata_2024b-3_all.deb
 ucf  3.0043
 udhcpc  1:1.30.1-6+b3
 unzip  6.0-26+deb11u1
