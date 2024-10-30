@@ -4,10 +4,10 @@ acpi-support-base  0.143-5
 adduser  3.118
 alembic  1.4.3-1
 ansible  2.10.7+merged+base+2.10.8+dfsg-1
-apache2  2.4.61-1~deb11u1  https://snapshot.debian.org/archive/debian-security/20240711T193635Z/pool/updates/main/a/apache2/apache2_2.4.61-1~deb11u1_amd64.deb
-apache2-bin  2.4.61-1~deb11u1  https://snapshot.debian.org/archive/debian-security/20240711T193635Z/pool/updates/main/a/apache2/apache2-bin_2.4.61-1~deb11u1_amd64.deb
-apache2-data  2.4.61-1~deb11u1  https://snapshot.debian.org/archive/debian-security/20240711T193635Z/pool/updates/main/a/apache2/apache2-data_2.4.61-1~deb11u1_all.deb
-apache2-utils  2.4.61-1~deb11u1  https://snapshot.debian.org/archive/debian-security/20240711T193635Z/pool/updates/main/a/apache2/apache2-utils_2.4.61-1~deb11u1_amd64.deb
+apache2  2.4.62-1~deb11u2  https://snapshot.debian.org/archive/debian-security/20241029T234230Z/pool/updates/main/a/apache2/apache2_2.4.62-1~deb11u2_amd64.deb
+apache2-bin  2.4.62-1~deb11u2  https://snapshot.debian.org/archive/debian-security/20241029T234230Z/pool/updates/main/a/apache2/apache2-bin_2.4.62-1~deb11u2_amd64.deb
+apache2-data  2.4.62-1~deb11u2  https://snapshot.debian.org/archive/debian-security/20241029T234230Z/pool/updates/main/a/apache2/apache2-data_2.4.62-1~deb11u2_all.deb
+apache2-utils  2.4.62-1~deb11u2  https://snapshot.debian.org/archive/debian-security/20241029T234230Z/pool/updates/main/a/apache2/apache2-utils_2.4.62-1~deb11u2_amd64.deb
 apparmor  2.13.6-10
 apparmor-utils 2.13.6-10
 apt  2.2.4
