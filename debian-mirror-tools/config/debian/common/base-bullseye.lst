@@ -580,7 +580,7 @@ libpci3  1:3.7.0-5
 libpcre2-8-0  10.36-2+deb11u1  https://snapshot.debian.org/archive/debian/20220930T210437Z/pool/main/p/pcre2/libpcre2-8-0_10.36-2%2Bdeb11u1_amd64.deb
 libpcre3  2:8.39-13
 libpcsclite1  1.9.1-1
-libperl5.32  5.32.1-4+deb11u3  https://snapshot.debian.org/archive/debian/20231219T030018Z/pool/main/p/perl/libperl5.32_5.32.1-4%2Bdeb11u3_amd64.deb
+libperl5.32  5.32.1-4+deb11u4  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/perl/libperl5.32_5.32.1-4%2Bdeb11u4_amd64.deb
 libpgm-5.3-0  5.3.128~dfsg-2
 libpils2  1.0.12-20
 libpipeline1  1.5.3-1
@@ -838,9 +838,9 @@ passwd  1:4.8.1-1
 patch  2.7.6-7
 pci.ids  0.0~2021.02.08-1
 pciutils  1:3.7.0-5
-perl  5.32.1-4+deb11u3  https://snapshot.debian.org/archive/debian/20231219T030018Z/pool/main/p/perl/perl_5.32.1-4%2Bdeb11u3_amd64.deb
-perl-base  5.32.1-4+deb11u3  https://snapshot.debian.org/archive/debian/20231219T030018Z/pool/main/p/perl/perl-base_5.32.1-4%2Bdeb11u3_amd64.deb
-perl-modules-5.32  5.32.1-4+deb11u3  https://snapshot.debian.org/archive/debian/20231218T215540Z/pool/main/p/perl/perl-modules-5.32_5.32.1-4%2Bdeb11u3_all.deb
+perl  5.32.1-4+deb11u4  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/perl/perl_5.32.1-4%2Bdeb11u4_amd64.deb
+perl-base  5.32.1-4+deb11u4  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/perl/perl-base_5.32.1-4%2Bdeb11u4_amd64.deb
+perl-modules-5.32  5.32.1-4+deb11u4  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/perl/perl-modules-5.32_5.32.1-4%2Bdeb11u4_all.deb
 pinentry-curses  1.1.0-4
 pipexec  2.5.5-2+b1
 pm-utils  1.4.1-19
