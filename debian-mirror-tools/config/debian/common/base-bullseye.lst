@@ -3,7 +3,7 @@ acpid  1:2.0.32-1
 acpi-support-base  0.143-5
 adduser  3.118
 alembic  1.4.3-1
-ansible  2.10.7+merged+base+2.10.8+dfsg-1
+ansible  2.10.7+merged+base+2.10.17+dfsg-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20241123T223325Z/pool/updates/main/a/ansible/ansible_2.10.7%2Bmerged%2Bbase%2B2.10.17%2Bdfsg-0%2Bdeb11u2_all.deb
 apache2  2.4.62-1~deb11u2  https://snapshot.debian.org/archive/debian-security/20241029T234230Z/pool/updates/main/a/apache2/apache2_2.4.62-1~deb11u2_amd64.deb
 apache2-bin  2.4.62-1~deb11u2  https://snapshot.debian.org/archive/debian-security/20241029T234230Z/pool/updates/main/a/apache2/apache2-bin_2.4.62-1~deb11u2_amd64.deb
 apache2-data  2.4.62-1~deb11u2  https://snapshot.debian.org/archive/debian-security/20241029T234230Z/pool/updates/main/a/apache2/apache2-data_2.4.62-1~deb11u2_all.deb
