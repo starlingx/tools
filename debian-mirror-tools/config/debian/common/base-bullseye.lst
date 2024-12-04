@@ -547,8 +547,8 @@ libnpth0  1.6-3
 libnsl2  1.3.0-2
 libnsl-dev  1.3.0-2
 libnspr4  2:4.29-1
-libnss3  2:3.61-1+deb11u3 https://snapshot.debian.org/archive/debian/20230219T210957Z/pool/main/n/nss/libnss3_3.61-1%2Bdeb11u3_amd64.deb
-libnss3-dev 2:3.61-1+deb11u3 https://snapshot.debian.org/archive/debian/20230219T210957Z/pool/main/n/nss/libnss3-dev_3.61-1%2Bdeb11u3_amd64.deb
+libnss3  2:3.61-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20241027T195345Z/pool/updates/main/n/nss/libnss3_3.61-1%2Bdeb11u4_amd64.deb
+libnss3-dev  2:3.61-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20241027T195345Z/pool/updates/main/n/nss/libnss3-dev_3.61-1%2Bdeb11u4_amd64.deb
 libnss-cache  0.18-1
 libnss-mdns  0.14.1-2
 libnss-sss  2.4.1-2
