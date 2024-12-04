@@ -233,7 +233,8 @@ libaprutil1  1.6.1-5+deb11u1  https://snapshot.debian.org/archive/debian-securit
 libaprutil1-dbd-sqlite3  1.6.1-5+deb11u1  https://snapshot.debian.org/archive/debian-security/20230226T132716Z/pool/updates/main/a/apr-util/libaprutil1-dbd-sqlite3_1.6.1-5%2Bdeb11u1_amd64.deb
 libaprutil1-ldap  1.6.1-5+deb11u1  https://snapshot.debian.org/archive/debian-security/20230226T132716Z/pool/updates/main/a/apr-util/libaprutil1-ldap_1.6.1-5%2Bdeb11u1_amd64.deb
 libapt-pkg6.0  2.2.4
-libarchive13  3.4.3-2+deb11u1
+libarchive13  3.4.3-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20241111T212343Z/pool/updates/main/liba/libarchive/libarchive13_3.4.3-2%2Bdeb11u2_amd64.deb
+libarchive-dev  3.4.3-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20241111T212343Z/pool/updates/main/liba/libarchive/libarchive-dev_3.4.3-2%2Bdeb11u2_amd64.deb
 libarchive-zip-perl  1.68-1
 libargon2-1  0~20171227-0.2
 libasan6  10.2.1-6
