@@ -3,7 +3,6 @@ python3-keystonemiddleware 10.2.0-2 https://snapshot.debian.org/archive/debian-p
 python3-mock  4.0.3-1 https://snapshot.debian.org/archive/debian/20210102T202954Z/pool/main/p/python-mock/python3-mock_4.0.3-1_all.deb
 python3-osc-lib 2.7.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-osc-lib/python3-osc-lib_2.7.0-2_all.deb
 python3-osc-placement 4.1.0-3 https://snapshot.debian.org/archive/debian/20230821T205629Z/pool/main/p/python-osc-placement/python3-osc-placement_4.1.0-3_all.deb
-python3-pyro4  4.80-1 https://snapshot.debian.org/archive/debian/20200614T024052Z/pool/main/p/pyro4/python3-pyro4_4.80-1_all.deb
 python3-oslo.cache 3.3.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.cache/python3-oslo.cache_3.3.1-2_all.deb
 python3-oslo.concurrency 5.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.concurrency/python3-oslo.concurrency_5.1.1-2_all.deb
 python3-oslo.config 1:9.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.config/python3-oslo.config_9.1.1-2_all.deb
@@ -20,6 +19,8 @@ python3-oslo.service 3.1.1-2 https://snapshot.debian.org/archive/debian-ports/20
 python3-oslo.upgradecheck 2.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.upgradecheck/python3-oslo.upgradecheck_2.1.1-2_all.deb
 python3-oslo.utils 6.1.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.utils/python3-oslo.utils_6.1.0-2_all.deb
 python3-oslo.versionedobjects 3.1.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.versionedobjects/python3-oslo.versionedobjects_3.1.0-2_all.deb
+python3-platformdirs 4.3.6-1 https://snapshot.debian.org/archive/debian/20240923T023655Z/pool/main/p/platformdirs/python3-platformdirs_4.3.6-1_all.deb
+python3-pyro4  4.80-1 https://snapshot.debian.org/archive/debian/20200614T024052Z/pool/main/p/pyro4/python3-pyro4_4.80-1_all.deb
 python3-serpent  1.30.2-1 https://snapshot.debian.org/archive/debian/20200212T030619Z/pool/main/s/serpent/python3-serpent_1.30.2-1_all.deb
 python3-sqlalchemy 1.4.47+ds1-1 https://snapshot.debian.org/archive/debian-ports/20230401T234825Z/pool/main/s/sqlalchemy/python3-sqlalchemy_1.4.47%2Bds1-1_all.deb
 python3-stevedore 5.0.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/s/stevedore/python3-stevedore_5.0.0-2_all.deb
