@@ -710,6 +710,8 @@ elif [[ $RESTART_MINIKUBE -eq 1 ]] ; then
     warn "--restart-minikube is only supported on minikube platform -- ignoring"
 fi
 
+# Workaround: Wait for Minikube network to stabilize before building images
+sleep 10
 
 if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     notice "Building docker images"
@@ -718,6 +720,8 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
         docker_build_args+=("--no-cache")
     fi
     for img in $BUILD_DOCKER_IMAGES; do
+        info "Starting to build image: $img:$DOCKER_TAG_LOCAL"
+
         extra_build_args=()
         if grep -q -E '^\s*ARG\s+STX_MIRROR_URL\s*=' "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile ; then
             init_stx_mirror_url
@@ -725,8 +729,12 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
                 extra_build_args+=("--build-arg" "STX_MIRROR_URL=$STX_MIRROR_URL")
             fi
         fi
-        docker build "${docker_build_args[@]}" "${extra_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile "$STX_TOOLS_DIR" || exit 1
-        info "built image $img:$DOCKER_TAG_LOCAL"
+
+        cmd="docker build "${docker_build_args[@]}" "${extra_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile "$STX_TOOLS_DIR""
+        info "Running command: ${cmd}"
+        eval "$cmd" || exit 1
+
+        info "Finished building image: $img:$DOCKER_TAG_LOCAL"
     done
 fi
 
