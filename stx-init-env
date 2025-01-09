@@ -29,6 +29,8 @@ Initialize StarlingX build environment & (re-)start builder pods
 
      --no-start   Refresh builder images, but don't (re-)start pods
 
+  -v,--verbose    Verbose logs during image build
+
 ENVIRONMENT RESET OPTIONS
 =========================
 
@@ -406,7 +408,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hRyD --long help,clean,restart-minikube,rebuild::,cache,delete-minikube-profile,nuke,reset,reset-hard,assumeyes,dockerhub-login,no-start -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hRyDv --long help,clean,restart-minikube,rebuild::,cache,delete-minikube-profile,nuke,reset,reset-hard,assumeyes,dockerhub-login,no-start,verbose -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -473,6 +475,10 @@ while true ; do
             ;;
         --no-start)
             START_PODS=0
+            shift
+            ;;
+        -v|--verbose)
+            VERBOSE_IMAGE_BUILD=1
             shift
             ;;
         --)
@@ -813,7 +819,11 @@ sleep 10
 
 if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     notice "Building docker images"
+
     declare -a docker_build_args
+    if [[ "$VERBOSE_IMAGE_BUILD" == "1" ]] ; then
+        docker_build_args+=("--progress=plain")
+    fi
     if [[ "$USE_DOCKER_CACHE" != "1" ]] ; then
         docker_build_args+=("--no-cache")
     fi
