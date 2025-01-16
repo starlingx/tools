@@ -1203,7 +1203,7 @@ rpcbind  1.2.5-9
 rpm2cpio 4.16.1.2+dfsg1-3
 rpm  4.16.1.2+dfsg1-3
 rpm-common  4.16.1.2+dfsg1-3
-rsync  3.2.3-4+deb11u1
+rsync  3.2.3-4+deb11u2  https://snapshot.debian.org/archive/debian-security/20250114T193322Z/pool/updates/main/r/rsync/rsync_3.2.3-4%2Bdeb11u2_amd64.deb
 ruby  1:2.7+2
 ruby2.7  2.7.4-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20240902T120333Z/pool/updates/main/r/ruby2.7/ruby2.7_2.7.4-1%2Bdeb11u2_amd64.deb
 ruby2.7-dev  2.7.4-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20240902T120333Z/pool/updates/main/r/ruby2.7/ruby2.7-dev_2.7.4-1%2Bdeb11u2_amd64.deb
