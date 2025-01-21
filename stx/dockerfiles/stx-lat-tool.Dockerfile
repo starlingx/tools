@@ -24,20 +24,22 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certifica
 
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \
-        openssh-client \
-        python3 \
-        python3-pip \
-        xz-utils \
-        file \
-        bzip2 \
-        procps \
-        tini \
-        wget \
-        locales-all \
-        python3-yaml \
-        rsync \
-        cpio \
-        vim \
+            bzip2 \
+            coreutils \
+            cpio \
+            file \
+            locales-all \
+            openssh-client \
+            procps \
+            python3 \
+            python3-pip \
+            python3-yaml \
+            rsync \
+            tini \
+            util-linux \
+            vim \
+            wget \
+            xz-utils \
         && \
         apt-get clean && \
         mkdir -p /opt/LAT/SDK && \
@@ -45,21 +47,21 @@ RUN apt-get -y update && apt-get --no-install-recommends -y install \
 
 # Packages for pre-patched iso creation support
 RUN apt-get -y install \
-        isomd5sum \
-        syslinux-utils \
-        bubblewrap \
-        git \
-        python3-apt \
-        python3-gi \
-        python3-gi-cairo \
-        python3-systemd \
-        gir1.2-ostree-1.0 \
-        reprepro \
-        dosfstools \
-        xfsprogs \
-        debos \
-        mmdebstrap \
-        p7zip-full \
+            bubblewrap \
+            debos \
+            dosfstools \
+            gir1.2-ostree-1.0 \
+            git \
+            isomd5sum \
+            mmdebstrap \
+            p7zip-full \
+            python3-apt \
+            python3-gi \
+            python3-gi-cairo \
+            python3-systemd \
+            reprepro \
+            syslinux-utils \
+            xfsprogs \
         && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \
@@ -92,4 +94,4 @@ COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["/opt/LAT/lat/latd"]
+CMD ["ionice", "-c", "3", "nice", "-n", "15", "/opt/LAT/lat/latd"]
