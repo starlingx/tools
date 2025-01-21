@@ -41,10 +41,13 @@ RUN apt-get -q update && apt-get -y install gnupg2 && \
     echo "deb http://nginx.org/packages/debian/ bullseye nginx" > /etc/apt/sources.list.d/nginx.list && \
     apt-key add ./nginx_signing.key && \
     apt-get -q update && apt-get -y install \
-                                            aptly \
-                                            supervisor \
-                                            gettext-base \
-                                            nginx && \
+                                    aptly \
+                                    coreutils \
+                                    gettext-base \
+                                    nginx \
+                                    supervisor \
+                                    util-linux \
+    && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /usr/share/man && \
@@ -82,4 +85,4 @@ RUN chmod 0644 /etc/vim/vimrc.local
 
 # Configure startup
 COPY stx/toCOPY/aptly/entrypoint.sh /bin/entrypoint.sh
-ENTRYPOINT [ "/bin/entrypoint.sh" ]
+ENTRYPOINT [ "ionice", "-c", "3", "nice", "-n", "15", "/bin/entrypoint.sh" ]

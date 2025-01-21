@@ -27,6 +27,7 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certifica
 # Download required dependencies by mirror/build processes.
 RUN apt-get update && apt-get install --no-install-recommends -y \
         bzip2 \
+        coreutils \
         cpio \
         curl \
         debian-keyring \
@@ -37,9 +38,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         file \
         git \
         git-buildpackage \
+        isomd5sum \
         less \
         libdistro-info-perl \
         locales-all \
+        mkisofs \
         pristine-tar \
         proxychains \
         python3 \
@@ -51,15 +54,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         rpm2cpio \
         ssh \
         sudo \
+        syslinux-utils \
         tini \
         unzip \
+        util-linux \
         vim \
         wget \
         xz-utils \
-        mkisofs \
-        isomd5sum \
-        syslinux-utils \
-        && \
+    && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -105,5 +107,5 @@ RUN mkdir -p /etc/vim
 COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
 
-ENTRYPOINT ["/usr/bin/tini", "-g", "--"]
+ENTRYPOINT ["ionice", "-c", "3", "nice", "-n", "15", "/usr/bin/tini", "-g", "--"]
 CMD ["/bin/bash", "-i", "-c", "exec /bin/sleep infinity" ]

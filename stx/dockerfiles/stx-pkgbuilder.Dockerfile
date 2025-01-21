@@ -22,28 +22,31 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certifica
 
 # Download required dependencies by mirror/build processes.
 RUN     apt-get update && apt-get install --no-install-recommends -y \
-        build-essential \
-        live-build \
-        pbuilder \
-        debootstrap \
-        devscripts \
-        schroot \
-        debmake \
-        dpkg-dev \
-        apt-utils \
-        sbuild \
-        osc \
-        python3-fs \
-        python3-pip \
-        python3-psutil \
-        git \
-        wget \
-        curl \
-        vim \
-        sudo \
-        emacs \
-        tini \
-        procps && \
+            apt-utils \
+            build-essential \
+            coreutils \
+            curl \
+            debmake \
+            debootstrap \
+            devscripts \
+            dpkg-dev \
+            emacs \
+            git \
+            live-build \
+            osc \
+            pbuilder \
+            procps \
+            python3-fs \
+            python3-pip \
+            python3-psutil \
+            sbuild \
+            schroot \
+            sudo \
+            tini \
+            util-linux \
+            vim \
+            wget \
+        && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \
         pip3 install Flask && \
@@ -74,4 +77,4 @@ RUN chmod 0644 /etc/vim/vimrc.local
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 WORKDIR /opt
-CMD ["python3", "app.py"]
+CMD [ "ionice", "-c", "3", "nice", "-n", "15", "python3", "app.py"]
