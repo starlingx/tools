@@ -335,7 +335,8 @@ class Debbuilder(object):
             response['msg'] = 'fail to create log file'
         else:
             chroot_suffix = '--chroot-suffix=-' + user
-            chroot_cmd = ' '.join(['sbuild-createchroot', chroot_suffix,
+            chroot_cmd = ' '.join(['nice', '-n', '15', 'ionice', '-c', '3',
+                                   'sbuild-createchroot', chroot_suffix,
                                    '--include=apt-transport-https,ca-certificates,eatmydata',
                                    '--command-prefix=eatmydata',
                                    self.attrs['dist'], parent_chroot_dir])
@@ -817,7 +818,8 @@ class Debbuilder(object):
             response['msg'] = dsc + ' does not exist'
             return response
 
-        bcommand = ' '.join([BUILD_ENGINE, '-d', self.attrs['dist']])
+        bcommand = ' '.join(['nice', '-n', '15', 'ionice', '-c', '3',
+                             BUILD_ENGINE, '-d', self.attrs['dist']])
         dsc_build_dir = os.path.dirname(dsc)
         chroot = self.chroots_pool.acquire(needed_size=size, allow_tmpfs=allow_tmpfs)
         self.chroots_pool.show()
