@@ -33,7 +33,7 @@ bison  2:3.7.5+dfsg-1
 bsdextrautils  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/bsdextrautils_2.36.1-8%2Bdeb11u2_amd64.deb
 bsdutils  1:2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/bsdutils_2.36.1-8%2Bdeb11u2_amd64.deb
 bubblewrap 0.4.1-3
-busybox  1:1.30.1-6+b3
+busybox  1:1.30.1-6+deb11u1  https://snapshot.debian.org/archive/debian-security/20250119T111333Z/pool/updates/main/b/busybox/busybox_1.30.1-6%2Bdeb11u1_amd64.deb
 bzip2  1.0.8-4
 ca-certificates  20210119
 cdebconf  0.260
@@ -1280,7 +1280,7 @@ traceroute 1:2.1.0-2+b1  https://snapshot.debian.org/archive/debian/20220703T032
 tuned  2.15.0-1
 tzdata  2024b-3   https://snapshot.debian.org/archive/debian/20241021T143748Z/pool/main/t/tzdata/tzdata_2024b-3_all.deb
 ucf  3.0043
-udhcpc  1:1.30.1-6+b3
+udhcpc  1:1.30.1-6+deb11u1  https://snapshot.debian.org/archive/debian-security/20250119T111333Z/pool/updates/main/b/busybox/udhcpc_1.30.1-6%2Bdeb11u1_amd64.deb
 unzip  6.0-26+deb11u1
 util-linux  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/util-linux_2.36.1-8%2Bdeb11u2_amd64.deb
 uuid-dev  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/uuid-dev_2.36.1-8%2Bdeb11u2_amd64.deb
