@@ -644,7 +644,7 @@ librte-hash21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-secu
 librte-pci21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-pci21_20.11.6-1~deb11u1_amd64.deb
 librte-rcu21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-rcu21_20.11.6-1~deb11u1_amd64.deb
 librtmp1  2.4+20151223.gitfa8646d.1-2+b2
-libruby2.7  2.7.4-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20240902T120333Z/pool/updates/main/r/ruby2.7/libruby2.7_2.7.4-1%2Bdeb11u2_amd64.deb
+libruby2.7  2.7.4-1+deb11u3 https://snapshot.debian.org/archive/debian-security/20250118T002331Z/pool/updates/main/r/ruby2.7/libruby2.7_2.7.4-1%2Bdeb11u3_amd64.deb
 libsanlock-client1  3.8.2-2
 libsanlock-dev  3.8.2-2
 libsasl2-2  2.1.27+dfsg-2.1+deb11u1
@@ -1205,8 +1205,8 @@ rpm  4.16.1.2+dfsg1-3
 rpm-common  4.16.1.2+dfsg1-3
 rsync  3.2.3-4+deb11u3  https://snapshot.debian.org/archive/debian-security/20250117T235324Z/pool/updates/main/r/rsync/rsync_3.2.3-4%2Bdeb11u3_amd64.deb
 ruby  1:2.7+2
-ruby2.7  2.7.4-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20240902T120333Z/pool/updates/main/r/ruby2.7/ruby2.7_2.7.4-1%2Bdeb11u2_amd64.deb
-ruby2.7-dev  2.7.4-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20240902T120333Z/pool/updates/main/r/ruby2.7/ruby2.7-dev_2.7.4-1%2Bdeb11u2_amd64.deb
+ruby2.7  2.7.4-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250118T002331Z/pool/updates/main/r/ruby2.7/ruby2.7_2.7.4-1%2Bdeb11u3_amd64.deb
+ruby2.7-dev  2.7.4-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250118T002331Z/pool/updates/main/r/ruby2.7/ruby2.7-dev_2.7.4-1%2Bdeb11u3_amd64.deb
 ruby-augeas  1:0.5.0-3+b8
 ruby-deep-merge  1.1.1-1
 rubygems-integration  1.18
