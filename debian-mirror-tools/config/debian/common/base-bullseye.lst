@@ -191,7 +191,7 @@ gpg-wks-server  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/202
 grep  3.6-1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/g/grep/grep_3.6-1_amd64.deb
 groff-base  1.22.4-6
 gsettings-desktop-schemas  3.38.0-2
-gunicorn  20.1.0-1++deb11u1  https://snapshot.debian.org/archive/debian-security/20241220T041311Z/pool/updates/main/g/gunicorn/gunicorn_20.1.0-1%2Bdeb11u1_all.deb
+gunicorn  20.1.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241220T041311Z/pool/updates/main/g/gunicorn/gunicorn_20.1.0-1%2Bdeb11u1_all.deb
 gzip  1.10-4+deb11u1 https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/g/gzip/gzip_1.10-4%2Bdeb11u1_amd64.deb
 hdparm  9.60+ds-1
 hiera  3.2.0-2.1
