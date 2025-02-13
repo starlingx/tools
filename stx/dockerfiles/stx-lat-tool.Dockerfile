@@ -54,7 +54,6 @@ RUN apt-get -y install \
             git \
             isomd5sum \
             mmdebstrap \
-            p7zip-full \
             python3-apt \
             python3-gi \
             python3-gi-cairo \
