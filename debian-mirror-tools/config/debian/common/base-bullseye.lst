@@ -429,7 +429,7 @@ libini-config5  0.6.1-2
 libinih1  53-1+b2
 libip4tc2  1.8.7-1
 libip6tc2  1.8.7-1
-libipa-hbac0  2.4.1-2
+libipa-hbac0  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libipa-hbac0_2.4.1-2%2Bdeb11u1_amd64.deb
 libiperf0  3.9-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250128T133327Z/pool/updates/main/i/iperf3/libiperf0_3.9-1%2Bdeb11u2_amd64.deb
 libipsec-mb0  0.55-1
 libisal2  2.30.0-2
@@ -553,7 +553,7 @@ libnss3  2:3.61-1+deb11u4  https://snapshot.debian.org/archive/debian-security/2
 libnss3-dev  2:3.61-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20241027T195345Z/pool/updates/main/n/nss/libnss3-dev_3.61-1%2Bdeb11u4_amd64.deb
 libnss-cache  0.18-1
 libnss-mdns  0.14.1-2
-libnss-sss  2.4.1-2
+libnss-sss  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libnss-sss_2.4.1-2%2Bdeb11u1_amd64.deb
 libnuma-dev  2.0.12-1+b1
 libnuma1  2.0.12-1+b1
 liboath0  2.6.6-3
@@ -573,7 +573,7 @@ libpam-modules  1.4.0-9+deb11u1
 libpam-modules-bin  1.4.0-9+deb11u1
 libpam-pwquality  1.4.4-1
 libpam-runtime  1.4.0-9+deb11u1
-libpam-sss  2.4.1-2
+libpam-sss  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libpam-sss_2.4.1-2%2Bdeb11u1_amd64.deb
 libpango-1.0-0  1.46.2-3
 libpangocairo-1.0-0  1.46.2-3
 libpangoft2-1.0-0  1.46.2-3
@@ -691,10 +691,10 @@ libssh-dev  0.9.8-0+deb11u1  https://snapshot.debian.org/archive/debian-security
 libssh2-1-dev  1.9.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/libs/libssh2/libssh2-1-dev_1.9.0-2%2Bdeb11u1_amd64.deb
 libssh2-1  1.9.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/libs/libssh2/libssh2-1_1.9.0-2%2Bdeb11u1_amd64.deb
 libssh-4  0.9.8-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20231228T223536Z/pool/updates/main/libs/libssh/libssh-4_0.9.8-0%2Bdeb11u1_amd64.deb
-libsss-certmap0  2.4.1-2
-libsss-idmap0  2.4.1-2
-libsss-nss-idmap0  2.4.1-2
-libsss-sudo  2.4.1-2
+libsss-certmap0  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libsss-certmap0_2.4.1-2%2Bdeb11u1_amd64.deb
+libsss-idmap0  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libsss-idmap0_2.4.1-2%2Bdeb11u1_amd64.deb
+libsss-nss-idmap0  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libsss-nss-idmap0_2.4.1-2%2Bdeb11u1_amd64.deb
+libsss-sudo  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libsss-sudo_2.4.1-2%2Bdeb11u1_amd64.deb
 libstdc++6  10.2.1-6
 libstonith1  1.0.12-20
 libstrongswan  5.9.1-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20231121T003520Z/pool/updates/main/s/strongswan/libstrongswan_5.9.1-1%2Bdeb11u4_amd64.deb
@@ -1122,7 +1122,7 @@ python3-soupsieve  2.2.1-1
 python3-sphinx  3.4.3-2
 python3-sqlalchemy  1.3.22+ds1-1
 python3-sqlparse  0.4.1-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241221T182311Z/pool/updates/main/s/sqlparse/python3-sqlparse_0.4.1-1%2Bdeb11u1_all.deb
-python3-sss  2.4.1-2
+python3-sss  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/python3-sss_2.4.1-2%2Bdeb11u1_amd64.deb
 python3-statsd  3.3.0-2
 python3-stevedore  3.2.2-3
 python3-swiftclient  1:3.10.1-2
@@ -1239,16 +1239,16 @@ sshpass  1.09-1+b1
 ssl-cert  1.1.0+nmu1
 ssg-base 0.1.62-2 https://snapshot.debian.org/archive/debian/20221203T150621Z/pool/main/s/scap-security-guide/ssg-base_0.1.62-2_all.deb
 ssg-debian 0.1.62-2 https://snapshot.debian.org/archive/debian/20221203T150621Z/pool/main/s/scap-security-guide/ssg-debian_0.1.62-2_all.deb
-sssd  2.4.1-2
-sssd-ad  2.4.1-2
-sssd-ad-common  2.4.1-2
-sssd-common  2.4.1-2
-sssd-ipa  2.4.1-2
-sssd-krb5  2.4.1-2
-sssd-krb5-common  2.4.1-2
-sssd-ldap  2.4.1-2
-sssd-proxy  2.4.1-2
-sssd-tools  2.4.1-2
+sssd  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-ad  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-ad_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-ad-common  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-ad-common_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-common  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-common_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-ipa  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-ipa_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-krb5  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-krb5_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-krb5-common  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-krb5-common_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-ldap  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-ldap_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-proxy  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-proxy_2.4.1-2%2Bdeb11u1_amd64.deb
+sssd-tools  2.4.1-2+deb11u1   https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/sssd-tools_2.4.1-2%2Bdeb11u1_amd64.deb
 startpar  0.64-3
 strace  5.10-1
 strongswan  5.9.1-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20231121T003520Z/pool/updates/main/s/strongswan/strongswan_5.9.1-1%2Bdeb11u4_all.deb
