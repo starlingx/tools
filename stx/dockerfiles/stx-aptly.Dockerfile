@@ -33,6 +33,9 @@ MAINTAINER mark.asselstine@windriver.com
 
 COPY --from=builder /go/nginx_signing.key nginx_signing.key
 
+# Add retry to apt config
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+
 # Update certificates
 RUN apt-get -q -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
 
