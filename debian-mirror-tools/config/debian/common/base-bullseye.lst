@@ -615,10 +615,11 @@ libpsl5  0.21.0-1.2
 libpixman-1-dev  0.40.0-1.1~deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/p/pixman/libpixman-1-dev_0.40.0-1.1~deb11u1_amd64.deb
 libpwquality1  1.4.4-1
 libpwquality-common  1.4.4-1
-libpython3.9  3.9.2-1
-libpython3.9-dev  3.9.2-1
-libpython3.9-minimal  3.9.2-1
-libpython3.9-stdlib  3.9.2-1
+libpython3.9  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9_3.9.2-1%2Bdeb11u3_amd64.deb
+libpython3.9-dev  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-dev_3.9.2-1%2Bdeb11u3_amd64.deb
+libpython3.9-minimal  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-minimal_3.9.2-1%2Bdeb11u3_amd64.deb
+libpython3.9-stdlib  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-stdlib_3.9.2-1%2Bdeb11u3_amd64.deb
+libpython3.9-dbg  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-dbg_3.9.2-1%2Bdeb11u3_amd64.deb
 libpython3-dev  3.9.2-3
 libpython3-stdlib  3.9.2-3
 libquadmath0  10.2.1-6
@@ -888,9 +889,10 @@ puppet-module-vswitch  13.4.0-2
 pv  1.6.6-1+b1
 pycadf-common  3.1.1-2
 python3  3.9.2-3
-python3.9  3.9.2-1
-python3.9-dev  3.9.2-1
-python3.9-minimal  3.9.2-1
+python3.9  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9_3.9.2-1%2Bdeb11u3_amd64.deb
+python3.9-dev  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-dev_3.9.2-1%2Bdeb11u3_amd64.deb
+python3.9-minimal  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-minimal_3.9.2-1%2Bdeb11u3_amd64.deb
+python3.9-dbg  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-dbg_3.9.2-1%2Bdeb11u3_amd64.deb
 python3-alabaster  0.7.8-1.1
 python3-alembic  1.4.3-1
 python3-amqp  5.0.3-3

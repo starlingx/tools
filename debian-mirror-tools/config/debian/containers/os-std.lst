@@ -57,7 +57,7 @@ python3-doc 3.9.2-3
 python3-intelhex 2.1-2.2
 python3-pybind11 2.6.2-1
 python3-thriftpy 0.3.9+ds1-1+b5
-python3.9-doc 3.9.2-1
+python3.9-doc  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-doc_3.9.2-1%2Bdeb11u3_all.deb
 sphinx-doc 3.4.3-2
 trace-cmd 2.9.1-1
 tree 1.8.0-1+b1
