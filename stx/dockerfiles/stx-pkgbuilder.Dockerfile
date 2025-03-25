@@ -20,6 +20,9 @@ ARG DEBIAN_SNAPSHOT_BASE=${STX_MIRROR_URL}/debian/debian/snapshot.debian.org/arc
 RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Add retry to apt config
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+
 # Update certificates
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
 
