@@ -21,6 +21,9 @@ RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/source
     echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
 
+# Add retry to apt config
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+
 # Update certificates
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
 
