@@ -10,7 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright (C) 2021-2022 Wind River Systems,Inc.
+# Copyright (C) 2021-2022,2025 Wind River Systems,Inc.
 #
 FROM golang:1.17.5-bullseye AS builder
 LABEL stage=builder
@@ -28,6 +28,8 @@ RUN mkdir -p $GOPATH/src/github.com/aptly-dev/aptly && \
 
 # Build our actual container
 FROM debian:bullseye
+ARG os_mirror_url="http://"
+ARG os_mirror_dist_path=""
 
 MAINTAINER mark.asselstine@windriver.com
 
@@ -36,8 +38,13 @@ COPY --from=builder /go/nginx_signing.key nginx_signing.key
 # Add retry to apt config
 RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
 
-# Update certificates
+# Update certificates via upsteam repos
 RUN apt-get -q -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
+# Now point to the mirror for specific package builds
+RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
 
 # Add Nginx repository and install required packages
 RUN apt-get -q update && apt-get -y install gnupg2 && \
@@ -59,7 +66,7 @@ RUN apt-get -q update && apt-get -y install gnupg2 && \
     rm -rf /usr/share/texmf/fonts && \
     rm -rf /usr/share/texmf/doc
 
-# Copy our  Aptly build and configure Aptly
+# Copy our Aptly build and configure Aptly
 COPY --from=builder /go/bin/aptly /usr/bin/aptly
 COPY stx/toCOPY/aptly/aptly.conf /etc/aptly.conf
 COPY stx/toCOPY/aptly/supervisord.aptly.conf /etc/supervisor/conf.d/aptly.conf

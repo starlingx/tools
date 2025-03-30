@@ -79,9 +79,24 @@
 #     we delete them via sudo. If you set STX_RM_METHOD to "docker", we will
 #     delete such files via a docker container with STX_BUILD_HOME mounted inside.
 #
-#   STX_MIRROR_URL
-#     StarlingX mirror URL; defaults to the value of "[repomgr]stx_mirror_url" from
-#     stx.conf; or https://mirror.starlingx.windriver.com/mirror. This is currently
+#   OS_MIRROR_URL
+#     StarlingX OS mirror URL; defaults to the value of "[repomgr]os_mirror_url" from
+#     stx.conf; or 'https://mirror.starlingx.windriver.com/mirror/'. This is currently
+#     used in all build containers.
+#
+#   OS_MIRROR_DIST_PATH
+#     StarlingX distribution path within the OS mirror URL; defaults to the value of
+#     "[repomgr]os_mirror_dist_path" from stx.conf; or 'debian/debian. This is currently
+#     used in all build containers.
+#
+#   LAT_MIRROR_URL
+#     StarlingX LAT mirror URL; defaults to the value of "[repomgr]lat_mirror_url" from
+#     stx.conf; or 'https://mirror.starlingx.windriver.com/mirror/'. This is currently
+#     used when building stx-lat-sdk container.
+#
+#   LAT_MIRROR_LAT_PATH
+#     StarlingX LAT mirror path to the LAT SDK; defaults to the value of
+#     "[repomgr]lat_mirror_lat_path" from stx.conf; or 'lat-sdk/'. This is currently
 #     used when building stx-lat-sdk container.
 #
 

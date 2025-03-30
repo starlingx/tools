@@ -36,11 +36,12 @@ export MANIFEST=@MANIFEST@
 
 export HOSTUSERNAME=@HOSTUSERNAME@
 
-export CENGNURL=@CENGNURL@
-# CENGN_STRATEGY value: [ cengn|cengn_first|upstream|upstream_first ]
-export CENGN_STRATEGY=@CENGNSTRATEGY@
+export OS_MIRROR_URL=@OS_MIRROR_URL@
+export OS_MIRROR_DIST_PATH=@OS_MIRROR_DIST_PATH@
 
-export STX_MIRROR_URL=@STX_MIRROR_URL@
+# Included for completeness. No know uses of these so far.
+export LAT_MIRROR_URL=@LAT_MIRROR_URL@
+export LAT_MIRROR_LAT_PATH=@LAT_MIRROR_LAT_PATH@
 
 # STX_MIRROR_STRATEGY value: [ stx_mirror|stx_mirror_first|upstream|upstream_first ]
 export STX_MIRROR_STRATEGY=@STX_MIRROR_STRATEGY@

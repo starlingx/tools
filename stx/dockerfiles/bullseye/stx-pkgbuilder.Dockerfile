@@ -10,20 +10,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright (C) 2021-2022 Wind River Systems,Inc.
+# Copyright (C) 2021-2022,2025 Wind River Systems,Inc.
 #
 FROM debian:bullseye
+ARG os_mirror_url="http://"
+ARG os_mirror_dist_path=""
 
-ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
-
-RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Add retry to apt config
 RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
 
-# Update certificates
+# Update certificates via upsteam repos
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
+# Now point to the mirror for specific package builds
+RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
+#RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
 
 # Download required dependencies by mirror/build processes.
 RUN     apt-get update && apt-get install --no-install-recommends -y \
@@ -60,10 +65,7 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
 # workaround for docker debootstrap bug
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=968927
 RUN cd /tmp && \
-    ( \
-      wget ${STX_MIRROR_URL}/debian/snapshot.debian.org/archive/debian/20231031T030246Z/pool/main/d/debootstrap/debootstrap_1.0.128%2Bnmu2%2Bdeb12u1_all.deb || \
-      wget https://snapshot.debian.org/archive/debian/20231031T030246Z/pool/main/d/debootstrap/debootstrap_1.0.128%2Bnmu2%2Bdeb12u1_all.deb \
-    ) && \
+    wget ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/20220331T000000Z/pool/main/d/debootstrap/debootstrap_1.0.128%2Bnmu2%2Bdeb12u1_all.deb && \
     dpkg -i debootstrap_1.0.128+nmu2+deb12u1_all.deb
 RUN groupadd crontab
 

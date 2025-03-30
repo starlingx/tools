@@ -38,4 +38,4 @@ export PATCH_BUILDER_PATH=$MY_REPO/build-tools/stx/patch
 export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx:/opt/LAT/lat:$PATCH_BUILDER_PATH
 export PYTHONPATH=$PYTHONPATH:$MY_BUILD_TOOLS_DIR/stx
 
-export STX_MIRROR=/import/mirrors/starlingx
+export OS_MIRROR=/import/mirrors/starlingx

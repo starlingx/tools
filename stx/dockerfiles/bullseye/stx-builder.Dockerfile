@@ -10,9 +10,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright (C) 2021-2022 Wind River Systems,Inc.
+# Copyright (C) 2021-2022,2025 Wind River Systems,Inc.
 #
 FROM debian:bullseye
+ARG os_mirror_url="http://"
+ARG os_mirror_dist_path=""
 
 ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
 
@@ -22,12 +24,17 @@ ENV container=docker \
 # Add retry to apt config
 RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
 
-# Update certificates
+# Update certificates via upsteam repos
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
 
-RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
+# Now point to the mirror for specific package builds
+RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
+
+RUN echo "deb-src ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
     echo "deb-src ${STX_MIRROR_URL}/debian/debian/deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
-    echo "deb http://deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
 
 # Download required dependencies by mirror/build processes.
 RUN apt-get update && apt-get install --no-install-recommends -y \

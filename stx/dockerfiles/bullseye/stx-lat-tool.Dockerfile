@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Wind River Systems, Inc.
+# Copyright (c) 2021,2025 Wind River Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +13,25 @@
 # limitations under the License.
 
 FROM debian:bullseye
+ARG os_mirror_url="http://"
+ARG os_mirror_dist_path=""
+ARG lat_mirror_url="https://mirror.starlingx.windriver.com/mirror/"
+ARG lat_mirror_lat_path="lat-sdk/lat-sdk-20231206/"
 
 MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
-ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
-ARG LAT_BINARY_RESOURCE_PATH=${STX_MIRROR_URL}/lat-sdk/lat-sdk-20231206
+ARG LAT_BINARY_RESOURCE_PATH="${lat_mirror_url}${lat_mirror_lat_path}"
 
 # Add retry to apt config
 RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
 
-# Update certificates
+# Update certificates via upsteam repos
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
+# Now point to the mirror for specific package builds
+RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
 
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \
@@ -75,13 +83,14 @@ COPY stx/toCOPY/builder/pubkey.rsa /opt/LAT/
 # Prepare executables
 COPY stx/toCOPY/lat-tool/lat/ /opt/LAT/lat
 # Download & install LAT SDK.
+RUN echo "LAT_BINARY_RESOURCE_PATH = ${LAT_BINARY_RESOURCE_PATH}"
 RUN wget --quiet ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh --output-document=/opt/LAT/AppSDK.sh && \
     chmod +x /opt/LAT/AppSDK.sh && \
     /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y && \
     rm -f /opt/LAT/AppSDK.sh
 
 # Fix: Use Debian CDN address for geo-frendly servers
-RUN sed -i 's/ftp.cn.debian.org/deb.debian.org/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
+RUN sed -i "s#ftp.cn.debian.org#${os_mirror_url}${os_mirror_dist_path}deb.debian.org#g" /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
 
 # Fix: Align DEFAULT_INITRD_NAME with our custom names
 RUN sed -i 's/debian-initramfs-ostree-image/starlingx-initramfs-ostree-image/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py

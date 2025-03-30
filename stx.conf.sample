@@ -34,8 +34,11 @@ mode = local
 
 [repomgr]
 type = aptly
-stx_mirror_url = https://mirror.starlingx.windriver.com/mirror
+os_mirror_url = https://mirror.starlingx.windriver.com/mirror
+os_mirror_dist_path = debian/debian/
 stx_mirror_strategy = stx_mirror_first
+lat_mirror_url = https://mirror.starlingx.windriver.com/mirror
+lat_mirror_lat_path = lat-sdk/
 sourceslist =
 deblist =
 dsclist =
