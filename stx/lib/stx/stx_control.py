@@ -251,7 +251,7 @@ stx-pkgbuilder/configmap/')
 
         return repomgr_type
 
-    def handleStartTask(self, projectname, wait):
+    def handleStartTask(self, projectname, wait, use_dockerhub_cred):
         if self.config.use_minikube:
             self.minikube_ctl.start()
 
@@ -270,6 +270,11 @@ stx-pkgbuilder/configmap/')
 
         if self.config.container_mtu:
             cmd += f' --set stx-docker.mtu={self.config.container_mtu}'
+
+        if use_dockerhub_cred:
+            image_pull_secret = self.k8s.try_create_docker_cred_secret()
+            if image_pull_secret:
+                cmd += f' --set global.imagePullSecrets[0].name={image_pull_secret}'
 
         self.logger.debug('Execute the helm start command: %s', cmd)
         helm_status = self.k8s.helm_release_exists(self.projectname)
@@ -316,6 +321,8 @@ stx-pkgbuilder/configmap/')
                     break
                 self.logger.info("waiting for %d pod(s) to exit", pod_count)
                 time.sleep(2)
+
+        self.k8s.delete_docker_cred_secret()
 
     def handleIsStartedTask(self, projectname):
         if self.k8s.helm_release_exists(projectname):
@@ -420,7 +427,8 @@ no lat container is available!')
                 projectname = 'stx'
 
             if args.ctl_task == 'start':
-                self.handleStartTask(projectname, args.wait)
+                self.handleStartTask(projectname, args.wait,
+                                     args.use_dockerhub_cred)
 
             elif args.ctl_task == 'stop':
                 self.handleStopTask(projectname, args.wait)
