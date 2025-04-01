@@ -84,6 +84,12 @@ task.\t\teg: [start|enter|stop|is-started|status|upgrade|keys-add]')
                                        help='wait for operation to finish, ' +
                                        'for start, stop\n\n',
                                        action='store_true')
+        control_subparser.add_argument('--use-dockerhub-cred',
+                                       help='Use dockerhub credentials from ' +
+                                       '$HOME/.docker/config for pulling ' +
+                                       'environment pods\' images within ' +
+                                       'k8s (for "start" command only)\n\n',
+                                       action='store_true')
         control_subparser.set_defaults(handle=self.handlecontrol.handleControl)
 
         config_subparser = subparsers.add_parser('config',
