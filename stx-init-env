@@ -83,6 +83,7 @@ START_PODS=1
 RESET_SOFT=0
 RESET_HARD=0
 ASSUME_YES=0
+STX_START_OPTS=
 
 COREUTILS_DOCKER_IMAGE="debian:bookworm-20240130-slim"
 
@@ -238,7 +239,7 @@ stx_stop() {
 
 stx_start() {
     stx config --upgrade || exit 1
-    stx control start --wait || exit 1
+    stx control start --wait $STX_START_OPTS || exit 1
 }
 
 #
@@ -708,6 +709,10 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
 
 elif [[ $RESTART_MINIKUBE -eq 1 ]] ; then
     warn "--restart-minikube is only supported on minikube platform -- ignoring"
+fi
+
+if [[ "$DOCKERHUB_LOGIN" -eq 1 ]] ; then
+    STX_START_OPTS+=" --use-dockerhub-cred"
 fi
 
 # Workaround: Wait for Minikube network to stabilize before building images
