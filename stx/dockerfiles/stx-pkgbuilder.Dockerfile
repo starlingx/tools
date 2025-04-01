@@ -14,6 +14,8 @@
 #
 FROM debian:bullseye
 
+ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
+
 RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -56,8 +58,8 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=968927
 RUN cd /tmp && \
     ( \
-      wget https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian/20220331T000000Z/pool/main/d/debootstrap/debootstrap_1.0.128%2Bnmu2%2Bdeb12u1_all.deb || \
-      wget http://snapshot.debian.org/archive/debian/20220331T000000Z/pool/main/d/debootstrap/debootstrap_1.0.128%2Bnmu2$2Bdeb12u1_all.deb \
+      wget ${STX_MIRROR_URL}/debian/snapshot.debian.org/archive/debian/20231031T030246Z/pool/main/d/debootstrap/debootstrap_1.0.128%2Bnmu2%2Bdeb12u1_all.deb || \
+      wget https://snapshot.debian.org/archive/debian/20231031T030246Z/pool/main/d/debootstrap/debootstrap_1.0.128%2Bnmu2%2Bdeb12u1_all.deb \
     ) && \
     dpkg -i debootstrap_1.0.128+nmu2+deb12u1_all.deb
 RUN groupadd crontab
