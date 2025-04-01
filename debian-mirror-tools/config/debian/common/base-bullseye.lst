@@ -295,8 +295,9 @@ libc6-dev-x32   2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-secu
 libc6-x32  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc6-x32_2.31-13%2Bdeb11u10_amd64.deb
 libc6.1-dev-alpha-cross  2.31-9cross4
 libcairo2  1.16.0-5
-libcap2  1:2.44-1
-libcap2-bin  1:2.44-1
+libcap2  1:2.44-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250326T144342Z/pool/updates/main/libc/libcap2/libcap2_2.44-1%2Bdeb11u1_amd64.deb
+libcap2-bin  1:2.44-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250326T144342Z/pool/updates/main/libc/libcap2/libcap2-bin_2.44-1%2Bdeb11u1_amd64.deb
+libcap-dev  1:2.44-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250326T144342Z/pool/updates/main/libc/libcap2/libcap-dev_2.44-1%2Bdeb11u1_amd64.deb
 libcap-ng0  0.7.9-2.2+b1
 libcap-ng-dev  0.7.9-2.2+b1
 libcapstone-dev  4.0.2-3
