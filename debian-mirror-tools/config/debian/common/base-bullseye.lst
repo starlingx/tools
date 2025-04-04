@@ -195,7 +195,7 @@ gpg-wks-server  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/202
 grep  3.6-1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/g/grep/grep_3.6-1_amd64.deb
 groff-base  1.22.4-6
 gsettings-desktop-schemas  3.38.0-2
-gunicorn  20.1.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241220T041311Z/pool/updates/main/g/gunicorn/gunicorn_20.1.0-1%2Bdeb11u1_all.deb
+gunicorn  23.0.0-1  https://snapshot.debian.org/archive/debian/20240814T203402Z/pool/main/g/gunicorn/gunicorn_23.0.0-1_all.deb
 gzip  1.10-4+deb11u1 https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/g/gzip/gzip_1.10-4%2Bdeb11u1_amd64.deb
 hdparm  9.60+ds-1
 hiera  3.2.0-2.1
@@ -518,8 +518,8 @@ libmpdec3  2.5.1-1
 libmpfr6  4.1.0-3
 libncurses-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 libncurses5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
-libncurses6  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
-libncursesw5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
+libncurses6  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
+libncursesw5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 libncursesw6  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 libndctl6  71.1-1
 libndp0  1.6-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20240616T175437Z/pool/updates/main/libn/libndp/libndp0_1.6-1%2Bdeb11u1_amd64.deb
@@ -829,8 +829,8 @@ multipath-tools-boot  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debia
 mysql-common  5.8+1.0.7
 nano  5.4-2+deb11u3  https://snapshot.debian.org/archive/debian/20240620T025456Z/pool/main/n/nano/nano_5.4-2%2Bdeb11u3_amd64.deb
 ncat  7.91+dfsg1+really7.80+dfsg1-2
-ncurses-base  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-base_6.2%2B20201114-2%2Bdeb11u2_all.deb 
-ncurses-bin  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-bin_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
+ncurses-base  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-base_6.2%2B20201114-2%2Bdeb11u2_all.deb
+ncurses-bin  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-bin_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 ndisc6 1.0.4-2
 netbase  6.3
 netcat-openbsd  1.217-3
@@ -948,13 +948,13 @@ python3-django-compressor  2.4-2
 python3-django-debreach  2.0.1-2
 python3-django-pyscss  2.0.2-9
 python3-dnf  4.5.2-6
-python3-dnspython  2.0.0-1
+python3-dnspython  2.3.0-1  https://snapshot.debian.org/archive/debian/20230125T025837Z/pool/main/d/dnspython/python3-dnspython_2.3.0-1_all.deb
 python3-docutils  0.16+dfsg-4
 python3-dogpile.cache  1.0.2-2
 python3-editor  1.0.3-2
 python3-elementpath  2.1.2-1
 python3-enmerkar  0.7.1-3
-python3-eventlet  0.26.1-7+deb11u1
+python3-eventlet  0.33.1-4  https://snapshot.debian.org/archive/debian/20230127T150858Z/pool/main/p/python-eventlet/python3-eventlet_0.33.1-4_all.deb
 python3-extras  1.0.0-4
 python3-falcon  2.0.0-2+b1
 python3-fasteners  0.14.1-2
@@ -969,7 +969,7 @@ python3-glanceclient 1:3.2.2-2
 python3-google-auth  1.5.1-3
 python3-gpg  1.14.0-1+b2
 python3-greenlet  0.4.17-1+b1
-python3-gunicorn  20.1.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241220T041311Z/pool/updates/main/g/gunicorn/python3-gunicorn_20.1.0-1%2Bdeb11u1_all.deb
+python3-gunicorn  23.0.0-1  https://snapshot.debian.org/archive/debian/20240814T203402Z/pool/main/g/gunicorn/python3-gunicorn_23.0.0-1_all.deb
 python3-hawkey  0.55.2-6
 python3-html5lib  1.1-3
 python3-httplib2  0.18.1-3
