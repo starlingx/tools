@@ -1,51 +1,56 @@
 [project]
-name = stx
-gituser = STX Builder
-gitemail = stx.builder@opendev.org
-proxy = false
-proxyserver = opendev.org
-proxyport = 8080
 buildbranch = master
-manifest = default.xml
-ostree_osname = debian
 debian_distribution = bullseye
 debian_version = 11.3
 
 # These URLs must contain snapshots of debian & debian-security repos.
 # We will append debian_snapshot_timestamp to each of them when creating
 # apt.sources lists
-#debian_snapshot_base = http://snapshot.debian.org/archive/debian
-debian_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian
 #debian_security_snapshot_base = http://snapshot.debian.org/archive/debian-security
 debian_security_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian-security
+#debian_snapshot_base = http://snapshot.debian.org/archive/debian
+debian_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian
 debian_snapshot_timestamp = 20220331T000000Z
 
+gitemail = stx.builder@opendev.org
+gituser = STX Builder
+manifest = default.xml
+name = stx
+ostree_osname = debian
+proxy = false
+proxyport = 8080
+proxyserver = opendev.org
+
 [builder]
-uid = 1000
-myuname = builder
-release = 6.0
-dist = bullseye
-stx_dist = .stx
-debfullname = STX Builder
 debemail = stx.builder@opendev.org
+debfullname = STX Builder
+myuname = builder
+os_codename = bullseye
+os_id = debian
+os_arch = amd64
+release = 6.0
+stx_pkg_ext = .stx
+uid = 1000
 
 [pkgbuilder]
 mode = local
 
 [repomgr]
-type = aptly
-os_mirror_url = https://mirror.starlingx.windriver.com/mirror
-os_mirror_dist_path = debian/debian/
-stx_mirror_strategy = stx_mirror_first
-lat_mirror_url = https://mirror.starlingx.windriver.com/mirror
-lat_mirror_lat_path = lat-sdk/
-sourceslist =
 deblist =
 dsclist =
+lat_mirror_lat_path = lat-sdk/
+lat_mirror_url = https://mirror.starlingx.windriver.com/mirror
 
 # This will be added to "Origin:" field in the Release file
 # of the local deb repos
 origin = starlingx
+
+os_mirror_dist_path = debian/debian/
+os_mirror_url = https://mirror.starlingx.windriver.com/mirror
+sourceslist =
+stx_mirror_strategy = stx_mirror_first
+type = aptly
+
 
 [aptly]
 mode = local

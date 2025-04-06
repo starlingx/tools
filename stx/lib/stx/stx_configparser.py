@@ -182,13 +182,20 @@ class STXConfigParser(object):
                     self.cf.set(section_name, key, value)
 
         # Assumptions:
-        #  - Removed
+        #  - Removed code:
         #    - cengn migration support is completed with the previous release
-        #    - debian_snapshot_{base,timestamp} migration is completed with the
-        #      previous release
-        #  - Adding
-        #    - support for stx_mirror_url => {os,lat}_mirror_url
-        #    - support for a specific mirror dist path: {os,lat}_mirror_{dist,lat}_path
+        #    - project.debian_snapshot_{base,timestamp} migration is completed
+        #      with the previous release
+        #  - Migrate/add builder config:
+        #    - Adjust builder distribution variables to align with the build
+        #      container configuration and /etc/os-release
+        #      - builder.dist -> builder.os_codename      (= bullseye)
+        #      - builder.stx_dist -> builder.stx_pkg_ext  (= .stx    )
+        #      - builder.os_id                            (= debian  )
+        #  - Adding configurable mirror support:
+        #    - support for repomgr.stx_mirror_url => repomgr.{os,lat}_mirror_url
+        #    - support for a specific mirror dist path:
+        #      repomgr.{os,lat}_mirror_{dist,lat}_path
 
         # Convert stx_mirror_url => {os,lat}_mirror_url and {os,lat}_mirror_{dist,lat}_path
         if self.cf.has_option('repomgr', 'stx_mirror_url'):
@@ -204,6 +211,17 @@ class STXConfigParser(object):
             self.__set('repomgr', 'lat_mirror_url',
                        'https://mirror.starlingx.windriver.com/mirror/')
             self.__set('repomgr', 'lat_mirror_lat_path', 'lat-sdk/lat-sdk-20231206/')
+
+        if self.cf.has_option('builder', 'dist'):
+            # Upgrade os related mirror info
+            self.__set('builder', 'os_id', 'debian')
+            self.__set('builder', 'os_codename', 'bullseye')
+            self.__delete_key('builder', 'dist')
+
+        if self.cf.has_option('builder', 'stx_dist'):
+            # Upgrade os related mirror info
+            self.__set('builder', 'stx_pkg_ext', '.stx')
+            self.__delete_key('builder', 'stx_dist')
 
         # Save changes
         self.syncConfigFile()

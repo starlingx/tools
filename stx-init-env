@@ -71,7 +71,6 @@ PYTHON3=python3
 KUBECTL=kubectl
 DOCKER_PREFIX=${STX_PREBUILT_BUILDER_IMAGE_PREFIX:-'starlingx/'}
 DOCKER_IMAGES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
-DOCKER_TAG="$STX_PREBUILT_BUILDER_IMAGE_TAG"
 DOCKERHUB_LOGIN=0
 
 BUILD_DOCKER=0
@@ -711,7 +710,7 @@ if [[ "$DOCKERHUB_LOGIN" -eq 1 ]] ; then
     STX_START_OPTS+=" --use-dockerhub-cred"
 fi
 
-## We should a valid stx.conf file here, read it and get the distro
+## We should have a valid stx.conf file here, read it and get the distro
 if [[ ! -f "$STX_TOOLS_DIR/stx.conf" ]] ; then
     error "$STX_TOOLS_DIR/stx.conf: file not found. Run with the '--clean' option first to use the latest stx.conf sample"
     exit 1
@@ -726,35 +725,71 @@ while IFS='=' read -r key value; do
     STX_CONF[$(echo $key | xargs)]="$(echo $value | xargs)"
 done < <(cat $STX_TOOLS_DIR/stx.conf | grep -v ^# | awk '/^\[/ { section=substr($0,2,length-2) } /=/ { print section "." $0 }')
 
-# Get the config values to pass to the the container builds
-dist=${STX_CONF["builder.dist"]}
+# Get the config values to find/pass to the the container builds
+builder_os_id=${STX_CONF["builder.os_id"]}
+builder_os_codename=${STX_CONF["builder.os_codename"]}
+builder_os_arch=${STX_CONF["builder.os_arch"]}
 os_mirror_url=${STX_CONF["repomgr.os_mirror_url"]}
 os_mirror_dist_path=${STX_CONF["repomgr.os_mirror_dist_path"]}
 lat_mirror_url=${STX_CONF["repomgr.lat_mirror_url"]}
 lat_mirror_lat_path=${STX_CONF["repomgr.lat_mirror_lat_path"]}
 
 # bail if values are missing
-if [ -z "${dist}" ]; then
-    error "Missing stx.conf value for: builder.dist"
-    exit 1
+if [ -z "${builder_os_id}" ]; then
+    builder_os_id=debian
+    warn "Missing stx.conf value for: builder.os_id; using: ${builder_os_id}"
+fi
+if [ -z "${builder_os_codename}" ]; then
+    builder_os_codename=bullseye
+    warn "Missing stx.conf value for: builder.os_codename; using: ${builder_os_codename}"
+fi
+if [ -z "${builder_os_arch}" ]; then
+    builder_os_arch=amd64
+    warn "Missing stx.conf value for: builder.os_codename; using: ${builder_os_codename}"
 fi
 if [ -z "${os_mirror_url}" ]; then \
-    error "Missing stx.conf value for: repomgr.os_mirror_url"
-    exit 1
+    os_mirror_url=https://mirror.starlingx.windriver.com/mirror/
+    warn "Missing stx.conf value for: repomgr.os_mirror_url; using: ${os_mirror_url}"
 fi
 if [ -z "${os_mirror_dist_path}" ]; then
-    error "Missing stx.conf value for: repomgr.os_mirror_dist_path"
-    exit 1
+    os_mirror_dist_path=debian/debian/
+    warn "Missing stx.conf value for: repomgr.os_mirror_dist_path; using: ${os_mirror_dist_path}"
 fi
 if [ -z "${lat_mirror_url}" ]; then
-    error "Missing stx.conf value for: repomgr.lat_mirror_url"
-    exit 1
+    lat_mirror_url=https://mirror.starlingx.windriver.com/mirror/
+    warn "Missing stx.conf value for: repomgr.lat_mirror_url; using: ${lat_mirror_url}"
 fi
 
 if [ -z "${lat_mirror_lat_path}" ]; then
-    error "Missing stx.conf value for: repomgr.lat_mirror_lat_path"
-    exit 1
+    lat_mirror_lat_path=lat-sdk/
+    warn "Missing stx.conf value for: repomgr.lat_mirror_lat_path; using: ${lat_mirror_lat_path}"
 fi
+
+# Make sure upstream DOCKER_TAG will be in the correct format
+#    e.g. might need to transform 'master-debian-latest'
+#         into 'master-debian-bullseye-amd64-latest'
+TAG_VER=${STX_PREBUILT_BUILDER_IMAGE_TAG##*-}
+REMANDER=${STX_PREBUILT_BUILDER_IMAGE_TAG%-*}
+NEXT=${REMANDER##*-}
+echo "REMANDER=$REMANDER"
+if [ "$NEXT" == "$builder_os_arch" ]; then
+    REMANDER=${REMANDER%-*}
+    NEXT=${REMANDER##*-}
+fi
+echo "REMANDER=$REMANDER"
+if [ "$NEXT" == "$builder_os_codename" ]; then
+    REMANDER=${REMANDER%-*}
+    NEXT=${REMANDER##*-}
+fi
+echo "REMANDER=$REMANDER"
+ROOT_TAG_NAME=${REMANDER}
+DOCKER_TAG="${ROOT_TAG_NAME}-${builder_os_codename}-${builder_os_arch}-${TAG_VER}"
+
+
+echo "Setup build containers (and toolchain) for:"
+echo "  - OS ID: ${builder_os_id}"
+echo "  - OS Code Name: ${builder_os_codename}"
+echo "  - OS Arch: ${builder_os_arch}"
 
 echo "Setup for distro: $dist:"
 echo "  - OS mirror: ${os_mirror_url}${os_mirror_dist_path}"
@@ -781,11 +816,11 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     extra_build_args+=("lat_mirror_lat_path=$lat_mirror_lat_path")
 
     for img in $BUILD_DOCKER_IMAGES; do
-        info "Starting to build image: $img:$DOCKER_TAG_LOCAL-${dist}"
-        cmd="docker build "${docker_build_args[@]}" "${extra_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL-${dist} -f "$STX_TOOLS_DIR/"stx/dockerfiles/${dist}/$img.Dockerfile "$STX_TOOLS_DIR""
+        info "Starting to build image: $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
+        cmd="docker build "${docker_build_args[@]}" "${extra_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL-${builder_os_codename} -f "$STX_TOOLS_DIR/"stx/${builder_os_id}/${builder_os_codename}/dockerfiles/$img.Dockerfile "$STX_TOOLS_DIR""
         info "Running command: ${cmd}"
         eval "$cmd" || exit 1
-        info "Finished building image: $img:$DOCKER_TAG_LOCAL-${dist}"
+        info "Finished building image: $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
     done
 fi
 
@@ -800,7 +835,7 @@ PULL_DOCKER_IMAGES=$(
             fi
         done
         if [[ "$built" != "yes" ]] && \
-            { [[ "$USE_DOCKER_CACHE" != 1 ]] || ! docker image inspect ${img}:${DOCKER_TAG_LOCAL}-${dist} >/dev/null 2>&1 ; } ; then
+               { [[ "$USE_DOCKER_CACHE" != 1 ]] || ! docker image inspect ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} >/dev/null 2>&1 ; } ; then
             echo "$img"
         fi
     done
@@ -808,9 +843,9 @@ PULL_DOCKER_IMAGES=$(
 if [[ -n "$PULL_DOCKER_IMAGES" ]] ; then
     notice "Pulling docker images: "$PULL_DOCKER_IMAGES
     for img in $PULL_DOCKER_IMAGES; do
-        docker pull ${DOCKER_PREFIX}${img}:${DOCKER_TAG}-${dist} || exit 1
-        docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL}-${dist} || exit 1
-        info "created image ${img}:${DOCKER_TAG_LOCAL}-${dist} from pre-built ${DOCKER_PREFIX}${img}:${DOCKER_TAG}-${dist}"
+        docker pull ${DOCKER_PREFIX}${img}:${DOCKER_TAG} || exit 1
+        docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} || exit 1
+        info "created image ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} from pre-built ${DOCKER_PREFIX}${img}:${DOCKER_TAG}"
     done
 fi
 

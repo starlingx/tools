@@ -78,8 +78,6 @@ class HandleControlTask(object):
         builder_uid = self.config.get('builder', 'uid')
         builder_myuname = self.config.get('builder', 'myuname')
         builder_release = self.config.get('builder', 'release')
-        builder_dist = self.config.get('builder', 'dist')
-        builder_stx_dist = self.config.get('builder', 'stx_dist')
         builder_debfullname = self.config.get('builder', 'debfullname')
         builder_debemail = self.config.get('builder', 'debemail')
         repomgr_type = self.config.get('repomgr', 'type')
@@ -91,6 +89,28 @@ class HandleControlTask(object):
         proxyport = self.config.get('project', 'proxyport')
         buildbranch = self.config.get('project', 'buildbranch')
         manifest = self.config.get('project', 'manifest')
+
+        # Adjust builder distribution variables to align with the build
+        # container configuration
+        #  Migrate:
+        #    builder.dist -> builder.os_id            (= debian)
+        #    builder.stx_dist -> builder.stx_pkg_ext  (= .stx  )
+        #  Add:
+        #    builder.os_codename                      (= bullseye)
+
+        try:
+            builder_os_codename = self.config.get('builder', 'os_codename')
+            builder_os_id = self.config.get('builder', 'os_id')
+        except Exception:
+            builder_dist = self.config.get('builder', 'dist')
+            builder_os_codename = builder_dist
+            builder_os_id = 'debian'
+
+        try:
+            builder_stx_pkg_ext = self.config.get('builder', 'stx_pkg_ext')
+        except Exception:
+            builder_stx_dist = self.config.get('builder', 'stx_dist')
+            builder_stx_pkg_ext = builder_stx_dist
 
         # The stx_mirror_url references below are obsolete, and are retained for
         # backward compatibility with preexisting build environmnets.
@@ -182,8 +202,9 @@ stx-pkgbuilder/configmap/')
                 line = line.replace("@MYUID@", builder_uid)
                 line = line.replace("@MYUNAME@", builder_myuname)
                 line = line.replace("@MY_RELEASE@", builder_release)
-                line = line.replace("@DIST@", builder_dist)
-                line = line.replace("@STX_DIST@", builder_stx_dist)
+                line = line.replace("@BUILDER_OS_ID@", builder_os_id)
+                line = line.replace("@BUILDER_OS_CODENAME@", builder_os_codename)
+                line = line.replace("@BUILDER_STX_PKG_EXTENSION@", builder_stx_pkg_ext)
                 line = line.replace("@DEBFULLNAME@", builder_debfullname)
                 line = line.replace("@DEBEMAIL@", builder_debemail)
                 line = line.replace("@REPOMGR_TYPE@", repomgr_type)
@@ -249,7 +270,7 @@ stx-pkgbuilder/configmap/')
         wait_arg = '--wait ' if wait else ''
         cmd = self.config.helm() + ' install ' + wait_arg + projectname + ' ' \
             + self.abs_helmchartdir \
-            + ' --set global.image.tag=' + self.config.docker_tag + '-' + self.config.get('builder', 'dist')
+            + ' --set global.image.tag=' + self.config.docker_tag + '-' + self.config.get('builder', 'os_codename')
 
         if not self.config.use_minikube:
             # Override hostDir for k8s local host mount

@@ -10,9 +10,11 @@ export MYUID=@MYUID@
 # These are used in the Dockerfile, not sure where else
 export MYUNAME=@MYUNAME@
 
-export DIST=@DIST@
+# Use to select the correct package $DIST_ID/$DIST (i.e. debian/bullseye)
+export DIST_ID=@BUILDER_OS_ID@
+export DIST=@BUILDER_OS_CODENAME@
 
-export STX_DIST=@STX_DIST@
+export STX_DIST=@BUILDER_STX_PKG_EXTENSION@
 
 export REPOMGR_TYPE=@REPOMGR_TYPE@
 

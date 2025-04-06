@@ -68,14 +68,14 @@ RUN apt-get -q update && apt-get -y install gnupg2 && \
 
 # Copy our Aptly build and configure Aptly
 COPY --from=builder /go/bin/aptly /usr/bin/aptly
-COPY stx/toCOPY/aptly/aptly.conf /etc/aptly.conf
-COPY stx/toCOPY/aptly/supervisord.aptly.conf /etc/supervisor/conf.d/aptly.conf
+COPY stx/debian/common/toCOPY/aptly/aptly.conf /etc/aptly.conf
+COPY stx/debian/common/toCOPY/aptly/supervisord.aptly.conf /etc/supervisor/conf.d/aptly.conf
 
 # Configure Nginx
-COPY stx/toCOPY/aptly/nginx.conf.template /etc/nginx/nginx.conf.template
-COPY stx/toCOPY/aptly/supervisord.nginx.conf /etc/supervisor/conf.d/nginx.conf
-COPY stx/toCOPY/aptly/nginx.conf /etc/nginx/nginx.conf
-COPY stx/toCOPY/aptly/nginx.logrotate /etc/logrotate.d/nginx
+COPY stx/debian/common/toCOPY/aptly/nginx.conf.template /etc/nginx/nginx.conf.template
+COPY stx/debian/common/toCOPY/aptly/supervisord.nginx.conf /etc/supervisor/conf.d/nginx.conf
+COPY stx/debian/common/toCOPY/aptly/nginx.conf /etc/nginx/nginx.conf
+COPY stx/debian/common/toCOPY/aptly/nginx.logrotate /etc/logrotate.d/nginx
 
 # Bind mount locations
 VOLUME [ "/var/aptly" ]
@@ -84,15 +84,15 @@ VOLUME [ "/var/aptly" ]
 EXPOSE 80 8080
 
 # Import private key for repo signatures
-COPY stx/toCOPY/aptly/privkey.rsa /root
+COPY stx/debian/common/toCOPY/aptly/privkey.rsa /root
 RUN gpg --import --pinentry-mode loopback --batch --passphrase starlingx /root/privkey.rsa && \
     rm -f /root/privkey.rsa
 
 # Add vimrc
 RUN mkdir -p /etc/vim
-COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+COPY stx/debian/common/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
 
 # Configure startup
-COPY stx/toCOPY/aptly/entrypoint.sh /bin/entrypoint.sh
+COPY stx/debian/common/toCOPY/aptly/entrypoint.sh /bin/entrypoint.sh
 ENTRYPOINT [ "ionice", "-c", "3", "nice", "-n", "15", "/bin/entrypoint.sh" ]

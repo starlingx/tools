@@ -78,10 +78,10 @@ RUN apt-get -y install \
         pip3 install git+https://opendev.org/starlingx/apt-ostree@master
 
 # Insert pubkey of the package repository
-COPY stx/toCOPY/builder/pubkey.rsa /opt/LAT/
+COPY stx/debian/common/toCOPY/builder/pubkey.rsa /opt/LAT/
 
 # Prepare executables
-COPY stx/toCOPY/lat-tool/lat/ /opt/LAT/lat
+COPY stx/debian/common/toCOPY/lat-tool/lat/ /opt/LAT/lat
 # Download & install LAT SDK.
 RUN echo "LAT_BINARY_RESOURCE_PATH = ${LAT_BINARY_RESOURCE_PATH}"
 RUN wget --quiet ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh --output-document=/opt/LAT/AppSDK.sh && \
@@ -101,7 +101,7 @@ RUN sed -i 's/linux-image-amd64/linux-image-stx-amd64/g' /opt/LAT/SDK/sysroots/x
 RUN sed -i 's/Wind River Linux Graphics development .* ostree/StarlingX ostree/g' /opt/LAT/SDK/sysroots/corei7-64-wrs-linux/boot/efi/EFI/BOOT/grub.cfg
 
 # Add vimrc
-COPY stx/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+COPY stx/debian/common/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
