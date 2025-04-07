@@ -69,19 +69,19 @@ RUN cd /tmp && \
     dpkg -i debootstrap_1.0.128+nmu2+deb12u1_all.deb
 RUN groupadd crontab
 
-COPY stx/debian/common/toCOPY/pkgbuilder/app.py /opt/
-COPY stx/debian/common/toCOPY/pkgbuilder/debbuilder.py /opt/
-COPY stx/debian/common/toCOPY/pkgbuilder/schrootspool.py /opt/
-COPY stx/debian/common/toCOPY/pkgbuilder/utils.py /opt/
-COPY stx/debian/common/toCOPY/pkgbuilder/setup.sh /opt/
-COPY stx/debian/common/toCOPY/pkgbuilder/debbuilder.conf /etc/sbuild/sbuild.conf
+COPY stx/debian/bullseye/toCOPY/pkgbuilder/app.py /opt/
+COPY stx/debian/bullseye/toCOPY/pkgbuilder/debbuilder.py /opt/
+COPY stx/debian/bullseye/toCOPY/pkgbuilder/schrootspool.py /opt/
+COPY stx/debian/bullseye/toCOPY/pkgbuilder/utils.py /opt/
+COPY stx/debian/bullseye/toCOPY/pkgbuilder/setup.sh /opt/
+COPY stx/debian/bullseye/toCOPY/pkgbuilder/debbuilder.conf /etc/sbuild/sbuild.conf
 
-COPY stx/debian/common/toCOPY/pkgbuilder/pubkey.rsa /opt/
+COPY stx/debian/bullseye/toCOPY/pkgbuilder/pubkey.rsa /opt/
 RUN apt-key add /opt/pubkey.rsa
 
 # Add vimrc
 RUN mkdir -p /etc/vim
-COPY stx/debian/common/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+COPY stx/debian/bullseye/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
 
 ENTRYPOINT ["/usr/bin/tini", "--"]

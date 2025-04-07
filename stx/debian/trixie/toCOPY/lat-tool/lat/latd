@@ -1,0 +1,230 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import time
+import logging
+import subprocess
+import argparse
+import signal
+import yaml
+
+import utils
+import volume as channel
+
+logger = logging.getLogger('latd')
+utils.set_logger(logger)
+
+LAT_SDK_DIR = "/opt/LAT/SDK"
+WORKSPACE_DIR = channel.workspace_dir
+CHANNEL_DIR = channel.channel_dir
+
+class LATD(object):
+    
+    def __init__(self):
+        self.appsdk_dir = LAT_SDK_DIR
+        self.workspace_dir = WORKSPACE_DIR
+        self.child_pid = 0
+        self.latest_build_status = 'not-started'
+
+    def update_build_status(self):
+        """
+        Update the build status
+        """
+        if self.child_pid > 0:
+            c_pid, c_st = os.waitpid(self.child_pid, os.WNOHANG)
+            if c_pid == 0:
+                self.latest_build_status = 'running'
+            else:
+                if c_st == 0:
+                    self.latest_build_status = 'succeed'
+                else:
+                    self.latest_build_status = 'fail'
+                self.child_pid = 0
+
+    def run(self):
+        """
+        Listen for client requests and act accordingly
+        """
+        def record_message(hist_file, msg):
+            with open(hist_file, 'a') as f:
+                f.write("%s: %s\n" % (time.time(), msg))
+
+        logger.info("workspace_dir: %s" % self.workspace_dir)
+        env_script = self.appsdk_dir + '/environment-setup-corei7-64-wrs-linux'
+        channel.server_init_channel()
+        while(True):
+            logger.info("latd waiting for client request")
+            message = channel.get_client_message()
+            logger.info("Got client message: %s" % message)
+            # record the message into history
+            msg_hist = CHANNEL_DIR + "/client_message_history"
+            record_message(msg_hist, message)
+            self.workspace_dir = message['workdir']
+            logger.info("Set work directory to %s" % self.workspace_dir)
+            if message['action'] == 'build':
+                msg_latd = {}
+                msg_latd['action'] = 'build'
+                cmd = 'rm -f log/log.appsdk'
+                subprocess.check_call(cmd, shell=True, cwd=self.workspace_dir)
+
+                if 'yaml_file' in message:
+                    yaml_file = message['yaml_file']
+                    if os.path.exists(yaml_file):
+                        channel.mark_client_message_valid(True)
+                    else:
+                        logger.info("Yaml file does not exist: %s" % yaml_file)
+                        channel.mark_client_message_valid(False)
+                        msg_latd['result'] = 'fail'
+                        msg_latd['fail_reason'] = 'Configuration yaml file (%s) does not exist' % yaml_file
+                        channel.send_message_to_client(msg_latd)
+                        continue
+                else:
+                    logger.info('No yaml file contents: %s' % yaml_file)
+                    channel.mark_client_message_valid(False)
+                    msg_latd['result'] = 'fail'
+                    msg_latd['fail_reason'] = 'No configuration yaml file contents'
+                    channel.send_message_to_client(msg_latd)
+                    continue
+
+                # check if a build is still running
+                if self.child_pid > 0:
+                    c_pid, c_st = os.waitpid(self.child_pid, os.WNOHANG)
+                    if c_pid == 0:
+                        msg_latd['result'] = 'fail'
+                        msg_latd['fail_reason'] = 'A previous build is still running'
+                        channel.send_message_to_client(msg_latd)
+                        continue
+                    else:
+                        self.child_pid = 0
+                # fork a child process to do the build
+                try:
+                    pid = os.fork()
+                except OSError:
+                    logger.warning("Failed to fork a child process to do the build")
+                    msg_latd['result'] = 'fail'
+                    msg_latd['fail_reason'] = 'Failed to fork a child process to do the build'
+                    channel.send_message_to_client(msg_latd)
+                    continue
+                if pid > 0:
+                    # parent process
+                    msg_latd['result'] = 'succeed'
+                    self.child_pid = pid
+                    channel.send_message_to_client(msg_latd)
+                else:
+                    # child process
+                    # use genimage command do the build and then exit
+                    gencmd = 'genimage'
+                    with open(yaml_file) as f:
+                        contents = yaml.safe_load(f)
+                        if 'image_type' in contents:
+                            if 'initramfs' in contents['image_type']:
+                                gencmd = 'geninitramfs'
+                    cmd = '. %s; appsdk --log-dir log %s %s' % (env_script, gencmd, yaml_file)
+                    # hack to change genimage command
+                    if os.path.exists(self.workspace_dir + '/hack/lat-genimage-cmd'):
+                        with open(self.workspace_dir + '/hack/lat-genimage-cmd', 'r') as f:
+                            lines = f.readlines()
+                            cmd = ' '.join(lines)
+                    logger.info("latd running command: %s" % cmd)
+                    subprocess.check_call(cmd, shell=True, cwd=self.workspace_dir)
+                    sys.exit(0)
+            elif message['action'] == 'status':
+                channel.mark_client_message_valid(True)
+                status_file = CHANNEL_DIR + '/status.lat'
+                st = {}
+                self.update_build_status()
+                if self.latest_build_status == 'running':
+                    st['lat_status'] = 'busy'
+                else:
+                    st['lat_status'] = 'idle'
+                st['build_status'] = self.latest_build_status
+                with open(status_file, 'w') as f:
+                    yaml.safe_dump(st, f)
+                # status action should always succeed
+                msg_latd = {}
+                msg_latd['action'] = 'status'
+                msg_latd['result'] = 'succeed'
+                msg_latd['status_file'] = status_file
+                channel.send_message_to_client(msg_latd)
+            elif message['action'] == 'stop':
+                channel.mark_client_message_valid(True)
+                # stop action should always succeed
+                if self.child_pid > 0:
+                    os.kill(self.child_pid, signal.SIGTERM)
+                    self.child_pid = 0
+                    self.latest_build_status = "fail"
+                msg_latd = {}
+                msg_latd['action'] = 'stop'
+                msg_latd['result'] = 'succeed'
+                channel.send_message_to_client(msg_latd)
+            elif message['action'] == 'logs':
+                channel.mark_client_message_valid(True)
+                log_file = self.workspace_dir + '/log/log.appsdk'
+                msg_latd = {}
+                msg_latd['action'] = 'logs'
+                if os.path.exists(log_file):
+                    msg_latd['result'] = 'succeed'
+                    msg_latd['log_file_path'] = log_file
+                else:
+                    msg_latd['result'] = 'fail'
+                    msg_latd['fail_reason'] = 'No log file found'
+                channel.send_message_to_client(msg_latd)
+            elif message['action'] == 'clean':
+                channel.mark_client_message_valid(True)
+                self.update_build_status()
+                msg_latd = {}
+                if self.latest_build_status == 'running':
+                    msg_latd['action'] = 'clean'
+                    msg_latd['result'] = 'fail'
+                    msg_latd['fail_reason'] = 'A build is still running'
+                else:
+                    cmd = 'rm -rf deploy exampleyamls workdir log'
+                    subprocess.check_call(cmd, shell=True, cwd=self.workspace_dir)
+                    msg_latd['action'] = 'clean'
+                    msg_latd['result'] = 'succeed'
+                channel.send_message_to_client(msg_latd)
+            elif message['action'] == 'getyaml':
+                channel.mark_client_message_valid(True)
+                cmd = '. %s; appsdk exampleyamls --pkg-type external-debian' % env_script
+                subprocess.check_call(cmd, shell=True, cwd=self.workspace_dir)
+                example_yaml = self.workspace_dir + '/exampleyamls/debian-image-base-intel-x86-64.yaml'
+                msg_latd = {}
+                msg_latd['action'] = 'getyaml'
+                msg_latd['result'] = 'succeed'
+                msg_latd['yaml_file_path'] = example_yaml
+                channel.send_message_to_client(msg_latd)
+            else:
+                logger.warning("Invalid action request from client: %s" % message['action'])
+                channel.mark_client_message_valid(False)
+            
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="LAT Daemon which runs inside LAT container",
+        epilog="Use %(prog)s --help to get help")
+    parser.add_argument("-d", "--debug",
+        help = "Enable debug output",
+        action="store_const", const=logging.DEBUG, dest="loglevel", default=logging.INFO)
+    parser.add_argument("-q", "--quiet",
+        help = "Hide all output except error messages",
+        action="store_const", const=logging.ERROR, dest="loglevel")
+
+    args = parser.parse_args()
+    logger.setLevel(args.loglevel)
+
+    logger.info("Started")
+    latd = LATD()
+    latd.run()
+
+    
+if __name__ == "__main__":
+    try:
+        ret = main()
+    except Exception as esc:
+        ret = 1
+        import traceback
+        traceback.print_exc()
+
+    sys.exit(ret)
+

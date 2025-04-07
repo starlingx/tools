@@ -1,4 +1,4 @@
-# Copyright (c) 2021,2025 Wind River Systems, Inc.
+# Copyright (c) 2021 Wind River Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM debian:bullseye
+FROM debian:trixie
 ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
 ARG lat_mirror_url="https://mirror.starlingx.windriver.com/mirror/"
@@ -22,16 +22,19 @@ MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
 ARG LAT_BINARY_RESOURCE_PATH="${lat_mirror_url}${lat_mirror_lat_path}"
 
-# Add retry to apt config
-RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie contrib main non-free-firmware" > /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates contrib main non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-backports contrib main non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian-security trixie-security contrib main non-free-firmware" >> /etc/apt/sources.list && \
+    rm /etc/apt/sources.list.d/debian.sources
 
-# Update certificates via upsteam repos
+# pass --break-system-packages to pip
+# https://salsa.debian.org/cpython-team/python3/-/blob/python3.11/debian/README.venv#L58
+RUN echo "[global]" >> /etc/pip.conf && \
+    echo "break-system-packages = true" >> /etc/pip.conf
+
+# Update certificates
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
-
-# Now point to the mirror for specific package builds
-RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" > /etc/apt/sources.list && \
-    echo "deb ${os_mirror_url}${os_mirror_dist_path}security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
-    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
 
 # Install necessary packages
 RUN apt-get -y update && apt-get --no-install-recommends -y install \
@@ -78,10 +81,10 @@ RUN apt-get -y install \
         pip3 install git+https://opendev.org/starlingx/apt-ostree@master
 
 # Insert pubkey of the package repository
-COPY stx/debian/bullseye/toCOPY/builder/pubkey.rsa /opt/LAT/
+COPY stx/debian/trixie/toCOPY/builder/pubkey.rsa /opt/LAT/
 
 # Prepare executables
-COPY stx/debian/bullseye/toCOPY/lat-tool/lat/ /opt/LAT/lat
+COPY stx/debian/trixie/toCOPY/lat-tool/lat/ /opt/LAT/lat
 # Download & install LAT SDK.
 RUN echo "LAT_BINARY_RESOURCE_PATH = ${LAT_BINARY_RESOURCE_PATH}"
 RUN wget --quiet ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh --output-document=/opt/LAT/AppSDK.sh && \
@@ -89,19 +92,27 @@ RUN wget --quiet ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh --output-document=/opt/L
     /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y && \
     rm -f /opt/LAT/AppSDK.sh
 
-# Fix: Use Debian CDN address for geo-frendly servers
-RUN sed -i "s#ftp.cn.debian.org#${os_mirror_url}${os_mirror_dist_path}deb.debian.org#g" /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
+# LAT Fix: Use Debian CDN address for geo-frendly servers
+RUN sed -i 's/ftp.cn.debian.org/${os_mirror_url}${os_mirror_dist_path}deb.debian.org/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
 
-# Fix: Align DEFAULT_INITRD_NAME with our custom names
+# LAT Fix: Align DEFAULT_INITRD_NAME with our custom names
 RUN sed -i 's/debian-initramfs-ostree-image/starlingx-initramfs-ostree-image/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
 
-# Fix: Align kernel with custom starlingx kernel
+# LAT Fix: Align kernel with custom starlingx kernel
 RUN sed -i 's/linux-image-amd64/linux-image-stx-amd64/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
 
 RUN sed -i 's/Wind River Linux Graphics development .* ostree/StarlingX ostree/g' /opt/LAT/SDK/sysroots/corei7-64-wrs-linux/boot/efi/EFI/BOOT/grub.cfg
 
+# LAT Fix: Update for the Trixie version of debootstrap: https://salsa.debian.org/installer-team/debootstrap/-/tree/1.0.140?ref_type=tags
+COPY stx/debian/trixie/toCOPY/lat-tool/lat/debootstrap/debootstrap /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/bin/debootstrap
+COPY stx/debian/trixie/toCOPY/lat-tool/lat/debootstrap/functions /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/share/debootstrap/functions
+COPY stx/debian/trixie/toCOPY/lat-tool/lat/debootstrap/scripts/debian-common /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/share/debootstrap/scripts/debian-common
+
+# Fix: Add gpgv package needed by proper functioning by apt
+RUN sed -i 's/gpg,gpg-agent/gpg,gpgv,gpg-agent/g' /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/package_manager/deb/__init__.py
+
 # Add vimrc
-COPY stx/debian/bullseye/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+COPY stx/debian/trixie/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
 
 ENTRYPOINT ["/usr/bin/tini", "--"]

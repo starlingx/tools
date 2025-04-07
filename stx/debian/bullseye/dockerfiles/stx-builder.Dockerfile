@@ -107,17 +107,17 @@ RUN sed -i '/^proxy_dns*/d' /etc/proxychains.conf && \
     ln -sf /usr/local/bin/stx/stx-localrc /root/localrc && \
     echo '. /usr/local/bin/finishSetup.sh' >> /root/.bashrc
 
-COPY stx/debian/common/toCOPY/lat-tool/lat /opt/LAT/lat
-COPY stx/debian/common/toCOPY/builder/finishSetup.sh /usr/local/bin
-COPY stx/debian/common/toCOPY/builder/userenv /root/
-COPY stx/debian/common/toCOPY/builder/buildrc /root/
+COPY stx/debian/bullseye/toCOPY/lat-tool/lat /opt/LAT/lat
+COPY stx/debian/bullseye/toCOPY/builder/finishSetup.sh /usr/local/bin
+COPY stx/debian/bullseye/toCOPY/builder/userenv /root/
+COPY stx/debian/bullseye/toCOPY/builder/buildrc /root/
 
-COPY stx/debian/common/toCOPY/builder/pubkey.rsa /root
+COPY stx/debian/bullseye/toCOPY/builder/pubkey.rsa /root
 RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa
 
 # Add vimrc
 RUN mkdir -p /etc/vim
-COPY stx/debian/common/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+COPY stx/debian/bullseye/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
 
 ENTRYPOINT ["ionice", "-c", "3", "nice", "-n", "15", "/usr/bin/tini", "-g", "--"]

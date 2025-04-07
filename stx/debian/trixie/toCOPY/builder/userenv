@@ -1,0 +1,57 @@
+# Common configuration for StarlingX builder
+
+# Find the other rc files
+BUILDRC_DIR=$(cd $(dirname "${BASH_SOURCE:-$0}") && pwd)
+
+# Allow local overrides of env variables
+if [[ -f $BUILDRC_DIR/localrc ]]; then
+    source $BUILDRC_DIR/localrc
+fi
+# Allow local overrides of env variables
+if [[ -f $BUILDRC_DIR/buildrc ]]; then
+    source $BUILDRC_DIR/buildrc
+fi
+
+if [ ! -d $MY_REPO_ROOT_DIR ]; then
+    mkdir -p $MY_REPO_ROOT_DIR > /dev/null 2>&1
+fi
+if [ ! -d $MY_WORKSPACE ]; then
+    mkdir -p $MY_WORKSPACE > /dev/null 2>&1
+fi
+
+if echo $- | grep -q i ; then
+cat <<EOF
+To ease checkout from builder container do:
+    !!!! Mandatory:
+    sudo apt-get update
+    git config --global user.name <username>
+    git config --global user.email <email>
+
+If proxy used:
+    ssh -D 8080 -qTfnN <proxy host>
+    echo "alias wget='proxychains wget'" >>~/.bashrc
+    echo "alias repo='proxychains repo'" >>~/.bashrc
+    source ~/.bashrc
+
+To start a fresh source tree:
+    cd \$MY_REPO_ROOT_DIR
+    repo init -u https://opendev.org/starlingx/manifest.git -m default.xml
+    repo sync
+
+To download binary, sources & 3rd-party to local mirror:
+    downloader -b -s -B std,rt
+
+To build all packages:
+    build-pkgs -a | build-pkgs -p <packageA,packageB...>
+
+To clean and re-build all packages:
+    build-pkgs --clean --all
+
+To make image (std and rt kernels are included):
+    build-image
+
+To build patches:
+    patch-builder --recipe <path to recipe>
+EOF
+fi
+cd ${MY_WORKSPACE}

@@ -1,0 +1,16 @@
+" Indent + disable tabs
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" Ignore TTY mouse events
+set ttymouse=
+
+" Enable search & syntax highlight
+set hlsearch
+syntax on
+
+" Restore cursor position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+

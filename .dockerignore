@@ -1,2 +1,3 @@
 *
-!stx/debian/common/toCOPY
+!stx/debian/bullseye/toCOPY
+!stx/debian/trixie/toCOPY

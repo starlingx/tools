@@ -752,8 +752,12 @@ if [ -z "${os_mirror_url}" ]; then \
     warn "Missing stx.conf value for: repomgr.os_mirror_url; using: ${os_mirror_url}"
 fi
 if [ -z "${os_mirror_dist_path}" ]; then
-    os_mirror_dist_path=debian/debian/
-    warn "Missing stx.conf value for: repomgr.os_mirror_dist_path; using: ${os_mirror_dist_path}"
+    if [ "${os_mirror_url}" == "http://" ]; then
+        info "Missing stx.conf value for: repomgr.os_mirror_dist_path; mirror points to upstream: ${os_mirror_url}; allowing"
+    else
+        os_mirror_dist_path=debian/debian/
+        warn "Missing stx.conf value for: repomgr.os_mirror_dist_path; using: ${os_mirror_dist_path}"
+    fi
 fi
 if [ -z "${lat_mirror_url}" ]; then
     lat_mirror_url=https://mirror.starlingx.windriver.com/mirror/
