@@ -13,7 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import json
 import logging
+import os
+import re
 from stx import utils  # pylint: disable=E0611
 import subprocess
 import tempfile
@@ -114,6 +117,87 @@ class KubeHelper(object):
         podname = str(output.decode('utf8').strip())
 
         return podname
+
+    def __get_docker_cred_secret_name(self):
+        project_name = re.sub(r'[^a-z0-9-]', r'-',
+                              self.config.get('project', 'name').lower())
+        return project_name + '-dockerconfigjson'
+
+    def try_create_docker_cred_secret(self):
+        '''Create a k8s secret with Docker Hub credentials.
+
+        Check the file $HOME/.docker/config.json for Docker Hub
+        credentials. If if found, create the secret and return
+        its name. Otherwise, do nothing and return None.
+        '''
+
+        cred_name = self.__get_docker_cred_secret_name()
+
+        # Create a temporary docker config file that contains only the
+        # docker hub credentials, by extracting it from the calling user's
+        # docker config
+
+        # Find docker config location
+        docker_config = '%s/config.json' % \
+                        os.getenv('DOCKER_CONFIG',
+                                  os.path.expanduser('~/.docker'))
+        try:
+            with open(docker_config) as f:
+                docker_config_data = json.load(f)
+        except FileNotFoundError:
+            return None
+
+        # Look for dockerhub credentials
+        dockerhub_auth = docker_config_data.get('auths', {})\
+                                           .get('https://index.docker.io/v1/', {})\
+                                           .get('auth')
+        if not dockerhub_auth:
+            return None
+
+        # Create a temporary file that contains only docker hub credentials
+        with tempfile.NamedTemporaryFile(mode='w+t',
+                                         encoding='utf8',
+                                         prefix='stx_docker_config_',
+                                         suffix='.json') as f:
+            new_docker_config_data = {
+                'auths': {
+                    'https://index.docker.io/v1/': {
+                        'auth': dockerhub_auth
+                    }
+                }
+            }
+            json.dump(new_docker_config_data, f)
+            f.flush()
+
+            # (re-)create the secret
+            self.__delete_docker_cred_secret(cred_name)
+            create_cmd = self.config.kubectl() + f' create secret generic {cred_name}' + \
+                                                 f' --from-file=.dockerconfigjson="{f.name}"' + \
+                                                 ' --type=kubernetes.io/dockerconfigjson'
+            logger.info('Running: %s', create_cmd)
+            subprocess.run(create_cmd, shell=True, check=True)
+
+        return cred_name
+
+    def delete_docker_cred_secret(self):
+        '''Delete the docker secret from k8s
+
+        Do nothing if it doesn't exist.
+        '''
+        self.__delete_docker_cred_secret(self.__get_docker_cred_secret_name())
+
+    def __delete_docker_cred_secret(self, cred_name):
+        delete_cmd = self.config.kubectl() + \
+            f' delete secret {cred_name} --ignore-not-found'
+        try:
+            logger.info('Running: %s', delete_cmd)
+            subprocess.run(delete_cmd, shell=True,
+                           stderr=subprocess.PIPE, check=True,
+                           encoding='utf8', errors='utf8')
+        except subprocess.CalledProcessError as x:
+            logger.error('Failed while attempting to delete k8s ' +
+                         'credentials "%s": %s', cred_name, x.stderr)
+            raise x
 
     def helm_release_exists(self, projectname):
         '''Check if the helm release exists'''
