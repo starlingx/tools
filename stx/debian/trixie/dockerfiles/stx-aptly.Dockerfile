@@ -24,6 +24,9 @@ RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian-security trixie-security contrib main non-free-firmware" >> /etc/apt/sources.list && \
     rm /etc/apt/sources.list.d/debian.sources
 
+# Add retry to apt config
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+
 # Update certificates
 RUN apt-get -q -y update && apt-get -y install --no-install-recommends curl ca-certificates && update-ca-certificates
 

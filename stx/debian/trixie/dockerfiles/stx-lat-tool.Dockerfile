@@ -33,7 +33,10 @@ RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie
 RUN echo "[global]" >> /etc/pip.conf && \
     echo "break-system-packages = true" >> /etc/pip.conf
 
-# Update certificates
+# Add retry to apt config
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+
+# Update certificates via upsteam repos
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
 
 # Install necessary packages

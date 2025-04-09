@@ -29,7 +29,10 @@ RUN echo "[global]" >> /etc/pip.conf && \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Update certificates
+# Add retry to apt config
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+
+# Update certificates via upsteam repos
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
 
 # Download required dependencies by mirror/build processes.
