@@ -1301,7 +1301,7 @@ vim-tiny  2:8.2.2434-3+deb11u2  https://snapshot.debian.org/archive/debian-secur
 virt-what  1.19-1
 vlan  2.0.5
 w3m  0.5.3+git20210102-6+deb11u1 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/w/w3m/w3m_0.5.3%2Bgit20210102-6%2Bdeb11u1_amd64.deb
-wget  1.21-1+deb11u1
+wget  1.21-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T154339Z/pool/updates/main/w/wget/wget_1.21-1%2Bdeb11u2_amd64.deb
 whiptail  0.52.21-4+b3
 x11-common  1:7.7+22
 xclip  0.13-2
