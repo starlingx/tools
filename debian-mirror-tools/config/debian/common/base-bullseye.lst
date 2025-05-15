@@ -706,7 +706,7 @@ libstonith1  1.0.12-20
 libstrongswan  5.9.1-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20231121T003520Z/pool/updates/main/s/strongswan/libstrongswan_5.9.1-1%2Bdeb11u4_amd64.deb
 libsub-override-perl  0.09-2
 libtalloc2  2.3.1-2+b1
-libtasn1-6  4.16.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20230108T032246Z/pool/main/libt/libtasn1-6/libtasn1-6_4.16.0-2+deb11u1_amd64.deb
+libtasn1-6  4.16.0-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250221T112326Z/pool/updates/main/libt/libtasn1-6/libtasn1-6_4.16.0-2%2Bdeb11u2_amd64.deb
 libtcl8.6  8.6.11+dfsg-1
 libtcmalloc-minimal4  2.8.1-1
 libtdb1  1.4.3-1+b1
