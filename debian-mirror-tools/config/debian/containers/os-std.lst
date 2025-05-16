@@ -10,8 +10,8 @@ doxygen 1.9.1-1
 dwarves 1.20-1
 fonts-mathjax 2.7.9+dfsg-1
 g++-10 10.2.1-6
-git 1:2.30.2-1+deb11u3 https://snapshot.debian.org/archive/debian-security/20240903T101346Z/pool/updates/main/g/git/git_2.30.2-1%2Bdeb11u3_amd64.deb
-git-man 1:2.30.2-1+deb11u3 https://snapshot.debian.org/archive/debian-security/20240903T101346Z/pool/updates/main/g/git/git-man_2.30.2-1%2Bdeb11u3_all.deb
+git 1:2.30.2-1+deb11u4 https://snapshot.debian.org/archive/debian-security/20250131T202345Z/pool/updates/main/g/git/git_2.30.2-1%2Bdeb11u4_amd64.deb
+git-man 1:2.30.2-1+deb11u4 https://snapshot.debian.org/archive/debian-security/20250131T202345Z/pool/updates/main/g/git/git-man_2.30.2-1%2Bdeb11u4_all.deb
 git-review 1.28.0-2
 guile-2.2-libs 2.2.7+1-6
 hwdata 0.345-1
