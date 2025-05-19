@@ -410,11 +410,11 @@ libglib2.0-dev-bin 2.66.8-1+deb11u5 https://snapshot.debian.org/archive/debian-s
 libglusterfs-dev  9.2-1
 libglusterfs0  9.2-1
 libgmp10  2:6.2.1+dfsg-1+deb11u1
-libgnutls28-dev  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutls28-dev_3.7.1-5%2Bdeb11u6_amd64.deb
-libgnutls30  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutls30_3.7.1-5%2Bdeb11u6_amd64.deb
-libgnutls-dane0  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutls-dane0_3.7.1-5%2Bdeb11u6_amd64.deb
-libgnutls-openssl27  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutls-openssl27_3.7.1-5%2Bdeb11u6_amd64.deb
-libgnutlsxx28  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutlsxx28_3.7.1-5%2Bdeb11u6_amd64.deb
+libgnutls28-dev  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutls28-dev_3.7.1-5%2Bdeb11u7_amd64.deb
+libgnutls30  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutls30_3.7.1-5%2Bdeb11u7_amd64.deb
+libgnutls-dane0  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutls-dane0_3.7.1-5%2Bdeb11u7_amd64.deb
+libgnutls-openssl27  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutls-openssl27_3.7.1-5%2Bdeb11u7_amd64.deb
+libgnutlsxx28  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutlsxx28_3.7.1-5%2Bdeb11u7_amd64.deb
 libgomp1  10.2.1-6
 libgoogle-perftools4  2.8.1-1
 libgpg-error0  1.38-2
