@@ -146,7 +146,7 @@ fontconfig  2.13.1-4.2
 fontconfig-config  2.13.1-4.2
 fonts-dejavu-core  2.37-2
 fonts-font-awesome  5.0.10+really4.7.0~dfsg-4.1
-fonts-glyphicons-halflings  1.009~3.4.1+dfsg-2
+fonts-glyphicons-halflings  1.009~3.4.1+dfsg-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250413T100314Z/pool/updates/main/t/twitter-bootstrap3/fonts-glyphicons-halflings_1.009~3.4.1%2Bdfsg-2%2Bdeb11u1_all.deb
 fonts-lato  2.0-2.1
 fonts-materialdesignicons-webfont  1.6.50-3
 fonts-roboto-fontface  0.5.0-3
@@ -458,7 +458,7 @@ libjs-angular-gettext  2.3.8-2.1
 libjs-angularjs  1.8.2-2
 libjs-angularjs-smart-table  1.4.13-1.1
 libjs-angular-schema-form  0.8.13-1.1
-libjs-bootstrap  3.4.1+dfsg-2
+libjs-bootstrap  3.4.1+dfsg-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250413T100314Z/pool/updates/main/t/twitter-bootstrap3/libjs-bootstrap_3.4.1%2Bdfsg-2%2Bdeb11u1_all.deb
 libjs-bootswatch  3.3.7+dfsg2-1.1
 libjs-d3  3.5.17-4
 libjs-jquery  3.5.1+dfsg+~3.5.5-7
