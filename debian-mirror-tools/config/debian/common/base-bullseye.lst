@@ -1053,7 +1053,7 @@ python3-oslo.rootwrap  6.2.0-2
 python3-oslo.serialization  4.0.2-1
 python3-oslo.service  2.4.0-2
 python3-oslo.upgradecheck 2.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.upgradecheck/python3-oslo.upgradecheck_2.1.1-2_all.deb
-python3-oslo.utils  4.6.0-2
+python3-oslo.utils  4.6.1-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/p/python-oslo.utils/python3-oslo.utils_4.6.1-0%2Bdeb11u1_all.deb
 python3-oslo.versionedobjects  2.3.0-2
 python3-osprofiler  3.4.0-3
 python3-os-service-types  1.7.0-2
