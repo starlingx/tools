@@ -630,6 +630,7 @@ libpython3-dev  3.9.2-3
 libpython3-stdlib  3.9.2-3
 libquadmath0  10.2.1-6
 librabbitmq4  0.10.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/libr/librabbitmq/librabbitmq4_0.10.0-1%2Bdeb11u1_amd64.deb
+librabbitmq-dev  0.10.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250606T154741Z/pool/updates/main/libr/librabbitmq/librabbitmq-dev_0.10.0-1%2Bdeb11u1_amd64.deb
 librdkafka1  1.6.0-1
 librdmacm1  33.2-1
 libreadline-dev  8.1-1
