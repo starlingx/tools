@@ -992,7 +992,7 @@ python3-ipaddr  2.2.0-4
 python3-iso8601  0.1.13-1
 python3-itsdangerous  1.1.0-3
 python3-jeepney  0.6.0-1
-python3-jinja2  2.11.3-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250413T181338Z/pool/updates/main/j/jinja2/python3-jinja2_2.11.3-1%2Bdeb11u3_all.deb
+python3-jinja2  2.11.3-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/j/jinja2/python3-jinja2_2.11.3-1%2Bdeb11u4_all.deb
 python3-jmespath  0.10.0-1
 python3-joblib  0.17.0-4+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/j/joblib/python3-joblib_0.17.0-4+deb11u1_all.deb
 python3-jsonpatch  1.25-3
