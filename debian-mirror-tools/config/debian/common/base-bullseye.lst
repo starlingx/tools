@@ -1228,7 +1228,7 @@ ruby-json  2.3.0+dfsg-1+b3
 ruby-minitest  5.13.0-1
 ruby-net-telnet  0.1.1-2
 ruby-power-assert  1.1.7-2
-ruby-rubygems  3.2.5-2
+ruby-rubygems  3.2.5-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250512T211322Z/pool/updates/main/r/rubygems/ruby-rubygems_3.2.5-2%2Bdeb11u1_all.deb
 ruby-shadow  2.5.0-1+b4
 ruby-test-unit  3.3.9-1
 ruby-xmlrpc  0.3.0-2
