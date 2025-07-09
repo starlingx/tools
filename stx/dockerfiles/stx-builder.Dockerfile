@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         bzip2 \
         coreutils \
         cpio \
+        cpp \
         curl \
         debian-keyring \
         debmake \
