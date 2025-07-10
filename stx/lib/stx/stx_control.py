@@ -31,6 +31,8 @@ from stx import utils  # pylint: disable=E0611
 
 helmchartdir = 'stx/stx-build-tools-chart/stx-builder'
 
+tty_flag = ' -ti ' if os.isatty(1) else ' -i '
+
 
 class HandleControlTask(object):
     '''Handle the task for the control sub-command'''
@@ -57,7 +59,7 @@ class HandleControlTask(object):
         while count:
             podname = self.k8s.get_pod_name(pulpname)
             if podname:
-                cmd = self.config.kubectl() + ' exec -ti '
+                cmd = self.config.kubectl() + ' exec ' + tty_flag
                 cmd = cmd + podname + remote_cmd
                 subprocess.call(cmd, shell=True)
                 count = 0
@@ -393,11 +395,11 @@ stx-pkgbuilder/configmap/')
         pod_name = self.k8s.get_pod_name(buildername)
         if pod_name:
             # Prepare and run commands:
-            #  kubectl exec -ti [pod_name_builder] -- mkdir /home/[user_name]/.ssh
-            #  kubectl exec -ti [pod_name_builder] -- mkdir /root/.ssh
+            #  kubectl exec -i(or -it if is a TTY) [pod_name_builder] -- mkdir /home/[user_name]/.ssh
+            #  kubectl exec -i(or -it if is a TTY) [pod_name_builder] -- mkdir /root/.ssh
             #  kubectl cp [key] [pod_name_builder]:/home/[user_name]/.ssh
             #  kubectl cp [key] [pod_name_builder]:/root/.ssh
-            main_cmd = ' exec -ti '
+            main_cmd = ' exec ' + tty_flag
             remote_cmd = ' -- mkdir /home/' + username + '/.ssh'
             self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
             remote_cmd = ' -- mkdir /root/.ssh'
@@ -415,9 +417,9 @@ no builder container is available!')
         pod_name = self.k8s.get_pod_name(latname)
         if pod_name:
             # Prepare and run commands:
-            #  kubectl exec -ti [pod_name_lat] -- mkdir /root/.ssh
+            #  kubectl exec -i(or -it if is a TTY) [pod_name_lat] -- mkdir /root/.ssh
             #  kubectl cp [key] [pod_name_lat]:/root/.ssh
-            main_cmd = ' exec -ti '
+            main_cmd = ' exec ' + tty_flag
             remote_cmd = ' -- mkdir /root/.ssh'
             self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
             main_cmd = ' cp ' + args.key + ' '

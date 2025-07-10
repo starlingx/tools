@@ -212,7 +212,9 @@ class KubeHelper(object):
     def generatePrefixCommand(self, podname, command, enableuser, interactive=False):
         '''Generate the command executed in the host'''
 
-        prefix_exec_cmd = self.config.kubectl() + ' exec -ti '
+        tty_flag = ' -ti ' if os.isatty(1) else ' -i '
+
+        prefix_exec_cmd = self.config.kubectl() + ' exec ' + tty_flag
         builder_exec_cmd = prefix_exec_cmd + podname
         prefix_bash_cmd = ' -- bash -l -c '
         prefix_bash_with_user_cmd = ' -- bash -l -c \'sudo -u ${MYUNAME} \
