@@ -19,7 +19,7 @@ autoconf  2.69-14
 automake  1:1.16.3-2
 autopoint  0.21-4
 autotools-dev  20180224.1+nmu1
-avahi-daemon  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/avahi-daemon_0.8-5%2Bdeb11u2_amd64.deb
+avahi-daemon  0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/avahi-daemon_0.8-5%2Bdeb11u3_amd64.deb
 base-files  11.1+deb11u3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/b/base-files/base-files_11.1%2Bdeb11u3_amd64.deb
 bash-completion  1:2.11-2
 bc  1.07.1-2+b2
@@ -89,30 +89,30 @@ e2fsprogs  1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/
 efibootmgr  17-1
 eject  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/eject_2.36.1-8%2Bdeb11u2_amd64.deb
 elfutils  0.183-1
-erlang-asn1 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-asn1_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-base 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-base_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-crypto 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-crypto_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-dev 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-dev_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-diameter 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-diameter_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-edoc 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-edoc_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-eldap 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-eldap_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-erl-docgen 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-erl-docgen_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-eunit 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-eunit_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-ftp 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-ftp_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-inets 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-inets_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-mnesia 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-mnesia_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-odbc 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-odbc_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-os-mon 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-os-mon_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-parsetools 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-parsetools_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-public-key 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-public-key_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-runtime-tools 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-runtime-tools_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-snmp 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-snmp_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-ssh 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-ssh_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-ssl 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-ssl_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-syntax-tools 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-syntax-tools_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-tftp 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-tftp_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-tools 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-tools_23.2.6+dfsg-1+deb11u1_amd64.deb
-erlang-xmerl 1:23.2.6+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/e/erlang/erlang-xmerl_23.2.6+dfsg-1+deb11u1_amd64.deb
+erlang-asn1 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-asn1_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-base 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-base_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-crypto 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-crypto_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-dev 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-dev_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-diameter 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-diameter_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-edoc 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-edoc_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-eldap 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-eldap_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-erl-docgen 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-erl-docgen_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-eunit 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-eunit_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-ftp 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-ftp_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-inets 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-inets_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-mnesia 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-mnesia_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-odbc 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-odbc_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-os-mon 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-os-mon_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-parsetools 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-parsetools_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-public-key 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-public-key_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-runtime-tools 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-runtime-tools_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-snmp 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-snmp_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-ssh 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-ssh_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-ssl 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-ssl_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-syntax-tools 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-syntax-tools_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-tftp 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-tftp_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-tools 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-tools_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-xmerl 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-xmerl_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
 ethtool  1:5.9-1
 expect  5.45.4-2+b1
 fdisk  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/fdisk_2.36.1-8%2Bdeb11u2_amd64.deb
@@ -146,7 +146,7 @@ fontconfig  2.13.1-4.2
 fontconfig-config  2.13.1-4.2
 fonts-dejavu-core  2.37-2
 fonts-font-awesome  5.0.10+really4.7.0~dfsg-4.1
-fonts-glyphicons-halflings  1.009~3.4.1+dfsg-2
+fonts-glyphicons-halflings  1.009~3.4.1+dfsg-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250413T100314Z/pool/updates/main/t/twitter-bootstrap3/fonts-glyphicons-halflings_1.009~3.4.1%2Bdfsg-2%2Bdeb11u1_all.deb
 fonts-lato  2.0-2.1
 fonts-materialdesignicons-webfont  1.6.50-3
 fonts-roboto-fontface  0.5.0-3
@@ -163,7 +163,7 @@ gettext-base  0.21-4
 gir1.2-glib-2.0  1.66.1-1+b1
 gir1.2-gtk-3.0  3.24.24-4+deb11u4  https://snapshot.debian.org/archive/debian/20240810T143846Z/pool/main/g/gtk%2B3.0/gir1.2-gtk-3.0_3.24.24-4%2Bdeb11u4_amd64.deb
 gir1.2-packagekitglib-1.0 1.2.2-2
-gir1.2-soup-2.4  2.72.0-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20241212T043347Z/pool/updates/main/libs/libsoup2.4/gir1.2-soup-2.4_2.72.0-2%2Bdeb11u1_amd64.deb
+gir1.2-soup-2.4  2.72.0-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250427T160416Z/pool/updates/main/libs/libsoup2.4/gir1.2-soup-2.4_2.72.0-2%2Bdeb11u2_amd64.deb
 glib-networking  2.66.0-2
 glib-networking-common  2.66.0-2
 glib-networking-services  2.66.0-2
@@ -178,6 +178,14 @@ golang-1.22 1.22.11-1~bpo12+1 https://snapshot.debian.org/archive/debian/2025020
 golang-1.22-doc 1.22.11-1~bpo12+1 https://snapshot.debian.org/archive/debian/20250205T084338Z/pool/main/g/golang-1.22/golang-1.22-doc_1.22.11-1~bpo12%2B1_all.deb
 golang-1.22-go 1.22.11-1~bpo12+1 https://snapshot.debian.org/archive/debian/20250205T084338Z/pool/main/g/golang-1.22/golang-1.22-go_1.22.11-1~bpo12%2B1_amd64.deb
 golang-1.22-src 1.22.11-1~bpo12+1 https://snapshot.debian.org/archive/debian/20250205T084338Z/pool/main/g/golang-1.22/golang-1.22-src_1.22.11-1~bpo12%2B1_all.deb
+golang-1.23 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23_1.23.6-4_all.deb
+golang-1.23-doc 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-doc_1.23.6-4_all.deb
+golang-1.23-go 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-go_1.23.6-4_amd64.deb
+golang-1.23-src 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-src_1.23.6-4_all.deb
+golang-1.24 1.24.2-2 https://snapshot.debian.org/archive/debian/20250515T023807Z/pool/main/g/golang-1.24/golang-1.24_1.24.2-2_all.deb
+golang-1.24-doc 1.24.2-2 https://snapshot.debian.org/archive/debian/20250515T023807Z/pool/main/g/golang-1.24/golang-1.24-doc_1.24.2-2_all.deb
+golang-1.24-go 1.24.2-2 https://snapshot.debian.org/archive/debian/20250515T023807Z/pool/main/g/golang-1.24/golang-1.24-go_1.24.2-2_amd64.deb
+golang-1.24-src 1.24.2-2 https://snapshot.debian.org/archive/debian/20250515T023807Z/pool/main/g/golang-1.24/golang-1.24-src_1.24.2-2_all.deb
 golang-any 1.22~3~bpo12+1 https://snapshot.debian.org/archive/debian/20241114T144032Z/pool/main/g/golang-defaults/golang-any_1.22~3~bpo12%2B1_amd64.deb
 golang-go 1.22~3~bpo12+1 https://snapshot.debian.org/archive/debian/20241114T144032Z/pool/main/g/golang-defaults/golang-go_1.22~3~bpo12%2B1_amd64.deb
 golang-src 1.22~3~bpo12+1 https://snapshot.debian.org/archive/debian/20241114T144032Z/pool/main/g/golang-defaults/golang-src_1.22~3~bpo12%2B1_all.deb
@@ -188,10 +196,11 @@ gpgsm  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093
 gpgv  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gpgv_2.2.27-2%2Bdeb11u2_amd64.deb
 gpg-wks-client  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gpg-wks-client_2.2.27-2%2Bdeb11u2_amd64.deb
 gpg-wks-server  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/gpg-wks-server_2.2.27-2%2Bdeb11u2_amd64.deb
+gpsd  3.22-4
 grep  3.6-1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/g/grep/grep_3.6-1_amd64.deb
 groff-base  1.22.4-6
 gsettings-desktop-schemas  3.38.0-2
-gunicorn  20.1.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241220T041311Z/pool/updates/main/g/gunicorn/gunicorn_20.1.0-1%2Bdeb11u1_all.deb
+gunicorn  23.0.0-1  https://snapshot.debian.org/archive/debian/20240814T203402Z/pool/main/g/gunicorn/gunicorn_23.0.0-1_all.deb
 gzip  1.10-4+deb11u1 https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/g/gzip/gzip_1.10-4%2Bdeb11u1_amd64.deb
 hdparm  9.60+ds-1
 hiera  3.2.0-2.1
@@ -221,7 +230,7 @@ keyutils  1.6.1-2
 klibc-utils  2.0.8-6.1
 kmod  28-1
 kpartx  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/kpartx_0.8.5-2+deb11u1_amd64.deb
-krb5-multidev  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/krb5-multidev_1.18.3-6%2Bdeb11u5_amd64.deb
+krb5-multidev  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/krb5-multidev_1.18.3-6%2Bdeb11u6_amd64.deb
 less  551-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20240503T211102Z/pool/updates/main/l/less/less_551-2%2Bdeb11u2_amd64.deb
 libacl1  2.2.53-10
 libaio1  0.3.112-9
@@ -251,14 +260,14 @@ libaudit1  1:3.0-2
 libaudit-common  1:3.0-2
 libaugeas0  1.12.0-2
 libauparse0  1:3.0-2
-libavahi-client3  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-client3_0.8-5%2Bdeb11u2_amd64.deb
-libavahi-common3  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-common3_0.8-5%2Bdeb11u2_amd64.deb
-libavahi-common-data  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-common-data_0.8-5%2Bdeb11u2_amd64.deb
-libavahi-common-dev 0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-common-dev_0.8-5%2Bdeb11u2_amd64.deb
-libavahi-core7  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-core7_0.8-5%2Bdeb11u2_amd64.deb
-libavahi-glib1  0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-glib1_0.8-5%2Bdeb11u2_amd64.deb
-libavahi-client-dev 0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-client-dev_0.8-5%2Bdeb11u2_amd64.deb
-libavahi-glib-dev 0.8-5+deb11u2 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/a/avahi/libavahi-glib-dev_0.8-5%2Bdeb11u2_amd64.deb
+libavahi-client3  0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/libavahi-client3_0.8-5%2Bdeb11u3_amd64.deb
+libavahi-common3  0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/libavahi-common3_0.8-5%2Bdeb11u3_amd64.deb
+libavahi-common-data  0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/libavahi-common-data_0.8-5%2Bdeb11u3_amd64.deb
+libavahi-common-dev 0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/libavahi-common-dev_0.8-5%2Bdeb11u3_amd64.deb
+libavahi-core7  0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/libavahi-core7_0.8-5%2Bdeb11u3_amd64.deb
+libavahi-glib1  0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/libavahi-glib1_0.8-5%2Bdeb11u3_amd64.deb
+libavahi-client-dev 0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/libavahi-client-dev_0.8-5%2Bdeb11u3_amd64.deb
+libavahi-glib-dev 0.8-5+deb11u3 https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/a/avahi/libavahi-glib-dev_0.8-5%2Bdeb11u3_amd64.deb
 libbabeltrace1  1.5.8-1+b3
 libbasicobjects0  0.6.1-2
 libbinutils  2.35.2-2
@@ -280,19 +289,20 @@ libbpf0  1:0.4.0-1 https://snapshot.debian.org/archive/debian/20210526T023010Z/p
 libbpf-dev  1:0.4.0-1 https://snapshot.debian.org/archive/debian/20210526T023010Z/pool/main/libb/libbpf/libbpf-dev_0.4.0-1_amd64.deb
 libbrotli1  1.0.9-2+b2
 libbsd0  0.11.3-1
-libbson-1.0-0  1.17.6-1
+libbson-1.0-0  1.17.6-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250520T190344Z/pool/updates/main/m/mongo-c-driver/libbson-1.0-0_1.17.6-1%2Bdeb11u1_amd64.deb
 libbz2-1.0  1.0.8-4
-libc6  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc6_2.31-13%2Bdeb11u10_amd64.deb
-libc6-i386  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc6-i386_2.31-13%2Bdeb11u10_amd64.deb
-libc6-dbg  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc6-dbg_2.31-13%2Bdeb11u10_amd64.deb
-libc6-dev  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc6-dev_2.31-13%2Bdeb11u10_amd64.deb
-libc6-dev-i386  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc6-dev-i386_2.31-13%2Bdeb11u10_amd64.deb
-libc6-dev-x32   2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc6-dev-x32_2.31-13%2Bdeb11u10_amd64.deb
-libc6-x32  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc6-x32_2.31-13%2Bdeb11u10_amd64.deb
+libc6  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc6_2.31-13%2Bdeb11u13_amd64.deb
+libc6-i386  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc6-i386_2.31-13%2Bdeb11u13_amd64.deb
+libc6-dbg  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc6-dbg_2.31-13%2Bdeb11u13_amd64.deb
+libc6-dev  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc6-dev_2.31-13%2Bdeb11u13_amd64.deb
+libc6-dev-i386  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc6-dev-i386_2.31-13%2Bdeb11u13_amd64.deb
+libc6-dev-x32  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc6-dev-x32_2.31-13%2Bdeb11u13_amd64.deb
+libc6-x32  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc6-x32_2.31-13%2Bdeb11u13_amd64.deb
 libc6.1-dev-alpha-cross  2.31-9cross4
 libcairo2  1.16.0-5
-libcap2  1:2.44-1
-libcap2-bin  1:2.44-1
+libcap2  1:2.44-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250326T144342Z/pool/updates/main/libc/libcap2/libcap2_2.44-1%2Bdeb11u1_amd64.deb
+libcap2-bin  1:2.44-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250326T144342Z/pool/updates/main/libc/libcap2/libcap2-bin_2.44-1%2Bdeb11u1_amd64.deb
+libcap-dev  1:2.44-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250326T144342Z/pool/updates/main/libc/libcap2/libcap-dev_2.44-1%2Bdeb11u1_amd64.deb
 libcap-ng0  0.7.9-2.2+b1
 libcap-ng-dev  0.7.9-2.2+b1
 libcapstone-dev  4.0.2-3
@@ -300,11 +310,11 @@ libcapstone4  4.0.2-3
 libcacard-dev  1:2.8.0-3
 libcacard0  1:2.8.0-3
 libc-ares2  1.17.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20230607T043432Z/pool/updates/main/c/c-ares/libc-ares2_1.17.1-1%2Bdeb11u3_amd64.deb
-libc-bin  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc-bin_2.31-13%2Bdeb11u10_amd64.deb
+libc-bin  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc-bin_2.31-13%2Bdeb11u13_amd64.deb
 libcbor0  0.5.0+dfsg-2
 libcc1-0  10.2.1-6
-libc-dev-bin  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc-dev-bin_2.31-13%2Bdeb11u10_amd64.deb
-libc-l10n  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/libc-l10n_2.31-13%2Bdeb11u10_all.deb
+libc-dev-bin  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc-dev-bin_2.31-13%2Bdeb11u13_amd64.deb
+libc-l10n  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc-l10n_2.31-13%2Bdeb11u13_all.deb
 libcgroup1  0.41-11
 libcollection4  0.6.1-2
 libcom-err2  1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/20241004T132419Z/pool/updates/main/e/e2fsprogs/libcom-err2_1.46.2-2%2Bdeb11u1_amd64.deb
@@ -357,8 +367,8 @@ libepoxy0  1.5.5-1
 libestr0  0.1.10-2.1+b1
 libevent-2.1-7  2.1.12-stable-1
 libexecs0  1.3-1
-libexpat1  2.2.10-2+deb11u6  https://snapshot.debian.org/archive/debian-security/20240919T014323Z/pool/updates/main/e/expat/libexpat1_2.2.10-2%2Bdeb11u6_amd64.deb
-libexpat1-dev  2.2.10-2+deb11u6  https://snapshot.debian.org/archive/debian-security/20240919T014323Z/pool/updates/main/e/expat/libexpat1-dev_2.2.10-2%2Bdeb11u6_amd64.deb
+libexpat1  2.2.10-2+deb11u7  https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/e/expat/libexpat1_2.2.10-2%2Bdeb11u7_amd64.deb
+libexpat1-dev  2.2.10-2+deb11u7  https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/e/expat/libexpat1-dev_2.2.10-2%2Bdeb11u7_amd64.deb
 libext2fs2  1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/20241004T132419Z/pool/updates/main/e/e2fsprogs/libext2fs2_1.46.2-2%2Bdeb11u1_amd64.deb
 libfam0  2.7.0-17.3
 libfastjson4  0.99.9-1
@@ -370,9 +380,9 @@ libfido2-1  1.6.0-2
 libfile-stripnondeterminism-perl  1.12.0-1
 libfontconfig1  2.13.1-4.2
 libfreeipmi17  1.6.6-4+deb11u1
-libfreetype6  2.10.4+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/freetype/libfreetype6_2.10.4%2Bdfsg-1%2Bdeb11u1_amd64.deb
-libfreetype6-dev  2.10.4+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/freetype/libfreetype6-dev_2.10.4%2Bdfsg-1%2Bdeb11u1_amd64.deb
-libfreetype-dev  2.10.4+dfsg-1+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/freetype/libfreetype-dev_2.10.4%2Bdfsg-1%2Bdeb11u1_amd64.deb
+libfreetype6  2.10.4+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250331T205345Z/pool/updates/main/f/freetype/libfreetype6_2.10.4%2Bdfsg-1%2Bdeb11u2_amd64.deb
+libfreetype6-dev  2.10.4+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250331T205345Z/pool/updates/main/f/freetype/libfreetype6-dev_2.10.4%2Bdfsg-1%2Bdeb11u2_amd64.deb
+libfreetype-dev  2.10.4+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250331T205345Z/pool/updates/main/f/freetype/libfreetype-dev_2.10.4%2Bdfsg-1%2Bdeb11u2_amd64.deb
 libfribidi0  1.0.8-2+deb11u1 https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/fribidi/libfribidi0_1.0.8-2%2Bdeb11u1_amd64.deb
 libfribidi-dev 1.0.8-2+deb11u1 https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/f/fribidi/libfribidi-dev_1.0.8-2%2Bdeb11u1_amd64.deb
 libfstrm0  0.6.0-1+b1
@@ -401,19 +411,20 @@ libglib2.0-dev-bin 2.66.8-1+deb11u5 https://snapshot.debian.org/archive/debian-s
 libglusterfs-dev  9.2-1
 libglusterfs0  9.2-1
 libgmp10  2:6.2.1+dfsg-1+deb11u1
-libgnutls28-dev  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutls28-dev_3.7.1-5%2Bdeb11u6_amd64.deb
-libgnutls30  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutls30_3.7.1-5%2Bdeb11u6_amd64.deb
-libgnutls-dane0  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutls-dane0_3.7.1-5%2Bdeb11u6_amd64.deb
-libgnutls-openssl27  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutls-openssl27_3.7.1-5%2Bdeb11u6_amd64.deb
-libgnutlsxx28  3.7.1-5+deb11u6  https://snapshot.debian.org/archive/debian-security/20240904T224638Z/pool/updates/main/g/gnutls28/libgnutlsxx28_3.7.1-5%2Bdeb11u6_amd64.deb
+libgnutls28-dev  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutls28-dev_3.7.1-5%2Bdeb11u7_amd64.deb
+libgnutls30  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutls30_3.7.1-5%2Bdeb11u7_amd64.deb
+libgnutls-dane0  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutls-dane0_3.7.1-5%2Bdeb11u7_amd64.deb
+libgnutls-openssl27  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutls-openssl27_3.7.1-5%2Bdeb11u7_amd64.deb
+libgnutlsxx28  3.7.1-5+deb11u7  https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/g/gnutls28/libgnutlsxx28_3.7.1-5%2Bdeb11u7_amd64.deb
 libgomp1  10.2.1-6
 libgoogle-perftools4  2.8.1-1
 libgpg-error0  1.38-2
 libgpgme11  1.14.0-1+b2
 libgpm2  1.20.7-8
+libgps28  3.22-4
 libgraphite2-3  1.3.14-1
-libgssapi-krb5-2  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/libgssapi-krb5-2_1.18.3-6%2Bdeb11u5_amd64.deb
-libgssrpc4  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/libgssrpc4_1.18.3-6%2Bdeb11u5_amd64.deb
+libgssapi-krb5-2  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/libgssapi-krb5-2_1.18.3-6%2Bdeb11u6_amd64.deb
+libgssrpc4  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/libgssrpc4_1.18.3-6%2Bdeb11u6_amd64.deb
 libgstreamer1.0-0  1.18.4-2.1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241215T210716Z/pool/updates/main/g/gstreamer1.0/libgstreamer1.0-0_1.18.4-2.1%2Bdeb11u1_amd64.deb
 libgstreamer-plugins-base1.0-0  1.18.4-2+deb11u3  https://snapshot.debian.org/archive/debian-security/20241221T170414Z/pool/updates/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-0_1.18.4-2%2Bdeb11u3_amd64.deb
 libgtk-3-0  3.24.24-4+deb11u4  https://snapshot.debian.org/archive/debian/20240810T143846Z/pool/main/g/gtk%2B3.0/libgtk-3-0_3.24.24-4%2Bdeb11u4_amd64.deb
@@ -447,7 +458,7 @@ libjs-angular-gettext  2.3.8-2.1
 libjs-angularjs  1.8.2-2
 libjs-angularjs-smart-table  1.4.13-1.1
 libjs-angular-schema-form  0.8.13-1.1
-libjs-bootstrap  3.4.1+dfsg-2
+libjs-bootstrap  3.4.1+dfsg-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250413T100314Z/pool/updates/main/t/twitter-bootstrap3/libjs-bootstrap_3.4.1%2Bdfsg-2%2Bdeb11u1_all.deb
 libjs-bootswatch  3.3.7+dfsg2-1.1
 libjs-d3  3.5.17-4
 libjs-jquery  3.5.1+dfsg+~3.5.5-7
@@ -469,15 +480,15 @@ libjs-term.js  0.0.7-2
 libjs-tv4  1.2.7+dfsg1-2.1
 libjs-twitter-bootstrap-datepicker  1.3.1+dfsg1-4.1
 libjs-underscore  1.9.1~dfsg-3
-libk5crypto3  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/libk5crypto3_1.18.3-6%2Bdeb11u5_amd64.deb
-libkadm5clnt-mit12  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/libkadm5clnt-mit12_1.18.3-6%2Bdeb11u5_amd64.deb
-libkadm5srv-mit12  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/libkadm5srv-mit12_1.18.3-6%2Bdeb11u5_amd64.deb
+libk5crypto3  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/libk5crypto3_1.18.3-6%2Bdeb11u6_amd64.deb
+libkadm5clnt-mit12  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/libkadm5clnt-mit12_1.18.3-6%2Bdeb11u6_amd64.deb
+libkadm5srv-mit12  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/libkadm5srv-mit12_1.18.3-6%2Bdeb11u6_amd64.deb
 libkeyutils1  1.6.1-2
 libklibc  2.0.8-6.1
 libkmod2  28-1
-libkrb5-3  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/libkrb5-3_1.18.3-6%2Bdeb11u5_amd64.deb
-libkrb5-dev  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/libkrb5-dev_1.18.3-6%2Bdeb11u5_amd64.deb
-libkrb5support0  1.18.3-6+deb11u5  https://snapshot.debian.org/archive/debian-security/20240705T211620Z/pool/updates/main/k/krb5/libkrb5support0_1.18.3-6%2Bdeb11u5_amd64.deb
+libkrb5-3  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/libkrb5-3_1.18.3-6%2Bdeb11u6_amd64.deb
+libkrb5-dev  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/libkrb5-dev_1.18.3-6%2Bdeb11u6_amd64.deb
+libkrb5support0  1.18.3-6+deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/k/krb5/libkrb5support0_1.18.3-6%2Bdeb11u6_amd64.deb
 libksba8  1.5.0-3+deb11u2  https://snapshot.debian.org/archive/debian/20230108T032246Z/pool/main/libk/libksba/libksba8_1.5.0-3+deb11u2_amd64.deb
 liblapack3  3.9.0-3
 liblbfgsb0  3.0+dfsg.3-9
@@ -498,15 +509,15 @@ liblz4-1  1.9.3-2
 liblzma5  5.2.5-2.1~deb11u1  https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/x/xz-utils/liblzma5_5.2.5-2.1~deb11u1_amd64.deb
 libmagic1  1:5.39-3+deb11u1  https://snapshot.debian.org/archive/debian-security/20230904T194428Z/pool/updates/main/f/file/libmagic1_5.39-3%2Bdeb11u1_amd64.deb
 libmagic-mgc  1:5.39-3+deb11u1  https://snapshot.debian.org/archive/debian-security/20230904T194428Z/pool/updates/main/f/file/libmagic-mgc_5.39-3%2Bdeb11u1_amd64.deb
-libmariadb-dev  1:10.5.26-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20240918T043331Z/pool/updates/main/m/mariadb-10.5/libmariadb-dev_10.5.26-0%2Bdeb11u2_amd64.deb
-libmariadb-dev-compat  1:10.5.26-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20240918T043331Z/pool/updates/main/m/mariadb-10.5/libmariadb-dev-compat_10.5.26-0%2Bdeb11u2_amd64.deb
-libmariadb3  1:10.5.26-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20240918T043331Z/pool/updates/main/m/mariadb-10.5/libmariadb3_10.5.26-0%2Bdeb11u2_amd64.deb
+libmariadb-dev  1:10.5.28-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20250519T175619Z/pool/updates/main/m/mariadb-10.5/libmariadb-dev_10.5.28-0%2Bdeb11u2_amd64.deb
+libmariadb-dev-compat  1:10.5.28-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20250519T175619Z/pool/updates/main/m/mariadb-10.5/libmariadb-dev-compat_10.5.28-0%2Bdeb11u2_amd64.deb
+libmariadb3  1:10.5.28-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20250519T175619Z/pool/updates/main/m/mariadb-10.5/libmariadb3_10.5.28-0%2Bdeb11u2_amd64.deb
 libmaxminddb0  1.5.2-1
 libmd0  1.0.3-3
 libmm-glib0  1.14.12-0.2
 libmnl0  1.0.4-3
 libmodulemd2  2.12.0-1
-libmongoc-1.0-0  1.17.6-1
+libmongoc-1.0-0  1.17.6-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250520T190344Z/pool/updates/main/m/mongo-c-driver/libmongoc-1.0-0_1.17.6-1%2Bdeb11u1_amd64.deb
 libmongocrypt0  1.1.0-1
 libmount1  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/libmount1_2.36.1-8%2Bdeb11u2_amd64.deb
 libmpc3  1.2.0-1
@@ -514,8 +525,8 @@ libmpdec3  2.5.1-1
 libmpfr6  4.1.0-3
 libncurses-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 libncurses5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
-libncurses6  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
-libncursesw5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
+libncurses6  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncurses6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
+libncursesw5-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw5-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 libncursesw6  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/libncursesw6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 libndctl6  71.1-1
 libndp0  1.6-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20240616T175437Z/pool/updates/main/libn/libndp/libndp0_1.6-1%2Bdeb11u1_amd64.deb
@@ -535,11 +546,12 @@ libnfs-dev  4.0.0-1
 libnfsidmap2  0.25-6
 libnftables1  0.9.8-3.1 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/nftables/libnftables1_0.9.8-3.1_amd64.deb
 libnftnl11  1.1.9-1
-libnghttp2-14  1.43.0-1+deb11u1 https://snapshot.debian.org/archive/debian-security/20231204T084520Z/pool/updates/main/n/nghttp2/libnghttp2-14_1.43.0-1+deb11u1_amd64.deb
+libnghttp2-14  1.43.0-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/n/nghttp2/libnghttp2-14_1.43.0-1%2Bdeb11u2_amd64.deb
 libnl-3-200  3.4.0-1+b1
 libnl-3-dev  3.4.0-1+b1
 libnl-cli-3-200  3.4.0-1+b1
 libnl-genl-3-200  3.4.0-1+b1
+libnl-genl-3-dev  3.4.0-1+b1
 libnl-nf-3-200  3.4.0-1+b1
 libnl-route-3-dev  3.4.0-1+b1
 libnl-route-3-200  3.4.0-1+b1
@@ -610,14 +622,16 @@ libpsl5  0.21.0-1.2
 libpixman-1-dev  0.40.0-1.1~deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/p/pixman/libpixman-1-dev_0.40.0-1.1~deb11u1_amd64.deb
 libpwquality1  1.4.4-1
 libpwquality-common  1.4.4-1
-libpython3.9  3.9.2-1
-libpython3.9-dev  3.9.2-1
-libpython3.9-minimal  3.9.2-1
-libpython3.9-stdlib  3.9.2-1
+libpython3.9  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9_3.9.2-1%2Bdeb11u3_amd64.deb
+libpython3.9-dev  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-dev_3.9.2-1%2Bdeb11u3_amd64.deb
+libpython3.9-minimal  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-minimal_3.9.2-1%2Bdeb11u3_amd64.deb
+libpython3.9-stdlib  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-stdlib_3.9.2-1%2Bdeb11u3_amd64.deb
+libpython3.9-dbg  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-dbg_3.9.2-1%2Bdeb11u3_amd64.deb
 libpython3-dev  3.9.2-3
 libpython3-stdlib  3.9.2-3
 libquadmath0  10.2.1-6
-librabbitmq4  0.10.0-1
+librabbitmq4  0.10.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/libr/librabbitmq/librabbitmq4_0.10.0-1%2Bdeb11u1_amd64.deb
+librabbitmq-dev  0.10.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250606T154741Z/pool/updates/main/libr/librabbitmq/librabbitmq-dev_0.10.0-1%2Bdeb11u1_amd64.deb
 librdkafka1  1.6.0-1
 librdmacm1  33.2-1
 libreadline-dev  8.1-1
@@ -644,7 +658,7 @@ librte-hash21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-secu
 librte-pci21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-pci21_20.11.6-1~deb11u1_amd64.deb
 librte-rcu21  20.11.6-1~deb11u1 https://snapshot.debian.org/archive/debian-security/20220830T184911Z/pool/updates/main/d/dpdk/librte-rcu21_20.11.6-1~deb11u1_amd64.deb
 librtmp1  2.4+20151223.gitfa8646d.1-2+b2
-libruby2.7  2.7.4-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20250211T215340Z/pool/updates/main/r/ruby2.7/libruby2.7_2.7.4-1%2Bdeb11u4_amd64.deb
+libruby2.7  2.7.4-1+deb11u5  https://snapshot.debian.org/archive/debian-security/20250309T222324Z/pool/updates/main/r/ruby2.7/libruby2.7_2.7.4-1%2Bdeb11u5_amd64.deb
 libsanlock-client1  3.8.2-2
 libsanlock-dev  3.8.2-2
 libsasl2-2  2.1.27+dfsg-2.1+deb11u1
@@ -679,9 +693,9 @@ libsnmp-dev  5.9+dfsg-4+deb11u1  https://snapshot.debian.org/archive/debian/2023
 libsodium23  1.0.18-1
 libsolv1  0.7.17-1
 libsolvext1  0.7.17-1
-libsoup2.4-1  2.72.0-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20241212T043347Z/pool/updates/main/libs/libsoup2.4/libsoup2.4-1_2.72.0-2%2Bdeb11u1_amd64.deb
-libsoup2.4-dev  2.72.0-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20241212T043347Z/pool/updates/main/libs/libsoup2.4/libsoup2.4-dev_2.72.0-2%2Bdeb11u1_amd64.deb
-libsoup-gnome2.4-1  2.72.0-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20241212T043347Z/pool/updates/main/libs/libsoup2.4/libsoup-gnome2.4-1_2.72.0-2%2Bdeb11u1_amd64.deb
+libsoup2.4-1  2.72.0-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250427T160416Z/pool/updates/main/libs/libsoup2.4/libsoup2.4-1_2.72.0-2%2Bdeb11u2_amd64.deb
+libsoup2.4-dev  2.72.0-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250427T160416Z/pool/updates/main/libs/libsoup2.4/libsoup2.4-dev_2.72.0-2%2Bdeb11u2_amd64.deb
+libsoup-gnome2.4-1  2.72.0-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250427T160416Z/pool/updates/main/libs/libsoup2.4/libsoup-gnome2.4-1_2.72.0-2%2Bdeb11u2_amd64.deb
 libspice-server-dev  0.14.3-2.1
 libspice-server1  0.14.3-2.1
 libsqlite3-0  3.34.1-3+deb11u1 https://snapshot.debian.org/archive/debian-security/20240930T202344Z/pool/updates/main/s/sqlite3/libsqlite3-0_3.34.1-3%2Bdeb11u1_amd64.deb
@@ -700,7 +714,7 @@ libstonith1  1.0.12-20
 libstrongswan  5.9.1-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20231121T003520Z/pool/updates/main/s/strongswan/libstrongswan_5.9.1-1%2Bdeb11u4_amd64.deb
 libsub-override-perl  0.09-2
 libtalloc2  2.3.1-2+b1
-libtasn1-6  4.16.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20230108T032246Z/pool/main/libt/libtasn1-6/libtasn1-6_4.16.0-2+deb11u1_amd64.deb
+libtasn1-6  4.16.0-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250221T112326Z/pool/updates/main/libt/libtasn1-6/libtasn1-6_4.16.0-2%2Bdeb11u2_amd64.deb
 libtcl8.6  8.6.11+dfsg-1
 libtcmalloc-minimal4  2.8.1-1
 libtdb1  1.4.3-1+b1
@@ -728,8 +742,8 @@ libtsan0  10.2.1-6
 libubsan1  10.2.1-6
 libuchardet0  0.0.7-1
 libudev1  247.3-7+deb11u1 https://snapshot.debian.org/archive/debian/20220829T032859Z/pool/main/s/systemd/libudev1_247.3-7+deb11u1_amd64.deb
-libunbound8  1.13.1-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20240214T064720Z/pool/updates/main/u/unbound/libunbound8_1.13.1-1%2Bdeb11u2_amd64.deb
-libunbound-dev  1.13.1-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20240214T064720Z/pool/updates/main/u/unbound/libunbound-dev_1.13.1-1%2Bdeb11u2_amd64.deb
+libunbound8  1.13.1-1+deb11u4 https://snapshot.debian.org/archive/debian-security/20241130T234400Z/pool/updates/main/u/unbound/libunbound8_1.13.1-1%2Bdeb11u4_amd64.deb
+libunbound-dev  1.13.1-1+deb11u4 https://snapshot.debian.org/archive/debian-security/20241130T234400Z/pool/updates/main/u/unbound/libunbound-dev_1.13.1-1%2Bdeb11u4_amd64.deb
 libunistring2  0.9.10-4
 liburing-dev  0.7-3
 liburing1  0.7-3
@@ -777,15 +791,15 @@ libxentoolcore1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/de
 libxentoollog1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxentoollog1_4.14.5%2B94-ge49571868d-1_amd64.deb
 libxenhypfs1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxenhypfs1_4.14.5%2B94-ge49571868d-1_amd64.deb
 libxext6  2:1.3.3-1.1
-libxml2-dev  2.9.10+dfsg-6.7+deb11u5 https://snapshot.debian.org/archive/debian-security/20240903T162335Z/pool/updates/main/libx/libxml2/libxml2-dev_2.9.10%2Bdfsg-6.7%2Bdeb11u5_amd64.deb
-libxml2-utils  2.9.10+dfsg-6.7+deb11u5 https://snapshot.debian.org/archive/debian-security/20240903T162335Z/pool/updates/main/libx/libxml2/libxml2-utils_2.9.10%2Bdfsg-6.7%2Bdeb11u5_amd64.deb
-libxml2  2.9.10+dfsg-6.7+deb11u5 https://snapshot.debian.org/archive/debian-security/20240903T162335Z/pool/updates/main/libx/libxml2/libxml2_2.9.10%2Bdfsg-6.7%2Bdeb11u5_amd64.deb
+libxml2-dev 2.9.10+dfsg-6.7+deb11u7 https://snapshot.debian.org/archive/debian-security/20250430T174501Z/pool/updates/main/libx/libxml2/libxml2-dev_2.9.10%2Bdfsg-6.7%2Bdeb11u7_amd64.deb
+libxml2-utils 2.9.10+dfsg-6.7+deb11u7 https://snapshot.debian.org/archive/debian-security/20250430T174501Z/pool/updates/main/libx/libxml2/libxml2-utils_2.9.10%2Bdfsg-6.7%2Bdeb11u7_amd64.deb
+libxml2 2.9.10+dfsg-6.7+deb11u7 https://snapshot.debian.org/archive/debian-security/20250430T174501Z/pool/updates/main/libx/libxml2/libxml2_2.9.10%2Bdfsg-6.7%2Bdeb11u7_amd64.deb
 libxmlsec1  1.2.31-1
 libxmlsec1-openssl  1.2.31-1
 libxmu6  2:1.1.2-2+b3
 libxrender1  1:0.9.10-1
-libxslt1.1  1.1.34-4+deb11u1 https://snapshot.debian.org/archive/debian/20220826T211148Z/pool/main/libx/libxslt/libxslt1.1_1.1.34-4%2Bdeb11u1_amd64.deb
-libxslt1-dev 1.1.34-4+deb11u1 https://snapshot.debian.org/archive/debian/20220826T211148Z/pool/main/libx/libxslt/libxslt1-dev_1.1.34-4%2Bdeb11u1_amd64.deb
+libxslt1.1  1.1.34-4+deb11u2  https://snapshot.debian.org/archive/debian-security/20250324T095328Z/pool/updates/main/libx/libxslt/libxslt1.1_1.1.34-4%2Bdeb11u2_amd64.deb
+libxslt1-dev 1.1.34-4+deb11u2  https://snapshot.debian.org/archive/debian-security/20250324T095328Z/pool/updates/main/libx/libxslt/libxslt1-dev_1.1.34-4%2Bdeb11u2_amd64.deb
 libxt6  1:1.2.0-1
 libxtables12  1.8.7-1
 libxxhash0  0.8.0-2
@@ -798,9 +812,9 @@ libzmq5  4.3.4-1
 libzstd1  1.4.8+dfsg-2.1
 linux-base  4.6
 linux-cpupower  5.10.106-1  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/l/linux/linux-cpupower_5.10.106-1_amd64.deb
-locales  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/locales_2.31-13%2Bdeb11u10_all.deb
-locales-all  2.31-13+deb11u10 https://snapshot.debian.org/archive/debian-security/20240503T195245Z/pool/updates/main/g/glibc/locales-all_2.31-13%2Bdeb11u10_amd64.deb
-login  1:4.8.1-1
+locales  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/locales_2.31-13%2Bdeb11u13_all.deb
+locales-all  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/locales-all_2.31-13%2Bdeb11u13_amd64.deb
+login  1:4.8.1-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250418T193359Z/pool/updates/main/s/shadow/login_4.8.1-1%2Bdeb11u1_amd64.deb
 logrotate  3.18.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/l/logrotate/logrotate_3.18.0-2%2Bdeb11u1_amd64.deb
 logsave  1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/20241004T132419Z/pool/updates/main/e/e2fsprogs/logsave_1.46.2-2%2Bdeb11u1_amd64.deb
 lsb-base  11.1.0
@@ -810,7 +824,7 @@ m4  1.4.18-5
 mailcap  3.69
 make  4.3-4.1
 man-db  2.9.4-2
-mariadb-common  1:10.5.26-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20240918T044328Z/pool/updates/main/m/mariadb-10.5/mariadb-common_10.5.26-0%2Bdeb11u2_all.deb
+mariadb-common  1:10.5.28-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20250519T175619Z/pool/updates/main/m/mariadb-10.5/mariadb-common_10.5.28-0%2Bdeb11u2_all.deb
 mawk  1.3.4.20200120-2
 mdadm  4.1-11
 media-types  4.0.0
@@ -824,9 +838,10 @@ multipath-tools  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/202
 multipath-tools-boot  0.8.5-2+deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/m/multipath-tools/multipath-tools-boot_0.8.5-2+deb11u1_all.deb
 mysql-common  5.8+1.0.7
 nano  5.4-2+deb11u3  https://snapshot.debian.org/archive/debian/20240620T025456Z/pool/main/n/nano/nano_5.4-2%2Bdeb11u3_amd64.deb
+nasm  2.15.05-1
 ncat  7.91+dfsg1+really7.80+dfsg1-2
-ncurses-base  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-base_6.2%2B20201114-2%2Bdeb11u2_all.deb 
-ncurses-bin  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-bin_6.2%2B20201114-2%2Bdeb11u2_amd64.deb 
+ncurses-base  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-base_6.2%2B20201114-2%2Bdeb11u2_all.deb
+ncurses-bin  6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/ncurses-bin_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
 ndisc6 1.0.4-2
 netbase  6.3
 netcat-openbsd  1.217-3
@@ -841,15 +856,15 @@ numad  0.5+20150602-7
 ntp  1:4.2.8p15+dfsg-1
 nvme-cli  1.12-5
 open-iscsi  2.1.3-5
-openssh-client  1:8.4p1-5+deb11u3 https://snapshot.debian.org/archive/debian/20231224T085540Z/pool/main/o/openssh/openssh-client_8.4p1-5%2Bdeb11u3_amd64.deb
-openssh-server 1:8.4p1-5+deb11u3 https://snapshot.debian.org/archive/debian/20231224T085540Z/pool/main/o/openssh/openssh-server_8.4p1-5%2Bdeb11u3_amd64.deb
-openssh-sftp-server 1:8.4p1-5+deb11u3 https://snapshot.debian.org/archive/debian/20231224T085540Z/pool/main/o/openssh/openssh-sftp-server_8.4p1-5%2Bdeb11u3_amd64.deb
+openssh-client  1:8.4p1-5+deb11u4 https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/o/openssh/openssh-client_8.4p1-5%2Bdeb11u4_amd64.deb
+openssh-server 1:8.4p1-5+deb11u4 https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/o/openssh/openssh-server_8.4p1-5%2Bdeb11u4_amd64.deb
+openssh-sftp-server 1:8.4p1-5+deb11u4 https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/o/openssh/openssh-sftp-server_8.4p1-5%2Bdeb11u4_amd64.deb
 original-awk  2018-08-27-1
 ovmf  2020.11-2+deb11u2 https://snapshot.debian.org/archive/debian-security/20240214T195659Z/pool/updates/main/e/edk2/ovmf_2020.11-2%2Bdeb11u2_all.deb
 pahole  1.22-4~bpo11+1 https://snapshot.debian.org/archive/debian/20220202T154459Z/pool/main/d/dwarves/pahole_1.22-4~bpo11%2B1_amd64.deb
-passwd  1:4.8.1-1
+passwd  1:4.8.1-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250418T193359Z/pool/updates/main/s/shadow/passwd_4.8.1-1%2Bdeb11u1_amd64.deb
 patch  2.7.6-7
-pci.ids  0.0~2021.02.08-1
+pci.ids  0.0~2025.03.09-1  https://snapshot.debian.org/archive/debian/20250531T203830Z/pool/main/p/pci.ids/pci.ids_0.0~2025.03.09-1_all.deb
 pciutils  1:3.7.0-5
 perl  5.32.1-4+deb11u4  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/perl/perl_5.32.1-4%2Bdeb11u4_amd64.deb
 perl-base  5.32.1-4+deb11u4  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/perl/perl-base_5.32.1-4%2Bdeb11u4_amd64.deb
@@ -879,13 +894,13 @@ puppet-module-puppetlabs-inifile  2.2.1-1
 puppet-module-puppetlabs-mount-core  1.0.4+dfsg1-2
 puppet-module-puppetlabs-translate  2.2.0-1
 puppet-module-voxpupuli-collectd  11.0.0-3
-puppet-module-vswitch  13.4.0-2
 pv  1.6.6-1+b1
 pycadf-common  3.1.1-2
 python3  3.9.2-3
-python3.9  3.9.2-1
-python3.9-dev  3.9.2-1
-python3.9-minimal  3.9.2-1
+python3.9  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9_3.9.2-1%2Bdeb11u3_amd64.deb
+python3.9-dev  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-dev_3.9.2-1%2Bdeb11u3_amd64.deb
+python3.9-minimal  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-minimal_3.9.2-1%2Bdeb11u3_amd64.deb
+python3.9-dbg  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-dbg_3.9.2-1%2Bdeb11u3_amd64.deb
 python3-alabaster  0.7.8-1.1
 python3-alembic  1.4.3-1
 python3-amqp  5.0.3-3
@@ -938,19 +953,19 @@ python3-defusedxml  0.6.0-2
 python3-deprecation  2.1.0-1
 python3-dev  3.9.2-3
 python3-distutils  3.9.2-1
-python3-django  2:2.2.28-1~deb11u4  https://snapshot.debian.org/archive/debian-security/20250110T191626Z/pool/updates/main/p/python-django/python3-django_2.2.28-1~deb11u4_all.deb
+python3-django  2:2.2.28-1~deb11u6  https://snapshot.debian.org/archive/debian-security/20250511T171345Z/pool/updates/main/p/python-django/python3-django_2.2.28-1~deb11u6_all.deb
 python3-django-appconf  1.0.3-1
 python3-django-compressor  2.4-2
 python3-django-debreach  2.0.1-2
 python3-django-pyscss  2.0.2-9
 python3-dnf  4.5.2-6
-python3-dnspython  2.0.0-1
+python3-dnspython  2.3.0-1  https://snapshot.debian.org/archive/debian/20230125T025837Z/pool/main/d/dnspython/python3-dnspython_2.3.0-1_all.deb
 python3-docutils  0.16+dfsg-4
 python3-dogpile.cache  1.0.2-2
 python3-editor  1.0.3-2
 python3-elementpath  2.1.2-1
 python3-enmerkar  0.7.1-3
-python3-eventlet  0.26.1-7+deb11u1
+python3-eventlet  0.33.1-4  https://snapshot.debian.org/archive/debian/20230127T150858Z/pool/main/p/python-eventlet/python3-eventlet_0.33.1-4_all.deb
 python3-extras  1.0.0-4
 python3-falcon  2.0.0-2+b1
 python3-fasteners  0.14.1-2
@@ -964,8 +979,9 @@ python3-gi  3.38.0-2
 python3-glanceclient 1:3.2.2-2
 python3-google-auth  1.5.1-3
 python3-gpg  1.14.0-1+b2
+python3-gps  3.22-4
 python3-greenlet  0.4.17-1+b1
-python3-gunicorn  20.1.0-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241220T041311Z/pool/updates/main/g/gunicorn/python3-gunicorn_20.1.0-1%2Bdeb11u1_all.deb
+python3-gunicorn  23.0.0-1  https://snapshot.debian.org/archive/debian/20240814T203402Z/pool/main/g/gunicorn/python3-gunicorn_23.0.0-1_all.deb
 python3-hawkey  0.55.2-6
 python3-html5lib  1.1-3
 python3-httplib2  0.18.1-3
@@ -977,7 +993,7 @@ python3-ipaddr  2.2.0-4
 python3-iso8601  0.1.13-1
 python3-itsdangerous  1.1.0-3
 python3-jeepney  0.6.0-1
-python3-jinja2  2.11.3-1
+python3-jinja2  2.11.3-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/j/jinja2/python3-jinja2_2.11.3-1%2Bdeb11u4_all.deb
 python3-jmespath  0.10.0-1
 python3-joblib  0.17.0-4+deb11u1  https://snapshot.debian.org/archive/debian/20230508T030704Z/pool/main/j/joblib/python3-joblib_0.17.0-4+deb11u1_all.deb
 python3-jsonpatch  1.25-3
@@ -988,7 +1004,7 @@ python3-jwt  1.7.1-2
 python3-keystoneauth1  4.2.1-2
 python3-keystonemiddleware  9.1.0-2
 python3-kombu  5.0.2-3
-python3-kubernetes  22.6.0-2 https://snapshot.debian.org/archive/debian/20230115T211934Z/pool/main/p/python-kubernetes/python3-kubernetes_22.6.0-2_all.deb
+python3-kubernetes 30.1.0-2 https://deb.debian.org/debian/pool/main/p/python-kubernetes/python3-kubernetes_30.1.0-2_all.deb
 python3-ldap  3.2.0-4+b3
 python3-ldap3  2.8.1-1
 python3-ldappool  2.3.1-1.1
@@ -1022,7 +1038,7 @@ python3-netifaces  0.10.9-0.2+b3
 python3-neutronclient 1:7.2.1-2
 python3-novaclient 2:17.2.1-3
 python3-numpy  1:1.19.5-1
-python3-oauthlib  3.1.0-2
+python3-oauthlib  3.2.2-3 https://deb.debian.org/debian/pool/main/p/python-oauthlib/python3-oauthlib_3.2.2-3_all.deb
 python3-openssl  20.0.1-1
 python3-openstacksdk  0.50.0-6
 python3-os-client-config  2.1.0-1
@@ -1030,16 +1046,16 @@ python3-oslo.cache  2.6.1-2
 python3-oslo.concurrency  4.3.1-1
 python3-oslo.config  1:8.3.3-1
 python3-oslo.context  3.1.1-2
-python3-oslo.db  8.4.0-2
+python3-oslo.db 12.3.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.db/python3-oslo.db_12.3.1-2_all.deb
 python3-oslo.i18n  5.0.1-2
 python3-oslo.log  4.4.0-2
 python3-oslo.middleware  4.1.1-2
-python3-oslo.policy  3.5.0-2
+python3-oslo.policy 4.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.policy/python3-oslo.policy_4.1.1-2_all.deb
 python3-oslo.rootwrap  6.2.0-2
 python3-oslo.serialization  4.0.2-1
 python3-oslo.service  2.4.0-2
-python3-oslo.upgradecheck  1.1.1-2
-python3-oslo.utils  4.6.0-2
+python3-oslo.upgradecheck 2.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.upgradecheck/python3-oslo.upgradecheck_2.1.1-2_all.deb
+python3-oslo.utils  4.6.1-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/p/python-oslo.utils/python3-oslo.utils_4.6.1-0%2Bdeb11u1_all.deb
 python3-oslo.versionedobjects  2.3.0-2
 python3-osprofiler  3.4.0-3
 python3-os-service-types  1.7.0-2
@@ -1120,7 +1136,7 @@ python3-sortedcontainers 2.1.0-2
 python3-software-properties 0.96.20.2-2.1
 python3-soupsieve  2.2.1-1
 python3-sphinx  3.4.3-2
-python3-sqlalchemy  1.3.22+ds1-1
+python3-sqlalchemy 1.4.47+ds1-1 https://snapshot.debian.org/archive/debian-ports/20230401T234825Z/pool/main/s/sqlalchemy/python3-sqlalchemy_1.4.47%2Bds1-1_all.deb
 python3-sqlparse  0.4.1-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241221T182311Z/pool/updates/main/s/sqlparse/python3-sqlparse_0.4.1-1%2Bdeb11u1_all.deb
 python3-sss  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/python3-sss_2.4.1-2%2Bdeb11u1_amd64.deb
 python3-statsd  3.3.0-2
@@ -1151,8 +1167,7 @@ python3-webob  1:1.8.6-1.1
 python3-websocket  0.57.0-1
 python3-websockify  0.9.0+dfsg1-3
 python3-webtest  2.0.35-1
-python3-werkzeug  1.0.1+dfsg1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20230806T123734Z/pool/updates/main/p/python-werkzeug/python3-werkzeug_1.0.1%2Bdfsg1-2%2Bdeb11u1_all.deb
-python3-wheel  0.34.2-1
+python3-werkzeug  1.0.1+dfsg1-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250221T142307Z/pool/updates/main/p/python-werkzeug/python3-werkzeug_1.0.1%2Bdfsg1-2%2Bdeb11u2_all.deb
 python3-wrapt  1.12.1-4+b1
 python3-xmlschema  1.4.2-1
 python3-xstatic  1.0.0-7
@@ -1205,8 +1220,8 @@ rpm  4.16.1.2+dfsg1-3
 rpm-common  4.16.1.2+dfsg1-3
 rsync  3.2.3-4+deb11u3  https://snapshot.debian.org/archive/debian-security/20250117T235324Z/pool/updates/main/r/rsync/rsync_3.2.3-4%2Bdeb11u3_amd64.deb
 ruby  1:2.7+2
-ruby2.7  2.7.4-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20250211T215340Z/pool/updates/main/r/ruby2.7/ruby2.7_2.7.4-1%2Bdeb11u4_amd64.deb
-ruby2.7-dev  2.7.4-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20250211T215340Z/pool/updates/main/r/ruby2.7/ruby2.7-dev_2.7.4-1%2Bdeb11u4_amd64.deb
+ruby2.7  2.7.4-1+deb11u5  https://snapshot.debian.org/archive/debian-security/20250309T222324Z/pool/updates/main/r/ruby2.7/ruby2.7_2.7.4-1%2Bdeb11u5_amd64.deb
+ruby2.7-dev  2.7.4-1+deb11u5  https://snapshot.debian.org/archive/debian-security/20250309T222324Z/pool/updates/main/r/ruby2.7/ruby2.7-dev_2.7.4-1%2Bdeb11u5_amd64.deb
 ruby-augeas  1:0.5.0-3+b8
 ruby-deep-merge  1.1.1-1
 rubygems-integration  1.18
@@ -1214,7 +1229,7 @@ ruby-json  2.3.0+dfsg-1+b3
 ruby-minitest  5.13.0-1
 ruby-net-telnet  0.1.1-2
 ruby-power-assert  1.1.7-2
-ruby-rubygems  3.2.5-2
+ruby-rubygems  3.2.5-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250512T211322Z/pool/updates/main/r/rubygems/ruby-rubygems_3.2.5-2%2Bdeb11u1_all.deb
 ruby-shadow  2.5.0-1+b4
 ruby-test-unit  3.3.9-1
 ruby-xmlrpc  0.3.0-2
@@ -1258,10 +1273,10 @@ strongswan-starter  5.9.1-1+deb11u4  https://snapshot.debian.org/archive/debian-
 strongswan-swanctl  5.9.1-1+deb11u4  https://snapshot.debian.org/archive/debian-security/20231121T003520Z/pool/updates/main/s/strongswan/strongswan-swanctl_5.9.1-1%2Bdeb11u4_amd64.deb
 sudo-ldap  1.9.5p2-3+deb11u1  https://snapshot.debian.org/archive/debian/20230123T040022Z/pool/main/s/sudo/sudo-ldap_1.9.5p2-3%2Bdeb11u1_amd64.deb
 sysstat  12.5.2-2
-syslog-ng  3.28.1-2+deb11u1 https://snapshot.debian.org/archive/debian/20230324T031555Z/pool/main/s/syslog-ng/syslog-ng_3.28.1-2%2Bdeb11u1_all.deb
-syslog-ng-core  3.28.1-2+deb11u1 https://snapshot.debian.org/archive/debian/20230324T031555Z/pool/main/s/syslog-ng/syslog-ng-core_3.28.1-2%2Bdeb11u1_amd64.deb
-syslog-ng-mod-mongodb  3.28.1-2+deb11u1 https://snapshot.debian.org/archive/debian/20230324T031555Z/pool/main/s/syslog-ng/syslog-ng-mod-mongodb_3.28.1-2%2Bdeb11u1_amd64.deb
-syslog-ng-mod-sql  3.28.1-2+deb11u1 https://snapshot.debian.org/archive/debian/20230324T031555Z/pool/main/s/syslog-ng/syslog-ng-mod-sql_3.28.1-2%2Bdeb11u1_amd64.deb
+syslog-ng  3.28.1-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250528T075331Z/pool/updates/main/s/syslog-ng/syslog-ng_3.28.1-2%2Bdeb11u2_all.deb
+syslog-ng-core  3.28.1-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250528T075331Z/pool/updates/main/s/syslog-ng/syslog-ng-core_3.28.1-2%2Bdeb11u2_amd64.deb
+syslog-ng-mod-mongodb  3.28.1-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250528T075331Z/pool/updates/main/s/syslog-ng/syslog-ng-mod-mongodb_3.28.1-2%2Bdeb11u2_amd64.deb
+syslog-ng-mod-sql  3.28.1-2+deb11u2  https://snapshot.debian.org/archive/debian-security/20250528T075331Z/pool/updates/main/s/syslog-ng/syslog-ng-mod-sql_3.28.1-2%2Bdeb11u2_amd64.deb
 syslinux-utils 3:6.04~git20190206.bf6db5b4+dfsg1-3+b1
 systemtap-sdt-dev  4.4-2
 sysvinit-utils  2.96-7+deb11u1
@@ -1278,7 +1293,7 @@ time  1.9-0.1
 tini  0.19.0-1
 traceroute 1:2.1.0-2+b1  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/t/traceroute/traceroute_2.1.0-2%2Bb1_amd64.deb
 tuned  2.15.0-1
-tzdata  2024b-3   https://snapshot.debian.org/archive/debian/20241021T143748Z/pool/main/t/tzdata/tzdata_2024b-3_all.deb
+tzdata  2025b-0+deb11u1  http://security.debian.org/debian-security/pool/updates/main/t/tzdata/tzdata_2025b-0+deb11u1_all.deb
 ucf  3.0043
 udhcpc  1:1.30.1-6+deb11u1  https://snapshot.debian.org/archive/debian-security/20250119T111333Z/pool/updates/main/b/busybox/udhcpc_1.30.1-6%2Bdeb11u1_amd64.deb
 unzip  6.0-26+deb11u1
@@ -1288,22 +1303,22 @@ uuid-runtime  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-securi
 uwsgi-core  2.0.19.1-7.1
 uwsgi-plugin-apparmor  0.0.0+git.2014.09.15.7d6d7bd7eb-3
 uwsgi-plugin-python3  2.0.19.1-7.1
-vim  2:8.2.2434-3+deb11u1
-vim-common  2:8.2.2434-3+deb11u1
-vim-runtime  2:8.2.2434-3+deb11u1
-vim-tiny  2:8.2.2434-3+deb11u1
+vim  2:8.2.2434-3+deb11u2  https://snapshot.debian.org/archive/debian-security/20250330T034336Z/pool/updates/main/v/vim/vim_8.2.2434-3%2Bdeb11u2_amd64.deb
+vim-common  2:8.2.2434-3+deb11u2  https://snapshot.debian.org/archive/debian-security/20250330T033313Z/pool/updates/main/v/vim/vim-common_8.2.2434-3%2Bdeb11u2_all.deb
+vim-runtime  2:8.2.2434-3+deb11u2  https://snapshot.debian.org/archive/debian-security/20250330T033313Z/pool/updates/main/v/vim/vim-runtime_8.2.2434-3%2Bdeb11u2_all.deb
+vim-tiny  2:8.2.2434-3+deb11u2  https://snapshot.debian.org/archive/debian-security/20250330T034336Z/pool/updates/main/v/vim/vim-tiny_8.2.2434-3%2Bdeb11u2_amd64.deb
 virt-what  1.19-1
 vlan  2.0.5
 w3m  0.5.3+git20210102-6+deb11u1 https://snapshot.debian.org/archive/debian/20230213T151507Z/pool/main/w/w3m/w3m_0.5.3%2Bgit20210102-6%2Bdeb11u1_amd64.deb
-wget  1.21-1+deb11u1
+wget  1.21-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T154339Z/pool/updates/main/w/wget/wget_1.21-1%2Bdeb11u2_amd64.deb
 whiptail  0.52.21-4+b3
 x11-common  1:7.7+22
 xclip  0.13-2
 xfsprogs  5.10.0-4
 xml-core  0.18+nmu1
 xmlsec1  1.2.31-1
-xsltproc  1.1.34-4  https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/libx/libxslt/xsltproc_1.1.34-4_amd64.deb
-xxd  2:8.2.2434-3+deb11u1
+xsltproc  1.1.34-4+deb11u2  https://snapshot.debian.org/archive/debian-security/20250324T095328Z/pool/updates/main/libx/libxslt/xsltproc_1.1.34-4%2Bdeb11u2_amd64.deb
+xxd  2:8.2.2434-3+deb11u2  https://snapshot.debian.org/archive/debian-security/20250330T034336Z/pool/updates/main/v/vim/xxd_8.2.2434-3%2Bdeb11u2_amd64.deb
 xz-utils  5.2.5-2.1~deb11u1 https://snapshot.debian.org/archive/debian/20220422T213035Z/pool/main/x/xz-utils/xz-utils_5.2.5-2.1~deb11u1_amd64.deb
 zip  3.0-12
 zlib1g  1:1.2.11.dfsg-2+deb11u2 https://snapshot.debian.org/archive/debian/20221106T145349Z/pool/main/z/zlib/zlib1g_1.2.11.dfsg-2+deb11u2_amd64.deb
