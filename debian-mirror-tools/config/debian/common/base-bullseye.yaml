@@ -294,10 +294,7 @@ iso-post-script: |
   RELEASE_VER=$(cat ${IMAGE_ROOTFS}/etc/build.info | grep SW_VERSION | cut -f2 -d'=' | tr -d '"')
   mkdir -p upgrades
   cp ${IMAGE_ROOTFS}/etc/pxeboot-update-${RELEASE_VER}.sh upgrades/
-  cp ${IMAGE_ROOTFS}/usr/sbin/software-deploy/deploy-precheck upgrades/
-  cp ${IMAGE_ROOTFS}/usr/sbin/software-deploy/upgrade_utils.py upgrades/
   cp ${IMAGE_ROOTFS}/opt/upgrades/metadata.xml upgrades/
-  cp ${IMAGE_ROOTFS}/usr/sbin/software-deploy/usm_load_import upgrades/
   sed -i "s/xxxSW_VERSIONxxx/${RELEASE_VER}/g" upgrades/metadata.xml
   if [ -f "/localdisk/workdir/${IMAGE_NAME}/packages.yaml" ]; then
     # Here we collect all the packages file names
@@ -315,12 +312,13 @@ iso-post-script: |
   CHECKSUM_OSTREE=$(ostree --repo=ostree_repo log starlingx | grep -i checksum | sed "s/.* //")
   sed -i "s,xxxBASECHECKSUMxxx,$CHECKSUM_OSTREE,g" ${IMAGE_ROOTFS}/etc/software/*-metadata.xml
   mkdir -p patches
+  # Copy metadata files to directories in ISO
   cp ${IMAGE_ROOTFS}/etc/software/*-metadata.xml upgrades/
   cp ${IMAGE_ROOTFS}/etc/software/*-metadata.xml patches/
   echo -n "VERSION=${RELEASE_VER}" > upgrades/version
-  mkdir -p upgrades/software-deploy
   # Copy all software-deploy scripts to upgrades/software-deploy in ISO
-  cp ${IMAGE_ROOTFS}/usr/sbin/software-deploy/* upgrades/software-deploy/
+  mkdir -p upgrades/software-deploy
+  cp -P ${IMAGE_ROOTFS}/usr/sbin/software-deploy/* upgrades/software-deploy/
 
   # 3. ISO
   # 3.1 Edit grub.cfg and isolinux.cfg
