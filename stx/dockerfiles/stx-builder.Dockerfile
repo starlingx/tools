@@ -14,18 +14,20 @@
 #
 FROM debian:bullseye
 
+ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
+
 ENV container=docker \
     PATH=/opt/LAT/lat:$PATH
-
-RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
-    echo "deb-src http://deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
-    echo "deb http://deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
 
 # Add retry to apt config
 RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
 
 # Update certificates
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
+RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
+    echo "deb-src ${STX_MIRROR_URL}/debian/debian/deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
 
 # Download required dependencies by mirror/build processes.
 RUN apt-get update && apt-get install --no-install-recommends -y \
