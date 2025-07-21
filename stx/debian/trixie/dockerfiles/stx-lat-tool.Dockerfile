@@ -16,11 +16,12 @@ FROM debian:trixie
 ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
 ARG lat_mirror_url="https://mirror.starlingx.windriver.com/mirror/"
-ARG lat_mirror_lat_path="lat-sdk/lat-sdk-20231206/"
+ARG lat_mirror_lat_path="lat-sdk/"
+ARG lat_version="lat-sdk-20231206"
 
 MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
-ARG LAT_BINARY_RESOURCE_PATH="${lat_mirror_url}${lat_mirror_lat_path}"
+ARG LAT_BINARY_RESOURCE_PATH="${lat_mirror_url}${lat_mirror_lat_path}${lat_version}"
 
 RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie contrib main non-free-firmware" > /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates contrib main non-free-firmware" >> /etc/apt/sources.list && \

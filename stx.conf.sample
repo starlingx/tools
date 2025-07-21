@@ -39,14 +39,14 @@ mode = local
 deblist =
 dsclist =
 lat_mirror_lat_path = lat-sdk/
-lat_mirror_url = https://mirror.starlingx.windriver.com/mirror
+lat_mirror_url = https://mirror.starlingx.windriver.com/mirror/
 
 # This will be added to "Origin:" field in the Release file
 # of the local deb repos
 origin = starlingx
 
 os_mirror_dist_path = debian/debian/
-os_mirror_url = https://mirror.starlingx.windriver.com/mirror
+os_mirror_url = https://mirror.starlingx.windriver.com/mirror/
 sourceslist =
 stx_mirror_strategy = stx_mirror_first
 type = aptly
