@@ -434,7 +434,9 @@ libharfbuzz0b  2.7.4-1
 libhogweed6  3.7.3-1
 libibverbs1  33.2-1
 libice6  2:1.0.10-1
-libicu67  67.1-7
+libicu67  67.1-7+deb11u1  https://snapshot.debian.org/archive/debian-security/20250615T141349Z/pool/updates/main/i/icu/libicu67_67.1-7%2Bdeb11u1_amd64.deb
+libicu-dev  67.1-7+deb11u1  https://snapshot.debian.org/archive/debian-security/20250615T141349Z/pool/updates/main/i/icu/libicu-dev_67.1-7%2Bdeb11u1_amd64.deb
+icu-devtools  67.1-7+deb11u1  https://snapshot.debian.org/archive/debian-security/20250615T141349Z/pool/updates/main/i/icu/icu-devtools_67.1-7%2Bdeb11u1_amd64.deb
 libidn2-0  2.3.0-5
 libini-config5  0.6.1-2
 libinih1  53-1+b2
