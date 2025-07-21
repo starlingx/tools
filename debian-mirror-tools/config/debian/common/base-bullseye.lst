@@ -862,7 +862,7 @@ openssh-client  1:8.4p1-5+deb11u4 https://snapshot.debian.org/archive/debian-sec
 openssh-server 1:8.4p1-5+deb11u4 https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/o/openssh/openssh-server_8.4p1-5%2Bdeb11u4_amd64.deb
 openssh-sftp-server 1:8.4p1-5+deb11u4 https://snapshot.debian.org/archive/debian-security/20250228T232616Z/pool/updates/main/o/openssh/openssh-sftp-server_8.4p1-5%2Bdeb11u4_amd64.deb
 original-awk  2018-08-27-1
-ovmf  2020.11-2+deb11u2 https://snapshot.debian.org/archive/debian-security/20240214T195659Z/pool/updates/main/e/edk2/ovmf_2020.11-2%2Bdeb11u2_all.deb
+ovmf  2020.11-2+deb11u3  https://snapshot.debian.org/archive/debian-security/20250605T181316Z/pool/updates/main/e/edk2/ovmf_2020.11-2%2Bdeb11u3_all.deb
 pahole  1.22-4~bpo11+1 https://snapshot.debian.org/archive/debian/20220202T154459Z/pool/main/d/dwarves/pahole_1.22-4~bpo11%2B1_amd64.deb
 passwd  1:4.8.1-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250418T193359Z/pool/updates/main/s/shadow/passwd_4.8.1-1%2Bdeb11u1_amd64.deb
 patch  2.7.6-7
