@@ -33,7 +33,6 @@ RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullse
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
 
 RUN echo "deb-src ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
-    echo "deb-src ${STX_MIRROR_URL}/debian/debian/deb.debian.org/debian buster main" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
 
 # Download required dependencies by mirror/build processes.
