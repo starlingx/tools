@@ -42,14 +42,14 @@ RUN apt-get -q update && apt-get -y install gnupg2 gpg-wks-server && \
     rm -f temp-keyring.gpg temp-keyring.gpg~ && \
     mkdir -p /etc/apt/keyrings && chmod 0775 /etc/apt/keyrings && \
     mv nginx_signing.gpg /etc/apt/keyrings && \
+    groupadd --system --gid 201 nginx && \
+    useradd --system --gid nginx --no-create-home --home /nonexistent --comment "nginx user" --shell /bin/false --uid 201 nginx && \
     apt-get -q update && apt-get -y install \
                                             aptly \
                                             supervisor \
                                             gettext-base \
                                             nginx && \
     apt-get clean && \
-    groupadd --system --gid 201 nginx && \
-    useradd --system --gid nginx --no-create-home --home /nonexistent --comment "nginx user" --shell /bin/false --uid 201 nginx && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /usr/share/man && \
     rm -rf /usr/share/doc && \
