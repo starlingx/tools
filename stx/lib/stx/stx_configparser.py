@@ -199,18 +199,25 @@ class STXConfigParser(object):
 
         # Convert stx_mirror_url => {os,lat}_mirror_url and {os,lat}_mirror_{dist,lat}_path
         if self.cf.has_option('repomgr', 'stx_mirror_url'):
+
+            stx_mirror_url = self.__get('repomgr', 'stx_mirror_url')
+            if not stx_mirror_url.endswith('/'):
+                stx_mirror_url += '/'
+
             # Upgrade os related mirror info
-            self.__upgrade_nonempty_key('repomgr',
-                                        'os_mirror_url',
-                                        'https://mirror.starlingx.windriver.com/mirror/')
+            self.__upgrade_nonempty_key('repomgr', 'os_mirror_url', stx_mirror_url)
             self.__set('repomgr', 'os_mirror_dist_path', 'debian/debian/')
             self.__delete_key('repomgr', 'stx_mirror_url')
 
             # Add LAT related mirror info, as this might be different than the
             # os mirror
-            self.__set('repomgr', 'lat_mirror_url',
-                       'https://mirror.starlingx.windriver.com/mirror/')
-            self.__set('repomgr', 'lat_mirror_lat_path', 'lat-sdk/lat-sdk-20231206/')
+            self.__set('repomgr', 'lat_mirror_url', stx_mirror_url)
+            self.__set('repomgr', 'lat_mirror_lat_path', 'lat-sdk/')
+
+        # lat_mirror_lat_path was set incorrectly in some versions, fix it
+        lat_mirror_lat_path = self.__get('repomgr', 'lat_mirror_lat_path', None)
+        if lat_mirror_lat_path == 'lat-sdk/lat-sdk-20231206/':
+            self.__set('repomgr', 'lat_mirror_lat_path', 'lat-sdk/')
 
         if self.cf.has_option('builder', 'dist'):
             # Upgrade os related mirror info
