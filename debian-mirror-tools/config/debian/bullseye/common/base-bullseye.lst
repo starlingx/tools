@@ -43,6 +43,8 @@ cloud-utils  0.31-2
 cloud-guest-utils  0.31-2
 cloud-image-utils  0.31-2
 cluster-glue  1.0.12-20
+cmake 3.18.4-2+deb11u1
+cmake-data 3.18.4-2+deb11u1
 collectd  5.12.0-7
 collectd-core  5.12.0-7
 conntrack  1:1.4.6-2
@@ -81,6 +83,7 @@ dnf-data  4.5.2-6
 docker.io  20.10.5+dfsg1-1+deb11u3 https://snapshot.debian.org/archive/debian-security/20241022T165401Z/pool/updates/main/d/docker.io/docker.io_20.10.5%2Bdfsg1-1%2Bdeb11u3_amd64.deb
 docutils-common  0.16+dfsg-4
 dosfstools  4.2-1
+doxygen 1.9.1-1
 dpkg  1.20.10 https://snapshot.debian.org/archive/debian-security/20220525T153250Z/pool/updates/main/d/dpkg/dpkg_1.20.10_amd64.deb
 dpkg-dev  1.20.10 https://snapshot.debian.org/archive/debian-security/20220525T153250Z/pool/updates/main/d/dpkg/dpkg-dev_1.20.10_all.deb
 dwz  0.13+20210201-1
@@ -343,8 +346,8 @@ libdconf1  0.38.0-2
 libdebconfclient0  0.260
 libdebhelper-perl  13.3.4
 libdebian-installer4  0.121
-libvdeplug-dev  4.0.1-2
-libvdeplug2  4.0.1-2
+liberror-perl 0.17029-1
+libjsoncpp24 1.9.4-4
 libdhash1  0.6.1-2
 libdnf2  0.55.2-6
 libdnf2-common  0.55.2-6
@@ -504,6 +507,7 @@ liblognorm5  2.0.5-1.1
 liblrm2  1.0.12-20
 liblsan0  10.2.1-6
 libltdl7  2.4.6-15
+libltdl-dev 2.4.6-15
 liblua5.2-0  5.2.4-1.1+b3
 liblua5.3-0  5.3.3-1.1+deb11u1  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/l/lua5.3/liblua5.3-0_5.3.3-1.1%2Bdeb11u1_amd64.deb
 liblua5.3-dev  5.3.3-1.1+deb11u1  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/l/lua5.3/liblua5.3-dev_5.3.3-1.1%2Bdeb11u1_amd64.deb
@@ -624,6 +628,11 @@ libpsl5  0.21.0-1.2
 libpixman-1-dev  0.40.0-1.1~deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/p/pixman/libpixman-1-dev_0.40.0-1.1~deb11u1_amd64.deb
 libpwquality1  1.4.4-1
 libpwquality-common  1.4.4-1
+libpython2.7 2.7.18-8+deb11u1 https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/libpython2.7_2.7.18-8%2Bdeb11u1_amd64.deb
+libpython2.7-minimal 2.7.18-8+deb11u1 https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/libpython2.7-minimal_2.7.18-8%2Bdeb11u1_amd64.deb
+libpython2.7-stdlib 2.7.18-8+deb11u1 https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/libpython2.7-stdlib_2.7.18-8%2Bdeb11u1_amd64.deb
+libpython2.7-dev 2.7.18-8+deb11u1 https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/libpython2.7-dev_2.7.18-8%2Bdeb11u1_amd64.deb
+libpython2-stdlib 2.7.18-3
 libpython3.9  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9_3.9.2-1%2Bdeb11u3_amd64.deb
 libpython3.9-dev  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-dev_3.9.2-1%2Bdeb11u3_amd64.deb
 libpython3.9-minimal  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/libpython3.9-minimal_3.9.2-1%2Bdeb11u3_amd64.deb
@@ -640,6 +649,7 @@ libreadline-dev  8.1-1
 libreadline8  8.1-1
 libref-array1  0.6.1-2
 librepo0  1.12.1-4
+librhash0 1.4.1-2
 librpm9  4.16.1.2+dfsg1-3
 librpmbuild9  4.16.1.2+dfsg1-3
 librpmio9  4.16.1.2+dfsg1-3
@@ -759,6 +769,8 @@ libutempter0 1.2.1-2
 libuuid1  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/libuuid1_2.36.1-8%2Bdeb11u2_amd64.deb
 libuv1  1.40.0-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20240310T130025Z/pool/updates/main/libu/libuv1/libuv1_1.40.0-2%2Bdeb11u1_amd64.deb
 libibverbs1  33.2-1
+libvdeplug-dev  4.0.1-2
+libvdeplug2  4.0.1-2
 libvirglrenderer-dev  0.8.2-5+deb11u1 https://snapshot.debian.org/archive/debian/20221210T034654Z/pool/main/v/virglrenderer/libvirglrenderer-dev_0.8.2-5%2Bdeb11u1_amd64.deb
 libvirglrenderer1  0.8.2-5+deb11u1 https://snapshot.debian.org/archive/debian/20221210T034654Z/pool/main/v/virglrenderer/libvirglrenderer1_0.8.2-5%2Bdeb11u1_amd64.deb
 libvte-2.91-dev  0.62.3-1
@@ -776,6 +788,7 @@ libx11-6  2:1.7.2-1+deb11u2 https://snapshot.debian.org/archive/debian-security/
 libx11-data  2:1.7.2-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20231005T190705Z/pool/updates/main/libx/libx11/libx11-data_1.7.2-1%2Bdeb11u2_all.deb
 libx11-dev  2:1.7.2-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20231005T190705Z/pool/updates/main/libx/libx11/libx11-dev_1.7.2-1%2Bdeb11u2_amd64.deb
 libx11-xcb1  2:1.7.2-1+deb11u2 https://snapshot.debian.org/archive/debian-security/20231005T190705Z/pool/updates/main/libx/libx11/libx11-xcb1_1.7.2-1%2Bdeb11u2_amd64.deb
+libxapian30 1.4.18-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/x/xapian-core/libxapian30_1.4.18-3_amd64.deb
 libxau6  1:1.0.9-1
 libxcb1  1.14-3
 libxcb-render0  1.14-3
@@ -864,6 +877,8 @@ openssh-sftp-server 1:8.4p1-5+deb11u4 https://snapshot.debian.org/archive/debian
 original-awk  2018-08-27-1
 ovmf  2020.11-2+deb11u3  https://snapshot.debian.org/archive/debian-security/20250605T181316Z/pool/updates/main/e/edk2/ovmf_2020.11-2%2Bdeb11u3_all.deb
 pahole  1.22-4~bpo11+1 https://snapshot.debian.org/archive/debian/20220202T154459Z/pool/main/d/dwarves/pahole_1.22-4~bpo11%2B1_amd64.deb
+pandoc 2.9.2.1-1+deb11u1 https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/p/pandoc/pandoc_2.9.2.1-1%2Bdeb11u1_amd64.deb
+pandoc-data 2.9.2.1-1+deb11u1 https://snapshot.debian.org/archive/debian/20230925T090110Z/pool/main/p/pandoc/pandoc-data_2.9.2.1-1%2Bdeb11u1_all.deb
 passwd  1:4.8.1-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250418T193359Z/pool/updates/main/s/shadow/passwd_4.8.1-1%2Bdeb11u1_amd64.deb
 patch  2.7.6-7
 pci.ids  0.0~2025.03.09-1  https://snapshot.debian.org/archive/debian/20250531T203830Z/pool/main/p/pci.ids/pci.ids_0.0~2025.03.09-1_all.deb
@@ -873,6 +888,7 @@ perl-base  5.32.1-4+deb11u4  https://snapshot.debian.org/archive/debian-security
 perl-modules-5.32  5.32.1-4+deb11u4  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/perl/perl-modules-5.32_5.32.1-4%2Bdeb11u4_all.deb
 pinentry-curses  1.1.0-4
 pipexec  2.5.5-2+b1
+pkg-config 0.29.2-1
 pm-utils  1.4.1-19
 po-debconf  1.0.21+nmu1
 policykit-1  0.105-31+deb11u1
@@ -898,6 +914,11 @@ puppet-module-puppetlabs-translate  2.2.0-1
 puppet-module-voxpupuli-collectd  11.0.0-3
 pv  1.6.6-1+b1
 pycadf-common  3.1.1-2
+python2 2.7.18-3
+python2-minimal 2.7.18-3
+python2.7  2.7.18-8+deb11u1  https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/python2.7_2.7.18-8%2Bdeb11u1_amd64.deb
+python2.7-minimal  2.7.18-8+deb11u1  https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/python2.7-minimal_2.7.18-8%2Bdeb11u1_amd64.deb
+python2.7-dev  2.7.18-8+deb11u1  https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/python2.7-dev_2.7.18-8%2Bdeb11u1_amd64.deb
 python3  3.9.2-3
 python3.9  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9_3.9.2-1%2Bdeb11u3_amd64.deb
 python3.9-dev  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-dev_3.9.2-1%2Bdeb11u3_amd64.deb
@@ -1029,6 +1050,7 @@ python3-memcache  1.59-5
 python3-migrate  0.13.0-2
 python3-mimeparse  1.6.0-3
 python3-minimal  3.9.2-3
+python3-mock  4.0.3-1 https://snapshot.debian.org/archive/debian/20210102T202954Z/pool/main/p/python-mock/python3-mock_4.0.3-1_all.deb
 python3-monotonic  1.5-3
 python3-more-itertools  4.2.0-3
 python3-msgpack  1.0.0-6+b1
@@ -1044,6 +1066,7 @@ python3-oauthlib  3.2.2-3 https://deb.debian.org/debian/pool/main/p/python-oauth
 python3-openssl  20.0.1-1
 python3-openstacksdk  0.50.0-6
 python3-os-client-config  2.1.0-1
+python3-osc-placement 4.1.0-3 https://snapshot.debian.org/archive/debian/20230821T205629Z/pool/main/p/python-osc-placement/python3-osc-placement_4.1.0-3_all.deb
 python3-oslo.cache  2.6.1-2
 python3-oslo.concurrency  4.3.1-1
 python3-oslo.config  1:8.3.3-1
@@ -1051,6 +1074,7 @@ python3-oslo.context  3.1.1-2
 python3-oslo.db 12.3.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.db/python3-oslo.db_12.3.1-2_all.deb
 python3-oslo.i18n  5.0.1-2
 python3-oslo.log  4.4.0-2
+python3-oslo.messaging 12.5.2-1 https://snapshot.debian.org/archive/debian/20210331T144200Z/pool/main/p/python-oslo.messaging/python3-oslo.messaging_12.5.2-1_all.deb
 python3-oslo.middleware  4.1.1-2
 python3-oslo.policy 4.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.policy/python3-oslo.policy_4.1.1-2_all.deb
 python3-oslo.rootwrap  6.2.0-2
