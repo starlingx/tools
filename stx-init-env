@@ -731,6 +731,7 @@ builder_os_codename=${STX_CONF["builder.os_codename"]}
 builder_os_arch=${STX_CONF["builder.os_arch"]}
 os_mirror_url=${STX_CONF["repomgr.os_mirror_url"]}
 os_mirror_dist_path=${STX_CONF["repomgr.os_mirror_dist_path"]}
+os_mirror_dl_path=${STX_CONF["repomgr.os_mirror_dl_path"]}
 lat_mirror_url=${STX_CONF["repomgr.lat_mirror_url"]}
 lat_mirror_lat_path=${STX_CONF["repomgr.lat_mirror_lat_path"]}
 
@@ -755,8 +756,16 @@ if [ -z "${os_mirror_dist_path}" ]; then
     if [ "${os_mirror_url}" == "http://" ]; then
         info "Missing stx.conf value for: repomgr.os_mirror_dist_path; mirror points to upstream: ${os_mirror_url}; allowing"
     else
-        os_mirror_dist_path=debian/debian/
+        os_mirror_dist_path=${builder_os_id}/${builder_os_id}/
         warn "Missing stx.conf value for: repomgr.os_mirror_dist_path; using: ${os_mirror_dist_path}"
+    fi
+fi
+if [ -z "${os_mirror_dl_path}" ]; then
+    if [ "${os_mirror_url}" == "http://" ]; then
+        info "Missing stx.conf value for: repomgr.os_mirror_dl_path; mirror points to upstream: ${os_mirror_url}; allowing"
+    else
+        os_mirror_dl_path=${builder_os_id}/
+        warn "Missing stx.conf value for: repomgr.os_mirror_dl_path; using: ${os_mirror_dist_path}"
     fi
 fi
 if [ -z "${lat_mirror_url}" ]; then

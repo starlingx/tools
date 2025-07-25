@@ -40,6 +40,7 @@ export HOSTUSERNAME=@HOSTUSERNAME@
 
 export OS_MIRROR_URL=@OS_MIRROR_URL@
 export OS_MIRROR_DIST_PATH=@OS_MIRROR_DIST_PATH@
+export OS_MIRROR_DL_PATH=@OS_MIRROR_DL_PATH@
 
 # Included for completeness. No know uses of these so far.
 export LAT_MIRROR_URL=@LAT_MIRROR_URL@

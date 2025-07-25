@@ -207,12 +207,16 @@ class STXConfigParser(object):
             # Upgrade os related mirror info
             self.__upgrade_nonempty_key('repomgr', 'os_mirror_url', stx_mirror_url)
             self.__set('repomgr', 'os_mirror_dist_path', 'debian/debian/')
+            self.__set('repomgr', 'os_mirror_dl_path', 'debian/')
             self.__delete_key('repomgr', 'stx_mirror_url')
 
             # Add LAT related mirror info, as this might be different than the
             # os mirror
             self.__set('repomgr', 'lat_mirror_url', stx_mirror_url)
             self.__set('repomgr', 'lat_mirror_lat_path', 'lat-sdk/')
+
+        if not self.cf.has_option('repomgr', 'os_mirror_dl_path'):
+            self.__set('repomgr', 'os_mirror_dl_path', 'debian/')
 
         # lat_mirror_lat_path was set incorrectly in some versions, fix it
         lat_mirror_lat_path = self.__get('repomgr', 'lat_mirror_lat_path', None)

@@ -46,6 +46,7 @@ lat_mirror_url = https://mirror.starlingx.windriver.com/mirror/
 origin = starlingx
 
 os_mirror_dist_path = debian/debian/
+os_mirror_dl_path = debian/
 os_mirror_url = https://mirror.starlingx.windriver.com/mirror/
 sourceslist =
 stx_mirror_strategy = stx_mirror_first

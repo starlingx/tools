@@ -89,6 +89,11 @@
 #     "[repomgr]os_mirror_dist_path" from stx.conf; or 'debian/debian. This is currently
 #     used in all build containers.
 #
+#   OS_MIRROR_DL_PATH
+#     StarlingX downloadables cache path within the OS mirror URL; defaults to the value of
+#     "[repomgr]os_mirror_dl_path" from stx.conf; or 'debian. This is currently
+#     used in all build containers.
+#
 #   LAT_MIRROR_URL
 #     StarlingX LAT mirror URL; defaults to the value of "[repomgr]lat_mirror_url" from
 #     stx.conf; or 'https://mirror.starlingx.windriver.com/mirror/'. This is currently
