@@ -18,6 +18,8 @@ ARG os_mirror_dist_path=""
 ARG lat_mirror_url="https://mirror.starlingx.windriver.com/mirror/"
 ARG lat_mirror_lat_path="lat-sdk/"
 ARG lat_version="lat-sdk-20231206"
+ARG max_retry_count=5
+ARG retry_delay=60
 
 MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
@@ -75,8 +77,24 @@ RUN apt-get -y install \
             xfsprogs \
         && \
         apt-get clean && \
-        rm -rf /var/lib/apt/lists/* && \
-        pip3 install git+https://opendev.org/starlingx/apt-ostree@master
+        rm -rf /var/lib/apt/lists/*
+
+RUN \
+    attempt=1 ; \
+    while true ; do \
+        if pip3 install git+https://opendev.org/starlingx/apt-ostree@master ; then \
+            break ; \
+        fi ; \
+        if [ $attempt -ge ${max_retry_count} ] ; then \
+            echo "ERROR: failed to install apt-ostree" >&2 ; \
+            exit 1 ; \
+        fi ; \
+        attempt=`expr $attempt + 1` ; \
+        echo "WARNING: failed to install apt-ostree" >&2 ; \
+        echo "Sleeping ${retry_delay} second(s)" >&2 ; \
+        sleep ${retry_delay} ; \
+        echo "Retrying ($attempt/${max_retry_count})" >&2 ; \
+    done
 
 # Insert pubkey of the package repository
 COPY stx/debian/bullseye/toCOPY/builder/pubkey.rsa /opt/LAT/
