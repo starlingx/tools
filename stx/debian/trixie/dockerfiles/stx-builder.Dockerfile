@@ -16,8 +16,16 @@ FROM debian:trixie
 ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
 
+ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
+
 ENV container=docker \
     PATH=/opt/LAT/lat:$PATH
+
+# Add retry to apt config
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+
+# Update certificates via upsteam repos
+RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
 
 RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie contrib main non-free-firmware" > /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates contrib main non-free-firmware" >> /etc/apt/sources.list && \
@@ -29,12 +37,6 @@ RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie
 # https://salsa.debian.org/cpython-team/python3/-/blob/python3.11/debian/README.venv#L58
 RUN echo "[global]" >> /etc/pip.conf && \
     echo "break-system-packages = true" >> /etc/pip.conf
-
-# Add retry to apt config
-RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
-
-# Update certificates via upsteam repos
-RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
 
 # Download required dependencies by mirror/build processes.
 RUN apt-get update && apt-get install --no-install-recommends -y \

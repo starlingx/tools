@@ -18,17 +18,17 @@ FROM debian:trixie
 ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
 
-RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie contrib main non-free-firmware" > /etc/apt/sources.list && \
-    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates contrib main non-free-firmware" >> /etc/apt/sources.list && \
-    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-backports contrib main non-free-firmware" >> /etc/apt/sources.list && \
-    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian-security trixie-security contrib main non-free-firmware" >> /etc/apt/sources.list && \
-    rm /etc/apt/sources.list.d/debian.sources
-
 # Add retry to apt config
 RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
 
 # Update certificates
 RUN apt-get -q -y update && apt-get -y install --no-install-recommends curl ca-certificates && update-ca-certificates
+
+RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie contrib main non-free-firmware" > /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates contrib main non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-backports contrib main non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian-security trixie-security contrib main non-free-firmware" >> /etc/apt/sources.list && \
+    rm /etc/apt/sources.list.d/debian.sources
 
 RUN curl -O https://nginx.org/keys/nginx_signing.key
 
