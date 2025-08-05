@@ -460,7 +460,7 @@ libjpeg-dev  1:2.0.6-4
 libjpeg62-turbo  1:2.0.6-4
 libjs-angular-file-upload  12.0.4+dfsg1-2.1
 libjs-angular-gettext  2.3.8-2.1
-libjs-angularjs  1.8.2-2
+libjs-angularjs  1.8.3-1+deb12u1~deb11u1  https://snapshot.debian.org/archive/debian-security/20250719T215320Z/pool/updates/main/a/angular.js/libjs-angularjs_1.8.3-1%2Bdeb12u1~deb11u1_all.deb
 libjs-angularjs-smart-table  1.4.13-1.1
 libjs-angular-schema-form  0.8.13-1.1
 libjs-bootstrap  3.4.1+dfsg-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250413T100314Z/pool/updates/main/t/twitter-bootstrap3/libjs-bootstrap_3.4.1%2Bdfsg-2%2Bdeb11u1_all.deb
