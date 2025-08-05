@@ -374,7 +374,7 @@ libexpat1  2.2.10-2+deb11u7  https://snapshot.debian.org/archive/debian-security
 libexpat1-dev  2.2.10-2+deb11u7  https://snapshot.debian.org/archive/debian-security/20250430T215321Z/pool/updates/main/e/expat/libexpat1-dev_2.2.10-2%2Bdeb11u7_amd64.deb
 libext2fs2  1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/20241004T132419Z/pool/updates/main/e/e2fsprogs/libext2fs2_1.46.2-2%2Bdeb11u1_amd64.deb
 libfam0  2.7.0-17.3
-libfastjson4  0.99.9-1
+libfastjson4  0.99.9-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250728T151337Z/pool/updates/main/libf/libfastjson/libfastjson4_0.99.9-1%2Bdeb11u1_amd64.deb
 libfdisk1  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/libfdisk1_2.36.1-8%2Bdeb11u2_amd64.deb
 libfdt1  1.6.0-1
 libfdt-dev  1.6.0-1
