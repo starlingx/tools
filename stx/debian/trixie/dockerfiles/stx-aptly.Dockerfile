@@ -24,6 +24,9 @@ RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
 # Update certificates
 RUN apt-get -q -y update && apt-get -y install --no-install-recommends curl ca-certificates && update-ca-certificates
 
+# Temporarily disable the valid-until check.  Trixie's repos are not updating as quickly as they should while in pre-release state
+RUN echo "Acquire::Check-Valid-Until "false";" > /etc/apt/apt.conf.d/99ignore-release-expiration
+
 RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie contrib main non-free-firmware" > /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates contrib main non-free-firmware" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-backports contrib main non-free-firmware" >> /etc/apt/sources.list && \
