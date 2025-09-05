@@ -217,7 +217,7 @@ init-system-helpers  1.60
 inotify-tools 3.14-7 https://snapshot.debian.org/archive/debian/20231201T092318Z/pool/main/i/inotify-tools/inotify-tools_3.14-7_amd64.deb
 install-info  6.7.0.dfsg.2-6
 intltool-debian  0.35.0+20060710.5
-iperf3  3.9-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250128T133327Z/pool/updates/main/i/iperf3/iperf3_3.9-1%2Bdeb11u2_amd64.deb
+iperf3  3.9-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250824T202338Z/pool/updates/main/i/iperf3/iperf3_3.9-1%2Bdeb11u3_amd64.deb
 ipmitool  1.8.18-10.1
 iproute2  5.10.0-4
 iptables  1.8.7-1
@@ -446,7 +446,7 @@ libinih1  53-1+b2
 libip4tc2  1.8.7-1
 libip6tc2  1.8.7-1
 libipa-hbac0  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libipa-hbac0_2.4.1-2%2Bdeb11u1_amd64.deb
-libiperf0  3.9-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250128T133327Z/pool/updates/main/i/iperf3/libiperf0_3.9-1%2Bdeb11u2_amd64.deb
+libiperf0  3.9-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250824T202338Z/pool/updates/main/i/iperf3/libiperf0_3.9-1%2Bdeb11u3_amd64.deb
 libipsec-mb0  0.55-1
 libisal2  2.30.0-2
 libisc-export1105  1:9.11.19+dfsg-2.1
