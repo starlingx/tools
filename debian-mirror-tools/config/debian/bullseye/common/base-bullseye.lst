@@ -139,7 +139,7 @@ firmware-myricom 20210315-3 https://snapshot.debian.org/archive/debian/20220703T
 firmware-netronome 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-netronome_20210315-3_all.deb
 firmware-netxen 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-netxen_20210315-3_all.deb
 firmware-qcom-soc 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-qcom-soc_20210315-3_all.deb
-firmware-qlogic  20210315-3 https://deb.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-qlogic_20210315-3_all.deb
+firmware-qlogic 20230210-5~bpo11+1 https://snapshot.debian.org/archive/debian/20230718T091208Z/pool/non-free/f/firmware-nonfree/firmware-qlogic_20230210-5~bpo11%2B1_all.deb
 firmware-realtek 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-realtek_20210315-3_all.deb
 firmware-samsung 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-samsung_20210315-3_all.deb
 firmware-siano 20210315-3 https://snapshot.debian.org/archive/debian/20220703T151735Z/pool/non-free/f/firmware-nonfree/firmware-siano_20210315-3_all.deb
