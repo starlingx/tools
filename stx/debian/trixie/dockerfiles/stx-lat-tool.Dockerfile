@@ -25,8 +25,11 @@ MAINTAINER Chen Qi <Qi.Chen@windriver.com>
 
 ARG LAT_BINARY_RESOURCE_PATH="${lat_mirror_url}${lat_mirror_lat_path}${lat_version}"
 
-# Add retry to apt config
-RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+# Add retry and parallel download to apt config
+RUN ( echo 'Acquire::Retries "3";'; \
+      echo 'Acquire::Queue-Mode "access";'; \
+      echo 'APT::Get::Max-Parallel-Downloads "3";' \
+    ) > /etc/apt/apt.conf.d/99custom
 
 # Update certificates via upsteam repos
 RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates

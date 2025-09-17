@@ -76,6 +76,7 @@ class Debbuilder(object):
         self.set_environ_vars()
         os.system('/opt/setup.sh')
         self.schroot_config_dir = '/etc/schroot/chroot.d'
+        self.logger.debug("Debbuilder initalized for dist %s", self.attrs['dist'])
 
     def get_parent_chroot_name(self, user):
         return '-'.join([self.attrs['dist'], self.attrs['arch'], user])
@@ -616,7 +617,7 @@ class Debbuilder(object):
         self.save_chroots_config(user, project)
 
         if chroot_sequence == required_instances + 1:
-            self.logger.info("All required %s chroots are created", str(required_instances))
+            self.logger.info("All %s required chroots are created", str(required_instances))
             response['status'] = 'success'
             response['msg'] = 'All required chroots are created'
         else:

@@ -17,6 +17,7 @@ ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
 
 ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
+ARG APT_CHROOT_DIR=/usr/local/apt-chroot
 
 ENV container=docker \
     PATH=/opt/LAT/lat:$PATH
@@ -37,6 +38,7 @@ RUN echo "deb-src ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bu
 
 # Download required dependencies by mirror/build processes.
 RUN apt-get update && apt-get install --no-install-recommends -y \
+        binutils \
         bzip2 \
         coreutils \
         cpio \
@@ -44,18 +46,22 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         curl \
         debian-keyring \
         debmake \
+        debootstrap \
         dnsutils \
+        dpkg \
         dpkg-dev \
         fakeroot \
         file \
         git \
         git-buildpackage \
+        gnupg \
         isomd5sum \
         less \
         libdistro-info-perl \
         locales-all \
         mkisofs \
         pristine-tar \
+        proot \
         proxychains \
         python3 \
         python3-apt \
@@ -67,6 +73,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         ssh \
         sudo \
         syslinux-utils \
+        tar \
         tini \
         unzip \
         util-linux \
@@ -95,10 +102,12 @@ RUN pip3 --no-cache-dir install \
         pulp_deb_client \
         pulp_file_client \
         progressbar \
-        git+https://github.com/masselstine/aptly-api-client.git \
         click \
         lxml \
         pycryptodomex
+
+RUN pip3 --no-cache-dir install \
+    git+https://github.com/slittle1/aptly-api-client.git
 
 # Misc files
 RUN sed -i '/^proxy_dns*/d' /etc/proxychains.conf && \
@@ -118,6 +127,14 @@ RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa
 RUN mkdir -p /etc/vim
 COPY stx/debian/bullseye/toCOPY/common/vimrc.local /etc/vim/vimrc.local
 RUN chmod 0644 /etc/vim/vimrc.local
+
+# setup chroot for apt queries
+RUN mkdir -p $APT_CHROOT_DIR
+RUN debootstrap --variant=minbase --include=ca-certificates,debian-archive-keyring,gnupg,procps --foreign bullseye $APT_CHROOT_DIR http://deb.debian.org/debian
+RUN chroot $APT_CHROOT_DIR debootstrap/debootstrap --second-stage
+RUN rm -rf $APT_CHROOT_DIR/etc/apt/sources.list $APT_CHROOT_DIR/etc/apt/sources.list.d && \
+    rm -rf $APT_CHROOT_DIR/etc/apt/apt.conf     $APT_CHROOT_DIR/etc/apt/apt.conf.d && \
+    rm -rf $APT_CHROOT_DIR/var/lib/apt/lists/partial  $APT_CHROOT_DIR/var/cache/apt/archives/partial
 
 ENTRYPOINT ["ionice", "-c", "3", "nice", "-n", "15", "/usr/bin/tini", "-g", "--"]
 CMD ["/bin/bash", "-i", "-c", "exec /bin/sleep infinity" ]
