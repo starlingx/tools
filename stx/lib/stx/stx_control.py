@@ -254,6 +254,7 @@ stx-pkgbuilder/configmap/')
 
         with open(patch_env_sample, "r") as rf:
             message = rf.read()
+            message = message.replace("@BUILDER_OS_CODENAME@", builder_os_codename)
             message = message.replace("@PROJECT@", projectname)
             message = message.replace("@MYUNAME@", builder_myuname)
 
