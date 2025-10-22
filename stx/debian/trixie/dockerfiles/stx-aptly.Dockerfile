@@ -18,8 +18,11 @@ FROM debian:trixie
 ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
 
-# Add retry to apt config
-RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+# Add retry and parallel download to apt config
+RUN ( echo 'Acquire::Retries "3";'; \
+      echo 'Acquire::Queue-Mode "access";'; \
+      echo 'APT::Get::Max-Parallel-Downloads "3";' \
+    ) > /etc/apt/apt.conf.d/99custom
 
 # Update certificates
 RUN apt-get -q -y update && apt-get -y install --no-install-recommends curl ca-certificates && update-ca-certificates
