@@ -80,7 +80,6 @@ distro-info-data  0.51+deb11u2  https://snapshot.debian.org/archive/debian/20221
 dmidecode  3.3-2
 dnf  4.5.2-6
 dnf-data  4.5.2-6
-docker.io  20.10.5+dfsg1-1+deb11u3 https://snapshot.debian.org/archive/debian-security/20241022T165401Z/pool/updates/main/d/docker.io/docker.io_20.10.5%2Bdfsg1-1%2Bdeb11u3_amd64.deb
 docutils-common  0.16+dfsg-4
 dosfstools  4.2-1
 doxygen 1.9.1-1

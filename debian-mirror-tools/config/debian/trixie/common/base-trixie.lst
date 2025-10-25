@@ -95,7 +95,6 @@ dmidecode  3.6-2
 dmsetup  2:1.02.205-2
 dnf  4.23.0-1
 dnf-data  4.23.0-1
-docker.io  26.1.5+dfsg1-9+b9
 docutils-common  0.21.2+dfsg-2
 dosfstools  4.2-1.2
 dpkg  1.22.21
