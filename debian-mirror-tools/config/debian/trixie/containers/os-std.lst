@@ -1,13 +1,3 @@
-# libpython2-stdlib 2.7.18-3
-# libpython2.7 2.7.18-8+deb11u1 https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/libpython2.7_2.7.18-8%2Bdeb11u1_amd64.deb
-# libpython2.7-dev 2.7.18-8+deb11u1 https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/libpython2.7-dev_2.7.18-8%2Bdeb11u1_amd64.deb
-# libpython2.7-minimal 2.7.18-8+deb11u1 https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/libpython2.7-minimal_2.7.18-8%2Bdeb11u1_amd64.deb
-# libpython2.7-stdlib 2.7.18-8+deb11u1 https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/libpython2.7-stdlib_2.7.18-8%2Bdeb11u1_amd64.deb
-# python2 2.7.18-3
-# python2-minimal 2.7.18-3
-# python2.7  2.7.18-8+deb11u1  https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/python2.7_2.7.18-8%2Bdeb11u1_amd64.deb
-# python2.7-dev  2.7.18-8+deb11u1  https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/python2.7-dev_2.7.18-8%2Bdeb11u1_amd64.deb
-# python2.7-minimal  2.7.18-8+deb11u1  https://snapshot.debian.org/archive/debian/20230926T090746Z/pool/main/p/python2.7/python2.7-minimal_2.7.18-8%2Bdeb11u1_amd64.deb
 acpica-tools  20250404-1
 autoconf-archive  20220903-3
 autogen  1:5.18.16-7

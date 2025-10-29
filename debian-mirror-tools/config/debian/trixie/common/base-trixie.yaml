@@ -44,8 +44,8 @@ rootfs-pre-scripts:
   # Speed up apt/dpkg used for running build-image
   echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/unsafe-io
   apt update
-  # apt install -y --no-install-recommends linux-image-stx-amd64 linux-rt-image-stx-amd64 grub-common
-  apt install -y --no-install-recommends linux-image-amd64 grub-common
+  apt install -y --no-install-recommends linux-image-stx-amd64 linux-rt-image-stx-amd64 grub-common
+  #apt install -y --no-install-recommends linux-image-amd64 grub-common
   apt install -y --allow-downgrades --allow-unauthenticated --no-install-recommends ostree ostree-boot libostree-1-1 ostree-upgrade-mgr
   apt install --no-install-recommends -y ifupdown
   apt install -y bc vim uuid-runtime iputils-ping
@@ -84,6 +84,7 @@ rootfs-post-scripts:
   fi
 environments:
 - NO_RECOMMENDATIONS="1"
+- CRYPTOGRAPHY_OPENSSL_NO_LEGACY="1"
 - DEBIAN_FRONTEND=noninteractive
 - KERNEL_PARAMS=crashkernel=2048M apparmor=0 security=apparmor
 ostree:
