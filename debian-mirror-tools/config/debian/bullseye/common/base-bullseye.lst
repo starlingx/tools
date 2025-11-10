@@ -288,8 +288,6 @@ libboost-program-options1.74.0  1.74.0-9
 libboost-python1.74.0  1.74.0-9
 libboost-regex1.74.0  1.74.0-9
 libboost-thread1.74.0  1.74.0-9
-libbpf0  1:0.4.0-1 https://snapshot.debian.org/archive/debian/20210526T023010Z/pool/main/libb/libbpf/libbpf0_0.4.0-1_amd64.deb
-libbpf-dev  1:0.4.0-1 https://snapshot.debian.org/archive/debian/20210526T023010Z/pool/main/libb/libbpf/libbpf-dev_0.4.0-1_amd64.deb
 libbrotli1  1.0.9-2+b2
 libbsd0  0.11.3-1
 libbson-1.0-0  1.17.6-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20250520T190344Z/pool/updates/main/m/mongo-c-driver/libbson-1.0-0_1.17.6-1%2Bdeb11u1_amd64.deb
