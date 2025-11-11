@@ -91,7 +91,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     apt-get update && \
-    apt-get install --no-install-recommends -y docker-ce-cli
+    apt-get install --no-install-recommends -y docker-ce-cli=5:28.5.2-1~debian.11~bullseye
 
 # Python modules
 RUN pip3 --no-cache-dir install \
