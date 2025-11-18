@@ -229,6 +229,7 @@ hiera  3.12.0-1
 hostname  3.25
 ieee-data  20240722
 ifenslave  2.14
+ipset  7.22-1+b1
 ifupdown  0.8.44
 init  1.68
 init-system-helpers  1.68
@@ -542,6 +543,7 @@ libipa-hbac0t64  2.10.1-2+b1
 libipc-run-perl  20231003.0-2
 libiperf0  3.18-2
 libipsec-mb2  2.0-1+b1
+libipset13t64  7.22-1+b1
 libisal2  2.31.1-1.1
 libiscsi-dev  1.20.0-4
 libiscsi7  1.20.0-4
