@@ -806,9 +806,9 @@ libxentoolcore1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/de
 libxentoollog1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxentoollog1_4.14.5%2B94-ge49571868d-1_amd64.deb
 libxenhypfs1  4.14.5+94-ge49571868d-1  https://snapshot.debian.org/archive/debian-security/20230325T163249Z/pool/updates/main/x/xen/libxenhypfs1_4.14.5%2B94-ge49571868d-1_amd64.deb
 libxext6  2:1.3.3-1.1
-libxml2-dev 2.9.10+dfsg-6.7+deb11u7 https://snapshot.debian.org/archive/debian-security/20250430T174501Z/pool/updates/main/libx/libxml2/libxml2-dev_2.9.10%2Bdfsg-6.7%2Bdeb11u7_amd64.deb
-libxml2-utils 2.9.10+dfsg-6.7+deb11u7 https://snapshot.debian.org/archive/debian-security/20250430T174501Z/pool/updates/main/libx/libxml2/libxml2-utils_2.9.10%2Bdfsg-6.7%2Bdeb11u7_amd64.deb
-libxml2 2.9.10+dfsg-6.7+deb11u7 https://snapshot.debian.org/archive/debian-security/20250430T174501Z/pool/updates/main/libx/libxml2/libxml2_2.9.10%2Bdfsg-6.7%2Bdeb11u7_amd64.deb
+libxml2-dev 2.9.10+dfsg-6.7+deb11u9 https://snapshot.debian.org/archive/debian-security/20250930T154349Z/pool/updates/main/libx/libxml2/libxml2-dev_2.9.10%2Bdfsg-6.7%2Bdeb11u9_amd64.deb
+libxml2-utils 2.9.10+dfsg-6.7+deb11u9 https://snapshot.debian.org/archive/debian-security/20250930T154349Z/pool/updates/main/libx/libxml2/libxml2-utils_2.9.10%2Bdfsg-6.7%2Bdeb11u9_amd64.deb
+libxml2 2.9.10+dfsg-6.7+deb11u9 https://snapshot.debian.org/archive/debian-security/20250930T154349Z/pool/updates/main/libx/libxml2/libxml2_2.9.10%2Bdfsg-6.7%2Bdeb11u9_amd64.deb
 libxmlsec1  1.2.31-1
 libxmlsec1-openssl  1.2.31-1
 libxmu6  2:1.1.2-2+b3
