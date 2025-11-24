@@ -1,4 +1,5 @@
-python3-keystoneauth1 5.1.2-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-keystoneauth1/python3-keystoneauth1_5.1.2-2_all.deb
+python3-iso8601 2.1.0-2 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-iso8601/python3-iso8601_2.1.0-2_all.deb
+python3-keystoneauth1 5.10.0-2 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-keystoneauth1/python3-keystoneauth1_5.10.0-2_all.deb
 python3-keystonemiddleware 10.2.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-keystonemiddleware/python3-keystonemiddleware_10.2.0-2_all.deb
 python3-osc-lib 2.7.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-osc-lib/python3-osc-lib_2.7.0-2_all.deb
 python3-oslo.cache 3.3.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.cache/python3-oslo.cache_3.3.1-2_all.deb
@@ -22,3 +23,4 @@ python3-serpent  1.30.2-1 https://snapshot.debian.org/archive/debian/20200212T03
 python3-sqlalchemy 1.4.47+ds1-1 https://snapshot.debian.org/archive/debian-ports/20230401T234825Z/pool/main/s/sqlalchemy/python3-sqlalchemy_1.4.47%2Bds1-1_all.deb
 python3-stevedore 5.0.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/s/stevedore/python3-stevedore_5.0.0-2_all.deb
 python3-swiftclient 1:4.2.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-swiftclient/python3-swiftclient_4.2.0-2_all.deb
+python3-typing-extensions 4.13.2-1 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-typing-extensions/python3-typing-extensions_4.13.2-1_all.deb
