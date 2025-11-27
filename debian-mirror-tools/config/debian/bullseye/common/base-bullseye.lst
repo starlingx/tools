@@ -92,30 +92,30 @@ e2fsprogs  1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/
 efibootmgr  17-1
 eject  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/eject_2.36.1-8%2Bdeb11u2_amd64.deb
 elfutils  0.183-1
-erlang-asn1 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-asn1_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-base 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-base_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-crypto 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-crypto_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-dev 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-dev_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-diameter 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-diameter_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-edoc 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-edoc_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-eldap 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-eldap_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-erl-docgen 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-erl-docgen_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-eunit 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-eunit_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-ftp 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-ftp_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-inets 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-inets_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-mnesia 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-mnesia_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-odbc 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-odbc_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-os-mon 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-os-mon_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-parsetools 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-parsetools_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-public-key 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-public-key_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-runtime-tools 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-runtime-tools_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-snmp 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-snmp_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-ssh 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-ssh_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-ssl 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-ssl_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-syntax-tools 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-syntax-tools_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-tftp 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-tftp_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-tools 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-tools_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
-erlang-xmerl 1:23.2.6+dfsg-1+deb11u2  https://snapshot.debian.org/archive/debian-security/20250420T231736Z/pool/updates/main/e/erlang/erlang-xmerl_23.2.6%2Bdfsg-1%2Bdeb11u2_amd64.deb
+erlang-asn1 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-asn1_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-base 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-base_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-crypto 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-crypto_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-dev 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-dev_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-diameter 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-diameter_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-edoc 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-edoc_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-eldap 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-eldap_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-erl-docgen 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-erl-docgen_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-eunit 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-eunit_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-ftp 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-ftp_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-inets 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-inets_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-mnesia 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-mnesia_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-odbc 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-odbc_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-os-mon 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-os-mon_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-parsetools 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-parsetools_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-public-key 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-public-key_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-runtime-tools 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-runtime-tools_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-snmp 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-snmp_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-ssh 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-ssh_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-ssl 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-ssl_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-syntax-tools 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-syntax-tools_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-tftp 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-tftp_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-tools 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-tools_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
+erlang-xmerl 1:23.2.6+dfsg-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20251125T150423Z/pool/updates/main/e/erlang/erlang-xmerl_23.2.6%2Bdfsg-1%2Bdeb11u3_amd64.deb
 ethtool  1:5.9-1
 expect  5.45.4-2+b1
 fdisk  2.36.1-8+deb11u2 https://snapshot.debian.org/archive/debian-security/20240331T115150Z/pool/updates/main/u/util-linux/fdisk_2.36.1-8%2Bdeb11u2_amd64.deb
