@@ -17,6 +17,7 @@ python3-oslo.service 3.1.1-2 https://snapshot.debian.org/archive/debian-ports/20
 python3-oslo.upgradecheck 2.1.1-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.upgradecheck/python3-oslo.upgradecheck_2.1.1-2_all.deb
 python3-oslo.utils 6.1.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.utils/python3-oslo.utils_6.1.0-2_all.deb
 python3-oslo.versionedobjects 3.1.0-2 https://snapshot.debian.org/archive/debian-ports/20230623T210953Z/pool/main/p/python-oslo.versionedobjects/python3-oslo.versionedobjects_3.1.0-2_all.deb
+python3-pbr 6.1.1 https://snapshot.debian.org/archive/debian/20250328T083810Z/pool/main/p/python-pbr/python3-pbr_6.1.1-2_all.deb
 python3-platformdirs 4.3.6-1 https://snapshot.debian.org/archive/debian/20240923T023655Z/pool/main/p/platformdirs/python3-platformdirs_4.3.6-1_all.deb
 python3-pyro4  4.80-1 https://snapshot.debian.org/archive/debian/20200614T024052Z/pool/main/p/pyro4/python3-pyro4_4.80-1_all.deb
 python3-serpent  1.30.2-1 https://snapshot.debian.org/archive/debian/20200212T030619Z/pool/main/s/serpent/python3-serpent_1.30.2-1_all.deb
