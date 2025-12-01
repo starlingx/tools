@@ -72,7 +72,7 @@ debugedit  4.16.1.2+dfsg1-3
 device-tree-compiler  1.6.0-1
 dh-apparmor  2.13.6-10
 dh-autoreconf  20
-dh-golang 1.58~bpo11+3 http://ftp.debian.org/debian/pool/main/d/dh-golang/dh-golang_1.58~bpo11+3_all.deb
+dh-golang 1.58~bpo11+3 https://snapshot.debian.org/archive/debian/20220926T205523Z/pool/main/d/dh-golang/dh-golang_1.58~bpo11%2B3_all.deb
 dh-strip-nondeterminism  1.12.0-1
 diffutils  1:3.7-5
 dirmngr  2.2.27-2+deb11u2  https://snapshot.debian.org/archive/debian/20220704T093053Z/pool/main/g/gnupg2/dirmngr_2.2.27-2%2Bdeb11u2_amd64.deb
