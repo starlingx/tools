@@ -754,8 +754,8 @@ libtsan0  10.2.1-6
 libubsan1  10.2.1-6
 libuchardet0  0.0.7-1
 libudev1  247.3-7+deb11u1 https://snapshot.debian.org/archive/debian/20220829T032859Z/pool/main/s/systemd/libudev1_247.3-7+deb11u1_amd64.deb
-libunbound8  1.13.1-1+deb11u5  https://snapshot.debian.org/archive/debian-security/20250824T192448Z/pool/updates/main/u/unbound/libunbound8_1.13.1-1%2Bdeb11u5_amd64.deb
-libunbound-dev  1.13.1-1+deb11u5  https://snapshot.debian.org/archive/debian-security/20250824T192448Z/pool/updates/main/u/unbound/libunbound-dev_1.13.1-1%2Bdeb11u5_amd64.deb
+libunbound8  1.13.1-1+deb11u6 https://snapshot.debian.org/archive/debian-security/20251105T230405Z/pool/updates/main/u/unbound/libunbound8_1.13.1-1%2Bdeb11u6_amd64.deb
+libunbound-dev  1.13.1-1+deb11u6 https://snapshot.debian.org/archive/debian-security/20251105T230405Z/pool/updates/main/u/unbound/libunbound-dev_1.13.1-1%2Bdeb11u6_amd64.deb
 libunistring2  0.9.10-4
 liburing-dev  0.7-3
 liburing1  0.7-3
