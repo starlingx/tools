@@ -712,10 +712,10 @@ libspice-server1  0.14.3-2.1
 libsqlite3-0  3.34.1-3+deb11u1 https://snapshot.debian.org/archive/debian-security/20240930T202344Z/pool/updates/main/s/sqlite3/libsqlite3-0_3.34.1-3%2Bdeb11u1_amd64.deb
 libsqlite3-dev  3.34.1-3+deb11u1 https://snapshot.debian.org/archive/debian-security/20240930T202344Z/pool/updates/main/s/sqlite3/libsqlite3-dev_3.34.1-3%2Bdeb11u1_amd64.deb
 libss2  1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/20241004T132419Z/pool/updates/main/e/e2fsprogs/libss2_1.46.2-2%2Bdeb11u1_amd64.deb
-libssh-dev  0.9.8-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20231228T223536Z/pool/updates/main/libs/libssh/libssh-dev_0.9.8-0%2Bdeb11u1_amd64.deb
+libssh-dev  0.9.8-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20251205T061450Z/pool/updates/main/libs/libssh/libssh-dev_0.9.8-0%2Bdeb11u2_amd64.deb
 libssh2-1-dev  1.9.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/libs/libssh2/libssh2-1-dev_1.9.0-2%2Bdeb11u1_amd64.deb
 libssh2-1  1.9.0-2+deb11u1  https://snapshot.debian.org/archive/debian/20240423T212025Z/pool/main/libs/libssh2/libssh2-1_1.9.0-2%2Bdeb11u1_amd64.deb
-libssh-4  0.9.8-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20231228T223536Z/pool/updates/main/libs/libssh/libssh-4_0.9.8-0%2Bdeb11u1_amd64.deb
+libssh-4  0.9.8-0+deb11u2  https://snapshot.debian.org/archive/debian-security/20251205T061450Z/pool/updates/main/libs/libssh/libssh-4_0.9.8-0%2Bdeb11u2_amd64.deb
 libsss-certmap0  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libsss-certmap0_2.4.1-2%2Bdeb11u1_amd64.deb
 libsss-idmap0  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libsss-idmap0_2.4.1-2%2Bdeb11u1_amd64.deb
 libsss-nss-idmap0  2.4.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20250209T111528Z/pool/updates/main/s/sssd/libsss-nss-idmap0_2.4.1-2%2Bdeb11u1_amd64.deb
