@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 # Copyright (c) 2021,2025 Wind River Systems, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -102,11 +103,21 @@ COPY stx/debian/bullseye/toCOPY/builder/pubkey.rsa /opt/LAT/
 # Prepare executables
 COPY stx/debian/bullseye/toCOPY/lat-tool/lat/ /opt/LAT/lat
 # Download & install LAT SDK.
+# Try to use cached version from additional build context, fallback to wget
+# Note: lat-cache is provided via --build-context lat-cache=<dir>
 RUN echo "LAT_BINARY_RESOURCE_PATH = ${LAT_BINARY_RESOURCE_PATH}"
-RUN wget --quiet ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh --output-document=/opt/LAT/AppSDK.sh && \
-    chmod +x /opt/LAT/AppSDK.sh && \
-    /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y && \
-    rm -f /opt/LAT/AppSDK.sh
+COPY --from=lat-cache lat-sdk.sh* /tmp/
+RUN set -ex; \
+    if [ -f /tmp/lat-sdk.sh ]; then \
+        echo "Using cached LAT SDK from build context"; \
+        mv /tmp/lat-sdk.sh /opt/LAT/AppSDK.sh; \
+    else \
+        echo "Downloading LAT SDK from: ${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh"; \
+        wget --quiet "${LAT_BINARY_RESOURCE_PATH}/lat-sdk.sh" --output-document=/opt/LAT/AppSDK.sh; \
+    fi; \
+    chmod +x /opt/LAT/AppSDK.sh; \
+    /opt/LAT/AppSDK.sh -d /opt/LAT/SDK -y; \
+    rm -f /opt/LAT/AppSDK.sh /tmp/lat-sdk.sh*
 
 # Fix: Use Debian CDN address for geo-frendly servers
 RUN sed -i "s#ftp.cn.debian.org#${os_mirror_url}${os_mirror_dist_path}deb.debian.org#g" /opt/LAT/SDK/sysroots/x86_64-wrlinuxsdk-linux/usr/lib/python3.10/site-packages/genimage/debian_constant.py
