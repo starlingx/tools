@@ -56,8 +56,7 @@ packages:
 - kbd
 - kmod
 - libostree-1-1
-- linux-image-amd64
-# - linux-image-stx-amd64
+- linux-image-stx-amd64
 # - linux-rt-image-stx-amd64
 - mdadm
 # - mlnx-ofed-kernel-modules
