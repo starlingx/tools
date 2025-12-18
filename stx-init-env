@@ -90,6 +90,8 @@ STX_START_OPTS=
 # It doesn't need to track the build target (e.g. bullseye/trixie)
 COREUTILS_DOCKER_IMAGE="debian:bookworm-20240130-slim"
 
+export DOCKER_BUILDKIT=1
+
 info() {
     local tty_on tty_off
     if [[ -t 2 ]] ; then
@@ -1002,7 +1004,7 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
         info "Starting to build image: $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
 
         # Build command base
-        cmd="docker build ${docker_build_args[@]} ${extra_build_args[@]}"
+        cmd="docker buildx build ${docker_build_args[@]} ${extra_build_args[@]}"
 
         # Add dedicated build context ONLY for stx-lat-tool (regardless of cache status)
         # We always pass --build-context (even if empty) to keep Dockerfile compatible
