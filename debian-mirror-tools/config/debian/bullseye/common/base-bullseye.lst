@@ -610,8 +610,8 @@ libpipeline1  1.5.3-1
 libpixman-1-0  0.40.0-1.1~deb11u1  https://snapshot.debian.org/archive/debian/20230524T024530Z/pool/main/p/pixman/libpixman-1-0_0.40.0-1.1~deb11u1_amd64.deb
 libplumb2  1.0.12-20
 libplumbgpl2  1.0.12-20
-libpng-dev  1.6.37-3
-libpng16-16  1.6.37-3
+libpng-dev  1.6.37-3+deb11u1
+libpng16-16  1.6.37-3+deb11u1
 libpmem-dev  1.10-2+deb11u1
 libpmem1  1.10-2+deb11u1
 libpolkit-agent-1-0  0.105-31+deb11u1
