@@ -29,6 +29,8 @@ Initialize StarlingX build environment & (re-)start builder pods
 
      --no-start   Refresh builder images, but don't (re-)start pods
 
+  -v,--verbose    Verbose logs during image build
+
 ENVIRONMENT RESET OPTIONS
 =========================
 
@@ -71,10 +73,9 @@ PYTHON3=python3
 KUBECTL=kubectl
 DOCKER_PREFIX=${STX_PREBUILT_BUILDER_IMAGE_PREFIX:-'starlingx/'}
 DOCKER_IMAGES="stx-builder stx-pkgbuilder stx-lat-tool stx-aptly"
-DOCKER_TAG="$STX_PREBUILT_BUILDER_IMAGE_TAG"
 DOCKERHUB_LOGIN=0
 
-BUILD_DOCKER=0
+BUILD_DOCKER_IMAGES=
 DELETE_MINIKUBE_PROFILE=0
 RESTART_MINIKUBE=0
 CLEAN_CONFIG=0
@@ -85,7 +86,11 @@ RESET_HARD=0
 ASSUME_YES=0
 STX_START_OPTS=
 
+# An image that contains the gnu 'rm' command.  
+# It doesn't need to track the build target (e.g. bullseye/trixie)
 COREUTILS_DOCKER_IMAGE="debian:bookworm-20240130-slim"
+
+export DOCKER_BUILDKIT=1
 
 info() {
     local tty_on tty_off
@@ -396,12 +401,6 @@ safe_rm() {
     done
 }
 
-init_stx_mirror_url() {
-    if [[ -z "$STX_MIRROR_URL" && -f "$STX_TOOLS_DIR/stx.conf" ]] ; then
-        STX_MIRROR_URL=$(sed -n -r 's/^\s*stx_mirror_url\s*=\s*//gp'  "$STX_TOOLS_DIR/stx.conf" | sed "s/[\"']//g")
-    fi
-}
-
 cmdline_error() {
     if [[ -n "$1" ]] ; then
         echo "error: $1" >&2
@@ -411,7 +410,7 @@ cmdline_error() {
 }
 
 # process command line
-temp=$(getopt -o hRyD --long help,clean,restart-minikube,rebuild::,cache,delete-minikube-profile,nuke,reset,reset-hard,assumeyes,dockerhub-login,no-start -n "$PROGNAME" -- "$@") || cmdline_error
+temp=$(getopt -o hRyDv --long help,clean,restart-minikube,rebuild::,cache,delete-minikube-profile,nuke,reset,reset-hard,assumeyes,dockerhub-login,no-start,verbose -n "$PROGNAME" -- "$@") || cmdline_error
 eval set -- "$temp"
 while true ; do
     case "$1" in
@@ -478,6 +477,10 @@ while true ; do
             ;;
         --no-start)
             START_PODS=0
+            shift
+            ;;
+        -v|--verbose)
+            VERBOSE_IMAGE_BUILD=1
             shift
             ;;
         --)
@@ -715,32 +718,315 @@ if [[ "$DOCKERHUB_LOGIN" -eq 1 ]] ; then
     STX_START_OPTS+=" --use-dockerhub-cred"
 fi
 
+## We should have a valid stx.conf file here, read it and get the distro
+if [[ ! -f "$STX_TOOLS_DIR/stx.conf" ]] ; then
+    error "$STX_TOOLS_DIR/stx.conf: file not found. Run with the '--clean' option first to use the latest stx.conf sample"
+    exit 1
+fi
+
+# set an associative array
+declare -A STX_CONF
+
+# remove comments and build a section.key=value string for reading and storing
+while IFS='=' read -r key value; do
+    echo "$key:$value"
+    STX_CONF[$(echo $key | xargs)]="$(echo $value | xargs)"
+done < <(cat $STX_TOOLS_DIR/stx.conf | grep -v ^# | awk '/^\[/ { section=substr($0,2,length-2) } /=/ { print section "." $0 }')
+
+# Get the config values to find/pass to the the container builds
+builder_os_id=${STX_CONF["builder.os_id"]}
+builder_os_codename=${STX_CONF["builder.os_codename"]}
+builder_os_arch=${STX_CONF["builder.os_arch"]}
+os_mirror_url=${STX_CONF["repomgr.os_mirror_url"]}
+os_mirror_dist_path=${STX_CONF["repomgr.os_mirror_dist_path"]}
+os_mirror_dl_path=${STX_CONF["repomgr.os_mirror_dl_path"]}
+lat_mirror_url=${STX_CONF["repomgr.lat_mirror_url"]}
+lat_mirror_lat_path=${STX_CONF["repomgr.lat_mirror_lat_path"]}
+
+# bail if values are missing
+if [ -z "${builder_os_id}" ]; then
+    builder_os_id=debian
+    warn "Missing stx.conf value for: builder.os_id; using: ${builder_os_id}"
+fi
+if [ -z "${builder_os_codename}" ]; then
+    builder_os_codename=bullseye
+    warn "Missing stx.conf value for: builder.os_codename; using: ${builder_os_codename}"
+fi
+if [ -z "${builder_os_arch}" ]; then
+    builder_os_arch=amd64
+    warn "Missing stx.conf value for: builder.os_codename; using: ${builder_os_codename}"
+fi
+if [ -z "${os_mirror_url}" ]; then \
+    os_mirror_url=https://mirror.starlingx.windriver.com/mirror/
+    warn "Missing stx.conf value for: repomgr.os_mirror_url; using: ${os_mirror_url}"
+fi
+if [ -z "${os_mirror_dist_path}" ]; then
+    if [ "${os_mirror_url}" == "http://" ]; then
+        info "Missing stx.conf value for: repomgr.os_mirror_dist_path; mirror points to upstream: ${os_mirror_url}; allowing"
+    else
+        os_mirror_dist_path=${builder_os_id}/${builder_os_id}/
+        warn "Missing stx.conf value for: repomgr.os_mirror_dist_path; using: ${os_mirror_dist_path}"
+    fi
+fi
+if [ -z "${os_mirror_dl_path}" ]; then
+    if [ "${os_mirror_url}" == "http://" ]; then
+        info "Missing stx.conf value for: repomgr.os_mirror_dl_path; mirror points to upstream: ${os_mirror_url}; allowing"
+    else
+        os_mirror_dl_path=${builder_os_id}/
+        warn "Missing stx.conf value for: repomgr.os_mirror_dl_path; using: ${os_mirror_dist_path}"
+    fi
+fi
+if [ -z "${lat_mirror_url}" ]; then
+    lat_mirror_url=https://mirror.starlingx.windriver.com/mirror/
+    warn "Missing stx.conf value for: repomgr.lat_mirror_url; using: ${lat_mirror_url}"
+fi
+
+if [ -z "${lat_mirror_lat_path}" ]; then
+    lat_mirror_lat_path=lat-sdk/
+    warn "Missing stx.conf value for: repomgr.lat_mirror_lat_path; using: ${lat_mirror_lat_path}"
+fi
+
+# Make sure upstream DOCKER_TAG will be in the correct format
+#    e.g. might need to transform 'master-debian-latest'
+#         into 'master-debian-bullseye-amd64-latest'
+TAG_VER=${STX_PREBUILT_BUILDER_IMAGE_TAG##*-}
+REMANDER=${STX_PREBUILT_BUILDER_IMAGE_TAG%-*}
+NEXT=${REMANDER##*-}
+echo "REMANDER=$REMANDER"
+if [ "$NEXT" == "$builder_os_arch" ]; then
+    REMANDER=${REMANDER%-*}
+    NEXT=${REMANDER##*-}
+fi
+echo "REMANDER=$REMANDER"
+if [ "$NEXT" == "$builder_os_codename" ]; then
+    REMANDER=${REMANDER%-*}
+    NEXT=${REMANDER##*-}
+fi
+echo "REMANDER=$REMANDER"
+ROOT_TAG_NAME=${REMANDER}
+DOCKER_TAG="${ROOT_TAG_NAME}-${builder_os_codename}-${builder_os_arch}-${TAG_VER}"
+
+
+echo "Setup build containers (and toolchain) for:"
+echo "  - OS ID: ${builder_os_id}"
+echo "  - OS Code Name: ${builder_os_codename}"
+echo "  - OS Arch: ${builder_os_arch}"
+
+echo "Setup for distro: $dist:"
+echo "  - OS mirror: ${os_mirror_url}${os_mirror_dist_path}"
+echo "  - LAT mirror: ${lat_mirror_url}${lat_mirror_lat_path}"
+
 # Workaround: Wait for Minikube network to stabilize before building images
 sleep 10
 
+# LAT SDK Cache Management Function
+manage_lat_sdk_cache() {
+    # Cache is enabled by default - can be disabled via LAT_SDK_CACHE_DISABLE=1
+    LAT_SDK_CACHE_DISABLE="${LAT_SDK_CACHE_DISABLE:-0}"
+
+    # Export variable to make it available to child processes
+    export LAT_SDK_CACHE_DISABLE
+
+    # Check if caching is disabled
+    if [[ "$LAT_SDK_CACHE_DISABLE" == "1" ]]; then
+        info "LAT SDK cache disabled"
+        export LAT_SDK_USE_CACHE=0
+        return 0
+    fi
+
+    # Extract lat_version from Dockerfile
+    local dockerfile="$STX_TOOLS_DIR/stx/${builder_os_id}/${builder_os_codename}/dockerfiles/stx-lat-tool.Dockerfile"
+    if [ ! -f "$dockerfile" ]; then
+        error "FATAL: Dockerfile not found: $dockerfile"
+        error "Cannot extract lat_version for cache management"
+        exit 1
+    fi
+
+    local lat_version=$(grep 'ARG lat_version=' "$dockerfile" | head -1 | cut -d'"' -f2)
+    if [ -z "$lat_version" ]; then
+        warn "Could not extract lat_version from Dockerfile"
+        export LAT_SDK_USE_CACHE=0
+        return 0
+    fi
+
+    info "LAT SDK version detected: $lat_version"
+
+    # Cache configuration (allow override via environment variable)
+    # If LAT_SDK_CACHE_DIR is not set, use environment-specific defaults:
+    # - Jenkins/CI: /localdisk/loadbuild/$USER/.lat-sdk-cache (shared location)
+    # - Local: cache/lat (relative to $STX_BUILD_HOME)
+    if [[ -z "$LAT_SDK_CACHE_DIR" ]]; then
+        if [[ -n "$JENKINS_HOME" ]] || [[ -n "$BUILD_ID" ]] || [[ "$CI" == "true" ]]; then
+            LAT_SDK_CACHE_DIR="/localdisk/loadbuild/$USER/.lat-sdk-cache"
+        else
+            LAT_SDK_CACHE_DIR="cache/lat"
+        fi
+    fi
+
+    # Convert relative paths to absolute (relative to $STX_BUILD_HOME)
+    if [[ "$LAT_SDK_CACHE_DIR" != /* ]]; then
+        LAT_SDK_CACHE_DIR="${STX_BUILD_HOME}/${LAT_SDK_CACHE_DIR}"
+    fi
+
+    # Export variable to make it available to child processes
+    export LAT_SDK_CACHE_DIR
+
+    local cache_version_dir="${LAT_SDK_CACHE_DIR}/${lat_version}"
+    local cache_file="${cache_version_dir}/lat-sdk.sh"
+    local cache_checksum="${cache_version_dir}/lat-sdk.sh.sha256"
+
+    # Remote URLs
+    local remote_url="${lat_mirror_url}${lat_mirror_lat_path}${lat_version}/lat-sdk.sh"
+    local remote_checksum_url="${lat_mirror_url}${lat_mirror_lat_path}${lat_version}/lat-sdk.sh.sha256"
+
+    info "LAT SDK cache directory: $LAT_SDK_CACHE_DIR"
+
+    # Check if cache exists and is valid
+    local download_needed=0
+    if [ -f "$cache_file" ]; then
+        info "LAT SDK cache found at: $cache_file"
+
+        # Download remote checksum for validation
+        local temp_checksum="/tmp/lat-sdk-${lat_version}.sha256"
+        if wget -q "$remote_checksum_url" -O "$temp_checksum"; then
+            # Validate cache against remote checksum
+            if (cd "$cache_version_dir" && sha256sum -c "$temp_checksum" >/dev/null 2>&1); then
+                info "LAT SDK cache is valid - will use cache"
+                rm -f "$temp_checksum"
+            else
+                warn "LAT SDK cache checksum mismatch - will re-download"
+                rm -rf "$cache_version_dir"
+                mkdir -p "$cache_version_dir"
+                download_needed=1
+            fi
+        else
+            warn "Could not download remote checksum from: $remote_checksum_url"
+            warn "Will attempt to use existing cache without validation"
+        fi
+        rm -f "$temp_checksum"
+    else
+        info "LAT SDK cache not found - will download"
+        mkdir -p "$cache_version_dir"
+        download_needed=1
+    fi
+
+    # Download LAT SDK if needed
+    if [ "$download_needed" -eq 1 ]; then
+        info "Downloading LAT SDK from mirror: $remote_url"
+
+        # Download to temporary names
+        local temp_download="${cache_file}.tmp"
+        local temp_checksum="${cache_file}.sha256.tmp"
+
+        if wget -q --show-progress "$remote_url" -O "$temp_download" && \
+           wget -q "$remote_checksum_url" -O "$temp_checksum"; then
+
+            # Rename to verify the checksum
+            mv "$temp_download" "$cache_file"
+            mv "$temp_checksum" "${cache_file}.sha256"
+
+            # Validate downloaded file
+            if (cd "$cache_version_dir" && sha256sum -c "${cache_file##*/}.sha256" >/dev/null 2>&1); then
+                info "LAT SDK downloaded and cached successfully: $cache_file"
+            else
+                error "Downloaded LAT SDK failed checksum validation"
+                rm -rf "$cache_version_dir"
+                export LAT_SDK_USE_CACHE=0
+                return 1
+            fi
+        else
+            error "Failed to download LAT SDK from: $remote_url"
+            rm -f "$temp_download" "$temp_checksum"
+            rm -rf "$cache_version_dir"
+            export LAT_SDK_USE_CACHE=0
+            return 1
+        fi
+    fi
+
+    # At this point, cache is valid and ready to use
+    export LAT_SDK_USE_CACHE=1
+    export LAT_SDK_CACHE_FILE="$cache_file"
+    info "LAT SDK cache ready for build"
+    return 0
+}
+
+# Call cache management function before building Docker images
+manage_lat_sdk_cache
+
 if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     notice "Building docker images"
+
     declare -a docker_build_args
+    if [[ "$VERBOSE_IMAGE_BUILD" == "1" ]] ; then
+        docker_build_args+=("--progress=plain")
+    fi
     if [[ "$USE_DOCKER_CACHE" != "1" ]] ; then
         docker_build_args+=("--no-cache")
     fi
-    for img in $BUILD_DOCKER_IMAGES; do
-        info "Starting to build image: $img:$DOCKER_TAG_LOCAL"
 
-        extra_build_args=()
-        if grep -q -E '^\s*ARG\s+STX_MIRROR_URL\s*=' "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile ; then
-            init_stx_mirror_url
-            if [[ -n "$STX_MIRROR_URL" ]] ; then
-                extra_build_args+=("--build-arg" "STX_MIRROR_URL=$STX_MIRROR_URL")
-            fi
+    extra_build_args=()
+    extra_build_args+=("--build-arg")
+    extra_build_args+=("os_mirror_url=$os_mirror_url")
+    extra_build_args+=("--build-arg")
+    extra_build_args+=("os_mirror_dist_path=$os_mirror_dist_path")
+    extra_build_args+=("--build-arg")
+    extra_build_args+=("lat_mirror_url=$lat_mirror_url")
+    extra_build_args+=("--build-arg")
+    extra_build_args+=("lat_mirror_lat_path=$lat_mirror_lat_path")
+
+    # Setup dedicated build context directory for LAT SDK cache
+    # Default: hidden directory in $STX_BUILD_HOME
+    LAT_SDK_BUILD_CONTEXT_DIR="${LAT_SDK_BUILD_CONTEXT_DIR:-${STX_BUILD_HOME}/.lat-build-context}"
+
+    # Convert relative paths to absolute
+    if [[ "$LAT_SDK_BUILD_CONTEXT_DIR" != /* ]]; then
+        LAT_SDK_BUILD_CONTEXT_DIR="${STX_BUILD_HOME}/${LAT_SDK_BUILD_CONTEXT_DIR}"
+    fi
+
+    export LAT_SDK_BUILD_CONTEXT_DIR
+
+    # Prepare build context for lat-sdk if cache is enabled
+    # ALWAYS create directory (even if empty) so --build-context doesn't fail
+    info "Preparing LAT SDK build context: $LAT_SDK_BUILD_CONTEXT_DIR"
+    rm -rf "$LAT_SDK_BUILD_CONTEXT_DIR"
+    mkdir -p "$LAT_SDK_BUILD_CONTEXT_DIR"
+
+    if [[ "$LAT_SDK_USE_CACHE" == "1" ]]; then
+        # Copy cache file to build context (using copy-on-write if filesystem supports it)
+        info "Copying LAT SDK cache to build context..."
+        cp --reflink=auto "$LAT_SDK_CACHE_FILE" "$LAT_SDK_BUILD_CONTEXT_DIR/lat-sdk.sh"
+        info "LAT SDK ready in build context ($(du -h "$LAT_SDK_BUILD_CONTEXT_DIR/lat-sdk.sh" | cut -f1))"
+    else
+        info "LAT SDK cache disabled - Dockerfile will download from mirror"
+    fi
+
+    for img in $BUILD_DOCKER_IMAGES; do
+        info "Starting to build image: $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
+
+        # Build command base
+        cmd="docker buildx build ${docker_build_args[@]} ${extra_build_args[@]}"
+
+        # Add dedicated build context ONLY for stx-lat-tool (regardless of cache status)
+        # We always pass --build-context (even if empty) to keep Dockerfile compatible
+        if [[ "$img" == "stx-lat-tool" ]]; then
+            cmd+=" --build-context lat-cache=\"$LAT_SDK_BUILD_CONTEXT_DIR\""
+            info "Using LAT SDK build context: $LAT_SDK_BUILD_CONTEXT_DIR"
         fi
 
-        cmd="docker build "${docker_build_args[@]}" "${extra_build_args[@]}" -t $img:$DOCKER_TAG_LOCAL -f "$STX_TOOLS_DIR/"stx/dockerfiles/$img.Dockerfile "$STX_TOOLS_DIR""
+        cmd+=" -t $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
+        cmd+=" -f \"$STX_TOOLS_DIR/stx/${builder_os_id}/${builder_os_codename}/dockerfiles/$img.Dockerfile\""
+        cmd+=" \"$STX_TOOLS_DIR\""
+
         info "Running command: ${cmd}"
         eval "$cmd" || exit 1
-
-        info "Finished building image: $img:$DOCKER_TAG_LOCAL"
+        info "Finished building image: $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
     done
+
+    # Cleanup: Remove dedicated build context directory
+    if [ -d "$LAT_SDK_BUILD_CONTEXT_DIR" ]; then
+        rm -rf "$LAT_SDK_BUILD_CONTEXT_DIR"
+        info "Cleaned up LAT SDK build context: $LAT_SDK_BUILD_CONTEXT_DIR"
+    fi
 fi
 
 # Pull images that we didn't rebuild
@@ -754,7 +1040,7 @@ PULL_DOCKER_IMAGES=$(
             fi
         done
         if [[ "$built" != "yes" ]] && \
-            { [[ "$USE_DOCKER_CACHE" != 1 ]] || ! docker image inspect ${img}:${DOCKER_TAG_LOCAL} >/dev/null 2>&1 ; } ; then
+               { [[ "$USE_DOCKER_CACHE" != 1 ]] || ! docker image inspect ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} >/dev/null 2>&1 ; } ; then
             echo "$img"
         fi
     done
@@ -763,8 +1049,8 @@ if [[ -n "$PULL_DOCKER_IMAGES" ]] ; then
     notice "Pulling docker images: "$PULL_DOCKER_IMAGES
     for img in $PULL_DOCKER_IMAGES; do
         docker pull ${DOCKER_PREFIX}${img}:${DOCKER_TAG} || exit 1
-        docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL} || exit 1
-        info "created image ${img}:${DOCKER_TAG_LOCAL} from pre-built ${DOCKER_PREFIX}${img}:${DOCKER_TAG}"
+        docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} || exit 1
+        info "created image ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} from pre-built ${DOCKER_PREFIX}${img}:${DOCKER_TAG}"
     done
 fi
 

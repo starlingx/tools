@@ -31,6 +31,8 @@ from stx import utils  # pylint: disable=E0611
 
 helmchartdir = 'stx/stx-build-tools-chart/stx-builder'
 
+tty_flag = ' -ti ' if os.isatty(1) else ' -i '
+
 
 class HandleControlTask(object):
     '''Handle the task for the control sub-command'''
@@ -57,7 +59,7 @@ class HandleControlTask(object):
         while count:
             podname = self.k8s.get_pod_name(pulpname)
             if podname:
-                cmd = self.config.kubectl() + ' exec -ti '
+                cmd = self.config.kubectl() + ' exec ' + tty_flag
                 cmd = cmd + podname + remote_cmd
                 subprocess.call(cmd, shell=True)
                 count = 0
@@ -78,8 +80,6 @@ class HandleControlTask(object):
         builder_uid = self.config.get('builder', 'uid')
         builder_myuname = self.config.get('builder', 'myuname')
         builder_release = self.config.get('builder', 'release')
-        builder_dist = self.config.get('builder', 'dist')
-        builder_stx_dist = self.config.get('builder', 'stx_dist')
         builder_debfullname = self.config.get('builder', 'debfullname')
         builder_debemail = self.config.get('builder', 'debemail')
         repomgr_type = self.config.get('repomgr', 'type')
@@ -91,48 +91,68 @@ class HandleControlTask(object):
         proxyport = self.config.get('project', 'proxyport')
         buildbranch = self.config.get('project', 'buildbranch')
         manifest = self.config.get('project', 'manifest')
-        # The cengn references below are obsolete, and are retained for
-        # backward compatibility with preexisting build environmnets.
-        # Please use stx_mirror versions instead.
-        cengnurl = None
-        try:
-            stx_mirror_url = self.config.get('repomgr', 'stx_mirror_url')
-        except Exception:
-            # second chance using old cengnurl
-            try:
-                cengnurl = self.config.get('repomgr', 'cengnurl')
-                stx_mirror_url = cengnurl
-            except Exception:
-                # Fail on stx_mirror_url without catching the error  this time
-                stx_mirror_url = self.config.get('repomgr', 'stx_mirror_url')
 
-        cengnstrategy = None
+        # Adjust builder distribution variables to align with the build
+        # container configuration
+        #  Migrate:
+        #    builder.dist -> builder.os_id            (= debian)
+        #    builder.stx_dist -> builder.stx_pkg_ext  (= .stx  )
+        #  Add:
+        #    builder.os_codename                      (= bullseye)
+
         try:
-            stx_mirror_strategy = self.config.get('repomgr', 'stx_mirror_strategy')
+            builder_os_codename = self.config.get('builder', 'os_codename')
+            builder_os_id = self.config.get('builder', 'os_id')
         except Exception:
+            builder_dist = self.config.get('builder', 'dist')
+            builder_os_codename = builder_dist
+            builder_os_id = 'debian'
+
+        try:
+            builder_stx_pkg_ext = self.config.get('builder', 'stx_pkg_ext')
+        except Exception:
+            builder_stx_dist = self.config.get('builder', 'stx_dist')
+            builder_stx_pkg_ext = builder_stx_dist
+
+        # The stx_mirror_url references below are obsolete, and are retained for
+        # backward compatibility with preexisting build environmnets.
+        # Please use {os,lat}_mirror versions instead.
+        stx_mirror_url = None
+        try:
+            os_mirror_url = self.config.get('repomgr', 'os_mirror_url')
+            if not os_mirror_url:
+                # Assume that we want an upstream URL
+                os_mirror_url = "http://"
+        except Exception:
+            # second chance using old stx_mirror_url
             try:
-                # second chance using old cengnstrategy
-                cengnstrategy = self.config.get('repomgr', 'cengnstrategy')
-                stx_mirror_strategy = cengnstrategy
-                if cengnstrategy == 'cengn':
-                    stx_mirror_strategy = 'stx_mirror'
-                if cengnstrategy == 'cengn_first':
-                    stx_mirror_strategy = 'stx_mirror_first'
+                stx_mirror_url = self.config.get('repomgr', 'stx_mirror_url')
+                os_mirror_url = stx_mirror_url
             except Exception:
-                # Fail on stx_mirror_strategy without catching the error  this time
-                stx_mirror_strategy = self.config.get('repomgr', 'stx_mirror_strategy')
+                # Fail on os_mirror_url without catching the error this time
+                os_mirror_url = self.config.get('repomgr', 'os_mirror_url')
+        os_mirror_dist_path = self.config.get('repomgr', 'os_mirror_dist_path')
+        os_mirror_dl_path = self.config.get('repomgr', 'os_mirror_dl_path')
+        stx_mirror_strategy = self.config.get('repomgr', 'stx_mirror_strategy')
+        lat_mirror_url = self.config.get('repomgr', 'lat_mirror_url')
+        lat_mirror_lat_path = self.config.get('repomgr', 'lat_mirror_lat_path')
+
         sourceslist = self.config.get('repomgr', 'sourceslist')
         deblist = self.config.get('repomgr', 'deblist')
         dsclist = self.config.get('repomgr', 'dsclist')
         ostree_osname = self.config.get('project', 'ostree_osname')
-        debian_snapshot = \
-            self.config.get('project', 'debian_snapshot_base') + \
-            '/' + \
-            self.config.get('project', 'debian_snapshot_timestamp')
-        debian_security_snapshot = \
-            self.config.get('project', 'debian_security_snapshot_base') + \
-            '/' + \
-            self.config.get('project', 'debian_snapshot_timestamp')
+        debian_snapshot = ""
+        if self.config.get('project', 'debian_snapshot_base'):
+            debian_snapshot = \
+                self.config.get('project', 'debian_snapshot_base') + \
+                '/' + \
+                self.config.get('project', 'debian_snapshot_timestamp')
+        debian_security_snapshot = ""
+        if self.config.get('project', 'debian_security_snapshot_base'):
+            debian_security_snapshot = \
+                self.config.get('project', 'debian_security_snapshot_base') + \
+                '/' + \
+                self.config.get('project', 'debian_snapshot_timestamp')
         debian_distribution = self.config.get('project', 'debian_distribution')
         debian_version = self.config.get('project', 'debian_version')
         if sourceslist:
@@ -189,8 +209,9 @@ stx-pkgbuilder/configmap/')
                 line = line.replace("@MYUID@", builder_uid)
                 line = line.replace("@MYUNAME@", builder_myuname)
                 line = line.replace("@MY_RELEASE@", builder_release)
-                line = line.replace("@DIST@", builder_dist)
-                line = line.replace("@STX_DIST@", builder_stx_dist)
+                line = line.replace("@BUILDER_OS_ID@", builder_os_id)
+                line = line.replace("@BUILDER_OS_CODENAME@", builder_os_codename)
+                line = line.replace("@BUILDER_STX_PKG_EXTENSION@", builder_stx_pkg_ext)
                 line = line.replace("@DEBFULLNAME@", builder_debfullname)
                 line = line.replace("@DEBEMAIL@", builder_debemail)
                 line = line.replace("@REPOMGR_TYPE@", repomgr_type)
@@ -203,12 +224,11 @@ stx-pkgbuilder/configmap/')
                 line = line.replace("@BUILDBRANCH@", buildbranch)
                 line = line.replace("@MANIFEST@", manifest)
                 line = line.replace("@HOSTUSERNAME@", hostusername)
-                # The cengn references below are obsolete, and are retained for
-                # backward compatibility with preexisting build environmnets.
-                # Please use stx_mirror versions instead.
-                line = line.replace("@CENGNURL@", stx_mirror_url)
-                line = line.replace("@CENGNSTRATEGY@", stx_mirror_strategy)
-                line = line.replace("@STX_MIRROR_URL@", stx_mirror_url)
+                line = line.replace("@OS_MIRROR_URL@", os_mirror_url)
+                line = line.replace("@OS_MIRROR_DIST_PATH@", os_mirror_dist_path)
+                line = line.replace("@OS_MIRROR_DL_PATH@", os_mirror_dl_path)
+                line = line.replace("@LAT_MIRROR_URL@", lat_mirror_url)
+                line = line.replace("@LAT_MIRROR_LAT_PATH@", lat_mirror_lat_path)
                 line = line.replace("@STX_MIRROR_STRATEGY@", stx_mirror_strategy)
                 line = line.replace("@OSTREE_OSNAME@", ostree_osname)
                 line = line.replace("@DEBIAN_SNAPSHOT@", debian_snapshot)
@@ -234,6 +254,7 @@ stx-pkgbuilder/configmap/')
 
         with open(patch_env_sample, "r") as rf:
             message = rf.read()
+            message = message.replace("@BUILDER_OS_CODENAME@", builder_os_codename)
             message = message.replace("@PROJECT@", projectname)
             message = message.replace("@MYUNAME@", builder_myuname)
 
@@ -258,7 +279,7 @@ stx-pkgbuilder/configmap/')
         wait_arg = '--wait ' if wait else ''
         cmd = self.config.helm() + ' install ' + wait_arg + projectname + ' ' \
             + self.abs_helmchartdir \
-            + ' --set global.image.tag=' + self.config.docker_tag
+            + ' --set global.image.tag=' + self.config.docker_tag + '-' + self.config.get('builder', 'os_codename')
 
         if not self.config.use_minikube:
             # Override hostDir for k8s local host mount
@@ -375,11 +396,11 @@ stx-pkgbuilder/configmap/')
         pod_name = self.k8s.get_pod_name(buildername)
         if pod_name:
             # Prepare and run commands:
-            #  kubectl exec -ti [pod_name_builder] -- mkdir /home/[user_name]/.ssh
-            #  kubectl exec -ti [pod_name_builder] -- mkdir /root/.ssh
+            #  kubectl exec -i(or -it if is a TTY) [pod_name_builder] -- mkdir /home/[user_name]/.ssh
+            #  kubectl exec -i(or -it if is a TTY) [pod_name_builder] -- mkdir /root/.ssh
             #  kubectl cp [key] [pod_name_builder]:/home/[user_name]/.ssh
             #  kubectl cp [key] [pod_name_builder]:/root/.ssh
-            main_cmd = ' exec -ti '
+            main_cmd = ' exec ' + tty_flag
             remote_cmd = ' -- mkdir /home/' + username + '/.ssh'
             self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
             remote_cmd = ' -- mkdir /root/.ssh'
@@ -397,9 +418,9 @@ no builder container is available!')
         pod_name = self.k8s.get_pod_name(latname)
         if pod_name:
             # Prepare and run commands:
-            #  kubectl exec -ti [pod_name_lat] -- mkdir /root/.ssh
+            #  kubectl exec -i(or -it if is a TTY) [pod_name_lat] -- mkdir /root/.ssh
             #  kubectl cp [key] [pod_name_lat]:/root/.ssh
-            main_cmd = ' exec -ti '
+            main_cmd = ' exec ' + tty_flag
             remote_cmd = ' -- mkdir /root/.ssh'
             self.run_pod_cmd(pod_name, main_cmd, remote_cmd)
             main_cmd = ' cp ' + args.key + ' '

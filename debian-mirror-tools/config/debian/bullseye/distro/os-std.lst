@@ -1,0 +1,9 @@
+#The OS binary packages that depended by StarlingX patched packages,
+#but they are not in the base packages list
+# This installs kdump and its dependency on Debian
+autoconf-archive 20190106-2.1
+comerr-dev 2.1-1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/20241004T132419Z/pool/updates/main/e/e2fsprogs/comerr-dev_2.1-1.46.2-2%2Bdeb11u1_amd64.deb
+kexec-tools 1:2.0.20-2.1
+liblzo2-2 2.10-2
+pigz 2.6-1
+yajl-tools 2.1.0-3+deb11u2 https://snapshot.debian.org/archive/debian/20230725T030258Z/pool/main/y/yajl/yajl-tools_2.1.0-3%2Bdeb11u2_amd64.deb

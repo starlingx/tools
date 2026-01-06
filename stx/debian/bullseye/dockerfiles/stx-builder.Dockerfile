@@ -1,0 +1,140 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright (C) 2021-2022,2025 Wind River Systems,Inc.
+#
+FROM debian:bullseye
+ARG os_mirror_url="http://"
+ARG os_mirror_dist_path=""
+
+ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
+ARG APT_CHROOT_DIR=/usr/local/apt-chroot
+
+ENV container=docker \
+    PATH=/opt/LAT/lat:$PATH
+
+# Add retry to apt config
+RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/99custom
+
+# Update certificates via upsteam repos
+RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certificates && update-ca-certificates
+
+# Now point to the mirror for specific package builds
+RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}security.debian.org/debian-security bullseye-security main" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
+
+RUN echo "deb-src ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye main" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian bullseye contrib" >> /etc/apt/sources.list
+
+# Download required dependencies by mirror/build processes.
+RUN apt-get update && apt-get install --no-install-recommends -y \
+        binutils \
+        bzip2 \
+        coreutils \
+        cpio \
+        cpp \
+        curl \
+        debian-keyring \
+        debmake \
+        debootstrap \
+        dnsutils \
+        dpkg \
+        dpkg-dev \
+        fakeroot \
+        file \
+        git \
+        git-buildpackage \
+        gnupg \
+        isomd5sum \
+        less \
+        libdistro-info-perl \
+        locales-all \
+        mkisofs \
+        pristine-tar \
+        proot \
+        proxychains \
+        python3 \
+        python3-apt \
+        python3-pip \
+        python3-ruamel.yaml \
+        python3-yaml \
+        repo \
+        rpm2cpio \
+        ssh \
+        sudo \
+        syslinux-utils \
+        tar \
+        tini \
+        unzip \
+        util-linux \
+        vim \
+        wget \
+        xz-utils \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# 3rd party apt repositories
+# docker-cli
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+    echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y docker-ce-cli=5:28.5.2-1~debian.11~bullseye
+
+# Python modules
+RUN pip3 --no-cache-dir install \
+        gitpython \
+        requests \
+        python-debian \
+        pulpcore_client \
+        pulp_deb_client \
+        pulp_file_client \
+        progressbar \
+        click \
+        lxml \
+        pycryptodomex
+
+RUN pip3 --no-cache-dir install \
+    git+https://github.com/slittle1/aptly-api-client.git
+
+# Misc files
+RUN sed -i '/^proxy_dns*/d' /etc/proxychains.conf && \
+    sed -i 's/^socks4.*/socks5 127.0.0.1 8080/g' /etc/proxychains.conf && \
+    ln -sf /usr/local/bin/stx/stx-localrc /root/localrc && \
+    echo '. /usr/local/bin/finishSetup.sh' >> /root/.bashrc
+
+COPY stx/debian/bullseye/toCOPY/lat-tool/lat /opt/LAT/lat
+COPY stx/debian/bullseye/toCOPY/builder/finishSetup.sh /usr/local/bin
+COPY stx/debian/bullseye/toCOPY/builder/userenv /root/
+COPY stx/debian/bullseye/toCOPY/builder/buildrc /root/
+
+COPY stx/debian/bullseye/toCOPY/builder/pubkey.rsa /root
+RUN apt-key add /root/pubkey.rsa && rm -f /root/pubkey.rsa
+
+# Add vimrc
+RUN mkdir -p /etc/vim
+COPY stx/debian/bullseye/toCOPY/common/vimrc.local /etc/vim/vimrc.local
+RUN chmod 0644 /etc/vim/vimrc.local
+
+# setup chroot for apt queries
+RUN mkdir -p $APT_CHROOT_DIR
+RUN debootstrap --variant=minbase --include=ca-certificates,debian-archive-keyring,gnupg,procps --foreign bullseye $APT_CHROOT_DIR http://deb.debian.org/debian
+RUN chroot $APT_CHROOT_DIR debootstrap/debootstrap --second-stage
+RUN rm -rf $APT_CHROOT_DIR/etc/apt/sources.list $APT_CHROOT_DIR/etc/apt/sources.list.d && \
+    rm -rf $APT_CHROOT_DIR/etc/apt/apt.conf     $APT_CHROOT_DIR/etc/apt/apt.conf.d && \
+    rm -rf $APT_CHROOT_DIR/var/lib/apt/lists/partial  $APT_CHROOT_DIR/var/cache/apt/archives/partial
+
+ENTRYPOINT ["ionice", "-c", "3", "nice", "-n", "15", "/usr/bin/tini", "-g", "--"]
+CMD ["/bin/bash", "-i", "-c", "exec /bin/sleep infinity" ]

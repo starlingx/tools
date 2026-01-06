@@ -1,0 +1,43 @@
+acpica-tools 20200925-1.2
+autoconf-archive 20190106-2.1
+autogen 1:5.18.16-4
+autogen-doc 1:5.18.16-4
+comerr-dev 2.1-1.46.2-2+deb11u1 https://snapshot.debian.org/archive/debian-security/20241004T132419Z/pool/updates/main/e/e2fsprogs/comerr-dev_2.1-1.46.2-2%2Bdeb11u1_amd64.deb
+docutils-doc 0.16+dfsg-4
+dwarves 1.20-1
+fonts-mathjax 2.7.9+dfsg-1
+g++-10 10.2.1-6
+git 1:2.30.2-1+deb11u5 https://snapshot.debian.org/archive/debian-security/20251006T123410Z/pool/updates/main/g/git/git_2.30.2-1%2Bdeb11u5_amd64.deb
+git-man 1:2.30.2-1+deb11u5 https://snapshot.debian.org/archive/debian-security/20251006T123410Z/pool/updates/main/g/git/git-man_2.30.2-1%2Bdeb11u5_all.deb
+git-review 1.28.0-2
+guile-2.2-libs 2.2.7+1-6
+hwdata 0.345-1
+lib32ncurses-dev 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/lib32ncurses-dev_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
+lib32ncurses6 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/lib32ncurses6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
+lib32ncursesw6 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/lib32ncursesw6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
+lib32tinfo6 6.2+20201114-2+deb11u2  https://snapshot.debian.org/archive/debian/20230726T151952Z/pool/main/n/ncurses/lib32tinfo6_6.2%2B20201114-2%2Bdeb11u2_amd64.deb
+libcap-dev 1:2.44-1
+libclang-cpp11 1:11.0.1-2
+libclang1-11 1:11.0.1-2
+libhwloc-dev 1.11.12-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/h/hwloc/libhwloc-dev_1.11.12-3_amd64.deb
+libhwloc5 1.11.12-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb
+libjs-mathjax 2.7.9+dfsg-1
+libjson-c-dev 0.15-2
+libncurses-dev 6.2+20201114-2 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/ncurses/libncurses-dev_6.2%2B20201114-2_amd64.deb
+libnuma-dev 2.0.12-1+b1
+libopts25-dev 1:5.18.16-4
+libsimdjson5 0.7.1-1
+libstdc++-10-dev 10.2.1-6
+pybind11-dev 2.6.2-1
+python3-prometheus-client 0.7.1-1.1 https://snapshot.debian.org/archive/debian/20191124T025632Z/pool/main/p/python-prometheus-client/python3-prometheus-client_0.7.1-1.1_all.deb
+python-requests-doc 2.25.1+dfsg-2
+python3-doc 3.9.2-3
+python3-intelhex 2.1-2.2
+python3-pybind11 2.6.2-1
+python3-thriftpy 0.3.9+ds1-1+b5
+python3.9-doc  3.9.2-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250320T045336Z/pool/updates/main/p/python3.9/python3.9-doc_3.9.2-1%2Bdeb11u3_all.deb
+sphinx-doc 3.4.3-2
+trace-cmd 2.9.1-1
+tree 1.8.0-1+b1
+unzip 6.0-26+deb11u1
+usb.ids 2022.05.20-0+deb11u1 https://snapshot.debian.org/archive/debian/20220702T033910Z/pool/main/u/usb.ids/usb.ids_2022.05.20-0+deb11u1_all.deb

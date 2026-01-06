@@ -1,0 +1,121 @@
+---
+name: starlingx-initramfs-ostree-image
+machine: intel-x86-64
+image_type:
+- initramfs
+debootstrap-mirror: deb-merge-all
+package_feeds: []
+package_type: external-debian
+gpg:
+  gpg_path: /tmp/.lat_gnupg_root
+  ostree:
+    gpgid: Wind-River-Linux-Sample
+    gpgkey: $OECORE_NATIVE_SYSROOT/usr/share/genimage/rpm_keys/RPM-GPG-PRIVKEY-Wind-River-Linux-Sample
+    gpg_password: windriver
+  grub:
+    BOOT_GPG_NAME: SecureBootCore
+    BOOT_GPG_PASSPHRASE: SecureCore
+    BOOT_KEYS_DIR: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys
+    BOOT_GPG_KEY: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys/BOOT-GPG-PRIVKEY-SecureBootCore
+packages:
+- apt-utils
+- base-passwd
+- bash
+- bc
+- bind9-dnsutils
+# - bnxt-en
+# - bnxt-en-rt
+- busybox
+- bzip2
+- ca-certificates
+- curl
+- dosfstools
+- e2fsprogs
+- efibootmgr
+- eject
+- fdisk
+- findutils
+- firmware-qlogic
+- gawk
+- glib-networking
+- gnupg
+- grep
+- grub2
+- gzip
+# - iavf
+# - iavf-rt
+# - ice
+# - ice-rt
+# - i40e
+# - i40e-rt
+- ifupdown
+- initramfs-ostree
+- iproute2
+- isc-dhcp-client
+- isc-dhcp-common
+- kbd
+- kmod
+- libostree-1-1
+- linux-image-stx-amd64
+# - linux-rt-image-stx-amd64
+- mdadm
+# - mlnx-ofed-kernel-modules
+# - mlnx-ofed-kernel-modules-rt
+- mount
+- mttyexec
+# - multipath-config
+- multipath-tools
+- multipath-tools-boot
+- open-iscsi
+- ostree-boot
+- ostree
+- parted
+- procps
+- psmisc
+- pv
+- iputils-ping
+- rng-tools
+- rpm2cpio
+- rsync
+- sed
+- tar
+- udev
+- udhcpc
+- util-linux
+- uuid-runtime
+- vim
+- watchdog
+- wget
+external-packages: []
+include-default-packages: '0'
+rootfs-pre-scripts:
+- echo "run script before do_rootfs in $IMAGE_ROOTFS"
+rootfs-post-scripts:
+- |-
+  # Reduce rootfs size AMAP
+  export PATH=/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+  chroot $IMAGE_ROOTFS bash << SCRIPT_ENDOF
+  # Each time modify this file, change the version number below.
+  echo "Initramfs trixie yaml file V-1.0.0" > /var/log/rootfs_install.log
+  dpkg-query -l >> /var/log/rootfs_install.log
+  set -x
+  rm -rf /boot/*
+  rm -rf /var/lib/* /var/cache/*
+  rm -rf /usr/share/man /usr/share/doc /usr/share/zoneinfo /usr/share/vim
+  SCRIPT_ENDOF
+- |-
+  # Set bash as default shell
+  ln -snf --relative $IMAGE_ROOTFS/bin/bash $IMAGE_ROOTFS/bin/sh
+- |-
+  # Update the installer script with partition size parameters
+  # so they don't have to be specified on the grub command line
+  sed -i "s/^FSZ=.*/FSZ=32/g" ${IMAGE_ROOTFS}/install
+  sed -i "s/^BSZ=.*/BSZ=512/g" ${IMAGE_ROOTFS}/install
+  sed -i "s/^RSZ=.*/RSZ=20480/g" ${IMAGE_ROOTFS}/install
+  sed -i "s/^VSZ=.*/VSZ=20480/g" ${IMAGE_ROOTFS}/install
+environments:
+- NO_RECOMMENDATIONS="1"
+- DEBIAN_FRONTEND=noninteractive
+debootstrap-key: ''
+apt-keys:
+- /opt/LAT/pubkey.rsa

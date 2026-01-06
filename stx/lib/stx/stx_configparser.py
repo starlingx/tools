@@ -181,79 +181,58 @@ class STXConfigParser(object):
                         self.configpath, section_name, key, value)
                     self.cf.set(section_name, key, value)
 
-        # Convert debian_snapshot => debian_snapshot_{base,timestamp}
-        if self.cf.has_option('project', 'debian_snapshot'):
-            obsolete = self.cf.get('project', 'debian_snapshot')
-            match = re.fullmatch(r'^(.*)/+(\d{4,}[^/]*)/*$', obsolete)
-            if match:
-                self.__upgrade_nonempty_key(
-                    'project', 'debian_snapshot_base', match.group(1))
-                self.__upgrade_nonempty_key(
-                    'project', 'debian_snapshot_timestamp', match.group(2))
-            else:
-                self.__raise_upgrade_error('project.debian_snapshot')
-            # delete old key
-            self.__delete_key('project', 'debian_snapshot')
+        # Assumptions:
+        #  - Removed code:
+        #    - cengn migration support is completed with the previous release
+        #    - project.debian_snapshot_{base,timestamp} migration is completed
+        #      with the previous release
+        #  - Migrate/add builder config:
+        #    - Adjust builder distribution variables to align with the build
+        #      container configuration and /etc/os-release
+        #      - builder.dist -> builder.os_codename      (= bullseye)
+        #      - builder.stx_dist -> builder.stx_pkg_ext  (= .stx    )
+        #      - builder.os_id                            (= debian  )
+        #  - Adding configurable mirror support:
+        #    - support for repomgr.stx_mirror_url => repomgr.{os,lat}_mirror_url
+        #    - support for a specific mirror dist path:
+        #      repomgr.{os,lat}_mirror_{dist,lat}_path
 
-        # Convert debian_security_snapshot => debian_security_snapshot_base
-        if self.cf.has_option('project', 'debian_security_snapshot'):
-            obsolete = self.cf.get('project', 'debian_security_snapshot')
-            match = re.fullmatch(r'^(.*)/+(\d{4,}[^/]*)/*$', obsolete)
-            fail = True
-            if match:
-                self.__upgrade_nonempty_key(
-                    'project', 'debian_security_snapshot_base', match.group(1))
-                # make sure the timestamp portion in debian_security_snapshot
-                # is the same as debian_snapshot_timestamp
-                timestamp = self.cf.get(
-                    'project', 'debian_snapshot_timestamp', fallback='')
-                if timestamp == match.group(2):
-                    fail = False
-            if fail:
-                self.__raise_upgrade_error('project.debian_security_snapshot')
-            # delete old key
-            self.__delete_key('project', 'debian_security_snapshot')
+        # Convert stx_mirror_url => {os,lat}_mirror_url and {os,lat}_mirror_{dist,lat}_path
+        if self.cf.has_option('repomgr', 'stx_mirror_url'):
 
-        # Change debian_snapshot_* to STX_MIRROR
-        if not self.__upgrade_id_exists('debian_snapshot_stx_mirror'):
-            debian_snapshot_stx_mirror_upgraded = False
-            # debian_snapshot_base
-            old_value = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian'
-            new_value = 'https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian'
-            current_value = self.__get('project', 'debian_snapshot_base')
-            if current_value == old_value:
-                self.__upgrade_nonempty_key('project', 'debian_snapshot_base', new_value)
-                debian_snapshot_stx_mirror_upgraded = True
-            # debian_security_snapshot_base
-            old_value = 'http://mirror.starlingx.cengn.ca/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
-            new_value = 'https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian-security'
-            current_value = self.__get('project', 'debian_security_snapshot_base')
-            if current_value == old_value:
-                self.__upgrade_nonempty_key('project', 'debian_security_snapshot_base', new_value)
-                debian_snapshot_stx_mirror_upgraded = True
+            stx_mirror_url = self.__get('repomgr', 'stx_mirror_url')
+            if not stx_mirror_url.endswith('/'):
+                stx_mirror_url += '/'
 
-            if debian_snapshot_stx_mirror_upgraded:
-                self.__save_upgrade_id('debian_snapshot_stx_mirror')
-                need_restart = True
+            # Upgrade os related mirror info
+            self.__upgrade_nonempty_key('repomgr', 'os_mirror_url', stx_mirror_url)
+            self.__set('repomgr', 'os_mirror_dist_path', 'debian/debian/')
+            self.__set('repomgr', 'os_mirror_dl_path', 'debian/')
+            self.__delete_key('repomgr', 'stx_mirror_url')
 
-        # Convert cengnurl => stx_mirror_url
-        if self.cf.has_option('repomgr', 'cengnurl'):
-            oldstring = self.cf.get('repomgr', 'cengnurl')
-            newstring = re.sub('http://mirror.starlingx.cengn.ca',
-                               r'https://mirror.starlingx.windriver.com',
-                               oldstring)
-            self.__upgrade_nonempty_key('repomgr', 'stx_mirror_url', newstring)
-            # delete old key
-            self.__delete_key('repomgr', 'cengnurl')
-            need_restart = True
+            # Add LAT related mirror info, as this might be different than the
+            # os mirror
+            self.__set('repomgr', 'lat_mirror_url', stx_mirror_url)
+            self.__set('repomgr', 'lat_mirror_lat_path', 'lat-sdk/')
 
-        # Convert cengnstrategy => stx_mirror_strategy
-        if self.cf.has_option('repomgr', 'cengnstrategy'):
-            oldstring = self.cf.get('repomgr', 'cengnstrategy')
-            newstring = re.sub('cengn', 'stx_mirror', oldstring)
-            self.__upgrade_nonempty_key('repomgr', 'stx_mirror_strategy', newstring)
-            # delete old key
-            self.__delete_key('repomgr', 'cengnstrategy')
+        if not self.cf.has_option('repomgr', 'os_mirror_dl_path'):
+            self.__set('repomgr', 'os_mirror_dl_path', 'debian/')
+
+        # lat_mirror_lat_path was set incorrectly in some versions, fix it
+        lat_mirror_lat_path = self.__get('repomgr', 'lat_mirror_lat_path', None)
+        if lat_mirror_lat_path == 'lat-sdk/lat-sdk-20231206/':
+            self.__set('repomgr', 'lat_mirror_lat_path', 'lat-sdk/')
+
+        if self.cf.has_option('builder', 'dist'):
+            # Upgrade os related mirror info
+            self.__set('builder', 'os_id', 'debian')
+            self.__set('builder', 'os_codename', 'bullseye')
+            self.__delete_key('builder', 'dist')
+
+        if self.cf.has_option('builder', 'stx_dist'):
+            # Upgrade os related mirror info
+            self.__set('builder', 'stx_pkg_ext', '.stx')
+            self.__delete_key('builder', 'stx_dist')
 
         # Save changes
         self.syncConfigFile()

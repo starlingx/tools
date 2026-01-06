@@ -1,0 +1,2 @@
+deb [trusted=yes] https://mirror.starlingx.windriver.com/mirror/debian/debian/ftp.ca.debian.org/debian/ trixie main
+deb-src [trusted=yes] https://mirror.starlingx.windriver.com/mirror/debian/debian/ftp.ca.debian.org/debian/ trixie main
