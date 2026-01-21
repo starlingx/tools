@@ -216,6 +216,7 @@ minikube_profile_start() {
         --memory=$MINIKUBEMEMORY \
         --mount=true \
         --mount-string="$STX_BUILD_HOME:/workspace" \
+        --wait=all \
         || exit 1
 }
 
@@ -815,9 +816,6 @@ echo "  - OS Arch: ${builder_os_arch}"
 echo "Setup for distro: $dist:"
 echo "  - OS mirror: ${os_mirror_url}${os_mirror_dist_path}"
 echo "  - LAT mirror: ${lat_mirror_url}${lat_mirror_lat_path}"
-
-# Workaround: Wait for Minikube network to stabilize before building images
-sleep 10
 
 # LAT SDK Cache Management Function
 manage_lat_sdk_cache() {
