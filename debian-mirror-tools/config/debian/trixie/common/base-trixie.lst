@@ -1140,8 +1140,6 @@ psmisc  23.7-2
 puppet  8.10.0-5
 puppet-agent  8.10.0-5
 puppet-module-adrienthebo-filemapper  1.1.3-2
-# puppet-module-asciiduck-sssd  0.3.0-1.1
-puppet-module-barbican  25.0.0-5
 puppet-module-camptocamp-kmod  2.1.1-3
 puppet-module-duritong-sysctl  0.0.11-3
 puppet-module-keystone  25.0.0-4
