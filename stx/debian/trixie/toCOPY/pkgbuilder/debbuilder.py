@@ -687,6 +687,62 @@ class Debbuilder(object):
             self.logger.debug("Successfully saved the config files of chroots")
         return response
 
+    def refresh_single_chroot(self, user, project, clone_chroot_name):
+        '''
+        Refresh a single chroot with the 'clean' parent chroot
+        '''
+        response = {}
+        response['status'] = 'fail'
+
+        user_chroots_dir = self.get_user_chroots_dir(user, project)
+        parent_chroot_name = self.get_parent_chroot_dir(user, project)
+        parent_chroot_path = os.path.join(user_chroots_dir, parent_chroot_name)
+
+        if not os.path.exists(parent_chroot_path):
+            self.logger.error("The parent chroot %s does not exist", parent_chroot_name)
+            response['msg'] = 'The parent chroot does not exist'
+            return response
+
+        if parent_chroot_name == clone_chroot_name:
+            self.logger.debug('Skipping parent chroot %s', clone_chroot_name)
+            response['status'] = 'success'
+            response['msg'] = 'Parent chroot does not need refresh'
+            return response
+
+        clone_chroot_path = os.path.join(user_chroots_dir, clone_chroot_name)
+        if not os.path.exists(clone_chroot_path):
+            self.logger.error("The chroot %s does not exist", clone_chroot_name)
+            response['msg'] = 'The chroot does not exist'
+            return response
+
+        is_tmpfs = self.chroots_pool.is_tmpfs(clone_chroot_name)
+        self.logger.info('Refreshing chroot %s (tmpfs: %s)', clone_chroot_name, is_tmpfs)
+
+        try:
+            if is_tmpfs:
+                utils.clear_directory(clone_chroot_path)
+                shell_cmd = 'cp -ar %s/. %s/' % (parent_chroot_path, clone_chroot_path)
+                subprocess.check_call(shell_cmd, shell=True)
+            else:
+                rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path + '.tmp'
+                subprocess.check_call(rm_cmd, shell=True)
+                cp_cmd = 'cp -ra %s %s' % (parent_chroot_path, clone_chroot_path + '.tmp')
+                subprocess.check_call(cp_cmd, shell=True)
+                rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path
+                subprocess.check_call(rm_cmd, shell=True)
+                mv_cmd = 'mv -f %s %s' % (clone_chroot_path + '.tmp', clone_chroot_path)
+                subprocess.check_call(mv_cmd, shell=True)
+        except subprocess.CalledProcessError as e:
+            self.logger.error(str(e))
+            self.logger.error('Failed to refresh the chroot %s', clone_chroot_name)
+            response['msg'] = 'Error during refreshing the chroot'
+            return response
+
+        self.logger.info('Successfully refreshed the chroot %s', clone_chroot_name)
+        response['status'] = 'success'
+        response['msg'] = 'Chroot refreshed successfully'
+        return response
+
     def refresh_chroots(self, request_form):
         '''
         Refresh all chroots with the 'clean' parent chroot
@@ -716,41 +772,16 @@ class Debbuilder(object):
             response['status'] = 'fail'
             response['msg'] = 'The parent chroot does not exist'
             return response
+
         for clone_chroot_name in dst_chroots:
-            # e.g. the chroot name is 'chroot:bullseye-amd64-<user>-1'
-            self.logger.debug('The current chroot is %s', clone_chroot_name)
             if parent_chroot_name == clone_chroot_name:
                 continue
 
-            parent_chroot_path = os.path.join(user_chroots_dir, parent_chroot_name)
-            self.logger.debug('The parent chroot path: %s', parent_chroot_path)
-            clone_chroot_path = os.path.join(user_chroots_dir, clone_chroot_name)
-            self.logger.debug('The chroot path: %s', clone_chroot_path)
-            is_tmpfs = self.chroots_pool.is_tmpfs(clone_chroot_name)
-            self.logger.debug('is_tmpfs: %s', is_tmpfs)
-            try:
-                if is_tmpfs:
-                    self.logger.debug('clean directory: %s', clone_chroot_path)
-                    utils.clear_directory(clone_chroot_path)
-                    shell_cmd = 'cp -ar %s/. %s/' % (parent_chroot_path, clone_chroot_path)
-                    self.logger.debug('shell_cmd: %s', shell_cmd)
-                    subprocess.check_call(shell_cmd, shell=True)
-                    self.logger.debug('cmd exits: %s', shell_cmd)
-                else:
-                    cp_cmd = 'cp -ra %s %s' % (parent_chroot_path, clone_chroot_path + '.tmp')
-                    subprocess.check_call(cp_cmd, shell=True)
-                    rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path
-                    subprocess.check_call(rm_cmd, shell=True)
-                    mv_cmd = 'mv -f %s %s' % (clone_chroot_path + '.tmp', clone_chroot_path)
-                    subprocess.check_call(mv_cmd, shell=True)
-            except subprocess.CalledProcessError as e:
-                self.logger.error(str(e))
-                self.logger.error('Failed to refresh the chroot %s', clone_chroot_name)
+            refresh_result = self.refresh_single_chroot(user, project, clone_chroot_name)
+            if refresh_result['status'] != 'success':
                 response['status'] = 'fail'
-                response['msg'] = 'Error during refreshing the chroots'
+                response['msg'] = f"Failed to refresh {clone_chroot_name}: {refresh_result['msg']}"
                 return response
-            else:
-                self.logger.info('Successfully refreshed the chroot %s', clone_chroot_name)
 
         self.logger.info('Successfully refreshed all idle chroots')
         response['status'] = 'success'
@@ -817,6 +848,14 @@ class Debbuilder(object):
             response['status'] = 'fail'
             response['msg'] = 'There is not idle chroot for ' + dsc
             return response
+
+        # Refresh the chroot before using it for the build
+        project = request_form['project']
+        refresh_result = self.refresh_single_chroot(user, project, chroot)
+        if refresh_result['status'] != 'success':
+            self.logger.warning("Failed to refresh chroot %s: %s", chroot, refresh_result['msg'])
+            # Continue anyway - refresh failure shouldn't block the build
+
         self.chroots_state[dsc] = chroot
         self.logger.info("Chroot %s is ready for %s", chroot, dsc)
 

@@ -141,6 +141,10 @@ class MinikubeCtl(object):
                     f"Minikube status output for profile '{self.minikube_profile}': \n{json_output}"
                 )
 
+                if not isinstance(json_output, dict):
+                    logger.error(f"Expected dict from minikube status, got: {type(json_output)}")
+                    return False
+
                 for service_name, service_info in json_output.items():
                     if isinstance(service_info, dict) and service_info.get("Status") != "Running":
                         logger.info(
