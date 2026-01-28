@@ -931,8 +931,8 @@ python3-aniso8601  8.1.1-1
 python3-anyjson  0.3.3-2
 python3-apparmor 2.13.6-10
 python3-appdirs  1.4.4-1
-python3-apt 2.2.1
-python-apt-common 2.2.1
+python3-apt 2.2.1.1  https://snapshot.debian.org/archive/debian-security/20260127T194459Z/pool/updates/main/p/python-apt/python3-apt_2.2.1.1_amd64.deb
+python-apt-common 2.2.1.1  https://snapshot.debian.org/archive/debian-security/20260127T194459Z/pool/updates/main/p/python-apt/python-apt-common_2.2.1.1_all.deb
 python3-argcomplete 1.8.1-1.5
 python3-attr  20.3.0-1
 python3-babel  2.8.0+dfsg.1-7
