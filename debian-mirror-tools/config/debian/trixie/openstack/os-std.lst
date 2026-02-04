@@ -1,3 +1,5 @@
+python3-iso8601 2.1.0-2 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-iso8601/python3-iso8601_2.1.0-2_all.deb
+python3-keystoneauth1 5.10.0-2 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-keystoneauth1/python3-keystoneauth1_5.10.0-2_all.deb
 python3-keystoneauth1  5.10.0-2
 python3-keystonemiddleware  10.9.0-2
 python3-mock  5.2.0-1
@@ -19,9 +21,11 @@ python3-oslo.service  4.1.1-2
 python3-oslo.upgradecheck  2.5.0-3
 python3-oslo.utils  8.2.0-4
 python3-oslo.versionedobjects  3.6.0-3
+python3-pbr 6.1.1 https://snapshot.debian.org/archive/debian/20250328T083810Z/pool/main/p/python-pbr/python3-pbr_6.1.1-2_all.deb
 python3-platformdirs  4.3.7-1
 python3-pyro5  5.15-1
 python3-serpent  1.41-2
 python3-sqlalchemy  2.0.40+ds1-1
 python3-stevedore  5.4.1-2
 python3-swiftclient  1:4.7.0-2
+python3-typing-extensions 4.13.2-1 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-typing-extensions/python3-typing-extensions_4.13.2-1_all.deb
