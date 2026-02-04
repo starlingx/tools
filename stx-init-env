@@ -86,7 +86,7 @@ RESET_HARD=0
 ASSUME_YES=0
 STX_START_OPTS=
 
-# An image that contains the gnu 'rm' command.  
+# An image that contains the gnu 'rm' command.
 # It doesn't need to track the build target (e.g. bullseye/trixie)
 COREUTILS_DOCKER_IMAGE="debian:bookworm-20240130-slim"
 
@@ -220,9 +220,28 @@ minikube_profile_start() {
         || exit 1
 }
 
+cleanup_evicted_pods() {
+    if command -v kubectl >/dev/null 2>&1; then
+        notice "Cleaning up evicted pods..."
+        kubectl get pods -A --field-selector='status.phase=Failed' -o json 2>/dev/null | \
+        $PYTHON3 -c "
+import sys, json
+try:
+    data = json.load(sys.stdin)
+    for pod in data.get('items', []):
+        if pod.get('status', {}).get('reason') == 'Evicted':
+            ns = pod['metadata']['namespace']
+            name = pod['metadata']['name']
+            print(f'{name} -n {ns}')
+except: pass
+" | xargs -r -L1 kubectl delete pod --ignore-not-found 2>/dev/null
+    fi
+}
+
 minikube_profile_stop() {
     if minikube_profile_is_started ; then
         notice "Stopping minikube profile \`$MINIKUBENAME'"
+        cleanup_evicted_pods
         $MINIKUBE stop -p $MINIKUBENAME
         if minikube_profile_is_started ; then
             echo >&2 "minikube container $MINIKUBENAME exist!"
@@ -592,6 +611,7 @@ Following this action you must re-run this script (possibly with
         fi
     else
         # stop & delete env pods
+        cleanup_evicted_pods
         if stx_is_started ; then
             info "stopping env pods"
             stx_stop || exit 1
@@ -637,6 +657,7 @@ if [[ $RESET_SOFT -eq 1 ]] ; then
     if stx_is_started ; then
         want_stx_start=1
         notice "stopping env pods"
+        [[ "$STX_PLATFORM" != "minikube" ]] && cleanup_evicted_pods
         stx_stop || exit 1
     fi
     # clean up
