@@ -815,6 +815,7 @@ TAG_VER=${STX_PREBUILT_BUILDER_IMAGE_TAG##*-}
 REMANDER=${STX_PREBUILT_BUILDER_IMAGE_TAG%-*}
 NEXT=${REMANDER##*-}
 echo "REMANDER=$REMANDER"
+
 if [ "$NEXT" == "$builder_os_arch" ]; then
     REMANDER=${REMANDER%-*}
     NEXT=${REMANDER##*-}
@@ -826,7 +827,8 @@ if [ "$NEXT" == "$builder_os_codename" ]; then
 fi
 echo "REMANDER=$REMANDER"
 ROOT_TAG_NAME=${REMANDER}
-DOCKER_TAG="${ROOT_TAG_NAME}-${builder_os_codename}-${builder_os_arch}-${TAG_VER}"
+# Builder containers don't include BUILD_STREAM in their tags
+DOCKER_TAG="${ROOT_TAG_NAME}-${builder_os_id}-${builder_os_codename}-${builder_os_arch}-${TAG_VER}"
 
 
 echo "Setup build containers (and toolchain) for:"
@@ -1020,7 +1022,7 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     fi
 
     for img in $BUILD_DOCKER_IMAGES; do
-        info "Starting to build image: $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
+        info "Starting to build image: $img:$DOCKER_TAG_LOCAL"
 
         # Build command base
         cmd="docker buildx build ${docker_build_args[@]} ${extra_build_args[@]}"
@@ -1032,13 +1034,18 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
             info "Using LAT SDK build context: $LAT_SDK_BUILD_CONTEXT_DIR"
         fi
 
-        cmd+=" -t $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
+        cmd+=" -t $img:$DOCKER_TAG_LOCAL"
+        # Add legacy tag for bullseye (old convention without OS_ID)
+        if [ "$builder_os_codename" == "bullseye" ]; then
+            LEGACY_TAG="${ROOT_TAG_NAME}-${builder_os_codename}-${builder_os_arch}-${TAG_VER}"
+            cmd+=" -t $img:$LEGACY_TAG"
+        fi
         cmd+=" -f \"$STX_TOOLS_DIR/stx/${builder_os_id}/${builder_os_codename}/dockerfiles/$img.Dockerfile\""
         cmd+=" \"$STX_TOOLS_DIR\""
 
         info "Running command: ${cmd}"
         eval "$cmd" || exit 1
-        info "Finished building image: $img:$DOCKER_TAG_LOCAL-${builder_os_codename}"
+        info "Finished building image: $img:$DOCKER_TAG_LOCAL"
     done
 
     # Cleanup: Remove dedicated build context directory
@@ -1059,7 +1066,7 @@ PULL_DOCKER_IMAGES=$(
             fi
         done
         if [[ "$built" != "yes" ]] && \
-               { [[ "$USE_DOCKER_CACHE" != 1 ]] || ! docker image inspect ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} >/dev/null 2>&1 ; } ; then
+               { [[ "$USE_DOCKER_CACHE" != 1 ]] || ! docker image inspect ${img}:${DOCKER_TAG_LOCAL} >/dev/null 2>&1 ; } ; then
             echo "$img"
         fi
     done
@@ -1068,8 +1075,14 @@ if [[ -n "$PULL_DOCKER_IMAGES" ]] ; then
     notice "Pulling docker images: "$PULL_DOCKER_IMAGES
     for img in $PULL_DOCKER_IMAGES; do
         docker pull ${DOCKER_PREFIX}${img}:${DOCKER_TAG} || exit 1
-        docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} || exit 1
-        info "created image ${img}:${DOCKER_TAG_LOCAL}-${builder_os_codename} from pre-built ${DOCKER_PREFIX}${img}:${DOCKER_TAG}"
+        docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${DOCKER_TAG_LOCAL} || exit 1
+        info "created image ${img}:${DOCKER_TAG_LOCAL} from pre-built ${DOCKER_PREFIX}${img}:${DOCKER_TAG}"
+        # Add legacy tag for bullseye (old convention without OS_ID)
+        if [ "$builder_os_codename" == "bullseye" ]; then
+            LEGACY_TAG="${ROOT_TAG_NAME}-${builder_os_codename}-${builder_os_arch}-${TAG_VER}"
+            docker tag ${DOCKER_PREFIX}${img}:${DOCKER_TAG} ${img}:${LEGACY_TAG} || exit 1
+            info "created legacy tag ${img}:${LEGACY_TAG}"
+        fi
     done
 fi
 

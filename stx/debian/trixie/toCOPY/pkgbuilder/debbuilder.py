@@ -27,7 +27,9 @@ BUILD_ENGINE = 'sbuild'
 STX_LOCALRC = '/usr/local/bin/stx/stx-localrc'
 SBUILD_CONF = '/etc/sbuild/sbuild.conf'
 ENVIRON_VARS = ['OSTREE_OSNAME', 'OS_MIRROR_URL', 'OS_MIRROR_DIST_PATH',
-                'DEBIAN_DISTRIBUTION', 'DEBIAN_VERSION']
+                'DEBIAN_DISTRIBUTION', 'DEBIAN_VERSION',
+                'PLATFORM_REGISTRY', 'BUILD_STREAM', 'IMAGE_PREFIX',
+                'IMAGE_SUFFIX', 'OS', 'OS_CODENAME', 'OS_ARCH']
 REPO_BUILD = 'deb-local-build'
 
 
@@ -209,11 +211,11 @@ class Debbuilder(object):
             except Exception as e:
                 self.logger.error(str(e))
                 self.logger.error("Failed to fetch %s from %s", var, STX_LOCALRC)
-                break
+                continue
             else:
                 if not outs:
-                    self.logger.error("Got null when fetch %s from %s", var, STX_LOCALRC)
-                    break
+                    self.logger.warning("Got null when fetch %s from %s", var, STX_LOCALRC)
+                    continue
                 value = outs.strip().split("\n")[0].strip('"')
                 self.logger.debug("Got value %s for %s", value, var)
                 replace_cmd = "sed -i -e 's#@%s@#%s#g' %s" % (var, value, SBUILD_CONF)
