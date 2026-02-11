@@ -1292,7 +1292,7 @@ python3-jwt  2.10.1-2
 python3-keyring  25.6.0-2
 python3-keystoneauth1  5.10.0-2
 python3-keystoneclient  1:5.6.0-2
-python3-keystonemiddleware  10.9.0-2
+python3-keystonemiddleware  10.9.0-2+deb13u1  https://security.debian.org/debian-security/pool/updates/main/p/python-keystonemiddleware/python3-keystonemiddleware_10.9.0-2+deb13u1_all.deb
 python3-kombu  5.5.3-1
 python3-lazr.restfulclient 0.14.6-3
 python3-lazr.uri 1.0.6-6
