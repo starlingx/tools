@@ -48,6 +48,52 @@ class KubeHelper(object):
         logger.info('stx-tools deployments list:')
         subprocess.check_call(cmd, shell=True)
 
+    def check_resource_exhaustion(self):
+        '''Check for node resource pressure conditions.'''
+
+        cmd = self.config.kubectl() + ' get nodes -o json'
+        try:
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=True, timeout=10)
+            nodes_data = json.loads(result.stdout)
+
+            for node in nodes_data.get('items', []):
+                node_name = node['metadata']['name']
+                conditions = node.get('status', {}).get('conditions', [])
+
+                for condition in conditions:
+                    ctype = condition.get('type', '')
+                    status = condition.get('status', '')
+                    reason = condition.get('reason', '')
+
+                    if status == 'True' and ctype in ['MemoryPressure', 'DiskPressure', 'PIDPressure']:
+                        logger.warning(f'Node {node_name}: {ctype} detected - {reason}')
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired, json.JSONDecodeError) as e:
+            logger.debug(f'Could not check resource exhaustion: {e}')
+
+    def cleanup_evicted_pods(self):
+        '''Delete all evicted pods across all namespaces.'''
+
+        cmd = self.config.kubectl() + " get pods -A --field-selector='status.phase=Failed' -o json"
+        try:
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=True, timeout=30)
+            pods_data = json.loads(result.stdout)
+            evicted_count = 0
+
+            for pod in pods_data.get('items', []):
+                status = pod.get('status', {})
+                reason = status.get('reason', '')
+                if reason == 'Evicted':
+                    namespace = pod['metadata']['namespace']
+                    name = pod['metadata']['name']
+                    delete_cmd = f"{self.config.kubectl()} delete pod {name} -n {namespace}"
+                    subprocess.run(delete_cmd, shell=True, check=False, stderr=subprocess.DEVNULL, timeout=5)
+                    evicted_count += 1
+
+            if evicted_count > 0:
+                logger.info(f'Cleaned up {evicted_count} evicted pod(s)')
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired, json.JSONDecodeError) as e:
+            logger.warning(f'Failed to cleanup evicted pods: {e}')
+
     def get_helm_info(self):
         '''Get the helm list information of the stx building tools.'''
 

@@ -322,28 +322,37 @@ stx-pkgbuilder/configmap/')
         if self.config.use_minikube:
             self.minikube_ctl.require_started()
 
-        helm_status = self.k8s.helm_release_exists(self.projectname)
-        if helm_status:
-            cmd = f'{self.config.helm()} uninstall {projectname}'
-            self.logger.debug('Execute the helm stop command: %s', cmd)
-            subprocess.check_call(cmd, shell=True)
-        else:
-            self.logger.warning('The helm release %s does not exist',
-                                projectname)
+        exception_occurred = False
+        try:
+            helm_status = self.k8s.helm_release_exists(self.projectname)
+            if helm_status:
+                cmd = f'{self.config.helm()} uninstall {projectname}'
+                self.logger.debug('Execute the helm stop command: %s', cmd)
+                subprocess.check_call(cmd, shell=True)
+            else:
+                self.logger.warning('The helm release %s does not exist',
+                                    projectname)
 
-        if wait:
-            while True:
-                pod_count = len(self.k8s.get_helm_pods())
-                if pod_count == 0:
-                    break
-                if time.time() > deadline:
-                    self.logger.warning("maximum wait time of %d second(s) exceeded", timeout)
-                    self.logger.warning("gave up while pods are still running")
-                    break
-                self.logger.info("waiting for %d pod(s) to exit", pod_count)
-                time.sleep(2)
+            if wait:
+                while True:
+                    pod_count = len(self.k8s.get_helm_pods())
+                    if pod_count == 0:
+                        break
+                    if time.time() > deadline:
+                        self.logger.warning("maximum wait time of %d second(s) exceeded", timeout)
+                        self.logger.warning("gave up while pods are still running")
+                        break
+                    self.logger.info("waiting for %d pod(s) to exit", pod_count)
+                    time.sleep(2)
 
-        self.k8s.delete_docker_cred_secret()
+            self.k8s.delete_docker_cred_secret()
+        except Exception:
+            exception_occurred = True
+            raise
+        finally:
+            if exception_occurred:
+                self.k8s.check_resource_exhaustion()
+            self.k8s.cleanup_evicted_pods()
 
     def handleIsStartedTask(self, projectname):
         if self.k8s.helm_release_exists(projectname):
