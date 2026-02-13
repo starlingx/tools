@@ -1100,7 +1100,7 @@ python3-prettytable  0.7.2-5
 python3-psutil  5.8.0-1
 python3-psycopg2  2.8.6-2
 python3-ptyprocess  0.7.0-1
-python3-pyasn1  0.4.8-1
+python3-pyasn1  0.4.8-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20260211T123600Z/pool/updates/main/p/pyasn1/python3-pyasn1_0.4.8-1%2Bdeb11u1_all.deb
 python3-pyasn1-modules  0.2.1-1
 python3-pycadf  3.1.1-2
 python3-pycodestyle  2.6.0-1
