@@ -23,8 +23,8 @@ packages:
 - bash
 - bc
 - bind9-dnsutils
-# - bnxt-en
-# - bnxt-en-rt
+- bnxt-en
+- bnxt-en-rt
 - busybox
 - bzip2
 - ca-certificates
@@ -42,12 +42,12 @@ packages:
 - grep
 - grub2
 - gzip
-# - iavf
-# - iavf-rt
-# - ice
-# - ice-rt
-# - i40e
-# - i40e-rt
+- iavf
+- iavf-rt
+- ice
+- ice-rt
+- i40e
+- i40e-rt
 - ifupdown
 - initramfs-ostree
 - iproute2
@@ -57,13 +57,13 @@ packages:
 - kmod
 - libostree-1-1
 - linux-image-stx-amd64
-# - linux-rt-image-stx-amd64
+- linux-rt-image-stx-amd64
 - mdadm
-# - mlnx-ofed-kernel-modules
-# - mlnx-ofed-kernel-modules-rt
+- mlnx-ofed-kernel-modules
+- mlnx-ofed-kernel-modules-rt
 - mount
 - mttyexec
-# - multipath-config
+- multipath-config
 - multipath-tools
 - multipath-tools-boot
 - open-iscsi
