@@ -801,12 +801,8 @@ libqb100 2.0.8-2+b1
 libquadmath0  14.2.0-19
 libquartz2-java  2.3.2-4
 librabbitmq4  0.15.0-1
-librados-dev  18.2.7+ds-1
-librados2 18.2.7+ds-1
 libraynes-fs-clojure 1.5.2-1
 librbac-client-clojure 1.1.5-3
-librbd-dev  18.2.7+ds-1
-librbd1 18.2.7+ds-1
 librdkafka1  2.8.0-1
 librdmacm1t64  56.1-1
 libreadline-dev  8.2-6
@@ -908,6 +904,7 @@ libssh2-1-dev  1.11.1-1
 libssh2-1t64  1.11.1-1
 libssl-dev  3.5.1-1
 libssl-utils-clojure  3.5.3-2
+libssl1.1  1.1.1w-0+deb11u1  https://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1w-0%2Bdeb11u1_amd64.deb
 libssl3t64  3.5.1-1
 libssl3t64  3.5.1-1
 libsss-certmap0  2.10.1-2+b1
@@ -1218,7 +1215,7 @@ python3-configobj  5.0.9-1
 python3-configshell-fb  1:2.0.0-2
 python3-confluent-kafka  1.7.0-4+b4
 python3-coverage  7.6.0+dfsg1-2+b2
-python3-cryptography  43.0.0-3
+python3-cryptography  3.3.2-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/python-cryptography/python3-cryptography_3.3.2-1%2Bdeb11u1_amd64.deb
 python3-csscompressor  0.9.5-6
 python3-daemon  3.1.2-2
 python3-dateutil  2.9.0-4
@@ -1289,7 +1286,7 @@ python3-jsonpatch  1.32-5
 python3-jsonpath-rw  1.4.0-7
 python3-jsonschema  4.19.2-6
 python3-jsonschema-specifications  2023.12.1-2
-python3-jwcrypto  1.5.6-1
+python3-jwcrypto  0.8.0-1  https://deb.debian.org/debian/pool/main/p/python-jwcrypto/python3-jwcrypto_0.8.0-1_all.deb
 python3-jwt  2.10.1-2
 python3-keyring  25.6.0-2
 python3-keystoneauth1  5.10.0-2
@@ -1340,7 +1337,7 @@ python3-numpy  1:2.2.4+ds-1
 python3-numpy-dev  1:2.2.4+ds-1
 python3-oauthlib  3.2.2-3
 python3-openscap  1.4.2+dfsg-1
-python3-openssl  25.0.0-1
+python3-openssl  20.0.1-1  https://deb.debian.org/debian/pool/main/p/pyopenssl/python3-openssl_20.0.1-1_all.deb
 python3-openstacksdk  4.4.0-5
 python3-os-client-config  2.1.0-3
 python3-os-service-types  1.7.0-5
