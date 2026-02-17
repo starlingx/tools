@@ -331,7 +331,7 @@ libboost-program-options1.83.0  1.83.0-4.2
 libboost-python1.83.0  1.83.0-4.2
 libboost-regex1.83.0  1.83.0-4.2
 libboost-thread1.83.0  1.83.0-4.2
-libbpf1  1:1.5.0-3
+libbpf1  1:1.5.0-3 https://snapshot.debian.org/archive/debian/20250426T024229Z/pool/main/libb/libbpf/libbpf1_1.5.0-3_amd64.deb
 libbrlapi0.8  6.7-3.1
 libbrotli1  1.1.0-2+b7
 libbsd0  0.12.2-2
