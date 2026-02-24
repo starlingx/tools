@@ -19,7 +19,6 @@ import schrootspool
 import shutil
 import signal
 import subprocess
-import time
 import utils
 
 BUILD_ROOT = '/localdisk/loadbuild/'
@@ -120,15 +119,6 @@ class Debbuilder(object):
             chroot_name = '-'.join([chroot_name, str(index)])
         return chroot_name
 
-    def is_valid_index(self, index):
-        try:
-            int_val = int(index)
-            if int_val > 0:
-                return True
-        except ValueError:
-            pass
-        return False
-
     def decompose_chroot_name(self, chroot_name, user):
         self.logger.debug("Starting decompose_chroot_name...")
         self.logger.debug("chroot_name: %s", chroot_name)
@@ -145,9 +135,6 @@ class Debbuilder(object):
         components['user'] = user
         if len(parts) >= 3:
             components['index'] = parts[2]
-            if not self.is_valid_index(components['index']):
-                self.logger.debug('invalid index "%s" in chroot name', components['index'])
-                components = {}
         self.logger.debug("components: %s", components)
         return components
 
@@ -192,9 +179,6 @@ class Debbuilder(object):
         components['unique_id'] = parts[2]
         if len(parts) >= 4:
             components['index'] = parts[3]
-            if not self.is_valid_index(components['index']):
-                self.logger.debug('invalid index "%s" in schroot config name', components['index'])
-                components = {}
         self.logger.debug("components: %s", components)
         return components
 
@@ -301,47 +285,6 @@ class Debbuilder(object):
         else:
             self.logger.error("failed to determine schroot unique_id from parent schroot name")
 
-    def get_chroot_sessions(self, chroot_name):
-
-        # list of sessions
-        sessions = subprocess.run(['schroot', '--list', '--all-sessions'],
-                                  stdout=subprocess.PIPE,
-                                  universal_newlines=True).stdout.splitlines()
-        # Find only sessions based on chroot_name
-        for session in sessions:
-            session_matches = False
-            mount_location = None
-            if session.startswith('session:%s-' % chroot_name):
-                config = subprocess.run(['schroot', '--config', '--chroot', session],
-                                        stdout=subprocess.PIPE,
-                                        universal_newlines=True).stdout.splitlines()
-                for line in config:
-                    if line.startswith('original-name=%s' % chroot_name):
-                        session_matches = True
-                    elif line.startswith('mount-location='):
-                        mount_location = line.split('=')[1].strip()
-            if session_matches:
-                yield (session, mount_location)
-
-    def terminate_chroot_sessions(self, chroot_name):
-        session_list = list(self.get_chroot_sessions(chroot_name))
-        if session_list:
-            # Send SIGKILL to each child
-            for session, mount_location in session_list:
-                cmd = ['fuser', '--kill', '-m', mount_location]
-                self.logger.debug('Running: %s', cmd)
-                subprocess.run(cmd)
-
-            # Give them time to terminate
-            time.sleep(1)
-
-            # End the session (unmount subdirectories, etc)
-            session_list = self.get_chroot_sessions(chroot_name)
-            for session, mount_location in session_list:
-                cmd = ['schroot', '--end-session', '--chroot', session]
-                self.logger.debug('Running: %s', cmd)
-                subprocess.run(cmd)
-
     def add_chroot(self, request_form):
         response = check_request(request_form, ['user', 'project'])
         if response:
@@ -423,7 +366,6 @@ class Debbuilder(object):
             try:
                 if utils.is_tmpfs(delete_chroot_dir):
                     utils.unmount_tmpfs(delete_chroot_dir)
-                self.terminate_chroot_sessions(self.get_cloned_chroot_name(user, index))
                 shell_cmd = 'rm -rf --one-file-system %s' % delete_chroot_dir
                 self.logger.debug('shell_cmd=%s', shell_cmd)
                 subprocess.check_call(shell_cmd, shell=True)
@@ -462,6 +404,14 @@ class Debbuilder(object):
         """
         rc = True
 
+        schroot_conf_list = os.listdir(self.schroot_config_dir)
+        for schroot_conf_name in schroot_conf_list:
+            index = self.index_from_schroot_config_name(schroot_conf_name, user)
+            if index is None or index <= max_index:
+                continue
+            if not self.delete_cloned_schroot_config(user, project, index):
+                rc = False
+
         user_chroots_dir = self.get_user_chroots_dir(user, project)
         chroot_list = os.listdir(user_chroots_dir)
         for chroot_name in chroot_list:
@@ -471,14 +421,6 @@ class Debbuilder(object):
             if index is None or index <= max_index:
                 continue
             if not self.delete_cloned_chroot(user, project, index):
-                rc = False
-
-        schroot_conf_list = os.listdir(self.schroot_config_dir)
-        for schroot_conf_name in schroot_conf_list:
-            index = self.index_from_schroot_config_name(schroot_conf_name, user)
-            if index is None or index <= max_index:
-                continue
-            if not self.delete_cloned_schroot_config(user, project, index):
                 rc = False
 
         # self.chroots_pool.load()
@@ -776,26 +718,21 @@ class Debbuilder(object):
         is_tmpfs = self.chroots_pool.is_tmpfs(clone_chroot_name)
         self.logger.info('Refreshing chroot %s (tmpfs: %s)', clone_chroot_name, is_tmpfs)
 
-        self.terminate_chroot_sessions(clone_chroot_name)
-
         try:
             if is_tmpfs:
                 utils.clear_directory(clone_chroot_path)
                 shell_cmd = 'cp -ar %s/. %s/' % (parent_chroot_path, clone_chroot_path)
                 subprocess.check_call(shell_cmd, shell=True)
             else:
-                rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path
-                subprocess.check_call(rm_cmd, shell=True)
                 rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path + '.tmp'
                 subprocess.check_call(rm_cmd, shell=True)
                 cp_cmd = 'cp -ra %s %s' % (parent_chroot_path, clone_chroot_path + '.tmp')
                 subprocess.check_call(cp_cmd, shell=True)
+                rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path
+                subprocess.check_call(rm_cmd, shell=True)
                 mv_cmd = 'mv -f %s %s' % (clone_chroot_path + '.tmp', clone_chroot_path)
                 subprocess.check_call(mv_cmd, shell=True)
         except subprocess.CalledProcessError as e:
-            # don't leave the .tmp dir behind
-            rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path + '.tmp'
-            subprocess.run(rm_cmd, shell=True)
             self.logger.error(str(e))
             self.logger.error('Failed to refresh the chroot %s', clone_chroot_name)
             response['msg'] = 'Error during refreshing the chroot'

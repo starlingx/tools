@@ -46,7 +46,6 @@ RUN     apt-get update && apt-get install --no-install-recommends -y \
             osc \
             pbuilder \
             procps \
-            psmisc \
             python3-fs \
             python3-pip \
             python3-psutil \
