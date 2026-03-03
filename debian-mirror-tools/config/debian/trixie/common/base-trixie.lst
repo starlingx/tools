@@ -1052,6 +1052,7 @@ libz3-4  4.13.3-1
 libzmq5  4.3.5-1+b3
 libzstd1  1.5.7+dfsg-1
 linux-base  4.12
+linux-sysctl-defaults  4.12
 locales  2.41-12
 locales-all  2.41-12
 login  1:4.16.0-2+really2.41-5
@@ -1654,6 +1655,7 @@ udev  257.7-1
 udhcpc  1:1.37.0-6
 unzip  6.0-29
 util-linux  2.41-5
+util-linux-extra  2.41-5
 uuid-dev  2.41-5
 uuid-runtime  2.41-5
 uwsgi-core  2.0.28-9
