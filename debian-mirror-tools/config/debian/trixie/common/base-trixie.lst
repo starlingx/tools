@@ -156,7 +156,7 @@ firmware-qcom-soc  20250410-2 https://snapshot.debian.org/archive/debian/2025113
 firmware-qlogic  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-qlogic_20250410-2_all.deb
 firmware-realtek  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-realtek_20250410-2_all.deb
 firmware-samsung  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-samsung_20250410-2_all.deb
-firmware-siano  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-siano_20250410-2_all.deb 
+firmware-siano  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-siano_20250410-2_all.deb
 flake8  7.1.1-3
 flex  2.6.4-8.2+b4
 fontconfig  2.15.0-2.3
@@ -286,6 +286,7 @@ libasan8  14.2.0-19
 libasm-java 9.8-1
 libasm1t64  0.192-4
 libasound2-data  1.2.14-1
+libasound2-dev  1.2.14-1
 libasound2t64  1.2.14-1
 libassuan9  3.0.2-2
 libatinject-jsr330-api-java  1.0+ds1-6

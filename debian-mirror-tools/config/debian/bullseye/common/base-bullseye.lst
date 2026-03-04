@@ -254,6 +254,7 @@ libasan6  10.2.1-6
 libasm1  0.183-1
 libassuan0  2.5.3-7.1
 libasound2  1.2.4-1.1+deb11u1  https://snapshot.debian.org/archive/debian-security/20260226T051334Z/pool/updates/main/a/alsa-lib/libasound2_1.2.4-1.1%2Bdeb11u1_amd64.deb
+libasound2-dev  1.2.4-1.1+deb11u1  https://snapshot.debian.org/archive/debian-security/20260226T051334Z/pool/updates/main/a/alsa-lib/libasound2-dev_1.2.4-1.1%2Bdeb11u1_amd64.deb
 libasound2-data  1.2.4-1.1+deb11u1  https://snapshot.debian.org/archive/debian-security/20260226T051334Z/pool/updates/main/a/alsa-lib/libasound2-data_1.2.4-1.1%2Bdeb11u1_all.deb
 libatomic1  10.2.1-6
 libattr1-dev  1:2.4.48-6
