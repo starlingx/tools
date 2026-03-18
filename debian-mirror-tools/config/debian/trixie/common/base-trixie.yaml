@@ -105,6 +105,8 @@ debootstrap-key: ''
 apt-keys:
 - /opt/LAT/pubkey.rsa
 iso-grub-entry: |
+  set linux_efi_legacy=1
+  export linux_efi_legacy
   submenu 'UEFI Debian Controller Install' --unrestricted --id=standard {
     menuentry 'Serial Console' --unrestricted --id=serial {
       set fallback=1
