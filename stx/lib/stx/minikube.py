@@ -141,6 +141,9 @@ class MinikubeCtl(object):
                     f"Minikube status output for profile '{self.minikube_profile}': \n{json_output}"
                 )
 
+                if json_output is None:
+                    return False
+
                 if not isinstance(json_output, dict):
                     logger.error(f"Expected dict from minikube status, got: {type(json_output)}")
                     return False

@@ -191,7 +191,12 @@ starts_with() {
 }
 
 minikube_profile_is_started() {
-    minikube status -p "$MINIKUBENAME" >/dev/null 2>&1
+    local out
+    out=$(minikube status -p "$MINIKUBENAME" 2>/dev/null)
+    if [[ $? -eq 0 && "$out" != "" ]] ; then
+        return 0
+    fi
+    return 1
 }
 
 minikube_profile_exists() {
@@ -216,8 +221,11 @@ minikube_profile_start() {
         --memory=$MINIKUBEMEMORY \
         --mount=true \
         --mount-string="$STX_BUILD_HOME:/workspace" \
-        --wait=all \
-        || exit 1
+        --wait=all
+    if [[ $? -ne 0 ]] ; then
+        echo "ERROR: failed to start minikube profile \`$MINIKUBENAME'" >&2
+        echo "ERROR: try to delete it first by using the \`--delete-minikube-profile' option" >&2
+    fi
 }
 
 cleanup_evicted_pods() {
@@ -724,7 +732,7 @@ if [ "$STX_PLATFORM" = "minikube" ]; then
 
     # Import minikube's docker environment. This points docker CLI to minikube's
     # embedded docker daemon.
-    eval $(minikube -p $MINIKUBENAME docker-env)
+    eval $(minikube -p $MINIKUBENAME docker-env) || exit 1
 
     # Ask minikube's docker daemon to obtain docker hub's access token
     if [[ "$DOCKERHUB_LOGIN" -eq 1 ]] ; then
