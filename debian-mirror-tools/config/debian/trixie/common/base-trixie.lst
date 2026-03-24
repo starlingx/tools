@@ -359,6 +359,7 @@ libcares2  1.34.5-1
 libcbor0.10  0.10.2-2
 libcc1-0  14.2.0-19
 libcgroup3  3.1.0-2+b2
+libcharon-extra-plugins 6.0.1-6
 libcheshire-clojure  5.11.0-4
 libc-l10n  2.41-12
 libclj-digest-clojure  1.4.9+dfsg-1
@@ -912,6 +913,8 @@ libstdc++6  14.2.0-19
 libstemmer0d 2.2.0-4+b2
 libstonith1t64  1.0.12-24+b1
 libstrongswan  6.0.1-6
+libstrongswan-extra-plugins 6.0.1-6
+libstrongswan-standard-plugins 6.0.1-6
 libsub-override-perl  0.12-1
 libsystemd-shared  257.7-1
 libsystemd0  257.7-1
@@ -957,6 +960,8 @@ libtrapperkeeper-scheduler-clojure  1.1.3-7
 libtrapperkeeper-status-clojure  1.1.1-5
 libtrapperkeeper-webserver-jetty9-clojure  4.5.2-2
 libtsan2  14.2.0-19
+libtss2-mu-4.0.1-0t64 4.1.3-1.2
+libtss2-sys1t64 4.1.3-1.2
 libtypesafe-config-clojure  0.1.5-2
 libtypesafe-config-java  1.3.1-2.1
 libubsan1  14.2.0-19
@@ -1635,6 +1640,7 @@ tcpdump  4.99.5-2
 texinfo  7.1.1-1
 time  1.9-0.2
 tini  0.19.0-3+b3
+tpm-udev 0.6+nmu1
 traceroute  1:2.1.6-1
 tuned  2.25.1-1
 tzdata  2025b-4
