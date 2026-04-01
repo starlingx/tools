@@ -1100,6 +1100,7 @@ python3-pip  20.3.4-4+deb11u1
 python3-pkg-resources  52.0.0-4+deb11u2  https://snapshot.debian.org/archive/debian-security/20250527T121436Z/pool/updates/main/s/setuptools/python3-pkg-resources_52.0.0-4+deb11u2_all.deb
 python3-ply  3.11-4
 python3-prettytable  0.7.2-5
+python3-prettytable  3.15.1-1 https://snapshot.debian.org/archive/debian/20250317T090330Z/pool/main/p/prettytable/python3-prettytable_3.15.1-1_all.deb
 python3-psutil  5.8.0-1
 python3-psycopg2  2.8.6-2
 python3-ptyprocess  0.7.0-1
