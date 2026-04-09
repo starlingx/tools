@@ -66,6 +66,7 @@ packages:
 - multipath-config
 - multipath-tools
 - multipath-tools-boot
+- net-config
 - open-iscsi
 - ostree-boot
 - ostree
