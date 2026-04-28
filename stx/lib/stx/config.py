@@ -76,11 +76,10 @@ class Config(object):
         self.helm_cmd = None
         self.minikube_docker_cmd = None
 
+        self._insecure_docker_reg_list = None
         reg_list_str = os.getenv('STX_INSECURE_DOCKER_REGISTRIES')
         if reg_list_str:
             self._insecure_docker_reg_list = re.split(r'[ \t;,]+', reg_list_str)
-        else:
-            self._insecure_docker_reg_list = []
 
         self._container_mtu = os.getenv('STX_CONTAINER_MTU')
 
@@ -127,8 +126,21 @@ class Config(object):
 
     @property
     def insecure_docker_reg_list(self):
-        """List of insecure docker registries we are allowed to access"""
-        return self._insecure_docker_reg_list
+        """List of insecure docker registries we are allowed to access.
+
+        Priority: STX_INSECURE_DOCKER_REGISTRIES env var, then
+        builder.insecure_docker_reg in stx.conf, then empty list.
+        """
+        if self._insecure_docker_reg_list is not None:
+            return self._insecure_docker_reg_list
+        if self.data:
+            try:
+                val = self.data.getConfig('builder', 'insecure_docker_reg')
+                if val:
+                    return re.split(r'[ \t;,]+', val)
+            except Exception:
+                pass
+        return []
 
     @property
     def container_mtu(self):

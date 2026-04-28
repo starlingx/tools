@@ -234,6 +234,16 @@ class STXConfigParser(object):
             self.__set('builder', 'stx_pkg_ext', '.stx')
             self.__delete_key('builder', 'stx_dist')
 
+        # Ensure image tag substitution defaults exist
+        if not self.cf.has_option('builder', 'build_stream'):
+            self.__set('builder', 'build_stream', 'stable')
+        if not self.cf.has_option('builder', 'image_prefix'):
+            self.__set('builder', 'image_prefix', 'master')
+        if not self.cf.has_option('builder', 'image_suffix'):
+            self.__set('builder', 'image_suffix', 'latest')
+        if not self.cf.has_option('builder', 'platform_registry'):
+            self.__set('builder', 'platform_registry', 'docker.io/starlingx')
+
         # Save changes
         self.syncConfigFile()
 

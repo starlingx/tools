@@ -39,3 +39,15 @@ export PATH=$PATH:$MY_BUILD_TOOLS_DIR/stx:/opt/LAT/lat:$PATCH_BUILDER_PATH
 export PYTHONPATH=$PYTHONPATH:$MY_BUILD_TOOLS_DIR/stx
 
 export OS_MIRROR=/import/mirrors/starlingx
+
+# Map localrc variables to build script expectations
+# localrc sets DIST_ID, DIST, and DIST_ARCH, but build scripts expect OS, OS_CODENAME, OS_ARCH
+export OS=${OS:-${DIST_ID:-debian}}
+export OS_CODENAME=${OS_CODENAME:-${DIST:-bullseye}}
+export OS_ARCH=${OS_ARCH:-${DIST_ARCH:-amd64}}
+
+# Image tag substitution defaults
+export BUILD_STREAM=${BUILD_STREAM:-stable}
+export IMAGE_PREFIX=${IMAGE_PREFIX:-master}
+export IMAGE_SUFFIX=${IMAGE_SUFFIX:-latest}
+export PLATFORM_REGISTRY=${PLATFORM_REGISTRY:-docker.io/starlingx}

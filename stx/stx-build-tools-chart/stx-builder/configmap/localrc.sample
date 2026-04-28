@@ -13,8 +13,20 @@ export MYUNAME=@MYUNAME@
 # Use to select the correct package $DIST_ID/$DIST (i.e. debian/bullseye)
 export DIST_ID=@BUILDER_OS_ID@
 export DIST=@BUILDER_OS_CODENAME@
+export DIST_ARCH=@BUILDER_OS_ARCH@
 
 export STX_DIST=@BUILDER_STX_PKG_EXTENSION@
+
+# Aliases expected by debbuilder.py for sbuild environment
+export OS=@BUILDER_OS_ID@
+export OS_CODENAME=@BUILDER_OS_CODENAME@
+export OS_ARCH=@BUILDER_OS_ARCH@
+
+# Image tag substitution for ISO-packaged helm charts
+export BUILD_STREAM=@BUILDER_BUILD_STREAM@
+export IMAGE_PREFIX=@BUILDER_IMAGE_PREFIX@
+export IMAGE_SUFFIX=@BUILDER_IMAGE_SUFFIX@
+export PLATFORM_REGISTRY=@BUILDER_PLATFORM_REGISTRY@
 
 export REPOMGR_TYPE=@REPOMGR_TYPE@
 

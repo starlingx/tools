@@ -103,16 +103,24 @@ class HandleControlTask(object):
         try:
             builder_os_codename = self.config.get('builder', 'os_codename')
             builder_os_id = self.config.get('builder', 'os_id')
+            builder_os_arch = self.config.get('builder', 'os_arch')
         except Exception:
             builder_dist = self.config.get('builder', 'dist')
             builder_os_codename = builder_dist
             builder_os_id = 'debian'
+            builder_os_arch = 'amd64'
 
         try:
             builder_stx_pkg_ext = self.config.get('builder', 'stx_pkg_ext')
         except Exception:
             builder_stx_dist = self.config.get('builder', 'stx_dist')
             builder_stx_pkg_ext = builder_stx_dist
+
+        # Image tag substitution variables for ISO-packaged helm charts
+        builder_build_stream = self.config.get('builder', 'build_stream')
+        builder_image_prefix = self.config.get('builder', 'image_prefix')
+        builder_image_suffix = self.config.get('builder', 'image_suffix')
+        builder_platform_registry = self.config.get('builder', 'platform_registry')
 
         # The stx_mirror_url references below are obsolete, and are retained for
         # backward compatibility with preexisting build environmnets.
@@ -211,7 +219,12 @@ stx-pkgbuilder/configmap/')
                 line = line.replace("@MY_RELEASE@", builder_release)
                 line = line.replace("@BUILDER_OS_ID@", builder_os_id)
                 line = line.replace("@BUILDER_OS_CODENAME@", builder_os_codename)
+                line = line.replace("@BUILDER_OS_ARCH@", builder_os_arch)
                 line = line.replace("@BUILDER_STX_PKG_EXTENSION@", builder_stx_pkg_ext)
+                line = line.replace("@BUILDER_BUILD_STREAM@", builder_build_stream)
+                line = line.replace("@BUILDER_IMAGE_PREFIX@", builder_image_prefix)
+                line = line.replace("@BUILDER_IMAGE_SUFFIX@", builder_image_suffix)
+                line = line.replace("@BUILDER_PLATFORM_REGISTRY@", builder_platform_registry)
                 line = line.replace("@DEBFULLNAME@", builder_debfullname)
                 line = line.replace("@DEBEMAIL@", builder_debemail)
                 line = line.replace("@REPOMGR_TYPE@", repomgr_type)
@@ -279,7 +292,7 @@ stx-pkgbuilder/configmap/')
         wait_arg = '--wait ' if wait else ''
         cmd = self.config.helm() + ' install ' + wait_arg + projectname + ' ' \
             + self.abs_helmchartdir \
-            + ' --set global.image.tag=' + self.config.docker_tag + '-' + self.config.get('builder', 'os_codename')
+            + ' --set global.image.tag=' + self.config.docker_tag
 
         if not self.config.use_minikube:
             # Override hostDir for k8s local host mount

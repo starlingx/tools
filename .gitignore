@@ -12,3 +12,4 @@ releasenotes/build
 # stx init/config/controller files
 stx.conf
 minikube_history.log
+stx-patch-env.sh
