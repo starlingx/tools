@@ -1141,7 +1141,6 @@ psmisc  23.7-2
 puppet  8.10.0-5
 puppet-agent  8.10.0-5
 puppet-module-adrienthebo-filemapper  1.1.3-2
-puppet-module-camptocamp-kmod  2.1.1-3
 puppet-module-duritong-sysctl  0.0.11-3
 puppet-module-keystone  25.0.0-4
 puppet-module-nanliu-staging  1.0.4-3
@@ -1150,7 +1149,6 @@ puppet-module-oslo  25.0.0-2
 puppet-module-puppetlabs-apache  12.2.0-1
 puppet-module-puppetlabs-apt  9.4.0-1
 puppet-module-puppetlabs-concat  7.3.1-2
-puppet-module-puppetlabs-firewall  8.1.7-1
 puppet-module-puppetlabs-inifile  5.4.0-1
 puppet-module-puppetlabs-mount-core  1.0.4+dfsg1-2
 puppet-module-puppetlabs-mysql  15.0.0-3
