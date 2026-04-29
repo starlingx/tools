@@ -819,6 +819,8 @@ fi
 # Make sure upstream DOCKER_TAG will be in the correct format
 #    e.g. might need to transform 'master-debian-latest'
 #         into 'master-debian-bullseye-amd64-latest'
+# Strip os_arch, os_codename and os_id from the tag if present,
+# then re-add them in canonical order to avoid duplicates.
 TAG_VER=${STX_PREBUILT_BUILDER_IMAGE_TAG##*-}
 REMANDER=${STX_PREBUILT_BUILDER_IMAGE_TAG%-*}
 NEXT=${REMANDER##*-}
@@ -830,6 +832,11 @@ if [ "$NEXT" == "$builder_os_arch" ]; then
 fi
 echo "REMANDER=$REMANDER"
 if [ "$NEXT" == "$builder_os_codename" ]; then
+    REMANDER=${REMANDER%-*}
+    NEXT=${REMANDER##*-}
+fi
+echo "REMANDER=$REMANDER"
+if [ "$NEXT" == "$builder_os_id" ]; then
     REMANDER=${REMANDER%-*}
     NEXT=${REMANDER##*-}
 fi
