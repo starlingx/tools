@@ -1165,7 +1165,6 @@ puppet-module-puppetlabs-rabbitmq  8.5.0-8
 puppet-module-puppetlabs-stdlib  9.4.1-1
 puppet-module-puppetlabs-translate  2.2.0-1
 puppet-module-voxpupuli-collectd  11.0.0-4
-puppet-module-vswitch  21.0.0-1
 pv  1.9.31-1
 pycadf-common  4.0.1-1
 python-apt-common  3.0.0
