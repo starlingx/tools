@@ -159,13 +159,16 @@ class SchrootsPool(object):
     def get_schroot_clone_list(self):
         schroot_clone_list = []
         for schroot_name in self.get_schroot_list():
-            if len(schroot_name.split('-')) >= 4:
+            # Clone chroots always end with a numeric suffix (e.g. -1, -2)
+            # Parent chroots do not. Using split('-') count is unreliable
+            # when the username contains hyphens.
+            if re.search(r'-\d+$', schroot_name):
                 schroot_clone_list.append(schroot_name)
         return schroot_clone_list
 
     def get_schroot_parent(self):
         for schroot_name in self.get_schroot_list():
-            if len(schroot_name.split('-')) < 4:
+            if not re.search(r'-\d+$', schroot_name):
                 return schroot_name
         self.logger.error('parent schroot not found')
         raise ValueError('parent schroot not found')
