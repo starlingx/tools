@@ -13,3 +13,7 @@ releasenotes/build
 stx.conf
 minikube_history.log
 stx-patch-env.sh
+
+# Python Cache
+__pycache__
+.pytest_cache

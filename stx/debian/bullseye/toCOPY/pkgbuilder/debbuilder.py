@@ -19,6 +19,7 @@ import schrootspool
 import shutil
 import signal
 import subprocess
+import time
 import utils
 
 BUILD_ROOT = '/localdisk/loadbuild/'
@@ -124,21 +125,17 @@ class Debbuilder(object):
     def decompose_chroot_name(self, chroot_name, user):
         self.logger.debug("Starting decompose_chroot_name...")
         self.logger.debug("chroot_name: %s", chroot_name)
-        components = {}
-        # the username may contain '-' so we remove it before splitting
-        value_to_remove = f'-{user}'
-        parts = chroot_name.replace(value_to_remove, '').split('-')
-        self.logger.debug("parts: %s", parts)
-        if len(parts) < 2:
-            self.logger.debug("components: %s", components)
-            return components
-        components['dist'] = parts[0]
-        components['arch'] = parts[1]
-        components['user'] = user
-        if len(parts) >= 3:
-            components['index'] = parts[2]
-        self.logger.debug("components: %s", components)
-        return components
+        # Format: {dist}-{arch}-{user}[-{index}]
+        prefix = f"{self.attrs['dist']}-{self.attrs['arch']}-{user}"
+        if chroot_name == prefix:
+            return {'dist': self.attrs['dist'], 'arch': self.attrs['arch'], 'user': user}
+        if chroot_name.startswith(prefix + '-'):
+            remainder = chroot_name[len(prefix) + 1:]
+            if remainder.isdigit() and int(remainder) > 0:
+                return {'dist': self.attrs['dist'], 'arch': self.attrs['arch'],
+                        'user': user, 'index': remainder}
+        self.logger.debug("chroot_name does not match expected format")
+        return {}
 
     def index_from_chroot_name(self, chroot_name, user):
         components = self.decompose_chroot_name(chroot_name, user)
@@ -167,22 +164,28 @@ class Debbuilder(object):
     def decompose_schroot_config_name(self, schroot_config_name, user):
         self.logger.debug("Starting decompose_schroot_config_name...")
         self.logger.debug("schroot_config_name: %s", schroot_config_name)
-        components = {}
-        # the username may contain '-' so we remove it before splitting
-        value_to_remove = f'-{user}'
-        parts = schroot_config_name.replace(value_to_remove, '').split('-')
-        self.logger.debug("parts: %s", parts)
-        if len(parts) < 3:
-            self.logger.debug("components: %s", components)
-            return components
-        components['dist'] = parts[0]
-        components['arch'] = parts[1]
-        components['user'] = user
-        components['unique_id'] = parts[2]
-        if len(parts) >= 4:
-            components['index'] = parts[3]
-        self.logger.debug("components: %s", components)
-        return components
+        # Format: {dist}-{arch}-{unique_id}-{user}[-{index}]
+        prefix = f"{self.attrs['dist']}-{self.attrs['arch']}-"
+        if not schroot_config_name.startswith(prefix):
+            self.logger.debug("schroot_config_name does not match expected format")
+            return {}
+        remainder = schroot_config_name[len(prefix):]
+        user_suffix = f'-{user}'
+        # Try clone format: {unique_id}-{user}-{index}
+        # Parse from the right: index is always a trailing digit string
+        if remainder.endswith(user_suffix):
+            unique_id = remainder[:-len(user_suffix)]
+            if unique_id:
+                return {'dist': self.attrs['dist'], 'arch': self.attrs['arch'],
+                        'unique_id': unique_id, 'user': user}
+        rest, sep, tail = remainder.rpartition('-')
+        if sep and tail.isdigit() and int(tail) > 0 and rest.endswith(user_suffix):
+            unique_id = rest[:-len(user_suffix)]
+            if unique_id:
+                return {'dist': self.attrs['dist'], 'arch': self.attrs['arch'],
+                        'unique_id': unique_id, 'user': user, 'index': tail}
+        self.logger.debug("schroot_config_name does not match expected format")
+        return {}
 
     def index_from_schroot_config_name(self, schroot_config_name, user):
         components = self.decompose_schroot_config_name(schroot_config_name, user)
@@ -287,6 +290,90 @@ class Debbuilder(object):
         else:
             self.logger.error("failed to determine schroot unique_id from parent schroot name")
 
+    def get_chroot_sessions(self, chroot_name):
+        sessions = subprocess.run(['schroot', '--list', '--all-sessions'],
+                                  stdout=subprocess.PIPE,
+                                  universal_newlines=True).stdout.splitlines()
+        self.logger.debug('Found %d total schroot session(s)', len(sessions))
+        for session in sessions:
+            # Pre-filter: skip sessions that can't possibly match.
+            # The authoritative check is original-name= from schroot
+            # --config below, but this avoids unnecessary subprocess calls.
+            if not session.startswith('session:%s-' % chroot_name):
+                continue
+            session_matches = False
+            mount_location = None
+            config = subprocess.run(
+                ['schroot', '--config', '--chroot', session],
+                stdout=subprocess.PIPE,
+                universal_newlines=True).stdout.splitlines()
+            for line in config:
+                line = line.strip()
+                if line == 'original-name=%s' % chroot_name:
+                    session_matches = True
+                elif line.startswith('mount-location='):
+                    mount_location = line.split('=', 1)[1].strip()
+            if session_matches:
+                yield (session, mount_location)
+
+    def terminate_chroot_sessions(self, chroot_name, max_attempts=3):
+        '''Best-effort termination of all schroot sessions for chroot_name.
+
+        Steps, repeated up to max_attempts:
+          1. List sessions for chroot_name.
+          2. fuser --kill -m <mount> for each session that has a mount.
+          3. sleep, then re-list.
+          4. Stop early if no sessions remain.
+
+        After the retry loop, any surviving sessions are explicitly ended
+        via `schroot --end-session`. All subprocess failures are logged
+        as warnings, never raised — this method is preliminary cleanup
+        that callers depend on but should not abort on.
+        '''
+        sessions = list(self.get_chroot_sessions(chroot_name))
+        if not sessions:
+            return
+        self.logger.debug('Terminating %d session(s) for %s',
+                          len(sessions), chroot_name)
+        for attempt in range(1, max_attempts + 1):
+            for session, mount_location in sessions:
+                if not mount_location:
+                    continue
+                cmd = ['fuser', '--kill', '-m', mount_location]
+                self.logger.debug('Attempt %d: %s', attempt, cmd)
+                result = subprocess.run(cmd, stdout=subprocess.PIPE,
+                                        stderr=subprocess.PIPE,
+                                        universal_newlines=True,
+                                        check=False)
+                if result.returncode != 0:
+                    # fuser returns non-zero when no processes are using
+                    # mount point; worth logging.
+                    self.logger.warning(
+                        'fuser kill returned rc=%d for %s: %s',
+                        result.returncode, mount_location,
+                        result.stderr.strip())
+            time.sleep(1)
+            sessions = list(self.get_chroot_sessions(chroot_name))
+            if not sessions:
+                self.logger.debug(
+                    'All sessions for %s terminated after %d attempt(s)',
+                    chroot_name, attempt)
+                return
+        self.logger.warning(
+            '%d session(s) for %s still alive after %d attempt(s); '
+            'forcing end-session', len(sessions), chroot_name, max_attempts)
+        for session, _mount_location in sessions:
+            cmd = ['schroot', '--end-session', '--chroot', session]
+            self.logger.debug('Running: %s', cmd)
+            result = subprocess.run(cmd, stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
+                                    universal_newlines=True,
+                                    check=False)
+            if result.returncode != 0:
+                self.logger.warning(
+                    'schroot --end-session returned rc=%d for %s: %s',
+                    result.returncode, session, result.stderr.strip())
+
     def add_chroot(self, request_form):
         response = check_request(request_form, ['user', 'project'])
         if response:
@@ -368,6 +455,7 @@ class Debbuilder(object):
             try:
                 if utils.is_tmpfs(delete_chroot_dir):
                     utils.unmount_tmpfs(delete_chroot_dir)
+                self.terminate_chroot_sessions(self.get_cloned_chroot_name(user, index))
                 shell_cmd = 'rm -rf --one-file-system %s' % delete_chroot_dir
                 self.logger.debug('shell_cmd=%s', shell_cmd)
                 subprocess.check_call(shell_cmd, shell=True)
@@ -406,14 +494,6 @@ class Debbuilder(object):
         """
         rc = True
 
-        schroot_conf_list = os.listdir(self.schroot_config_dir)
-        for schroot_conf_name in schroot_conf_list:
-            index = self.index_from_schroot_config_name(schroot_conf_name, user)
-            if index is None or index <= max_index:
-                continue
-            if not self.delete_cloned_schroot_config(user, project, index):
-                rc = False
-
         user_chroots_dir = self.get_user_chroots_dir(user, project)
         chroot_list = os.listdir(user_chroots_dir)
         for chroot_name in chroot_list:
@@ -423,6 +503,14 @@ class Debbuilder(object):
             if index is None or index <= max_index:
                 continue
             if not self.delete_cloned_chroot(user, project, index):
+                rc = False
+
+        schroot_conf_list = os.listdir(self.schroot_config_dir)
+        for schroot_conf_name in schroot_conf_list:
+            index = self.index_from_schroot_config_name(schroot_conf_name, user)
+            if index is None or index <= max_index:
+                continue
+            if not self.delete_cloned_schroot_config(user, project, index):
                 rc = False
 
         # self.chroots_pool.load()
@@ -689,6 +777,15 @@ class Debbuilder(object):
             self.logger.debug("Successfully saved the config files of chroots")
         return response
 
+    def _remove_stale_tmp(self, path):
+        '''Remove a leftover staging dir. Returns True if gone.'''
+        if not os.path.exists(path):
+            return True
+        self.logger.debug('Removing stale tmp: %s', path)
+        subprocess.run('rm -rf --one-file-system ' + path,
+                       shell=True, check=False)
+        return not os.path.exists(path)
+
     def refresh_single_chroot(self, user, project, clone_chroot_name):
         '''
         Refresh a single chroot with the 'clean' parent chroot
@@ -720,21 +817,43 @@ class Debbuilder(object):
         is_tmpfs = self.chroots_pool.is_tmpfs(clone_chroot_name)
         self.logger.info('Refreshing chroot %s (tmpfs: %s)', clone_chroot_name, is_tmpfs)
 
+        self.terminate_chroot_sessions(clone_chroot_name)
+
         try:
             if is_tmpfs:
                 utils.clear_directory(clone_chroot_path)
-                shell_cmd = 'cp -ar %s/. %s/' % (parent_chroot_path, clone_chroot_path)
-                subprocess.check_call(shell_cmd, shell=True)
+                subprocess.check_call(
+                    'cp -ar %s/. %s/' % (parent_chroot_path, clone_chroot_path),
+                    shell=True)
             else:
-                rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path + '.tmp'
-                subprocess.check_call(rm_cmd, shell=True)
-                cp_cmd = 'cp -ra %s %s' % (parent_chroot_path, clone_chroot_path + '.tmp')
+                clone_tmp_path = clone_chroot_path + '.tmp'
+                clone_old_path = clone_chroot_path + '.tmp.old'
+                # Clean up leftovers from previous crashes
+                for stale in (clone_old_path, clone_tmp_path):
+                    if not self._remove_stale_tmp(stale):
+                        self.logger.error(
+                            'Cannot remove stale directory %s; '
+                            'mounts may still be busy', stale)
+                        response['msg'] = (
+                            'Cannot remove stale .tmp at %s; '
+                            'mounts still busy' % stale)
+                        return response
+                cp_cmd = 'cp -ra %s %s' % (parent_chroot_path, clone_tmp_path)
                 subprocess.check_call(cp_cmd, shell=True)
-                rm_cmd = 'rm -rf --one-file-system ' + clone_chroot_path
-                subprocess.check_call(rm_cmd, shell=True)
-                mv_cmd = 'mv -f %s %s' % (clone_chroot_path + '.tmp', clone_chroot_path)
-                subprocess.check_call(mv_cmd, shell=True)
+                # Atomic swap via renames
+                if os.path.exists(clone_chroot_path):
+                    os.rename(clone_chroot_path, clone_old_path)
+                os.rename(clone_tmp_path, clone_chroot_path)
+                # Non-critical cleanup of old version
+                subprocess.run(
+                    'rm -rf --one-file-system ' + clone_old_path,
+                    shell=True, check=False)
         except subprocess.CalledProcessError as e:
+            for stale in (clone_chroot_path + '.tmp',
+                          clone_chroot_path + '.tmp.old'):
+                self.logger.debug('Cleaning up: %s', stale)
+                subprocess.run('rm -rf --one-file-system ' + stale,
+                               shell=True, check=False)
             self.logger.error(str(e))
             self.logger.error('Failed to refresh the chroot %s', clone_chroot_name)
             response['msg'] = 'Error during refreshing the chroot'
