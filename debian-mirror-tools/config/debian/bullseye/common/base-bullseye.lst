@@ -192,6 +192,10 @@ golang-1.25 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z
 golang-1.25-doc 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-doc_1.25.9-1_all.deb
 golang-1.25-go 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-go_1.25.9-1_amd64.deb
 golang-1.25-src 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-src_1.25.9-1_all.deb
+golang-1.26 1.26.2-1 https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26_1.26.2-1_all.deb
+golang-1.26-doc 1.26.2-1 https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-doc_1.26.2-1_all.deb
+golang-1.26-go 1.26.2-1 https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-go_1.26.2-1_amd64.deb
+golang-1.26-src 1.26.2-1 https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-src_1.26.2-1_all.deb
 golang-any 1.22~3~bpo12+1 https://snapshot.debian.org/archive/debian/20241114T144032Z/pool/main/g/golang-defaults/golang-any_1.22~3~bpo12%2B1_amd64.deb
 golang-go 1.22~3~bpo12+1 https://snapshot.debian.org/archive/debian/20241114T144032Z/pool/main/g/golang-defaults/golang-go_1.22~3~bpo12%2B1_amd64.deb
 golang-src 1.22~3~bpo12+1 https://snapshot.debian.org/archive/debian/20241114T144032Z/pool/main/g/golang-defaults/golang-src_1.22~3~bpo12%2B1_all.deb
