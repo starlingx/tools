@@ -82,6 +82,7 @@ class Config(object):
             self._insecure_docker_reg_list = re.split(r'[ \t;,]+', reg_list_str)
 
         self._container_mtu = os.getenv('STX_CONTAINER_MTU')
+        self._tmpfs_percent = os.getenv('STX_TMPFS_PERCENT')
 
     def load(self):
         """Load stx.conf"""
@@ -146,6 +147,21 @@ class Config(object):
     def container_mtu(self):
         """Container network MTU value"""
         return self._container_mtu
+
+    @property
+    def tmpfs_percent(self):
+        """Percent of available RAM to use for /dev/shm tmpfs (default 10, max 50)"""
+        val = self._tmpfs_percent
+        if not val:
+            try:
+                val = self.get('builder', 'tmpfs_percent')
+            except Exception:
+                val = None
+        try:
+            pct = int(val) if val else 10
+        except (ValueError, TypeError):
+            pct = 10
+        return max(1, min(50, pct))
 
     @property
     def project_name(self):

@@ -36,6 +36,8 @@ platform_registry = docker.io/starlingx
 release = 6.0
 stx_pkg_ext = .stx
 uid = 1000
+# Percent of available RAM for /dev/shm tmpfs (default 10, max 50)
+tmpfs_percent = 10
 
 [pkgbuilder]
 mode = local

@@ -305,6 +305,20 @@ stx-pkgbuilder/configmap/')
         if self.config.container_mtu:
             cmd += f' --set stx-docker.mtu={self.config.container_mtu}'
 
+        # Set /dev/shm size based on configured tmpfs_percent of available RAM (min 3Gi)
+        try:
+            pct = self.config.tmpfs_percent / 100.0
+            with open('/proc/meminfo') as f:
+                for line in f:
+                    if line.startswith('MemAvailable:'):
+                        avail_gb = int(line.split()[1]) / (1024 * 1024)
+                        shm_gb = int(avail_gb * pct)
+                        if shm_gb >= 3:
+                            cmd += f' --set shmSize={shm_gb}Gi'
+                        break
+        except Exception:
+            pass
+
         if use_dockerhub_cred:
             image_pull_secret = self.k8s.try_create_docker_cred_secret()
             if image_pull_secret:

@@ -44,6 +44,10 @@ spec:
             mountPath: {{ .Values.volumeMounts.userSetting.mountPath}}
           - name: {{ .Values.volumeMounts.mirror.name }}
             mountPath: {{ .Values.volumeMounts.mirror.mountPath }}
+          {{- if .Values.shmSize }}
+          - name: dshm
+            mountPath: /dev/shm
+          {{- end }}
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -61,6 +65,12 @@ spec:
       - name: {{ .Values.volumes.mirror.name }}
         hostPath:
           path: {{ .Values.global.hostDir }}{{ .Values.volumes.mirror.hostPath.path }}
+      {{- if .Values.shmSize }}
+      - name: dshm
+        emptyDir:
+          medium: Memory
+          sizeLimit: {{ .Values.shmSize }}
+      {{- end }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:
