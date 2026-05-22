@@ -198,10 +198,10 @@ golang-1.23 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z
 golang-1.23-doc 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-doc_1.23.6-4_all.deb
 golang-1.23-go 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-go_1.23.6-4_amd64.deb
 golang-1.23-src 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-src_1.23.6-4_all.deb
-golang-1.24 1.24.7-1 https://snapshot.debian.org/archive/debian/20251006T082441Z/pool/main/g/golang-1.24/golang-1.24_1.24.7-1_all.deb
-golang-1.24-doc 1.24.7-1 https://snapshot.debian.org/archive/debian/20251006T082441Z/pool/main/g/golang-1.24/golang-1.24-doc_1.24.7-1_all.deb
-golang-1.24-go 1.24.7-1 https://snapshot.debian.org/archive/debian/20251006T082441Z/pool/main/g/golang-1.24/golang-1.24-go_1.24.7-1_amd64.deb
-golang-1.24-src 1.24.7-1 https://snapshot.debian.org/archive/debian/20251006T082441Z/pool/main/g/golang-1.24/golang-1.24-src_1.24.7-1_all.deb
+golang-1.24 1.24.13-2 https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24_1.24.13-2_all.deb
+golang-1.24-doc 1.24.13-2 https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-doc_1.24.13-2_all.deb
+golang-1.24-go 1.24.13-2 https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-go_1.24.13-2_amd64.deb
+golang-1.24-src 1.24.13-2 https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-src_1.24.13-2_all.deb
 golang-1.25 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25_1.25.9-1_all.deb
 golang-1.25-doc 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-doc_1.25.9-1_all.deb
 golang-1.25-go 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-go_1.25.9-1_amd64.deb
