@@ -165,6 +165,7 @@ gettext-base  0.21-4
 gir1.2-glib-2.0  1.66.1-1+b1
 gir1.2-gtk-3.0  3.24.24-4+deb11u4  https://snapshot.debian.org/archive/debian/20240810T143846Z/pool/main/g/gtk%2B3.0/gir1.2-gtk-3.0_3.24.24-4%2Bdeb11u4_amd64.deb
 gir1.2-packagekitglib-1.0 1.2.2-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20260506T211048Z/pool/updates/main/p/packagekit/gir1.2-packagekitglib-1.0_1.2.2-2%2Bdeb11u1_amd64.deb
+gir1.2-polkit-1.0  0.105-31+deb11u2  https://snapshot.debian.org/archive/debian-security/20260429T101338Z/pool/updates/main/p/policykit-1/gir1.2-polkit-1.0_0.105-31%2Bdeb11u2_amd64.deb
 gir1.2-soup-2.4  2.72.0-2+deb11u3  https://security.debian.org/debian-security/pool/updates/main/libs/libsoup2.4/gir1.2-soup-2.4_2.72.0-2+deb11u3_amd64.deb
 glib-networking  2.66.0-2
 glib-networking-common  2.66.0-2
@@ -627,9 +628,9 @@ libpng-dev  1.6.37-3+deb11u3  https://snapshot.debian.org/archive/debian-securit
 libpng16-16  1.6.37-3+deb11u3  https://snapshot.debian.org/archive/debian-security/20260405T205725Z/pool/updates/main/libp/libpng1.6/libpng16-16_1.6.37-3%2Bdeb11u3_amd64.deb
 libpmem-dev  1.10-2+deb11u1
 libpmem1  1.10-2+deb11u1
-libpolkit-agent-1-0  0.105-31+deb11u1
-libpolkit-gobject-1-dev  0.105-31+deb11u1
-libpolkit-gobject-1-0  0.105-31+deb11u1
+libpolkit-agent-1-0  0.105-31+deb11u2  https://snapshot.debian.org/archive/debian-security/20260429T101338Z/pool/updates/main/p/policykit-1/libpolkit-agent-1-0_0.105-31%2Bdeb11u2_amd64.deb
+libpolkit-gobject-1-dev  0.105-31+deb11u2  https://snapshot.debian.org/archive/debian-security/20260429T101338Z/pool/updates/main/p/policykit-1/libpolkit-gobject-1-dev_0.105-31%2Bdeb11u2_amd64.deb
+libpolkit-gobject-1-0  0.105-31+deb11u2  https://snapshot.debian.org/archive/debian-security/20260429T101338Z/pool/updates/main/p/policykit-1/libpolkit-gobject-1-0_0.105-31%2Bdeb11u2_amd64.deb
 libpopt0  1.18-2
 libpq5  13.23-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20260217T084758Z/pool/updates/main/p/postgresql-13/libpq5_13.23-0%2Bdeb11u1_amd64.deb
 libpq-dev  13.23-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20260217T084758Z/pool/updates/main/p/postgresql-13/libpq-dev_13.23-0%2Bdeb11u1_amd64.deb
@@ -897,7 +898,7 @@ pipexec  2.5.5-2+b1
 pkg-config 0.29.2-1
 pm-utils  1.4.1-19
 po-debconf  1.0.21+nmu1
-policykit-1  0.105-31+deb11u1
+policykit-1  0.105-31+deb11u2  https://snapshot.debian.org/archive/debian-security/20260429T101338Z/pool/updates/main/p/policykit-1/policykit-1_0.105-31%2Bdeb11u2_amd64.deb
 postgresql-13  13.23-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20260217T084758Z/pool/updates/main/p/postgresql-13/postgresql-13_13.23-0%2Bdeb11u1_amd64.deb
 postgresql-client-13  13.23-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20260217T084758Z/pool/updates/main/p/postgresql-13/postgresql-client-13_13.23-0%2Bdeb11u1_amd64.deb
 postgresql-client-common  225
