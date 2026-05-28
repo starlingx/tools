@@ -22,7 +22,6 @@ libclang1-11 1:11.0.1-2
 libhwloc-dev 1.11.12-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/h/hwloc/libhwloc-dev_1.11.12-3_amd64.deb
 libhwloc5 1.11.12-3 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/h/hwloc/libhwloc5_1.11.12-3_amd64.deb
 libjs-mathjax 2.7.9+dfsg-1
-libjson-c-dev 0.15-2
 libncurses-dev 6.2+20201114-2 https://snapshot.debian.org/archive/debian/20220703T032011Z/pool/main/n/ncurses/libncurses-dev_6.2%2B20201114-2_amd64.deb
 libnuma-dev 2.0.12-1+b1
 libopts25-dev 1:5.18.16-4
