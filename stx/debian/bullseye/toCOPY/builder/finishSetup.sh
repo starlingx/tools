@@ -2,6 +2,10 @@
 
 . $HOME/buildrc
 
+# Refresh CA certificates to avoid SSL errors with external downloads
+apt-get -qq update -o Dir::Etc::sourcelist=/dev/null -o Dir::Etc::sourceparts=/dev/null > /dev/null 2>&1
+apt-get -qq install -y --only-upgrade ca-certificates > /dev/null 2>&1 && update-ca-certificates > /dev/null 2>&1
+
 REPOMGR=aptly
 if [ "$REPOMGR" == "aptly" ]; then
     OS_MIRROR="${OS_MIRROR_URL}${OS_MIRROR_DIST_PATH}deb.debian.org/debian/${DEBIAN_DISTRIBUTION}-${DEBIAN_VERSION} ${DEBIAN_DISTRIBUTION} main"
