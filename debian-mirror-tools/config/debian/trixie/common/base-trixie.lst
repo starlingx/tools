@@ -356,6 +356,8 @@ libc6-dev  2.41-12
 libc6.1-dev-alpha-cross  2.41-11cross1
 libcacard-dev  1:2.8.0-3+b2
 libcacard0  1:2.8.0-3+b2
+libcjson1  1.7.18-3.1+deb13u1  https://snapshot.debian.org/archive/debian-security/20250914T181939Z/pool/updates/main/c/cjson/libcjson1_1.7.18-3.1%2Bdeb13u1_amd64.deb
+libcjson-dev  1.7.18-3.1+deb13u1  https://snapshot.debian.org/archive/debian-security/20250914T181939Z/pool/updates/main/c/cjson/libcjson-dev_1.7.18-3.1%2Bdeb13u1_amd64.deb
 libcairo2  1.18.4-1+b1
 libcap-ng-dev  0.8.5-4+b1
 libcap-ng0  0.8.5-4+b1

@@ -320,6 +320,8 @@ libcapstone-dev  4.0.2-3
 libcapstone4  4.0.2-3
 libcacard-dev  1:2.8.0-3
 libcacard0  1:2.8.0-3
+libcjson1  1.7.14-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250918T120331Z/pool/updates/main/c/cjson/libcjson1_1.7.14-1%2Bdeb11u3_amd64.deb
+libcjson-dev  1.7.14-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20250918T120331Z/pool/updates/main/c/cjson/libcjson-dev_1.7.14-1%2Bdeb11u3_amd64.deb
 libc-ares2  1.17.1-1+deb11u3  https://snapshot.debian.org/archive/debian-security/20230607T043432Z/pool/updates/main/c/c-ares/libc-ares2_1.17.1-1%2Bdeb11u3_amd64.deb
 libc-bin  2.31-13+deb11u13  https://snapshot.debian.org/archive/debian-security/20250527T120343Z/pool/updates/main/g/glibc/libc-bin_2.31-13%2Bdeb11u13_amd64.deb
 libcbor0  0.5.0+dfsg-2
