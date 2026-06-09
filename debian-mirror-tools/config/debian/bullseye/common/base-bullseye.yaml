@@ -306,6 +306,12 @@ iso-post-script: |
     # If we don't find the packages file we need to remove the placeholder
     sed -i "s,xxxPACKAGESxxx,,g" ${IMAGE_ROOTFS}/etc/software/*-metadata.xml
   fi
+  if [ -d "${IMAGE_ROOTFS}/usr/local/share/metapackages" ]; then
+    # collect metapackages names
+    METAPACKAGES=$(find ${IMAGE_ROOTFS}/usr/local/share/metapackages/ -name metadata.xml -exec grep -oP '(?<=<id>)[^<]+' {} + | tr ' ' '\n' | cut -d':' -f2 | sed 's,_[0-9.]*$,,; s,.*,<pkg>&<\/pkg>,')
+    # replace placeholder with actual metapackages
+    sed -i -e '/xxxMETAPACKAGESxxx/{r /dev/stdin' -e 'd}' ${IMAGE_ROOTFS}/etc/software/*-metadata.xml <<< "$METAPACKAGES"
+  fi
   # Add commit id and checksum from the ostree repo in the metadata
   COMMIT_OSTREE=$(ostree --repo=ostree_repo rev-parse starlingx)
   sed -i "s,xxxBASECOMMITxxx,$COMMIT_OSTREE,g" ${IMAGE_ROOTFS}/etc/software/*-metadata.xml
