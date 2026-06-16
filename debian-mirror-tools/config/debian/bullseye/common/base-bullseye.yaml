@@ -312,6 +312,11 @@ iso-post-script: |
     # replace placeholder with actual metapackages
     sed -i -e '/xxxMETAPACKAGESxxx/{r /dev/stdin' -e 'd}' ${IMAGE_ROOTFS}/etc/software/*-metadata.xml <<< "$METAPACKAGES"
   fi
+
+  # Create deployable branch
+  RELEASE_ID=$(grep -oP '(?<=<id>).*(?=</id>)' ${IMAGE_ROOTFS}/etc/software/*-metadata.xml)
+  ostree refs --repo=ostree_repo --create ${RELEASE_ID} "starlingx"
+  ostree summary --repo=ostree_repo -u
   # Add commit id and checksum from the ostree repo in the metadata
   COMMIT_OSTREE=$(ostree --repo=ostree_repo rev-parse starlingx)
   sed -i "s,xxxBASECOMMITxxx,$COMMIT_OSTREE,g" ${IMAGE_ROOTFS}/etc/software/*-metadata.xml
