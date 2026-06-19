@@ -693,7 +693,7 @@ libnet1  1.3+dfsg-2
 libnetfilter-conntrack3  1.1.0-1
 libnetfilter-cthelper0  1.0.1-4+b2
 libnetfilter-queue1  1.0.5-4+b1
-libnetsnmptrapd40t64  5.9.4+dfsg-2
+libnetsnmptrapd40t64  5.9.4+dfsg-2+deb13u1
 libnettle8t64  3.10.1-1
 libnettle8t64  3.10.1-1
 libnewt0.52  0.52.25-1
@@ -897,9 +897,9 @@ libsmartcols1  2.41-5
 libsmbclient0  2:4.22.3+dfsg-4
 libsnakeyaml-engine-java  2.7+ds-3
 libsnappy1v5  1.2.2-1
-libsnmp-base  5.9.4+dfsg-2
-libsnmp-dev  5.9.4+dfsg-2
-libsnmp40t64  5.9.4+dfsg-2
+libsnmp-base  5.9.4+dfsg-2+deb13u1
+libsnmp-dev  5.9.4+dfsg-2+deb13u1
+libsnmp40t64  5.9.4+dfsg-2+deb13u1
 libsodium23  1.0.18-1+b2
 libsolv1  0.7.32-1
 libsolvext1  0.7.32-1
@@ -1605,6 +1605,9 @@ sg3-utils  1.48-2
 sg3-utils-udev  1.48-2
 sgml-base  1.31+nmu1
 smartmontools  7.4-3
+snmp  5.9.4+dfsg-2+deb13u1
+snmpd  5.9.4+dfsg-2+deb13u1
+snmptrapd  5.9.4+dfsg-2+deb13u1
 socat  1.8.0.3-1
 spectre-meltdown-checker  0.46-1
 sphinx-common  8.1.3-5

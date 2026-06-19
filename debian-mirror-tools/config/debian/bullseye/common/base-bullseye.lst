@@ -1276,6 +1276,9 @@ sg3-utils  1.45-1
 sg3-utils-udev  1.45-1
 sgml-base  1.30
 smartmontools  7.2-1
+snmp  5.9+dfsg-4+deb11u3
+snmpd  5.9+dfsg-4+deb11u3
+snmptrapd  5.9+dfsg-4+deb11u3
 socat  1.7.4.1-3
 software-properties-common 0.96.20.2-2.1
 spectre-meltdown-checker  0.44-2
