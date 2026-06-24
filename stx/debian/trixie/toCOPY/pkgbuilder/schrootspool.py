@@ -153,7 +153,9 @@ class SchrootsPool(object):
         schroot_list = []
         for line in subprocess.run(['schroot', '--list'], stdout=subprocess.PIPE,
                                    universal_newlines=True).stdout.splitlines():
-            schroot_list.append(line.split(':')[1].strip())
+            parts = line.split(':')
+            if len(parts) >= 2:
+                schroot_list.append(parts[1].strip())
         return schroot_list
 
     def get_schroot_clone_list(self):

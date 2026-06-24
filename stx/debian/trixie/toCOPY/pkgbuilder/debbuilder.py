@@ -532,6 +532,44 @@ class Debbuilder(object):
 
         return rc
 
+    def _cleanup_orphaned_schroot_configs(self, user, project):
+        """Remove schroot configs whose chroot directory no longer exists.
+
+        Cleans both the active schroot config dir (/etc/schroot/chroot.d/)
+        and the persistent store (chroots/chroot.d/).
+        """
+        config_dirs = [
+            self.schroot_config_dir,
+            self.get_user_schroot_config_dir(user, project),
+        ]
+        for config_dir in config_dirs:
+            if not os.path.isdir(config_dir):
+                continue
+            for conf_name in os.listdir(config_dir):
+                conf_path = os.path.join(config_dir, conf_name)
+                if not os.path.isfile(conf_path):
+                    continue
+                if user not in conf_name:
+                    continue
+                # Read the directory from the config file
+                chroot_dir = None
+                try:
+                    with open(conf_path, 'r') as f:
+                        for line in f:
+                            if line.startswith('directory='):
+                                chroot_dir = line.strip().split('=', 1)[1]
+                                break
+                except OSError:
+                    continue
+                if chroot_dir and not os.path.exists(chroot_dir):
+                    self.logger.warning(
+                        'Removing orphaned schroot config %s '
+                        '(directory %s does not exist)', conf_path, chroot_dir)
+                    try:
+                        os.remove(conf_path)
+                    except OSError as e:
+                        self.logger.warning('Failed to remove %s: %s', conf_path, e)
+
     def delete_tmpfs_clones(self, user, project):
         rc = True
 
@@ -621,6 +659,9 @@ class Debbuilder(object):
             response['status'] = 'fail'
             response['msg'] = 'Failed to delete old chroot instances'
             return response
+
+        # Clean up orphaned schroot configs (configs pointing to non-existent dirs)
+        self._cleanup_orphaned_schroot_configs(user, project)
 
         # tmpfs calculations
         mem_per_instance_gb = 0
@@ -735,7 +776,8 @@ class Debbuilder(object):
                                         'does not exist'])
         else:
             try:
-                shutil.rmtree(self.schroot_config_dir)
+                if os.path.exists(self.schroot_config_dir):
+                    shutil.rmtree(self.schroot_config_dir)
                 shutil.copytree(user_schroot_config_dir, self.schroot_config_dir)
             except Exception as e:
                 self.logger.error(str(e))
@@ -745,8 +787,12 @@ class Debbuilder(object):
             else:
                 response['status'] = 'success'
                 response['msg'] = 'Load external chroot config ok'
+                self._cleanup_orphaned_schroot_configs(user, project)
 
-        self.chroots_pool.load()
+        try:
+            self.chroots_pool.load()
+        except Exception as e:
+            self.logger.error("chroots_pool.load() failed: %s", e)
         return response
 
     def save_chroot(self, request_form):
