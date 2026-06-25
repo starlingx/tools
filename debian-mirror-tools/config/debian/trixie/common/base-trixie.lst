@@ -3,57 +3,57 @@ acpi-support-base  0.143-5.2
 acpid  1:2.0.34-1+b1
 adduser  3.152
 alembic  1.13.2-4
-ansible  12.0.0~a6+dfsg-1
-ansible-core  2.19.0~beta6-1
+ansible  12.0.0+dfsg-0+deb13u1
+ansible-core  2.19.4-0+deb13u1
 ant  1.10.15-1
-apache2  2.4.65-2
-apache2-bin  2.4.65-2
-apache2-data  2.4.65-2
-apache2-utils  2.4.65-2
+apache2  2.4.67-1~deb13u2
+apache2-bin  2.4.67-1~deb13u2
+apache2-data  2.4.67-1~deb13u2
+apache2-utils  2.4.67-1~deb13u2
 apparmor  4.1.0-1
 apparmor-utils  4.1.0-1
 apt  3.0.3
 apt-utils  3.0.3
 auditd  1:4.0.2-2+b2
-augeas-lenses  1.14.1-1
-augeas-tools  1.14.1-1+b3
+augeas-lenses  1.14.1-1.1~deb13u1
+augeas-tools  1.14.1-1.1~deb13u1
 autoconf  2.72-3.1
 automake  1:1.17-4
 autopoint  0.23.1-2
 autotools-dev  20240727.1
 avahi-daemon  0.8-16
-base-files  13.8
+base-files  13.8+deb13u5
 base-passwd  3.6.7
-bash  5.2.37-2+b5
+bash  5.2.37-2+b9
 bash-completion  1:2.16.0-7
 bc  1.07.1-4
-bind9-dnsutils  1:9.20.11-4
-bind9-host  1:9.20.11-4
-bind9-libs  1:9.20.11-4
+bind9-dnsutils  1:9.20.21-1~deb13u1
+bind9-host  1:9.20.21-1~deb13u1
+bind9-libs  1:9.20.21-1~deb13u1
 binutils  2.44-3
 binutils-common  2.44-3
 binutils-x86-64-linux-gnu  2.44-3
 bison  2:3.8.2+dfsg-1+b2
 bsdextrautils  2.41-5
 bsdutils  1:2.41-5
-bubblewrap  0.11.0-2
-busybox  1:1.37.0-6+b3
+bubblewrap  0.11.0-2+deb13u1
+busybox  1:1.37.0-6+b8
 bzip2  1.0.8-6
 ca-certificates  20250419
 ca-certificates-java  20240118
 cdebconf  0.280
 cgroup-tools  3.1.0-2+b2
-charon-systemd  6.0.1-6
+charon-systemd  6.0.1-6+deb13u5
 cloud-guest-utils  0.33-1
 cloud-image-utils  0.33-1
-cloud-init  25.1.4-1
+cloud-init  25.1.4-1+deb13u1
 cloud-utils  0.33-1
 cluster-glue  1.0.12-24+b1
 collectd  5.12.0-26
 collectd-core  5.12.0-26
 conntrack  1:1.4.8-2
 conntrackd  1:1.4.8-2
-containerd  1.7.24~ds1-6+b4
+containerd  1.7.24~ds1-6+deb13u1
 coreutils  9.7-3
 cpio  2.15+dfsg-2
 cpp  4:14.2.0-1
@@ -63,7 +63,7 @@ cracklib-runtime  2.9.6-5.2+b1
 cron  3.0pl1-197
 cron-daemon-common  3.0pl1-197
 cryptsetup-bin  2:2.7.5-2
-curl  8.14.1-2
+curl  8.14.1-2+deb13u3
 dash  0.5.12-12
 dbconfig-common  2.0.25
 dbus  1.16.2-2
@@ -88,8 +88,8 @@ dh-autoreconf  20
 dh-golang  1.63
 dh-strip-nondeterminism  1.14.1-2
 diffutils  1:3.10-4
-dirmngr  2.4.7-21+b3
-distro-info-data  0.66
+dirmngr  2.4.7-21+deb13u1+b3
+distro-info-data  0.66+deb13u2
 dmeventd  2:1.02.205-2
 dmidecode  3.6-2
 dmsetup  2:1.02.205-2
@@ -97,67 +97,67 @@ dnf  4.23.0-1
 dnf-data  4.23.0-1
 docutils-common  0.21.2+dfsg-2
 dosfstools  4.2-1.2
-dpkg  1.22.21
-dpkg-dev  1.22.21
+dpkg  1.22.22
+dpkg-dev  1.22.22
 dracut-install  106-6
 dwz  0.15-1+b1
-e2fsprogs  1.47.2-3+b3
+e2fsprogs  1.47.2-3+b11
 eatmydata  131-2
 efibootmgr  18-2
 eject  2.41-5
 elfutils  0.192-4
-erlang-asn1  1:27.3.4.1+dfsg-1
-erlang-base  1:27.3.4.1+dfsg-1
-erlang-crypto  1:27.3.4.1+dfsg-1
-erlang-dev  1:27.3.4.1+dfsg-1
-erlang-diameter  1:27.3.4.1+dfsg-1
-erlang-edoc  1:27.3.4.1+dfsg-1
-erlang-eldap  1:27.3.4.1+dfsg-1
-erlang-eunit  1:27.3.4.1+dfsg-1
-erlang-ftp  1:27.3.4.1+dfsg-1
-erlang-inets  1:27.3.4.1+dfsg-1
-erlang-mnesia  1:27.3.4.1+dfsg-1
-erlang-odbc  1:27.3.4.1+dfsg-1
-erlang-os-mon  1:27.3.4.1+dfsg-1
-erlang-parsetools  1:27.3.4.1+dfsg-1
-erlang-public-key  1:27.3.4.1+dfsg-1
-erlang-runtime-tools  1:27.3.4.1+dfsg-1
-erlang-snmp  1:27.3.4.1+dfsg-1
-erlang-ssh  1:27.3.4.1+dfsg-1
-erlang-ssl  1:27.3.4.1+dfsg-1
-erlang-syntax-tools  1:27.3.4.1+dfsg-1
-erlang-tftp  1:27.3.4.1+dfsg-1
-erlang-tools  1:27.3.4.1+dfsg-1
-erlang-xmerl  1:27.3.4.1+dfsg-1
-ethtool  1:6.14.1-1
+erlang-asn1  1:27.3.4.1+dfsg-1+deb13u2
+erlang-base  1:27.3.4.1+dfsg-1+deb13u2
+erlang-crypto  1:27.3.4.1+dfsg-1+deb13u2
+erlang-dev  1:27.3.4.1+dfsg-1+deb13u2
+erlang-diameter  1:27.3.4.1+dfsg-1+deb13u2
+erlang-edoc  1:27.3.4.1+dfsg-1+deb13u2
+erlang-eldap  1:27.3.4.1+dfsg-1+deb13u2
+erlang-eunit  1:27.3.4.1+dfsg-1+deb13u2
+erlang-ftp  1:27.3.4.1+dfsg-1+deb13u2
+erlang-inets  1:27.3.4.1+dfsg-1+deb13u2
+erlang-mnesia  1:27.3.4.1+dfsg-1+deb13u2
+erlang-odbc  1:27.3.4.1+dfsg-1+deb13u2
+erlang-os-mon  1:27.3.4.1+dfsg-1+deb13u2
+erlang-parsetools  1:27.3.4.1+dfsg-1+deb13u2
+erlang-public-key  1:27.3.4.1+dfsg-1+deb13u2
+erlang-runtime-tools  1:27.3.4.1+dfsg-1+deb13u2
+erlang-snmp  1:27.3.4.1+dfsg-1+deb13u2
+erlang-ssh  1:27.3.4.1+dfsg-1+deb13u2
+erlang-ssl  1:27.3.4.1+dfsg-1+deb13u2
+erlang-syntax-tools  1:27.3.4.1+dfsg-1+deb13u2
+erlang-tftp  1:27.3.4.1+dfsg-1+deb13u2
+erlang-tools  1:27.3.4.1+dfsg-1+deb13u2
+erlang-xmerl  1:27.3.4.1+dfsg-1+deb13u2
+ethtool  1:6.14.2-1
 expect  5.45.4-4
 facter  4.10.0-1
 fdisk  2.41-5
 file  1:5.46-5
 findutils  4.10.0-3
-firmware-amd-graphics  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-amd-graphics_20250410-2_all.deb
-firmware-ath9k-htc  1.4.0-110-ge888634+dfsg1-0.1 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/o/open-ath9k-htc-firmware/firmware-ath9k-htc_1.4.0-110-ge888634+dfsg1-0.1_all.deb
-firmware-atheros  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-atheros_20250410-2_all.deb
-firmware-bnx2  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-bnx2_20250410-2_all.deb
-firmware-bnx2x  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-bnx2x_20250410-2_all.deb
-firmware-brcm80211  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-brcm80211_20250410-2_all.deb
-firmware-cavium  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-cavium_20250410-2_all.deb
-firmware-intel-misc  20260519-1~bpo13+1  https://snapshot.debian.org/archive/debian/20260613T082636Z/pool/non-free-firmware/f/firmware-nonfree/firmware-intel-misc_20260519-1~bpo13%2B1_all.deb
-firmware-intel-sound  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-intel-sound_20250410-2_all.deb
-firmware-iwlwifi  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-iwlwifi_20250410-2_all.deb
-firmware-libertas  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-libertas_20250410-2_all.deb
-firmware-linux  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-linux_20250410-2_all.deb
-firmware-linux-free  20241210-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/f/firmware-free/firmware-linux-free_20241210-2_all.deb
-firmware-linux-nonfree  20240210-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-linux-nonfree_20250410-2_all.deb
-firmware-misc-nonfree  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-misc-nonfree_20250410-2_all.deb
-firmware-myricom  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-myricom_20250410-2_all.deb
-firmware-netronome  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-netronome_20250410-2_all.deb
-firmware-netxen  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-netxen_20250410-2_all.deb
-firmware-qcom-soc  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-qcom-soc_20250410-2_all.deb
-firmware-qlogic  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-qlogic_20250410-2_all.deb
-firmware-realtek  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-realtek_20250410-2_all.deb
-firmware-samsung  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-samsung_20250410-2_all.deb
-firmware-siano  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-siano_20250410-2_all.deb
+firmware-amd-graphics  20250410-2
+firmware-ath9k-htc  1.4.0-110-ge888634+dfsg1-0.1
+firmware-atheros  20250410-2
+firmware-bnx2  20250410-2
+firmware-bnx2x  20250410-2
+firmware-brcm80211  20250410-2
+firmware-cavium  20250410-2
+firmware-intel-misc  20260519-1~bpo13+1
+firmware-intel-sound  20250410-2
+firmware-iwlwifi  20250410-2
+firmware-libertas  20250410-2
+firmware-linux  20250410-2
+firmware-linux-free  20241210-2
+firmware-linux-nonfree  20250410-2
+firmware-misc-nonfree  20250410-2
+firmware-myricom  20250410-2
+firmware-netronome  20250410-2
+firmware-netxen  20250410-2
+firmware-qcom-soc  20250410-2
+firmware-qlogic  20250410-2
+firmware-realtek  20250410-2
+firmware-samsung  20250410-2
+firmware-siano  20250410-2
 flake8  7.1.1-3
 flex  2.6.4-8.2+b4
 fontconfig  2.15.0-2.3
@@ -181,54 +181,54 @@ genisoimage  9:1.1.11-4
 gettext  0.23.1-2
 gettext-base  0.23.1-2
 gir1.2-girepository-2.0  1.84.0-1
-gir1.2-glib-2.0  2.84.3-1
-gir1.2-glib-2.0-dev 2.84.3-1
-gir1.2-packagekitglib-1.0  1.3.1-1
-girepository-tools 2.84.3-1
+gir1.2-glib-2.0  2.84.4-3~deb13u3
+gir1.2-glib-2.0-dev  2.84.4-3~deb13u3
+gir1.2-packagekitglib-1.0  1.3.1-1+deb13u1
+girepository-tools  2.84.4-3~deb13u3
 glib-networking  2.80.1-1
 glib-networking-common  2.80.1-1
 glib-networking-services  2.80.1-1
-gnupg  2.4.7-21
-gnupg-l10n  2.4.7-21
-gnupg-utils  2.4.7-21+b3
+gnupg  2.4.7-21+deb13u1
+gnupg-l10n  2.4.7-21+deb13u1
+gnupg-utils  2.4.7-21+deb13u1+b3
 golang-1.22  1.22.12-3~bpo12+1  https://snapshot.debian.org/archive/debian/20250630T203427Z/pool/main/g/golang-1.22/golang-1.22_1.22.12-3~bpo12%2B1_all.deb
 golang-1.22-doc  1.22.12-3~bpo12+1  https://snapshot.debian.org/archive/debian/20250630T203427Z/pool/main/g/golang-1.22/golang-1.22-doc_1.22.12-3~bpo12%2B1_all.deb
 golang-1.22-go  1.22.12-3~bpo12+1  https://snapshot.debian.org/archive/debian/20250630T203427Z/pool/main/g/golang-1.22/golang-1.22-go_1.22.12-3~bpo12%2B1_amd64.deb
 golang-1.22-src  1.22.12-3~bpo12+1  https://snapshot.debian.org/archive/debian/20250630T203427Z/pool/main/g/golang-1.22/golang-1.22-src_1.22.12-3~bpo12%2B1_all.deb
-golang-1.23 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23_1.23.6-4_all.deb
-golang-1.23-doc 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-doc_1.23.6-4_all.deb
-golang-1.23-go 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-go_1.23.6-4_amd64.deb
-golang-1.23-src 1.23.6-4 https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-src_1.23.6-4_all.deb
-golang-1.24 1.24.13-2 https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24_1.24.13-2_all.deb
-golang-1.24-doc 1.24.13-2 https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-doc_1.24.13-2_all.deb
-golang-1.24-go 1.24.13-2 https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-go_1.24.13-2_amd64.deb
-golang-1.24-src 1.24.13-2 https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-src_1.24.13-2_all.deb
-golang-1.25 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25_1.25.9-1_all.deb
-golang-1.25-doc 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-doc_1.25.9-1_all.deb
-golang-1.25-go 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-go_1.25.9-1_amd64.deb
-golang-1.25-src 1.25.9-1 https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-src_1.25.9-1_all.deb
-golang-1.26 1.26.2-1 https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26_1.26.2-1_all.deb
-golang-1.26-doc 1.26.2-1 https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-doc_1.26.2-1_all.deb
-golang-1.26-go 1.26.2-1 https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-go_1.26.2-1_amd64.deb
-golang-1.26-src 1.26.2-1 https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-src_1.26.2-1_all.deb
+golang-1.23  1.23.6-4  https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23_1.23.6-4_all.deb
+golang-1.23-doc  1.23.6-4  https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-doc_1.23.6-4_all.deb
+golang-1.23-go  1.23.6-4  https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-go_1.23.6-4_amd64.deb
+golang-1.23-src  1.23.6-4  https://snapshot.debian.org/archive/debian/20250308T220502Z/pool/main/g/golang-1.23/golang-1.23-src_1.23.6-4_all.deb
+golang-1.24  1.24.13-2  https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24_1.24.13-2_all.deb
+golang-1.24-doc  1.24.13-2  https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-doc_1.24.13-2_all.deb
+golang-1.24-go  1.24.13-2  https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-go_1.24.13-2_amd64.deb
+golang-1.24-src  1.24.13-2  https://snapshot.debian.org/archive/debian/20260210T022610Z/pool/main/g/golang-1.24/golang-1.24-src_1.24.13-2_all.deb
+golang-1.25  1.25.9-1  https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25_1.25.9-1_all.deb
+golang-1.25-doc  1.25.9-1  https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-doc_1.25.9-1_all.deb
+golang-1.25-go  1.25.9-1  https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-go_1.25.9-1_amd64.deb
+golang-1.25-src  1.25.9-1  https://snapshot.debian.org/archive/debian/20260515T082737Z/pool/main/g/golang-1.25/golang-1.25-src_1.25.9-1_all.deb
+golang-1.26  1.26.2-1  https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26_1.26.2-1_all.deb
+golang-1.26-doc  1.26.2-1  https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-doc_1.26.2-1_all.deb
+golang-1.26-go  1.26.2-1  https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-go_1.26.2-1_amd64.deb
+golang-1.26-src  1.26.2-1  https://snapshot.debian.org/archive/debian/20260408T144019Z/pool/main/g/golang-1.26/golang-1.26-src_1.26.2-1_all.deb
 golang-any  2:1.24~2
 golang-go  2:1.24~2
 golang-src  2:1.24~2
-gpg  2.4.7-21+b3
-gpg-agent  2.4.7-21+b3
-gpg-wks-client  2.4.7-21+b3
-gpg-wks-server  2.4.7-21+b3
-gpgconf  2.4.7-21+b3
-gpgsm  2.4.7-21+b3
-gpgv  2.4.7-21+b3
-gpsd  3.25-5
+gpg  2.4.7-21+deb13u1+b3
+gpg-agent  2.4.7-21+deb13u1+b3
+gpg-wks-client  2.4.7-21+deb13u1+b3
+gpg-wks-server  2.4.7-21+deb13u1+b3
+gpgconf  2.4.7-21+deb13u1+b3
+gpgsm  2.4.7-21+deb13u1+b3
+gpgv  2.4.7-21+deb13u1+b3
+gpsd  3.25-5+deb13u1
 grep  3.11-4
 groff-base  1.23.0-9
-grub-common  2.12-9
-grub-pc  2.12-9
-grub-pc-bin  2.12-9
-grub2  2.12-9
-grub2-common  2.12-9
+grub-common  2.12-9+deb13u2
+grub-pc  2.12-9+deb13u2
+grub-pc-bin  2.12-9+deb13u2
+grub2  2.12-9+deb13u2
+grub2-common  2.12-9+deb13u2
 gsettings-desktop-schemas  48.0-1
 gunicorn  23.0.0-1
 gzip  1.13-1
@@ -237,21 +237,20 @@ hiera  3.12.0-1
 hostname  3.25
 ieee-data  20240722
 ifenslave  2.14
-ipset  7.22-1+b1
-ifupdown  0.8.44
-init  1.68
-init-system-helpers  1.68
-initramfs-tools  0.148.3
-initramfs-tools-bin 0.148.3
-initramfs-tools-core  0.148.3
-init-system-helpers  1.68
+ifupdown  0.8.44+deb13u1
+init  1.69~deb13u1
+init-system-helpers  1.69~deb13u1
+initramfs-tools  0.148.4
+initramfs-tools-bin  0.148.4
+initramfs-tools-core  0.148.4
 inotify-tools  4.23.9.0-2+b1
 install-info  7.1.1-1+b1
 intltool-debian  0.35.0+20060710.6
 iotop  0.6-42-ga14256a-0.3+b1
-iperf3  3.18-2
+iperf3  3.18-2+deb13u2
 ipmitool  1.8.19-9
 iproute2  6.15.0-1
+ipset  7.22-1+b1
 iptables  1.8.11-2
 iptables-persistent  1.0.23
 iputils-arping  3:20240905-3
@@ -261,7 +260,7 @@ ipxe-qemu  1.21.1+git20250501.dad20602+dfsg-1
 isa-support  27
 isc-dhcp-client  4.4.3-P1-8
 isc-dhcp-common  4.4.3-P1-8
-iscsiuio  2.1.11-1
+iscsiuio  2.1.11-1+deb13u2
 iso-codes  4.18.0-1
 isomd5sum  1:1.2.3-5+b8
 java-common  0.76
@@ -278,21 +277,21 @@ libacl1  2.3.2-2+b1
 libactivation-java  1.2.0-2
 libaio-dev  0.3.113-8+b1
 libaio1t64  0.3.113-8+b1
-libapache2-mod-wsgi-py3  5.0.2-1
 libapache-pom-java  33-2
+libapache2-mod-wsgi-py3  5.0.2-1
 libapparmor-dev  4.1.0-1
 libapparmor1  4.1.0-1
-libappstream5 1.0.5-1
+libappstream5  1.0.5-1
 libapr1t64  1.7.5-1
 libaprutil1-dbd-sqlite3  1.6.3-3+b1
 libaprutil1-ldap  1.6.3-3+b1
 libaprutil1t64  1.6.3-3+b1
 libapt-pkg7.0  3.0.3
 libarchive-zip-perl  1.68-1
-libarchive13t64  3.7.4-4
+libarchive13t64  3.7.4-4+deb13u1
 libargon2-1  0~20190702+dfsg-4+b2
 libasan8  14.2.0-19
-libasm-java 9.8-1
+libasm-java  9.8-1
 libasm1t64  0.192-4
 libasound2-data  1.2.14-1
 libasound2-dev  1.2.14-1
@@ -302,11 +301,10 @@ libatinject-jsr330-api-java  1.0+ds1-6
 libatomic1  14.2.0-19
 libattr1  1:2.5.2-3
 libattr1-dev  1:2.5.2-3
-libaudit1  1:4.0.2-2+b2
 libaudit-common  1:4.0.2-2
 libaudit-dev  1:4.0.2-2+b2
 libaudit1  1:4.0.2-2+b2
-libaugeas0  1.14.1-1+b3
+libaugeas0  1.14.1-1.1~deb13u1
 libauparse0t64  1:4.0.2-2+b2
 libavahi-client-dev  0.8-16
 libavahi-client3  0.8-16
@@ -341,51 +339,50 @@ libboost-program-options1.83.0  1.83.0-4.2
 libboost-python1.83.0  1.83.0-4.2
 libboost-regex1.83.0  1.83.0-4.2
 libboost-thread1.83.0  1.83.0-4.2
-libbpf1  1:1.5.0-3 https://snapshot.debian.org/archive/debian/20250426T024229Z/pool/main/libb/libbpf/libbpf1_1.5.0-3_amd64.deb
-libbrlapi0.8  6.7-3.1
+libbpf1  1:1.5.0-3
+libbrlapi0.8  6.7-3.1+deb13u3
 libbrotli1  1.1.0-2+b7
 libbsd0  0.12.2-2
-libbson-1.0-0t64  1.30.4-1
+libbson-1.0-0t64  1.30.4-1+deb13u2
 libbz2-1.0  1.0.8-6
-libc-ares2  1.34.5-1
-libc-bin  2.41-12
-libc-dev-bin  2.41-12
-libc-l10n  2.41-12
+libc-ares2  1.34.5-1+deb13u1
+libc-bin  2.41-12+deb13u3
+libc-dev-bin  2.41-12+deb13u3
+libc-l10n  2.41-12+deb13u3
 libc3p0-java  0.9.1.2-10.1
-libc6  2.41-12
-libc6-dev  2.41-12
+libc6  2.41-12+deb13u3
+libc6-dev  2.41-12+deb13u3
 libc6.1-dev-alpha-cross  2.41-11cross1
 libcacard-dev  1:2.8.0-3+b2
 libcacard0  1:2.8.0-3+b2
-libcjson1  1.7.18-3.1+deb13u1  https://snapshot.debian.org/archive/debian-security/20250914T181939Z/pool/updates/main/c/cjson/libcjson1_1.7.18-3.1%2Bdeb13u1_amd64.deb
-libcjson-dev  1.7.18-3.1+deb13u1  https://snapshot.debian.org/archive/debian-security/20250914T181939Z/pool/updates/main/c/cjson/libcjson-dev_1.7.18-3.1%2Bdeb13u1_amd64.deb
 libcairo2  1.18.4-1+b1
 libcap-ng-dev  0.8.5-4+b1
 libcap-ng0  0.8.5-4+b1
-libcap2  1:2.75-10+b1
-libcap2-bin  1:2.75-10+b1
-libcapstone-dev  5.0.6-1
-libcapstone5  5.0.6-1
-libcares2  1.34.5-1
+libcap2  1:2.75-10+deb13u1+b1
+libcap2-bin  1:2.75-10+deb13u1+b1
+libcapstone-dev  5.0.7-1~deb13u1
+libcapstone5  5.0.7-1~deb13u1
+libcares2  1.34.5-1+deb13u1
 libcbor0.10  0.10.2-2
 libcc1-0  14.2.0-19
 libcgroup3  3.1.0-2+b2
-libcharon-extra-plugins 6.0.1-6
+libcharon-extra-plugins  6.0.1-6+deb13u5
 libcheshire-clojure  5.11.0-4
-libc-l10n  2.41-12
+libcjson-dev  1.7.18-3.1+deb13u1
+libcjson1  1.7.18-3.1+deb13u1
 libclj-digest-clojure  1.4.9+dfsg-1
 libclj-time-clojure  0.15.2-2
 libclojure-java  1.12.0-1
 libclout-clojure  2.1.2-2
 libcollection4t64  0.6.2-3
-libcom-err2  1.47.2-3+b3
+libcom-err2  1.47.2-3+b11
 libcomidi-clojure  0.3.2-2
 libcommons-codec-java  1.18.0-1
 libcommons-compress-java  1.27.1-2
 libcommons-exec-java  1.3-3
 libcommons-fileupload-java  1.5-1.1
 libcommons-io-java  2.19.0-1
-libcommons-lang-java  2.6-10
+libcommons-lang-java  2.6-10+deb13u1
 libcommons-logging-java  1.3.0-2
 libcommons-parent-java  56-1
 libcompojure-clojure  1.6.0-2
@@ -404,11 +401,11 @@ libcrypto-random-clojure  1.2.1-1
 libcryptsetup12  2:2.7.5-2
 libctf-nobfd0  2.44-3
 libctf0  2.44-3
-libcups2t64  2.4.10-3
-libcurl3t64-gnutls  8.14.1-2
-libcurl4-gnutls-dev  8.14.1-2
-libcurl4-openssl-dev  8.14.1-2
-libcurl4t64  8.14.1-2
+libcups2t64  2.4.10-3+deb13u2
+libcurl3t64-gnutls  8.14.1-2+deb13u3
+libcurl4-gnutls-dev  8.14.1-2+deb13u3
+libcurl4-openssl-dev  8.14.1-2+deb13u3
+libcurl4t64  8.14.1-2+deb13u3
 libdaemon0  0.14-7.1+b3
 libdata-csv-clojure  1.0.0-1
 libdata-json-clojure  2.4.0-2
@@ -432,7 +429,7 @@ libdirgra-java  0.4-2
 libdnf2-common  0.74.0-1
 libdnf2t64  0.74.0-1
 libdouble-conversion3  3.3.1-1
-libdpkg-perl  1.22.21
+libdpkg-perl  1.22.22
 libdrm-amdgpu1  2.4.124-2
 libdrm-common  2.4.124-2
 libdrm-dev  2.4.124-2
@@ -462,9 +459,10 @@ libevent-core-2.1-7t64  2.1.12-stable-10+b1
 libexecs1  1.4-2+b2
 libexpat1  2.7.1-2
 libexpat1-dev  2.7.1-2
-libext2fs2t64  1.47.2-3+b3
-libfam-dev 2.7.0-17.3 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/f/fam/libfam-dev_2.7.0-17.3_amd64.deb
-libfam0  2.7.0-17.3 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/f/fam/libfam0_2.7.0-17.3_amd64.deb
+libext2fs2t64  1.47.2-3+b11
+#libfam-dev and libfam0 are needed to compile lighttpd 1.4.55-1~bpo10+1
+libfam-dev  2.7.0-17.3  https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/f/fam/libfam-dev_2.7.0-17.3_amd64.deb
+libfam0  2.7.0-17.3  https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/f/fam/libfam0_2.7.0-17.3_amd64.deb
 libfastjson4  1.2304.0-2
 libfdisk1  2.41-5
 libfdt-dev  1.7.2-2+b1
@@ -476,8 +474,8 @@ libfixposix4t64  1:0.5.1-1+nmu1.1+b1
 libfmt10  10.1.1+ds1-4
 libfontconfig1  2.15.0-2.3
 libfreeipmi17  1.6.15-1
-libfreetype-dev  2.13.3+dfsg-1
-libfreetype6  2.13.3+dfsg-1
+libfreetype-dev  2.13.3+dfsg-1+deb13u1
+libfreetype6  2.13.3+dfsg-1+deb13u1
 libfribidi-dev  1.0.16-1
 libfribidi0  1.0.16-1
 libfstrm0  0.6.1-1+b3
@@ -499,36 +497,36 @@ libgfapi0  11.1-6
 libgfortran5  14.2.0-19
 libgfrpc0  11.1-6
 libgfxdr0  11.1-6
-libgio-2.0-dev 2.84.3-1
-libgio-2.0-dev-bin 2.84.3-1
+libgio-2.0-dev  2.84.4-3~deb13u3
+libgio-2.0-dev-bin  2.84.4-3~deb13u3
 libgirepository-1.0-1  1.84.0-1
-libgirepository-2.0-0  2.84.3-1
-libglib2.0-0t64  2.84.3-1
-libglib2.0-bin  2.84.3-1
-libglib2.0-data 2.84.3-1
-libglib2.0-dev  2.84.3-1
-libglib2.0-dev-bin  2.84.3-1
+libgirepository-2.0-0  2.84.4-3~deb13u3
+libglib2.0-0t64  2.84.4-3~deb13u3
+libglib2.0-bin  2.84.4-3~deb13u3
+libglib2.0-data  2.84.4-3~deb13u3
+libglib2.0-dev  2.84.4-3~deb13u3
+libglib2.0-dev-bin  2.84.4-3~deb13u3
 libglusterfs-dev  11.1-6
 libglusterfs0  11.1-6
 libgmp10  2:6.3.0+dfsg-3
-libgnutls-dane0t64  3.8.9-3
-libgnutls-openssl27t64  3.8.9-3
-libgnutls28-dev  3.8.9-3
-libgnutls30t64  3.8.9-3
+libgnutls-dane0t64  3.8.9-3+deb13u3
+libgnutls-openssl27t64  3.8.9-3+deb13u3
+libgnutls28-dev  3.8.9-3+deb13u3
+libgnutls30t64  3.8.9-3+deb13u3
 libgomp1  14.2.0-19
 libgoogle-perftools4t64  2.16-1
 libgpg-error0  1.51-4
 libgpgme11t64  1.24.2-3
 libgpm2  1.20.7-11+b2
 libgprofng0  2.44-3
-libgps30t64  3.25-5
+libgps30t64  3.25-5+deb13u1
 libgraphite2-3  1.3.14-2+b1
 libgssapi-krb5-2  1.21.3-5
 libgssrpc4t64  1.21.3-5
-libgstreamer-plugins-base1.0-0  1.26.2-1
+libgstreamer-plugins-base1.0-0  1.26.2-1+deb13u1
 libgstreamer1.0-0  1.26.2-2
 libgtk-3-dev  3.24.49-3
-libharfbuzz0b  10.2.0-1+b1
+libharfbuzz0b  10.2.0-1+deb13u1
 libhawtjni-runtime-java  1.18-1
 libheadius-options-java  1.7-1
 libhiccup-clojure  1.0.5-2
@@ -538,15 +536,13 @@ libhttpasyncclient-java  4.1.5-1
 libhttpclient-java  4.5.14-1
 libhttpcore-java  4.4.16-1
 libhwasan0  14.2.0-19
-libibus-1.0-dev 1.5.32-2
-libibverbs1  56.1-1
+libibus-1.0-dev  1.5.32-2
 libibverbs1  56.1-1
 libice6  2:1.1.1-1
 libicu76  76.1-4
 libidn2-0  2.3.8-2
-libidn2-0  2.3.8-2
-libini4j-java  0.5.4-1
 libini-config5t64  0.6.2-3
+libini4j-java  0.5.4-1
 libinih1  59-1
 libinotifytools0  4.23.9.0-2+b1
 libinstaparse-clojure  1.4.7-2
@@ -556,7 +552,7 @@ libip4tc2  1.8.11-2
 libip6tc2  1.8.11-2
 libipa-hbac0t64  2.10.1-2+b1
 libipc-run-perl  20231003.0-2
-libiperf0  3.18-2
+libiperf0  3.18-2+deb13u2
 libipsec-mb2  2.0-1+b1
 libipset13t64  7.22-1+b1
 libisal2  2.31.1-1.1
@@ -570,16 +566,16 @@ libjackson2-core-java  2.14.1-1
 libjackson2-dataformat-cbor  2.7.8-5.1
 libjackson2-dataformat-smile  2.7.8-5
 libjanino-java  3.1.12+dfsg-1
-libjansi1-java  1.18-3.1
 libjansi-native-java  1.8-2
+libjansi1-java  1.18-3.1
 libjansson4  2.14-2+b3
 libjava-classpath-clojure  1.0.0-1
 libjava-jmx-clojure  0.3.4-2
 libjaxb-api-java  2.3.1-1
 libjcodings-java  1.0.58-1
 libjemalloc2  5.3.0-3
-libjetty9-extra-java  9.4.57-1
-libjetty9-java  9.4.57-1
+libjetty9-extra-java  9.4.57-1.1~deb13u1
+libjetty9-java  9.4.57-1.1~deb13u1
 libjffi-java  1.3.13+ds-1
 libjffi-jni  1.3.13+ds-1+b1
 libjitescript-java  0.4.3-1
@@ -593,7 +589,6 @@ libjnr-unixsocket-java  0.38.21-3
 libjnr-x86asm-java  1.0.2-6
 libjoda-time-java  2.10.14-1
 libjolokia-core-java  1.7.1+dfsg-3
-libjpeg62-turbo  1:2.1.5-4
 libjpeg-dev  1:2.1.5-4
 libjpeg62-turbo  1:2.1.5-4
 libjruby-joni-java  2.2.1-1
@@ -645,9 +640,9 @@ liblapack3  3.12.1-6
 liblastlog2-2  2.41-5
 liblazymap-clojure  3.1.1-3
 liblbfgsb0  3.0+dfsg.4-1+b2
-liblcms2-2  2.16-2
+liblcms2-2  2.16-2+deb13u2
 libldap2  2.6.10+dfsg-1
-libldb2  2:2.11.0+samba4.22.3+dfsg-4
+libldb2  2:2.11.0+samba4.22.8+dfsg-0+deb13u1
 libleatherman1.12.1t64  1.12.1+dfsg-1.3+b3
 libleveldb1d  1.23-5+b2
 libliberator-clojure  0.15.3-1
@@ -670,16 +665,16 @@ liblzma5  5.8.1-1
 libmagic-mgc  1:5.46-5
 libmagic1t64  1:5.46-5
 libmail-java  1.6.5-3
-libmariadb-dev  1:11.8.2-1
-libmariadb-dev-compat  1:11.8.2-1
-libmariadb3  1:11.8.2-1
+libmariadb-dev  1:11.8.6-0+deb13u1
+libmariadb-dev-compat  1:11.8.6-0+deb13u1
+libmariadb3  1:11.8.6-0+deb13u1
 libmaxminddb0  1.12.2-1
 libmd0  1.1.0-2+b1
 libmedley-clojure  1.0.0-2
-libmm-glib0  1.24.0-1
+libmm-glib0  1.24.0-1+deb13u1
 libmnl0  1.0.5-3
 libmodulemd2  2.15.0-1
-libmongoc-1.0-0t64  1.30.4-1
+libmongoc-1.0-0t64  1.30.4-1+deb13u2
 libmongocrypt0  1.13.2-1
 libmount1  2.41-5
 libmpc3  1.3.1-1+b3
@@ -694,8 +689,7 @@ libnet1  1.3+dfsg-2
 libnetfilter-conntrack3  1.1.0-1
 libnetfilter-cthelper0  1.0.1-4+b2
 libnetfilter-queue1  1.0.5-4+b1
-libnetsnmptrapd40t64  5.9.4+dfsg-2+deb13u1 https://snapshot.debian.org/archive/debian-security/20260601T000000Z/pool/updates/main/n/net-snmp/libnetsnmptrapd40t64_5.9.4%2Bdfsg-2%2Bdeb13u1_amd64.deb
-libnettle8t64  3.10.1-1
+libnetsnmptrapd40t64  5.9.4+dfsg-2+deb13u1
 libnettle8t64  3.10.1-1
 libnewt0.52  0.52.25-1
 libnfnetlink0  1.0.2-3
@@ -706,8 +700,8 @@ libnftables1  1.1.3-1
 libnftnl11  1.2.9-1
 libnghttp2-14  1.64.0-1.1
 libnghttp3-9  1.8.0-1
-libngtcp2-16  1.11.0-1
-libngtcp2-crypto-gnutls8  1.11.0-1
+libngtcp2-16  1.11.0-1+deb13u1
+libngtcp2-crypto-gnutls8  1.11.0-1+deb13u1
 libnl-3-200  3.7.0-2
 libnl-3-dev  3.7.0-2
 libnl-cli-3-200  3.7.0-2
@@ -724,9 +718,9 @@ libnspr4  2:4.36-1
 libnss-cache  0.22-1
 libnss-mdns  0.15.1-4+b1
 libnss-sss  2.10.1-2+b1
-libnss-sudo  1.9.16p2-3
-libnss3  2:3.110-1
-libnss3-dev  2:3.110-1
+libnss-sudo  1.9.16p2-3+deb13u2
+libnss3  2:3.110-1+deb13u1
+libnss3-dev  2:3.110-1+deb13u1
 libnuma-dev  2.0.19-1
 libnuma1  2.0.19-1
 libnvme1t64  1.13-2
@@ -736,21 +730,21 @@ libopencsd1  1.5.5-1
 libopendbx1t64  1.4.6-18
 libopenhpi3  3.8.0-2.3
 libopenipmi0t64  2.0.37-1
-libopeniscsiusr  2.1.11-1
-libopentracing1  1.6.0-4+b2
+libopeniscsiusr  2.1.11-1+deb13u2
 libopentracing-c-wrapper0t64  1.1.3-3.1+b1
+libopentracing1  1.6.0-4+b2
 libopts25  1:5.18.16-7
 libopus0  1.5.2-2
 liborc-0.4-0t64  1:0.4.41-1
 libordered-clojure  1.15.12-1
 libp11-kit0  0.25.5-3
-libpackagekit-glib2-18  1.3.1-1
+libpackagekit-glib2-18  1.3.1-1+deb13u1
 libpam-modules  1.7.0-5
 libpam-modules-bin  1.7.0-5
 libpam-pwquality  1.4.5-5
 libpam-runtime  1.7.0-5
 libpam-sss  2.10.1-2+b1
-libpam-systemd  257.7-1
+libpam-systemd  257.13-1~deb13u1
 libpam0g  1.7.0-5
 libpango-1.0-0  1.56.3-1
 libpangocairo-1.0-0  1.56.3-1
@@ -760,19 +754,19 @@ libpath-utils1t64  0.6.2-3
 libpcap0.8-dev  1.10.5-2
 libpcap0.8t64  1.10.5-2
 libpci3  1:3.13.0-2
-libpciaccess0  0.17-3+b3
 libpciaccess-dev  0.17-3+b3
 libpciaccess0  0.17-3+b3
-libpcre16-3 2:8.39-13 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcre16-3_8.39-13_amd64.deb
-libpcre2-8-0  10.45-1
-libpcre2-16-0 10.45-1
-libpcre2-32-0 10.45-1
-libpcre2-dev 10.45-1
-libpcre2-posix3 10.45-1
-libpcre3  2:8.39-13 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcre3_8.39-13_amd64.deb
-libpcre32-3 2:8.39-13 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcre32-3_8.39-13_amd64.deb
-libpcre3-dev 2:8.39-13 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcre3-dev_8.39-13_amd64.deb
-libpcrecpp0v5 2:8.39-13 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcrecpp0v5_8.39-13_amd64.deb
+#libpcre16-3 is needed to compile lighttpd 1.4.55-1~bpo10+1
+libpcre16-3  2:8.39-13  https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcre16-3_8.39-13_amd64.deb
+libpcre2-16-0  10.46-1~deb13u1
+libpcre2-32-0  10.46-1~deb13u1
+libpcre2-8-0  10.46-1~deb13u1
+libpcre2-dev  10.46-1~deb13u1
+libpcre2-posix3  10.46-1~deb13u1
+libpcre3  2:8.39-13  https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcre3_8.39-13_amd64.deb
+libpcre3-dev  2:8.39-13  https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcre3-dev_8.39-13_amd64.deb
+libpcre32-3  2:8.39-13  https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcre32-3_8.39-13_amd64.deb
+libpcrecpp0v5  2:8.39-13  https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/p/pcre3/libpcrecpp0v5_8.39-13_amd64.deb
 libpcsclite1  2.3.3-1
 libperl5.40  5.40.1-6
 libpgm-5.3-0t64  5.3.128~dfsg-2.1+b1
@@ -782,23 +776,21 @@ libpixman-1-0  0.44.0-3
 libpixman-1-dev  0.44.0-3
 libplumb2t64  1.0.12-24+b1
 libplumbgpl2t64  1.0.12-24+b1
-libpmem1  1.13.1-1.1+b1
 libpmem-dev  1.13.1-1.1+b1
 libpmem1  1.13.1-1.1+b1
-libpng-dev  1.6.48-1
-libpng16-16t64  1.6.48-1
+libpng-dev  1.6.48-1+deb13u5
+libpng16-16t64  1.6.48-1+deb13u5
 libpolkit-agent-1-0  126-2
 libpolkit-gobject-1-0  126-2
 libpolkit-gobject-1-dev  126-2
 libpopt0  1.19+dfsg-2
-libpq-dev  17.5-1
-libpq5  17.5-1
+libpq-dev  17.9-0+deb13u1
+libpq5  17.9-0+deb13u1
 libprismatic-plumbing-clojure  0.6.0-4
 libprismatic-schema-clojure  1.2.0-6
 libproc2-0  2:4.0.4-9
 libprotobuf-c1  1.5.1-1
 libproxy1v5  0.5.9-1
-libpsl5t64  0.21.2-1.1+b1
 libpsl5t64  0.21.2-1.1+b1
 libpuppetlabs-http-client-clojure  2.1.1-2
 libpuppetlabs-i18n-clojure  0.9.2-2
@@ -807,24 +799,22 @@ libpwquality-common  1.4.5-5
 libpwquality1  1.4.5-5
 libpython3-dev  3.13.5-1
 libpython3-stdlib  3.13.5-1
-libpython3.13  3.13.5-2
-libpython3.13-dev  3.13.5-2
-libpython3.13-minimal  3.13.5-2
-libpython3.13-stdlib  3.13.5-2
-libpython3-dev  3.13.5-1
-libpython3-stdlib  3.13.5-1
-libqb100 2.0.8-2+b1
+libpython3.13  3.13.5-2+deb13u2
+libpython3.13-dev  3.13.5-2+deb13u2
+libpython3.13-minimal  3.13.5-2+deb13u2
+libpython3.13-stdlib  3.13.5-2+deb13u2
+libqb100  2.0.8-2+b1
 libquadmath0  14.2.0-19
 libquartz2-java  2.3.2-4
 librabbitmq4  0.15.0-1
-libraynes-fs-clojure 1.5.2-1
-librbac-client-clojure 1.1.5-3
+libraynes-fs-clojure  1.5.2-1
+librbac-client-clojure  1.1.5-3
 librdkafka1  2.8.0-1
 librdmacm1t64  56.1-1
 libreadline-dev  8.2-6
 libreadline8t64  8.2-6
 libref-array1t64  0.6.2-3
-librepo0  1.19.0-1+b1
+librepo0  1.20.0-1~deb13u1
 libring-anti-forgery-clojure  1.1.0-2
 libring-codec-clojure  1.2.0-1
 libring-core-clojure  1.8.2-3
@@ -834,28 +824,28 @@ libring-json-clojure  0.4.0-2
 libring-mock-clojure  0.4.0-2
 libring-servlet-clojure  1.8.2-3
 libring-ssl-clojure  0.3.0-2
+librpm-sequoia-1  1.8.0-2
 librpm10  4.20.1+dfsg-3
 librpmbuild10  4.20.1+dfsg-3
 librpmio10  4.20.1+dfsg-3
 librpmsign10  4.20.1+dfsg-3
-librpm-sequoia-1  1.8.0-2
 librrd8t64  1.7.2-4.2+b5
-librte-cryptodev25  24.11.2-2
-librte-dmadev25  24.11.2-2
-librte-eal25  24.11.2-2
-librte-ethdev25  24.11.2-2
-librte-hash25  24.11.2-2
-librte-kvargs25  24.11.2-2
-librte-log25  24.11.2-2
-librte-mbuf25  24.11.2-2
-librte-mempool25  24.11.2-2
-librte-meter25  24.11.2-2
-librte-net25  24.11.2-2
-librte-pci25  24.11.2-2
-librte-rcu25  24.11.2-2
-librte-ring25  24.11.2-2
-librte-telemetry25  24.11.2-2
-librte-vhost25  24.11.2-2
+librte-cryptodev25  24.11.4-0+deb13u1
+librte-dmadev25  24.11.4-0+deb13u1
+librte-eal25  24.11.4-0+deb13u1
+librte-ethdev25  24.11.4-0+deb13u1
+librte-hash25  24.11.4-0+deb13u1
+librte-kvargs25  24.11.4-0+deb13u1
+librte-log25  24.11.4-0+deb13u1
+librte-mbuf25  24.11.4-0+deb13u1
+librte-mempool25  24.11.4-0+deb13u1
+librte-meter25  24.11.4-0+deb13u1
+librte-net25  24.11.4-0+deb13u1
+librte-pci25  24.11.4-0+deb13u1
+librte-rcu25  24.11.4-0+deb13u1
+librte-ring25  24.11.4-0+deb13u1
+librte-telemetry25  24.11.4-0+deb13u1
+librte-vhost25  24.11.4-0+deb13u1
 librtmp1  2.4+20151223.gitfa8646d.1-2+b5
 libruby  1:3.3+b1
 libruby3.3  3.3.8-2
@@ -866,20 +856,18 @@ libsasl2-dev  2.1.28+dfsg1-9
 libsasl2-modules-db  2.1.28+dfsg1-9
 libsass1  3.6.5+20231221-3+b1
 libsctp1  1.0.21+dfsg-1
-libsdl2-dev 2.32.4+dfsg-1
-libsdl2-compat-dev 2.32.54+ds-1
-libsdl3-dev 3.2.10+ds-1
+libsdl2-compat-dev  2.32.54+ds-1
+libsdl2-dev  2.32.4+dfsg-1
+libsdl3-dev  3.2.10+ds-1
 libseccomp-dev  2.6.0-2
 libseccomp2  2.6.0-2
 libsecret-1-0  0.21.7-1
 libsecret-common  0.21.7-1
 libselinux1  3.8.1-1
 libselinux1-dev  3.8.1-1
-libsemanage2  3.8.1-1
 libsemanage-common  3.8.1-1
 libsemanage2  3.8.1-1
 libsemver-clojure  0.3.0-2
-libsensors5  1:3.6.2-2
 libsensors-config  1:3.6.2-2
 libsensors5  1:3.6.2-2
 libsepol2  3.8.1-1
@@ -895,58 +883,57 @@ libslirp-dev  4.8.0-1+b1
 libslirp0  4.8.0-1+b1
 libsm6  2:1.2.6-1
 libsmartcols1  2.41-5
-libsmbclient0  2:4.22.3+dfsg-4
+libsmbclient0  2:4.22.8+dfsg-0+deb13u1
 libsnakeyaml-engine-java  2.7+ds-3
 libsnappy1v5  1.2.2-1
-libsnmp-base  5.9.4+dfsg-2+deb13u1 https://snapshot.debian.org/archive/debian-security/20260601T000000Z/pool/updates/main/n/net-snmp/libsnmp-base_5.9.4%2Bdfsg-2%2Bdeb13u1_all.deb
-libsnmp-dev  5.9.4+dfsg-2+deb13u1 https://snapshot.debian.org/archive/debian-security/20260601T000000Z/pool/updates/main/n/net-snmp/libsnmp-dev_5.9.4%2Bdfsg-2%2Bdeb13u1_amd64.deb
-libsnmp40t64  5.9.4+dfsg-2+deb13u1 https://snapshot.debian.org/archive/debian-security/20260601T000000Z/pool/updates/main/n/net-snmp/libsnmp40t64_5.9.4%2Bdfsg-2%2Bdeb13u1_amd64.deb
-libsodium23  1.0.18-1+b2
+libsnmp-base  5.9.4+dfsg-2+deb13u1
+libsnmp-dev  5.9.4+dfsg-2+deb13u1
+libsnmp40t64  5.9.4+dfsg-2+deb13u1
+libsodium23  1.0.18-1+deb13u1
 libsolv1  0.7.32-1
 libsolvext1  0.7.32-1
 libsoup-2.4-1  2.74.3-10.1
 libsoup2.4-common  2.74.3-10.1
 libspec-alpha-clojure  0.5.238-1
-libspice-server1  0.15.2-1+b1
 libspice-server-dev  0.15.2-1+b1
 libspice-server1  0.15.2-1+b1
 libspring-beans-java  4.3.30-3
 libspring-core-java  4.3.30-3
-libsqlite3-0  3.46.1-7
-libss2  1.47.2-3+b3
-libssh-4  0.11.2-1
-libssh-dev  0.11.2-1
+libsqlite3-0  3.46.1-7+deb13u1
+libss2  1.47.2-3+b11
+libssh-4  0.11.2-1+deb13u1
+libssh-dev  0.11.2-1+deb13u1
 libssh2-1-dev  1.11.1-1
 libssh2-1t64  1.11.1-1
-libssl-dev  3.5.1-1
+libssl-dev  3.5.6-1~deb13u1
 libssl-utils-clojure  3.5.3-2
-libssl1.1  1.1.1w-0+deb11u1  https://deb.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1w-0%2Bdeb11u1_amd64.deb
-libssl3t64  3.5.1-1
-libssl3t64  3.5.1-1
+#libssl1.1 is a needed dependency of meta-base
+libssl1.1  1.1.1w-0+deb11u8  https://snapshot.debian.org/archive/debian-security/20260615T025018Z/pool/updates/main/o/openssl/libssl1.1_1.1.1w-0%2Bdeb11u8_amd64.deb
+libssl3t64  3.5.6-1~deb13u1
 libsss-certmap0  2.10.1-2+b1
 libsss-idmap0  2.10.1-2+b1
 libsss-nss-idmap0  2.10.1-2+b1
 libsss-sudo  2.10.1-2+b1
 libstdc++6  14.2.0-19
-libstemmer0d 2.2.0-4+b2
+libstemmer0d  2.2.0-4+b2
 libstonith1t64  1.0.12-24+b1
-libstrongswan  6.0.1-6
-libstrongswan-extra-plugins 6.0.1-6
-libstrongswan-standard-plugins 6.0.1-6
+libstrongswan  6.0.1-6+deb13u5
+libstrongswan-extra-plugins  6.0.1-6+deb13u5
+libstrongswan-standard-plugins  6.0.1-6+deb13u5
 libsub-override-perl  0.12-1
-libsystemd-shared  257.7-1
-libsystemd0  257.7-1
+libsystemd-shared  257.13-1~deb13u1
+libsystemd0  257.13-1~deb13u1
 libtaglibs-standard-impl-java  1.2.5-3
 libtaglibs-standard-spec-java  1.2.5-3
-libtalloc2  2:2.4.3+samba4.22.3+dfsg-4
+libtalloc2  2:2.4.3+samba4.22.8+dfsg-0+deb13u1
 libtasn1-6  4.20.0-2
 libtcl8.6  8.6.16+dfsg-1
 libtcmalloc-minimal4t64  2.16-1
-libtdb1  2:1.4.13+samba4.22.3+dfsg-4
+libtdb1  2:1.4.13+samba4.22.8+dfsg-0+deb13u1
 libteam-utils  1.31-1+b2
 libteam5  1.31-1+b2
 libteamdctl0  1.31-1+b2
-libtevent0t64  2:0.16.2+samba4.22.3+dfsg-4
+libtevent0t64  2:0.16.2+samba4.22.8+dfsg-0+deb13u1
 libtext-charwidth-perl  0.04-11+b4
 libtext-iconv-perl  1.7-8+b4
 libtext-wrapi18n-perl  0.06-10
@@ -956,7 +943,6 @@ libthai0  0.1.29-2+b1
 libtigris-clojure  0.1.2-2
 libtimedate-perl  2.3300-2
 libtinfo6  6.5+20250216-2
-libtirpc3t64  1.3.6+ds-1
 libtirpc-common  1.3.6+ds-1
 libtirpc-dev  1.3.6+ds-1
 libtirpc3t64  1.3.6+ds-1
@@ -978,15 +964,15 @@ libtrapperkeeper-scheduler-clojure  1.1.3-7
 libtrapperkeeper-status-clojure  1.1.1-5
 libtrapperkeeper-webserver-jetty9-clojure  4.5.2-2
 libtsan2  14.2.0-19
-libtss2-mu-4.0.1-0t64 4.1.3-1.2
-libtss2-sys1t64 4.1.3-1.2
+libtss2-mu-4.0.1-0t64  4.1.3-1.2
+libtss2-sys1t64  4.1.3-1.2
 libtypesafe-config-clojure  0.1.5-2
 libtypesafe-config-java  1.3.1-2.1
 libubsan1  14.2.0-19
 libuchardet0  0.0.8-1+b2
-libudev1  257.7-1
-libunbound-dev  1.22.0-2
-libunbound8  1.22.0-2
+libudev1  257.13-1~deb13u1
+libunbound-dev  1.22.0-2+deb13u2
+libunbound8  1.22.0-2+deb13u2
 libunistring5  1.3-2
 libunwind8  1.8.1-0.1
 liburcu8t64  0.15.2-2
@@ -1010,18 +996,17 @@ libvirglrenderer1  1.1.0-2
 libvte-2.91-dev  0.80.1-1
 libvulkan1  1.4.309.0-1
 libwayland-server0  1.23.1-3
-libwbclient0  2:4.22.3+dfsg-4
+libwbclient0  2:4.22.8+dfsg-0+deb13u1
 libwebsocket-api-java  1.1-2
-libwireshark-dev  4.4.7-1
-libwiretap-dev  4.4.7-1
+libwireshark-dev  4.4.15-0+deb13u1
+libwiretap-dev  4.4.15-0+deb13u1
 libwrap0  7.6.q-36
-libwtmpdb0  0.73.0-3
+libwtmpdb0  0.73.0-3+deb13u1
 libx11-6  2:1.8.12-1
 libx11-data  2:1.8.12-1
 libx11-dev  2:1.8.12-1
 libx11-xcb1  2:1.8.12-1
 libxau6  1:1.0.11-1
-libxcb1  1.17.0-2+b1
 libxcb-dri3-0  1.17.0-2+b1
 libxcb-present0  1.17.0-2+b1
 libxcb-randr0  1.17.0-2+b1
@@ -1032,30 +1017,29 @@ libxcb-xfixes0  1.17.0-2+b1
 libxcb1  1.17.0-2+b1
 libxdmcp6  1:1.1.5-1
 libxdp1  1.5.4-1
-libxencall1  4.20.0+68-g35cb38b222-1
-libxen-dev  4.20.0+68-g35cb38b222-1
-libxencall1  4.20.0+68-g35cb38b222-1
-libxendevicemodel1  4.20.0+68-g35cb38b222-1
-libxenevtchn1  4.20.0+68-g35cb38b222-1
-libxenforeignmemory1  4.20.0+68-g35cb38b222-1
-libxengnttab1  4.20.0+68-g35cb38b222-1
-libxenhypfs1  4.20.0+68-g35cb38b222-1
-libxenmisc4.20  4.20.0+68-g35cb38b222-1
-libxenstore4  4.20.0+68-g35cb38b222-1
-libxentoolcore1  4.20.0+68-g35cb38b222-1
-libxentoollog1  4.20.0+68-g35cb38b222-1
+libxen-dev  4.20.2+37-g61ff35323e-0+deb13u1
+libxencall1  4.20.2+37-g61ff35323e-0+deb13u1
+libxendevicemodel1  4.20.2+37-g61ff35323e-0+deb13u1
+libxenevtchn1  4.20.2+37-g61ff35323e-0+deb13u1
+libxenforeignmemory1  4.20.2+37-g61ff35323e-0+deb13u1
+libxengnttab1  4.20.2+37-g61ff35323e-0+deb13u1
+libxenhypfs1  4.20.2+37-g61ff35323e-0+deb13u1
+libxenmisc4.20  4.20.2+37-g61ff35323e-0+deb13u1
+libxenstore4  4.20.2+37-g61ff35323e-0+deb13u1
+libxentoolcore1  4.20.2+37-g61ff35323e-0+deb13u1
+libxentoollog1  4.20.2+37-g61ff35323e-0+deb13u1
 libxext6  2:1.3.4-1+b3
-libxml2  2.12.7+dfsg+really2.9.14-2.1
-libxml2-dev  2.12.7+dfsg+really2.9.14-2.1
-libxml2-utils  2.12.7+dfsg+really2.9.14-2.1
-libxmlb2 0.3.22-1
+libxml2  2.12.7+dfsg+really2.9.14-2.1+deb13u2
+libxml2-dev  2.12.7+dfsg+really2.9.14-2.1+deb13u2
+libxml2-utils  2.12.7+dfsg+really2.9.14-2.1+deb13u2
+libxmlb2  0.3.22-1
 libxmlsec1t64  1.2.41-1+b1
 libxmlsec1t64-openssl  1.2.41-1+b1
 libxmu6  2:1.1.3-3+b4
 libxrender1  1:0.9.12-1
 libxshmfence1  1.3.3-1
-libxslt1-dev  1.1.35-1.2
-libxslt1.1  1.1.35-1.2
+libxslt1-dev  1.1.35-1.2+deb13u3
+libxslt1.1  1.1.35-1.2+deb13u3
 libxt6t64  1:1.2.1-1.2+b2
 libxtables12  1.8.11-2
 libxxhash0  0.8.3-2
@@ -1068,15 +1052,14 @@ libyaml-snake-java  2.0+ds+really1.33-1
 libz3-4  4.13.3-1
 libzmq5  4.3.5-1+b3
 libzstd1  1.5.7+dfsg-1
-linux-base  4.12
-linux-sysctl-defaults  4.12
-locales  2.41-12
-locales-all  2.41-12
-login  1:4.16.0-2+really2.41-5
+linux-base  4.12.1
+linux-sysctl-defaults  4.12.1
+locales  2.41-12+deb13u3
+locales-all  2.41-12+deb13u3
 login  1:4.16.0-2+really2.41-5
 login.defs  1:4.17.4-2
 logrotate  3.22.0-1
-logsave  1.47.2-3+b3
+logsave  1.47.2-3+b11
 lsb-base  11.6
 lsb-release  12.1-1
 lsof  4.99.4+dfsg-2
@@ -1085,21 +1068,21 @@ m4  1.4.19-8
 mailcap  3.74
 make  4.4.1-2
 man-db  2.13.1-1
-mariadb-common  1:11.8.2-1
+mariadb-common  1:11.8.6-0+deb13u1
 mawk  1.3.4.20250131-1
 mdadm  4.4-11
 media-types  13.0.0
 memcached  1.6.38-1
 mesa-libgallium  25.0.7-2
 meson  1.7.0-1
-mime-support 3.66 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/m/mime-support/mime-support_3.66_all.deb
-mksh  59c-41
+mime-support  3.66  https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/main/m/mime-support/mime-support_3.66_all.deb
+mksh  59c-41+b2
 mokutil  0.7.2-1
 mount  2.41-5
 multipath-tools  0.11.1-2
 multipath-tools-boot  0.11.1-2
 mysql-common  5.8+1.1.1
-nano  8.4-1
+nano  8.4-1+deb13u1
 ncat  7.95+dfsg-3
 ncurses-base  6.5+20250216-2
 ncurses-bin  6.5+20250216-2
@@ -1113,26 +1096,23 @@ nfs-common  1:2.8.3-1
 nfs-kernel-server  1:2.8.3-1
 nftables  1.1.3-1
 ninja-build  1.12.1-1
-# ntp  1:4.2.8p15+dfsg-2~1.2.3+dfsg1-3
-# ntpdate  1:4.2.8p15+dfsg-2~1.2.3+dfsg1-3
 ntpsec  1.2.3+dfsg1-8
 ntpsec-ntpdate  1.2.3+dfsg1-8
 ntpsec-ntpdig  1.2.3+dfsg1-8
 numad  0.5+20150602-8+b2
 nvme-cli  2.13-2
-open-iscsi  2.1.11-1
-openjdk-21-jre-headless  21.0.8+9-1
-openssh-client  1:10.0p1-7
-openssh-server  1:10.0p1-7
-openssh-sftp-server  1:10.0p1-7
-openssl  3.5.1-1
-openssl-provider-legacy  3.5.1-1
+open-iscsi  2.1.11-1+deb13u2
+openjdk-21-jre-headless  21.0.11+10-1~deb13u2
+openssh-client  1:10.0p1-7+deb13u4
+openssh-server  1:10.0p1-7+deb13u4
+openssh-sftp-server  1:10.0p1-7+deb13u4
+openssl  3.5.6-1~deb13u1
+openssl-provider-legacy  3.5.6-1~deb13u1
 original-awk  2025-01-16-1
-ovmf  2025.02-8
-packagekit 1.3.1-1
+ovmf  2025.02-8+deb13u1
+packagekit  1.3.1-1+deb13u1
 pahole  1.30-1
 parted  3.6-5
-passwd  1:4.17.4-2
 passwd  1:4.17.4-2
 patch  2.8-2
 pci.ids  0.0~2025.06.09-1
@@ -1145,11 +1125,10 @@ pipexec  2.6.2-1
 pm-utils  1.4.1-21
 po-debconf  1.0.21+nmu1
 polkitd  126-2
-postgresql-17  17.5-1
-postgresql-client-17  17.5-1
+postgresql-17  17.9-0+deb13u1
+postgresql-client-17  17.9-0+deb13u1
 postgresql-client-common  278
 postgresql-common  278
-postgresql-common-dev  278
 postgresql-common-dev  278
 powermgmt-base  1.38
 procps  2:4.0.4-9
@@ -1169,7 +1148,7 @@ puppet-module-puppetlabs-inifile  5.4.0-1
 puppet-module-puppetlabs-mount-core  1.0.4+dfsg1-2
 puppet-module-puppetlabs-mysql  15.0.0-3
 puppet-module-puppetlabs-postgresql  10.5.0-1
-puppet-module-puppetlabs-rabbitmq  8.5.0-8
+puppet-module-puppetlabs-rabbitmq  8.5.0-8+deb13u1
 puppet-module-puppetlabs-stdlib  9.4.1-1
 puppet-module-puppetlabs-translate  2.2.0-1
 puppet-module-voxpupuli-collectd  11.0.0-4
@@ -1181,7 +1160,7 @@ python-is-python3  3.13.3-1
 python-pastedeploy-tpl  3.1-1
 python3  3.13.5-1
 python3-aiohappyeyeballs  2.6.1-1
-python3-aiohttp  3.11.16-1
+python3-aiohttp  3.11.16-1+deb13u1
 python3-aiosignal  1.3.2-1
 python3-alabaster  0.7.16-0.1
 python3-alembic  1.13.2-4
@@ -1205,7 +1184,7 @@ python3-boto3  1.37.9-1
 python3-botocore  1.37.9+repack-1
 python3-bs4  4.13.4-2
 python3-bson  4.10.1-6
-python3-build 1.2.2-2
+python3-build  1.2.2-2
 python3-cachetools  5.3.3-1
 python3-calmjs  3.4.2-4
 python3-calmjs.parse  1.2.5-6
@@ -1229,6 +1208,7 @@ python3-configobj  5.0.9-1
 python3-configshell-fb  1:2.0.0-2
 python3-confluent-kafka  1.7.0-4+b4
 python3-coverage  7.6.0+dfsg1-2+b2
+#python3-cryptography 3.3.2 is needed because Ceph 14.2.22 (nautilus) mgr cannot load PyO3/Rust cryptography (>=42) — do not bump until Ceph is upgraded to a PyO3-compatible release
 python3-cryptography  3.3.2-1+deb11u1  https://snapshot.debian.org/archive/debian-security/20241030T011651Z/pool/updates/main/p/python-cryptography/python3-cryptography_3.3.2-1%2Bdeb11u1_amd64.deb
 python3-csscompressor  0.9.5-6
 python3-daemon  3.1.2-2
@@ -1240,9 +1220,9 @@ python3-defusedxml  0.7.1-3
 python3-deprecated  1.2.18-1
 python3-deprecation  2.1.0-4
 python3-dev  3.13.5-1
-python3-distro 1.9.0-1
+python3-distro  1.9.0-1
 python3-distutils-extra  3.1
-python3-django  3:4.2.23-1
+python3-django  3:4.2.28-0+deb13u1
 python3-django-appconf  1.0.6-3
 python3-django-compressor  4.5.1-4
 python3-django-debreach  2.1.0-3
@@ -1253,9 +1233,9 @@ python3-docutils  0.21.2+dfsg-2
 python3-dogpile.cache  1.3.3-1
 python3-editor  1.0.3-10
 python3-elementpath  4.8.0-1
-python3-email-validator 2.2.0-1
+python3-email-validator  2.2.0-1
 python3-enmerkar  0.7.1-8
-python3-eventlet  0.39.1-2
+python3-eventlet  0.39.1-2+deb13u1
 python3-extras  1.0.0-6
 python3-falcon  3.1.1-5+b1
 python3-fasteners  0.18-2
@@ -1266,13 +1246,12 @@ python3-flask  3.1.1-1
 python3-flask-restful  0.3.10-5
 python3-frozenlist  1.6.0-1
 python3-futurist  3.1.0-2
-python3-futurist  3.1.0-2
 python3-gevent  24.11.1-1+b1
 python3-gi  3.50.0-4+b1
 python3-glanceclient  1:4.8.0-2
 python3-google-auth  2.28.2-3
 python3-gpg  1.24.2-3
-python3-gps  3.25-5
+python3-gps  3.25-5+deb13u1
 python3-greenlet  3.1.0-1+b2
 python3-gunicorn  23.0.0-1
 python3-hawkey  0.74.0-1
@@ -1287,7 +1266,7 @@ python3-iso8601  2.1.0-2
 python3-itsdangerous  2.2.0-2
 python3-jaraco.classes  3.4.0-1
 python3-jaraco.collections  5.1.0-1
-python3-jaraco.context  6.0.1-1
+python3-jaraco.context  6.0.1-1+deb13u1
 python3-jaraco.functools  4.1.0-1
 python3-jaraco.text  4.0.0-1
 python3-jeepney  0.9.0-1
@@ -1299,36 +1278,37 @@ python3-jsonpatch  1.32-5
 python3-jsonpath-rw  1.4.0-7
 python3-jsonschema  4.19.2-6
 python3-jsonschema-specifications  2023.12.1-2
+#python3-jwcrypto pinned to a cryptography (<3.4)-compatible version because the pinned 3.3.2 for Ceph nautilus breaks trixie's jwcrypto (needs >=3.4) — do not bump until Ceph is upgraded
 python3-jwcrypto  0.8.0-1  https://deb.debian.org/debian/pool/main/p/python-jwcrypto/python3-jwcrypto_0.8.0-1_all.deb
-python3-jwt  2.10.1-2
+python3-jwt  2.10.1-2+deb13u1
 python3-keyring  25.6.0-2
 python3-keystoneauth1  5.10.0-2
 python3-keystoneclient  1:5.6.0-2
-python3-keystonemiddleware  10.9.0-2+deb13u1  https://security.debian.org/debian-security/pool/updates/main/p/python-keystonemiddleware/python3-keystonemiddleware_10.9.0-2+deb13u1_all.deb
+python3-keystonemiddleware  10.9.0-2+deb13u1
 python3-kombu  5.5.3-1
-python3-lazr.restfulclient 0.14.6-3
-python3-lazr.uri 1.0.6-6
-python3-ldap  3.4.4-1+b5
+python3-lazr.restfulclient  0.14.6-3
+python3-lazr.uri  1.0.6-6
+python3-ldap  3.4.4-1+deb13u1
 python3-ldap3  2.9.1-2
 python3-ldappool  3.0.0-5
-python3-ldb  2:2.11.0+samba4.22.3+dfsg-4
+python3-ldb  2:2.11.0+samba4.22.8+dfsg-0+deb13u1
 python3-legacy-cgi  2.6.3-1
 python3-legacycrypt  0.3-2
 python3-libapparmor  4.1.0-1
 python3-libcomps  0.1.21-1+b3
 python3-libdnf  0.74.0-1
 python3-libsass  0.23.0-0.1
-python3-linkify-it 2.0.3-1
+python3-linkify-it  2.0.3-1
 python3-linux-procfs  0.7.3-3
 python3-lockfile  1:0.12.2-4
 python3-logutils  0.3.5-5
 python3-lxml  5.4.0-1
 python3-lz4  4.4.0+dfsg-2
 python3-mako  1.3.9-1
-python3-markdown-it 3.0.0-3
+python3-markdown-it  3.0.0-3
 python3-markupsafe  2.1.5-1+b3
 python3-mccabe  0.7.0-1
-python3-mdurl 0.1.2-1
+python3-mdurl  0.1.2-1
 python3-mechanize  1:0.4.10+ds-4
 python3-memcache  1.62-3
 python3-microversion-parse  1.0.1-3
@@ -1349,15 +1329,16 @@ python3-ntp  1.2.3+dfsg1-8
 python3-numpy  1:2.2.4+ds-1
 python3-numpy-dev  1:2.2.4+ds-1
 python3-oauthlib  3.2.2-3
+#python3-openssl 20.0.1 is needed because trixie's 25.0.0 requires cryptography (>=41.0.5), incompatible with the pinned 3.3.2 for Ceph nautilus — do not bump until Ceph is upgraded
 python3-openssl  20.0.1-1  https://deb.debian.org/debian/pool/main/p/pyopenssl/python3-openssl_20.0.1-1_all.deb
-python3-openstackclient 7.4.0-3
+python3-openstackclient  7.4.0-3
 python3-os-client-config  2.1.0-3
 python3-os-service-types  1.8.2-2  https://snapshot.debian.org/archive/debian/20260415T000000Z/pool/main/p/python-os-service-types/python3-os-service-types_1.8.2-2_all.deb
 python3-oslo.cache  3.10.1-3
 python3-oslo.concurrency  7.1.0-3
 python3-oslo.config  1:9.7.1-3
 python3-oslo.context  5.7.1-3
-python3-oslo.db  17.2.1-2
+python3-oslo.db  17.2.1-2+deb13u1
 python3-oslo.i18n  6.5.1-3
 python3-oslo.log  7.1.0-4
 python3-oslo.messaging  16.1.0-3
@@ -1394,7 +1375,7 @@ python3-propcache  0.3.1-1
 python3-psutil  7.0.0-2
 python3-psycopg2  2.9.10-1+b1
 python3-ptyprocess  0.7.0-6
-python3-pyasn1  0.6.1-1
+python3-pyasn1  0.6.1-1+deb13u2
 python3-pyasn1-modules  0.4.1-2
 python3-pyasyncore  1.0.2-3
 python3-pycadf  4.0.1-1
@@ -1426,8 +1407,7 @@ python3-redis  6.1.0-2
 python3-referencing  0.36.2-1
 python3-repoze.lru  0.7-3
 python3-repoze.who  3.0.0-4
-python3-repoze.who  3.0.0-4
-python3-requests  2.32.3+dfsg-5
+python3-requests  2.32.3+dfsg-5+deb13u1
 python3-requests-oauthlib  1.3.1-1
 python3-requests-toolbelt  1.0.0-4
 python3-requests-unixsocket  0.3.0-6
@@ -1471,8 +1451,8 @@ python3-statsd  4.0.1-3
 python3-stevedore  5.7.0-3  https://snapshot.debian.org/archive/debian/20260326T142937Z/pool/main/s/stevedore/python3-stevedore_5.7.0-3_all.deb
 python3-swiftclient  1:4.7.0-2
 python3-systemd  235-1+b6
-python3-tabulate 0.9.0-1
-python3-talloc  2:2.4.3+samba4.22.3+dfsg-4
+python3-tabulate  0.9.0-1
+python3-talloc  2:2.4.3+samba4.22.8+dfsg-0+deb13u1
 python3-tempita  0.6.0-1
 python3-tempora  5.7.0-2
 python3-tenacity  8.4.2+really8.4.1-2
@@ -1484,10 +1464,10 @@ python3-tomli  2.2.1-2+b1
 python3-typeguard  4.4.2-1
 python3-typing-extensions  4.13.2-1
 python3-tz  2025.2-3
-python3-uc-micro 1.0.3-1
+python3-uc-micro  1.0.3-1
 python3-uhashring  2.3-2
 python3-ujson  5.10.0-1+b4
-python3-urllib3  2.3.0-3
+python3-urllib3  2.3.0-3+deb13u1
 python3-urwid  2.6.16-1
 python3-vine  5.1.0+dfsg-1
 python3-wadllib  2.0.0-3
@@ -1541,17 +1521,16 @@ python3-zipp  3.21.0-1
 python3-zmq  26.4.0-1
 python3-zope.event  5.0-0.1
 python3-zope.interface  7.2-1+b1
-python3.13  3.13.5-2
-python3.13-dev  3.13.5-2
-python3.13-minimal  3.13.5-2
-qemu-utils 1:10.0.2+ds-2+b1
+python3.13  3.13.5-2+deb13u2
+python3.13-dev  3.13.5-2+deb13u2
+python3.13-minimal  3.13.5-2+deb13u2
+qemu-utils  1:10.0.8+ds-0+deb13u1+b2
 racc  1.8.1-1
 radvd  1:2.20-1+b1
 rake  13.2.1-1
 readline-common  8.2-6
 redfishtool  1.1.5-3
-reprepro  5.4.6+really5.3.2-1
-rng-tools-debian  2.6
+reprepro  5.4.6+really5.3.2-1+deb13u1
 rng-tools-debian  2.6
 rng-tools5  5-4.1+b1
 rpcbind  1.2.7-1
@@ -1559,7 +1538,7 @@ rpcsvc-proto  1.4.3-1
 rpm  4.20.1+dfsg-3
 rpm-common  4.20.1+dfsg-3
 rpm2cpio  4.20.1+dfsg-3
-rsync  3.4.1+ds1-5
+rsync  3.4.1+ds1-5+deb13u2
 ruby  1:3.3+b1
 ruby-augeas  1:0.5.0+gem-3
 ruby-concurrent  1.3.5-1
@@ -1592,25 +1571,25 @@ ruby3.3  3.3.8-2
 rubygems-integration  1.19
 runc  1.1.15+ds1-2+b4
 runit-helper  2.16.4
-samba-libs  2:4.22.3+dfsg-4
+samba-libs  2:4.22.8+dfsg-0+deb13u1
 sbsigntool  0.9.4-3.2
 screen  4.9.1-3
 seabios  1.16.3-2
-sed  4.9-2
+sed  4.9-2+deb13u1
 sensible-utils  0.0.25
 sg3-utils  1.48-2
 sg3-utils-udev  1.48-2
 sgml-base  1.31+nmu1
 smartmontools  7.4-3
-snmp  5.9.4+dfsg-2+deb13u1 https://snapshot.debian.org/archive/debian-security/20260601T000000Z/pool/updates/main/n/net-snmp/snmp_5.9.4%2Bdfsg-2%2Bdeb13u1_amd64.deb
-snmpd  5.9.4+dfsg-2+deb13u1 https://snapshot.debian.org/archive/debian-security/20260601T000000Z/pool/updates/main/n/net-snmp/snmpd_5.9.4%2Bdfsg-2%2Bdeb13u1_amd64.deb
-snmptrapd  5.9.4+dfsg-2+deb13u1 https://snapshot.debian.org/archive/debian-security/20260601T000000Z/pool/updates/main/n/net-snmp/snmptrapd_5.9.4%2Bdfsg-2%2Bdeb13u1_amd64.deb
+snmp  5.9.4+dfsg-2+deb13u1
+snmpd  5.9.4+dfsg-2+deb13u1
+snmptrapd  5.9.4+dfsg-2+deb13u1
 socat  1.8.0.3-1
 spectre-meltdown-checker  0.46-1
 sphinx-common  8.1.3-5
 sphinx-rtd-theme-common  3.0.2+dfsg-2
-sqlite3  3.46.1-7
-sqv  1.3.0-3
+sqlite3  3.46.1-7+deb13u1
+sqv  1.3.0-3+b2
 sse4.2-support  27
 ssg-base  0.1.80-1  https://snapshot.debian.org/archive/debian/20260314T143719Z/pool/main/s/scap-security-guide/ssg-base_0.1.80-1_all.deb
 ssg-debian  0.1.80-1  https://snapshot.debian.org/archive/debian/20260314T143719Z/pool/main/s/scap-security-guide/ssg-debian_0.1.80-1_all.deb
@@ -1628,21 +1607,21 @@ sssd-proxy  2.10.1-2+b1
 sssd-tools  2.10.1-2+b1
 startpar  0.66-1
 strace  6.13+ds-1
-strongswan  6.0.1-6
-strongswan-charon  6.0.1-6
-strongswan-libcharon  6.0.1-6
-strongswan-starter  6.0.1-6
-strongswan-swanctl  6.0.1-6
-sudo-ldap  1.9.16p2-3
+strongswan  6.0.1-6+deb13u5
+strongswan-charon  6.0.1-6+deb13u5
+strongswan-libcharon  6.0.1-6+deb13u5
+strongswan-starter  6.0.1-6+deb13u5
+strongswan-swanctl  6.0.1-6+deb13u5
+sudo-ldap  1.9.16p2-3+deb13u2
 syslinux-utils  3:6.04~git20190206.bf6db5b4+dfsg1-3.1
-syslog-ng  4.8.1-5
-syslog-ng-core  4.8.1-5
-syslog-ng-mod-mongodb  4.8.1-5
-syslog-ng-mod-sql  4.8.1-5
-syslog-ng-scl  4.8.1-5
+syslog-ng  4.8.1-5+deb13u1
+syslog-ng-core  4.8.1-5+deb13u1
+syslog-ng-mod-mongodb  4.8.1-5+deb13u1
+syslog-ng-mod-sql  4.8.1-5+deb13u1
+syslog-ng-scl  4.8.1-5+deb13u1
 sysstat  12.7.5-2
-systemd  257.7-1
-systemd-sysv  257.7-1
+systemd  257.13-1~deb13u1
+systemd-sysv  257.13-1~deb13u1
 systemtap-sdt-dev  5.1-5
 sysvinit-utils  3.14-4
 tar  1.35+dfsg-3.1
@@ -1654,14 +1633,13 @@ tcl8.6  8.6.16+dfsg-1
 tcpdump  4.99.5-2
 texinfo  7.1.1-1
 time  1.9-0.2
-tini  0.19.0-3+b3
-tpm-udev 0.6+nmu1
+tini  0.19.0-3+b7
+tpm-udev  0.6+nmu1
 traceroute  1:2.1.6-1
 tuned  2.25.1-1
-tzdata  2025b-4
+tzdata  2026b-0+deb13u1
 ucf  3.0052
-udev  257.7-1
-udev  257.7-1
+udev  257.13-1~deb13u1
 udhcpc  1:1.37.0-6
 unzip  6.0-29
 util-linux  2.41-5
@@ -1681,15 +1659,15 @@ w3m  0.5.3+git20230121-2.1
 watchdog  5.16-1.1
 wget  1.25.0-2
 whiptail  0.52.25-1
-x11-common  1:7.7+24
+x11-common  1:7.7+24+deb13u1
 xclip  0.13-4
 xfsprogs  6.13.0-2+b1
 xml-core  0.19
 xmlsec1  1.2.41-1+b1
-xsltproc  1.1.35-1.2
+xsltproc  1.1.35-1.2+deb13u3
 xxd  2:9.1.1230-2
 xz-utils  5.8.1-1
 zip  3.0-15
 zlib1g  1:1.3.dfsg+really1.3.1-1+b1
 zlib1g-dev  1:1.3.dfsg+really1.3.1-1+b1
-zstd 1.5.7+dfsg-1
+zstd  1.5.7+dfsg-1

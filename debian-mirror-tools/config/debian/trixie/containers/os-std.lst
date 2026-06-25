@@ -4,14 +4,14 @@ autogen  1:5.18.16-7
 autogen-doc  1:5.18.16-7
 cmake  3.31.6-2
 cmake-data  3.31.6-2
-comerr-dev  2.1-1.47.2-3+b3
+comerr-dev  2.1-1.47.2-3+b11
 docutils-doc  0.21.2+dfsg-2
 doxygen  1.9.8+ds-2.1
 dwarves  1.30-1
 fonts-mathjax  2.7.9+dfsg-1
 g++-12  12.4.0-5
-git  1:2.47.2-0.2
-git-man  1:2.47.2-0.2
+git  1:2.47.3-0+deb13u1
+git-man  1:2.47.3-0+deb13u1
 git-review  2.4.0-1
 guile-2.2-libs  2.2.7+1-9+b6
 hwdata  0.394-1
@@ -19,7 +19,7 @@ lib32ncurses-dev  6.5+20250216-2
 lib32ncurses6  6.5+20250216-2
 lib32ncursesw6  6.5+20250216-2
 lib32tinfo6  6.5+20250216-2
-libcap-dev  1:2.75-10+b1
+libcap-dev  1:2.75-10+deb13u1+b1
 libclang-cpp17t64  1:17.0.6-22+b2
 libclang1-17t64  1:17.0.6-22+b2
 liberror-perl  0.17030-1
@@ -40,17 +40,17 @@ pandoc  3.1.11.1+ds-2
 pandoc-data  3.1.11.1-3
 pkg-config  1.8.1-4
 pybind11-dev  2.13.6-2
-python3-iso8601 2.1.0-2 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-iso8601/python3-iso8601_2.1.0-2_all.deb
-python3-keystoneauth1 5.10.0-2 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-keystoneauth1/python3-keystoneauth1_5.10.0-2_all.deb
-python-requests-doc  2.32.3+dfsg-5
+python-requests-doc  2.32.3+dfsg-5+deb13u1
 python3-doc  3.13.5-1
 python3-intelhex  2.3.0-3
+python3-iso8601  2.1.0-2
+python3-keystoneauth1  5.10.0-2
 python3-oslo.messaging  16.1.0-3
 python3-prometheus-client  0.21.1+ds1-1
 python3-pybind11  2.13.6-2
 python3-thrift  0.19.0-4+b1
-python3-typing-extensions 4.13.2-1 https://snapshot.debian.org/archive/debian-ports/20250531T195045Z/pool/main/p/python-typing-extensions/python3-typing-extensions_4.13.2-1_all.deb
-python3.13-doc  3.13.5-2
+python3-typing-extensions  4.13.2-1
+python3.13-doc  3.13.5-2+deb13u2
 sphinx-doc  8.1.3-5
 trace-cmd  3.3.1-1+b1
 tree  2.2.1-1

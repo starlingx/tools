@@ -771,6 +771,7 @@ os_mirror_dist_path=${STX_CONF["repomgr.os_mirror_dist_path"]}
 os_mirror_dl_path=${STX_CONF["repomgr.os_mirror_dl_path"]}
 lat_mirror_url=${STX_CONF["repomgr.lat_mirror_url"]}
 lat_mirror_lat_path=${STX_CONF["repomgr.lat_mirror_lat_path"]}
+debian_snapshot_timestamp=${STX_CONF["project.debian_snapshot_timestamp"]}
 
 # bail if values are missing
 if [ -z "${builder_os_id}" ]; then
@@ -813,6 +814,16 @@ fi
 if [ -z "${lat_mirror_lat_path}" ]; then
     lat_mirror_lat_path=lat-sdk/
     warn "Missing stx.conf value for: repomgr.lat_mirror_lat_path; using: ${lat_mirror_lat_path}"
+fi
+
+# The trixie builder Dockerfile requires a Debian snapshot timestamp to pin the
+# base image to a reproducible snapshot. If the variable is not set, fail early
+# with a clear error message.
+if [ "${builder_os_codename}" = "trixie" ] && [ -z "${debian_snapshot_timestamp}" ]; then
+    error "Missing stx.conf value for: project.debian_snapshot_timestamp"
+    error "Format: YYYYMMDDTHHMMSSZ (e.g. 20260516T111458Z)"
+    error "Browse available snapshots at: https://snapshot.debian.org/archive/debian/"
+    exit 1
 fi
 
 # Make sure upstream DOCKER_TAG will be in the correct format
@@ -1008,6 +1019,8 @@ if [[ -n "${BUILD_DOCKER_IMAGES}" ]] ; then
     extra_build_args+=("lat_mirror_url=$lat_mirror_url")
     extra_build_args+=("--build-arg")
     extra_build_args+=("lat_mirror_lat_path=$lat_mirror_lat_path")
+    extra_build_args+=("--build-arg")
+    extra_build_args+=("debian_snapshot_timestamp=$debian_snapshot_timestamp")
 
     # Setup dedicated build context directory for LAT SDK cache
     # Default: hidden directory in $STX_BUILD_HOME

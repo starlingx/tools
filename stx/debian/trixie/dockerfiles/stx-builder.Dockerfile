@@ -10,13 +10,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright (C) 2021-2022,2025 Wind River Systems,Inc.
+# Copyright (C) 2021-2022,2025-2026 Wind River Systems,Inc.
 #
 FROM debian:trixie
 ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
+ARG debian_snapshot_timestamp=""
+RUN if [ -z "$debian_snapshot_timestamp" ]; then \
+        echo "ERROR: debian_snapshot_timestamp build-arg is required." && \
+        echo "Format: YYYYMMDDTHHMMSSZ (e.g. 20260516T111458Z)" && \
+        echo "Browse available snapshots at: https://snapshot.debian.org/archive/debian/" && \
+        exit 1; \
+    fi
 
-ARG STX_MIRROR_URL=https://mirror.starlingx.windriver.com/mirror
 ARG APT_CHROOT_DIR=/usr/local/apt-chroot
 
 ENV container=docker \
@@ -34,19 +40,13 @@ RUN apt-get -y update && apt-get -y install --no-install-recommends ca-certifica
 # Temporarily disable the valid-until check.  Trixie's repos are not updating as quickly as they should while in pre-release state
 RUN echo "Acquire::Check-Valid-Until "false";" > /etc/apt/apt.conf.d/99ignore-release-expiration
 
-RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/20250902T143411Z trixie contrib main non-free" > /etc/apt/sources.list && \
-    echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/20250902T143411Z trixie-updates contrib main non-free" >> /etc/apt/sources.list && \
-    echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/20250902T143411Z trixie-backports contrib main non-free" >> /etc/apt/sources.list && \
+RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/${debian_snapshot_timestamp} trixie contrib main non-free" > /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/${debian_snapshot_timestamp} trixie-updates contrib main non-free" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/${debian_snapshot_timestamp} trixie-backports contrib main non-free" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie non-free-firmware" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates non-free-firmware" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-backports non-free-firmware" >> /etc/apt/sources.list && \
     rm -rf /etc/apt/sources.list.d/debian.sources /var/lib/apt/lists/*
-
-# RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie contrib main non-free-firmware" > /etc/apt/sources.list && \
-#     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates contrib main non-free-firmware" >> /etc/apt/sources.list && \
-#     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-backports contrib main non-free-firmware" >> /etc/apt/sources.list && \
-#     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian-security trixie-security contrib main non-free-firmware" >> /etc/apt/sources.list && \
-#     rm /etc/apt/sources.list.d/debian.sources
 
 RUN cat /etc/apt/sources.list
 
