@@ -134,6 +134,24 @@ def save_chroot():
         }), 500
 
 
+@app.route('/pkgbuilder/updateparentchroot', methods=['GET'])
+def update_parent_chroot():
+    log_request('updateparentchroot', request)
+    init_result = dbuilder_initialized()
+    if init_result is not True:
+        return jsonify(init_result), 400
+
+    try:
+        response = dbuilder.update_parent_chroot(request.args)
+        return jsonify(response)
+    except Exception as e:
+        log.error(f"Failed to update parent chroot: {e}")
+        return jsonify({
+            'status': 'error',
+            'msg': 'Internal Server Error'
+        }), 500
+
+
 @app.route('/pkgbuilder/addchroot', methods=['GET'])
 def add_chroot():
     log_request('addchroot', request)

@@ -19,6 +19,7 @@ import schrootspool
 import shutil
 import signal
 import subprocess
+import threading
 import time
 import utils
 
@@ -41,6 +42,32 @@ def check_request(request_form, needed_form):
         msg = ','.join(needed_form)
         response['msg'] = 'All required parameters are: ' + msg
     return response
+
+
+class _ParentChrootLock(object):
+    """Read-write lock: multiple clones (readers) OR one parent update (writer)."""
+    def __init__(self):
+        self._read_lock = threading.Lock()
+        self._write_lock = threading.Lock()
+        self._readers = 0
+
+    def acquire_read(self):
+        with self._read_lock:
+            self._readers += 1
+            if self._readers == 1:
+                self._write_lock.acquire()
+
+    def release_read(self):
+        with self._read_lock:
+            self._readers -= 1
+            if self._readers == 0:
+                self._write_lock.release()
+
+    def acquire_write(self):
+        self._write_lock.acquire()
+
+    def release_write(self):
+        self._write_lock.release()
 
 
 class Debbuilder(object):
@@ -79,6 +106,8 @@ class Debbuilder(object):
         self.set_environ_vars()
         os.system('/opt/setup.sh')
         self.schroot_config_dir = '/etc/schroot/chroot.d'
+        self._parent_lock = _ParentChrootLock()
+        self._parent_installed_pkgs = set()  # populated after chroot creation
         self.logger.debug("Debbuilder initalized for dist %s", self.attrs['dist'])
 
     def get_parent_chroot_name(self, user):
@@ -641,6 +670,10 @@ class Debbuilder(object):
             response['msg'] = 'The parent chroot %s does not exist' % parent_chroot_dir
             return response
 
+        # Capture installed packages on first clone request
+        if not self._parent_installed_pkgs:
+            self._capture_parent_installed_pkgs(parent_chroot_dir)
+
         parent_conf_path = self.get_schroot_conf_path(user)
         if parent_conf_path is None or not os.path.exists(parent_conf_path):
             self.logger.error("Failed to find the parent schroot config file for %s", parent_chroot_name)
@@ -865,6 +898,8 @@ class Debbuilder(object):
 
         self.terminate_chroot_sessions(clone_chroot_name)
 
+        # Read lock: allows parallel clones, blocks during parent update
+        self._parent_lock.acquire_read()
         try:
             if is_tmpfs:
                 utils.clear_directory(clone_chroot_path)
@@ -904,11 +939,167 @@ class Debbuilder(object):
             self.logger.error('Failed to refresh the chroot %s', clone_chroot_name)
             response['msg'] = 'Error during refreshing the chroot'
             return response
+        finally:
+            self._parent_lock.release_read()
 
         self.logger.info('Successfully refreshed the chroot %s', clone_chroot_name)
         response['status'] = 'success'
         response['msg'] = 'Chroot refreshed successfully'
         return response
+
+    def _capture_parent_installed_pkgs(self, parent_chroot_path):
+        """Capture the set of package names installed in the parent chroot."""
+        dpkg_status = os.path.join(parent_chroot_path, 'var/lib/dpkg/status')
+        pkgs = set()
+        if os.path.exists(dpkg_status):
+            with open(dpkg_status) as f:
+                for line in f:
+                    if line.startswith('Package: '):
+                        pkgs.add(line.split()[1])
+        self._parent_installed_pkgs = pkgs
+        self.logger.info("Parent chroot has %d installed packages", len(pkgs))
+
+    def update_parent_chroot(self, request_form):
+        """Update parent chroot if any built packages overlap with pre-installed ones.
+
+        Called by build-pkgs after a package build completes. Checks if any of
+        the built binary packages are pre-installed in the parent chroot. If so,
+        acquires write lock (blocks new clones), runs apt upgrade on the parent,
+        then releases.
+        """
+        response = check_request(request_form, ['user', 'project', 'packages'])
+        if response:
+            return response
+
+        user = request_form['user']
+        project = request_form['project']
+        # packages = comma-separated list of binary package names just built
+        built_pkgs = set(request_form['packages'].split(','))
+
+        # Check overlap with pre-installed packages
+        overlap = built_pkgs & self._parent_installed_pkgs
+        if not overlap:
+            return {'status': 'success', 'msg': 'no overlap, parent unchanged'}
+
+        self.logger.info("Parent chroot update needed: %d overlapping package(s): %s",
+                         len(overlap), ','.join(sorted(overlap)[:5]))
+
+        parent_chroot_dir = self.get_parent_chroot_dir(user, project)
+        if not os.path.exists(parent_chroot_dir):
+            return {'status': 'fail', 'msg': 'parent chroot not found'}
+
+        # Acquire write lock — waits for all in-progress clones to finish
+        self._parent_lock.acquire_write()
+        try:
+            # Stale mount detection: clean up mounts left by interrupted upgrades
+            proc_path = os.path.join(parent_chroot_dir, 'proc')
+            sys_path = os.path.join(parent_chroot_dir, 'sys')
+            for mnt in (sys_path, proc_path):
+                res = subprocess.run(f'mountpoint -q {mnt}',
+                                     shell=True, capture_output=True)
+                if res.returncode == 0:
+                    self.logger.warning("Stale mount detected at %s, cleaning up", mnt)
+                    res2 = subprocess.run(f'umount -R {mnt}',
+                                          shell=True, capture_output=True)
+                    if res2.returncode != 0:
+                        self.logger.error("Failed to unmount stale %s: %s",
+                                          mnt, res2.stderr.decode(errors='replace').strip())
+                        return {'status': 'fail',
+                                'msg': f'cannot unmount stale {mnt}, manual cleanup required'}
+
+            # Copy-then-swap: upgrade on a staging copy, swap atomically on success
+            staging_dir = parent_chroot_dir + '.upgrading'
+            old_dir = parent_chroot_dir + '.pre-upgrade'
+
+            # Clean up leftovers from previous interrupted upgrades
+            for stale in (staging_dir, old_dir):
+                if os.path.exists(stale):
+                    self.logger.warning("Removing stale dir from prior interrupted upgrade: %s", stale)
+                    # Unmount anything inside before removal
+                    res = subprocess.run(f'findmnt -rn -o TARGET {stale}',
+                                         shell=True, capture_output=True)
+                    stale_mounts = res.stdout.decode(errors='replace').strip()
+                    if stale_mounts:
+                        self.logger.warning("Unmounting stale mounts in %s", stale)
+                        res2 = subprocess.run(f'umount -R {stale}',
+                                              shell=True, capture_output=True)
+                        if res2.returncode != 0:
+                            self.logger.error("Cannot unmount %s: %s; skipping cleanup",
+                                              stale, res2.stderr.decode(errors='replace').strip())
+                            continue
+                    subprocess.run(f'rm -rf --one-file-system {stale}',
+                                   shell=True, check=False)
+
+            # Create staging copy
+            self.logger.info("Creating staging copy of parent chroot for upgrade")
+            res = subprocess.run(f'cp -ar {parent_chroot_dir} {staging_dir}',
+                                 shell=True, capture_output=True)
+            if res.returncode != 0:
+                self.logger.error("Failed to create staging copy: %s",
+                                  res.stderr.decode(errors='replace')[-500:])
+                return {'status': 'fail', 'msg': 'failed to create staging copy'}
+
+            # Mount /proc and /sys in the staging copy
+            staging_proc = os.path.join(staging_dir, 'proc')
+            staging_sys = os.path.join(staging_dir, 'sys')
+            res = subprocess.run(f'mount -t proc proc {staging_proc}',
+                                 shell=True, capture_output=True)
+            if res.returncode != 0:
+                self.logger.warning("Failed to mount proc in staging chroot: %s",
+                                    res.stderr.decode(errors='replace').strip())
+            res = subprocess.run(f'mount --rbind /sys {staging_sys}',
+                                 shell=True, capture_output=True)
+            if res.returncode != 0:
+                self.logger.warning("Failed to mount sys in staging chroot: %s",
+                                    res.stderr.decode(errors='replace').strip())
+            try:
+                # Run apt upgrade inside the staging chroot
+                cmd = (
+                    f"chroot {staging_dir} /bin/bash -c "
+                    f"'apt-get update -q && "
+                    f"apt-get dist-upgrade -y -q --allow-downgrades "
+                    f"-o Dpkg::Options::=\"--force-confdef\" "
+                    f"-o Dpkg::Options::=\"--force-confold\"'"
+                )
+                result = subprocess.run(cmd, shell=True,
+                                        capture_output=True, timeout=300)
+                if result.returncode != 0:
+                    self.logger.error("Parent chroot upgrade failed: %s",
+                                      result.stderr.decode(errors='replace')[-500:])
+                    # Upgrade failed — discard staging, parent unchanged
+                    subprocess.run(f'rm -rf --one-file-system {staging_dir}',
+                                   shell=True, check=False)
+                    return {'status': 'fail', 'msg': 'apt upgrade failed'}
+                else:
+                    self.logger.debug("apt dist-upgrade output: %s",
+                                      result.stdout.decode(errors='replace')[-1000:])
+            finally:
+                # Always unmount before swap
+                res = subprocess.run(f'umount -R {staging_sys}',
+                                     shell=True, capture_output=True)
+                if res.returncode != 0:
+                    self.logger.warning("umount -R %s: %s", staging_sys,
+                                        res.stderr.decode(errors='replace').strip())
+                res = subprocess.run(f'umount {staging_proc}',
+                                     shell=True, capture_output=True)
+                if res.returncode != 0:
+                    self.logger.warning("umount %s: %s", staging_proc,
+                                        res.stderr.decode(errors='replace').strip())
+
+            # Atomic swap: rename old parent away, rename staging in place
+            os.rename(parent_chroot_dir, old_dir)
+            os.rename(staging_dir, parent_chroot_dir)
+            # Non-critical cleanup of old version
+            subprocess.run(f'rm -rf --one-file-system {old_dir}',
+                           shell=True, check=False)
+
+            # Refresh the installed packages list
+            self._capture_parent_installed_pkgs(parent_chroot_dir)
+            self.logger.info("Parent chroot updated successfully")
+            return {'status': 'success',
+                    'msg': f'upgraded {len(overlap)} package(s)'}
+        finally:
+            self._parent_lock.release_write()
 
     def refresh_chroots(self, request_form):
         '''
