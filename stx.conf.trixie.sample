@@ -1,0 +1,71 @@
+[project]
+buildbranch = master
+debian_distribution = trixie
+debian_version = 13.0
+
+# These URLs must contain snapshots of debian & debian-security repos.
+# We will append debian_snapshot_timestamp to each of them when creating
+# apt.sources lists
+#debian_security_snapshot_base = http://snapshot.debian.org/archive/debian-security
+debian_security_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian-security
+#debian_snapshot_base = http://snapshot.debian.org/archive/debian
+debian_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian
+debian_snapshot_timestamp = 20250902T143411Z
+
+gitemail = stx.builder@opendev.org
+gituser = STX Builder
+manifest = default.xml
+name = stx
+ostree_osname = debian
+proxy = false
+proxyport = 8080
+proxyserver = opendev.org
+
+[builder]
+debemail = stx.builder@opendev.org
+debfullname = STX Builder
+myuname = builder
+os_codename = trixie
+os_id = debian
+os_arch = amd64
+build_stream = stable
+image_prefix = master
+image_suffix = latest
+insecure_docker_reg =
+platform_registry = docker.io/starlingx
+release = 6.0
+stx_pkg_ext = .stx
+uid = 1000
+# Percent of available RAM for /dev/shm tmpfs (default 10, max 50)
+tmpfs_percent = 10
+
+[pkgbuilder]
+mode = local
+
+[repomgr]
+deblist =
+dsclist =
+lat_mirror_lat_path = lat-sdk/
+lat_mirror_url = https://mirror.starlingx.windriver.com/mirror/
+
+# This will be added to "Origin:" field in the Release file
+# of the local deb repos
+origin = starlingx
+
+os_mirror_dist_path = debian/debian/
+os_mirror_dl_path = debian/
+os_mirror_url = https://mirror.starlingx.windriver.com/mirror/
+sourceslist =
+stx_mirror_strategy = stx_mirror_first
+type = aptly
+
+
+[aptly]
+mode = local
+
+[pulp]
+mode = local
+
+[default]
+name = stx
+
