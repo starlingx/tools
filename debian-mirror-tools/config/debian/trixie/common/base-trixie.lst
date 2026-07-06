@@ -1610,8 +1610,8 @@ sphinx-rtd-theme-common  3.0.2+dfsg-2
 sqlite3  3.46.1-7
 sqv  1.3.0-3
 sse4.2-support  27
-ssg-base  0.1.76-1
-ssg-debian  0.1.76-1
+ssg-base  0.1.80-1  https://snapshot.debian.org/archive/debian/20260314T143719Z/pool/main/s/scap-security-guide/ssg-base_0.1.80-1_all.deb
+ssg-debian  0.1.80-1  https://snapshot.debian.org/archive/debian/20260314T143719Z/pool/main/s/scap-security-guide/ssg-debian_0.1.80-1_all.deb
 sshpass  1.10-0.1
 ssl-cert  1.1.3
 sssd  2.10.1-2+b1
