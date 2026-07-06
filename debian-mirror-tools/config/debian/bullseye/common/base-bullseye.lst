@@ -1030,7 +1030,7 @@ python3-jsonpatch  1.25-3
 python3-jsonpath-rw 1.4.0-4
 python3-json-pointer  2.0-2
 python3-jsonschema  3.2.0-3
-python3-jwt  1.7.1-2
+python3-jwt  1.7.1-2+deb11u1  https://snapshot.debian.org/archive/debian-security/20260618T015606Z/pool/updates/main/p/pyjwt/python3-jwt_1.7.1-2%2Bdeb11u1_all.deb
 python3-keystoneauth1  4.2.1-2
 python3-keystonemiddleware  9.1.0-2
 python3-kombu  5.0.2-3
