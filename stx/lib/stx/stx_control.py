@@ -24,6 +24,7 @@ import time
 from stx.k8s import KubeHelper
 from stx.minikube import MinikubeCtl
 from stx.minikube import MinikubeProfileNotFoundError
+from stx.minikube import MinikubeProfileNotRunning
 
 from stx import helper  # pylint: disable=E0611
 from stx import stx_shell
@@ -407,7 +408,12 @@ stx-pkgbuilder/configmap/')
 
     def handleStatusTask(self):
         if self.config.use_minikube:
-            self.minikube_ctl.require_started()
+            if not self.minikube_ctl.is_started():
+                self.logger.info(
+                    "Minikube profile '%s' is not running. "
+                    "Start it with: stx control start --wait",
+                    self.minikube_ctl.minikube_profile)
+                return
         self.k8s.get_helm_info()
         self.k8s.get_deployment_info()
         self.k8s.get_pods_info()
