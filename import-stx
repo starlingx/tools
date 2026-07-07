@@ -109,6 +109,18 @@
 #     stx.conf.OS_CODENAME.sample file when initializing
 #
 
+# Bail out if not running in bash
+if [ -z "$BASH_VERSION" ] ; then
+    echo "ERROR: import-stx must be sourced from bash" >&2
+    return 1 2>/dev/null || exit 1
+fi
+
+# Bail out if executed rather than sourced
+if [[ "${BASH_SOURCE[0]}" == "$0" ]] ; then
+    echo "ERROR: import-stx must be sourced, not executed" >&2
+    exit 1
+fi
+
 notice_warn () {
     local tty_on tty_off
     if [[ -t 2 ]] ; then
