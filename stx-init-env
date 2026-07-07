@@ -65,7 +65,6 @@ END
 source "$(dirname "$0")"/import-stx  || exit 1
 
 PROGNAME=$(basename "$0") || exit 1
-STX_TOOLS_DIR="$(readlink -v -e "$(dirname "$0")")" || exit 1
 MINIKUBE=minikube
 HELM=helm
 DOCKER=docker
@@ -581,7 +580,7 @@ if [[ $CLEAN_CONFIG -eq 1 ]] ; then
     notice "Clean the config file and configmap data for builder|pkgbuilder container."
     # copy a fresh config file
     rm -f "$STX_TOOLS_DIR/stx.conf"
-    cp "$STX_TOOLS_DIR/stx.conf.sample" "$STX_TOOLS_DIR/stx.conf"
+    _init_stx_conf || exit 1
 
     rm -f "$STX_TOOLS_DIR"/stx/lib/stx/__pycache__/*
     rm -f "$STX_TOOLS_DIR"/stx/stx-build-tools-chart/stx-builder/Chart.lock

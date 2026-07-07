@@ -104,6 +104,10 @@
 #     "[repomgr]lat_mirror_lat_path" from stx.conf; or 'lat-sdk/'. This is currently
 #     used when building stx-lat-sdk container.
 #
+#   OS_CODENAME
+#     Base debian codename, "bullseye" or "trixie". This is used to select the default
+#     stx.conf.OS_CODENAME.sample file when initializing
+#
 
 notice_warn () {
     local tty_on tty_off
@@ -167,12 +171,24 @@ export STX_PLATFORM="${STX_PLATFORM:-minikube}"
 # Max cpus for the build parallel jobs, replaces MINIKUBECPUS env var
 export STX_BUILD_CPUS=${STX_BUILD_CPUS:-6}
 
+export OS_CODENAME
+
 STX_BUILD_HOME_DEFAULT_v1="/localdisk/$USER"
 STX_BUILD_HOME_DEFAULT_v2="/localdisk/designer/$USER/$PROJECT"
+STX_TOOLS_DIR="$(readlink -v -e "$(dirname "${BASH_SOURCE[0]}")")" || return 1
 
-if [ ! -f "stx.conf" ]; then
-    cp stx.conf.sample stx.conf
-fi
+_init_stx_conf() {
+    if [[ ! -f "$STX_TOOLS_DIR/stx.conf" ]] ; then
+        if [[ -n "$OS_CODENAME" ]] ; then
+            echo "Copying $STX_TOOLS_DIR/{stx.conf.$OS_CODENAME.sample => stx.conf}" >&2
+            cp "$STX_TOOLS_DIR/stx.conf.$OS_CODENAME.sample" "$STX_TOOLS_DIR/stx.conf"
+        else
+            echo "Copying $STX_TOOLS_DIR/{stx.conf.sample => stx.conf}" >&2
+            cp "$STX_TOOLS_DIR/stx.conf.sample" "$STX_TOOLS_DIR/stx.conf"
+        fi
+    fi
+}
+_init_stx_conf || return 1
 
 # Platform specifics
 if [ "$STX_PLATFORM" = "minikube" ]; then

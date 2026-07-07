@@ -161,7 +161,12 @@ class STXConfigParser(object):
 
         need_restart = False
 
-        ref_config_path = os.path.join(os.environ['PRJDIR'], "stx.conf.sample")
+        os_codename = os.environ.get('OS_CODENAME')
+        if os_codename:
+            stx_conf_sample = 'stx.conf.%s.sample' % os_codename
+        else:
+            stx_conf_sample = 'stx.conf.sample'
+        ref_config_path = os.path.join(os.environ['PRJDIR'], stx_conf_sample)
         ref_config = configparser.ConfigParser()
         ref_config.read(ref_config_path, encoding="utf-8")
         for section_name, data in ref_config.items():
