@@ -18,15 +18,11 @@ gpg:
     BOOT_KEYS_DIR: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys
     BOOT_GPG_KEY: $OECORE_NATIVE_SYSROOT/usr/share/bootfs/boot_keys/BOOT-GPG-PRIVKEY-SecureBootCore
 packages:
-- apt-utils
-- base-passwd
-- bash
 - bc
 - bind9-dnsutils
 - bnxt-en
 - bnxt-en-rt
 - busybox
-- bzip2
 - ca-certificates
 - curl
 - dosfstools
@@ -34,14 +30,10 @@ packages:
 - efibootmgr
 - eject
 - fdisk
-- findutils
 - firmware-qlogic
-- gawk
 - glib-networking
 - gnupg
-- grep
 - grub2
-- gzip
 - iavf
 - iavf-rt
 - ice
@@ -51,8 +43,6 @@ packages:
 - ifupdown
 - initramfs-ostree
 - iproute2
-- isc-dhcp-client
-- isc-dhcp-common
 - kbd
 - kmod
 - libostree-1-1
@@ -61,7 +51,6 @@ packages:
 - mdadm
 - mlnx-ofed-kernel-modules
 - mlnx-ofed-kernel-modules-rt
-- mount
 - mttyexec
 - multipath-config
 - multipath-tools
@@ -73,19 +62,11 @@ packages:
 - parted
 - procps
 - psmisc
-- pv
 - iputils-ping
-- rng-tools
-- rpm2cpio
 - rsync
-- sed
-- tar
 - udev
 - udhcpc
-- util-linux
 - uuid-runtime
-- vim
-- watchdog
 - wget
 external-packages: []
 include-default-packages: '0'
@@ -103,6 +84,13 @@ rootfs-post-scripts:
   rm -rf /boot/*
   rm -rf /var/lib/* /var/cache/*
   rm -rf /usr/share/man /usr/share/doc /usr/share/zoneinfo /usr/share/vim
+  rm -rf /vmlinuz* /initrd*
+  # Remove kernel modules not needed during install and early boot
+  rm -rf /lib/modules/*-amd64/kernel/arch/x86/kvm
+  rm -rf /lib/modules/*-amd64/kernel/drivers/gpu/drm/amd
+  rm -rf /lib/modules/*-amd64/kernel/fs/gfs2
+  rm -rf /lib/modules/*-amd64/kernel/fs/nfs*
+  rm -rf /lib/modules/*-amd64/kernel/virt
   SCRIPT_ENDOF
 - |-
   # Set bash as default shell
