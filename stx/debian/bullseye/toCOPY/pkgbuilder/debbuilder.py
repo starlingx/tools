@@ -444,7 +444,10 @@ class Debbuilder(object):
             chroot_suffix = '--chroot-suffix=-' + user
             chroot_cmd = ' '.join(['nice', '-n', '15', 'ionice', '-c', '3',
                                    'sbuild-createchroot', chroot_suffix,
-                                   '--include=apt-transport-https,ca-certificates,eatmydata',
+                                   '--include=apt-transport-https,ca-certificates,eatmydata,'
+                                   'debhelper,dh-python,python3-all-dev,python3-setuptools,'
+                                   'cmake,pkg-config,libssl-dev,libtool,autoconf,automake,'
+                                   'devscripts,quilt,fakeroot',
                                    '--command-prefix=eatmydata',
                                    self.attrs['dist'], parent_chroot_dir])
             if 'mirror' in request_form:
