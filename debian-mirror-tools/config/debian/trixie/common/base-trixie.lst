@@ -142,6 +142,7 @@ firmware-bnx2  20250410-2 https://snapshot.debian.org/archive/debian/20251130T20
 firmware-bnx2x  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-bnx2x_20250410-2_all.deb
 firmware-brcm80211  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-brcm80211_20250410-2_all.deb
 firmware-cavium  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-cavium_20250410-2_all.deb
+firmware-intel-misc  20260519-1~bpo13+1  https://snapshot.debian.org/archive/debian/20260613T082636Z/pool/non-free-firmware/f/firmware-nonfree/firmware-intel-misc_20260519-1~bpo13%2B1_all.deb
 firmware-intel-sound  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-intel-sound_20250410-2_all.deb
 firmware-iwlwifi  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-iwlwifi_20250410-2_all.deb
 firmware-libertas  20250410-2 https://snapshot.debian.org/archive/debian/20251130T202713Z/pool/non-free-firmware/f/firmware-nonfree/firmware-libertas_20250410-2_all.deb
@@ -1129,6 +1130,7 @@ openssl-provider-legacy  3.5.1-1
 original-awk  2025-01-16-1
 ovmf  2025.02-8
 packagekit 1.3.1-1
+pahole  1.30-1
 parted  3.6-5
 passwd  1:4.17.4-2
 passwd  1:4.17.4-2
