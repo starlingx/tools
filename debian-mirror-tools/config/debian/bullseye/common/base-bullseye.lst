@@ -633,8 +633,8 @@ libpolkit-agent-1-0  0.105-31+deb11u2  https://snapshot.debian.org/archive/debia
 libpolkit-gobject-1-dev  0.105-31+deb11u2  https://snapshot.debian.org/archive/debian-security/20260429T101338Z/pool/updates/main/p/policykit-1/libpolkit-gobject-1-dev_0.105-31%2Bdeb11u2_amd64.deb
 libpolkit-gobject-1-0  0.105-31+deb11u2  https://snapshot.debian.org/archive/debian-security/20260429T101338Z/pool/updates/main/p/policykit-1/libpolkit-gobject-1-0_0.105-31%2Bdeb11u2_amd64.deb
 libpopt0  1.18-2
-libpq5  13.23-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20260217T084758Z/pool/updates/main/p/postgresql-13/libpq5_13.23-0%2Bdeb11u1_amd64.deb
-libpq-dev  13.23-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20260217T084758Z/pool/updates/main/p/postgresql-13/libpq-dev_13.23-0%2Bdeb11u1_amd64.deb
+libpq5  13.23-0+deb11u3  https://snapshot.debian.org/archive/debian-security/20260417T134345Z/pool/updates/main/p/postgresql-13/libpq5_13.23-0%2Bdeb11u3_amd64.deb
+libpq-dev  13.23-0+deb11u3  https://snapshot.debian.org/archive/debian-security/20260417T134345Z/pool/updates/main/p/postgresql-13/libpq-dev_13.23-0%2Bdeb11u3_amd64.deb
 libprocps8  2:3.3.17-5
 libprotobuf-c1  1.3.3-1+b2
 libproxy1v5  0.4.17-1
@@ -900,8 +900,8 @@ pkg-config 0.29.2-1
 pm-utils  1.4.1-19
 po-debconf  1.0.21+nmu1
 policykit-1  0.105-31+deb11u2  https://snapshot.debian.org/archive/debian-security/20260429T101338Z/pool/updates/main/p/policykit-1/policykit-1_0.105-31%2Bdeb11u2_amd64.deb
-postgresql-13  13.23-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20260217T084758Z/pool/updates/main/p/postgresql-13/postgresql-13_13.23-0%2Bdeb11u1_amd64.deb
-postgresql-client-13  13.23-0+deb11u1  https://snapshot.debian.org/archive/debian-security/20260217T084758Z/pool/updates/main/p/postgresql-13/postgresql-client-13_13.23-0%2Bdeb11u1_amd64.deb
+postgresql-13  13.23-0+deb11u3  https://snapshot.debian.org/archive/debian-security/20260417T134345Z/pool/updates/main/p/postgresql-13/postgresql-13_13.23-0%2Bdeb11u3_amd64.deb
+postgresql-client-13  13.23-0+deb11u3  https://snapshot.debian.org/archive/debian-security/20260417T134345Z/pool/updates/main/p/postgresql-13/postgresql-client-13_13.23-0%2Bdeb11u3_amd64.deb
 postgresql-client-common  225
 postgresql-common  225
 powermgmt-base  1.36
