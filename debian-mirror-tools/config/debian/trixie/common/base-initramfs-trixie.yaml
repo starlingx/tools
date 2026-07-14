@@ -114,6 +114,21 @@ rootfs-post-scripts:
   sed -i "s/^BSZ=.*/BSZ=512/g" ${IMAGE_ROOTFS}/install
   sed -i "s/^RSZ=.*/RSZ=20480/g" ${IMAGE_ROOTFS}/install
   sed -i "s/^VSZ=.*/VSZ=20480/g" ${IMAGE_ROOTFS}/install
+- |-
+  cat > ${IMAGE_ROOTFS}/etc/modprobe.d/qat-blacklist.conf <<MEOF
+  # QAT modules need firmware not present in the initramfs
+  # They'll be loaded from the real rootfs later
+  blacklist qat_4xxx
+  blacklist qat_420xx
+  blacklist qat_c62x
+  blacklist qat_c62xvf
+  blacklist qat_6xxx
+  blacklist qat_dh895xccvf
+  blacklist qat_c3xxx
+  blacklist qat_c3xxxvf
+  blacklist qat_dh895xcc
+  blacklist intel_qat
+  MEOF
 environments:
 - NO_RECOMMENDATIONS="1"
 - DEBIAN_FRONTEND=noninteractive
