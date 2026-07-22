@@ -67,6 +67,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         debmake \
         debootstrap \
         dnsutils \
+        docker-buildx \
         docker-cli \
         dpkg \
         dpkg-dev \
