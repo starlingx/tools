@@ -249,6 +249,19 @@ class STXConfigParser(object):
         if not self.cf.has_option('builder', 'platform_registry'):
             self.__set('builder', 'platform_registry', 'docker.io/starlingx')
 
+        # Always sync debian_snapshot_timestamp from the sample file.
+        # This value must match the mirrored snapshot and the Dockerfile default;
+        # keeping a stale value breaks container builds.
+        if ref_config.has_option('project', 'debian_snapshot_timestamp'):
+            ref_ts = ref_config.get('project', 'debian_snapshot_timestamp', raw=True)
+            cur_ts = self.__get('project', 'debian_snapshot_timestamp', None)
+            if cur_ts != ref_ts:
+                logger.info(
+                    '%s: updating project.debian_snapshot_timestamp: %s -> %s',
+                    self.configpath, cur_ts, ref_ts)
+                self.__set('project', 'debian_snapshot_timestamp', ref_ts)
+                need_restart = True
+
         # Save changes
         self.syncConfigFile()
 
