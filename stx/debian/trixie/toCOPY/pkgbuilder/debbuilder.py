@@ -413,12 +413,16 @@ class Debbuilder(object):
             response['msg'] = 'fail to create log file'
         else:
             chroot_suffix = '--chroot-suffix=-' + user
+            # Warning: debootstrap's dependency resolver is simplistic and sometimes
+            # fails where apt would succeed. You may want to list some dependencies
+            # here; or add a second step that installs additional packages using
+            # apt.
             chroot_cmd = ' '.join(['nice', '-n', '15', 'ionice', '-c', '3',
                                    'sbuild-createchroot', chroot_suffix,
                                    '--include=apt-transport-https,ca-certificates,eatmydata,'
                                    'debhelper,dh-python,python3-all-dev,python3-setuptools,'
                                    'cmake,pkg-config,libssl-dev,libtool,autoconf,automake,'
-                                   'devscripts,quilt,fakeroot',
+                                   'devscripts,quilt,fakeroot,perl,gpgv,perl-openssl-defaults',
                                    '--command-prefix=eatmydata',
                                    self.attrs['dist'], parent_chroot_dir])
             if 'mirror' in request_form:
