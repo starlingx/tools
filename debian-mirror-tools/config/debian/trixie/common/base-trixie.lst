@@ -1632,6 +1632,7 @@ tcl-expect  5.45.4-4
 tcl8.6  8.6.16+dfsg-1
 tcpdump  4.99.5-2
 texinfo  7.1.1-1
+thin-provisioning-tools 1.1.0-4+b1
 time  1.9-0.2
 tini  0.19.0-3+b7
 tpm-udev  0.6+nmu1
