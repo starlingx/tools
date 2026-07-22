@@ -262,6 +262,17 @@ class STXConfigParser(object):
                 self.__set('project', 'debian_snapshot_timestamp', ref_ts)
                 need_restart = True
 
+        # Keep debian_version in sync with the sample for the same reason:
+        # it identifies the Debian point release and must match the snapshot.
+        if ref_config.has_option('project', 'debian_version'):
+            ref_ver = ref_config.get('project', 'debian_version', raw=True)
+            cur_ver = self.__get('project', 'debian_version', None)
+            if cur_ver != ref_ver:
+                logger.info(
+                    '%s: updating project.debian_version: %s -> %s',
+                    self.configpath, cur_ver, ref_ver)
+                self.__set('project', 'debian_version', ref_ver)
+
         # Save changes
         self.syncConfigFile()
 

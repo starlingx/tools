@@ -1,7 +1,7 @@
 [project]
 buildbranch = master
 debian_distribution = trixie
-debian_version = 13.0
+debian_version = 13.5
 
 # These URLs must contain snapshots of debian & debian-security repos.
 # We will append debian_snapshot_timestamp to each of them when creating
