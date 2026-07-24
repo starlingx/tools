@@ -5,3 +5,11 @@ kexec-tools  1:2.0.29-2+b2
 liblzo2-2  2.10-3+b1
 pigz  2.8-1
 yajl-tools  2.1.0-5+b2
+# Runtime dependencies of the opae/opae-extra-tools packages
+# (userspace/opae-sdk); libtbb12 pulls in libtbbbind-2-5 and
+# libtbbmalloc2, and libtbbbind-2-5 pulls in libhwloc15.
+libhwloc15  2.12.0-4
+libspdlog1.15  1:1.15.2+ds-2
+libtbb12  2022.1.0-1+deb13u1
+libtbbbind-2-5  2022.1.0-1+deb13u1
+libtbbmalloc2  2022.1.0-1+deb13u1
