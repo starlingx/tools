@@ -142,7 +142,7 @@ firmware-bnx2  20250410-2
 firmware-bnx2x  20250410-2
 firmware-brcm80211  20250410-2
 firmware-cavium  20250410-2
-firmware-intel-misc  20260519-1~bpo13+1
+firmware-intel-misc  20260519-1~bpo13+1  https://snapshot.debian.org/archive/debian/20260613T082636Z/pool/non-free-firmware/f/firmware-nonfree/firmware-intel-misc_20260519-1~bpo13%2B1_all.deb
 firmware-intel-sound  20250410-2
 firmware-iwlwifi  20250410-2
 firmware-libertas  20250410-2
