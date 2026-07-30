@@ -1,6 +1,7 @@
 python3-awscurl 0.36-1 https://snapshot.debian.org/archive/debian/20251028T203550Z/pool/main/p/python-awscurl/python3-awscurl_0.36-1_all.deb
+python3-barbicanclient 7.3.0-2 https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-barbicanclient/python3-barbicanclient_7.3.0-2_all.deb
 python3-iso8601  2.1.0-2
-python3-keystoneauth1  5.10.0-2
+python3-keystoneauth1 5.13.1-2 https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-keystoneauth1/python3-keystoneauth1_5.13.1-2_all.deb
 python3-keystonemiddleware  10.9.0-2+deb13u1
 python3-mock  5.2.0-1
 python3-osc-lib  4.4.0-2  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-osc-lib/python3-osc-lib_4.4.0-2_all.deb
@@ -26,6 +27,6 @@ python3-platformdirs  4.3.7-1
 python3-serpent  1.41-2
 python3-sqlalchemy  2.0.40+ds1-1
 python3-stevedore  5.7.0-3  https://snapshot.debian.org/archive/debian/20260326T142937Z/pool/main/s/stevedore/python3-stevedore_5.7.0-3_all.deb
-python3-swiftclient  1:4.7.0-2
+python3-swiftclient 1:4.10.0-2 https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-swiftclient/python3-swiftclient_4.10.0-2_all.deb
 python3-typing-extensions  4.13.2-1
 python3-vmmsclient  0.0.3  https://snapshot.debian.org/archive/debian/20251112T203051Z/pool/main/p/python-vmmsclient/python3-vmmsclient_0.0.3_all.deb
