@@ -900,6 +900,7 @@ libspice-server1  0.15.2-1+b1
 libspring-beans-java  4.3.30-3
 libspring-core-java  4.3.30-3
 libsqlite3-0  3.46.1-7+deb13u1
+libsqlite3-dev  3.46.1-7+deb13u1
 libss2  1.47.2-3+b11
 libssh-4  0.11.2-1+deb13u1
 libssh-dev  0.11.2-1+deb13u1
