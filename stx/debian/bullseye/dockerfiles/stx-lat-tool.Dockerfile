@@ -22,8 +22,6 @@ ARG lat_version="lat-sdk-20231206"
 ARG max_retry_count=5
 ARG retry_delay=60
 
-MAINTAINER Chen Qi <Qi.Chen@windriver.com>
-
 ARG LAT_BINARY_RESOURCE_PATH="${lat_mirror_url}${lat_mirror_lat_path}${lat_version}"
 
 # Add retry to apt config

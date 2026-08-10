@@ -31,8 +31,6 @@ FROM debian:bullseye
 ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
 
-MAINTAINER mark.asselstine@windriver.com
-
 COPY --from=builder /go/nginx_signing.key nginx_signing.key
 
 # Add retry to apt config
