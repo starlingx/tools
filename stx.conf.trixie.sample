@@ -1,7 +1,7 @@
 [project]
 buildbranch = master
 debian_distribution = trixie
-debian_version = 13.5
+debian_version = 13.6
 
 # These URLs must contain snapshots of debian & debian-security repos.
 # We will append debian_snapshot_timestamp to each of them when creating
@@ -10,7 +10,7 @@ debian_version = 13.5
 debian_security_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian-security
 #debian_snapshot_base = http://snapshot.debian.org/archive/debian
 debian_snapshot_base = https://mirror.starlingx.windriver.com/mirror/debian/debian/snapshot.debian.org/archive/debian
-debian_snapshot_timestamp = 20260516T111458Z
+debian_snapshot_timestamp = 20260812T085050Z
 
 gitemail = stx.builder@opendev.org
 gituser = STX Builder
