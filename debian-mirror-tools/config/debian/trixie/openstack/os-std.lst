@@ -1,3 +1,6 @@
+libaprutil1-dbd-sqlite3  1.6.4-2  https://snapshot.debian.org/archive/debian/20260807T202035Z/pool/main/a/apr-util/libaprutil1-dbd-sqlite3_1.6.4-2_amd64.deb
+libaprutil1-ldap  1.6.4-2  https://snapshot.debian.org/archive/debian/20260807T202035Z/pool/main/a/apr-util/libaprutil1-ldap_1.6.4-2_amd64.deb
+libaprutil1t64  1.6.4-2  https://snapshot.debian.org/archive/debian/20260807T202035Z/pool/main/a/apr-util/libaprutil1t64_1.6.4-2_amd64.deb
 python3-awscurl 0.36-1 https://snapshot.debian.org/archive/debian/20251028T203550Z/pool/main/p/python-awscurl/python3-awscurl_0.36-1_all.deb
 python3-barbicanclient 7.3.0-2 https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-barbicanclient/python3-barbicanclient_7.3.0-2_all.deb
 python3-iso8601  2.1.0-2
