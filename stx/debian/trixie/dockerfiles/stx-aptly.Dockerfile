@@ -14,7 +14,12 @@
 #
 
 # Build our actual container
-FROM debian:trixie
+# Pin base image digest to remain compatible with debian_snapshot_timestamp=20260516T111458Z.
+# The unpinned debian:trixie image now ships util-linux 2.41.5-0+deb13u1 (trixie 13.6),
+# which conflicts with bsdextrautils from the older snapshot (requires libsmartcols1 = 2.41-5).
+# Revert to "FROM debian:trixie" once debian_snapshot_timestamp is updated to >= 20260815T000000Z.
+# Using dated tag debian:trixie-20260803 (pre-dates the util-linux update on Aug 14).
+FROM debian:trixie-20260803
 ARG os_mirror_url="http://"
 ARG os_mirror_dist_path=""
 
