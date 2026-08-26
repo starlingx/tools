@@ -19,6 +19,10 @@ if [ ! -d $MY_WORKSPACE ]; then
     mkdir -p $MY_WORKSPACE > /dev/null 2>&1
 fi
 
+# Auto-initialize git user config from stx.conf values (only if not already set)
+[[ -n "$GITUSER" ]] && { git config --global user.name >/dev/null 2>&1 || git config --global user.name "$GITUSER"; }
+[[ -n "$GITEMAIL" ]] && { git config --global user.email >/dev/null 2>&1 || git config --global user.email "$GITEMAIL"; }
+
 if echo $- | grep -q i ; then
 cat <<EOF
 To ease checkout from builder container do:
