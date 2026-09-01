@@ -1663,6 +1663,7 @@ w3m  0.5.3+git20230121-2.1
 watchdog  5.16-1.1
 wget  1.25.0-2
 whiptail  0.52.25-1
+wtmpdb  0.73.0-3+deb13u1
 x11-common  1:7.7+24+deb13u1
 xclip  0.13-4
 xfsprogs  6.13.0-2+b1
