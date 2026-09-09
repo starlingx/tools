@@ -265,6 +265,7 @@ iscsiuio  2.1.11-1+deb13u2
 iso-codes  4.18.0-1
 isomd5sum  1:1.2.3-5+b8
 java-common  0.76
+jq  1.7.1-6+deb13u3  https://snapshot.debian.org/archive/debian/20260824T000000Z/pool/main/j/jq/jq_1.7.1-6%2Bdeb13u3_amd64.deb
 jruby  9.4.8.0+ds-3
 kbd  2.7.1-2
 kernel-wedge  2.106
@@ -626,6 +627,7 @@ libjson-simple-java  2.3.0-2
 libjsp-api-java  2.3.4-3
 libjsr166y-java  1.7.0-3
 libjzlib-java  1.1.3-3
+libjq1  1.7.1-6+deb13u3  https://snapshot.debian.org/archive/debian/20260824T000000Z/pool/main/j/jq/libjq1_1.7.1-6%2Bdeb13u3_amd64.deb
 libk5crypto3  1.21.3-5
 libkadm5clnt-mit12  1.21.3-5
 libkadm5srv-mit12  1.21.3-5
@@ -735,6 +737,7 @@ libopeniscsiusr  2.1.11-1+deb13u2
 libopentracing-c-wrapper0t64  1.1.3-3.1+b1
 libopentracing1  1.6.0-4+b2
 libopts25  1:5.18.16-7
+libonig5  6.9.9-1+b1  https://snapshot.debian.org/archive/debian/20260824T000000Z/pool/main/libo/libonig/libonig5_6.9.9-1%2Bb1_amd64.deb
 libopus0  1.5.2-2
 liborc-0.4-0t64  1:0.4.41-1
 libordered-clojure  1.15.12-1
