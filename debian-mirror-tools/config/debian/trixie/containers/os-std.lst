@@ -4,7 +4,7 @@ autogen  1:5.18.16-7
 autogen-doc  1:5.18.16-7
 cmake  3.31.6-2
 cmake-data  3.31.6-2
-comerr-dev  2.1-1.47.2-3+b11
+comerr-dev  2.1-1.47.2-3+b12
 docutils-doc  0.21.2+dfsg-2
 doxygen  1.9.8+ds-2.1
 dwarves  1.30-1
@@ -19,7 +19,7 @@ lib32ncurses-dev  6.5+20250216-2
 lib32ncurses6  6.5+20250216-2
 lib32ncursesw6  6.5+20250216-2
 lib32tinfo6  6.5+20250216-2
-libcap-dev  1:2.75-10+deb13u1+b1
+libcap-dev  1:2.75-10+deb13u1+b3
 libclang-cpp17t64  1:17.0.6-22+b2
 libclang1-17t64  1:17.0.6-22+b2
 liberror-perl  0.17030-1
@@ -34,7 +34,7 @@ libopts25-dev  1:5.18.16-7
 librhash1  1.4.5-1
 libsimdjson25  3.12.3-1
 libstdc++-12-dev  12.4.0-5
-libxapian30  1.4.29-3
+libxapian30  1.4.29-3+deb13u1
 mdevctl  1.4.0-2+b1
 pandoc  3.1.11.1+ds-2
 pandoc-data  3.1.11.1-3
@@ -50,9 +50,9 @@ python3-prometheus-client  0.21.1+ds1-1
 python3-pybind11  2.13.6-2
 python3-thrift  0.19.0-4+b1
 python3-typing-extensions  4.13.2-1
-python3.13-doc  3.13.5-2+deb13u4
+python3.13-doc  3.13.5-2+deb13u5
 sphinx-doc  8.1.3-5
 trace-cmd  3.3.1-1+b1
 tree  2.2.1-1
-unzip  6.0-29
+unzip  6.0-29+deb13u1
 usb.ids  2025.07.26-1
