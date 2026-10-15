@@ -3,10 +3,12 @@ libaprutil1-ldap  1.6.4-2  https://snapshot.debian.org/archive/debian/20260807T2
 libaprutil1t64  1.6.4-2  https://snapshot.debian.org/archive/debian/20260807T202035Z/pool/main/a/apr-util/libaprutil1t64_1.6.4-2_amd64.deb
 python3-awscurl  0.36-1  https://snapshot.debian.org/archive/debian/20251028T203550Z/pool/main/p/python-awscurl/python3-awscurl_0.36-1_all.deb
 python3-barbicanclient  7.3.0-2  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-barbicanclient/python3-barbicanclient_7.3.0-2_all.deb
+python3-cotyledon  2.2.0-3  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-cotyledon/python3-cotyledon_2.2.0-3_all.deb
 python3-iso8601  2.1.0-2
 python3-keystoneauth1  5.13.1-2  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-keystoneauth1/python3-keystoneauth1_5.13.1-2_all.deb
 python3-keystonemiddleware  10.9.0-2+deb13u1
 python3-mock  5.2.0-1
+python3-observabilityclient  1.3.0-4  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-observabilityclient/python3-observabilityclient_1.3.0-4_all.deb
 python3-osc-lib  4.4.0-2  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-osc-lib/python3-osc-lib_4.4.0-2_all.deb
 python3-osc-placement  4.6.0-2
 python3-oslo.cache  3.10.1-3
@@ -21,13 +23,14 @@ python3-oslo.metrics  0.11.0-3
 python3-oslo.middleware  6.3.1-3
 python3-oslo.policy  4.5.1-3
 python3-oslo.serialization  5.7.0-3
-python3-oslo.service  4.1.1-2
+python3-oslo.service  4.5.1-2  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-oslo.service/python3-oslo.service_4.5.1-2_all.deb
 python3-oslo.upgradecheck  2.5.0-3
 python3-oslo.utils  8.2.0-4
 python3-oslo.versionedobjects  3.6.0-3
 python3-pbr  6.1.1-2
 python3-platformdirs  4.3.7-1
 python3-serpent  1.41-2
+python3-setproctitle  1.3.7-3  https://snapshot.debian.org/archive/debian/20260823T203331Z/pool/main/p/python-setproctitle/python3-setproctitle_1.3.7-3_amd64.deb
 python3-sqlalchemy  2.0.40+ds1-1
 python3-stevedore  5.7.0-3
 python3-swiftclient 1:4.10.0-2 https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-swiftclient/python3-swiftclient_4.10.0-2_all.deb
