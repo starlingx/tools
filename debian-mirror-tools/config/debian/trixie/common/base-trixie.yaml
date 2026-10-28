@@ -109,13 +109,17 @@ iso-grub-entry: |
     menuentry 'Serial Console' --unrestricted --id=serial {
       set fallback=1
       efi-watchdog enable 0 1200
+      echo "Loading kernel... "
       linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64
+      echo "Loading initramfs... "
       initrd @INITRD@
     }
     menuentry 'Graphical Console' --unrestricted --id=graphical {
       set fallback=1
       efi-watchdog enable 0 1200
+      echo "Loading kernel... "
       linux /bzImage-std %BOOT_PARAMS% traits=controller defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
+      echo "Loading initramfs... "
       initrd @INITRD@
     }
   }
@@ -124,13 +128,17 @@ iso-grub-entry: |
     menuentry 'Serial Console' --unrestricted --id=serial {
       set fallback=1
       efi-watchdog enable 0 1200
+      echo "Loading kernel... "
       linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64
+      echo "Loading initramfs... "
       initrd @INITRD@
     }
     menuentry 'Graphical Console' --unrestricted --id=graphical {
       set fallback=1
       efi-watchdog enable 0 1200
+      echo "Loading kernel... "
       linux /bzImage-std %BOOT_PARAMS% traits=controller,worker defaultkernel=vmlinuz-*[!t]-amd64 console=tty1
+      echo "Loading initramfs... "
       initrd @INITRD@
     }
   }
