@@ -9,13 +9,15 @@ python3-iso8601  2.1.0-2
 python3-keystoneauth1  5.13.1-2  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-keystoneauth1/python3-keystoneauth1_5.13.1-2_all.deb
 python3-keystonemiddleware  10.9.0-2+deb13u1
 python3-mock  5.2.0-1
+python3-neutron-lib  3.24.0-3  https://snapshot.debian.org/archive/debian/20260326T142937Z/pool/main/p/python-neutron-lib/python3-neutron-lib_3.24.0-3_all.deb
 python3-observabilityclient  1.3.0-4  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-observabilityclient/python3-observabilityclient_1.3.0-4_all.deb
 python3-os-brick  7.0.0-2  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-os-brick/python3-os-brick_7.0.0-2_all.deb
+python3-os-ken  4.2.2-4  https://snapshot.debian.org/archive/debian/20261011T022943Z/pool/main/p/python-os-ken/python3-os-ken_4.2.2-4_all.deb
 python3-osc-lib  4.4.0-2  https://snapshot.debian.org/archive/debian/20260527T000000Z/pool/main/p/python-osc-lib/python3-osc-lib_4.4.0-2_all.deb
 python3-osc-placement  4.6.0-2
 python3-oslo.cache  3.10.1-3
 python3-oslo.concurrency  7.1.0-3
-python3-oslo.config  1:9.7.1-3
+python3-oslo.config  1:10.3.0-2  https://snapshot.debian.org/archive/debian/20260326T203750Z/pool/main/p/python-oslo.config/python3-oslo.config_10.3.0-2_all.deb
 python3-oslo.context  5.7.1-3
 python3-oslo.db  17.2.1-2+deb13u1
 python3-oslo.i18n  6.5.1-3
@@ -30,6 +32,7 @@ python3-oslo.service  4.5.1-2  https://snapshot.debian.org/archive/debian/202605
 python3-oslo.upgradecheck  2.5.0-3
 python3-oslo.utils  8.2.0-4
 python3-oslo.versionedobjects  3.6.0-3
+python3-ovsdbapp  2.16.1-1  https://snapshot.debian.org/archive/debian/20260414T143352Z/pool/main/p/python-ovsdbapp/python3-ovsdbapp_2.16.1-1_all.deb
 python3-pbr  6.1.1-2
 python3-platformdirs  4.3.7-1
 python3-pymysql  1.1.2-3  https://snapshot.debian.org/archive/debian/20260527T142953Z/pool/main/p/python-pymysql/python3-pymysql_1.1.2-3_all.deb
