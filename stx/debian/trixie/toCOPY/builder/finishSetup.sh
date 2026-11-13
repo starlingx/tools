@@ -10,6 +10,7 @@ REPOMGR=aptly
 if [ "$REPOMGR" == "aptly" ]; then
     OS_MIRROR="${OS_MIRROR_URL}${OS_MIRROR_DIST_PATH}deb.debian.org/debian/${DEBIAN_DISTRIBUTION}-${DEBIAN_VERSION} ${DEBIAN_DISTRIBUTION} main"
     REPO_SNAPSHOT="[check-valid-until=no] ${DEBIAN_SNAPSHOT} ${DEBIAN_DISTRIBUTION} main"
+    REPO_SECURITY="[check-valid-until=no] ${DEBIAN_SECURITY_SNAPSHOT} ${DEBIAN_DISTRIBUTION}-security main"
     REPO_BIN="deb [trusted=yes] ${REPOMGR_DEPLOY_URL}deb-local-binary ${DEBIAN_DISTRIBUTION} main"
     REPO_SRC="deb-src [trusted=yes] ${REPOMGR_DEPLOY_URL}deb-local-source ${DEBIAN_DISTRIBUTION} main"
     ret=`grep 'deb-local-binary' /etc/apt/sources.list`
@@ -25,6 +26,13 @@ if [ "$REPOMGR" == "aptly" ]; then
         if [ "x$ret" == "x" ]; then
             sed -i "1i\\deb ${REPO_SNAPSHOT}" /etc/apt/sources.list
             sed -i "1i\\deb-src ${REPO_SNAPSHOT}" /etc/apt/sources.list
+        fi
+    fi
+    if [ ! -z ${DEBIAN_SECURITY_SNAPSHOT} ]; then
+        ret=`grep ${DEBIAN_SECURITY_SNAPSHOT} /etc/apt/sources.list`
+        if [ "x$ret" == "x" ]; then
+            sed -i "1i\\deb ${REPO_SECURITY}" /etc/apt/sources.list
+            sed -i "1i\\deb-src ${REPO_SECURITY}" /etc/apt/sources.list
         fi
     fi
     if [ ! -z ${OS_MIRROR_URL} ]; then

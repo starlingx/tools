@@ -43,9 +43,11 @@ RUN echo "Acquire::Check-Valid-Until "false";" > /etc/apt/apt.conf.d/99ignore-re
 RUN echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/${debian_snapshot_timestamp} trixie contrib main non-free" > /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/${debian_snapshot_timestamp} trixie-updates contrib main non-free" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian/${debian_snapshot_timestamp} trixie-backports contrib main non-free" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}snapshot.debian.org/archive/debian-security/${debian_snapshot_timestamp} trixie-security contrib main non-free" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie non-free-firmware" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-updates non-free-firmware" >> /etc/apt/sources.list && \
     echo "deb ${os_mirror_url}${os_mirror_dist_path}deb.debian.org/debian trixie-backports non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb ${os_mirror_url}${os_mirror_dist_path}security.debian.org/debian-security trixie-security non-free-firmware" >> /etc/apt/sources.list && \
     rm -rf /etc/apt/sources.list.d/debian.sources /var/lib/apt/lists/*
 
 RUN cat /etc/apt/sources.list

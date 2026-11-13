@@ -29,6 +29,7 @@ STX_LOCALRC = '/usr/local/bin/stx/stx-localrc'
 SBUILD_CONF = '/etc/sbuild/sbuild.conf'
 ENVIRON_VARS = ['OSTREE_OSNAME', 'OS_MIRROR_URL', 'OS_MIRROR_DIST_PATH',
                 'DEBIAN_DISTRIBUTION', 'DEBIAN_VERSION',
+                'DEBIAN_SECURITY_SNAPSHOT',
                 'PLATFORM_REGISTRY', 'BUILD_STREAM', 'IMAGE_PREFIX',
                 'IMAGE_SUFFIX', 'OS', 'OS_CODENAME', 'OS_ARCH']
 REPO_BUILD = 'deb-local-build'
