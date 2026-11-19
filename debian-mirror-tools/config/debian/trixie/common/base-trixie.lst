@@ -59,6 +59,7 @@ cpio  2.15+dfsg-2
 cpp  4:14.2.0-1
 cpp-14  14.2.0-19
 cpp-14-x86-64-linux-gnu  14.2.0-19
+cpp-x86-64-linux-gnu  4:14.2.0-1
 cracklib-runtime  2.9.6-5.2+b1
 cron  3.0pl1-197
 cron-daemon-common  3.0pl1-197
@@ -177,6 +178,7 @@ gcc-14  14.2.0-19
 gcc-14-base  14.2.0-19
 gcc-14-x86-64-linux-gnu  14.2.0-19
 gcc-alpha-linux-gnu  4:14.2.0-1
+gcc-x86-64-linux-gnu  4:14.2.0-1
 gdisk  1.0.10-2
 genisoimage  9:1.1.11-4
 gettext  0.23.1-2
