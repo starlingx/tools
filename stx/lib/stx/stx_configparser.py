@@ -142,8 +142,8 @@ class STXConfigParser(object):
     def __upgrade_nonempty_key(self, section, option, value):
         old_value = self.cf.get(section, option)
         if old_value != value:
-            logger.warn('%s: setting option %s.%s to %s', self.configpath,
-                        section, option, value)
+            logger.warning('%s: setting option %s.%s to %s', self.configpath,
+                           section, option, value)
             self.cf.set(section, option, value)
 
     def __raise_upgrade_error(self, bad_section_key):

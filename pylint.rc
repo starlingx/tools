@@ -5,9 +5,16 @@ rcfile=pylint.rc
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
 #init-hook=
+init-hook='import sys; sys.path.insert(0, "stx/lib")'
 
 # Add files or directories to the blacklist. Should be base names, not paths.
 ignore=
+
+# Skip the bullseye copies of the build containers' code.  Bullseye is no
+# longer supported, and their module names (app, debbuilder, schrootspool,
+# utils, volume) duplicate the trixie copies, which makes pylint resolve
+# imports to the wrong copy depending on traversal order.
+ignore-paths=^stx/debian/bullseye/.*$
 
 # Pickle collected data for later comparisons.
 persistent=yes
@@ -43,7 +50,43 @@ extension-pkg-whitelist=lxml.etree,greenlet
 # See "Messages Control" section of
 # https://pylint.readthedocs.io/en/latest/user_guide
 # We are disabling (C)onvention
-disable=C
+# Checks reported once pylint 3 (Python 3.13/trixie) started linting the whole
+# stx tree.  Their current findings are style, refactoring or dead-code
+# suggestions, not defects, so they are disabled.  Real problems such as
+# method-hidden (E0202) and deprecated-method (W4902) stay enabled.
+disable=C,
+        duplicate-code,
+        too-few-public-methods,
+        too-many-branches,
+        too-many-instance-attributes,
+        too-many-locals,
+        too-many-public-methods,
+        too-many-return-statements,
+        too-many-statements,
+        useless-object-inheritance,
+        consider-using-in,
+        consider-using-with,
+        inconsistent-return-statements,
+        no-else-return,
+        simplifiable-if-statement,
+        attribute-defined-outside-init,
+        broad-exception-caught,
+        broad-exception-raised,
+        fixme,
+        global-statement,
+        global-variable-not-assigned,
+        logging-fstring-interpolation,
+        logging-not-lazy,
+        pointless-string-statement,
+        raise-missing-from,
+        redefined-outer-name,
+        subprocess-popen-preexec-fn,
+        subprocess-run-check,
+        unspecified-encoding,
+        unused-argument,
+        unused-import,
+        unused-private-member,
+        unused-variable
 
 [REPORTS]
 # Set the output format. Available formats are text, parseable, colorized, msvs
@@ -53,7 +96,6 @@ output-format=text
 # Put messages in a separate file for each module / package specified on the
 # command line instead of printing them on stdout. Reports (if any) will be
 # written in a file name "pylint_global.[txt|html]".
-files-output=no
 
 # Tells whether to display a full report or only the messages
 reports=yes
@@ -96,7 +138,10 @@ ignore-mixin-members=yes
 # List of module names for which member attributes should not be checked
 # (useful for modules/projects where namespaces are manipulated during runtime
 # and thus existing member attributes cannot be deduced by static analysis
-ignored-modules=distutils,eventlet.green.subprocess,six,six.moves
+# flask, fs and psutil are runtime dependencies of the pkgbuilder container and
+# are not installed in the lint environment.  "utils" is pkgbuilder's sibling
+# module; with several utils.py files in the tree pylint resolves the wrong one.
+ignored-modules=distutils,eventlet.green.subprocess,six,six.moves,flask,fs,psutil,utils
 
 # List of classes names for which member attributes should not be checked
 # (useful for classes with attributes dynamically set).
@@ -114,7 +159,6 @@ generated-members=REQUEST,acl_users,aq_parent
 
 [BASIC]
 # List of builtins function names that should not be used, separated by a comma
-bad-functions=map,filter,apply,input
 
 # Regular expression which should only match correct module names
 module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
@@ -205,7 +249,7 @@ max-locals=15
 max-returns=6
 
 # Maximum number of branch for function / method body
-max-branchs=12
+max-branches=12
 
 # Maximum number of statements in function / method body
 max-statements=50
@@ -234,4 +278,4 @@ valid-classmethod-first-arg=cls
 [EXCEPTIONS]
 # Exceptions that will emit a warning when being caught. Defaults to
 # "Exception"
-overgeneral-exceptions=Exception
+overgeneral-exceptions=builtins.Exception

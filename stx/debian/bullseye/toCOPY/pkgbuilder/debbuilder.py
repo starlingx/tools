@@ -412,7 +412,7 @@ class Debbuilder(object):
 
         parent_chroot_name = self.get_parent_chroot_name(user)
         if self.has_chroot(parent_chroot_name):
-            self.logger.warn("chroot %s already exists" % parent_chroot_name)
+            self.logger.warning("chroot %s already exists" % parent_chroot_name)
             self.set_unique_id(user)
             response['status'] = 'exists'
             response['msg'] = 'chroot exists'
@@ -810,7 +810,7 @@ class Debbuilder(object):
 
         user_schroot_config_dir = self.get_user_schroot_config_dir(user, project)
         if not os.path.exists(user_schroot_config_dir):
-            self.logger.warn("Failed to find directory of chroots %s" % user_schroot_config_dir)
+            self.logger.warning("Failed to find directory of chroots %s" % user_schroot_config_dir)
             response['status'] = 'success'
             response['msg'] = ' '.join(['External chroot', user_schroot_config_dir,
                                         'does not exist'])

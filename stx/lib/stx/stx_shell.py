@@ -132,5 +132,5 @@ class HandleShellTask(object):
 
     def cmd_control_enter(self, args):
         self.logger.setLevel(args.loglevel)
-        self.logger.warn("""This command is deprecated, please use "stx shell" instead""")
+        self.logger.warning("""This command is deprecated, please use "stx shell" instead""")
         self._do_shell(args, False, None, 'dockername')

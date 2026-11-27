@@ -19,24 +19,30 @@
 
 - job:
     name: tools-tox-linters
-    parent: openstack-tox-linters
+    parent: tox
     description: |
-      Run linters
-    nodeset: debian-bullseye
+      Run linters (Python 3.13/Trixie)
+    nodeset: debian-trixie-8GB
+    vars:
+      tox_envlist: linters
 
 - job:
     name: tools-tox-pep8
-    parent: openstack-tox-pep8
+    parent: tox
     description: |
-      Check conformance with pep8
-    nodeset: debian-bullseye
+      Check conformance with pep8 (Python 3.13/Trixie)
+    nodeset: debian-trixie-8GB
+    vars:
+      tox_envlist: pep8
 
 - job:
     name: tools-tox-pylint
-    parent: openstack-tox-pylint
+    parent: tox
     description: |
-      Run pylint
-    nodeset: debian-bullseye
+      Run pylint (Python 3.13/Trixie)
+    nodeset: debian-trixie-8GB
+    vars:
+      tox_envlist: pylint
 
 - job:
     name: stx-tools-upload-git-mirror

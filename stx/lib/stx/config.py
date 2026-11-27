@@ -99,10 +99,6 @@ class Config(object):
         """Internal object that stores configuration"""
         return self.data
 
-    def prjdir(self):
-        """Path of starlingx/tools checkout"""
-        return self.prjdir
-
     def kubectl(self):
         """Returns the command for invoking kubect"""
         assert self.data
